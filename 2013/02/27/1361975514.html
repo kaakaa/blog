@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      KS Sample
+    </title>
+    <meta chearset="UTF-8" />
+    <meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" />
+    <link href="/css/kickstart.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/kickstart.js" type="text/javasript"></script>
+  </head>
+  <body class="elements">
+    <div class="callout clearfix">
+      <h1>
+        びぼーろく（仮）
+      </h1>
+      <div class="grid">
+        <div class="col_12">
+          <ul class="tabs right">
+            <li>
+              <a href="tab_blog"><i class="icon-file"></i>BLOG</a>
+            </li>
+            <li>
+              <a href="tab_socials"><i class="icon-twitter"></i>SOCIALS</a>
+            </li>
+            <li>
+              <a href="https://github.com/kaakaa/middleman-blog-slim-sample/tree/gh-pages"><i class="icon-github"></i>View on Gitub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col_12"><p><a href="http://www.amazon.co.jp/dp/4048707876/?tag=hatena_st1-22&amp;ascsubtag=d-s2pfr"><img src="http://ecx.images-amazon.com/images/I/5119zam7gKL._SL160_.jpg" alt="継続的デリバリー
+信頼できるソフトウェアリリースのためのビルド・テスト・デプロイメントの自動化" title="継続的デリバリー 信頼できるソフトウェアリリースのためのビルド・テスト・デプロイメントの自動化" /></a></p>
+
+<p><a href="http://www.amazon.co.jp/dp/4048707876/?tag=hatena_st1-22&amp;ascsubtag=d-s2pfr">継続的デリバリー
+信頼できるソフトウェアリリースのためのビルド・テスト・デプロイメントの自動化</a></p>
+
+<ul>
+  <li>作者: <a href="http://d.hatena.ne.jp/keyword/David%20Farley">David
+Farley</a>,<a href="http://d.hatena.ne.jp/keyword/Jez%20Humble">Jez
+Humble</a>,<a href="http://d.hatena.ne.jp/keyword/%CF%C2%C3%D2%B1%A6%B7%CB">和智右桂</a>,<a href="http://d.hatena.ne.jp/keyword/%B9%E2%CC%DA%C0%B5%B9%B0">高木正弘</a></li>
+  <li>出版社/メーカー:
+<a href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%B9%A5%AD%A1%BC%A1%A6%A5%E1%A5%C7%A5%A3%A5%A2%A5%EF%A1%BC%A5%AF%A5%B9">アスキー・メディアワークス</a></li>
+  <li>発売日: 2012/03/14</li>
+  <li>メディア: 大型本</li>
+  <li>購入: 24人 クリック: 567回</li>
+  <li><a href="http://d.hatena.ne.jp/asin/4048707876">この商品を含むブログ (48件)
+を見る</a></li>
+</ul>
+
+<p>を購入したが、読む時間が取れなそうなので、とりあえず見出しだけ流し読してみた。</p>
+
+<p>その中で気になったコードメトリクス可視化ツールPanopticodeを動かしてみようとしたところ、</p>
+
+<p>EMMA実行時に実行時にエラーが出たので、それを残しておく。</p>
+
+<p>\</p>
+
+<p>Panopticodeを動かすのはココらへんを参考に。</p>
+
+<p><a href="http://d.hatena.ne.jp/travelershouse/20080315/1205594341">Panopticode -
+不悔必省</a></p>
+
+<p><a href="http://sourceforge.net/projects/panopticode/">Panopticode | Free Development software downloads at
+SourceForge.net</a></p>
+
+<p>\</p>
+
+<p>実際にAntタスクのmetricsを叩いてみると、以下のエラー。</p>
+
+<pre><code>    [junit] Testcase: testAdd1 took 0.003 sec
+    [junit]     Caused an ERROR
+    [junit] Illegal local variable table length 5 in method org.sample.Sample.&lt;init&gt;()V
+    [junit] java.lang.ClassFormatError: Illegal local variable table length 5 in method org.sample.Sample.&lt;init&gt;()V
+    [junit]     at org.sample.SampleTest.&lt;init&gt;(SampleTest.java:9)
+    [junit]     at java.lang.reflect.Constructor.newInstance(Constructor.java:525)
+    [junit] 
+</code></pre>
+
+<p>\</p>
+
+<p>探してみると、こんなのが。</p>
+
+<p><a href="http://arihantwin.blogspot.jp/2012/08/getting-error-illegal-local-variable.html">My Blogs : Getting error “Illegal local variable table length 5 in
+method” while running Junit using Java version
+7</a></p>
+
+<p>Java7で起こる問題みたい。</p>
+
+<p>\</p>
+
+<p>panopticode/supplements/emma/emma-imports.xmlの65行目辺りに、</p>
+
+<pre><code>&lt;jvmarg value="-XX:-UseSplitVerifier" /&gt;
+</code></pre>
+
+<p>を追加。</p>
+
+<pre><code>            &lt;junit fork="yes" forkmode="once" haltonfailure="yes"&gt;
+                &lt;classpath&gt;
+                    &lt;path refid="@{unitTestClasspathId}" /&gt;
+                    &lt;fileset dir="@{panopticodeDir}" includes="supplements/emma/lib/*.jar" /&gt;
+                &lt;/classpath&gt;
+                &lt;jvmarg value="-Demma.coverage.out.file=@{outputDir}/scratch/emma/coverage.emma" /&gt;
+                &lt;jvmarg value="-Demma.coverage.out.merge=true" /&gt;
+                &lt;jvmarg value="-XX:-UseSplitVerifier" /&gt;
+
+                &lt;formatter type="plain" usefile="false" /&gt;
+                &lt;formatter type="xml" /&gt;
+
+                &lt;thetests /&gt;
+            &lt;/junit&gt;
+</code></pre>
+
+<p>\</p>
+
+<p>したら動いたみたい。</p>
+
+<p>Panopticodeで実際どんなメトリクスを可視化出来るのかは後日。。。</p>
+
+<p><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" /></a></p>
+
+<p><a href="http://twitter.com/share">ツイートする</a></p>
+
+      </div>
+      <hr />
+      <div class="col_12">
+        <div class="col_4">
+          <h4>
+            Profile
+          </h4>
+          <img class="align-center" src="http://placehold.it/169x130/4D99E0/ffffff.png&text=full+width" />
+          <p>
+            live in Yokohama. Software Engineer. Java / Groovy / Ruby / Sinatra / Trac / Jenkins
+          </p>
+        </div>
+        <div class="col_5">
+          <h5>
+            Recent Articles
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013/10/07/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/06/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/05/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/09/24/1380029870.html">Githubリポジトリのデフォルトブランチを変更する</a>
+            </li>
+            <li>
+              <a href="/2013/09/15/20130915.html">Sinatraアプリを定期的に実行するために泥臭く行ってみた</a>
+            </li>
+            <li>
+              <a href="/2013/09/10/20130910.html">Node.js(Express)でフィードアグリゲータを作り始め</a>
+            </li>
+            <li>
+              <a href="/2013/09/03/20130903.html">SinatraでFeedAggregator</a>
+            </li>
+            <li>
+              <a href="/2013/08/19/1376919346.html">社内勉強会 - 書籍管理Webシステム</a>
+            </li>
+            <li>
+              <a href="/2013/07/18/1374154333.html">Gitbucket1.2で500エラー</a>
+            </li>
+            <li>
+              <a href="/2013/06/24/20130624.html">社内勉強会 - chef</a>
+            </li>
+            <li>
+              <a href="/2013/06/09/1370708167.html">vagrant&chefで構築した仮想CentOS上JenkinsでGoogle Testを実行</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col_3">
+          <h5>
+            By Year
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013.html">2013</a>(24)
+            </li>
+            <li>
+              <a href="/2012.html">2012</a>(81)
+            </li>
+            <li>
+              <a href="/2011.html">2011</a>(31)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="footer">
+      <p>
+        &copy; Copyright 2013 kaakaa
+      </p>
+    </div>
+  </body>
+</html>

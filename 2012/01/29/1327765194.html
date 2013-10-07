@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      KS Sample
+    </title>
+    <meta chearset="UTF-8" />
+    <meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" />
+    <link href="/css/kickstart.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/kickstart.js" type="text/javasript"></script>
+  </head>
+  <body class="elements">
+    <div class="callout clearfix">
+      <h1>
+        びぼーろく（仮）
+      </h1>
+      <div class="grid">
+        <div class="col_12">
+          <ul class="tabs right">
+            <li>
+              <a href="tab_blog"><i class="icon-file"></i>BLOG</a>
+            </li>
+            <li>
+              <a href="tab_socials"><i class="icon-twitter"></i>SOCIALS</a>
+            </li>
+            <li>
+              <a href="https://github.com/kaakaa/middleman-blog-slim-sample/tree/gh-pages"><i class="icon-github"></i>View on Gitub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col_12"><p>作ってみた。</p>
+
+<p>pythonでプログラム組むのは初めてなので、python的におかしなコードになってると思います。</p>
+
+<p>普段使ってるjavaの癖で、やりたいことはとにかくメソッド分割してしまいたくなる…。</p>
+
+<p>~~~~ {.syntax-highlight}
+import sys
+import re
+import urllib2</p>
+
+<p>url = r"http://www.ted.com/talks/lang/ja/damon_horowitz_philosophy_in_prison.html"</p>
+
+<p>def get_htmlsource(url):
+    fp = urllib2.urlopen(url)
+    html = fp.read()
+    fp.close()
+    return html</p>
+
+<p>def get_title(url):
+    html = get_htmlsource(url)
+    return re.search(r'<title>([^&lt;]+)</title>',html).group(1)</p>
+
+<p>def get_transcript(url):
+    html = get_htmlsource(url)
+    p = re.compile(r'<a href="[0-9]*" class="transcriptLink">([^&lt;]+)</a>')
+    return p.findall(html)</p>
+
+<p>def make_transcript_data(url):
+    t_list_ja = get_transcript(url)</p>
+
+<pre><code>url_en = re.sub(r'/ja/', r'/en/', url)
+t_list_en = get_transcript(url_en)
+
+t_list = []
+for i in range(len(t_list_ja)):
+    t_list.append(t_list_ja[i] + '\n')
+    t_list.append(t_list_en[i] + '\n')
+    t_list.append('\n')
+return t_list
+</code></pre>
+
+<p>def write(title,t_list,media):
+    write_transcript(title,t_list)
+    write_media(title,media)</p>
+
+<p>def write_transcript(title,t_list):
+    f = open(r'/Users/<strong>**</strong>/Desktop/' + title + r'.txt','w')
+    for i in range(len(t_list)):
+        t_list[i] = t_list[i] + '\n'
+    f.writelines(t_list)
+    f.close()</p>
+
+<p>def write_media(title,media):
+    f = open(r'/Volumes/<strong>**</strong>/iTunes/Movies/TED/' + title + r'.mp4', 'w')
+    f.write(media)
+    f.close()</p>
+
+<p>def get_media_url(html):
+    return re.search(r'&lt;meta property="og:video" content="([^"]+)" /&gt;',html).group(1)</p>
+
+<p>def get_media(url):
+    media_url = get_media_url(urllib2.urlopen(url).read())
+    return  urllib2.urlopen(media_url).read()</p>
+
+<p>t_list = make_transcript_data(url)</p>
+
+<p>media = get_media(url)</p>
+
+<p>write(get_title(url),t_list,media)
+print r'<strong>*** finish **</strong>*'
+~~~~</p>
+
+<p>これでダウンロードしたファイルをiTunesに登録するコード組みたいんだけど、色々ググッてみてもそれらしい情報は見つからず…。</p>
+
+<p>VBScriptだけど、これはいけるか？</p>
+
+<p><a href="http://stackoverflow.com/questions/5135054/programmatically-add-converted-video-to-itunes-using-sdk">vbscript - Programmatically add converted video to iTunes using SDK -
+Stack
+Overflow</a></p>
+
+<p><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" /></a></p>
+
+<p><a href="http://twitter.com/share">ツイートする</a></p>
+
+      </div>
+      <hr />
+      <div class="col_12">
+        <div class="col_4">
+          <h4>
+            Profile
+          </h4>
+          <img class="align-center" src="http://placehold.it/169x130/4D99E0/ffffff.png&text=full+width" />
+          <p>
+            live in Yokohama. Software Engineer. Java / Groovy / Ruby / Sinatra / Trac / Jenkins
+          </p>
+        </div>
+        <div class="col_5">
+          <h5>
+            Recent Articles
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013/10/07/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/06/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/05/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/09/24/1380029870.html">Githubリポジトリのデフォルトブランチを変更する</a>
+            </li>
+            <li>
+              <a href="/2013/09/15/20130915.html">Sinatraアプリを定期的に実行するために泥臭く行ってみた</a>
+            </li>
+            <li>
+              <a href="/2013/09/10/20130910.html">Node.js(Express)でフィードアグリゲータを作り始め</a>
+            </li>
+            <li>
+              <a href="/2013/09/03/20130903.html">SinatraでFeedAggregator</a>
+            </li>
+            <li>
+              <a href="/2013/08/19/1376919346.html">社内勉強会 - 書籍管理Webシステム</a>
+            </li>
+            <li>
+              <a href="/2013/07/18/1374154333.html">Gitbucket1.2で500エラー</a>
+            </li>
+            <li>
+              <a href="/2013/06/24/20130624.html">社内勉強会 - chef</a>
+            </li>
+            <li>
+              <a href="/2013/06/09/1370708167.html">vagrant&chefで構築した仮想CentOS上JenkinsでGoogle Testを実行</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col_3">
+          <h5>
+            By Year
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013.html">2013</a>(24)
+            </li>
+            <li>
+              <a href="/2012.html">2012</a>(81)
+            </li>
+            <li>
+              <a href="/2011.html">2011</a>(31)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="footer">
+      <p>
+        &copy; Copyright 2013 kaakaa
+      </p>
+    </div>
+  </body>
+</html>

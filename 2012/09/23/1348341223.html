@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      KS Sample
+    </title>
+    <meta chearset="UTF-8" />
+    <meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" />
+    <link href="/css/kickstart.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/kickstart.js" type="text/javasript"></script>
+  </head>
+  <body class="elements">
+    <div class="callout clearfix">
+      <h1>
+        びぼーろく（仮）
+      </h1>
+      <div class="grid">
+        <div class="col_12">
+          <ul class="tabs right">
+            <li>
+              <a href="tab_blog"><i class="icon-file"></i>BLOG</a>
+            </li>
+            <li>
+              <a href="tab_socials"><i class="icon-twitter"></i>SOCIALS</a>
+            </li>
+            <li>
+              <a href="https://github.com/kaakaa/middleman-blog-slim-sample/tree/gh-pages"><i class="icon-github"></i>View on Gitub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col_12"><p>今までTrac使ってたけど、Redmineも使ってみたくなったので家のCentOS6.3機に入れてみる。</p>
+
+<p>\</p>
+
+<p>とりあえずインストールはここを参考にしながら。</p>
+
+<p><a href="http://blog.redmine.jp/articles/redmine-2_1-installation_centos/">Redmine 2.1をCentOS 6.3にインストールする手順 | Redmine.JP
+Blog</a></p>
+
+<p>特に問題なく済んだ。</p>
+
+<p>\</p>
+
+<p>Tracで使ってるKanban(<a href="http://mackeblog.blogspot.jp/2011/01/trac-and-kanban.html">http://mackeblog.blogspot.jp/2011/01/trac-and-kanban.html</a>
+Macke's Blog: Trac and
+Kanban])みたいなの無いかなってことで、redmine_kanbanを入れてみる。</p>
+
+<p><a href="https://github.com/edavis10/redmine_kanban">edavis10/redmine_kanban</a></p>
+
+<p>が、2.x.x系には対応してないってことでエラー。</p>
+
+<p>修正方法はここを参考にしながら。</p>
+
+<p><a href="http://www.redmine.org/boards/3/topics/30930">http://www.redmine.org/boards/3/topics/30930</a>
+Plugins for redmine 2.0.1 - Error no such file to load – dispatcher -
+Redmine]</p>
+
+<p>\</p>
+
+<p>まず、db:migrateする時にdispathcerが無いよってエラー。</p>
+
+<pre><code>rake aborted!
+no such file to load -- dispatcher
+
+Tasks: TOP =&gt; redmine:plugins:migrate =&gt; environment
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>これは、参考ページにある通りinit.rbをdispatcherを使わない形に書き換える。</p>
+
+<p>~~~~ {.syntax-highlight}
+require 'dispatcher'</p>
+
+<p>Dispatcher.to_prepare do 
+  <init code="">
+end
+~~~~</init></p>
+
+<p>~~~~ {.syntax-highlight}
+ActionDispatch::Callbacks.to_prepare do 
+  <init code="">
+end
+~~~~</init></p>
+
+<p>\</p>
+
+<p>んで、db:migrateしようとすると、今度はメソッド無いよエラー。</p>
+
+<pre><code>rake aborted!
+undefined method `named_scope' for #&lt;Class:0xa14c288&gt;
+
+Tasks: TOP =&gt; db:migrate_plugins =&gt; redmine:plugins:migrate =&gt; environment
+(See full trace by running task with --trace)
+</code></pre>
+
+<p>これも参考ページに書いてあるように、named_scope -&gt; scopeに書き換える。</p>
+
+<p>named_scopeは</p>
+
+<p>redmine_kanban/lib/redmine_kanban/issue_patch.rb</p>
+
+<p>redmine_kanban/lib/redmine_kanban/patches/principal_patch.rb</p>
+
+<p>redmine_kanban/app/models/kanban_issue.rb</p>
+
+<p>の３ファイルで使われているらしい。</p>
+
+<p>\</p>
+
+<p>直してdb:migrate。</p>
+
+<p>次はこんなエラー。</p>
+
+<pre><code>An error occurred while loading the routes definition of redmine_kanban plugin (/var/lib/redmine/plugins/redmine_kanban/config/routes.rb): uninitialized constant ActionDispatch::Routing::Routes.
+</code></pre>
+
+<p>今度はココらへん参考にroute.rbを修正。</p>
+
+<p><a href="https://github.com/daipresents/redmine_roadmaps/issues/9">Uninitialized constant ActionDispatch::Routing::Routes. · Issue #9 ·
+daipresents/redmine_roadmaps</a></p>
+
+<p>nilチェック入れないとエラーになったりしたので、最終的にこうなりました。</p>
+
+<p>~~~~ {.syntax-highlight}
+RedmineApp::Application.routes.draw do
+  resource :kanban, :member =&gt; {:sync =&gt; :put} do |kanban|
+    if !kanban.nil? then
+      kanban.resource :user_kanbans, :as =&gt; 'my-requests'
+      kanban.resources :user_kanbans, :as =&gt; 'users'
+      kanban.resources :assigned_kanbans, :as =&gt; 'assigned-to'
+      kanban.resource :assigned_kanbans, :as =&gt; 'my-assigned', :only =&gt; [:show]
+      kanban.resource :kanban_overviews, :as =&gt; 'overview', :only =&gt; [:show]
+    end
+  end
+  resources :kanban_issues
+end
+~~~~</p>
+
+<p>\</p>
+
+<p>んで、db:migrate</p>
+
+<pre><code>Migrating redmine_kanban (Kanban)...
+==  CreateKanbanIssues: migrating =============================================
+
+            
+
+                
+                     create_table(:kanban_issues)
+                
+            
+   -&gt; 0.4196s
+
+            
+
+                
+                     add_index(:kanban_issues, :user_id)
+                
+            
+   -&gt; 0.2888s
+
+            
+
+                
+                     add_index(:kanban_issues, :issue_id)
+                
+            
+   -&gt; 0.2567s
+
+            
+
+                
+                     add_index(:kanban_issues, :state)
+                
+            
+   -&gt; 0.2424s
+==  CreateKanbanIssues: migrated (1.2087s) ====================================
+
+
+Note: The rake task db:migrate_plugins has been deprecated, please use the replacement version redmine:plugins:migrate
+</code></pre>
+
+<p>警告は出てるけど、いけたっぽい。</p>
+
+<p>\</p>
+
+<p>んで、httpd再起動してredmineを開くと…エラーで開けなくなってましたとさ。</p>
+
+<p>routets.rbが悪そうだけど、どう直せば良いのかわからない…。</p>
+
+<pre><code>ActionController::RoutingError (No route matches {:controller=&gt;"assigned_kanbans", :action=&gt;"show", :id=&gt;nil}):
+  lib/redmine/menu_manager.rb:150:in `render_single_menu_node'
+  lib/redmine/menu_manager.rb:102:in `render_menu_node'
+  lib/redmine/menu_manager.rb:91:in `block in render_menu'
+  lib/redmine/menu_manager.rb:168:in `block in menu_items_for'
+  lib/redmine/menu_manager.rb:165:in `each'
+  lib/redmine/menu_manager.rb:165:in `menu_items_for'
+  lib/redmine/menu_manager.rb:90:in `render_menu'
+  app/views/layouts/base.html.erb:24:in `_app_views_layouts_base_html_erb__576748956_98438230'
+  app/controllers/wiki_controller.rb:92:in `show'
+</code></pre>
+
+<p>この調査でこんな時間…いかんわ。</p>
+
+<p>\</p>
+
+<p>追記。</p>
+
+<p>Redmine2系からRails3になったらしく、Rails2と3だとroutes.rbの仕様がかなり変わったらしい。</p>
+
+<p>色々試したけど、直せる気がしないので放置。</p>
+
+<p><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" /></a></p>
+
+<p><a href="http://twitter.com/share">ツイートする</a></p>
+
+      </div>
+      <hr />
+      <div class="col_12">
+        <div class="col_4">
+          <h4>
+            Profile
+          </h4>
+          <img class="align-center" src="http://placehold.it/169x130/4D99E0/ffffff.png&text=full+width" />
+          <p>
+            live in Yokohama. Software Engineer. Java / Groovy / Ruby / Sinatra / Trac / Jenkins
+          </p>
+        </div>
+        <div class="col_5">
+          <h5>
+            Recent Articles
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013/10/07/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/06/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/05/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/09/24/1380029870.html">Githubリポジトリのデフォルトブランチを変更する</a>
+            </li>
+            <li>
+              <a href="/2013/09/15/20130915.html">Sinatraアプリを定期的に実行するために泥臭く行ってみた</a>
+            </li>
+            <li>
+              <a href="/2013/09/10/20130910.html">Node.js(Express)でフィードアグリゲータを作り始め</a>
+            </li>
+            <li>
+              <a href="/2013/09/03/20130903.html">SinatraでFeedAggregator</a>
+            </li>
+            <li>
+              <a href="/2013/08/19/1376919346.html">社内勉強会 - 書籍管理Webシステム</a>
+            </li>
+            <li>
+              <a href="/2013/07/18/1374154333.html">Gitbucket1.2で500エラー</a>
+            </li>
+            <li>
+              <a href="/2013/06/24/20130624.html">社内勉強会 - chef</a>
+            </li>
+            <li>
+              <a href="/2013/06/09/1370708167.html">vagrant&chefで構築した仮想CentOS上JenkinsでGoogle Testを実行</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col_3">
+          <h5>
+            By Year
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013.html">2013</a>(24)
+            </li>
+            <li>
+              <a href="/2012.html">2012</a>(81)
+            </li>
+            <li>
+              <a href="/2011.html">2011</a>(31)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="footer">
+      <p>
+        &copy; Copyright 2013 kaakaa
+      </p>
+    </div>
+  </body>
+</html>

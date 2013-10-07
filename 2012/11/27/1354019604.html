@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      KS Sample
+    </title>
+    <meta chearset="UTF-8" />
+    <meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" />
+    <link href="/css/kickstart.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/kickstart.js" type="text/javasript"></script>
+  </head>
+  <body class="elements">
+    <div class="callout clearfix">
+      <h1>
+        びぼーろく（仮）
+      </h1>
+      <div class="grid">
+        <div class="col_12">
+          <ul class="tabs right">
+            <li>
+              <a href="tab_blog"><i class="icon-file"></i>BLOG</a>
+            </li>
+            <li>
+              <a href="tab_socials"><i class="icon-twitter"></i>SOCIALS</a>
+            </li>
+            <li>
+              <a href="https://github.com/kaakaa/middleman-blog-slim-sample/tree/gh-pages"><i class="icon-github"></i>View on Gitub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col_12"><p>URLを貼り付けるだけの簡単なお仕事。</p>
+
+<p>Tweepyを使うまで</p>
+
+<p><a href="http://talkfast.org/2010/05/31/twitter-from-the-command-line-in-python-using-oauth/">Twitter From the Command Line in Python Using
+OAuth</a></p>
+
+<p>TweepyのAPI</p>
+
+<p><a href="http://packages.python.org/tweepy/html/api.html">API Reference — tweepy v1.4
+documentation</a></p>
+
+<p>\</p>
+
+<p>とりあえず、search_users()で自分を検索してみる。</p>
+
+<p>~~~~ {.syntax-highlight}
+#!/usr/bin/env python</p>
+
+<p>import sys
+import tweepy
+import inspect</p>
+
+<p>CONSUMER_KEY = '<strong>**'
+CONSUMER_SECRET = '</strong><strong>'
+ACCESS_KEY = '</strong><strong>'
+ACCESS_SECRET = '</strong>**'</p>
+
+<p>auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+api = tweepy.API(auth)
+users = api.search_users(sys.argv[1])</p>
+
+<p>for p in inspect.getmembers(users[0]):
+        print p
+~~~~</p>
+
+<p>\</p>
+
+<p>結果。</p>
+
+<p>\</p>
+
+<pre><code>('__class__', &lt;class 'tweepy.models.User'&gt;)
+('__delattr__', &lt;method-wrapper '__delattr__' of User object at 0x10816cf10&gt;)
+('__dict__', {'follow_request_sent': False, 'profile_use_background_image': True, 'contributors_enabled': False, 'id': 461961652, '_api': &lt;tweepy.api.API object at 0x10816ca50&gt;, 'verified': False, 'profile_image_url_https': u'https://si0.twimg.com/profile_images/2243152042/DSC03646_normal.jpg’, 'profile_sidebar_fill_color': u'DDEEF6', 'profile_text_color': u'333333', 'followers_count': 18, 'protected': False, 'location': u'\u6a2a\u6d5c', 'default_profile_image': False, 'id_str': u'461961652', 'status': &lt;tweepy.models.Status object at 0x108171050&gt;, 'utc_offset': None, 'statuses_count': 286, 'description': u'Engineer\u57a2\uff08private\u57a2\u2192 @kaakaa_hoe\uff09\u3068\u8a00\u3044\u306a\u304c\u3089\u3001\u30a2\u30a6\u30c8\u30d7\u30c3\u30c8\u306f\u307b\u3068\u3093\u3069\u306a\u304f\u30a4\u30f3\u30d7\u30c3\u30c8\u3070\u304b\u308a\u3002\u4ed5\u4e8b\u306fJava\u4f7f\u3063\u305f\u958b\u767a\u3057\u3066\u307e\u3059\u3002\u30d7\u30ed\u30b0\u30e9\u30e0\u521d\u3081\u3066\uff12\u5e74\u76ee\u3002Jenkins\u4f7f\u3044\u306b\u306a\u308a\u305f\u3044\u3002', 'friends_count': 76, 'profile_link_color': u'0084B4', 'profile_image_url': u'http://a0.twimg.com/profile_images/2243152042/DSC03646_normal.jpg’, 'notifications': False, 'geo_enabled': False, 'profile_background_color': u'C0DEED', 'profile_background_image_url': u'http://a0.twimg.com/images/themes/theme1/bg.png’, 'screen_name': u'kaakaa_hoe_prog', 'lang': u'ja', 'following': False, 'profile_background_tile': False, 'favourites_count': 89, 'name': u'kaakaa_hoe_prog', 'url': u'http://d.hatena.ne.jp/kaakaa_hoe/’, 'created_at': datetime.datetime(2012, 1, 12, 11, 56, 51), 'profile_background_image_url_https': u'https://si0.twimg.com/images/themes/theme1/bg.png’, 'time_zone': None, 'profile_sidebar_border_color': u'C0DEED', 'default_profile': True, 'is_translator': False, 'listed_count': 1})
+('__doc__', None)
+('__format__', &lt;built-in method __format__ of User object at 0x10816cf10&gt;)
+('__getattribute__', &lt;method-wrapper '__getattribute__' of User object at 0x10816cf10&gt;)
+('__getstate__', &lt;bound method User.__getstate__ of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('__hash__', &lt;method-wrapper '__hash__' of User object at 0x10816cf10&gt;)
+('__init__', &lt;bound method User.__init__ of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('__module__', 'tweepy.models')
+('__new__', &lt;built-in method __new__ of type object at 0x107797e00&gt;)
+('__reduce__', &lt;built-in method __reduce__ of User object at 0x10816cf10&gt;)
+('__reduce_ex__', &lt;built-in method __reduce_ex__ of User object at 0x10816cf10&gt;)
+('__repr__', &lt;method-wrapper '__repr__' of User object at 0x10816cf10&gt;)
+('__setattr__', &lt;method-wrapper '__setattr__' of User object at 0x10816cf10&gt;)
+('__sizeof__', &lt;built-in method __sizeof__ of User object at 0x10816cf10&gt;)
+('__str__', &lt;method-wrapper '__str__' of User object at 0x10816cf10&gt;)
+('__subclasshook__', &lt;built-in method __subclasshook__ of type object at 0x1079c0940&gt;)
+('__weakref__', None)
+('_api', &lt;tweepy.api.API object at 0x10816ca50&gt;)
+('contributors_enabled', False)
+('created_at', datetime.datetime(2012, 1, 12, 11, 56, 51))
+('default_profile', True)
+('default_profile_image', False)
+('description', u'Engineer\u57a2\uff08private\u57a2\u2192 @kaakaa_hoe\uff09\u3068\u8a00\u3044\u306a\u304c\u3089\u3001\u30a2\u30a6\u30c8\u30d7\u30c3\u30c8\u306f\u307b\u3068\u3093\u3069\u306a\u304f\u30a4\u30f3\u30d7\u30c3\u30c8\u3070\u304b\u308a\u3002\u4ed5\u4e8b\u306fJava\u4f7f\u3063\u305f\u958b\u767a\u3057\u3066\u307e\u3059\u3002\u30d7\u30ed\u30b0\u30e9\u30e0\u521d\u3081\u3066\uff12\u5e74\u76ee\u3002Jenkins\u4f7f\u3044\u306b\u306a\u308a\u305f\u3044\u3002')
+('favourites_count', 89)
+('follow', &lt;bound method User.follow of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('follow_request_sent', False)
+('followers', &lt;bound method User.followers of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('followers_count', 18)
+('followers_ids', &lt;bound method User.followers_ids of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('following', False)
+('friends', &lt;bound method User.friends of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('friends_count', 76)
+('geo_enabled', False)
+('id', 461961652)
+('id_str', u'461961652')
+('is_translator', False)
+('lang', u'ja')
+('listed_count', 1)
+('lists', &lt;bound method User.lists of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('lists_memberships', &lt;bound method User.lists_memberships of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('lists_subscriptions', &lt;bound method User.lists_subscriptions of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('location', u'\u6a2a\u6d5c')
+('name', u'kaakaa_hoe_prog')
+('notifications', False)
+('parse', &lt;bound method type.parse of &lt;class 'tweepy.models.User'&gt;&gt;)
+('parse_list', &lt;bound method type.parse_list of &lt;class 'tweepy.models.User'&gt;&gt;)
+('profile_background_color', u'C0DEED')
+('profile_background_image_url', u'http://a0.twimg.com/images/themes/theme1/bg.png’)
+('profile_background_image_url_https', u'https://si0.twimg.com/images/themes/theme1/bg.png’)
+('profile_background_tile', False)
+('profile_image_url', u'http://a0.twimg.com/profile_images/2243152042/DSC03646_normal.jpg’)
+('profile_image_url_https', u'https://si0.twimg.com/profile_images/2243152042/DSC03646_normal.jpg’)
+('profile_link_color', u'0084B4')
+('profile_sidebar_border_color', u'C0DEED')
+('profile_sidebar_fill_color', u'DDEEF6')
+('profile_text_color', u'333333')
+('profile_use_background_image', True)
+('protected', False)
+('screen_name', u'kaakaa_hoe_prog')
+('status', &lt;tweepy.models.Status object at 0x108171050&gt;)
+('statuses_count', 286)
+('time_zone', None)
+('timeline', &lt;bound method User.timeline of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('unfollow', &lt;bound method User.unfollow of &lt;tweepy.models.User object at 0x10816cf10&gt;&gt;)
+('url', u'http://d.hatena.ne.jp/kaakaa_hoe/’)
+('utc_offset', None)
+('verified', False)
+</code></pre>
+
+<p>\</p>
+
+<p>SearchResultオブジェクトは、けっこう色々なパラメータ持ってるのね。</p>
+
+<p>\
+ \</p>
+
+<p>sphinx使ってみたいな～</p>
+
+<p>↓</p>
+
+<p>tweetをドキュメント化しようか</p>
+
+<p>↓</p>
+
+<p>twitter apiどうやって叩くんだろう</p>
+
+<p>ってな流れでtweepy調べてた。</p>
+
+<p>tweepy使えそうなので、そろそろ当初の目的であるsphinxに戻れそう。</p>
+
+<p><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" /></a></p>
+
+<p><a href="http://twitter.com/share">ツイートする</a></p>
+
+      </div>
+      <hr />
+      <div class="col_12">
+        <div class="col_4">
+          <h4>
+            Profile
+          </h4>
+          <img class="align-center" src="http://placehold.it/169x130/4D99E0/ffffff.png&text=full+width" />
+          <p>
+            live in Yokohama. Software Engineer. Java / Groovy / Ruby / Sinatra / Trac / Jenkins
+          </p>
+        </div>
+        <div class="col_5">
+          <h5>
+            Recent Articles
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013/10/07/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/06/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/05/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/09/24/1380029870.html">Githubリポジトリのデフォルトブランチを変更する</a>
+            </li>
+            <li>
+              <a href="/2013/09/15/20130915.html">Sinatraアプリを定期的に実行するために泥臭く行ってみた</a>
+            </li>
+            <li>
+              <a href="/2013/09/10/20130910.html">Node.js(Express)でフィードアグリゲータを作り始め</a>
+            </li>
+            <li>
+              <a href="/2013/09/03/20130903.html">SinatraでFeedAggregator</a>
+            </li>
+            <li>
+              <a href="/2013/08/19/1376919346.html">社内勉強会 - 書籍管理Webシステム</a>
+            </li>
+            <li>
+              <a href="/2013/07/18/1374154333.html">Gitbucket1.2で500エラー</a>
+            </li>
+            <li>
+              <a href="/2013/06/24/20130624.html">社内勉強会 - chef</a>
+            </li>
+            <li>
+              <a href="/2013/06/09/1370708167.html">vagrant&chefで構築した仮想CentOS上JenkinsでGoogle Testを実行</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col_3">
+          <h5>
+            By Year
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013.html">2013</a>(24)
+            </li>
+            <li>
+              <a href="/2012.html">2012</a>(81)
+            </li>
+            <li>
+              <a href="/2011.html">2011</a>(31)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="footer">
+      <p>
+        &copy; Copyright 2013 kaakaa
+      </p>
+    </div>
+  </body>
+</html>
