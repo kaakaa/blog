@@ -5,16 +5,361 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2013-10-07T00:00:00Z</updated>
+  <updated>2013-10-10T00:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>2013年秋 Web開発最前線テックトーク</title>
+    <link rel="alternate" href="http://blog.url.com/2013/10/10/webfrontier_seminar.html"/>
+    <id>http://blog.url.com/2013/10/10/webfrontier_seminar.html</id>
+    <published>2013-10-10T00:00:00Z</published>
+    <updated>2013-10-10T23:30:24+09:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h3 id="ruby-on-rails2013"&gt;これから始める"Ruby on Rails"2013年秋版&lt;/h3&gt;
+
+&lt;h5 id="section"&gt;開発環境&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MySQL::Sandboxで複数バージョンのインストールができる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id="section-1"&gt;テスト&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;現場ではあまりテストは書かれない&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;テストする順番を考える&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;RSpecが主流(model)&lt;/li&gt;
+  &lt;li&gt;Request spec(Controller)
+    &lt;ul&gt;
+      &lt;li&gt;RoutingをトレースしたControllerのテスト&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Rspec + Capybara + Poltergeist(View)
+    &lt;ul&gt;
+      &lt;li&gt;現状は手作業&lt;/li&gt;
+      &lt;li&gt;Capybara 
+        &lt;ul&gt;
+          &lt;li&gt;Webアクセス自動化 + テスト&lt;/li&gt;
+          &lt;li&gt;DOMを取得&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Poltergeist(Phantomjs)
+        &lt;ul&gt;
+          &lt;li&gt;seleniumの軽量版&lt;/li&gt;
+          &lt;li&gt;Capybaraのplugin&lt;/li&gt;
+          &lt;li&gt;headlessなのでブラウザを開かずにテストできる&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id="gem"&gt;便利なgem&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Rails高速化
+    &lt;ul&gt;
+      &lt;li&gt;Springがよく使われていそう&lt;/li&gt;
+      &lt;li&gt;実行ファイルをキャッシュして、デーモンとして別プロセスで活かしておく&lt;/li&gt;
+      &lt;li&gt;spork/zeus/commands&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Rubocop(ロボコップ)
+    &lt;ul&gt;
+      &lt;li&gt;静的解析&lt;/li&gt;
+      &lt;li&gt;コーディング規約チェック&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;TDD
+    &lt;ul&gt;
+      &lt;li&gt;guard/watchrが便利&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="nodejs"&gt;最近のnode.jsについて&lt;/h3&gt;
+
+&lt;h5 id="node"&gt;Node&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;node
+    &lt;ul&gt;
+      &lt;li&gt;sleepやmutexがない。idle&lt;/li&gt;
+      &lt;li&gt;ver.偶数メジャーバージョンをインストールする（奇数バージョンはstableじゃない）&lt;/li&gt;
+      &lt;li&gt;nodeのサイトにstabilityを調べられる（apiの安定性）
+        &lt;ul&gt;
+          &lt;li&gt;gruntのfs.watch -&amp;gt; stableでない&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;再帰処理は気をつける
+    &lt;ul&gt;
+      &lt;li&gt;再帰処理中はconnectionを受け付けられない&lt;/li&gt;
+      &lt;li&gt;他の処理が割り込みできる余地を残しながら回す&lt;/li&gt;
+      &lt;li&gt;✕ nextTick ◯ setImmediate&lt;/li&gt;
+      &lt;li&gt;nextTick: イベントループ内でネスト的に再帰処理 / setImmediate:１つのイベントを繰り返す&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Stream2
+    &lt;ul&gt;
+      &lt;li&gt;dataイベントがある奴は古い&lt;/li&gt;
+      &lt;li&gt;readableイベントがある奴は新しい&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;プロセス管理
+    &lt;ul&gt;
+      &lt;li&gt;initctl + foreman + grunt&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;node-webkit
+    &lt;ul&gt;
+      &lt;li&gt;node.jsでGUIアプリFW&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Haroopad
+    &lt;ul&gt;
+      &lt;li&gt;markdownエディタ&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;node使えばXHR制約を受けないのでGUIアプリが簡単に作れる&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Grunt
+    &lt;ul&gt;
+      &lt;li&gt;YAPCのスライドが参考になる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;tessel
+    &lt;ul&gt;
+      &lt;li&gt;node.jsが組み込まれたマイコン&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;大学諸島プログラミングの授業がjavaからjavascriptに変わった
+    &lt;ul&gt;
+      &lt;li&gt;初学者を組み込みやすい&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Glideのサーバは
+    &lt;ul&gt;
+      &lt;li&gt;さくら使ってる間はスローダウンさせられてログインできずに落ちてた&lt;/li&gt;
+      &lt;li&gt;自宅サーバで動かしてる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;process memoryusage
+    &lt;ul&gt;
+      &lt;li&gt;でメモリ使用量が見れる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="scalaweb"&gt;ScalaでのWeb開発事情&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;gitbucket
+    &lt;ul&gt;
+      &lt;li&gt;Gitlabのインストールがめんどい。メンテする気にならない&lt;/li&gt;
+      &lt;li&gt;JGit&lt;/li&gt;
+      &lt;li&gt;httpでしかアクセスできない(sshはダメ)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scalaの利点
+    &lt;ul&gt;
+      &lt;li&gt;安全性 / 柔軟性&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scalaフレームワークの使い分け
+    &lt;ul&gt;
+      &lt;li&gt;Slick (タイプセーフにDSL記述・DB接続)&lt;/li&gt;
+      &lt;li&gt;Play2 -&amp;gt; Netty(多重度やスケールアウトに強い) / Scalatra -&amp;gt; Tomcat()&lt;/li&gt;
+      &lt;li&gt;SIerはスケールとかいらないのでScalatra(Tomcat)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Play2
+    &lt;ul&gt;
+      &lt;li&gt;ORM微妙(とても微妙/play2.3からはslickが標準に)&lt;/li&gt;
+      &lt;li&gt;既存Javaのポーティングに向かない&lt;/li&gt;
+      &lt;li&gt;テンプレート/ルーティングもタイプセーフ
+        &lt;ul&gt;
+          &lt;li&gt;テンプレートがタイプセーフなJavaのwebFWはない&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;ステートレス
+        &lt;ul&gt;
+          &lt;li&gt;セッションの書き換えは変態的な記述が必要&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;すべてをノンブロッキングで作れる&lt;/li&gt;
+      &lt;li&gt;Websocketを簡単に使える&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Scalatra
+    &lt;ul&gt;
+      &lt;li&gt;servletAPIを持っているので既存のjavaコードとの移行性も高い&lt;/li&gt;
+      &lt;li&gt;play2のタイプセーフなテンプレートエンジンを単体で使える&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Slick
+    &lt;ul&gt;
+      &lt;li&gt;タイプセーフなDSL（Lynqみたいなやつ）&lt;/li&gt;
+      &lt;li&gt;テーブル定義を簡単にするアノテーションも提供されている&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;デメリット
+    &lt;ul&gt;
+      &lt;li&gt;コンパイルが遅い
+        &lt;ul&gt;
+          &lt;li&gt;修正だけ差分コンパイルも可能&lt;/li&gt;
+          &lt;li&gt;プロジェクトを細かく分ける（コンパイル単位を小さく）&lt;/li&gt;
+          &lt;li&gt;依存を脚力減らす（差分コンパイルのために）&lt;/li&gt;
+          &lt;li&gt;Scalaコミュニティでも最大の問題として認識されている&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;バイナリ互換性がない
+        &lt;ul&gt;
+          &lt;li&gt;Scalaをバージョンアップするとバージョンの古いバイナリが動かなくなることがあるA&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;周辺ツールが未成熟
+        &lt;ul&gt;
+          &lt;li&gt;IntelliJおすすめ
+            &lt;ul&gt;
+              &lt;li&gt;Eclipseのようにホワイトアウトしない&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;sbtも微妙
+            &lt;ul&gt;
+              &lt;li&gt;キャッシュの挙動がおかしい&lt;/li&gt;
+              &lt;li&gt;sbtもあまり互換性がない&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="javascript-"&gt;JavaScript フロントエンド開発の昨今&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;HTML5アプリケーションアセンブラ
+    &lt;ul&gt;
+      &lt;li&gt;middleman = サイトアセンブラ&lt;/li&gt;
+      &lt;li&gt;アプリケーションアセンブラ = Yoeoman
+        &lt;ul&gt;
+          &lt;li&gt;jsのアレなやつ&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Yeoman
+    &lt;ul&gt;
+      &lt;li&gt;js版middlemanみたいなやつ&lt;/li&gt;
+      &lt;li&gt;livereloadがデフォルト&lt;/li&gt;
+      &lt;li&gt;yeoman generator-webapp
+        &lt;ul&gt;
+          &lt;li&gt;色んなもの使える grunt/bower/bootstrap fo r sass/ requireJS/ moderniizr&lt;/li&gt;
+          &lt;li&gt;ここで使われてるものがトレンド&lt;/li&gt;
+          &lt;li&gt;構成のトレンドが見える&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Grunt
+        &lt;ul&gt;
+          &lt;li&gt;ビルド・ミニファイ&lt;/li&gt;
+          &lt;li&gt;node.jsベース&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Bower
+        &lt;ul&gt;
+          &lt;li&gt;npmベース&lt;/li&gt;
+          &lt;li&gt;node.js強い&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Yeoman generatorコマンドで人気なのは？
+        &lt;ul&gt;
+          &lt;li&gt;angularJSが一番人気&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;MV◯FW
+    &lt;ul&gt;
+      &lt;li&gt;Ember/Angular &lt;/li&gt;
+      &lt;li&gt;ワザノバ&lt;/li&gt;
+      &lt;li&gt;thougntworks technology radar&lt;/li&gt;
+      &lt;li&gt;BackboneはFWの制約弱いから気をつける&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;データバインディングが重要
+    &lt;ul&gt;
+      &lt;li&gt;smalltalk的なmvc
+        &lt;ul&gt;
+          &lt;li&gt;モデルのデータが変わればviewも自動で変わる&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;angularJSはアプリケーション的なFW&lt;/li&gt;
+      &lt;li&gt;タグを付けるだけでモデルとビューを結びつける&lt;/li&gt;
+      &lt;li&gt;M -&amp;gt; V への通知を主軸に周辺を固めたもの&lt;/li&gt;
+      &lt;li&gt;どのFWを使うべきか？
+        &lt;ul&gt;
+          &lt;li&gt;-&amp;gt; データ・モデルの更新に対してビューがどのように更新されるかに重きをおくべき&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;ObjectObserver&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;-&amp;gt; データバインディングをしっかりするとテストがやりやすくなる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;テスト
+    &lt;ul&gt;
+      &lt;li&gt;WebDB vol.77 にフレームワーク一覧&lt;/li&gt;
+      &lt;li&gt;Yeomanではjasmin/sinonjs/chai/mochaなどが使われている&lt;/li&gt;
+      &lt;li&gt;全部入り jasmin / カスタマイズ moccha&lt;/li&gt;
+      &lt;li&gt;リモートテストランナー
+        &lt;ul&gt;
+          &lt;li&gt;karma / testem(実ブラウザ使ってテスト・デバッグでインスペクション見たりできる)&lt;/li&gt;
+          &lt;li&gt;karma + travisCIとかも出来る
+　- travisにはfirefoxがインストールされているのでfirefox指定したテスト出来る&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;karma + isranbul(カバレッジ)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;ユニットテスト {karma, testem} + {jasmine, mocha}&lt;/li&gt;
+  &lt;li&gt;E2Eテスト
+    &lt;ul&gt;
+      &lt;li&gt;End to End&lt;/li&gt;
+      &lt;li&gt;jsだけでE2Eテスト
+        &lt;ul&gt;
+          &lt;li&gt;karma + なにか&lt;/li&gt;
+          &lt;li&gt;casperJS
+            &lt;ul&gt;
+              &lt;li&gt;nodeベースかな？&lt;/li&gt;
+              &lt;li&gt;コッチのほうがデベロッパーフレンドリー&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;burnch.io yeomanがトレンド&lt;/li&gt;
+  &lt;li&gt;node.js重要&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+  </entry>
   <entry>
     <title>Example Article</title>
     <link rel="alternate" href="http://blog.url.com/2013/10/07/example-article.html"/>
     <id>http://blog.url.com/2013/10/07/example-article.html</id>
     <published>2013-10-07T00:00:00Z</published>
-    <updated>2013-10-07T23:08:34+09:00</updated>
+    <updated>2013-10-10T23:27:23+09:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -26,7 +371,7 @@
     <link rel="alternate" href="http://blog.url.com/2013/10/06/example-article.html"/>
     <id>http://blog.url.com/2013/10/06/example-article.html</id>
     <published>2013-10-06T00:00:00Z</published>
-    <updated>2013-10-07T22:01:15+09:00</updated>
+    <updated>2013-10-10T23:27:23+09:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -38,7 +383,7 @@
     <link rel="alternate" href="http://blog.url.com/2013/10/05/example-article.html"/>
     <id>http://blog.url.com/2013/10/05/example-article.html</id>
     <published>2013-10-05T00:00:00Z</published>
-    <updated>2013-10-07T22:01:15+09:00</updated>
+    <updated>2013-10-10T23:27:23+09:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -50,7 +395,7 @@
     <link rel="alternate" href="http://blog.url.com/2013/09/24/1380029870.html"/>
     <id>http://blog.url.com/2013/09/24/1380029870.html</id>
     <published>2013-09-24T00:00:00Z</published>
-    <updated>2013-10-07T22:01:15+09:00</updated>
+    <updated>2013-10-10T23:27:23+09:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -71,19 +416,7 @@ User&lt;/a&gt;&lt;/p&gt;
     <link rel="alternate" href="http://blog.url.com/2013/09/15/20130915.html"/>
     <id>http://blog.url.com/2013/09/15/20130915.html</id>
     <published>2013-09-15T00:00:00Z</published>
-    <updated>2013-10-07T22:01:15+09:00</updated>
-    <author>
-      <name>Article Author</name>
-    </author>
-    <content type="html">
-</content>
-  </entry>
-  <entry>
-    <title>Node.js(Express)でフィードアグリゲータを作り始め</title>
-    <link rel="alternate" href="http://blog.url.com/2013/09/10/20130910.html"/>
-    <id>http://blog.url.com/2013/09/10/20130910.html</id>
-    <published>2013-09-10T00:00:00Z</published>
-    <updated>2013-10-07T22:01:15+09:00</updated>
+    <updated>2013-10-10T23:27:23+09:00</updated>
     <author>
       <name>Article Author</name>
     </author>

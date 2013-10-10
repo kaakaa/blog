@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      KS Sample
+    </title>
+    <meta chearset="UTF-8" />
+    <meta content="IE=edge;chrome=1" http-equiv="X-UA-Compatible" />
+    <link href="/css/kickstart.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="/javascripts/kickstart.js" type="text/javasript"></script>
+  </head>
+  <body class="elements">
+    <div class="callout clearfix">
+      <h1>
+        びぼーろく（仮）
+      </h1>
+      <div class="grid">
+        <div class="col_12">
+          <ul class="tabs right">
+            <li>
+              <a href="tab_blog"><i class="icon-file"></i>BLOG</a>
+            </li>
+            <li>
+              <a href="tab_socials"><i class="icon-twitter"></i>SOCIALS</a>
+            </li>
+            <li>
+              <a href="https://github.com/kaakaa/middleman-blog-slim-sample/tree/gh-pages"><i class="icon-github"></i>View on Gitub</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col_12">
+        <h3 id="ruby-on-rails2013">これから始める"Ruby on Rails"2013年秋版</h3>
+        
+        <h5 id="section">開発環境</h5>
+        
+        <ul>
+          <li>MySQL::Sandboxで複数バージョンのインストールができる</li>
+        </ul>
+        
+        <h5 id="section-1">テスト</h5>
+        
+        <ul>
+          <li>現場ではあまりテストは書かれない</li>
+          <li>
+            <p>テストする順番を考える</p>
+          </li>
+          <li>RSpecが主流(model)</li>
+          <li>Request spec(Controller)
+            <ul>
+              <li>RoutingをトレースしたControllerのテスト</li>
+            </ul>
+          </li>
+          <li>Rspec + Capybara + Poltergeist(View)
+            <ul>
+              <li>現状は手作業</li>
+              <li>Capybara 
+                <ul>
+                  <li>Webアクセス自動化 + テスト</li>
+                  <li>DOMを取得</li>
+                </ul>
+              </li>
+              <li>Poltergeist(Phantomjs)
+                <ul>
+                  <li>seleniumの軽量版</li>
+                  <li>Capybaraのplugin</li>
+                  <li>headlessなのでブラウザを開かずにテストできる</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        
+        <h5 id="gem">便利なgem</h5>
+        
+        <ul>
+          <li>Rails高速化
+            <ul>
+              <li>Springがよく使われていそう</li>
+              <li>実行ファイルをキャッシュして、デーモンとして別プロセスで活かしておく</li>
+              <li>spork/zeus/commands</li>
+            </ul>
+          </li>
+          <li>Rubocop(ロボコップ)
+            <ul>
+              <li>静的解析</li>
+              <li>コーディング規約チェック</li>
+            </ul>
+          </li>
+          <li>TDD
+            <ul>
+              <li>guard/watchrが便利</li>
+            </ul>
+          </li>
+        </ul>
+        
+        <h3 id="nodejs">最近のnode.jsについて</h3>
+        
+        <h5 id="node">Node</h5>
+        
+        <ul>
+          <li>node
+            <ul>
+              <li>sleepやmutexがない。idle</li>
+              <li>ver.偶数メジャーバージョンをインストールする（奇数バージョンはstableじゃない）</li>
+              <li>nodeのサイトにstabilityを調べられる（apiの安定性）
+                <ul>
+                  <li>gruntのfs.watch -&gt; stableでない</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>再帰処理は気をつける
+            <ul>
+              <li>再帰処理中はconnectionを受け付けられない</li>
+              <li>他の処理が割り込みできる余地を残しながら回す</li>
+              <li>✕ nextTick ◯ setImmediate</li>
+              <li>nextTick: イベントループ内でネスト的に再帰処理 / setImmediate:１つのイベントを繰り返す</li>
+            </ul>
+          </li>
+          <li>Stream2
+            <ul>
+              <li>dataイベントがある奴は古い</li>
+              <li>readableイベントがある奴は新しい</li>
+            </ul>
+          </li>
+          <li>プロセス管理
+            <ul>
+              <li>initctl + foreman + grunt</li>
+            </ul>
+          </li>
+          <li>node-webkit
+            <ul>
+              <li>node.jsでGUIアプリFW</li>
+            </ul>
+          </li>
+          <li>Haroopad
+            <ul>
+              <li>markdownエディタ</li>
+            </ul>
+          </li>
+          <li>
+            <p>node使えばXHR制約を受けないのでGUIアプリが簡単に作れる</p>
+          </li>
+          <li>Grunt
+            <ul>
+              <li>YAPCのスライドが参考になる</li>
+            </ul>
+          </li>
+          <li>tessel
+            <ul>
+              <li>node.jsが組み込まれたマイコン</li>
+            </ul>
+          </li>
+          <li>大学諸島プログラミングの授業がjavaからjavascriptに変わった
+            <ul>
+              <li>初学者を組み込みやすい</li>
+            </ul>
+          </li>
+          <li>Glideのサーバは
+            <ul>
+              <li>さくら使ってる間はスローダウンさせられてログインできずに落ちてた</li>
+              <li>自宅サーバで動かしてる</li>
+            </ul>
+          </li>
+          <li>process memoryusage
+            <ul>
+              <li>でメモリ使用量が見れる</li>
+            </ul>
+          </li>
+        </ul>
+        
+        <h3 id="scalaweb">ScalaでのWeb開発事情</h3>
+        
+        <ul>
+          <li>gitbucket
+            <ul>
+              <li>Gitlabのインストールがめんどい。メンテする気にならない</li>
+              <li>JGit</li>
+              <li>httpでしかアクセスできない(sshはダメ)</li>
+            </ul>
+          </li>
+          <li>Scalaの利点
+            <ul>
+              <li>安全性 / 柔軟性</li>
+            </ul>
+          </li>
+          <li>Scalaフレームワークの使い分け
+            <ul>
+              <li>Slick (タイプセーフにDSL記述・DB接続)</li>
+              <li>Play2 -&gt; Netty(多重度やスケールアウトに強い) / Scalatra -&gt; Tomcat()</li>
+              <li>SIerはスケールとかいらないのでScalatra(Tomcat)</li>
+            </ul>
+          </li>
+          <li>Play2
+            <ul>
+              <li>ORM微妙(とても微妙/play2.3からはslickが標準に)</li>
+              <li>既存Javaのポーティングに向かない</li>
+              <li>テンプレート/ルーティングもタイプセーフ
+                <ul>
+                  <li>テンプレートがタイプセーフなJavaのwebFWはない</li>
+                </ul>
+              </li>
+              <li>ステートレス
+                <ul>
+                  <li>セッションの書き換えは変態的な記述が必要</li>
+                </ul>
+              </li>
+              <li>すべてをノンブロッキングで作れる</li>
+              <li>Websocketを簡単に使える</li>
+            </ul>
+          </li>
+          <li>Scalatra
+            <ul>
+              <li>servletAPIを持っているので既存のjavaコードとの移行性も高い</li>
+              <li>play2のタイプセーフなテンプレートエンジンを単体で使える</li>
+            </ul>
+          </li>
+          <li>Slick
+            <ul>
+              <li>タイプセーフなDSL（Lynqみたいなやつ）</li>
+              <li>テーブル定義を簡単にするアノテーションも提供されている</li>
+            </ul>
+          </li>
+          <li>デメリット
+            <ul>
+              <li>コンパイルが遅い
+                <ul>
+                  <li>修正だけ差分コンパイルも可能</li>
+                  <li>プロジェクトを細かく分ける（コンパイル単位を小さく）</li>
+                  <li>依存を脚力減らす（差分コンパイルのために）</li>
+                  <li>Scalaコミュニティでも最大の問題として認識されている</li>
+                </ul>
+              </li>
+              <li>バイナリ互換性がない
+                <ul>
+                  <li>Scalaをバージョンアップするとバージョンの古いバイナリが動かなくなることがあるA</li>
+                </ul>
+              </li>
+              <li>周辺ツールが未成熟
+                <ul>
+                  <li>IntelliJおすすめ
+                    <ul>
+                      <li>Eclipseのようにホワイトアウトしない</li>
+                    </ul>
+                  </li>
+                  <li>sbtも微妙
+                    <ul>
+                      <li>キャッシュの挙動がおかしい</li>
+                      <li>sbtもあまり互換性がない</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        
+        <h3 id="javascript-">JavaScript フロントエンド開発の昨今</h3>
+        
+        <ul>
+          <li>HTML5アプリケーションアセンブラ
+            <ul>
+              <li>middleman = サイトアセンブラ</li>
+              <li>アプリケーションアセンブラ = Yoeoman
+                <ul>
+                  <li>jsのアレなやつ</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>Yeoman
+            <ul>
+              <li>js版middlemanみたいなやつ</li>
+              <li>livereloadがデフォルト</li>
+              <li>yeoman generator-webapp
+                <ul>
+                  <li>色んなもの使える grunt/bower/bootstrap fo r sass/ requireJS/ moderniizr</li>
+                  <li>ここで使われてるものがトレンド</li>
+                  <li>構成のトレンドが見える</li>
+                </ul>
+              </li>
+              <li>Grunt
+                <ul>
+                  <li>ビルド・ミニファイ</li>
+                  <li>node.jsベース</li>
+                </ul>
+              </li>
+              <li>Bower
+                <ul>
+                  <li>npmベース</li>
+                  <li>node.js強い</li>
+                </ul>
+              </li>
+              <li>Yeoman generatorコマンドで人気なのは？
+                <ul>
+                  <li>angularJSが一番人気</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>MV◯FW
+            <ul>
+              <li>Ember/Angular </li>
+              <li>ワザノバ</li>
+              <li>thougntworks technology radar</li>
+              <li>BackboneはFWの制約弱いから気をつける</li>
+            </ul>
+          </li>
+          <li>データバインディングが重要
+            <ul>
+              <li>smalltalk的なmvc
+                <ul>
+                  <li>モデルのデータが変わればviewも自動で変わる</li>
+                </ul>
+              </li>
+              <li>angularJSはアプリケーション的なFW</li>
+              <li>タグを付けるだけでモデルとビューを結びつける</li>
+              <li>M -&gt; V への通知を主軸に周辺を固めたもの</li>
+              <li>どのFWを使うべきか？
+                <ul>
+                  <li>-&gt; データ・モデルの更新に対してビューがどのように更新されるかに重きをおくべき</li>
+                </ul>
+              </li>
+              <li>
+                <p>ObjectObserver</p>
+              </li>
+              <li>-&gt; データバインディングをしっかりするとテストがやりやすくなる</li>
+            </ul>
+          </li>
+          <li>テスト
+            <ul>
+              <li>WebDB vol.77 にフレームワーク一覧</li>
+              <li>Yeomanではjasmin/sinonjs/chai/mochaなどが使われている</li>
+              <li>全部入り jasmin / カスタマイズ moccha</li>
+              <li>リモートテストランナー
+                <ul>
+                  <li>karma / testem(実ブラウザ使ってテスト・デバッグでインスペクション見たりできる)</li>
+                  <li>karma + travisCIとかも出来る
+        　- travisにはfirefoxがインストールされているのでfirefox指定したテスト出来る</li>
+                </ul>
+              </li>
+              <li>karma + isranbul(カバレッジ)</li>
+            </ul>
+          </li>
+          <li>ユニットテスト {karma, testem} + {jasmine, mocha}</li>
+          <li>E2Eテスト
+            <ul>
+              <li>End to End</li>
+              <li>jsだけでE2Eテスト
+                <ul>
+                  <li>karma + なにか</li>
+                  <li>casperJS
+                    <ul>
+                      <li>nodeベースかな？</li>
+                      <li>コッチのほうがデベロッパーフレンドリー</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>burnch.io yeomanがトレンド</li>
+          <li>node.js重要</li>
+        </ul>
+        
+        
+      </div>
+      <hr />
+      <div class="col_12">
+        <div class="col_4">
+          <h4>
+            Profile
+          </h4>
+          <img class="align-center" src="http://placehold.it/169x130/4D99E0/ffffff.png&text=full+width" />
+          <p>
+            live in Yokohama. Software Engineer. Java / Groovy / Ruby / Sinatra / Trac / Jenkins
+          </p>
+        </div>
+        <div class="col_5">
+          <h5>
+            Recent Articles
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013/10/10/webfrontier_seminar.html">2013年秋 Web開発最前線テックトーク</a>
+            </li>
+            <li>
+              <a href="/2013/10/07/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/06/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/10/05/example-article.html">Example Article</a>
+            </li>
+            <li>
+              <a href="/2013/09/24/1380029870.html">Githubリポジトリのデフォルトブランチを変更する</a>
+            </li>
+            <li>
+              <a href="/2013/09/15/20130915.html">Sinatraアプリを定期的に実行するために泥臭く行ってみた</a>
+            </li>
+            <li>
+              <a href="/2013/09/10/20130910.html">Node.js(Express)でフィードアグリゲータを作り始め</a>
+            </li>
+            <li>
+              <a href="/2013/09/03/20130903.html">SinatraでFeedAggregator</a>
+            </li>
+            <li>
+              <a href="/2013/08/19/1376919346.html">社内勉強会 - 書籍管理Webシステム</a>
+            </li>
+            <li>
+              <a href="/2013/07/18/1374154333.html">Gitbucket1.2で500エラー</a>
+            </li>
+            <li>
+              <a href="/2013/06/24/20130624.html">社内勉強会 - chef</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col_3">
+          <h5>
+            By Year
+          </h5>
+          <ul class="alt">
+            <li>
+              <a href="/2013.html">2013</a>(25)
+            </li>
+            <li>
+              <a href="/2012.html">2012</a>(81)
+            </li>
+            <li>
+              <a href="/2011.html">2011</a>(31)
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="footer">
+      <p>
+        &copy; Copyright 2013 kaakaa
+      </p>
+    </div>
+  </body>
+</html>
