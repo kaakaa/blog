@@ -18,6 +18,7 @@ before_script:
   - sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
 
 script:
+  - git submodule update --init
   - hugo -v
 
 deploy:
