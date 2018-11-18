@@ -1,0 +1,9 @@
+baseURL = "http://kaakaa.github.io/"
+languageCode = "ja-JP"
+title = "kaakaa blog"
+theme = "cactus-plus"
+
+[params]
+    enableToc = true
+    enableShare = true
+    showLatestPosts = true
