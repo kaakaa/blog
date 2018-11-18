@@ -2,8 +2,19 @@ baseURL = "http://kaakaa.github.io/blog/"
 languageCode = "ja-JP"
 title = "kaakaa blog"
 theme = "cactus-plus"
+hasCJKLanguage = true
 
 [params]
+    twitter = "kaakaa_hoe_prog"
+    enableTwitterCard = true
+
     enableToc = true
     enableShare = true
+    share = ""
+
     showLatestPosts = true
+
+    enableSummary = true
+    useDescriptionReplaceSummary = false
+
+    copyright = "© 2018 kaakaa (Yusuke Nemoto)"

@@ -1,10 +1,10 @@
 ---
 title: "About"
 date: 2001-01-01T00:00:00+09:00
-draft: true
+draft: false
 ---
 
-# kaakaa
+# kaakaa (Yusuke Nemoto)
 
 * [kaakaa \(Yusuke Nemoto\)](https://github.com/kaakaa)
 * [kaakaa\_hoe \- Qiita](https://qiita.com/kaakaa_hoe)
