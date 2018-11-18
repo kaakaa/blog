@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.com/kaakaa/kaakaa.github.io.svg?branch=master)](https://travis-ci.com/kaakaa/kaakaa.github.io)
+[![Build Status](https://travis-ci.com/kaakaa/blog.svg?branch=master)](https://travis-ci.com/kaakaa/blog)
