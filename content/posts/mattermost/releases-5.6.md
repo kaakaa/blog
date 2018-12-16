@@ -1,5 +1,5 @@
 ---
-title: "Mattermost5.4の新機能"
+title: "Mattermost5.6の新機能"
 date: 2018-12-16T15:17:06+09:00
 draft: false
 toc: true
