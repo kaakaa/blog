@@ -1,6 +1,6 @@
 ---
 title: "Mattermost5.8の新機能"
-date: 2018-02-18T15:17:06+09:00
+date: 2019-02-18T15:17:06+09:00
 draft: false
 toc: true
 tags: ["mattermost", "releases"]

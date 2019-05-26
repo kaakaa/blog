@@ -1,6 +1,6 @@
 ---
 title: "Mattermost5.10の新機能"
-date: 2018-04-21T15:17:06+09:00
+date: 2019-04-21T15:17:06+09:00
 draft: false
 toc: true
 tags: ["mattermost", "releases"]
