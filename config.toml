@@ -4,10 +4,17 @@ title = "kaakaa blog"
 theme = "cactus-plus"
 hasCJKLanguage = true
 
+googleAnalytics = "UA-57299975-4"
+
 [params]
     twitter = "kaakaa_hoe_prog"
     enableTwitterCard = true
+    enableGoogleAnalytics = true
 
+    enableDisqus = true
+    disqusShortname = "kaakaa-blog"
+
+    enableRSS = true
     enableToc = true
     enableShare = true
     share = ""
@@ -18,3 +25,7 @@ hasCJKLanguage = true
     useDescriptionReplaceSummary = false
 
     copyright = "© 2018 kaakaa (Yusuke Nemoto)"
+
+[social]
+    twitter-square = "https://www.twitter.com/kaakaa_hoe_prog"
+    github-square = "https://www.github.com/kaakaa"
