@@ -9,7 +9,7 @@ tags: ["mattermost", "releases"]
 
 ## はじめに
 
-前回の更新([v3.8](https://qiita.com/kaakaa_hoe/items/1ae33a780a4a17f4374b))からだいぶバージョンが飛んでしまいましたが、2017/9/15にMattermost 4.2.0がリリースされたので、追加された機能などについて簡単に紹介します。
+前回の更新([v3.8](https://qiita.com/kaakaa_hoe/items/1ae33a780a4a17f4374b))からだいぶバージョンが飛んでしまいましたが、2017/9/15にMattermost v4.2.0がリリースされたので、追加された機能などについて簡単に紹介します。
 
 詳細については公式のリリースを確認ください。  
 [Mattermost 4.2: Interactive message buttons, AppConfig for Mobile App - Mattermost](https://about.mattermost.com/blog/mattermost-4-2/)
