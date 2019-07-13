@@ -9,26 +9,29 @@ tags: ["mattermost", "plugin"]
 ## Mattermost Plugin用テンプレートリポジトリ
 
 Mattermostにはプラグイン機能があり、サーバーサイド/フロントエンド共に独自の拡張機能を追加することができます。
+Mattermostプラグインの開発方法は[Mattermostプラグインの作り方 · kaakaa blog](https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/)にも書きましたが、一から作るとなると準備するファイルも多く大変です。
 
-Mattermostプラグインの開発方法は、[Mattermostプラグインの作り方 · kaakaa blog](https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/)にも書きましたが一から作るとなると準備するファイルも多く大変です。
+そこで、Mattermostプラグインの開発を楽にするため、Mattermostチームが[GitHubのテンプレートリポジトリ機能](https://help.github.com/ja/articles/creating-a-template-repository)を利用して作成しているテンプレートリポジトリを使ったプラグイン開発方法について紹介します。
 
-そこで、Mattermostチームが[GitHubのテンプレートリポジトリ機能](https://help.github.com/ja/articles/creating-a-template-repository)を使ったボイラープレートを作成しています。
+* [mattermost/mattermost\-plugin\-starter\-template: Build scripts and templates for writing Mattermost plugins\.](https://github.com/mattermost/mattermost-plugin-starter-template)
 
-
-[mattermost/mattermost\-plugin\-starter\-template: Build scripts and templates for writing Mattermost plugins\.](https://github.com/mattermost/mattermost-plugin-starter-template)
-
-このテンプレートリポジトリを使用することで、初めから動作するプラグインを作成することができ、必要な機能を開発することに集中することができるようになります。
+このテンプレートリポジトリを使用することで、動作するプラグインがある状態から開発を始めることができ、必要な機能を開発することに集中することができるようになります。
 
 ## テンプレートリポジトリを使用してMattermostプラグインを開発する
 
 ### 0. Mattermostプラグイン開発環境について
 
-プラグイン開発向けの開発環境はまだまとめられていなようですが、Mattermost本体の推奨環境に沿うのが安全だと思います。
+プラグイン開発を行うには下記の開発環境が必要です。
 
-* Go: 1.12
-* Node 10.15.3+
-* npm 6.4.1+
-* GNU Make
+* サーバー側のプラグイン実装を行う場合
+  * Go: 1.12
+* webapp (フロントエンド) 側のプラグイン実装を行う場合
+  * Node 10.15.3+
+  * npm 6.4.1+
+* どちらでも必要
+  * GNU Make
+
+プラグイン開発向けの開発環境はまとめられていなようですが、Mattermost本体の推奨環境に沿うのが安全だと思います。
 
 * 参考
   * https://developers.mattermost.com/contribute/server/developer-setup/
@@ -39,7 +42,7 @@ Mattermostプラグインの開発方法は、[Mattermostプラグインの作�
 
 [mattermost/mattermost\-plugin\-starter\-template](https://github.com/mattermost/mattermost-plugin-starter-template)をブラウザで開くと、`Use this template`というボタンがあります。
 
-![]()
+![スクリーンショット 2019-07-13 11.15.37.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/25b49b1c-3096-f135-219f-352cd741f2cf.png)
 
 このボタンを押すとリポジトリ作成画面へ遷移するので、そこでリポジトリ名を入力してリポジトリを作成するだけでテンプレートからリポジトリを作成できます。
 
@@ -48,18 +51,19 @@ Mattermostプラグインの開発方法は、[Mattermostプラグインの作�
 > * 新しいフォークは、親リポジトリのコミット履歴すべてを含んでいますが、テンプレートから作成されたリポジトリには、最初は 1 つのコミットしかありません。
 > * フォークへのコミットはコントリビューショングラフに表示されませんが、テンプレートから作成されたリポジトリへのコミットはコントリビューショングラフに表示されます。
 > * フォークは、既存のプロジェクトにコードをコントリビュートするための一時的な方法となります。テンプレートからリポジトリを作成することは、新たなプロジェクトを初めから素早く始める方法です。
-引用元: [テンプレートからリポジトリを作成する \- GitHub ヘルプ](https://help.github.com/ja/articles/creating-a-repository-from-a-template)
+
+_引用元: [テンプレートからリポジトリを作成する \- GitHub ヘルプ](https://help.github.com/ja/articles/creating-a-repository-from-a-template)_
 
 #### Security Alert
 
 テンプレートからリポジトリを作成したときに、セキュリティ脆弱性に関するアラートが出ることがあります。
 
+![スクリーンショット 2019-07-13 10.58.36.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/c2a17096-6677-6a08-3429-61280efac613.png)
 
-![]()
 
-これは、このリポジトリが依存しているライブラリに脆弱性が含まれる可能性があることを示しており、本体のテンプレートリポジトリ側でも随時ライブラリのアップデートは行われいますが、リポジトリを作成するタイミングによってはこの通知が出てしまうことがあります。
+これは、リポジトリが依存しているライブラリに脆弱性が含まれる可能性があることを示しており、本体のテンプレートリポジトリ側でも随時ライブラリのアップデートは行われいますが、リポジトリを作成するタイミングによってはこの通知が出てしまうことがあります。
 
-[リポジトリ内の脆弱な依存関係を表示・更新する \- GitHub ヘルプ](https://help.github.com/ja/articles/viewing-and-updating-vulnerable-dependencies-in-your-repository)を参考にするなどして、ライブラリのアップデートを行いましょう。
+[リポジトリ内の脆弱な依存関係を表示・更新する \- GitHub ヘルプ](https://help.github.com/ja/articles/viewing-and-updating-vulnerable-dependencies-in-your-repository)を参考にするなどして、ライブラリのアップデートを行ってください。
 
 #### テンプレートリポジトリの内容について
 
@@ -67,20 +71,21 @@ Mattermostプラグインの開発方法は、[Mattermostプラグインの作�
 
 ```
 .
-├── .circleci/      - CircleCI設定ファイル。このまま使用できます。
-├── assets/         - プラグインに含まれる静的ファイルです。(publicと同じ用途？)
-├── build/          - Makefileから呼ばれるビルド用のスクリプトが格納されています。
-├── public/         - プラグインに含まれる静的ファイルです。(publicと同じ用途？)
-├── server/         - サーバー用のプラグインサンプルコードが格納されています。
-├── webapp/         - フロントエンド用のプラグインサンプルコードが格納されています。
+├── .circleci/      - CircleCI設定ファイル(プロジェクト依存の情報がないのでこのまま使用できます)
+├── assets/         - プラグインから利用するファイル(アイコン画像など)の格納先
+├── build/          - Makefileから呼ばれるビルド用のスクリプト格納ディレクトリ
+                      基本的にこのディレクトリのファイルは編集しません。
+├── public/         - (assetsと同じ用途？)
+├── server/         - サーバー用のプラグインコードが格納ディレクトリ
+├── webapp/         - フロントエンド用のプラグインコードディクトり
 ├── .editorconfig   - editorconfigの設定ファイルです https://editorconfig.org/
 ├── .gitignore
-├── CHANGELOG.md    - バージョン履歴を記述ファイルです。（手動で更新するものです）
-├── go.mod          - Go(サーバー)の依存ライブラリ管理です。
-├── go.sum          - 同上。
-├── LICENSE         - Apache License v2のファイルです。
-├── Makefile        - ビルド用のMakefileです。
-├── plugin.json     - プラグインのメタデータを記述するファイルです。
+├── CHANGELOG.md    - 更新履歴を記述ファイル（手動更新）
+├── go.mod          - Go(サーバープラグイン)の依存ライブラリ管理ファイル
+├── go.sum          - 同上
+├── LICENSE         - Apache License v2のライセンスファイル
+├── Makefile        - ビルド用のMakefile
+├── plugin.json     - プラグインのメタデータを記述するファイル
 ┗── README.md 
 ```
 
@@ -88,31 +93,33 @@ Mattermostプラグインの開発方法は、[Mattermostプラグインの作�
 
 作成したプラグインをcloneして、ビルドしてみましょう。
 
+#### 2.1. 前準備
+
 まず、リポジトリをクローンします。
 
 ```
 git clone --depth 1 https://github.com/mattermost/mattermost-plugin-starter-template
 ```
 
-`https://github.com/mattermost/mattermost-plugin-starter-template`の部分は作成したリポジトリのURLに変更してください。
+注意: `https://github.com/mattermost/mattermost-plugin-starter-template`の部分は作成したリポジトリのURLに変更してください。
 
 
-テンプレートリポジトリは、ほぼ何も変えなくてもそのままでビルド・デプロイを行うことができます。
-ただ、例えば `plugin.json` に書かれているプラグインのIDなどは、他のプラグインと競合するとアップロードできなくなってしまうため、いくつか変更しておくべき箇所があります。
+テンプレートリポジトリは、ほぼ何も変えなくてもそのままでビルド・デプロイを行うことができます。ただ、`plugin.json` に書かれているプラグインのIDなど必ず変更しておくべき箇所が何点かあります。
 
-* `plugin.json`
+* **plugin.json**
     * https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/plugin.json#L2
     * `id`は必ず変更してください。併せて`name`、`description`なども変えておくと良いと思います。
-    * 記述内容については [Manifest Reference](https://developers.mattermost.com/extend/plugins/manifest-reference/) を参照してください、
-* `LICENSE`
-    * ライセンスの著作権者の欄がプレースホルダーとなっているため、自分の著作権情報に変更しておきましょう
+    * このファイルの内容については [Manifest Reference](https://developers.mattermost.com/extend/plugins/manifest-reference/) を参照してください、
+* **LICENSE**
+    * ライセンスの著作権者の欄がプレースホルダーとなっているため、自身の情報に変更しておきましょう
     * https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/LICENSE#L189
-        * `Copyright [yyyy] [name of copyright owner]`
-        * => `Copyright 2019 Yusuke Nemoto`
-* `README.md`
+        * `Copyright [yyyy] [name of copyright owner]` => `Copyright 2019 Yusuke Nemoto`
+* **README.md**
     * 内容がテンプレートリポジトリのものになっているため更新しておきましょう
 
 上記を変更したら、まずはプラグインをビルドしてみましょう。
+
+#### 2.2. ビルド
 
 ```
 $ make
@@ -121,11 +128,13 @@ $ make
 上記コマンドを実行するだけでビルドが完了します。
 ビルドが正常に終了すると、`dist/`というディレクトリが作成され、その中に `.tar.gz` のファイルがあるはずです。これがMattermostプラグインファイルになります。
 
-この `.tar.gz` ファイルをアップロードすることでMattermostプラグインを有効にすることができます。プラグインのアップロード方法などは下記記事で紹介しています。
+この `.tar.gz` ファイルをアップロードすることでMattermostプラグインを有効にすることができます。プラグインのアップロード方法などは下記記事で紹介しているので参照ください。
 
-https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/
+* https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/
 
-テンプレートリポジトリのプラグインが持つ機能は、[プラグイン用に新しいエンドポイントを作成する](https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/plugin.go#L24)のみのため、動作確認もこれで行います。
+#### 2.3. 動作確認
+
+このテンプレートリポジトリのプラグインが持つ機能は、[プラグイン用に新しいエンドポイントを作成する](https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/plugin.go#L24)のみのため、動作確認もこれで行います。
 
 ```
 $ curl http://localhost:8065/plugins/${PLUGIN_ID}/
@@ -156,15 +165,17 @@ make deploy
 
 プラグインのアップロードが完了し、動作することまで確認できたらあとは機能の開発を進めていくだけです。
 
-下記のサイトなどが参考になると思います。
+ここで、もしサーバー側の機能のみを実装する場合は、`webapp`ディレクトリは削除しても構いません。逆にフロントエンド側のみの機能を実装する場合は `server` ディレクトリを削除できます。この辺りはMakefile内でディレクトリの存在確認を行い、よしなに動作してくれます。
+
+
+プラグインの開発については下記のサイトの情報が参考になると思います。
 
 * [Plugins \(Beta\)](https://developers.mattermost.com/extend/plugins/)
 * [mattermost/mattermost\-plugin\-demo: A demo of what Mattermost plugins can do\.](https://github.com/mattermost/mattermost-plugin-demo)
 * [Mattermostプラグインの作り方 · kaakaa blog](https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/)
 
 また、Mattermostコアチームによるプラグイン開発に関する会話は下記のチャンネルで行われています。
-https://community.mattermost.com/core/channels/developer-toolkit
 
-また、もしサーバー側の機能のみを実装する場合は、`webapp`ディレクトリは削除しても構いません。逆にフロントエンド側のみの機能を実装する場合は `server` ディレクトリを削除できます。この辺りはMakefile内でディレクトリの存在確認を行い、よしなに動作してくれます。
+* https://community.mattermost.com/core/channels/developer-toolkit
 
 
