@@ -11,7 +11,8 @@ jobs:
     steps:
     - name: Install hugo
       run: |
-        HUGO_VERSION=0.57.2 wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
+        export HUGO_VERSION=0.57.2
+        wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
         sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
     - uses: actions/checkout@v1
     - name: Build and Deploy
