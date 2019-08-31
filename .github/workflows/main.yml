@@ -13,7 +13,7 @@ jobs:
       run: |
         export HUGO_VERSION=0.57.2
         wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
-        dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+        sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
     - name: Checkout
       uses: actions/checkout@v1
     - name: Build and Deploy
