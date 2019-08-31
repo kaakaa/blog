@@ -20,6 +20,6 @@ jobs:
         HUGO_VERSION: 0.57.2
         BUILD_SCRIPT: |
           wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
-          sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+          dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
           git submodule update --init
           hugo -v
