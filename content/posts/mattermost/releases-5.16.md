@@ -1,9 +1,9 @@
----	
-title: "Mattermost5.16の新機能"	
-date: 2019-10-19T10:15:49+09:00	
-draft: false	
-toc: true	
-tags: ["mattermost", "releases"]	
+---
+title: "Mattermost5.16の新機能"
+date: 2019-10-19T10:15:49+09:00
+draft: false
+toc: true
+tags: ["mattermost", "releases"]
 ---
 
 Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
