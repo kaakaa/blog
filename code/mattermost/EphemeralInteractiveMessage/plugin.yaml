@@ -1,0 +1,7 @@
+id: ephemeral-interactive-message-demo
+name: Mattermost Sample Plugin
+description: サンプルプラグイン
+version: 0.0.1
+server:
+  executable: server/eim
+
