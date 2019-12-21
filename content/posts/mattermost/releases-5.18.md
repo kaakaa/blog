@@ -68,15 +68,15 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
 まだベータ版の機能ですが、Mattermostサーバー内の `config.json` にある `ExperimentalViewArchivedChannels` の設定を `true` にすることで、参加可能チャンネルの一覧にアーカイブされたチャンネルを表示できるようになります。
 ([公式ドキュメント](https://docs.mattermost.com/administration/config-settings.html#allow-users-to-view-archived-channels-beta)では設定名が `ViewArchivedChannels` となっていますが、おそらく誤りだと思われるため[修正のPR](https://github.com/mattermost/docs/pull/3278)を出しています。)
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archivec_channel_1.png)
+![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_1.png)
 
 アーカイブチャンネルは普通のチャンネルと同じように開くことができますが、書き込みはできません。
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archivec_channel_2.png)
+![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_2.png)
 
 また、この設定を有効にすると、アーカイブチャンネル内のコメントを検索できるようにもなります。
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archivec_channel_3.png)
+![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_3.png)
 
 
 ## その他の変更点
