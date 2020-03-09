@@ -7,40 +7,41 @@ title: "MatterCon2020 Report"
 
 ## Summary
 
-- 概要: Mattermost社のコミュニティイベントに招待されたので行ってきました
+- 概要:
+  - 中南米・バハマで開催されたMattermost社のコミュニティイベント **MatterCon2020** に招待されたので行ってきました
 - 目的:
   - 建前: OSSネイティブな企業の開発プロセス・営業の仕方などに関する知見の収集
   - 本音: バハマとか人生で行くことないだろうし、せっかく招待されたのだから行ってみたい
 - 感想:
   - MatterConはMattermost社のメンバ、コミュニティメンバともに気軽に話しかけられる貴重な機会。CEO/CTOとも気軽に話ができる。
-  - Mattermostはコミュニティを大事にする会社でありゲストとして至れり尽せりな印象でした
-  - 技術の話が主体ということはなく、参加者同士のコミュニケーションを重視している雰囲気を感じました
-  - Fun Cultureを作り様々な背景を持つ人々をコミュニティとして巻き込んでいくことが、OSSネイティブな企業の特性を活かしたビジネスの仕方だと感じた
+  - Mattermostはコミュニティを大事にする会社でありゲストとして至れり尽せりでした
+  - 技術の話が主体ということはなく、参加者同士のコミュニケーションを重視しており、Mattermost社員、コントリビュータに関係なく様々な人と話すことができました
+  - Fun Cultureを作り様々な背景を持つ人々をコミュニティとして巻き込んで規模を大きくしていくことが、OSSネイティブな企業の特性を活かしたビジネスの仕方だと感じた
 
 ## 背景
 
-ここでは、MattermostおよびMatterConについてと、私がMatterConに参加するまでの敬意を述べます。
+まず、MattermostおよびMatterConについてと、私がMatterConに参加するまでの経緯を述べます。
 
 ### Mattermostとは
 [Mattermost](https://mattermost.com/)はSlack Alternativeを標榜している、オープンソースのチャットツールです。SlackやTeamsと違い、データも含めたチャット環境すべてを自分たちの管理下に置けることを重視しており、SaaS展開などを行っていないのが特徴です。
 
-昨年、TeamsのDAUがSlackを超えた[^about-mattermost-teamsdau]というニュースが流れるなど、ユーザー数的にはSlack/Teamsが頭ひとつ抜けている感じですが、チャットのような組織内のコミュニケーションに関するデータが組織外の環境で扱われることに懸念を持つようなセキュリティ意識の高い組織などでMattermostのようなオンプレミス環境に構築できるチャットツールの採用が増えているようです。その需要の大きさを示すように、昨年、Mattermostは昨年 $50M の投資を受け Series B[^about-mattermot-seriesb] となりました。
+昨年、TeamsのDAUがSlackを超えた[^about-mattermost-teamsdau]というニュースが流れるなど、ユーザー数的にはSlack/Teamsが頭ひとつ抜けている感じですが、チャットのような組織内のコミュニケーションに関するデータを組織外の環境に置くことに懸念を持つようなセキュリティ意識の高い組織などで、Mattermostのようなオンプレミス環境に構築できるチャットツールの採用が増えています。その需要の大きさを示すように、昨年、Mattermostは昨年$50Mの投資を受け Series B[^about-mattermot-seriesb] となりました。
 
 [^about-mattermost-teamsdau]: https://jp.techcrunch.com/2019/07/12/2019-07-11-microsoft-says-its-slack-competitor-teams-now-has-13-million-daily-active-users/
 [^about-mattermot-seriesb]: https://mattermost.com/blog/yc-leads-50m-series-b-in-mattermost-as-open-source-slack-alternative/
 
-### MatterCon とは?
+### MatterConとは?
 
-MatterConとはMattermost社が主催するイベントであり、公式のハンドブックでは下記のように定義されています。
+MatterConとはMattermost社が主催するイベントであり、Mattermost社のハンドブックでは以下のように定義されています。
 
 https://handbook.mattermost.com/contributors/mattercon
 > We try to get together every 12 months or so to get face-time with one another, build community, reinforce our leadership principles, and get some work done! Since our team is scattered all over the globe, we try to plan a different location for each MatterCon.
 > MatterCon is not a mandatory trip or a department offsite, nor is it a vacation or incentive trip. It's a chance for everyone to meet fellow Mattermost team-members across all departments and regions: part team building, part education, part community building, and hopefully all fun. This is a work trip with fun mixed in.
 
-Mattermostはフルリモートの会社のため、12ヶ月ごとに一同に介して顔を合わせる機会を作っており、それが **MatterCon** と呼ばれています。
-また、Mattermostは、そのミッションの一つとしてオープンソースコラボレーションを掲げており[^about-mattercon-mission]、その一環としてMatterConにコミュニティメンバーを招待しています。
+Mattermostはフルリモートの会社のため、12ヶ月ごとに一同に介して顔を合わせる機会を作っており、それを **MatterCon** と呼んでいます。
+また、Mattermostは、会社のミッションの一つとして **オープンソースコラボレーション** を掲げており[^about-mattercon-mission]、その一環としてMatterConにコミュニティメンバーを招待しています。
 
-一昨年までは参加者の規模が2,30人程度だったようですが、昨年のMatterConからは100人ほどの規模で開催されているようです。（正確な人数については把握しておりません）過去のMatterConの模様はYouTubeで公開されています。
+一昨年までは参加者の規模が2,30人程度だったようですが、昨年のMatterConからは100人ほどの規模で開催されているようです（正確な人数については把握しておりません）。過去のMatterConの模様はYouTubeで公開されています。
 
 * [Mattermost 2017 Core Committers Summit & Hackathon \- Las Vegas \- YouTube](https://www.youtube.com/watch?v=_RpmrM-5UFY&t=65s)
 * [Mattermost \| MatterCon 2018 \| Community Meetup in Lisbon \- YouTube](https://www.youtube.com/watch?v=CZXaYttz3NA)
@@ -49,16 +50,15 @@ Mattermostはフルリモートの会社のため、12ヶ月ごとに一同に�
 [^about-mattercon-mission]: https://docs.mattermost.com/process/handbook.html#mission
 
 ### 参加経緯
-私は現在、Mattermost公式のコミュニティメンバとしてMattermostの日本語化[^about-partition-translation-maintainer]、Twitter Mattermost日本語アカウント([@mattermost_jp](https://twitter.com/mattermost_jp))の管理などを行っています。また他にも、Mattermost関連の記事投稿(blog[^about-partition-blog], Qiita[^about-partition-qiita])やHelp Wantedなどの軽微なIssueの解決などを行っています。もう2年も前の話ですが、Mattermost v4.6がリリースされた際にはMVP[^about-partition-mvp]にも選出していただきました。
+私は現在、Mattermost公式のコミュニティメンバとしてMattermostの日本語化[^about-partition-translation-maintainer]、Twitter Mattermost日本語アカウント([@mattermost_jp](https://twitter.com/mattermost_jp))の管理などを行っています。また他にも、Mattermost関連の記事投稿(blog[^about-partition-blog], Qiita[^about-partition-qiita])やHelp Wantedなどの軽微なIssueの解決などを行っています。もう2年も前の話ですがMattermost v4.6がリリースされた際にはMVP[^about-partition-mvp]にも選出していただきました。
 
 {{<figure src="/blog/images/posts/mattercon-2020/mvp.jpeg" alt="MVP" height="640px">}}
 
 Mattermostへの貢献を始めたきっかけは、2016年ごろに職場でMattermostを使い始めたことに起因します。
-その頃、ChatOpsが流行りはじめていたということもあり、オンプレミスで運用できるようなOSSのチャットツールを探していました。Mattermostを使い始める前にも[Kandan](https://github.com/kandanapp/kandan)や[Let's Chat](https://github.com/sdelements/lets-chat)などのOSSのチャットツールを試していたのですが、それぞれ他システムとの連携機能が不十分であったり、開発が活発出なかったりと問題が見えていました。そんな中、会社の同期が見つけてきたMattermostは、当時(`v3.4`ぐらい？)から機能も豊富で開発も非常に活発であり、とても魅力的なプロジェクトであるという印象を持ちました。
-Matterostでいろいろ遊んでいるうちに小さな翻訳ミスを見つけ、元々OSSへの貢献に興味があった私は、公式ドキュメントで貢献の仕方を調べ、翻訳の修正を送ったことがMattermostへの貢献の始まりでした。（当時から貢献の仕方などのドキュメントも非常に豊富でした）
+その頃、ChatOpsが流行りはじめていたということもあり、オンプレミスで運用できるようなOSSのチャットツールを探していました。Mattermostを使い始める前にも[Kandan](https://github.com/kandanapp/kandan)や[Let's Chat](https://github.com/sdelements/lets-chat)などのOSSのチャットツールを試していたのですが、それぞれ他システムとの連携機能が不十分であったり、開発が活発でなかったりと問題が見えていました。そんな中、会社の同期が見つけてきたMattermostは、当時(`v3.4`ぐらい？)から機能も豊富で開発も非常に活発であり、とても魅力的なソフトウェア/プロジェクトでした。Matterostでいろいろ遊んでいるうちに小さな翻訳ミスを見つけ、元々OSSへの貢献に興味があった私は公式ドキュメントで貢献の仕方を調べ、翻訳の修正を送ったことがMattermostへの貢献の始まりでした。
 
-当時、一つ小さな修正を送るだけでコアメンバーの方が[コミュニティ用のMattermost](https://community.mattermost.com/)上で非常に気さくにコメントをくれたことを覚えています。
-MattermostはGolangやReact.jsなどの技術を利用していることも自分の興味を惹き、さらに定期的にTシャツなどのSwagを定期的に送ってくれたりしたこともあり、段々と貢献の幅を広げていきました。
+当時、一つ小さな修正を送るだけでコアメンバーの方が[コミュニティ用のMattermost](https://community.mattermost.com/)上ですぐにコメントをくれたことも非常に印象的でした。
+さらに、MattermostはGolangやReact.jsなどの技術を利用していることも自分の興味を惹き、定期的にTシャツなどのSwagを定期的に送ってくれたりしたこともあり、段々と貢献の幅を広げていきました。
 
 そして今回、MatterConへ招待いただくこととなりました。
 
@@ -69,16 +69,16 @@ MattermostはGolangやReact.jsなどの技術を利用していることも自�
 
 ## MatterCon出発前
 
-ここでは、Mattermostの概要や、出発前のやり取り、旅程について簡単に述べます。
+ここでは、Mattermostの概要や出発前のやり取り、旅程について簡単に述べます。
 
 ### 概要
 
 - 期間: 2020/2/22(Sat), 23(Sun)
 - 場所: [Hotel Melia Nassau Beach \- All Inclusive, in Nassa](https://www.melia.com/en/hotels/bahamas/nassau/melia-nassau-beach/index.htm)
 - 参加者: 100人ぐらい？
-    - Mattermost Inc
+    - Mattermost Inc.
     - Partner / Contributor
-    - SOs (Significant Others / 奥さんなど)
+    - SOs (Significant Others, 奥さんなど)
 
 ### 開催前
 
@@ -89,13 +89,13 @@ MatterCon開催前の動きとしては、おおよそ下記のような流れ�
 - (1/24) MatterCon Guest用チャンネルが作成される
   - MatterCon開催前、開催期間中を通じて必要な情報はここに投稿される
 - (2/4) Conference Agenda発表
+  - MatterCon開催中のスケジュールなど
 - (2/10) Guest Agenda発表
-  - ゲスト向けの詳細ドキュメント(空港からのシャトルバスの乗り方など)の公開
+  - ゲスト向けの詳細ドキュメント(空港からのシャトルバスの乗り方など)
 
 ### 旅程
 
-旅程は下記の通りでした。
-バハマまでは直行便がないため、帰りは乗り継ぎ14時間空いたりするなど足掛け30時間以上かかりました...。
+旅程は以下の通りでした。バハマまでは直行便がないため、帰りは乗り継ぎ14時間空いたりするなど足掛け30時間以上かかりました...(流石にホテルを予約しましたが)。
 
 - 2/21: NRT - DFW - NAS
   - 乗り継ぎの待機時間(4h)含めて移動時間は20時間ほど
@@ -113,12 +113,11 @@ MatterCon開催前の動きとしては、おおよそ下記のような流れ�
 
 ### MatterCon Day 0 (Arrival)
 
-自宅から成田空港へ行き、成田からダラス・フォートワース空港(DFW)へ。DFWで4時間ほど時間を潰しAmerican Airlinesでバハマ・ナッソーにあるリンデン・ピンドリング空港(NAS)へ。
+自宅から成田空港へ行き、成田(NRT)からダラス・フォートワース空港(DFW)へ。DFWで4時間ほど時間を潰しAmerican Airlinesでバハマ・ナッソーにあるリンデン・ピンドリング空港(NAS)へ。
 コロナウイルスの影響もあり検疫等で時間がかかることを予想していたましが、拍子抜けするほど何もなく。出入国時に過去14日以内の中国滞在歴を聞かれたぐらいでした。
 DFW - NAS のフライトの途中、バハマの入国カードが配られたのですが、その紙は2枚綴りになっており、2枚目は出国時に提出するバハマのアンケートになっている模様。さすが観光立国。
 
-ナッソーのリンデン・ピンドリング空港からはシャトルバス。到着ターミナル出口には観光会社の方だと思われる人たちが10人以上。事前に通知のあったMajestic Toursのマークを掲げている人を見つけて声かけ。陽気なおっちゃんに誘われてシャトルバスへ。
-その間に、Buddyの Miguel ([@mgdelacroix](https://github.com/mgdelacroix)) からMattermostのDMで「ホテルに着いたら会おう」というメッセージが来ているのに気付き、「ちょうどバス乗ったところだから数十分ぐらいで着くよ」と返信。MatterConでは、私のようなゲスト1人に対し、滞在中に分からないことがあった時の相談相手としてMattermost社の人をBuddyとして充てがってくれていました。
+ナッソーのリンデン・ピンドリング空港からはシャトルバス。到着ターミナル出口には観光会社の方だと思われる人たちが10人以上。出発前に送付されたGuest Agendaに記載の通り、現地の観光会社であるMajestic Toursのマークを掲げている人を見つけて声かけ。陽気なおっちゃんに誘われてシャトルバスへ。その間に、Buddyの Miguel ([@mgdelacroix](https://github.com/mgdelacroix)) からMattermostのDMで「ホテルに着いたら会おう」というメッセージが来ているのに気付き、「ちょうどバス乗ったところだから数十分ぐらいで着くよ」と返信。MatterConでは、私のようなゲスト一人一人に対して滞在中に分からないことがあった時の相談相手としてMattermost社の人をBuddyとして充てがってくれていました。
 
 ホテルまではバスで10分ほど。バスから見える風景は、道路脇に椰子の木🌴が並ぶまさに南国リゾートのそれでした。(写真看板奥の建物は別のホテル)
 
@@ -128,9 +127,9 @@ DFW - NAS のフライトの途中、バハマの入国カードが配られた�
 
 {{<figure src="/blog/images/posts/mattercon-2020/mattercon-day0-lobby.jpeg" alt="lobby" height="480px">}}
 
-Miguellがホテル内を案内してくれるとのことなので、簡単に歩き回りながら案内してもらいました。案内してもらってる間、Miguelの持っているアタリのバッグばかりが目に入る...。聞いてみるとVideoゲームが好きとのこと（その後、日本のアニメ・漫画の知識も豊富であることが判明）。
+Miguelがホテル内を案内してくれるとのことなので、簡単に歩き回りながら案内してもらいました。案内してもらってる間、Miguelの持っているアタリのバッグばかりが目に入る...。聞いてみるとVideoゲームが好きとのこと（その後、日本のアニメ・漫画の知識も豊富であることが判明）。
 
-案内の最後に部屋まで行く途中、「18:00から4Fの日本料理店でDinnerがあるけど、疲れてるなら休んでても良いし来たいなら来ても良いし自由にして」と労いの言葉をかけてくれました。とりあえず部屋に入って荷物を置いてシャワーを浴びていたら18:00を過ぎてたけど、せっかくの機会なのでDinnerの会場に向かいました。
+案内の最後に部屋まで行く途中、「18:00から4Fの日本料理店でDinnerがあるけど、疲れてるなら休んでても良いし来たいなら来ても良いし自由にして」と労いの言葉をかけてくれました。とりあえず部屋に入って荷物を置いてシャワーを浴びていたら18:00を過ぎていましたが、せっかくの機会なのでDinnerの会場へ。
 
 受付の人に何といえば良いか迷いましたが、「Mattermost社の人いますか？」という聞き方をしたら通じたようで案内してもらいました。ただ、案内してもらったテーブルにBuddyの人はおらず...テーブルの方の何人かがMattermostのTシャツを着ていたのでBuddyとは別テーブルに来てしまったと理解。少し戸惑っていると非常にフレンドリーにWelcomeしてくれたので空いてた席に着席。日本語を少し喋れる人がいたり、日本料理ということでちょっと会話に参加したり。英語が結構わからず戸惑いましたが楽しい雰囲気だったので楽しかった。2時間ほどしたら流石に眠くなってきたので先に退席して就寝。
 
@@ -151,14 +150,13 @@ Dinnerでは会えなかったけど、別テーブルで楽しんでたこと�
 
 Greetingの前に会場前でノベルティを配っていたので、Tシャツとステッカー、ノートとペンをもらいました。また、その場に[@jasonblais](https://github.com/jasonblais)がいたので挨拶。彼は、私が初めてコントリビュートをした時にメッセージをくれたり、その後もよく気にかけてくれてコメントをくれたりしていたので、今回のMatterConで感謝を述べたい人の一人でした。彼がいなかったらここまでコントリビュートをしてなかったと思います。このタイミングではあまり時間もなかったので、後で改めて感謝の意を伝えました。
 
-Greeting会場は、会議室らしく机と椅子が並べられている部屋。Mattermost社の人たちはもっと前の日からプライベートなカンファレンスを行ってたらしいが、この日からコミュニティメンバーも参加するということで改めてCEO/CTOから挨拶。
+Greeting会場は、会議室らしく机と椅子が並べられている部屋。Mattermost社の人たちは数日前からプライベートなカンファレンスを行ってたらしいが、この日からコミュニティメンバーも参加するということで改めてCEO/CTOから挨拶。
 
 {{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-greeting.jpeg" alt="day1-greeting" height="480px">}}
 
 #### Unconference
 
-挨拶の後はUnconference。Greetingと同じ部屋でいくつかのトピックと、それを担当するMattermost社の開発者が紹介され、興味がありそうなところの議論に参加するというもの。トピックはPlatform, Security, DevOps, Kubernetes, Mobile, Integrationsなどなど7,8トピックぐらい？
-Miguelの誘いもあり、Platformのところに参加。会話の内容としては、モバイルアプリでネットワーク切断中に投稿されたメッセージのWebSocketをどう扱うか、とか、GraphQLの導入についての話でした。
+挨拶の後はUnconference。いくつかのトピックについて円座になってディスカッションすると言うもの。まず、Greetingと同じ部屋でディスカッションのトピックとそれを担当するMattermost社の開発者が紹介され、興味がありそうなところの議論に参加するという形。トピックはPlatform, Security, DevOps, Kubernetes, Mobile, Integrationsなどなど7,8トピックぐらい？ありました。Miguelの誘いもあり、Platformのディスカッションに参加。会話の内容としては、モバイルアプリでネットワーク切断中に投稿されたメッセージのWebSocketをどう扱うか、や、GraphQLの導入についての話でした。
 
 #### Group Photo
 ランチの前にMatterCon2020用の黄色いTシャツを着てグループフォト撮影。
@@ -168,7 +166,7 @@ Miguelの誘いもあり、Platformのところに参加。会話の内容とし
 #### Lunch
 Unconference後はランチ。自分と同じ日本人コントリビュータの [@maruTA-bis5](https://github.com/maruTA-bis5)とご一緒させてもらう。
 朝食と同じ場所と聞いていたけど、そのレストランが空いておらず、近くで掃除してた人に聞いてビーチ近くのレストランを紹介される。
-レストランの受付しようとしたところ、昨年日本で行われたMattermostイベントで知り合ったNRIの方々や、その時に来日していたMattermost営業の[Steve](https://twitter.com/stephenlgreen)がいたので同席させてもらう。ありがたい。
+ビーチのレストランで受付をしようとしたところ、昨年日本で行われたMattermostイベント [^mattercon-day1-nri]で知り合ったNRIの方々や、その時に来日していたMattermost営業の[Steve](https://twitter.com/stephenlgreen)がいたので同席させてもらう。ありがたい。
 日本人コミュニティとして初めましてをしていたが、次のアクティビティの集合時間が迫っていたり、忙しいのか中々オーダーを取りに来てくれないということもあり慌ただしくランチを済ませることに...。
 
 #### Activities
@@ -196,8 +194,10 @@ Unconference後はランチ。自分と同じ日本人コントリビュータ�
 ナッソー市街歩けなかったのは残念だけど、色んな景色を見れたので満足でした。
 {{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-activities4.jpeg" alt="sea" height="480px">}}
 
+[^mattercon-day1-nri]: https://www.sbbit.jp/eventinfo/52965/
 [^mattercon-day1-charlotte]: https://www.bahamas.com/vendor/fort-charlotte
 [^mattercon-day1-rumcake]: https://www.thebahamasrumcakefactory.com/
+
 
 ### MatterCon Day 2 (Hungout, Partner Session, Lightning Talks...)
 
@@ -214,7 +214,7 @@ Partner Sessionの後は午前のHungoutで話をした問題について解決�
 
 #### Lunch
 [@cometkim](https://github.com/cometkim)とBuddyの[@wiggin77](https://github.com/wiggin77)と一緒にランチビュッフェへ。途中でCTOの[@coreyhulen](https://github.com/coreyhulen)も一緒に。
-[@cometkim](https://github.com/cometkim)に話を聞くと、彼が最初にMattermostにPR(CJK関連)[^mattercon-day2-cjk]を送った時、そのPRに自分がコメントをしたので覚えてくれていたらしく、今回ランチに誘ってくれたそう。その頃はちょうど自分もMattermost本体へのPRをはじめた頃で、CJK関係のPRだったので自分の環境で動かしてコメントした覚えがあります。コメントした時は、まさかこんな形で対面するなんて想像もしていませんでした...不思議なものです。
+[@cometkim](https://github.com/cometkim)に話を聞くと、彼が最初にMattermost本体にPullRequest(CJK関連)[^mattercon-day2-cjk]を送った時、そのPRに自分がコメントをしたのを覚えてくれていたらしく、今回ランチに誘ってくれたそう。その頃はちょうど自分もMattermost本体へのPRをはじめた頃で、CJK関係のPRだったので自分の環境で動かしてコメントした覚えがあります。コメントした時は、まさかこんな形で対面するなんて想像もしていませんでした...不思議なものです。
 
 #### Lightning Talks
 ランチの後は会議室でライトニングトーク。
