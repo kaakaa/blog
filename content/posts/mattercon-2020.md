@@ -5,6 +5,9 @@ tags: ["mattermost", "mattercon"]
 title: "MatterCon2020 Report"
 ---
 
+Mattermost公式ブログでも公開されました。  
+https://mattermost.com/blog/going-to-mattercon-as-a-mattermost-contributor/
+
 ## Summary
 
 - 概要:
