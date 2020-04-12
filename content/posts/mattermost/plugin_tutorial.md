@@ -6,6 +6,14 @@ toc: true
 tags: ["mattermost", "plugin"]
 ---
 
+**(追記 2020/04/12)** 
+
+本記事でも使用している`dep`がもうメンテナンスされておらず、本記事で紹介している内容でMattermostの最新版を利用したプラグインの開発が困難になっているようです。
+
+今後Mattermostプラグイン開発を始める場合、[Mattermostプラグイン用のリポジトリテンプレート](https://kaakaa.github.io/blog/posts/mattermost/plugin-template/) でも紹介していますが、Mattermost公式チームがメンテナンスしているテンプレートリポジトリ https://github.com/mattermost/mattermost-plugin-starter-template を利用することを推奨します。
+
+**(追記おわり)**
+
 # はじめに
 
 2017/11/16にリリースされたMattermost v4.4.0で、Mattermost自体の機能拡張を行うためのプラグイン機能が追加されました。
