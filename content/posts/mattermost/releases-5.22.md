@@ -27,7 +27,7 @@ Mattermostは一つのサーバーに複数のチームを作成でき、複数�
 今回のリリースで、ショートカットキーによるチームの切り替えができるようになりました。
 **Ctrl + Alt** (Windows) / **⌘ + ⌥** (Mac) を押しながら **↑/↓** キー、もしくはチームアイコンの脇に表示された数字のキーを押すことでチームを切り替えることができます。また、ドラッグ&ドロップでチームアイコンの順番を変えることができます。
 
-![switch team](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/switch-team.mov)
+![switch team](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/switch-team.gif)
 
 ## アーカイブしたチャンネルの復元
 
