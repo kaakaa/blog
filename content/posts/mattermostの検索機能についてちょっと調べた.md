@@ -112,11 +112,13 @@ MySQLの場合、`OrTerms`が設定されていると与えられた（除外）
 するど、どうやら検索除外ワードのみのクエリが与えられた場合、MySQLは空の結果を返すようです。
 
 https://dev.mysql.com/doc/refman/5.7/en/fulltext-boolean.html
-> -
-> 
-> A leading or trailing minus sign indicates that this word must not be present in any of the rows that are returned. InnoDB only supports leading minus signs.
-> 
-> Note: The - operator acts only to exclude rows that are otherwise matched by other search terms. Thus, a boolean-mode search that contains only terms preceded by - returns an empty result. It does not return “all rows except those containing any of the excluded terms.”
+
+```
+* -
+ A leading or trailing minus sign indicates that this word must not be present in any of the rows that are returned. InnoDB only supports leading minus signs.
+ 
+ Note: The - operator acts only to exclude rows that are otherwise matched by other search terms. Thus, a boolean-mode search that contains only terms preceded by - returns an empty result. It does not return “all rows except those containing any of the excluded terms.”
+```
 
 Mattermostは`boolean-mode`で検索を行っているため、検索除外ワードのみで検索ワードが与えられていないと検索結果が空となってしまい、空の検索結果から何を除外しても空ということのようです。
 検索ワード、検索除外ワードともに空の場合は、PostgreSQL/MySQLごとに処理を分岐する以前に検索クエリ部分をSQL文から削除しているため、全ての投稿が検索結果として返ってきます。
@@ -125,7 +127,7 @@ Mattermostは`boolean-mode`で検索を行っているため、検索除外ワ�
 が、ワイルドカード(`*`) を使った検索は `innodb_ft_min_token_size` の影響を受けてしまい、1文字のワイルドカード(`*`)はクエリとして無効となってしまうらしい...。(`AB*` のように2文字 + ワイルドカード(`*`) ならOK）。
 Mattermostはこのサイズが最低でも`2`にしかできなかったため、単純にワイルドカードを付与する方法ではダメそうです...。
 
-----
+## おわりに
 
 どうしよ。とりあえずIssueを立てた。
 https://github.com/mattermost/mattermost-server/issues/14641

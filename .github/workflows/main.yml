@@ -34,7 +34,9 @@ jobs:
       with:
         token: ${{ secrets.ACCESS_TOKEN }}
   tweet:
+    run-os: ubuntu-latest
     needs: deploy
+    steps:
     - name: test
       run: echo ${{ needs.deploy.outputs.changed }}
     - name: test2
