@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 # はじめに
 

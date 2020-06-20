@@ -10,6 +10,8 @@ draft: false
 * [kaakaa\_hoe \- Qiita](https://qiita.com/kaakaa_hoe)
 * [yemoto\(@kaakaa\_hoe\_prog\)さん \| Twitter](https://twitter.com/kaakaa_hoe_prog)
 
+<iframe src="https://github.com/sponsors/kaakaa/card" title="Sponsor kaakaa" height="225" width="600" style="border: 0;"></iframe>
+
 ## Publications
 
 * "Mattermost［導入＋構築］入門", Software Design 2019年4~7月号, 技術評論社

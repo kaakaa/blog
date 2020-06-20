@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 # はじめに
 
@@ -42,15 +42,15 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
 
 インストールされているプラグインのアップデートが簡単になりました。
 
-[Mattermost v5.16で **プラグインマーケットプレース** の機能](https://kaakaa.github.io/blog/posts/mattermost/releases-5.16/#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%BC%E3%82%B1%E3%83%83%E3%83%88%E3%83%97%E3%83%AC%E3%83%BC%E3%82%B9)が追加されましたが、その **プラグインマーケットプレース** のページでインストール済のプラグインのアップデートを行えるようになりました。
+[Mattermost v5.16で **プラグインマーケットプレース** の機能](https://blog.kaakaa.dev/posts/mattermost/releases-5.16/#%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%83%9E%E3%83%BC%E3%82%B1%E3%83%83%E3%83%88%E3%83%97%E3%83%AC%E3%83%BC%E3%82%B9)が追加されましたが、その **プラグインマーケットプレース** のページでインストール済のプラグインのアップデートを行えるようになりました。
 
 インストール済のプラグインの新しいバージョンがリリースされている場合、**アップデートする**というリンクが表示されます。
 
-![plugin_update](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/plugin_update_1.png)
+![plugin_update](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/plugin_update_1.png)
 
 **アップデートする**ボタンをクリックとすると確認ダイアログが表示されます。リリースノートへのリンクも表示されているため、ここから更新内容を確認しにいくこともできます。
 
-![plugin_update](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/plugin_update_2.png)
+![plugin_update](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/plugin_update_2.png)
 
 ## 未読としてマーク
 新しいメッセージは、それが後で読み返したい重要なメッセージであっても、一度表示してしまうと既読としてマークされてしまい、他のメッセージに埋もれてしまっていました。
@@ -58,7 +58,7 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
 
 以下のサンプルは[公式ブログ](https://mattermost.com/blog/mattermost-5-18-id-only-option-for-push-notifications-one-click-plugin-updates-mark-posts-unread-and-more/)からの転載です。
 
-![mark_as_unread](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/mark_as_unread.gif)
+![mark_as_unread](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/mark_as_unread.gif)
 
 
 ## アーカイブされたチャンネルの参照
@@ -68,15 +68,15 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
 まだベータ版の機能ですが、Mattermostサーバー内の `config.json` にある `ExperimentalViewArchivedChannels` の設定を `true` にすることで、参加可能チャンネルの一覧にアーカイブされたチャンネルを表示できるようになります。
 ([公式ドキュメント](https://docs.mattermost.com/administration/config-settings.html#allow-users-to-view-archived-channels-beta)では設定名が `ViewArchivedChannels` となっていますが、おそらく誤りだと思われるため[修正のPR](https://github.com/mattermost/docs/pull/3278)を出しています。)
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_1.png)
+![view_archived_channel](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/view_archived_channel_1.png)
 
 アーカイブチャンネルは普通のチャンネルと同じように開くことができますが、書き込みはできません。
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_2.png)
+![view_archived_channel](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/view_archived_channel_2.png)
 
 また、この設定を有効にすると、アーカイブチャンネル内のコメントを検索できるようにもなります。
 
-![view_archived_channel](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/view_archived_channel_3.png)
+![view_archived_channel](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/view_archived_channel_3.png)
 
 
 ## その他の変更点
@@ -85,7 +85,7 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
   * https://mattermost.gitbook.io/plugin-jira/
 * リモート端末からMattermostを操作できる新しいCLIツール `mmctl` が公開されています
   * https://github.com/mattermost/mmctl
-* (E10/E20) v5.16で追加された[ゲストアカウント](https://kaakaa.github.io/blog/posts/mattermost/releases-5.16/#e10-20-%E3%82%B2%E3%82%B9%E3%83%88%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88)機能に、AD/LDAPとSAMLから直接ゲストアカウントを作成する機能が追加されました
+* (E10/E20) v5.16で追加された[ゲストアカウント](https://blog.kaakaa.dev/posts/mattermost/releases-5.16/#e10-20-%E3%82%B2%E3%82%B9%E3%83%88%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88)機能に、AD/LDAPとSAMLから直接ゲストアカウントを作成する機能が追加されました
 * (E20)コンプライアンス用のActiance Export Toolで投稿/ファイルの削除/修正イベントを扱えるようになりました
 * (E20) AD/LDAPグループ同期機能が実験的な機能(Experimental)からベータ版(Beta)となりました
 
@@ -93,7 +93,7 @@ E20ライセンスに追加された **ID-only** オプションを利用する�
 
 シンタックスハイライト付きでコードブロックを投稿した際に、行番号が表示されるようになりました。
 
-![line_number](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.18/line_number.png)
+![line_number](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.18/line_number.png)
 
 # MISC
 

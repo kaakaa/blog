@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 # はじめに
 
@@ -31,7 +31,7 @@ Enterprise版限定の機能です。
 
 ゲストアカウントは、招待されたチャンネルのみにアクセスでき、その他の公開チャンネルを検索したり、他のチャンネルに参加したりすることはできません。また、ダイレクトメッセージについても、招待されたチャンネルに参加しているユーザーのみにしか送信できず、その他のユーザーにはメッセージを送ることはできません。
 
-![guest_account](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/guest_account_01.png)
+![guest_account](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/guest_account_01.png)
 
 ゲストアカウントの投稿や、プロフィールポップアップ画面には `GUEST` というバッチが付与されます。(画像は[公式ブログ](https://mattermost.com/blog/mattermost-5-16-guest-accounts-a-new-plugin-marketplace-faster-installation-on-desktops-and-more/)から)
 
@@ -39,26 +39,26 @@ Enterprise版限定の機能です。
 
 ゲストアカウントはシステムコンソール画面から有効にできます。また、ゲストアカウントとして追加できるメールアドレスのドメインを制限することもできます。
 
-![configuration](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/guest_systemconsole_01.png)
+![configuration](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/guest_systemconsole_01.png)
 
 
 ゲストアカウント機能を有効にしたのち、メインメニューの **招待する** メニューをクリックすると、下記のようなメニューが表示されます。
 ゲストアカウントを追加したい場合は、「ゲストを招待する」メニューを選択します。
 
-![invite](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/guest_invite_01.png)
+![invite](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/guest_invite_01.png)
 
 既に他のチームに参加しているユーザーをゲストアカウントとして追加したい場合はユーザー名を、まだMattermostアカウントを作成していない場合はメールアドレスを指定します。
 ゲストとして追加するチャンネルは、公開チャンネル・非公開チャンネル共に選択することができます。
 
-![invite](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/guest_invite_02.png)
+![invite](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/guest_invite_02.png)
 
 メールアドレスを入力してゲストを招待すると、このようなメールが送信されます。
 
-![invite](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/guest_invite_03.png)
+![invite](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/guest_invite_03.png)
 
 また、既に存在するアカウントをゲストアカウントへ降格させることもできます。
 
-![demote](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/demote_guest_01.png)
+![demote](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/demote_guest_01.png)
 
 ## プラグインマーケットプレース
 Mattermost統合機能のマーケットプレースにメインメニューからアクセスできるようになりました。
@@ -67,7 +67,7 @@ Mattermost統合機能のマーケットプレースにメインメニューか�
 メインメニューの **プラグインマーケットプレース** メニューからマーケットプレースを開けます。
 プラグインマーケットプレースから、インストールしたいプラグインの横にある **インストール** ボタンをクリックするだけでプラグインをインストールできます。
 
-![plugin_marketplace](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/plugin_marketplace_02.png)
+![plugin_marketplace](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/plugin_marketplace_02.png)
 
 
 現在は、Mattermostチームによって検証されたプラグインのみが表示されます。コミュニティメンバによって開発されたプラグインは https://integrations.mattermost.com/ から探すことができます。
@@ -80,7 +80,7 @@ https://github.com/mattermost/mattermost-marketplace
 
 マーケットプレースサーバーをセルフホストした場合、そのサーバーURLをシステムコンソールから設定することにより、セルフホストしたマーケットプレースに接続できるようになります。
 
-![plugin_marketplace](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/plugin_marketplace_03.png)
+![plugin_marketplace](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/plugin_marketplace_03.png)
 
 
 ## その他の変更点
@@ -124,7 +124,7 @@ Mattermostの[インタラクティブダイアログ](https://docs.mattermost.c
 * チェックボックス型の要素を利用できるようになりました
 * ラジオボタンを利用できるようになりました
 
-![interactive_dialog](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.16/interactive_dialog_01.png)
+![interactive_dialog](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.16/interactive_dialog_01.png)
 
 上記のダイアログを生成するためのコードは https://gist.github.com/kaakaa/a159cdc51a96b2daa41d84b2d1e2c218#file-mm_v5-16_interactive_dialog-go-L34 にあります。
 

@@ -66,7 +66,7 @@ Mattermostへの貢献を始めたきっかけは、2016年ごろに職場でMat
 そして今回、MatterConへ招待いただくこととなりました。
 
 [^about-partition-translation-maintainer]: https://docs.mattermost.com/developer/localization.html#translation-maintenance
-[^about-partition-blog]: https://kaakaa.github.io/blog
+[^about-partition-blog]: https://blog.kaakaa.dev
 [^about-partition-qiita]: https://qiita.com/kaakaa_hoe
 [^about-partition-mvp]: https://developers.mattermost.com/contribute/mvp/
 

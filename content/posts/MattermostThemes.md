@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "theme"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost
 
 # Mattermost テーマ
 
@@ -25,7 +25,7 @@ Mattermostはデフォルトで4種類のテーマ (**Mattermost**, **Organizati
 
 カスタムテーマの設定方法は非常に簡単で、Mattermostテーマを表すJSON文字列をコピーして、アカウント設定のカスタムテーマの部分にペーストするだけです。
 
-![custom_theme_settings](https://kaakaa.github.io/blog/images/posts/mattermost/MattermostThemes/custom_theme_settings.png)
+![custom_theme_settings](https://blog.kaakaa.dev/images/posts/mattermost/MattermostThemes/custom_theme_settings.png)
 
 ペーストした時点で画面表示が変わるので、問題なさそうなら **保存** ボタンを押して変更を完了します。
 
@@ -37,13 +37,13 @@ Mattermostテーマを表すJSON文字列は、下記のような形式をした
 
 また、Slackで設定しているテーマカラーを、そのまま流用することもできます。
 
-![custome_theme_slack](https://kaakaa.github.io/blog/images/posts/mattermost/MattermostThemes/custom_theme_slack.png)
+![custome_theme_slack](https://blog.kaakaa.dev/images/posts/mattermost/MattermostThemes/custom_theme_slack.png)
 
 # カスタムテーマ集
 
 ## [Mattermost Themes](https://avasconcelos114.github.io/mattermost-themes/)
 
-![gh_mattermost_themes](https://kaakaa.github.io/blog/images/posts/mattermost/MattermostThemes/gh_mattermost_themes.png)
+![gh_mattermost_themes](https://blog.kaakaa.dev/images/posts/mattermost/MattermostThemes/gh_mattermost_themes.png)
 
 Mattermostのコミュニティメンバーが作成したGitHub Pagesサイトです。
 現時点では、このサイトで最も多くのテーマが紹介されているようです。(Light Theme 16種類、 Dark Theme 14種類)
@@ -55,7 +55,7 @@ https://github.com/avasconcelos114/mattermost-themes
 
 ## [公式ドキュメント](https://docs.mattermost.com/help/settings/theme-colors.html#custom-theme-examples)
 
-![official_docs_themes](https://kaakaa.github.io/blog/images/posts/mattermost/MattermostThemes/official_docs_themes.png)
+![official_docs_themes](https://blog.kaakaa.dev/images/posts/mattermost/MattermostThemes/official_docs_themes.png)
 
 公式ドキュメントの **Theme Color** のページにいくつかテーマが紹介されています。現時点(2019/12/14現在)で紹介されているのは、以下の5つのテーマです。
 
@@ -69,7 +69,7 @@ https://github.com/avasconcelos114/mattermost-themes
 
 ## [公式フォーラム](https://forum.mattermost.org/t/share-your-favorite-mattermost-theme-colors/1330)
 
-![forum_themes](https://kaakaa.github.io/blog/images/posts/mattermost/MattermostThemes/forum_themes.png)
+![forum_themes](https://blog.kaakaa.dev/images/posts/mattermost/MattermostThemes/forum_themes.png)
 
 公式フォーラムでもテーマを共有するトピックが立っています。名前のついていないテーマもありますが、現時点(2019/12/14事典)で、14種類ほどのテーマが紹介されています。(**One Dark**等、他で紹介されているものと重複しているものもありそうですが...）
 

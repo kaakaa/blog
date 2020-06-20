@@ -9,7 +9,7 @@ tags: ["mattermost", "plugin"]
 ## Mattermost Plugin用テンプレートリポジトリ
 
 Mattermostにはプラグイン機能があり、サーバーサイド/フロントエンド共に独自の拡張機能を追加することができます。
-Mattermostプラグインの開発方法は[Mattermostプラグインの作り方 · kaakaa blog](https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/)にも書きましたが、一から作るとなると準備するファイルも多く大変です。
+Mattermostプラグインの開発方法は[Mattermostプラグインの作り方 · kaakaa blog](https://blog.kaakaa.dev/posts/mattermost/plugin_tutorial/)にも書きましたが、一から作るとなると準備するファイルも多く大変です。
 
 そこで、Mattermostプラグインの開発を楽にするため、Mattermostチームが[GitHubのテンプレートリポジトリ機能](https://help.github.com/ja/articles/creating-a-template-repository)を利用して作成しているテンプレートリポジトリを使ったプラグイン開発方法について紹介します。
 
@@ -130,7 +130,7 @@ $ make
 
 この `.tar.gz` ファイルをアップロードすることでMattermostプラグインを有効にすることができます。プラグインのアップロード方法などは下記記事で紹介しているので参照ください。
 
-* https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/
+* https://blog.kaakaa.dev/posts/mattermost/plugin_tutorial/
 
 #### 2.3. 動作確認
 
@@ -172,7 +172,7 @@ make deploy
 
 * [Plugins \(Beta\)](https://developers.mattermost.com/extend/plugins/)
 * [mattermost/mattermost\-plugin\-demo: A demo of what Mattermost plugins can do\.](https://github.com/mattermost/mattermost-plugin-demo)
-* [Mattermostプラグインの作り方 · kaakaa blog](https://kaakaa.github.io/blog/posts/mattermost/plugin_tutorial/)
+* [Mattermostプラグインの作り方 · kaakaa blog](https://blog.kaakaa.dev/posts/mattermost/plugin_tutorial/)
 
 また、Mattermostコアチームによるプラグイン開発に関する会話は下記のチャンネルで行われています。
 

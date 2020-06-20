@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 # はじめに
 
@@ -61,7 +61,7 @@ https://github.com/mattermost/mmctl
 ## 未読メッセージがある場合のfavicon
 
 未読のメンションがある場合、faviconに赤いドットが付与されるようになりました
-![favicon](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.20/favicon.png)
+![favicon](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.20/favicon.png)
 
 # おわりに
 

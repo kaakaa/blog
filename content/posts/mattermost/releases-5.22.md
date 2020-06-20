@@ -6,7 +6,7 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://kaakaa.github.io/blog/tags/mattermost/
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 # はじめに
 
@@ -27,7 +27,7 @@ Mattermostは一つのサーバーに複数のチームを作成でき、複数�
 今回のリリースで、ショートカットキーによるチームの切り替えができるようになりました。
 **Ctrl + Alt** (Windows) / **⌘ + ⌥** (Mac) を押しながら **↑/↓** キー、もしくはチームアイコンの脇に表示された数字のキーを押すことでチームを切り替えることができます。また、ドラッグ&ドロップでチームアイコンの順番を変えることができます。
 
-![switch team](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/switch-team.gif)
+![switch team](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/switch-team.gif)
 
 ## アーカイブしたチャンネルの復元
 
@@ -37,7 +37,7 @@ Mattermostは一つのサーバーに複数のチームを作成でき、複数�
 メッセージ検索結果などからアーカイブされたチャンネルに移動し、チャンネルメニューからチャンネル復元のメニューを選択することで復元可能になります。
 (注意: 翻訳ミスのため、メニュー名が**「チャンネルをアーカイブする」**と表示されてしまっています...次回リリースの`v5.23.0`で修正されているはずです。)
 
-![unarchive](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/unarchive.png)
+![unarchive](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/unarchive.png)
 
 ## Confluenceプラグインの改善
 
@@ -65,11 +65,11 @@ https://mattermost.gitbook.io/plugin-confluence/
 
 この実験的な機能を有効にするには、まずシステム管理者によってシステムコンソールから **実験的なサイドバー機能** を有効にします。
 
-![system_console](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/sidebar-system-console.png)
+![system_console](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/sidebar-system-console.png)
 
 その後、ユーザーごとに **アカウント設定 > サイドバー > 実験的なサイドバー機能** をオンにすることで有効になります。
 
-![account_settings](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/sidebar-account-settings.png)
+![account_settings](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/sidebar-account-settings.png)
 
 
 ## チャンネルモデレーション設定 (E20)
@@ -85,7 +85,7 @@ https://mattermost.gitbook.io/plugin-confluence/
 
 チャンネル設定画面から設定できます。
 
-![moderation](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/channel-moderation.png)
+![moderation](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/channel-moderation.png)
 
 詳細について公式ドキュメントを参照してください。
 https://docs.mattermost.com/deployment/advanced-permissions.html#channel-moderation-beta-e20
@@ -123,7 +123,7 @@ Mattermostは毎月16日にリリース日が設定されていますが、セ�
 
 キーボードショートカットは **Ctrl / ⌘ + /**で確認することができます。
 
-![shortcut](https://kaakaa.github.io/blog/images/posts/mattermost/releases-5.22/shortcut.png)
+![shortcut](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.22/shortcut.png)
 
 
 
