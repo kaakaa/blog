@@ -1,0 +1,7 @@
+<iframe
+    src='{{.Get "src"}}'
+    {{with .Get "title"}} title="{{.}}" {{ end }}
+    {{with .Get "width"}} width="{{.}}" {{ end }}
+    {{with .Get "height"}} height="{{.}}" {{ end }}
+    style="border: 0;" marginwidth="0" marginheight="0" scrolling="no">
+</iframe>
