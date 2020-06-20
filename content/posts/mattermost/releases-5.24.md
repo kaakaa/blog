@@ -6,8 +6,6 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
-Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
-
 # はじめに
 
 2020/6/17にMattermost v5.24.0がリリースされました。  
@@ -45,13 +43,13 @@ Mattermostヘッダ部分にある検索画面で、検索フィルタが利用�
 
 モバイルアプリ v1.32から、投稿を長押しすると出てくるメニューによく使われるリアクションが表示されるようになり、今までより簡単に絵文字リアクションが付けられるようになりました。
 
-![emoji](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/emoji_mobile.jpg)
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/emoji_mobile.jpg" height=480/>
 
 ## 自動補完を使用したスラッシュコマンド入力 (BETA)
 
 今までのバージョンでも、メッセージ入力欄で `/` を入力すると利用可能なスラッシュコマンドの自動補完を行うことができましたが、今回のバージョンから、さらに選択したスラッシュコマンドで利用可能なオプション部分についても自動補完が可能となりました。
 
-![autocomplete](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/slash_autocomplete.gif)
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/slash_autocomplete.gif" height=480/>
 (画像は[公式リリースブログ](https://mattermost.com/blog/mattermost-release-v5-24/)より転載)
 
 ## Bleveを利用した全文検索で日本語検索も可能に！（実験的機能）
@@ -71,7 +69,7 @@ Bleveの利用設定は **システムコンソール > 実験的機能 > Bleve*
 
 設定完了後、Mattermost上で検索を行うことで、日本語一文字だけでも検索できるようになります。
 
-![bleve_search](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_search.png)
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_search.png" height=480/>
 
 Bleveによる全文検索機能は実験的な機能のため、予期せぬ事象が発生する可能性があります。また、私も数件のメッセージがある環境でしか試していないため、大量のメッセージが存在する環境でどのような事象が発生するかは確認できていません。
 
@@ -116,7 +114,6 @@ Mattermost上でのプロフィール画像をAD/LDAPのプロフィール画像
 
 * チャンネル内のピン留めされた投稿の数がヘッダ部分に表示されるようになりました
 ![count_pin](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/count_pin.png)
-* Interactive message buttonの色を変えることができるようになりました
 * その他、多くの機能追加がありますが、詳細は[Changelog](https://docs.mattermost.com/administration/changelog.html#release-v5-24-feature-release)からご確認ください
 
 # おわりに
