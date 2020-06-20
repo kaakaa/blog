@@ -1,4 +1,4 @@
-baseURL = "https://blog.kaakaa.dev"
+baseURL = "https://blog.kaakaa.dev/"
 languageCode = "ja-JP"
 title = "kaakaa blog"
 theme = "cactus-plus"
