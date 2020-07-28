@@ -38,61 +38,61 @@ Draw.ioには、`extractGraphModelFromPng`というメソッドがあり、ど�
 
 https://github.com/jgraph/drawio/blob/a579fe9c094510093db631283166f35588848113/src/main/webapp/js/diagramly/Editor.js#L1547
 
-```ks
-	Editor.extractGraphModelFromPng = function(data)
-	{
-		var result = null;
+```js
+  Editor.extractGraphModelFromPng = function(data)
+  {
+    var result = null;
 
-        ...	(snip) ...
-			
-			EditorUi.parsePng(binary, mxUtils.bind(this, function(pos, type, length)
-			{
-				var value = binary.substring(pos + 8, pos + 8 + length);
-				
-				if (type == 'zTXt')
-				{
-					var idx = value.indexOf(String.fromCharCode(0));
-					
-					if (value.substring(0, idx) == 'mxGraphModel')
-					{
-						// Workaround for Java URL Encoder using + for spaces, which isn't compatible with JS
-						var xmlData = pako.inflateRaw(value.substring(idx + 2),
-							{to: 'string'}).replace(/\+/g,' ');
-						
-						if (xmlData != null && xmlData.length > 0)
-						{
-							result = xmlData;
-						}
-					}
-				}
-				// Uncompressed section is normally not used
-				else if (type == 'tEXt')
-				{
-					var vals = value.split(String.fromCharCode(0));
-					
-					if (vals.length > 1 && (vals[0] == 'mxGraphModel' ||
-						vals[0] == 'mxfile'))
-					{
-						result = vals[1];
-					}
-				}
-				
-				if (result != null || type == 'IDAT')
-				{
-					// Stops processing the file as our text chunks
-					// are always placed before the data section
-					return true;
-				}
-			}));
+        ...  (snip) ...
+      
+      EditorUi.parsePng(binary, mxUtils.bind(this, function(pos, type, length)
+      {
+        var value = binary.substring(pos + 8, pos + 8 + length);
+        
+        if (type == 'zTXt')
+        {
+          var idx = value.indexOf(String.fromCharCode(0));
+          
+          if (value.substring(0, idx) == 'mxGraphModel')
+          {
+            // Workaround for Java URL Encoder using + for spaces, which isn't compatible with JS
+            var xmlData = pako.inflateRaw(value.substring(idx + 2),
+              {to: 'string'}).replace(/\+/g,' ');
+            
+            if (xmlData != null && xmlData.length > 0)
+            {
+              result = xmlData;
+            }
+          }
+        }
+        // Uncompressed section is normally not used
+        else if (type == 'tEXt')
+        {
+          var vals = value.split(String.fromCharCode(0));
+          
+          if (vals.length > 1 && (vals[0] == 'mxGraphModel' ||
+            vals[0] == 'mxfile'))
+          {
+            result = vals[1];
+          }
+        }
+        
+        if (result != null || type == 'IDAT')
+        {
+          // Stops processing the file as our text chunks
+          // are always placed before the data section
+          return true;
+        }
+      }));
 
-        ...	(snip) ...
+        ...  (snip) ...
 ```
 
 実際に、適当な`*.dio.png`ファイルを作って中身をみてみます。  
 コードは [PNGを読む \- Qiita](https://qiita.com/kouheiszk/items/17485ccb902e8190923b) を参考にしました。
 
 ```go
-ackage main
+package main
 
 import (
     "bytes"
@@ -208,7 +208,7 @@ SVGの方は元々XMLファイルなので、直接テキストファイルと�
         <ellipse cx="60" cy="40" rx="60" ry="40" fill="#ffffff" stroke="#000000" pointer-events="all"/>
         <g transform="translate(-0.5 -0.5)">
             <switch>
-			... (snip) ...
+      ... (snip) ...
 
 ```
 
