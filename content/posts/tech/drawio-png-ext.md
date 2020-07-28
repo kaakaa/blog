@@ -6,14 +6,13 @@ toc: true
 tags: ["draw.io", "vs-code", "png"]
 ---
 
-
 ## VS Code Draw.io Integrationの画像エクスポート機能
 
 数ヶ月前に、VS CodeのDraw.io Integrationが話題になりました。
 
 [VSCodeでDraw\.ioが使えるようになったらしい！ \- Qiita](https://qiita.com/riku-shiru/items/5ab7c5aecdfea323ec4e)
 
-ただ、上記の記事にもあるようにエクスポート機能は途中のバージョンから無効化されたようであり、エクスポート機能を利用するにはオンライン版のDraw.ioに繋がないといけないという本末転倒な状況になっているようです。
+ただ、上記の記事にもあるようにエクスポート機能は`v0.4.0`から無効化されており、エクスポート機能を利用するにはオンライン版のDraw.ioに繋がないといけないという本末転倒な状況になっているようです。
 
 せっかくエディタ内でドキュメントと作図が完結しそうという素敵な体験にあと一歩というところなので、`*.drawio`ファイルを一括で画像ファイルに変換するスタンドアロンのツールを作ってみたり（[kaakaa/dio\-exporter](https://github.com/kaakaa/dio-exporter)）もしましたが、もっと良い方法があったようです。
 
@@ -21,7 +20,7 @@ tags: ["draw.io", "vs-code", "png"]
 
 [Visual Studio Code \- \*\.drawio\.svg や \*\.drawio\.png の衝撃 \- anfangd's blog](https://blog.anfangd.me/entry/2020/07/08/220628)
 
-こちらの記事で知ったのですが、どうやらファイルを`*.drawio.svg`や`*.drawio.png`という拡張子で保存すると、Draw．ioで開くことができ、かつSVG, PNGファイルとして扱うことができるようです。
+こちらの記事で知ったのですが、ファイルを`*.drawio.svg`や`*.drawio.png`という拡張子で保存すると、Draw.ioで開くことができ、かつSVG/PNGファイルとして扱うことができるようです。
 
 公式リポジトリの方にも記述がありました。
 
@@ -34,7 +33,7 @@ https://github.com/hediet/vscode-drawio#editing-drawiosvgdrawiopng-files
 
 ### `*.drawio.png` or `*.dio.png`
 
-Draw.ioには、`extractGraphModelFromPng`というメソッドがあり、どうやらPNGファイルからDraw.ioのグラフモデルを取得できるようです。
+Draw.ioには、`extractGraphModelFromPng`というメソッドがあり、このメソッドにPNGファイルからDraw.ioのグラフモデルを取得する処理が書かれているようです。
 
 https://github.com/jgraph/drawio/blob/a579fe9c094510093db631283166f35588848113/src/main/webapp/js/diagramly/Editor.js#L1547
 
@@ -88,8 +87,9 @@ https://github.com/jgraph/drawio/blob/a579fe9c094510093db631283166f35588848113/s
         ...  (snip) ...
 ```
 
-実際に、適当な`*.dio.png`ファイルを作って中身をみてみます。  
-コードは [PNGを読む \- Qiita](https://qiita.com/kouheiszk/items/17485ccb902e8190923b) を参考にしました。
+PNGファイルの`zTXt`チャンク、もしくは`tEXt`チャンクからグラフモデルを読み出しているようです。
+
+実際に、適当な`*.dio.png`ファイルを作って中身をみてみます。 以下のコードは [PNGを読む \- Qiita](https://qiita.com/kouheiszk/items/17485ccb902e8190923b) を参考にしました。
 
 ```go
 package main
@@ -174,8 +174,8 @@ mxfile<mxfile host="8ce946a9-c68b-479a-941a-3275fc70c066" modified="2020-07-28T1
 Complete
 ```
 
-まず、画像データは`IDAT`チャンクに保存され、Draw.ioのグラフモデルは `zTXt`チャンク ではなく `tEXt`チャンク として保存されているようです。
-`tEXt`チャンクの中身はXML要素ではない`mxfile`というワードで始まっていることと、パーセントエンコードされていること以外は、Draw.ioのデータ保存形式と同じように見えます。実際、先頭の`mxfile`を外したXMLをファイルに保存し、Draw.io Integrationで開いてみたところ問題なく開けました。
+実行結果を見ると、Draw.ioのグラフモデルは `zTXt`チャンク ではなく `tEXt`チャンク として保存されているようです。
+`tEXt`チャンクの中身は、XML要素ではない`mxfile`というワードで始まっていることと、パーセントエンコードされていること以外は、Draw.ioのデータ保存形式と同じように見えます。実際、先頭の`mxfile`を外したXMLをファイルに保存し、Draw.io Integrationで開いてみたところ問題なく開けました。
 
 ---
 
@@ -187,11 +187,11 @@ else if (type == 'tEXt')
 ```
 
 しかし、VS Code Draw.io Integrationで`*.drawio.png`ファイルを作成した場合は、その`tEXt`チャンクにデータが保存されています。
-個人的な予想ですが、やはりエディタでの操作だと保存回数が多くなるため、保存のたびに圧縮をかけて保存する必要がある`zTXt`チャンクではレスポンスが悪くなる恐れがあるため、`tEXt`チャンクを採用しているのではないかと思っています。
+個人的な予想ですが、エディタでの操作だと保存回数が多くなるため、保存のたびに圧縮をかける必要のある`zTXt`チャンクでは保存操作に対するレスポンスが悪くなる恐れがあるため、`tEXt`チャンクを採用しているのではないかと思っています。
 
 ### `*.drawio.svg` or `*.dio.svg`
 
-SVGの方は元々XMLファイルなので、直接テキストファイルとして開けば `<svg>` タグの `content`属性の値として、HTMLエンコードされたDraw.ioのグラフモデルが格納されていることがわかります。
+SVGファイルの中身はXMLファイルなので、テキストファイルとして開けば `<svg>` タグの `content`属性の値として、HTMLエンコードされたDraw.ioのグラフモデルが格納されていることがわかります。
 
 ```
 <svg
@@ -214,7 +214,7 @@ SVGの方は元々XMLファイルなので、直接テキストファイルと�
 
 ## 懸念点
 
-`*.drawio.png`、`*.drawio.svg`形式で保存することで、画像ファイルとしても扱えるし、Draw.ioで追加で編集処理も加えられるとても便利なファイルを作成することができます。しかし、いくつか懸念すべき点があります。
+`*.drawio.png`、`*.drawio.svg`形式で保存することで、画像ファイルとしても扱えますし、Draw.ioで開けば追加で編集も加えられるとても便利なファイルを作成することができます。しかし、いくつか懸念すべき点があります。
 
 ### ファイルサイズが大きくなる
 
@@ -223,12 +223,12 @@ Webページに使用するなど、容量にシビアな環境では画像フ�
 
 ### 複数ページを扱うことはできない
 
-Draw.ioでは一つのファイルに複数ページ(タブ)を作成することができますが、画像として参照できるのは１ページのみです。（おそらく最初のページ）  
-複数ページの存在するDraw.ioファイルを画像表示するには、各ページを別ファイルに分割する必要があります。（一応、[kaakaa/dio\-exporter](https://github.com/kaakaa/dio-exporter)も複数ページに対応できているはずです）
+Draw.ioでは一つのファイルに複数ページ(タブ)を作成することができますが、画像として参照できるのは１ページのみです。（おそらく最初のページ）  複数ページの存在するDraw.ioファイルを画像表示するには、各ページを別ファイルに分割する必要があります。
+（[kaakaa/dio\-exporter](https://github.com/kaakaa/dio-exporter)は複数ページのDraw.ioファイルから複数の画像ファイルを出力できるようになっているはずです）
 
 ## おわりに
 
-`*.drawio.png`や`*.drawio.svg`というファイル形式にはいくつか懸念事項はありますが、作っているツールの概要をサクッと書きたいときなどは、とても便利な機能だと思います。
+`*.drawio.png`や`*.drawio.svg`というファイル形式にはいくつか懸念事項はありますが、作っているツールの概要をサクッと書きたいときなどは、とても役に立つと思います。
 
 また、どうやら本体のDraw.io Integrationの方でも、PNGエクスポートの機能は追加される予定のようです。
 
