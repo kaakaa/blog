@@ -30,7 +30,7 @@ https://github.com/hediet/vscode-drawio#editing-drawiosvgdrawiopng-files
 
 なぜ、そんなことができるのかを調べてみました。
 
-## ファイルの内容
+## なぜ画像ファイルとしてもDraw.ioとしても開けるのか
 
 ### `*.drawio.png` or `*.dio.png`
 
