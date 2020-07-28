@@ -1,5 +1,5 @@
 ---
-title: "VS Code Draw.io IntegrationにはExport機能なんて必要なかった"
+title: "*.drawio.png と *.drawio.svg とはなんなのか"
 date: 2020-07-28T23:16:05+09:00
 draft: false
 toc: true
