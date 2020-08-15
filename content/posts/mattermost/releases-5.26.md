@@ -97,16 +97,16 @@ https://mattermost.com/blog/upcoming-channel-sidebar-features/
 ![filter](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/filters.png)
 
 また、チャンネル管理画面では、チャンネルのタイプ(公開チャンネル、非公開チャンネル、AD/LDAPグループと同期したチャンネル、等)でフィルタリング可能になったようです。
-![filter2](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/filters2.png)
+![filter2](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/filters-2.png)
 
 （画像は[公式ブログ](https://mattermost.com/blog/mattermost-release-v5-26/#filters)から）
 
 ### (E20) ログ設定のカスタマイズ
 
-Mattermostが出力するログについて、出力先をコンソール、ファイル、syslog, TCPから選択できるようになり、さらにそれぞれの出力先に対して異なるログレベルを設定するなど柔軟なログ出力の設定が可能になったようです。
+Mattermostが出力するログについて、出力先をコンソール、ファイル、syslog、 TCPから選択できるようになり、さらにそれぞれの出力先に対して異なるログレベルを設定するなど柔軟なログ出力の設定が可能になったようです。
 
 設定方法については公式ドキュメントを参照ください。
-https://docs.mattermost.com/administration/config-settings.html?highlight=syslog#output-logs-to-multiple-targets
+https://docs.mattermost.com/administration/config-settings.html#output-logs-to-multiple-targets
 
 ### (E20・ベータ版) モバイルアプリからもAD/LDAPグループへのメンションが利用可能に
 
@@ -126,15 +126,15 @@ Mattermostのヘッダ部分にヘルプアイコンが追加され、そこか�
 
 `Peer-to-peer Help`チャンネルでは、やりとりは基本的に英語ですが、開発チームも見ているチャンネルのため素早い回答が期待できるのではないかと思います。
 
-また、チャット以外にもMattermostは質問用のフォーラムを運用してします。
+また、Mattermostは質問用のフォーラムも運用してしおり、こちらからも質問を投稿することができます。
 https://forum.mattermost.org/
 
-上記も基本的に英語でやりとりが行われていますが、一応、日本語のフォーラムもあります。（あまり利用されていないですが...）
+上記フォーラムも基本的に英語でやりとりが行われていますが、一応、日本語のフォーラムもあります。（あまり利用されてはいないですが...）
 https://forum.mattermost.org/c/international/japanese/29
 
 
 ### PostgreSQL 10のサポート
-今までサポート対象だったPostgreSQL 9.4のLTSが2020年2月に終了したことを受け、Mattermostも5.26から公式にPostgreSQL 10をサポートするようになりました。今後もMattermostはPostgreSQL 9.4でも動作可能となる予定ですが、Mattermost v6.0(リリース時期未定)ではPostgreSQL 9.4はサポート対象外となる予定です。
+今までサポート対象だったPostgreSQL 9.4のLTSが2020年2月に終了したことを受け、Mattermostも5.26から公式にPostgreSQL 10をサポートするようになりました。今後もMattermost v5系はPostgreSQL 9.4でも動作可能となりますが、Mattermost v6.0(リリース時期未定)ではPostgreSQL 9.4はサポート対象外となる予定です。
 
 ### 破壊的変更
 * Mattermost v5.26では、Elasticsearchのインデックスを再作成する必要があるそうです
