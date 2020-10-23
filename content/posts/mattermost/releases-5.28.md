@@ -93,7 +93,7 @@ GitHubプラグインでは、GitHubリポジトリのアクティビティを�
 その他、プラグインを含むMattermostとの連携機能については [Mattermost Integrations \- Powerful integrations to help your team do better work, faster\.](https://integrations.mattermost.com/) にまとまっています。
 
 ### mmctl の TLS1.0, 1.1 サポートについて
-20201/1/16リリース予定の Mattermost v5.31 から、Mattermostの管理者向けコマンドラインツールである`mmctl` を用いてTLS1.0, 1.1 を利用しているMattermostサーバーに対して操作を行おうとすると、エラーを返すようになります。オプションを指定することで利用し続けることも可能ですが、TLS1.0, 1.1は多くのブラウザでdeprecatedとなっているため、TLS1.2以降へのアップグレードを推奨します。
+2021/1/16リリース予定の Mattermost v5.31 から、Mattermostの管理者向けコマンドラインツールである`mmctl` を用いてTLS1.0, 1.1 を利用しているMattermostサーバーに対して操作を行おうとすると、エラーを返すようになります。オプションを指定することで利用し続けることも可能ですが、TLS1.0, 1.1は多くのブラウザでdeprecatedとなっているため、TLS1.2以降へのアップグレードを推奨します。
 
 ### [破壊的変更](https://docs.mattermost.com/administration/changelog.html#breaking-changes)
 * Mattermostがクラッシュした時に coredump が生成されるようになりました
@@ -101,7 +101,7 @@ GitHubプラグインでは、GitHubリポジトリのアクティビティを�
 # おわりに
 
 次の`v5.29`のリリースは2020/11/16(Mon)を予定しています。
-そして機能追加が行われる`v5.30`は恐らく2020/10/16(Wed)のリリースになるかと思います。
+そして機能追加が行われる`v5.30`は恐らく2020/12/16(Wed)のリリースになるかと思います。
 
 ---
 
