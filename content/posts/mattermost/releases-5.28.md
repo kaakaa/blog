@@ -1,6 +1,6 @@
 ---
 title: "Mattermost5.28の新機能"
-date: 2020-10-16T00:06:12+09:00
+date: 2020-10-23T23:50:12+09:00
 draft: false
 toc: true
 tags: ["mattermost", "releases"]
@@ -25,10 +25,14 @@ tags: ["mattermost", "releases"]
 ### 新しく導入された機能のお知らせ
 Mattermostを新しいバージョンに上げた後にログインすると、新しいバージョンで利用可能なった機能などがMattermost上で通知されるようになりました。(v5.27からv5.28に上げた時は出てこなかったような? v5.26で導入されたチャンネルカテゴリの機能では表示されましたが。）
 
-![settings in production](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.28/settings-in-produciton-notice.png)
+![in production](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.28/in-production-notice.png)
+(画像は[公式ブログ](https://mattermost.com/blog/mattermost-release-v5-28/#notifications)のもの)
 
 この設定は **システムコンソール > 通知 > エンドユーザー通知を有効にする** からオフにすることもできます。  
 (システムコンソールのサイドメニュー上に２つ「通知」の項目が存在してしまったため、下の方の設定（今回追加された機能に関する設定）の項目名を「お知らせ」に変更しました。v5.29から反映されると思います。)
+
+![settings in production](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.28/settings-in-production-notice.png)
+
 
 ### その他の新機能
 #### bold / italic の入力簡易化
