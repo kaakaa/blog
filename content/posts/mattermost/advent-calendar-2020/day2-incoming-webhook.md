@@ -54,9 +54,9 @@ Incoming WebHookを利用するには、**システムコンソール > 統合�
 * **チャンネル**: チャンネル名を指定せずにIncoming WebHookを実行した場合、ここで指定したチャンネルに投稿が作成されます
 * **このチャンネルに固定する**: このIncoming WebHookでは、**チャンネル**で指定したチャンネルにしか投稿を作成できなくなります
 
-![create](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/complete-incoming-webhook.png)
-
 Incoming WebHookの作成が完了すると、WebHook実行時に指定するURLが表示されます。このURLに対してHTTPリクエストを送信することで、外部アプリケーションからMattermostに投稿を作成することができます。
+
+![complete](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/complete-incoming-webhook.png)
 
 作成したIncoming WebHookは後で編集することも可能です。
 

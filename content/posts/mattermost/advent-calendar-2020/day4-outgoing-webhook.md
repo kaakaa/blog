@@ -57,9 +57,9 @@ Outgoing WebHookを利用するには、**システムコンソール > 統合�
 * **トリガーとなる条件**: トリガーワードと一致する条件を指定します。スペース区切りで最初の単語がトリガーワードと完全に一致するか、トリガーワードで始まるかを設定するものであるため、日本語の投稿を対象とする場合、`最初の単語がトリガーワードで始まる`に設定しておくと良いかと思います。
 * **コールバックURL**: リクエスト送信先のURLです。
 
-![complete](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day4/complete-outgoing-webhook.png)
-
 Outgoing WebHookの作成が完了すると、トークンが表示されます。このトークンは、外部アプリケーションに対して送信されるリクエストに含まれる値であり、リクエストがMattermostから送信されたことを検証するために使われます。
+
+![complete](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day4/complete-outgoing-webhook.png)
 
 ### 実行
 
