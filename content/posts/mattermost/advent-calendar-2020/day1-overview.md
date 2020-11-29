@@ -39,7 +39,7 @@ Mattermostはビジネスチャットの機能だけでも便利なのですが�
 
 １日目の記事は、Mattermostの統合機能の全体像を紹介します。
 
-![overview](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/overview.drawio.png)
+![overview](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day1/overview.drawio.png)
 
 まず、Mattermost本体の機能は上図青い四角のMattermost ServerとMattermost Webappから成り、Mattermost Serverはデータの管理などのコアの機能を果たしており、Go言語で書かれています。Mattermost WebappはブラウザやデスクトップアプリのUIの部分であり、React/Reduxで書かれています。
 
