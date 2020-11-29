@@ -109,7 +109,11 @@ func main() {
 
 上記コードを`main.go`として保存し、`go run main`を実行してサーバーを立ち上げます。もし、MattermostサーバーとSlashCommandリクエスト受付用のサーバを同じマシン上で起動し、Outgoing WebHook作成時の**コールバックURL**に`localhost`のサーバーを指定している場合、**システムコンソール > 開発者 > 信頼されていない内部接続を許可する**に`localhost`を追加しておく必要があります。
 
+![config allow internal](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day6/config-allow-internal.png)
+
 上記の設定が完了した後、Slash Commandを実行すると下記のようなリクエストの情報がコンソールに出力されます。
+
+![execute](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day6/execute-slash-command.png)
 
 ```bash
 $ go run main.go 
