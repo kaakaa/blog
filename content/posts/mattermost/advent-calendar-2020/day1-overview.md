@@ -1,16 +1,16 @@
 ---
-title: "Mattermost Integrationsアドベントカレンダー"
+title: "Mattermost Integrationsアドベントカレンダーについて"
 date: 2020-12-01T00:00:00+09:00
 draft: false
 toc: true
 tags: ["mattermost", "integration"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 ## 本記事について
 
 今日からMattermostの統合機能の開発方法について書いていきます。
-
-本アドベントカレンダーでは、Mattermost統合機能を動作させるためのソースコードを載せることが多くありますが、コードは基本的にGo言語で書かれています。また、コードを簡略化するためにMattermost本体のコードを利用している部分があり、実行するために`go mod init`による依存関係の解決が必要なことがあります。
 
 ## Mattermost について
 Mattermostは、米国のMattermost Inc.が開発しているSlack Alternativeなチャットツール[Mattermost](https://mattermost.com)です。OSSとして開発が進められており、誰でも開発に参加することができます。
