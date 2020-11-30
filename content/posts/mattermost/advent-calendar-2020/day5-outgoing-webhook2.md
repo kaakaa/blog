@@ -6,9 +6,11 @@ toc: true
 tags: ["mattermost", "integration", "webhook", "outgoing"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 ## 本記事について
 
-Mattermostの統合機能アドベントカレンダーの第5日目の記事です。
+[Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第5日目の記事です。
 
 前回の記事では、Mattermostに投稿が作成された際に、その投稿情報を外部アプリケーションに送信することができるOutgoing WebHook(外向きのウェブフック)の機能について紹介しましたが、本記事はその続きです。Outgoing WebHookが送信された外部アプリケーションからMattermostへ投稿を作成する方法について紹介します。
 

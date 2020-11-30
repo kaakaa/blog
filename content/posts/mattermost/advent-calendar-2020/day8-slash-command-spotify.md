@@ -6,9 +6,11 @@ toc: true
 tags: ["mattermost", "integration", "slashcommand", "command"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 ## 本記事について
 
-Mattermostの統合機能アドベントカレンダーの第8日目の記事です。
+[Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第8日目の記事です。
 
 本日の記事は、昨日まで紹介してきたSlash Commandを使ったサンプルアプリの紹介です。
 

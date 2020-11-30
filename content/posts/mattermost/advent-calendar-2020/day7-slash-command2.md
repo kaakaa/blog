@@ -6,9 +6,11 @@ toc: true
 tags: ["mattermost", "integration", "command", "slashcommand"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 ## 本記事について
 
-Mattermostの統合機能アドベントカレンダーの第7日目の記事です。
+[Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第7日目の記事です。
 
 前回の記事では、Mattermostで`/`で始まるコマンドを実行することで、特定の処理を実行することができるSlash Commandの機能について紹介しました。また、Custom Slash Commandにより外部アプリケーションにリクエストを送信する方法を紹介しました。本記事では、Custome Slash Commandのリクエストが送信された外部アプリケーション側からMattermost側へ返却するレスポンス内容について紹介します。
 

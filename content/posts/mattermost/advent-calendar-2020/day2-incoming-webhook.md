@@ -6,9 +6,12 @@ toc: true
 tags: ["mattermost", "integration", "webhook", "incoming"]
 ---
 
+
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 ## 本記事について
 
-Mattermostの統合機能アドベントカレンダーの第2日目の記事です。
+[Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第2日目の記事です。
 
 本記事では、Mattermostの最も簡易な統合機能であるIncoming WebHook(内向きのウェブフック)機能について紹介します。
 
