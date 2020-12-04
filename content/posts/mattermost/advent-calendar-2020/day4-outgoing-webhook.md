@@ -41,7 +41,7 @@ Outgoing WebHookを利用するには、**システムコンソール > 統合�
 
 **メインメニュー > 統合機能**から統合機能の画面を開き、
 
-![main menu](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day4/integratoin-menu.png)
+![main menu](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day4/integration-menu.png)
 
 **外向きのウェブフック > 外向きのウェブフックを追加する**から、新たなOutgoing WebHookを追加します。
 
