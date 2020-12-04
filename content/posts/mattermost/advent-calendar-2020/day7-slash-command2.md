@@ -1,5 +1,5 @@
 ---
-title: "Slash Command 発展編"
+title: "[Mattermost Integrations] Slash Command 発展編"
 date: 2020-12-07T00:00:00+09:00
 draft: false
 toc: true

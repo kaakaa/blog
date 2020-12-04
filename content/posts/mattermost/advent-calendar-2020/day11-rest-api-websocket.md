@@ -1,5 +1,5 @@
 ---
-title: "REST API (WebSocket)"
+title: "[Mattermost Integrations] REST API (WebSocket)"
 date: 2020-12-11T00:00:00+09:00
 draft: false
 toc: true

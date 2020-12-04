@@ -1,5 +1,5 @@
 ---
-title: "Interactive Dialog"
+title: "[Mattermost Integrations] Interactive Dialog"
 date: 2020-12-16T00:00:00+09:00
 draft: false
 toc: true

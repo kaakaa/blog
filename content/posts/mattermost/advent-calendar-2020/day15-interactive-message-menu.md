@@ -1,5 +1,5 @@
 ---
-title: "Interactive Message Menu"
+title: "[Mattermost Integrations] Interactive Message Menu"
 date: 2020-12-15T00:00:00+09:00
 draft: false
 toc: true

@@ -1,5 +1,5 @@
 ---
-title: "Plugin"
+title: "[Mattermost Integrations] Plugin基本編"
 date: 2020-12-17T00:00:00+09:00
 draft: false
 toc: true
