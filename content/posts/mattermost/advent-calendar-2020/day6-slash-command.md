@@ -12,7 +12,7 @@ Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 [Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第6日目の記事です。
 
-本記事では、Mattermost上で特定の処理を実行できるSlash Command機能について紹介します。
+本記事では、Mattermost上で任意のタイミングで特定の処理を実行できるSlash Command機能について紹介します。
 
 ## Slash Command概要
 
@@ -109,7 +109,7 @@ func main() {
 
 `(1)` Slash Commandにより送信されるリクエストは、`application/x-www-form-urlencoded`形式で送信されるため、Formデータとして読み出しています。
 
-上記コードを`main.go`として保存し、`go run main`を実行してサーバーを立ち上げます。もし、MattermostサーバーとSlashCommandリクエスト受付用のサーバを同じマシン上で起動し、Outgoing WebHook作成時の**コールバックURL**に`localhost`のサーバーを指定している場合、**システムコンソール > 開発者 > 信頼されていない内部接続を許可する**に`localhost`を追加しておく必要があります。
+上記コードを`main.go`として保存し、`go run main.go`を実行してサーバーを立ち上げます。もし、MattermostサーバーとSlashCommandリクエスト受付用のサーバを同じマシン上で起動し、Outgoing WebHook作成時の**コールバックURL**に`localhost`のサーバーを指定している場合、**システムコンソール > 開発者 > 信頼されていない内部接続を許可する**に`localhost`を追加しておく必要があります。
 
 ![config allow internal](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day6/config-allow-internal.png)
 
