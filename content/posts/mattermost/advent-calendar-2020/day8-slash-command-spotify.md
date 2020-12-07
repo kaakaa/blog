@@ -29,6 +29,8 @@ Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ソースコードは下記のリポジトリにコミットしてあります。
 
+https://github.com/kaakaa/blog/tree/master/code/mattermost/2020-advent-calendar/slash-command-spotify
+
 Mattermost連携部分の動作コードは下記になります。これとは別にSpotifyクライアント用のコードもありますが、そちらの紹介は割愛します。
 
 ```go
