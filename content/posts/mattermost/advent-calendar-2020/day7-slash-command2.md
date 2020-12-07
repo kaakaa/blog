@@ -57,9 +57,8 @@ func main() {
 
 Outgoing WebHookの時とほぼ同じですが、`(1)` でトークンを利用したリクエストの検証を行い、`(2)` でSlash Commandのレスポンスとして投稿を作成しています。レスポンスヘッダーへの`Content-Type: application/json`の設定は必須です。`text`フィールドに指定したメッセージがMattermostに投稿されます。
 
-このサーバに対してSlash Commandを送信した時の画面が下記になります。
+このサーバに対して`/サンプルコマンド TEST`というSlash Commandを送信した時の画面が下記になります。
 
-![execute](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day7/trigger-slash-command.png)
 
 ![response](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day7/response-slash-command.png)
 
@@ -129,7 +128,7 @@ io.WriteString(w, `{
 }`)
 ```
 
-![movie](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day7/example-goto-location.gif) <- .mov to .gif 必要　ffmepg
+![movie](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day7/example-goto-location.gif)
 
 `goto_location`には`https`だけでなく、`ssh`や`mailto`のプロトコルも使用できるため、例えばスラッシュコマンドを実行した場合に「メーラーでメール作成画面を開く」というような動作をさせることも可能です。
 
