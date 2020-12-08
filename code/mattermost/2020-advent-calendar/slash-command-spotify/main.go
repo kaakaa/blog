@@ -12,8 +12,8 @@ import (
 
 const (
 	MattermostToken     = "arzoyh4i57dw5x57yumenuktqw"
-	SpotifyClientID     = "7055f386f99a458bbc94da5ac9f794c1"
-	SpotifyClientSecret = "0da8fbc0900f43e5855b3fadd1cb4256"
+	SpotifyClientID     = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+	SpotifyClientSecret = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
 )
 
 func main() {
