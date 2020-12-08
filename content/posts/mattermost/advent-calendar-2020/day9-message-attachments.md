@@ -222,7 +222,6 @@ curl \
 
 * `title`: `attachments`の上部に表示されるタイトルを指定します
 * `title_link`: `attachments`の上部に表示されるタイトルをクリックしたときのリンクを指定します
-* `author_icon`: `attachments`の上部に表示される作成者のアイコン画像のURLを指定します
 
 Author Detailsと同時に指定した場合は、下記のような見た目になります。
 
