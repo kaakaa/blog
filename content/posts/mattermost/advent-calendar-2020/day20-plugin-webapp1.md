@@ -615,7 +615,7 @@ export default CustomCardComponent;
 
 `registerPostWillRenderEmbedComponent`は、投稿内で最初に出現するURLの内容をプレビュー表示する部分のコンポーネントを登録します。OpenGraphの情報を表示するアレです。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-will-render-embed.png) 
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-will-render-embed-sample.png) 
 
 `registerPostWillRenderEmbedComponent`は3つの引数を取ります。
 * `match`: ここで指定したコンポーネントでプレビュー要素をレンダリングするかどうかを決定するための関数。プレビュー表示対象のURLや種別を使い、`true`を返すとここで指定したコンポーネントを使用する。
@@ -629,6 +629,8 @@ export default CustomCardComponent;
   * `data`: `url`から取得できるプレビュー内容に関する情報が格納されるらしいが、試している中では値が取得できなかった
 
 `https://github.com/mattermost`で始まるURLが指定された場合に、青い背景色のプレビューをレンダリングする例を以下に示します。
+
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-will-render-embed.png) 
 
 ```js:index.js
 ...
