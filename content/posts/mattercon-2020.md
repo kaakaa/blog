@@ -55,7 +55,7 @@ Mattermostはフルリモートの会社のため、12ヶ月ごとに一同に�
 ### 参加経緯
 私は現在、Mattermost公式のコミュニティメンバとしてMattermostの日本語化[^about-partition-translation-maintainer]、Twitter Mattermost日本語アカウント([@mattermost_jp](https://twitter.com/mattermost_jp))の管理などを行っています。また他にも、Mattermost関連の記事投稿(blog[^about-partition-blog], Qiita[^about-partition-qiita])やHelp Wantedなどの軽微なIssueの解決などを行っています。もう2年も前の話ですがMattermost v4.6がリリースされた際にはMVP[^about-partition-mvp]にも選出していただきました。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mvp.jpeg" alt="MVP" height="640px">}}
+{{<figure src="/images/posts/mattercon-2020/mvp.jpeg" alt="MVP" height="640px">}}
 
 Mattermostへの貢献を始めたきっかけは、2016年ごろに職場でMattermostを使い始めたことに起因します。
 その頃、ChatOpsが流行りはじめていたということもあり、オンプレミスで運用できるようなOSSのチャットツールを探していました。Mattermostを使い始める前にも[Kandan](https://github.com/kandanapp/kandan)や[Let's Chat](https://github.com/sdelements/lets-chat)などのOSSのチャットツールを試していたのですが、それぞれ他システムとの連携機能が不十分であったり、開発が活発でなかったりと問題が見えていました。そんな中、会社の同期が見つけてきたMattermostは、当時(`v3.4`ぐらい？)から機能も豊富で開発も非常に活発であり、とても魅力的なソフトウェア/プロジェクトでした。Matterostでいろいろ遊んでいるうちに小さな翻訳ミスを見つけ、元々OSSへの貢献に興味があった私は公式ドキュメントで貢献の仕方を調べ、翻訳の修正を送ったことがMattermostへの貢献の始まりでした。
@@ -124,11 +124,11 @@ DFW - NAS のフライトの途中、バハマの入国カードが配られた�
 
 ホテルまではバスで10分ほど。バスから見える風景は、道路脇に椰子の木🌴が並ぶまさに南国リゾートのそれでした。(写真看板奥の建物は別のホテル)
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day0-bahamas.jpeg" alt="bahamas" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day0-bahamas.jpeg" alt="bahamas" height="480px">}}
 
 17:00ごろにホテルに到着してそのままチェックイン。受付の人も適度にフレンドリーで好印象。特に問題なくチェックインを済ませ、ロビーでBuddyのMiguelを探すとGitHubのアイコン通りの見た目だったのですぐに見つかり挨拶。ちなみにホテルのロビーはこんな感じでした。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day0-lobby.jpeg" alt="lobby" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day0-lobby.jpeg" alt="lobby" height="480px">}}
 
 Miguelがホテル内を案内してくれるとのことなので、簡単に歩き回りながら案内してもらいました。案内してもらってる間、Miguelの持っているアタリのバッグばかりが目に入る...。聞いてみるとVideoゲームが好きとのこと（その後、日本のアニメ・漫画の知識も豊富であることが判明）。
 
@@ -138,7 +138,7 @@ Miguelがホテル内を案内してくれるとのことなので、簡単に�
 
 部屋に戻ってから、部屋の外を見ると疑いようもないリゾート感。パシャリ。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day0-hotel.jpeg" alt="day0-hotel" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day0-hotel.jpeg" alt="day0-hotel" height="480px">}}
 
 Dinnerでは会えなかったけど、別テーブルで楽しんでたことをMiguelに連絡。
 
@@ -155,7 +155,7 @@ Greetingの前に会場前でノベルティを配っていたので、Tシャ�
 
 Greeting会場は、会議室らしく机と椅子が並べられている部屋。Mattermost社の人たちは数日前からプライベートなカンファレンスを行ってたらしいが、この日からコミュニティメンバーも参加するということで改めてCEO/CTOから挨拶。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-greeting.jpeg" alt="day1-greeting" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day1-greeting.jpeg" alt="day1-greeting" height="480px">}}
 
 #### Unconference
 
@@ -164,7 +164,7 @@ Greeting会場は、会議室らしく机と椅子が並べられている部屋
 #### Group Photo
 ランチの前にMatterCon2020用の黄色いTシャツを着てグループフォト撮影。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-tshirts.jpeg" alt="MatterCon2020 T-shirt" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day1-tshirts.jpeg" alt="MatterCon2020 T-shirt" height="480px">}}
 
 #### Lunch
 Unconference後はランチ。自分と同じ日本人コントリビュータの [@maruTA-bis5](https://github.com/maruTA-bis5)とご一緒させてもらう。
@@ -186,16 +186,16 @@ Unconference後はランチ。自分と同じ日本人コントリビュータ�
 指定された時間にロビーへ行くと、朝食で一緒だった[@liusy182](https://github.com/liusy182)がいたので一緒に行動。
 まずはシャーロット砦[^mattercon-day1-charlotte]へ。シャーロット砦には説明員の方がおり、その方に砦の中を案内してもらう。説明員の方が一々オーバーリアクションで面白かった。シャーロット砦自体はそんなに広くないので、2,30分ぐらいで一通り案内も終え、最後は屋上を散策しながら写真を撮ってバスへ。高台に建てられてる建物といこともあり眺めがとても良かった。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-activities1.jpeg" alt="charlotte" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day1-activities1.jpeg" alt="charlotte" height="480px">}}
 
 次はナッソー市街へ。市街をバスで走った後、ラムケーキ屋[^mattercon-day1-rumcake]さんで停車。バハマではラムケーキが有名らしい。中に入って試食。甘さとアルコール感が強め。さぁ、ここから自由時間...と思ったら、ナッソー市街で停車するのはココだけらしい。バスで回るだけだったのね...お土産どうしよ。そう言ってても始まらないのでバスに乗ってまた移動。写真はナッソー市街にあるParliament Squareの銅像。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-activities3.jpeg" alt="city" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day1-activities3.jpeg" alt="city" height="480px">}}
 
 海岸線を20分ほど走った後、海岸に到着。綺麗な景色。ブラブラ歩いて写真を撮る。一通り歩き回って出発待ってると、Microsoftから数ヶ月前にMattermostにジョインしたという方が話しかけてくれたので少し会話。
 そしてそのままバスに乗ってホテル着。
 ナッソー市街歩けなかったのは残念だけど、色んな景色を見れたので満足でした。
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day1-activities4.jpeg" alt="sea" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day1-activities4.jpeg" alt="sea" height="480px">}}
 
 [^mattercon-day1-nri]: https://www.sbbit.jp/eventinfo/52965/
 [^mattercon-day1-charlotte]: https://www.bahamas.com/vendor/fort-charlotte
@@ -223,7 +223,7 @@ Partner Sessionの後は午前のHungoutで話をした問題について解決�
 ランチの後は会議室でライトニングトーク。
 参加者は開発者だけではないので、ライトニングトークの内容はツール/フレームワークの話から営業向けサービス、コミュニティに対する想いなど様々でした。途中、Zoomで発表しているコミュニティの方がおり、そのセッションは非常に盛り上がっていました。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day2-lt.jpeg" alt="day2-lighningtalks" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day2-lt.jpeg" alt="day2-lighningtalks" height="480px">}}
 
 | Topic | Presenter | Notes |
 |:------|:----------|:------|
@@ -253,11 +253,11 @@ Partner Sessionの後は午前のHungoutで話をした問題について解決�
 CEO/CTOなどから挨拶があり、貢献してくれた方々にプレゼントがあるということで名前を呼ばれ取りに行く。
 貰ったのは、PatagoniaのダウンやTシャツ、ステッカー、ボールペンなどのSwagでした。Patagoniaのダウンをプレゼントできるとは強いな...。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day2-swag.jpeg" alt="swag" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day2-swag.jpeg" alt="swag" height="480px">}}
 
 ビュッフェスタイルで食事を取り、食べ、飲み、眠くなったので就寝。夜のビーチは風も強くて少し肌寒く、貰ったPatagoniaのダウンを早速着たり、会場にあった焚き火の周りにどんどん人が集まっていました。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-day2-dinner.jpeg" alt="day2-dinner" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-day2-dinner.jpeg" alt="day2-dinner" height="480px">}}
 
 [^mattercon-day2-cjk]: https://github.com/mattermost/mattermost-server/pull/4555
 [^mattercon-day2-foldedreply]: https://mattermost.uservoice.com/forums/306457-general/suggestions/19572469-make-threads-collapsible
@@ -290,7 +290,7 @@ DFWでは乗り継ぎに14時間空くのでBaggage Claimで荷物を受け取�
 
 ロケーションについては、リゾート地らしく基本的にはTシャツ一枚で過ごせる気候で過ごしやすかったです（雨が降ったあとなどは肌寒かったりもしましたが）。現地の人々もリゾート地らしく陽気な方々が多く、ホテルの近くを移動するだけならば治安的な心配は全くありませんでした。また、会場である [Melia Nassau Beach](https://www.melia.com/en/hotels/bahamas/nassau/melia-nassau-beach/index.htm) は All Inclusive ということで、ホテル内の飲食が自由であるためにホテル外に出る必要がなかったのも治安が良いと感じる一因かと思います。後、当然ですがホテルのビーチは非常に綺麗でした。
 
-{{<figure src="/blog/images/posts/mattercon-2020/mattercon-beach.jpeg" alt="Beach" height="480px">}}
+{{<figure src="/images/posts/mattercon-2020/mattercon-beach.jpeg" alt="Beach" height="480px">}}
 
 また来年も招待していただけるよう、時間を見つけて貢献を積み重ねていければと思います。
 
