@@ -6,7 +6,11 @@ toc: true
 tags: ["mattermost", "integration", "plugin", "matterpoll"]
 ---
 
-## はじめに
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
+## 本記事について
+
+[Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第22日目の記事です。
 
 以前から開発に参加している[Matterpoll](https://github.com/matterpoll/matterpoll)がMattermost公式のPlugin MarketplaceでCommunity Pluginとして公開されました。
 
