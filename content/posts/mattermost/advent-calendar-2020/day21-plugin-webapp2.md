@@ -1,5 +1,5 @@
 ---
-title: "[Mattermost Integrations] Plugin (Webapp)"
+title: "[Mattermost Integrations] Plugin (Webapp 2)"
 date: 2020-12-21T00:00:00+09:00
 draft: false
 toc: true
