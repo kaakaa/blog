@@ -69,7 +69,7 @@ NRI主催のイベントでMattermost社の人が来日した時に個別に合�
 
 ### MatterCon 2020 in Bahama
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day13/swag-mattercon.jpg)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day13/swag-mattercon.jpeg)
 
 [MatterCon 2020 highlights the power of a remote community](https://mattermost.com/blog/mattercon-2020-highlights-the-power-of-a-remote-community/)
 
