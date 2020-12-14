@@ -62,7 +62,7 @@ curl \
 
 上記のリクエストを実行すると、下記のようなボタンを含む投稿が作成されます。
 
-![first example](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day12/first-example.png)
+![first example](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day14/example-button.png)
 
 リクエスト内容と見ると、`actions`フィールドに含まれる下記の一つのオブジェクトが一つのボタンに関連していることが分かります。
 
