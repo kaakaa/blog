@@ -124,7 +124,7 @@ func (p *MatterpollPlugin) OnDeactivate() error {
 Plugin専用の設定が変更された際に実行されます。
 Mattermost Pluginの[Manifestファイル](https://developers.mattermost.com/extend/plugins/manifest-reference/)に`settings`を記述することで、Plugin専用の設定画面を持つことができます。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/configuration-page.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/configuration-page.png)
 
 `OnConfigurationChange`周りの処理は下記のStarterテンプレートのコードを流用すると良いです。
 https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go
@@ -187,7 +187,7 @@ func (p *SamplePlugin) ExecuteCommand(c *plugin.Context, args *model.CommandArgs
 `UserHasBeenCreated`は、ユーザーが新規に作成された場合に実行されます。
 新しく参加したユーザーにBotからメッセージを送る場合などに使用できます。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-been-created.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-been-created.png)
 
 ```go
 func (p *SamplePlugin) UserHasBeenCreated(c *plugin.Context, user *model.User) {
@@ -225,7 +225,7 @@ unc (p *SamplePlugin) UserWillLogIn(c *plugin.Context, user *model.User) string 
 
 前回ログアウト(オフライン)してから、7日以上経過していた場合にBotからメッセージを送信する場合などに利用できます。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-loggedIn.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-loggedIn.png)
 
 ```go
 func (p *SamplePlugin) UserHasLoggedIn(c *plugin.Context, user *model.User) {
@@ -266,9 +266,9 @@ func (p *SamplePlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) 
 }
 ```
 
-このHookによって投稿が拒否された場合、ユーザーからはその拒否理由が見えないようなので、拒否基準を明文化したり、拒否理由をBotから通知するなどの対応が必要そうです。
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-will-be-posted.png)
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-will-be-posted.png)
+このHookによって投稿が拒否された場合、ユーザーからはその拒否理由が見えないようなので、拒否基準を明文化したり、拒否理由をBotから通知するなどの対応が必要そうです。
 
 ### MessageWillBeUpdated 
 `MessageWillBeUpdated`は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存される直前に実行される処理です。
@@ -287,6 +287,8 @@ func (p *SamplePlugin) MessageWillBeUpdated(c *plugin.Context, newPost, oldPost 
 特定のキーワードを含むメッセージが作成された場合に、特定のチャンネルに通知するようなコードは下記のようになります。
 Botが作成した投稿もこのHookで処理されるため、考慮が漏れると処理が無限ループしてしまうため注意が必要です。また、非公開チャンネルの投稿なども処理されてしまうため、その点を考慮する必要もあります。
 
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-postedd.png)
+
 ```go
 func (p *SamplePlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post) {
 	postUrl := fmt.Sprintf("http://localhost:8065/_redirect/pl/%s", post.Id)
@@ -300,7 +302,6 @@ func (p *SamplePlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post)
 }
 ```
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-postedd.png)
 
 ### MessageHasBeedUpdated
 `MessageHasBeenUpdated`は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存された直後に実行される処理です。
@@ -317,6 +318,8 @@ func (p *SamplePlugin) MessageHasBeenUpdated(c *plugin.Context, newPost, oldPost
 `ChannelHasBeenCreated`は、チャンネルが作成された直後に実行されます。
 
 チャンネルが作成されたことを`town-square`チャンネルに通知するコードは下記のようになります。このHookについても、非公開チャンネルが作成された場合の考慮が必要になります。
+
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/channel-has-been-created.png)
 
 ```go
 func (p *SamplePlugin) ChannelHasBeenCreated(c *plugin.Context, channel *model.Channel) {
@@ -346,7 +349,6 @@ func (p *SamplePlugin) ChannelHasBeenCreated(c *plugin.Context, channel *model.C
 }
 ```
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/channel-has-been-created.png)
 
 ### UserHasJoinedChannel
 `UserHasJoinedChannel`は、ユーザーがチャンネルに参加した直後に実行されます。第３引数の`actor`は、他のユーザーがユーザーをチャンネルに追加した場合など、ユーザーをチャンネルに追加する処理を実行した人の情報が入ります。
@@ -367,7 +369,7 @@ func (p *SamplePlugin) UserHasJoinedChannel(c *plugin.Context, channelMember *mo
 }
 ```
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-joined-channel.pngh)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-joined-channel.pngh)
 
 ### UserHasLeftChannel
 `UserHasLeftChannel`は、ユーザーがチャンネルから脱退した直後に実行されます。
@@ -403,14 +405,12 @@ func (p *SamplePlugin) UserHasLeftTeam(c *plugin.Context, teamMember *model.Team
 ### FileWillBeUploaded
 `FileWillBeUploaded`は、メッセージ入力欄にファイルが添付された時に実行されます。ユーザーが投稿作成を実行する前にファイルが変換されます。
 
-![]()
-
 添付されたファイルの情報は第2引数の[`*model.FileInfo`](https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#FileInfo)から、ファイルの内容は第3引数の`io.Reader`から取得できます。添付ファイルに変更を加えた場合は、第4引数の`io.Writer`に書き込みます。
 また、ファイルの添付を拒否する場合は、2つ目の返却値に空でない文字列を指定します。1つ目の返却値の`*model.FileInfo`には内容を編集した後の`*model.FileInfo`を指定します。もしファイルを編集した場合、編集後のファイルサイズについては自動で更新されるため、`FileWillBeUploaded`内で計算する必要はありません。
 
 画像にフィルタをかける例は下記のようになります。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/file-will-be-uploaded.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/file-will-be-uploaded.png)
 
 ```go
 func (p *SamplePlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInfo, file io.Reader, output io.Writer) (*model.FileInfo, string) {
