@@ -124,7 +124,7 @@ func (p *MatterpollPlugin) OnDeactivate() error {
 Plugin専用の設定が変更された際に実行されます。
 Mattermost Pluginの[Manifestファイル](https://developers.mattermost.com/extend/plugins/manifest-reference/)に`settings`を記述することで、Plugin専用の設定画面を持つことができます。
 
-![]()
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/configuration-page.png)
 
 `OnConfigurationChange`周りの処理は下記のStarterテンプレートのコードを流用すると良いです。
 https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go
@@ -268,7 +268,7 @@ func (p *SamplePlugin) MessageWillBePosted(c *plugin.Context, post *model.Post) 
 
 このHookによって投稿が拒否された場合、ユーザーからはその拒否理由が見えないようなので、拒否基準を明文化したり、拒否理由をBotから通知するなどの対応が必要そうです。
 
-![]((https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-will-be-posted.png)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-will-be-posted.png)
 
 ### MessageWillBeUpdated 
 `MessageWillBeUpdated`は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存される直前に実行される処理です。
@@ -300,7 +300,7 @@ func (p *SamplePlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post)
 }
 ```
 
-![]((https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-postedd.png)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-postedd.png)
 
 ### MessageHasBeedUpdated
 `MessageHasBeenUpdated`は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存された直後に実行される処理です。
