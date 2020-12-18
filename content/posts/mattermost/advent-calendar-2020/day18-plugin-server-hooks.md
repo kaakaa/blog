@@ -225,7 +225,7 @@ unc (p *SamplePlugin) UserWillLogIn(c *plugin.Context, user *model.User) string 
 
 前回ログアウト(オフライン)してから、7日以上経過していた場合にBotからメッセージを送信する場合などに利用できます。
 
-![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-loggedIn.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-logged-in.png)
 
 ```go
 func (p *SamplePlugin) UserHasLoggedIn(c *plugin.Context, user *model.User) {
@@ -287,7 +287,7 @@ func (p *SamplePlugin) MessageWillBeUpdated(c *plugin.Context, newPost, oldPost 
 特定のキーワードを含むメッセージが作成された場合に、特定のチャンネルに通知するようなコードは下記のようになります。
 Botが作成した投稿もこのHookで処理されるため、考慮が漏れると処理が無限ループしてしまうため注意が必要です。また、非公開チャンネルの投稿なども処理されてしまうため、その点を考慮する必要もあります。
 
-![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-postedd.png)
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-posted.png)
 
 ```go
 func (p *SamplePlugin) MessageHasBeenPosted(c *plugin.Context, post *model.Post) {
@@ -355,6 +355,8 @@ func (p *SamplePlugin) ChannelHasBeenCreated(c *plugin.Context, channel *model.C
 
 チャンネルに新しく参加したユーザーに読んで欲しいリンクなどを通知する場合に利用できます。
 
+![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-joined-channel.png)
+
 
 ```go
 func (p *SamplePlugin) UserHasJoinedChannel(c *plugin.Context, channelMember *model.ChannelMember, actor *model.User) {
@@ -369,7 +371,6 @@ func (p *SamplePlugin) UserHasJoinedChannel(c *plugin.Context, channelMember *mo
 }
 ```
 
-![IMAGE](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-joined-channel.pngh)
 
 ### UserHasLeftChannel
 `UserHasLeftChannel`は、ユーザーがチャンネルから脱退した直後に実行されます。
@@ -446,4 +447,4 @@ func (p *SamplePlugin) FileWillBeUploaded(c *plugin.Context, info *model.FileInf
 ## さいごに
 
 本日は、Mattermost PluginのServer Hooksについて紹介しました。
-明日からは、Mattermost Pluginの**Webapp**サイドの実装について紹介します。
+明日も、Mattermost Pluginの**Server**サイドで使用できるAPIとHelper関数について紹介します。

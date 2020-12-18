@@ -106,6 +106,7 @@ func (p *SamplePlugin) ServeHTTP(c *plugin.Context, w http.ResponseWriter, r *ht
 `PublishWebSocketEvent`は、プラグイン独自のWebSoketイベントを送信するAPIです。
 
 `PublishWebSocketEvent`は、3つの引数を取ります。
+
 * `event string`: WebSocketイベント名を指定します。実際に送信されるWebSocketイベントには接頭辞として`custom_<PluginID>_`が付与されます
 * `payload map[string]interface{}`: 送信されるデータの内容を指定します
 * `broadcast *model.WebsocketBroadcast`: WebSocketを送信する対象を指定します
