@@ -62,13 +62,13 @@ https://docs.mattermost.com/administration/devops-command-center.html
 
 Mattermostのチャンネルヘッダーボタンから、Microsoft Teamsの会議を作成し、会議へ参加するためのボタンを含む投稿をMattermostチャンネルに作成するプラグインのようです。こちらは有償版Mattermost限定の昨日のようです。
 
-![公式ブログから]()
+![公式ブログから](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/ms-teams-plugin.webp)
 （※画像は[公式ブログ](https://mattermost.com/blog/mattermost-release-v5-30/)から）
 
 ## (E20) 新たに追加された管理者ロールの権限が設定可能に
 Mattermos v5.28で、システム管理者の一部の権限のみを持つ`System Manager`、`User Manager`、`Read-only Admin`という役割が新たに追加されましたが、今回のv5.30から、これらの役割の権限を任意に設定できるようになりました。
 
-![公式ブログから]()
+![公式ブログから](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/admin-roles.webp)
 （※画像は[公式ブログ](https://mattermost.com/blog/mattermost-release-v5-30/)から）
 
 ## その他のトピック
