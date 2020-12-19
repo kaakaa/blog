@@ -12,7 +12,7 @@ Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 [Mattermostの統合機能アドベントカレンダー](https://qiita.com/advent-calendar/2020/mattermost-integrations)の第25日目の記事です。
 
-最終日の記事は、これまでの記事執筆にあたって見つけた問題を修正した記録について紹介します。と言っても、簡単なドキュメントの修正が主ですが。（昨日までのMattermost Pluginの記事が重かったため力尽きました...。）
+最終日の記事は、これまでの記事執筆にあたって見つけた問題を修正した記録について紹介します。と言っても、簡単なドキュメントの修正が主です。（昨日までのMattermost Pluginの記事が重かったため力尽きました...。）
 
 ## Mattermostへのコントリビュート
 
@@ -36,12 +36,12 @@ https://mattermost.com/contribute/
 
 Incoming WebHook作成時のコピーアイコンに設定されているTooltipテキストに誤った値が設定されていたのを修正しました。
 
-## ドキュメントのパラメータ型誤りの修正
+### ドキュメントのパラメータ型誤りの修正
 [Fix incorrect type of \`notify\_on\_cancel\` by kaakaa · Pull Request \#4193 · mattermost/docs](https://github.com/mattermost/docs/pull/4193)
 
 これもドキュメントの修正で、パラメータの型が誤っていたのを修正（併せて簡単なインデントの修正も）。
 
-## デッドリンクの修正
+### デッドリンクの修正
 [fix invalid link for js websocket client by kaakaa · Pull Request \#596 · mattermost/mattermost\-api\-reference](https://github.com/mattermost/mattermost-api-reference/pull/596)
 
 APIドキュメントのJavaScript WebSocket Clientへのリンクが404だったので修正。
