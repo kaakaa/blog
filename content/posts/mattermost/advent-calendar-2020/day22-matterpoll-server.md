@@ -22,7 +22,7 @@ Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 MatterpollはMattermost上で投票を行うことができるPluginであり、Mattermost社の開発者である Hanzei と私を中心に開発が進められています。
 
-![screenshot of MatterPoll]()
+![screenshot of MatterPoll](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.png)
 
 以前よりMattermostに投票機能を付けるという提案は[MattermostのFeature Request Forumでも票数を集めて](https://mattermost.uservoice.com/forums/306457-general/suggestions/11721996-polls-like-doodle-or-for-decision-making)いたため、以前は絵文字で投票を促すような統合機能を開発していました。
 
