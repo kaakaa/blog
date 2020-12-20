@@ -56,14 +56,15 @@ window.registerPlugin('myplugin', new PluginClass());
 
 ## Webapp Plugin API
 
-### registerRootComponent
+### [registerRootComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerRootComponent)
 `registerRootComponent`は、画面全体に表示されるモーダルのReact Componentを登録するAPIです。Componentが登録されると、Componentを一意に識別するためのIDが返却されます。
 
 ここで登録したRoot Componentは、登録するだけで表示されるわけではなく、別のアクションから起動されることで表示されます。
 
 登録されたComponentで使用できるpropsは特にありません。[channel_controller.jsx](https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/channel_layout/channel_controller.jsx#L86)
 
-今回は、チャンネルのヘッダー部分にボタンを追加する`registerChannelHeaderButtonAction` APIを使ってRoot Componentを表示する例を以下に示します。全てのプログラムを記述すると非常に長くなってしまうため、Reduxによるデータのやりとりなど部分については本記事では割愛します。プログラム全体について知りたい場合は、https://github.com/kaakaa/mattermost-plugin-api-sampleを参照してください。また、　[mattermost-plugin-demo](https://github.com/mattermost/mattermost-plugin-demo/tree/master/webapp)も参考になります。
+今回は、チャンネルのヘッダー部分にボタンを追加する`registerChannelHeaderButtonAction` APIを使ってRoot Componentを表示する例を以下に示します。全てのプログラムを記述すると非常に長くなってしまうため、Reduxによるデータのやりとりなど部分については本記事では割愛します。プログラム全体について知りたい場合は、[kaakaa/mattermost-plugin-api-sample](https://github.com/kaakaa/mattermost-plugin-api-sampleを参照してください。)
+また、Mattermost公式チームにより作成されているデモ用プラグイン[mattermost-plugin-demo](https://github.com/mattermost/mattermost-plugin-demo/tree/master/webapp)の実装も参考になります。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/root-component.gif)
 
@@ -153,7 +154,7 @@ export default Root;
 Root ComponentはReact Componentのため、様々な要素を表示することができますが、基本的には通知のために利用し、ユーザーに入力を促すようなユースケースの場合は[`Interactive Dialog`](https://docs.mattermost.com/developer/interactive-dialogs.html)を使用すべきだと思います。
 
 
-### registerPopoverUserAttributesComponent
+### [registerPopoverUserAttributesComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserAttributesComponent)
 
 `registerPopoverUserAttributesComponent`は、ユーザーアイコンをクリックすると表示されるpopover内に表示されるComponentを登録します。
 
@@ -212,7 +213,7 @@ export default UserAttributes;
 ```
 
 
-### registerPopoverUserActionsComponent
+### [registerPopoverUserActionsComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserActionsComponent)
 
 `registerPopoverUserActionsComponent`は、ユーザーアイコンをクリックすると表示されるpopover内に表示されるComponentを登録します。`registerPopoverUserAttributesComponent`と似ていますが、表示される位置が異なるだけの違いだと思います。
 
@@ -224,7 +225,7 @@ export default UserAttributes;
 
 `registerPopoverUserActionsComponent`で、RootComponentを表示する例は以下のようになります。（処理を一部割愛しているため、プログラム全体は https://github.com/kaakaa/mattermost-plugin-api-sample から確認してください）
 
-![])(https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/user-action.gif)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/user-action.gif)
 
 ```js:index.js
 ...
@@ -267,7 +268,7 @@ UserActionComponent.PropTypes = {
 export default UserActionComponent;
 ```
 
-### registerLeftSidebarHeaderComponent
+### [registerLeftSidebarHeaderComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLeftSidebarHeaderComponent)
 
 `registerLeftSidebarHeaderComponent`は、Mattermost画面の左サイドバーに表示するComponentを登録します。
 
@@ -310,7 +311,7 @@ export default LeftSidebarHeader;
 ```
 
 
-### registerBottomTeamSidebarComponent
+### [registerBottomTeamSidebarComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerBottomTeamSidebarComponent)
 
 `registerBottomTeamSidebarComponent`は、チーム選択サイドバーの下部に表示されるComponentを登録します。１つのチームにしか参加していない場合、チーム選択サイドバー自体が表示されないため、ここで登録したComponentも表示されません。
 
@@ -350,7 +351,7 @@ const BottomTeamSidebarComponent = () => (
 export default BottomTeamSidebarComponent;
 ```
 
-### registerLinkTooltipComponent
+### [registerLinkTooltipComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLinkTooltipComponent)
 
 `registerLinkTooltipComponent`は、リンクをhoverした時に表示されるtooltipのComponentを登録します。
 
@@ -404,16 +405,16 @@ LinkTooltipComponent.propTypes = {
 export default LinkTooltipComponent;
 ```
 
-### registerChannelHeaderButtonAction
+### [registerChannelHeaderButtonAction](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderButtonAction)
 
 `registerChannelHeaderButtonAction`は、`registerRootComponent`のところでも使用しましたが、チャンネルのヘッダ部分にアクション付きのボタンを登録します。
 
 `registerChannelHeaderButtonAction`は、`(icon, action, dropdownText, tooltipText)`の４つの引数を取ります。
 * `icon`: ボタンのアイコンを表すReact Element
-* `action`: ボタンがクリックされたときのアクションです
+* `action`: ボタンがクリックされたときに実行されるアクション
   * ボタンが押されたチャンネルの情報を持つ[`channel`](https://github.com/mattermost/mattermost-server/blob/master/model/channel.go#L36)と、ボタンを押したユーザーの[`channelMember`](https://github.com/mattermost/mattermost-server/blob/master/model/channel_member.go#L44)を引数に取ることができます
-* `dropdown_text`: ボタンが複数登録されると一つのアイコンにまとめられ、ドロップダウンメニューから選ぶ形式になりますが、その時のドロップダウンメニューに表示される文字列を指定します
-* `tooltip_text`: ボタンをhoverした時にtooltipとして表示される文字列を指定します
+* `dropdown_text`: ボタンが複数登録されると一つのアイコンにまとめられ、ドロップダウンメニューから選ぶ形式になりますが、その時のドロップダウンメニューに表示される文字列
+* `tooltip_text`: ボタンをhoverした時にtooltipとして表示される文字列
 
 **ボタン形式**
 
@@ -481,7 +482,7 @@ export function createPluginPost(channelId) {
 }
 ```
 
-### registerPostTypeComponent
+### [registerPostTypeComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)
 
 `registerPostTypeComponent`は、特定のtypeを持つ投稿をレンダリングする時に使用されるComponentを登録します。投稿（`Post`）に独自のtypeを指定する場合、そのtypeは`custom_`で始まる必要があります。
 
@@ -489,7 +490,7 @@ export function createPluginPost(channelId) {
 * `post`: 投稿の内容 [post.go](https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72)
 * `theme`: Mattermost画面の配色テーマ [constants.jsx](https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047)
 
-typeに`custom_sample_post`を持つ投稿が作成された場合、背景色が赤の投稿をレンダリングする例を以下に示します。特定のtypeを持つ投稿を作成する方法はいろいろありますが、Incoming Webhookを使って下記のコマンドを実行することでも作成可能です。
+typeに`custom_sample_post`を持つ投稿が作成された場合、背景色が赤の投稿をレンダリングする例を以下に示します。今回は、Incoming Webhookで投稿を作成する際のパラメータとして`custom_sample_post`の独自typeを指定しています。
 
 ```bash
 curl \
@@ -545,7 +546,7 @@ export default CustomPostComponent;
 
 独自のtypeを指定した投稿を作成した後にPluginを無効にするなど、typeに対応したComponentが登録されていない場合は、通常の投稿と同じようにレンダリングされます。
 
-### registerPostCardTypeComponent
+### [registerPostCardTypeComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostCardTypeComponent)
 
 `registerPostCardTypeComponent`は、特定のtypeを持つ投稿の`card`要素をレンダリングする時に使用されるComponentを登録します。投稿（`Post`）に独自のtypeを指定する場合、そのtypeは`custom_`で始まる必要があります。
 
@@ -553,7 +554,7 @@ export default CustomPostComponent;
 * `post`: 投稿の内容 [post.go](https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72)
 * `theme`: Mattermost画面の配色テーマ [constants.jsx](https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047)
 
-typeに`custom_sample_card`を持つ投稿が作成された場合、背景色が青の投稿をレンダリングする例を以下に示します。特定のtypeを持つ投稿を作成する方法はいろいろありますが、Incoming Webhookを使って下記のコマンドを実行することでも作成可能です。
+typeに`custom_sample_card`を持つ投稿が作成された場合、背景色が青のカード要素を持つ投稿をレンダリングする例を以下に示します。`custom_sample_card`という独自typeはIncoming Webhookのパラメータとして指定しています。
 
 ```bash
 curl \
@@ -564,7 +565,7 @@ curl \
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-card-type.png)
 
-作成する投稿に`props.card`がない場合、`card`要素を表示するための`i`ボタンが表示されないため、`props.card`要素を指定する必要があります。
+作成する投稿に`props.card`プロパティがない場合、`card`要素を表示するための`i`ボタンが表示されないためカード要素を表示することができません。必ず`props.card`要素を指定する必要があります。
 
 ```js:index.js
 ...
@@ -611,7 +612,7 @@ export default CustomCardComponent;
 
 独自のtypeを指定した投稿を作成した後にPluginを無効にするなど、typeに対応したComponentが登録されていない場合は、通常の投稿と同じようにレンダリングされます。
 
-### registerPostWillRenderEmbedComponent 
+### [registerPostWillRenderEmbedComponent ](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostWillRenderEmbedComponent )
 
 `registerPostWillRenderEmbedComponent`は、投稿内で最初に出現するURLの内容をプレビュー表示する部分のコンポーネントを登録します。OpenGraphの情報を表示するアレです。
 
@@ -679,10 +680,10 @@ CustomEmbedComponent.propTypes = {
 export default CustomEmbedComponent;
 ```
 
-作りかけですが、以下のブランチにMattermost公式チームの`registerPostWillRenderEmbedComponent`を使用したプラグインの実装が残っています。
+以下のリポジトリの`oEmbed-plugin`ブランチに、Mattermost公式チームによる`registerPostWillRenderEmbedComponent`を使用したプラグインの実装が残っています。（作りかけで止まっているようですが）
 https://github.com/mattermost/mattermost-plugin-oembed/tree/oEmbed-plugin
 
-### registerMainMenuAction
+### [registerMainMenuAction](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMainMenuAction)
 
 `registerMainMenuAction`は、Mattermostのメインメニュー部分に独自のメニューを追加します。
 
@@ -691,7 +692,7 @@ https://github.com/mattermost/mattermost-plugin-oembed/tree/oEmbed-plugin
 * `action`: メインメニューが選択された際に実行されるアクションを登録します
 * `mobileIcon`: モバイルアプリで表示されるアイコンを登録します（が、モバイルアプリだとメインメニュー表示されない...?）
 
-モーダルを開くアクションを実行するメインメニューを追加する例を以下に示します。
+モーダルを開くアクションが登録されたメインメニューを追加する例を以下に示します。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/main-menu.gif)
 
@@ -713,15 +714,15 @@ export default class Plugin {
 ...
 ```
 
-### registerChannelHeaderMenuAction
+### [registerChannelHeaderMenuAction](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderMenuAction)
 
 `registerChannelHeaderMenuAction`は、チャンネル名の部分をクリックした時に表示されるメニューに独自のメニューを追加します。
 
 `registerPostWillRenderEmbedComponent`は2つの引数を取ります。
-* `text`: メニューに表示される文字列かReact Elementを指定します
-* `action`: メニューが選択された際に実行されるアクションを登録します。実行されたチャンネルのチャンネルIDが渡されます。
+* `text`: メニューに表示される文字列かReact Element
+* `action`: メニューが選択された際に実行されるアクション。実行されたチャンネルのチャンネルIDが渡されます。
 
-モーダルを開くアクションを実行するチャンネルヘッダーメニューを追加する例を以下に示します。
+モーダルを開くアクションが登録されたチャンネルヘッダーメニューを追加する例を以下に示します。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/channel-header-menu-action.gif)
 
@@ -741,16 +742,16 @@ export default class Plugin {
 ...
 ```
 
-### registerPostDropdownMenuAction
+### [registerPostDropdownMenuAction](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuAction)
 `registerPostDropdownMenuAction`は、投稿に対するドロップダウンメニューに独自のメニューを追加します。
 
 `registerPostDropdownMenuAction`は3つの引数を取ります。
 
-* `text`: メニューに表示される文字列かReact Elementを指定します
-* `action`: メニューが選択された際に実行されるアクションを登録します。実行された投稿のPostIDが渡されます。
-* `filter`: メニューを表示するかどうかを決定する関数を登録します。実行された投稿のPostIDが渡されます。
+* `text`: メニューに表示される文字列かReact Element
+* `action`: メニューが選択された際に実行されるアクション。メニューが実行された投稿のPostIDが渡されます。
+* `filter`: メニューを表示するかどうかを決定する関数。実行された投稿のPostIDが渡されます。
 
-モーダルを開くアクションを実行するドロップダウンメニューを追加する例を以下に示します。
+モーダルを開くアクションが登録されたドロップダウンメニューを追加する例を以下に示します。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-menu-action.gif)
 
@@ -771,23 +772,23 @@ export default class Plugin {
 ...
 ```
 
-### registerPostDropdownSubMenuAction
+### [registerPostDropdownSubMenuAction](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownSubMenuAction)
 `registerPostDropdownSubMenuAction`は、投稿に対するドロップダウンメニューにサブメニュー付きの独自のメニューを追加します。
 
 まず、`registerPostDropdownSubMenuAction`は3つの引数を取ります。
 
-* `text`: メニューに表示される文字列かReact Elementを指定します
-* `action`: メニューが選択された際に実行されるアクションを登録します。実行された投稿のPostIDが渡されます。(しかし、クリックしても何も実行されないようです)
-* `filter`: メニューを表示するかどうかを決定する関数を登録します。実行された投稿のPostIDが渡されます。
+* `text`: メニューに表示される文字列かReact Element
+* `action`: メニューが選択された際に実行されるアクション。実行された投稿のPostIDが渡されます。(しかし、クリックしても何も実行されないようです)
+* `filter`: メニューを表示するかどうかを決定する関数。メニューが実行された投稿のPostIDが渡されます。
 
 `registerPostDropdownSubMenuAction`は、返り値として登録したアクションのIDと、サブメニューを登録するための関数を返します。ここで返される関数を使ってサブメニューを登録していきますが、この関数は2つの引数を取ります。
 
-* `text`: メニューに表示される文字列かReact Elementを指定します
-* `action`: メニューが選択された際に実行されるアクションを登録します。実行された投稿のPostIDが渡されます。
+* `text`: メニューに表示される文字列かReact Element
+* `action`: メニューが選択された際に実行されるアクション。メニューが実行された投稿のPostIDが渡されます。
 
 （サブメニューを登録する関数の第3引数として`filter`となる関数を渡しても、特に効果はないようです）
 
-モーダルを開くアクションを実行するドロップダウンサブメニューを追加する例を以下に示します。
+モーダルを開くアクションが登録されたドロップダウンサブメニューを追加する例を以下に示します。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-submenu.gif)
 
@@ -817,7 +818,7 @@ export default class Plugin {
 ```
 
 
-### registerPostDropdownComponent
+### [registerPostDropdownComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownComponent)
 
 `registerPostDropdownComponent`は、投稿に対するドロップダウンメニューに独自のコンポーネントを追加します。
 
@@ -826,7 +827,7 @@ export default class Plugin {
 * `theme`: Mattermost画面の配色テーマ [constants.jsx](https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047)
 * `dispatch`: actionをdispatchするための関数
 
-モーダルを開くアクションを実行するドロップダウンサブメニューを追加する例を以下に示します。
+モーダルを開くアクションが登録されたドロップダウンメニューを追加する例を以下に示します。
 
 ![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-component.gif)
 
@@ -871,14 +872,14 @@ CustomPostDropdownComponent.propTypes = {
 export default CustomPostDropdownComponent;
 ```
 
-### registerFileUploadMethod
+### [registerFileUploadMethod](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFileUploadMethod)
 `registerFileUploadMethod`は、ファイルアップロードメニューに独自のメニューを追加します。
 
 `registerFileUploadMethod`は3つの引数を取ります。(公式ドキュメントは引数の順序が違っているので注意)
 
-* `icon`: メニューに表示されるアイコンをJSXとして指定します
-* `action`: メニューが選択された際に実行されるアクションを登録します。ファイルをアップロードするための関数が渡されます。
-* `text`: メニューに表示されるテキストを指定します
+* `icon`: JSX形式のメニューに表示されるアイコン
+* `action`: メニューが選択された際に実行されるアクション。ファイルをアップロードするための関数が渡されます。
+* `text`: メニューに表示されるテキスト
 
 メニューが選択されると、テキストファイルが2つアップロードされる例を以下に示します。
 
@@ -904,16 +905,17 @@ export default class Plugin {
 ...
 ```
 
-### registerFilesWillUploadHook
+### [registerFilesWillUploadHook](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFilesWillUploadHook)
 
 `registerFilesWillUploadHook`は、ファイルアップロード時に実行される関数を登録できます。
 
 `registerFilesWillUploadHook`は2つの引数を取る関数を引数に取ります。
 
 * `files`: アップロードしようとしているファイルの配列
-* `upload`: ファイルをアップロードするための関数。この関数を使わなくとも返却値として指定することでファイルをアプロードできます
+* `upload`: ファイルをアップロードするための関数
+  * この関数を使わなくとも、アップロードしたいファイルを返却値として指定することでファイルをアップロードできます
 
-返り値としてい以下のフィールドを持つオブジェクトを返却する必要があります。
+返り値として以下のフィールドを持つオブジェクトを返却する必要があります。
 * `message`: 処理結果として画面に表示されるメッセージを指定します
 * `files`: 処理結果としてアップロードするファイルを配列として指定します。`null`を指定するとアップロードをrejectします。
 
@@ -945,7 +947,7 @@ export default class Plugin {
 ...
 ```
 
-### unregisterComponent
+### [unregisterComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterComponent)
 
 `unregisterComponent`は、プラグインとして登録したComponentやHookを登録から除外します。
 
@@ -974,13 +976,13 @@ export default class Plugin {
 ...
 ```
 
-### unregisterPostTypeComponent
+### [unregisterPostTypeComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterPostTypeComponent)
 
 `unregisterPostTypeComponent`は、`unregisterComponent`と同様、独自の`PostType`に対して設定したComponentを登録から除外します。
 
 例は省略します。
 
-### registerReducer
+### [registerReducer](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerReducer)
 
 `registerReducer`は、プラグイン内で使用するReducerを登録します。
 
