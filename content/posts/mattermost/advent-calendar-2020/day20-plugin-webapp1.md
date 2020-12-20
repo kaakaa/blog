@@ -818,9 +818,9 @@ export default class Plugin {
 ```
 
 
-### [registerPostDropdownComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownComponent)
+### [registerPostDropdownMenuComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuComponent)
 
-`registerPostDropdownComponent`は、投稿に対するドロップダウンメニューに独自のコンポーネントを追加します。
+`registerPostDropdownMenuComponent`は、投稿に対するドロップダウンメニューに独自のコンポーネントを追加します。
 
 登録したComponentは以下のpropsを受け取れます。
 * `postId`: アクションが実行された投稿のPostID
