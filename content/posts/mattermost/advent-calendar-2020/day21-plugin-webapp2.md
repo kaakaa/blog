@@ -569,7 +569,7 @@ export default CustomTeamRouteComponent;
 
 Mattermost Plugin Webapp開発中に使えるPlugin開発用の便利機能がいくつかあります。その概要だけ紹介します。
 
-### [Theme](https://developers.mattermost.com/extend/plugins/webapp/reference/#Theme)
+### [Theme](https://developers.mattermost.com/extend/plugins/webapp/reference/#theme)
 Mattermost Plugin APIの中でも何度か出てきましたが、Webapp PluginではMattermostのテーマカラーを参照することができます。Mattermostではユーザーごとにテーマカラーを変更することができるため、Webapp PluginでUIの色を指定する場合は、ユーザーごとに見え方が異なることを考慮に入れる必要があります。
 
 参考: [Mattermostのテーマ集 \- Qiita](https://qiita.com/kaakaa_hoe/items/45c8857589ccd822ab1a)
@@ -578,7 +578,7 @@ Mattermostで扱われるテーマカラー一覧は以下で紹介されてい�
 
 https://developers.mattermost.com/extend/plugins/webapp/reference/#theme
 
-### [Exported Libraries and Functions](https://developers.mattermost.com/extend/plugins/webapp/reference/#Exported Libraries and Functions)
+### [Exported Libraries and Functions](https://developers.mattermost.com/extend/plugins/webapp/reference/#exported-libraries-and-functions)
 
 Mattermost Webapp PluginはReact.jsを使用して開発しますが、React開発によく使われるいくつかのライブラリはMattermost本体から`window`オブジェクトを介して取得できるようになっています。
 取得できるライブラリは以下で紹介されています。
@@ -598,7 +598,7 @@ const formattedText = messageHtmlToComponent(formatText(text));
 
 https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils
 
-### [Redux Action](https://developers.mattermost.com/extend/plugins/webapp/reference/#Redux Action)
+### [Redux Action](https://developers.mattermost.com/extend/plugins/webapp/actions/))
 Webapp上で投稿やユーザー情報の取得などのMattermostに対する何かしらの処理を実行する場合、[mattermost-redux](https://github.com/mattermost/mattermost-redux)というReduxライブラリがあります。これはMattermost本体のWebappでも利用されている公式のJavascript APIのような位置付けのものです。
 
 mattermost-reduxはもちろんMattermost Plugin開発でも使用することができ、下記のページで使い方について紹介されています。
