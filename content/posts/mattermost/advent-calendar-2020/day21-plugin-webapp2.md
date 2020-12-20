@@ -22,12 +22,12 @@ https://github.com/kaakaa/mattermost-plugin-api-sample
 
 ## Webapp Plugin API
 
-### registerWebSocketEventHandler
+### [registerWebSocketEventHandler](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler)
 `registerWebSocketEventHandler`は、Mattermost Serverから送信されるWebSocketイベントを処理するHandlerを登録します。
 
 `registerWebSocketEventHandler`は2つの引数を取ります。
-* `event`: 処理するWebSocketイベントの種別を指定します
-* `handler`: WebSocketイベントのデータを引数に取る関数を指定します。引数のデータはイベントによって異なります。
+* `event`: 処理するWebSocketイベントの種別
+* `handler`: WebSocketイベントのデータを引数に取る関数。引数のデータはイベントによって異なります。
 
 
 Serverプラグインの[PublishWebSocketEvent](https://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent)と組み合わせて使用すると強力ですが、その辺りの例については22日目以降の記事で紹介します。
@@ -58,26 +58,26 @@ export default class Plugin {
 }
 ```
 
-### unregisterWebSocketEventHandler
+### [unregisterWebSocketEventHandler](https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterWebSocketEventHandler)
 `unregisterWebSocketEventHandler`は、`registerWebSocketEventHandler`によってWebSocketイベントに対して設定されたHandlerを登録から除外します。
 
 例は省略します。
 
-### registerReconnectHandler
+### [registerReconnectHandler](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerReconnectHandler)
 
 `registerReconnectHandler`は、一度インターネット接続が失われた後に再びMattermostへ接続した際に実行されるHandlerです。
 
 `registerReconnectHandler`は引数のない関数を引数に取ります。
-* `handler`: Mattermostへ再接続した際に実行される関数を指定します
+* `handler`: Mattermostへ再接続した際に実行される関数
 
 例は省略します。
 
-### unregisterReconnectHandler
+### [unregisterReconnectHandler](https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterReconnectHandler)
 `unregisterReconnectHandler`は、`registerReconnectHandler`で登録したHandlerを登録から除外します。引数は取りません。
 
 こちらも例は省略します。
 
-### registerMessageWillBePostedHook
+### [registerMessageWillBePostedHook](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMessageWillBePostedHook)
 
 `registerMessageWillBePostedHook`は、ユーザーが投稿を送信した際、その投稿がサーバーに送信される前に実行される処理を登録します。
 
@@ -111,7 +111,7 @@ export default class Plugin {
 }
 ```
 
-### registerSlashCommandWillBePostedHook
+### [registerSlashCommandWillBePostedHook](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerSlashCommandWillBePostedHook)
 
 `registerSlashCommandWillBePostedHook`は、ユーザーがSlash Commandを実行した際、その投稿がサーバーに送信される前に実行される処理を登録します。
 
@@ -151,7 +151,7 @@ export default class Plugin {
 }
 ```
 
-### registerMessageWillFormatHook
+### [registerMessageWillFormatHook](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMessageWillFormatHook)
 `registerMessageWillFormatHook`は、投稿したメッセージがMarkdownテキストとして変換される直前に実行される処理を登録します。
 
 `registerMessageWillFormatHook`は、2つの引数を取る関数を引数に取ります。
@@ -165,7 +165,7 @@ export default class Plugin {
 
 良い利用方法が思いつかないので例は省略します。
 
-### registerFilePreviewComponent
+### [registerFilePreviewComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFilePreviewComponent)
 
 `registerFilePreviewComponent`は、ファイルプレビュー用の独自のComponentを登録します。
 
@@ -224,7 +224,7 @@ CustomFilePreviewComponent.propTypes = {
 export default CustomFilePreviewComponent;
 ```
 
-### registerTranslations
+### [registerTranslations](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerTranslations)
 `registerTranslations`は、プラグイン内で使用しているメッセージの翻訳データを登録します。
 
 `registerTranslations`は、`locale`を引数にとり、その`locale`に対する翻訳データを返す関数を引数に取ります。
@@ -317,16 +317,16 @@ const getStyle = () => ({
 export default Root;
 ```
 
-### registerAdminConsolePlugin
+### [registerAdminConsolePlugin](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerAdminConsolePlugin)
 `registerAdminConsolePlugin`は、AdminConsole(システムコンソール?)の内容を上書きするための関数を登録します。
 
 Mattermost内部での利用が主目的であり、ユーザープラグインによる使用は推奨されていないようなので例は省略します。（使い方がよく分からない）
 
-### unregisterAdminConsolePlugin
+### [unregisterAdminConsolePlugin](https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterAdminConsolePlugin)
 `unregisterAdminConsolePlugin`は、`registerAdminConsolePlugin`で登録した　AdminConsole上書き用関数を登録から除外します。
 `registerAdminConsolePlugin`がMattermost内部での利用が主目的のため、こちらも説明、例は省略します。
 
-### registerAdminConsoleCustomSetting
+### [registerAdminConsoleCustomSetting](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerAdminConsoleCustomSetting)
 `registerAdminConsoleCustomSetting`は、プラグイン用の設定画面に独自のコンポーネントを追加します。
 このプラグインAPIについては、公式ドキュメントの[Best Practices](https://developers.mattermost.com/extend/plugins/best-practices/#how-can-a-plugin-define-its-own-setting-type)のページに詳細にまとめられています。
 
@@ -351,9 +351,9 @@ https://developers.mattermost.com/extend/plugins/manifest-reference/
 デフォルトの`type`以外の設定項目を指定したい場合に`registerAdminConsoleCustomSetting`を使用します。
 
 `registerAdminConsoleCustomSetting`は、3つの引数を取ります。
-* `key`: 上書きする設定項目の`key`を指定します。`key`は、マニフェストファイルに設定項目ごとに任意で指定する値です。
-* `component`: 設定画面に表示されるComponentを指定します。
-* `options`: 設定項目の表示方法についてのオプションを指定します
+* `key`: 上書きする設定項目の`key`。`key`は、マニフェストファイルに設定項目ごとに任意で指定する値です。
+* `component`: 設定画面に表示されるComponent。
+* `options`: 設定項目の表示方法についてのオプション
   * `showTitle`: `true`を指定した場合、マニフェストファイルの`display_name`が設定項目の左側に表示されます
 
 パスワードなどを入力する際に、入力項目をUI上に表示しないような設定項目を追加する例を以下に示します。
@@ -430,12 +430,12 @@ export default CustomSettingsComponent;
 ```
 
 
-### registerRightHandSidebarComponent
+### [registerRightHandSidebarComponent](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerRightHandSidebarComponent)
 `registerRightHandSidebarComponent`は、Mattermostの右サイドバーに表示する独自のComponentを登録します。
 
 `registerRightHandSidebarComponent`は、2つの引数を取ります。
-* `component`: 右サイドバーに表示されるComponentを指定します
-* `title`: 右サイドバーのタイトル部分に表示されるテキストを指定します
+* `component`: 右サイドバーに表示されるComponent
+* `title`: 右サイドバーのタイトル部分に表示されるテキスト
 
 また、`registerRightHandSidebarComponent`は4つの引数を返却します。
 * `id`: 登録されたComponentのID
@@ -492,12 +492,12 @@ ComponentRightHandSidebar.propTypes = {
 export default ComponentRightHandSidebar;
 ```
 
-### registerNeedsTeamRoute
+### [registerNeedsTeamRoute](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerNeedsTeamRoute)
 `registerNeedsTeamRoute`は、チームごとにプラグイン専用のRouteを追加します。プラグイン専用のエラー画面を作成したい場合などに使用するものだと思います。
 
 `registerNeedsTeamRoute`は、2つの引数と取ります。
-* `route`: 
-* `comopnent`: `route`にアクセスされた際に呼び出されるComponentです
+* `route`: ルート文字列
+* `comopnent`: `route`にアクセスされた際に呼び出されるComponent
 
 `http://localhost:8065`でMattermostが起動していて、`test`というチーム名のチームがあり、`sample.plugin`というプラグインIDを持つプラグインがインストールされており、その中で`registerNeedsTeamRoute`の引数として`route="/subpath"`が指定されていた場合、`http://localhost:8065/test/sample.plugin/subpath`にアクセスすると、`component`に指定したコンポーネントが呼び出されます。
 
@@ -558,7 +558,7 @@ CustomTeamRouteComponent.propTypes = {
 export default CustomTeamRouteComponent;
 ```
 
-### registerCustomRoute
+### [registerCustomRoute](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerCustomRoute)
 `registerCustomRoute`は、プラグイン専用のRouteを追加します。
 
 `registerNeedsTeamRoute`は、`/${team_name}/${plugin_id}/${route}`のようにチームごとにRouteを追加するAPIでしたが、`registerCustomRoute`は`/plug/${plugin_id}/${route}`のように、Mattermost全体としてプラグインごとに一つのRouteを追加するAPIです。
@@ -569,7 +569,7 @@ export default CustomTeamRouteComponent;
 
 Mattermost Plugin Webapp開発中に使えるPlugin開発用の便利機能がいくつかあります。その概要だけ紹介します。
 
-### Theme
+### [Theme](https://developers.mattermost.com/extend/plugins/webapp/reference/#Theme)
 Mattermost Plugin APIの中でも何度か出てきましたが、Webapp PluginではMattermostのテーマカラーを参照することができます。Mattermostではユーザーごとにテーマカラーを変更することができるため、Webapp PluginでUIの色を指定する場合は、ユーザーごとに見え方が異なることを考慮に入れる必要があります。
 
 参考: [Mattermostのテーマ集 \- Qiita](https://qiita.com/kaakaa_hoe/items/45c8857589ccd822ab1a)
@@ -578,7 +578,7 @@ Mattermostで扱われるテーマカラー一覧は以下で紹介されてい�
 
 https://developers.mattermost.com/extend/plugins/webapp/reference/#theme
 
-### Exported Libraries and Functions
+### [Exported Libraries and Functions](https://developers.mattermost.com/extend/plugins/webapp/reference/#Exported Libraries and Functions)
 
 Mattermost Webapp PluginはReact.jsを使用して開発しますが、React開発によく使われるいくつかのライブラリはMattermost本体から`window`オブジェクトを介して取得できるようになっています。
 取得できるライブラリは以下で紹介されています。
@@ -598,7 +598,7 @@ const formattedText = messageHtmlToComponent(formatText(text));
 
 https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils
 
-### Redux Action
+### [Redux Action](https://developers.mattermost.com/extend/plugins/webapp/reference/#Redux Action)
 Webapp上で投稿やユーザー情報の取得などのMattermostに対する何かしらの処理を実行する場合、[mattermost-redux](https://github.com/mattermost/mattermost-redux)というReduxライブラリがあります。これはMattermost本体のWebappでも利用されている公式のJavascript APIのような位置付けのものです。
 
 mattermost-reduxはもちろんMattermost Plugin開発でも使用することができ、下記のページで使い方について紹介されています。
