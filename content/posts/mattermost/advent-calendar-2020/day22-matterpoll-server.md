@@ -52,7 +52,7 @@ Mattermostの基本的な処理の流れは下記のようになります。
 
 ![architecture](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.dio.png)
 
-ユーザーがMattermost上でスラッシュコマンド `/poll` を実行する **(1)** と、そのコマンドをMatterpoll Server側が受け取り **(2)**、投票データ(`Poll`)を作成します **(3)**。作成された `Poll` のデータは、プラグイン用のKey-Value Storeに格納されます **(4)**。そして、Mattermostの投稿形式 (`Post`)へ変換され **(5)**、通常の投稿と同様にMattermostのデータベースに格納され **(6)**、WebappへWebSocketを通じてPublishされます **(7)**。(実際には、諸事情により投稿が作成(6)されてから投票データをKey-Valueストア に格納 **(4)**していますが、話を簡単にするため上記の順で話をしています)
+ユーザーがMattermost上でスラッシュコマンド `/poll` を実行する **(1)** と、そのコマンドをMatterpoll Server側が受け取り **(2)**、投票データ(`Poll`)を作成します **(3)**。作成された `Poll` のデータは、プラグイン用のKey-Value Storeに格納されます **(4)**。そして、Mattermostの投稿形式 (`Post`)へ変換され **(5)**、通常の投稿と同様にMattermostのデータベースに格納され **(6)**、WebappへWebSocketを通じてPublishされます **(7)**。(実際には、諸事情により投稿が作成 **(6)** されてから投票データをKey-Valueストア に格納 **(4)** していますが、話を簡単にするため上記の順で話をしています)
 
 Matterpoll Pluginにより作成されたメッセージは、Mattermost Webapp側の処理によってユーザー毎に見た目が変わります **(8)**。具体的には、自分が投票した回答のボタンの色が変わったり、投票管理系のボタンが権限のないユーザーから見えなくなったりします。このWebApp側の機能は、現在実験的な機能として提供されており、デフォルトではOffになっています。MattermostのSystem ConsoleのMatterpollプラグインの設定からOnにすることが出来ます。(設定がOffでも、投票機能自体は利用可能)
 
