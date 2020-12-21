@@ -26,6 +26,7 @@ https://github.com/kaakaa/mattermost-plugin-api-sample
 `registerWebSocketEventHandler`は、Mattermost Serverから送信されるWebSocketイベントを処理するHandlerを登録します。
 
 `registerWebSocketEventHandler`は2つの引数を取ります。
+
 * `event`: 処理するWebSocketイベントの種別
 * `handler`: WebSocketイベントのデータを引数に取る関数。引数のデータはイベントによって異なります。
 
@@ -68,6 +69,7 @@ export default class Plugin {
 `registerReconnectHandler`は、一度インターネット接続が失われた後に再びMattermostへ接続した際に実行されるHandlerです。
 
 `registerReconnectHandler`は引数のない関数を引数に取ります。
+
 * `handler`: Mattermostへ再接続した際に実行される関数
 
 例は省略します。
@@ -81,9 +83,13 @@ export default class Plugin {
 
 `registerMessageWillBePostedHook`は、ユーザーが投稿を送信した際、その投稿がサーバーに送信される前に実行される処理を登録します。
 
-`registerMessageWillBePostedHook`は、引数を1つ取る関数を引数に取ります。
+`registerMessageWillBePostedHook`は、引数を1つ取ります。
+
 * `hook`: ユーザーによって投稿処理が実行された際、その投稿がサーバーに送信される直前に実行される処理
-  * `post`: 投稿の情報
+
+`hooks`は、引数を一つ取ります。
+
+* `post`: 投稿の情報
 
 `hook`の返り値として、投稿情報を持つ`error`フィールドを含む値を返却した場合、投稿はrejectされます。投稿情報を持つ`post`フィールドのを含むオブジェクトを返却した場合は、`post`フィールドの値で投稿が作成されます。
 
@@ -115,10 +121,14 @@ export default class Plugin {
 
 `registerSlashCommandWillBePostedHook`は、ユーザーがSlash Commandを実行した際、その投稿がサーバーに送信される前に実行される処理を登録します。
 
-`registerSlashCommandWillBePostedHook`は、引数を2つ取る関数を引数に取ります。
+`registerSlashCommandWillBePostedHook`は、引数を1つ取ります。
+
 * `hook`: Slash Commandが実行された際に、その内容がサーバーに送信される直前に実行される処理
-  * `message`: 投稿されたメッセージ
-  * `args`: Slash Command実行情報(`channel_id`, `team_id`, `root_id`, `parent_id`)
+
+`hook`は、引数を2つ取ります。
+
+* `message`: 投稿されたメッセージ
+* `args`: Slash Command実行情報(`channel_id`, `team_id`, `root_id`, `parent_id`)
 
 `/away`をreject、`/help`を`/shrug`に書き換え、`/leave`をエラーメッセージなしでrejectするような処理を実行する例を以下に示します。
 
@@ -154,10 +164,14 @@ export default class Plugin {
 ### [registerMessageWillFormatHook](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMessageWillFormatHook)
 `registerMessageWillFormatHook`は、投稿したメッセージがMarkdownテキストとして変換される直前に実行される処理を登録します。
 
-`registerMessageWillFormatHook`は、2つの引数を取る関数を引数に取ります。
+`registerMessageWillFormatHook`は、引数を1つ取ります。
+
 * `hook`: 投稿がMarkdownテキストとして変換される直前に実行される処理
-  * `post`: 変換されていない投稿情報
-  * `message`: 投稿されたメッセージ（プラグインによって変換されている可能性あり）
+
+`hook`は、引数を2つ取ります。
+
+* `post`: 変換されていない投稿情報
+* `message`: 投稿されたメッセージ（プラグインによって変換されている可能性あり）
 
 `hook`の返却値として返された文字列が投稿として表示されます。
 
@@ -170,10 +184,15 @@ export default class Plugin {
 `registerFilePreviewComponent`は、ファイルプレビュー用の独自のComponentを登録します。
 
 `registerFilePreviewComponent`は、2つの関数を引数に取ります。
+
 * `override`: 独自のファイルプレビューComponentを使用するかどうかを決定するための関数。以下の2つを引数に取ります。
-  * `fileInfo`: ファイルの情報
-  * `post`: 投稿の情報
 * `component`: ファイルプレビュー用のComponent
+
+`override`は、引数を2つ取ります。
+
+* `fileInfo`: ファイルの情報
+* `post`: 投稿の情報
+
 
 `debug`で始まるメッセージを持つ投稿の添付ファイルをプレビューする際に、独自のコンポーネントを使用する例を以下に示します。
 
@@ -335,7 +354,7 @@ Mattermost Pluginでは、マニフェストファイルの`settings_schema`と�
 
 https://developers.mattermost.com/extend/plugins/manifest-reference/
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day21/admin-console-custom-setting-default.png)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day21/admin-console-custom-settings-default.png)
 
 デフォルトでは、下記の`type`を持つ設定項目を追加することができます。
 
@@ -351,6 +370,7 @@ https://developers.mattermost.com/extend/plugins/manifest-reference/
 デフォルトの`type`以外の設定項目を指定したい場合に`registerAdminConsoleCustomSetting`を使用します。
 
 `registerAdminConsoleCustomSetting`は、3つの引数を取ります。
+
 * `key`: 上書きする設定項目の`key`。`key`は、マニフェストファイルに設定項目ごとに任意で指定する値です。
 * `component`: 設定画面に表示されるComponent。
 * `options`: 設定項目の表示方法についてのオプション
@@ -358,7 +378,7 @@ https://developers.mattermost.com/extend/plugins/manifest-reference/
 
 パスワードなどを入力する際に、入力項目をUI上に表示しないような設定項目を追加する例を以下に示します。
 
-![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day21/admin-console-custom-setting.png)
+![](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day21/admin-console-custom-settings.png)
 
 ```json:plugin.json
 {
@@ -434,10 +454,12 @@ export default CustomSettingsComponent;
 `registerRightHandSidebarComponent`は、Mattermostの右サイドバーに表示する独自のComponentを登録します。
 
 `registerRightHandSidebarComponent`は、2つの引数を取ります。
+
 * `component`: 右サイドバーに表示されるComponent
 * `title`: 右サイドバーのタイトル部分に表示されるテキスト
 
 また、`registerRightHandSidebarComponent`は4つの引数を返却します。
+
 * `id`: 登録されたComponentのID
 * `showRHSPlugin`: 登録したComponentを表示するためのアクション
 * `hideRHSPlugin`: 登録したComponentを非表示にするためのアクション
@@ -495,7 +517,8 @@ export default ComponentRightHandSidebar;
 ### [registerNeedsTeamRoute](https://developers.mattermost.com/extend/plugins/webapp/reference/#registerNeedsTeamRoute)
 `registerNeedsTeamRoute`は、チームごとにプラグイン専用のRouteを追加します。プラグイン専用のエラー画面を作成したい場合などに使用するものだと思います。
 
-`registerNeedsTeamRoute`は、2つの引数と取ります。
+`registerNeedsTeamRoute`は、2つの引数を取ります。
+
 * `route`: ルート文字列
 * `comopnent`: `route`にアクセスされた際に呼び出されるComponent
 
