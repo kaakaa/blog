@@ -6,6 +6,8 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 # はじめに
 
 2020/6/17にMattermost v5.24.0がリリースされました。  

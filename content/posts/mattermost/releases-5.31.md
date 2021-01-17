@@ -6,6 +6,8 @@ toc: true
 tags: ["mattermost", "releases"]
 ---
 
+Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
+
 # はじめに
 
 2021/01/16にMattermost v5.31.0がリリースされました。
