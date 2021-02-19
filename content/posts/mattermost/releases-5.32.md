@@ -94,6 +94,20 @@ E10/E20 を利用している場合、サブスクリプションの更新手続
 
 破壊的変更について詳しくは [Changelog](https://docs.mattermost.com/administration/changelog.html#release-v5-32-feature-release) を参照してください。
 
+## その他のトピック
+
+### Sponsored Rocky Linux Project
+
+CentOS に関する RedHad の方針変更を受けて生まれた Rocky Linux プロジェクトについて、Mattermost がスポンサーとしてコミュニケーション基盤を提供しています。
+
+[Rocky Linux](https://rockylinux.org/)
+
+### What Matterst - A Podcast from Mattermost
+
+Mattermost 主催の Podcast にエピソードが追加されています。最新のエピソードでは、前述の Rocky Linux のコミュニティマネージャーがゲストです。
+
+[What Matters \- A Podcast from Mattermost](https://mattermost.libsyn.com/)
+
 ## Mattermost MVP
 
 昨年 12 月に書いていた[Mattermost Integration Advent Calendar](https://qiita.com/advent-calendar/2020/mattermost-integrations)を評価していただき、2 度目の MVP を受賞いたしました。
