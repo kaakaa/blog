@@ -58,11 +58,16 @@ disqusShortname = "kaakaa-blog"
 
 
 [[params.social]]
-  name = "@kaakaa"
+  name = "GitHub"
   url = "https://github.com/kaakaa"
   icon = "fab fa-github-alt fa-lg"
 
 [[params.social]]
-  name = "@kaakaa_hoe_prog"
+  name = "Twitter"
   url = "https://twitter.com/kaakaa_hoe_prog"
   icon = "fab fa-twitter fa-lg"
+
+[[params.social_static]]
+  name = "Qiita"
+  url = "https://twitter.com/kaakaa_hoe_prog"
+  icon = "qiita.png"
