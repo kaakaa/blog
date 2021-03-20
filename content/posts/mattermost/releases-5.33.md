@@ -11,7 +11,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 # はじめに
 
 2021/03/17 に Mattermost v5.33.0 がリリースされました。  
-また、近いうちに TLS 接続をしている際に WebSocket 通信が失敗する問題の修正を加えた v5.33.1 がリリースされるようです。
+また、近いうちに TLS 接続をしている際に WebSocket 通信が失敗する問題の修正を加えた v5.33.1 がリリースされるようです。  
 [\[MM\-34000\] Websockets fail with TLS connections \- Mattermost](https://mattermost.atlassian.net/browse/MM-34000)
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。（なので、Enterprise 版限定の機能などについてはリリースノート書いてあることの紹介程度となっています）
@@ -32,19 +32,19 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## カスタムステータス
 
-Mattermost 上に表示されるステータスを自由に設定できるようになりました。
+Mattermost 上に表示されるステータスを自由に設定できるようになりました。  
 今までのバージョンで設定できるステータスは、システム固有の`オンライン(Online)`、`離席中(Away)`、`取り込み中(Do Not Disturb)`、`オフライン(Offline)`の 4 種別でしたが、 これらのステータスとは別に、自由にメッセージや絵文字を指定できるカスタムステータスを設定できるようになりました。
 
-Mattermost 画面左上のアイコン部分をクリックするとステータス設定メニューが表示され、その中にカスタムステータス設定メニューがあります。
+Mattermost 画面左上のアイコン部分をクリックするとステータス設定メニューが表示され、その中にカスタムステータス設定メニューがあります。  
 ![status menu](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.33/status-menu.png)
 
-カスタムステータス設定メニューでは、絵文字とメッセージを指定することができます。絵文字にはユーザーが登録したカスタム絵文字も指定することができます。
+カスタムステータス設定メニューでは、絵文字とメッセージを指定することができます。絵文字にはユーザーが登録したカスタム絵文字も指定することができます。  
 ![set custom status](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.33/set-status.png)
 
-設定されたステータスは、投稿に表示される名前の横などに現れます。
+設定されたステータスは、投稿に表示される名前の横などに現れます。  
 ![show custom status](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.33/show-status.png)
 
-また、スラッシュコマンドを使ってカスタムステータスを設定することもできます。
+また、スラッシュコマンドを使ってカスタムステータスを設定することもできます。  
 ![slash command](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.33/status-command.png)
 
 カスタムステータスを設定しても、システム固有のステータス(`オンライン`等)は別に設定することができるため、システム固有ステータスによる通知のコントロール機能は引き続き使用することができます。
@@ -83,17 +83,18 @@ Mattermost が開発している `a self-hosted alternative to Trello, Notion, a
 - https://www.reddit.com/r/selfhosted/comments/m72mes/focalboard_open_source_selfhosted_project/
 - https://news.ycombinator.com/item?id=26499062
 
-注目されたことで開発も活発になり、[Docker サポート](https://github.com/mattermost/focalboard/pull/105)や翻訳サポート(https://github.com/mattermost/focalboard/commit/8f31d14a304a5a46d8f7f197a85361d04a196fff)などが進んでいます。
+注目されたことで開発も活発になり、[Docker サポート](https://github.com/mattermost/focalboard/pull/105)や[翻訳サポート](https://github.com/mattermost/focalboard/commit/8f31d14a304a5a46d8f7f197a85361d04a196fff)などが進んでいます。
 
 ちょうど私も先週 Focalboard を動かしていて、その時の感想を Zenn の方に書いていました。
 
-[Notion のような UI の Trello っぽい Kanban ツールの OSS の Focalboard を触ってみた](https://zenn.dev/kaakaa/articles/mattermost-focalboard-first)
+- [Notion のような UI の Trello っぽい Kanban ツールの OSS の Focalboard を触ってみた](https://zenn.dev/kaakaa/articles/mattermost-focalboard-first)
 
 まだバージョンが v0.6.1 ということもあり開発段階ではありますが、面白そうなプロジェクトのため今後もチェックしていきたいと思います。
 
 ### Mattermost リポジトリのスター数が 20,000 に
 
 Mattermost Server の GitHub リポジトリのスター数が 20,000 を超えたようです。
+
 [The Mattermost server repo surpasses 20,000 stars on GitHub](https://mattermost.com/blog/mattermost-server-surpasses-20000-stars-on-github/)
 
 ### International Woman's Day
