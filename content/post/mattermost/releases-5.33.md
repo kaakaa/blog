@@ -70,7 +70,7 @@ Incident Collaboration 機能のアップデートの詳細については、以
 
 [Mattermost Incident Collaboration for faster incident response](https://mattermost.com/blog/mattermost-incident-collaboration-for-incident-response-teams/)
 
-## (Cloud/E10/E20)
+## (Cloud/E10/E20) サポートパケット生成機能
 
 Mattermost インスタンスの設定の詳細や、ログ、その他のデプロイ情報などをダウンロードできるようになりました。これは、Mattermost の商用サポートチームが、トラブルシューティングを円滑に行うための機能です。
 
