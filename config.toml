@@ -3,6 +3,7 @@ title = "kaakaa blog"
 theme = "harbor"
 language = "ja"
 languageCode = "ja-JP"
+enableInlineShortcodes = true
 hasCJKLanguage = true
 footnoteReturnLinkContents = "^"
 

@@ -15,15 +15,15 @@ disable_comments: true
 
 ## Publications
 
-- "Mattermost［導入＋構築］入門", Software Design 2019 年 4~7 月号, 技術評論社
+- "短期連載: Mattermost［導入＋構築］入門", Software Design 2019 年 4~7 月号, 技術評論社
 
 ## Links
 
-- [GitHub](https://github.com/kaakaa)
-- [Twitter](https://twitter.com/kaakaa_hoe_prog)
-- [Qiita](https://qiita.com/kaakaa_hoe)
-- [Zenn](https://zenn.dev/kaakaa)
+- [GitHub: @kaakaa](https://github.com/kaakaa)
+- [Twitter: @kaakaa_hoe_prog](https://twitter.com/kaakaa_hoe_prog)
+- [Qiita: @kaakaa](https://qiita.com/kaakaa_hoe)
+- [Zenn: @kaakaa](https://zenn.dev/kaakaa)
 
----
+## Support
 
-{{<iframe src="https://github.com/sponsors/kaakaa/card" title="Sponsor kaakaa" height=225 width=600 >}}
+{{<iframe src="https://github.com/sponsors/kaakaa/button" title="Sponsor kaakaa" height="35" width="116" style="border: 0; background-color: red;">}}
