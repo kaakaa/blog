@@ -1,31 +1,74 @@
 baseURL = "https://blog.kaakaa.dev/"
-languageCode = "ja-JP"
 title = "kaakaa blog"
-theme = "cactus-plus"
+theme = "harbor"
+language = "ja"
+languageCode = "ja-JP"
+enableInlineShortcodes = true
 hasCJKLanguage = true
+footnoteReturnLinkContents = "^"
 
 googleAnalytics = "UA-57299975-4"
+disqusShortname = "kaakaa-blog"
 
 [params]
-    twitter = "kaakaa_hoe_prog"
-    enableTwitterCard = true
-    enableGoogleAnalytics = true
+  enableGoogleAnalytics = true
 
-    enableDisqus = true
-    disqusShortname = "kaakaa-blog"
+[Author]
+  name = "Yusuke Nemoto"
 
-    enableRSS = true
-    enableToc = true
-    enableShare = true
-    share = ""
+[outpus]
+  section = ["JSON", "HTML"]
 
-    showLatestPosts = true
+[permalinks]
+  page = "/:filename/"
 
-    enableSummary = true
-    useDescriptionReplaceSummary = false
+[[params.nav]]
+  identifier = "home"
+  name = "Home"
+  icon = "fas fa-home fa-lg"
+  url = "/"
+  weidht = 1
 
-    copyright = "© 2018 kaakaa (Yusuke Nemoto)"
+[[params.nav]]
+  identifier = "about"
+  name = "About"
+  icon = "fas fa-user fa-lg"
+  url = "/about/"
+  weidht = 3
 
-[social]
-    twitter-square = "https://www.twitter.com/kaakaa_hoe_prog"
-    github-square = "https://github.com/kaakaa"
+[[params.nav]]
+  identifier = "tags"
+  name = "Tags"
+  icon = "fas fa-tag fa-lg"
+  url = "/tags/"
+  weight = 4
+
+[[params.nav]]
+  identifier = "search"
+  name = "Search"
+  icon = "fas fa-search fa-lg"
+  url = "/search/"
+  weight = 8
+
+[[params.nav]]
+  identifier = "subscribe"
+  name = "Subscribe"
+  icon = "fas fa-rss fa-lg"
+  url = "/index.xml"
+  weight = 9
+
+
+[[params.social]]
+  name = "GitHub"
+  url = "https://github.com/kaakaa"
+  icon = "fab fa-github-alt fa-lg"
+
+[[params.social]]
+  name = "Twitter"
+  url = "https://twitter.com/kaakaa_hoe_prog"
+  icon = "fab fa-twitter fa-lg"
+
+[[params.social_static]]
+  name = "Qiita"
+  url = "https://twitter.com/kaakaa_hoe_prog"
+  icon = "qiita.png"
