@@ -27,7 +27,7 @@ Mattermost プラグインでは、Plugin 起動時にプラグイン専用の B
 
 そのため、セットアップ手順がちょっと面倒臭くなっている。REST API のなかで、Plugin API に実装されているものとされていないものの違いがわからないんだよな。Contribute しますって言えばやらせてもらえるのかな。
 
-## CircleCI
+### CircleCI
 
 久しぶりに CircleCI 回したらビルドがコケる。
 
@@ -43,7 +43,7 @@ Deploy Key を作り直せば良かったらしい。
 
 [CircleCI で checkout 時に「fatal: Could not read from remote repository\.」出る（長く放置していた時に発生） \- nwtgck / Ryo Ota](https://scrapbox.io/nwtgck/CircleCI%E3%81%A7checkout%E6%99%82%E3%81%AB%E3%80%8Cfatal:_Could_not_read_from_remote_repository.%E3%80%8D%E5%87%BA%E3%82%8B%EF%BC%88%E9%95%B7%E3%81%8F%E6%94%BE%E7%BD%AE%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F%E6%99%82%E3%81%AB%E7%99%BA%E7%94%9F%EF%BC%89)
 
-## GitHub Release
+### GitHub Release
 
 tag 打っても Release Job が走らない。
 
