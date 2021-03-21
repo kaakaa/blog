@@ -17,7 +17,8 @@ Mattermost 上でテキストから絵文字を作成できるプラグインを
 
 主な変更点は、今まで 2x2 の 4 文字までの絵文字しか作れなかったけど、上限文字数を撤廃。3x3 の`圧倒的当事者意識`的な絵文字も作れるようにした。とはいえ、視認性的に 3x3 でも厳しいぐらいだと思うけど。
 
-Go 言語で文字画像作るのは、描画位置をどのように決めるかとの戦い。テストコードの動作見ながらゴリゴリ試して書いてた。脳筋。
+Go 言語で文字画像作るのは、文字数と描画位置をどのように決めるかとの戦い。テストコード書いて画像出力させながらゴリゴリ調整。脳筋。
+
 https://github.com/kaakaa/mattermost-emojigen/commit/21fd13ada28106ca1b7fcd3d0279cfef1e90ed11#diff-285e170643d9e80db83915466e06d2269d66a6cd59a3140e9db79cf5b6d7f834R47
 
 ## CircleCI
@@ -43,6 +44,7 @@ tag 打っても Release Job が走らない。
 基本、Mattermost Plugin 関連のファイルは [mattermost\-plugin\-starter\-template](https://github.com/mattermost/mattermost-plugin-starter-template) から取って来るけど、このリポジトリにある Circle の設定ファイルには Release Job が定義されていなかった。
 
 使い慣れた？ Matterpoll の方の設定ファイルを持ってくる。
+
 https://github.com/matterpoll/matterpoll/blob/master/.circleci/config.yml
 
 `mattermost/plugin-ci`の Circle CI Orb は、最新バージョン`v0.1.6`まで進んでるんだけど、新しめのやつ(`v0.1.2`とかだったかな?)になると Mattermost 社の S3 インスタンスとかにアクセスしようとするので、認証情報設定しておかないとエラーになるのよね。なので一般コントリビュータは`v0.1.0`を使うしかない（と思う）。
