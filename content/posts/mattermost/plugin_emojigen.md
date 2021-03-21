@@ -21,6 +21,12 @@ Go 言語で文字画像作るのは、文字数と描画位置をどのよう�
 
 https://github.com/kaakaa/mattermost-emojigen/commit/21fd13ada28106ca1b7fcd3d0279cfef1e90ed11#diff-285e170643d9e80db83915466e06d2269d66a6cd59a3140e9db79cf5b6d7f834R47
 
+### No bot...
+
+Mattermost プラグインでは、Plugin 起動時にプラグイン専用の Bot アカウントを作成して、その Bot から[Plugin API](https://developers.mattermost.com/extend/plugins/server/reference/#API)を叩かせて処理をやらせるというのが一般的だけど、悲しいことに絵文字登録 API が[Plugin API](https://developers.mattermost.com/extend/plugins/server/reference/#API)として実装されていなかったので、プラグインの設定画面にアクセストークンを入力して、絵文字登録は REST API 経由で実行するという方式を取っている。
+
+そのため、セットアップ手順がちょっと面倒臭くなっている。REST API のなかで、Plugin API に実装されているものとされていないものの違いがわからないんだよな。Contribute しますって言えばやらせてもらえるのかな。
+
 ## CircleCI
 
 久しぶりに CircleCI 回したらビルドがコケる。
