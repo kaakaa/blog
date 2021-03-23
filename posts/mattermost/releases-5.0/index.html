@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.0の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.0の新機能"/>
+<meta name="twitter:description" content="はじめに 2018/06/15にMattermost 5.0.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermost5.0の新機能
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2018/06/15にMattermost 5.0.0がリリースされたので、アップデートの内容について簡単に紹介します。</p>
+<p>詳細については公式のリリースを確認ください。</p>
+<ul>
+<li><a href="https://about.mattermost.com/releases/mattermost-5-0/">Mattermost 5.0: Intercept and modify posts, advanced permissions, longer posts and more – Mattermost</a></li>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-0">Mattermost Changelog — Mattermost 5.0 documentation</a></li>
+</ul>
+<h3 id="メジャーバージョンアップについて">メジャーバージョンアップについて</h3>
+<p><a href="https://forum.mattermost.org/t/upcoming-changes-with-mattermost-v5-0/5119">Upcoming Changes with Mattermost v5.0 - Announcements - Mattermost Peer-to-Peer Forum</a>
+今回メジャーバージョンアップが行われた理由として、Enterprise版向けの高度な権限設定機能を追加するにあたり、データベースへ大きな変更が必要となったことが挙げられています。
+また、データベースへの影響の他にも今回のメジャーバージョンアップにより以下の変更が行われています。</p>
+<ul>
+<li><code>サイトURL</code>の設定が必須に</li>
+<li>Mattermost APIv3の廃止</li>
+<li>管理者向けCLIツールの名称が<code>platform</code>から<code>mattermost</code>に変更</li>
+</ul>
+<p>その他のアップデートにおける注意点について、詳しくは<a href="https://docs.mattermost.com/administration/important-upgrade-notes.html#important-upgrade-notes">Important Upgrade Notes</a>を参照してください。</p>
+<h1 id="アップデート内容">アップデート内容</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#メジャーバージョンアップについて">メジャーバージョンアップについて</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#プラグインによる投稿の検閲">プラグインによる投稿の検閲</a></li>
+    <li><a href="#e10e20高度な権限設定">(E10/E20)高度な権限設定</a></li>
+    <li><a href="#投稿の最大文字数の拡大">投稿の最大文字数の拡大</a></li>
+    <li><a href="#enterprise版の機能がteam-editionoss版に">Enterprise版の機能がTeam Edition(OSS版)に</a>
+      <ul>
+        <li><a href="#カスタムブランディング">カスタムブランディング</a></li>
+        <li><a href="#チーム毎のテーマ設定">チーム毎のテーマ設定</a></li>
+        <li><a href="#パスワードルールの設定">パスワードルールの設定</a></li>
+      </ul>
+    </li>
+    <li><a href="#参加脱退メッセージの結合">参加・脱退メッセージの結合</a></li>
+    <li><a href="#モバイルアプリの改善">モバイルアプリの改善</a></li>
+    <li><a href="#デスクトップアプリの改善">デスクトップアプリの改善</a></li>
+    <li><a href="#その他">その他</a>
+      <ul>
+        <li><a href="#extended-support-release">Extended Support Release</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="プラグインによる投稿の検閲">プラグインによる投稿の検閲</h2>
+<p>Mattermostのプラグインに、投稿内容がデータベースに保存される直前・直後に処理を差し込めるAPIが追加されました。
+<a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.MessageWillBePosted">Hooks.MessageWillBePosted</a></p>
+<p>この機能を使うことで、有害な言葉を含む投稿をできなくしたり、個人情報のような重要な文字列を別の言葉に置き換えることなどができるようになります。</p>
+<p>以下のリンクから、Mattermost CTOによるこの機能の解説動画を見ることができます。</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=YgMqFZARzfs">Coming soon: (APIv4) Mattermost Post-Intercept - YouTube</a></li>
+<li><a href="https://forum.mattermost.org/t/coming-soon-apiv4-mattermost-post-intercept/4982">Coming soon: (APIv4) Mattermost Post-Intercept - Feature Idea Discussion / Design Feedback Request - Mattermost Peer-to-Peer Forum</a>
+<ul>
+<li>上記YouTube動画の書き起こし</li>
+</ul>
+</li>
+</ul>
+<p>また、Mattermostプラグインの開発方法については下記のドキュメントを参考になります。
+<a href="https://developers.mattermost.com/extend/plugins/">Plugins (Beta)</a></p>
+<h2 id="e10e20高度な権限設定">(E10/E20)高度な権限設定</h2>
+<p>Enterprise版の機能として、チーム/チャンネル/投稿の作成・修正・削除に関する権限設定を柔軟に行えるようになりました。</p>
+<!-- raw HTML omitted -->
+<p>権限設定はJSONファイルとしてエクスポート/インポートすることもできます。</p>
+<p>また、E20プランの場合、追加で下記のような権限設定も可能となります。</p>
+<ul>
+<li>システム全体の設定だけでなくチームごとに権限設定可能</li>
+<li>追加のチャンネル権限設定(読取専用チャンネルの作成、@all/@channel/@hereの使用制限、メンバー管理の制限)</li>
+<li>ユーザー単位やLDAPのグループ単位の権限付与</li>
+</ul>
+<p>この機能についての開発チーム/ビジネスチームに対するデモの様子がYouTubeに上がっています。</p>
+<p><a href="https://www.youtube.com/watch?v=aKF_xYWD9LU&amp;t=429s">Mattermost | Permission Schemes demo - YouTube</a>
+<a href="https://www.youtube.com/watch?v=tRJWxK4_2u8">Mattermost 5.0 | Advanced Permissions Demo and Q&amp;A - YouTube</a></p>
+<p>また、権限管理機能に関する今後のロードマップについては、下記で触れられています。
+<a href="https://forum.mattermost.org/t/upcoming-permissions-changes-schemes-roles-guest-accounts-channel-permissions/4971">Upcoming Permissions changes: Schemes, Roles, Guest Accounts, Channel Permissions - Announcements - Mattermost Peer-to-Peer Forum</a></p>
+<pre><code>Phase 1 (v4.9, April 2018): Backend work already implemented. No visible changes for end users or Admins.
+Phase 2 (v5.0, June 2018): Permission Schemes.
+Phase 3 (Q4 2018): Channel Permissions and Guest Accounts.
+Phase 4 (Q1 2019): Supplementary Roles to grant individuals extra permissions.
+Phase 5 (TBD): Supplementary Roles that can be synced with and granted to AD/LDAP groups.
+</code></pre><p>チャンネル管理の権限設定や、ゲストアカウントの作成等が2018/4Qに予定されています。
+ゆくゆくはAD/LDAPグループとMattermostの権限管理の同期も挙げられており、エンタープライズユーザーに対して親和性のあるコミュニティ基盤を目指していることが見て取れます。</p>
+<h2 id="投稿の最大文字数の拡大">投稿の最大文字数の拡大</h2>
+<p>今まで一つの投稿に含められる最大の文字数は4,000文字でしたが、今回のバージョンから最大文字数が16,383文字に引き上げられました。
+これにより、大きなMarkdownのテーブルなども投稿可能になります。</p>
+<p>この機能を有効にするには使用しているデータベースのマイグレーションが必要になります。</p>
+<p>使用しているデータベースがMySQLの場合は</p>
+<pre><code>ALTER TABLE Posts MODIFY COLUMN Message TEXT;
+</code></pre><p>PostgreSQLの場合、</p>
+<pre><code>ALTER TABLE Posts ALTER COLUMN Message TYPE VARCHAR(65535)
+</code></pre><p>を実行し、Mattermostを再起動することで有効になります。
+<code>Posts</code>テーブルが巨大な場合、パフォーマンスに影響が出る可能性があるため、ユーザーの少ない時間帯に実行することが推奨されています。</p>
+<h2 id="enterprise版の機能がteam-editionoss版に">Enterprise版の機能がTeam Edition(OSS版)に</h2>
+<p>Enterprise版でしか使用できなかった下記の機能がOSS版であるTeam Editionでも使用可能となりました。</p>
+<h3 id="カスタムブランディング">カスタムブランディング</h3>
+<ul>
+<li><a href="https://docs.mattermost.com/administration/branding.html">Custom Branding Tools — Mattermost 5.0 documentation</a></li>
+</ul>
+<ul>
+<li>ログイン画面に組織独自の画像やテキストを設定可能に</li>
+<li>設定: <strong>システムコンソール</strong> &gt; <strong>カスタマイズ</strong> &gt; <strong>独自ブランド設定</strong></li>
+</ul>
+<h3 id="チーム毎のテーマ設定">チーム毎のテーマ設定</h3>
+<ul>
+<li>チーム毎にMattermost画面のテーマカラーを変更可能に</li>
+<li>設定: <strong>アカウント設定</strong> &gt; <strong>表示</strong> &gt; <strong>テーマ</strong> &gt; (テーマ変更後<code>全ての自分のチームに新しいテーマを適用する</code>のチェックを外して更新)</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="パスワードルールの設定">パスワードルールの設定</h3>
+<ul>
+<li>パスワードのルール(パスワードの最低の長さ、英数字記号を必須とするかなど)を設定可能に</li>
+<li>設定: <strong>システムコンソール</strong> &gt; <strong>セキュリティ</strong> &gt; <strong>パスワード</strong></li>
+</ul>
+<!-- raw HTML omitted -->
+<h2 id="参加脱退メッセージの結合">参加・脱退メッセージの結合</h2>
+<p>今まではチャンネル参加/脱退メッセージが一つ一つ投稿されていましたが、これらのメッセージが連続した場合、まとめて表示されるようになりました。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/2281ef70-42e8-5cf9-534d-968d7149f51a.png" alt="Image Pasted at 2018-6-13 22-10.png"></p>
+<h2 id="モバイルアプリの改善">モバイルアプリの改善</h2>
+<ul>
+<li>Androidユーザー向けの初回ロード時間の改善</li>
+<li>プッシュ通知画面の改善</li>
+</ul>
+<p>その他の変更点については<a href="https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#v190-release">mattermost-mobile/CHANGELOG.md at master · mattermost/mattermost-mobile</a>を参照してください。</p>
+<h2 id="デスクトップアプリの改善">デスクトップアプリの改善</h2>
+<ul>
+<li>メモリキャッシュ削除間隔の見直しによるパフォーマンス改善</li>
+<li>新しい&quot;Enable GPU Hardware acceleration&quot;オプションによる安定性の向上、および動作可能時間の改善</li>
+<li>UI更新によるUXの改善</li>
+</ul>
+<p>その他の変更点については<a href="https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v412">desktop/CHANGELOG.md at master · mattermost/desktop</a>を参照してください。</p>
+<h2 id="その他">その他</h2>
+<h3 id="extended-support-release">Extended Support Release</h3>
+<p>いくつかの顧客からの要望を受け、Mattermost v4.10について１年間のセキュリティバックポートが行われます。
+毎月のアップデートが負担になっている場合、作業負荷を軽減することができるようになります。</p>
+<h1 id="おわりに">おわりに</h1>
+<p>次回の<code>v5.1</code>のリリースは2018/7/16を予定しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/releases/">releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

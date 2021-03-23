@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>ChatGopsで本物のGopherを、すぐそばに...</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ChatGopsで本物のGopherを、すぐそばに..."/>
+<meta name="twitter:description" content="ChatOps DevOpsの流れで、開発・運用における情報共有やビルド実行・通知などをコミュニケーションツールであるチャットから行うChatOpsという"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              ChatGopsで本物のGopherを、すぐそばに...
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="chatops">ChatOps</h1>
+<p>DevOpsの流れで、開発・運用における情報共有やビルド実行・通知などをコミュニケーションツールであるチャットから行うChatOpsというブームが起こりました。ChatOpsを採用することで開発チームと運用チームのリアルタイムな連携や、ビルド・デプロイの失敗に対する迅速な対応が可能となり、開発スピードの向上を図ることができるようになります。</p>
+<p>その中核をなすのが、チャットに書き込まれたメッセージによる処理実行やチャットへの通知を管理するBotツールです。
+ChatOpsの流行り始めはGithub社のHubotがデファクトスタンダートでしたが、昨今ではSlackのBotkitやMicrosoft Bot Framework、またLINEまでもBotを提供するなど、Bot / ChatOpsはシステム開発における一つの定番プラクティスとなってきました。</p>
+<p>でも、何かが・・・何かが足りない・・</p>
+<h1 id="chatgops">ChatGops</h1>
+<p>そう、Gopherくんが足りない。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/bf9f9fef-de6c-41e1-50c9-f76368da4e1b.gif" alt="bopher.gif"></p>
+<p><a href="https://github.com/kaakaa/bopher">kaakaa/bopher</a></p>
+<p><a href="http://qiita.com/mattn/items/b7889e3c036b408ae8bd">本物の golang を... 本物の Gopher を、お見せしますよ。 - Qiita</a>を全面的に利用しています。
+（そのためWindows Onlyです）</p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#必要なもの">必要なもの</a></li>
+    <li><a href="#手順">手順</a></li>
+  </ul>
+</nav><h2 id="必要なもの">必要なもの</h2>
+<ul>
+<li>Mattermost 3.3～</li>
+<li><a href="https://github.com/mattn/gopher">mattn/gopher</a>をビルドした<code>gopher.exe</code></li>
+<li><a href="https://github.com/kaakaa/bopher">kaakaa/bopher: Bot + Gopher = Bopher</a></li>
+</ul>
+<h2 id="手順">手順</h2>
+<ol>
+<li>Mattermost(v3.3以降)を立てる</li>
+<li><a href="https://github.com/mattn/gopher">mattn/gopher</a>eをビルドする</li>
+<li><a href="https://github.com/kaakaa/bopher/releases/tag/v0.0.1">bopher.exe</a>をダウンロードする</li>
+<li><a href="https://github.com/kaakaa/bopher/blob/master/config.json">bopher/config.json</a>に設定を書いて、bopher.exeと同じディレクトリに置く</li>
+<li>bopher.exeを起動する</li>
+</ol>
+<h1 id="注意">注意</h1>
+<ul>
+<li>Core i7, メモリ24GBを積んだマシンでもGopherくんを5,60人同時に発生させたところ操作が効かなくなりました。設定ファイルでGopherくんの最大数を設定できるようにしてあります。用法・容量を守って正しく服用ください。</li>
+</ul>
+<h1 id="きっかけ">きっかけ</h1>
+<ul>
+<li>Mattermost3.3から、GoでBotを書けるようになったので、なんか作ってみようと思いました
+<ul>
+<li><a href="https://github.com/mattermost/mattermost-bot-sample-golang">mattermost/mattermost-bot-sample-golang</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/go/">Go</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/gopher/">gopher</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">Mattermost</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

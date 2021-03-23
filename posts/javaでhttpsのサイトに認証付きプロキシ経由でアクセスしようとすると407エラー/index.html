@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>JavaでHTTPSのサイトに認証付きプロキシ経由でアクセスしようとすると407エラー</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="JavaでHTTPSのサイトに認証付きプロキシ経由でアクセスしようとすると407エラー"/>
+<meta name="twitter:description" content="はじめに Java 8 Update 111からjava.netパッケージのHTTPS接続の際のトンネリングにBasic認証を使用できない設定がデフォルトになったよ"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              JavaでHTTPSのサイトに認証付きプロキシ経由でアクセスしようとすると407エラー
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>Java 8 Update 111から<code>java.net</code>パッケージのHTTPS接続の際のトンネリングにBasic認証を使用できない設定がデフォルトになったようです。
+回避するには<code>jdk.http.auth.tunneling.disabledSchemes</code>に空文字列を設定する必要があるそうです。</p>
+<h1 id="事象">事象</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#現象">現象</a></li>
+    <li><a href="#環境">環境</a></li>
+  </ul>
+</nav><h2 id="背景">背景</h2>
+<p>Javaの<code>java.net.HttpURLConnection</code>を利用して、認証付きプロキシ内の環境からhttpsのサイトにアクセスしようとした時に、どんな方法でプロキシの認証情報を付与しても<code>407 Proxy Authentication Required</code>エラーを解消できなかった。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java:Sample.java" data-lang="java:Sample.java"><span style="color:#f92672">import</span> java.util.*<span style="color:#f92672">;</span>
+<span style="color:#f92672">import</span> java.net.*<span style="color:#f92672">;</span>
+
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Sample</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String PROXY_HOST <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;example.proxy.com&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String PROXY_PORT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;8080&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String PROXY_USER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;user&#34;</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> String PROXY_PASSWORD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;password&#34;</span><span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[]</span> args<span style="color:#f92672">)</span> <span style="color:#66d9ef">throws</span> Exception <span style="color:#f92672">{</span>
+                String url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://news.google.com&#34;</span><span style="color:#f92672">;</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">setProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;proxySet&#34;</span><span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;true&#34;</span><span style="color:#f92672">);</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">setProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;proxyHost&#34;</span><span style="color:#f92672">,</span> PROXY_HOST<span style="color:#f92672">);</span>
+                System<span style="color:#f92672">.</span><span style="color:#a6e22e">setProperty</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;proxyPort&#34;</span><span style="color:#f92672">,</span> PROXY_PORT<span style="color:#f92672">);</span>
+
+                Authenticator<span style="color:#f92672">.</span><span style="color:#a6e22e">setDefault</span><span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Authenticator<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                        <span style="color:#a6e22e">@Override</span>
+                        <span style="color:#66d9ef">protected</span> PasswordAuthentication <span style="color:#a6e22e">getPasswordAuthentication</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+                                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> PasswordAuthentication<span style="color:#f92672">(</span>PROXY_USER<span style="color:#f92672">,</span> PROXY_PASSWORD<span style="color:#f92672">.</span><span style="color:#a6e22e">toCharArray</span><span style="color:#f92672">());</span>
+                        <span style="color:#f92672">}</span>
+                <span style="color:#f92672">});</span>
+
+                HttpURLConnection urlconn <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>HttpURLConnection<span style="color:#f92672">)</span> <span style="color:#66d9ef">new</span> URL<span style="color:#f92672">(</span>url<span style="color:#f92672">).</span><span style="color:#a6e22e">openConnection</span><span style="color:#f92672">();</span>
+                urlconn<span style="color:#f92672">.</span><span style="color:#a6e22e">setRequestMethod</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;GET&#34;</span><span style="color:#f92672">);</span>
+                urlconn<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span><span style="color:#f92672">();</span>
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="現象">現象</h2>
+<p>上記のJavaコードを実行すると下記のエラーが発生する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">$ java Sample
+Exception in thread &#34;main&#34; java.io.IOException: Unable to tunnel through proxy. Proxy returns &#34;HTTP/1.1 407 Proxy Authentication Required&#34;
+        at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2124)
+        at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
+        at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
+        at Sample.main(Sample.java:25)
+</code></pre></div><p>コード内での認証プロキシ設定だけでなく、下記も試しましたが結果はかわらず。</p>
+<ol>
+<li>Java起動オプションにproxyの設定をする</li>
+</ol>
+<ul>
+<li>例: <code>java -Dhttp.proxyHost=&quot;example.proxy.com&quot; -Dhttp.proxyPort=8080 -Dhttp.proxyUser=user -Dhttp.proxyPassword=password (httpsに関しても同様に設定) Sample</code></li>
+</ul>
+<ol start="2">
+<li>Systemデフォルトを参照するよう設定</li>
+</ol>
+<ul>
+<li>例: <code>java -Djava.net.useSystemProxies=true Sample</code></li>
+</ul>
+<h2 id="環境">環境</h2>
+<p>OSはUbuntu 16.04、Javaのバージョンは下記です。</p>
+<pre><code>$ java -version
+java version &quot;1.8.0_111&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_111-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
+</code></pre><h1 id="結論">結論</h1>
+<p>2016/10にリリースされた8u111以降から、デフォルトの設定としてHTTPS接続する際のトンネリングにBasic認証を利用することができなくなりました。</p>
+<p><a href="https://www.java.com/ja/download/faq/release_changes.xml">Java 8リリースの変更</a></p>
+<blockquote>
+<p>HTTPSトンネリングのBasic認証の無効化
+一部の環境で、HTTPSプロキシ時に特定の認証スキームが不適切である場合があります。そのため、Basic認証スキームは、デフォルトではOracle Java Runtimeでjdk.http.auth.tunneling.disabledSchemesネットワーク・プロパティにBasicを追加することで非アクティブ化されています。HTTPSのトンネルの設定時にBasic認証を必要とするプロキシは、デフォルトでは成功しないようになりました。必要な場合、jdk.http.auth.tunneling.disabledSchemesネットワーク・プロパティからBasicを削除するか、コマンド行で同じ名前のシステム・プロパティを&rdquo;&rdquo; (空)に設定することで、この認証スキームを再度アクティブ化できます。また、jdk.http.auth.tunneling.disabledSchemesおよびjdk.http.auth.proxying.disabledSchemesネットワーク・プロパティと同じ名前のシステム・プロパティは、それぞれHTTPSのトンネルの設定時またはプレーンなHTTPのプロキシ時に、アクティブ化されている可能性があるその他の認証スキームを無効化するために使用できます。JDK-8160838 (非公開)</p>
+</blockquote>
+<p><a href="http://www.oracle.com/technetwork/java/javase/8u111-relnotes-3124969.html">英語版のリリースノート</a>を見ると、<code>core-libs/java.net</code>と書いてあるので、<code>java.net</code>パッケージ内のクラスの機能を使ってHTTPS接続する際のデフォルトの挙動の変更だと思われます。</p>
+<h1 id="回避方法">回避方法</h1>
+<ol>
+<li>JVMオプション<code>jdk.http.auth.tunneling.disabledSchemes=&quot;&quot;</code>を設定する。</li>
+</ol>
+<ul>
+<li>実行時: <code>java -Djdk.http.auth.tunneling.disabledSchemes=&quot;&quot; Sample</code></li>
+<li>コード内: <code>System.setProperty(&quot;jdk.http.auth.tunneling.disabledSchemes&quot;, &quot;&quot;);</code></li>
+</ul>
+<ol start="2">
+<li>他のライブラリを使う</li>
+</ol>
+<ul>
+<li>ApacheのHTTPClientなど</li>
+</ul>
+<h1 id="補足">補足</h1>
+<p><code>System.getProperty(&quot;jdk.http.auth.tunneling.disabledSchemes&quot;)</code>をsysoutしてみましたが、結果は<code>null</code>でした。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/java/">Java</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/proxy/">proxy</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

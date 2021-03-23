@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermostの開発に参加してみた記録</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermostの開発に参加してみた記録"/>
+<meta name="twitter:description" content="この記事はFujitsu extended Advent Calendar 2016 16日目の記事です。 ※この記事に描かれていることは個人の見解であり、所属する組織の公式見解ではありません。`"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermostの開発に参加してみた記録
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>この記事は<a href="http://qiita.com/advent-calendar/2016/fujitsu_ext">Fujitsu extended Advent Calendar 2016</a> 16日目の記事です。</p>
+<p>※この記事に描かれていることは個人の見解であり、所属する組織の公式見解ではありません。`
+個人的な活動の経験から得た知見の共有を目的としています。</p>
+<h1 id="はじめに">はじめに</h1>
+<p>SI企業で働く傍ら社外のプログラミング関係の勉強会にも参加しており、その中で語られるOSS的な開発プロセスがどんなものであるか、実際に参加して体験してみたいと常々思っていました。
+今年の夏ごろから<a href="https://about.mattermost.com">Mattermost</a>というSlackクローンのOSSチャットツールの開発に参加し始めているので、Mattermost開発の進め方などを紹介したいと思います。
+他の組織の開発を体験することで、日頃の開発の改善点が見つかるのでは無いかというのが参加のモチベーションです。</p>
+<p>Mattermostを選んだ理由としては、今年の初め頃から日常的にMattermostを利用しており、Eat Your Own Dogfoodの精神で「より良くしたい」という意識を持ちやすいことです。
+また、MattermostはサーバーサイドのGo言語、フロントエンドのReact.jsを始めとし、DockerfileやiOS,Androidアプリ(最近react-nativeで書き直し中)、<a href="https://github.com/mattermost/desktop">Electron製のデスクトップアプリ</a>など、新し目の技術を取り入れているため、普段は使わない技術に触れられるところが魅力でした。</p>
+<p>開発に参加してると言っても、枝葉のIssue対応ぐらいしかしていないので、もちろんMattermostチームを代表しての記事ではありません。
+誤っている部分がありましたら、報告いただけると幸いです。</p>
+<h1 id="チャットツール">チャットツール</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mattermost">Mattermost</a></li>
+    <li><a href="#その他のチャットツール">その他のチャットツール</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#mattermosthttpspre-releasemattermostcom"><a href="https://pre-release.mattermost.com/">Mattermost</a></a></li>
+    <li><a href="#githubhttpsgithubcommattermostplatform"><a href="https://github.com/mattermost/platform">Github</a></a></li>
+    <li><a href="#jira-cloudhttpsmattermostatlassiannetsecuredashboardjspa"><a href="https://mattermost.atlassian.net/secure/Dashboard.jspa">JIRA Cloud</a></a></li>
+    <li><a href="#jenkinshttpsbuildmattermostcom"><a href="https://build.mattermost.com">Jenkins</a></a></li>
+    <li><a href="#mattermost-peer-to-peer-forumhttpsforummattermostorg"><a href="https://forum.mattermost.org">Mattermost Peer-to-Peer Forum</a></a></li>
+    <li><a href="#mattermost-translation-serverhttptranslatemattermostcom"><a href="http://translate.mattermost.com">Mattermost Translation Server</a></a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#チケット選択">チケット選択</a></li>
+        <li><a href="#cla">CLA</a></li>
+        <li><a href="#developer-machine-setup">Developer Machine Setup</a></li>
+        <li><a href="#コーディング">コーディング</a></li>
+        <li><a href="#レビュー">レビュー</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="mattermost">Mattermost</h2>
+<p>MatermostはPalo Altoにある<a href="https://about.mattermost.com/company/">Mattermost, Inc.</a>が開発しているオープンソースのチャットツールです。
+<a href="https://about.mattermost.com/">公式サイト</a>にもあるように<code>Open source, self-hosted Slack-alternative</code>を謳っています。。
+名前の由来は<code>achieve what matters most(最も重要なことを達成する)</code>だそうです。</p>
+<p>機能的にはSlackに追従することを目的としつつ、オンプレミスで動作可能であることやオープンな場で開発されていることを強みとしています。
+また、Slackにはない多言語対応や、Enterprise版ではAD/LDAP認証を利用できるなど独自の機能も追加しています。
+<a href="https://about.mattermost.com/pricing/">Pricing – Mattermost</a></p>
+<p>隔月の定期リリースを行っており、次回のv3.6のリリースは2017/1/16に予定されています。</p>
+<h2 id="その他のチャットツール">その他のチャットツール</h2>
+<p>Mattermost以外にもChatツールはプロプライエタリ・OSS含め様々あります。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名前</th>
+<th align="center">公式サイト</th>
+<th align="center">Github</th>
+<th align="center">スター数</th>
+<th align="center">言語</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Slack</td>
+<td align="center"><a href="https://slack.com/">Slack: Be less busy</a></td>
+<td align="center">SaaSのみ</td>
+<td align="center">-</td>
+<td align="center">PHP</td>
+</tr>
+<tr>
+<td align="center">HipChat</td>
+<td align="center"><a href="https://ja.atlassian.com/software/hipchat">HipChat - Atlassian</a></td>
+<td align="center">SaaSのみ</td>
+<td align="center">-</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">Mattermost</td>
+<td align="center"><a href="https://www.mattermost.org/">Mattermost</a></td>
+<td align="center"><a href="https://github.com/mattermost/platform">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/mattermost/platform.svg" alt="GitHub stars"></a></td>
+<td align="center">go,js</td>
+</tr>
+<tr>
+<td align="center">RocketChat</td>
+<td align="center"><a href="https://rocket.chat/">Rocket.Chat</a></td>
+<td align="center"><a href="https://github.com/RocketChat/Rocket.Chat">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/RocketChat/Rocket.Chat.svg" alt="GitHub stars"></a></td>
+<td align="center">js,coffee</td>
+</tr>
+<tr>
+<td align="center">Zulip</td>
+<td align="center"><a href="https://zulip.org/">Zulip</a></td>
+<td align="center"><a href="https://github.com/zulip/zulip">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/zulip/zulip.svg" alt="GitHub stars"></a></td>
+<td align="center">python,js</td>
+</tr>
+<tr>
+<td align="center">Actor Messanger</td>
+<td align="center"><a href="https://actor.im/">Actor Messenger</a></td>
+<td align="center"><a href="https://github.com/actorapp/actor-platform">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/actorapp/actor-platform.svg" alt="GitHub stars"></a></td>
+<td align="center">java,scala,swift</td>
+</tr>
+<tr>
+<td align="center">Let&rsquo;s Chat</td>
+<td align="center"><a href="http://sdelements.github.io/lets-chat/">Let&rsquo;s Chat</a></td>
+<td align="center"><a href="https://github.com/sdelements/lets-chat">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/sdelements/lets-chat.svg" alt="GitHub stars"></a></td>
+<td align="center">js</td>
+</tr>
+<tr>
+<td align="center">Kandan</td>
+<td align="center"><a href="http://getkandan.com/">KandanApp</a></td>
+<td align="center"><a href="https://github.com/kandanapp/kandan">github</a></td>
+<td align="center"><a href=""><img src="https://img.shields.io/github/stars/kandanapp/kandan.svg" alt="GitHub stars"></a></td>
+<td align="center">js,coffee,ruby</td>
+</tr>
+</tbody>
+</table>
+<p>参考：<a href="https://github.com/Kickball/awesome-selfhosted#custom">Kickball/awesome-selfhosted</a></p>
+<p>基本無料かつサーバーのお守りの必要のないSaaSであるSlackがチャットツールの定番かと思いますが、やはり組織内で利用するには外部サービスということで利用に慎重になってしまう部分があったため、何も心配せず使えるOSSを選択していました。</p>
+<p>私はOSSとしてはKandan, Let&rsquo;s Chat, Mattermostしか使ったことがないですが、Rocket.chatとZulipも開発が活発なため、OSSのチャットツールを検討する場合は候補となるかと思います。
+Kandanは機能的に物足りなく、Let&rsquo;s Chatは快適に利用できてはいましたが最近ほとんどメンテナンスされていないため、Mattermostへ乗り換え、今でもコミュニケーションツールとして利用しています。</p>
+<h1 id="mattermost開発ツール">Mattermost開発ツール</h1>
+<p>Mattermostチームは多くのサービスを使って開発されており、そのほとんどが誰でも閲覧できるところに公開されています。（各サービスのアカウントを作成する必要はありますが）</p>
+<h2 id="mattermosthttpspre-releasemattermostcom"><a href="https://pre-release.mattermost.com/">Mattermost</a></h2>
+<p>Mattermost開発におけるコミュニケーションの多くはMattermost上で行われています。
+バグのトリアージからPull RequestやGithu Issueへの更新の通知、ユーザーフォーラムの質問への回答依頼など、Mattermost本体に関わることから、ドキュメンテーション、ローカライズなどなど開発に関することが日頃から議論されています。
+ほぼすべて英語です。</p>
+<p>「どこどこのチャンネルに属さなくてはいけない」という指定は無いと思いますが、開発に参加する場合は<code>Contributors</code>と、開発対象のチャンネル(<code>Documentation</code>、<code>i18n - localization</code>など)の動向はチェックしておいても良いかと思います。</p>
+<p>開発チャットとして使われているMattermostは最新のコードから作成された環境のため、新機能をいち早く試すことができます。
+最近ではSlackにあるような、投稿に対するReactionの機能などが追加されています。</p>
+<p>最初にログインした時にデフォルトで参加することになるチャンネルである<code>Reception</code>の参加者数は1184名(2016/12/12時点)となっています。
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/4243baac-8c38-fe80-96d3-2e35d276a7a0.png" alt="_Reception-_Contributors_Mattermost.png"></p>
+<h2 id="githubhttpsgithubcommattermostplatform"><a href="https://github.com/mattermost/platform">Github</a></h2>
+<p>Githubではソースコード、Issue、Pull Requestなどが管理されています。
+最近追加されたGithubの新機能である<a href="https://github.com/mattermost/platform/projects">Projects</a>やReviewers指定なども積極的に採用しています。</p>
+<p>また、Mattermost本体のソースコードだけでなく、Mattermostのorganizationでは<a href="https://github.com/mattermost/docs">ドキュメント(Sphinx製)</a>や<a href="https://github.com/mattermost/mattermost-docker">Dockerfile</a>、<a href="https://github.com/mattermost/desktop">デスクトップ</a>・<a href="https://github.com/mattermost/android">Android</a>・<a href="https://github.com/mattermost/ios">iOS</a>アプリなどのソースコードも公開されています。</p>
+<p>最近では<a href="https://github.com/mattermost/mattermost-mobile">React Nativeによるスマホアプリ</a>の開発も始まっているようです。</p>
+<h2 id="jira-cloudhttpsmattermostatlassiannetsecuredashboardjspa"><a href="https://mattermost.atlassian.net/secure/Dashboard.jspa">JIRA Cloud</a></h2>
+<p>JIRAでもIssueの管理が行われています。
+GithubのIssue管理と被る部分もありそうですが、おそらくJIRAがメインのIssue Trackerで使用されており、GithubはGithubに慣れている人へのIssue報告の場やHelp Wanted Issue置き場として利用しているように思います。</p>
+<h2 id="jenkinshttpsbuildmattermostcom"><a href="https://build.mattermost.com">Jenkins</a></h2>
+<p>CIサーバーとしてJenkinsを利用しています。
+PullRequestが作成されると、テストとチェックスタイルが実行され、CIの結果はPullRequestへ通知されます。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/9e9f6309-b681-e391-0609-6c3958f6b2b0.png" alt="PLT-1555_Message_Editing_and_Deleting_permissions_by_ayadav_·_Pull_Request__4692_·_mattermost_platform.png"></p>
+<h2 id="mattermost-peer-to-peer-forumhttpsforummattermostorg"><a href="https://forum.mattermost.org">Mattermost Peer-to-Peer Forum</a></h2>
+<p>ユーザーによるPeer-to-Peerのフォーラムも用意されています。
+回答の必要があるトピックについては、定期的に開発者チャットの方でキャッチアップされているのため、回答がつかないということはあまり無いようです。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/448f8a43-0755-7167-1acf-cb85287ad9a7.png" alt="Contributors_-_Contributors_Mattermost_と_マイファイル.png"></p>
+<h2 id="mattermost-translation-serverhttptranslatemattermostcom"><a href="http://translate.mattermost.com">Mattermost Translation Server</a></h2>
+<p>翻訳作業用のPootleサーバーです。
+翻訳については、別エントリに詳しく書いています。
+<a href="http://qiita.com/kaakaa_hoe/items/ac79289d65f7a3e3d9ea">MattermostのLocalizationフロー - Qiita</a></p>
+<h1 id="code-contribution">Code Contribution</h1>
+<p>コードを送る際に必要なプロセスは、公式の<a href="https://docs.mattermost.com/guides/developer.html#development-process">Development Process</a>にまとめてあるので、詳細についてはこちらを参照ください。
+もちろん上記のドキュメントについてもオープンソースとして公開されており、PullRequestも受け付けています。https://github.com/mattermost/docs</p>
+<p>ここでは、メインリポジトリである<a href="https://github.com/mattermost/platform">mattermost/platform</a>へのコントリビューションのざっくりとした流れを紹介します。
+（GithubでのPullRequestの作り方などの基本的なことには触れません）</p>
+<h3 id="チケット選択">チケット選択</h3>
+<p>まず、対応するチケットを下記から選びます。</p>
+<ul>
+<li><a href="https://github.com/mattermost/platform/issues?utf8=%E2%9C%93&amp;q=is%3Aissue%20is%3Aopen%20%5BHelp%20Wanted%5D">Help Wanted Issues - Github</a>
+<ul>
+<li>2016/12/8〜2017/1/8まで、4つプルリクを送ると<a href="http://www.zazzle.com/knights_of_mattermost_shirt_black-235102741116730031">Tシャツ(デザイン違うかも)</a>が貰える<a href="https://about.mattermost.com/mattermost-holiday-hackfest-2016/">Mattermost Holiday Hackfest</a>が開催中</li>
+<li>2016年10月の<a href="https://hacktoberfest.digitalocean.com">Hacktoberfest</a>以降、GithubにHelp Wanted Issueが作成されるようになった</li>
+</ul>
+</li>
+<li><a href="https://mattermost.atlassian.net/browse/PLT-4950?filter=10101">Accepted Pull Request - JIRA</a>
+<ul>
+<li><a href="https://mattermost.atlassian.net/browse/PLT-3485?filter=10206">Good First Contribution - JIRA</a>というのもあります。が、最近あまり追加はされてないようです。</li>
+</ul>
+</li>
+</ul>
+<h3 id="cla">CLA</h3>
+<p>対応するチケットが決まったら<a href="https://www.mattermost.org/mattermost-contributor-agreement/">Mattermost Contributor Agreement</a>を結んでおきます。
+これをやらずにPullRequestを送ると、Mattermostチームの方からPull Requestのコメントとして上記CLAを結ぶよう言われます。</p>
+<h3 id="developer-machine-setup">Developer Machine Setup</h3>
+<p>修正したソースコードの動作を確認するために、ローカルでMattermostを起動するための環境を作ります。
+<a href="https://docs.mattermost.com/developer/developer-setup.html#developer-machine-setup">Developer Machine Setup</a>を参考に。(DockerやGo環境が必要です)</p>
+<h3 id="コーディング">コーディング</h3>
+<p>MattermostはGithub Flowを採用していると思われます。
+PullRequest用の作業をする際は、masterから開発用ブランチを作成し、開発が終わったらmasterに対してPullRequestを作成します。</p>
+<p>ブランチ名はJIRAチケットなら<code>plt-394</code>のようにJIRAのチケット番号を使用します。
+JIRAチケットがなく、Github Issueのみある場合は<code>gh-555</code>のようにIssue番号を使用しています。</p>
+<hr>
+<p>実際のコードの修正部分ですが、リポジトリ内のファイル構造の概要は<a href="https://docs.mattermost.com/developer/developer-flow.html#repository-structure">Repository Structure</a>に書かれています。
+個人的な感想としては、サーバーサイドのGoの部分はディレクトリ構造から責務が理解しやすいですが、フロントエンドのReact Component入れ子を読み解くのが難儀でした。</p>
+<hr>
+<p>動作確認は、先の<a href="https://docs.mattermost.com/developer/developer-setup.html#developer-machine-setup">Developer Machine Setup</a>を済ませた環境であれば、ルートディレクトリで<code>make run</code>を実行することで、<code>http://localhost:8065</code>にMattermostが立ち上がるので、そちらで実機確認が出来ます。
+また、Pull Requestを作成する前に<code>make test</code>、<code>make check-style</code>でエラーがないか確認しておきます。(私のMacBookAir 2011モデルでテスト完了まで10分程度かかるのが難点・・)</p>
+<p>Pull Requestのテンプレートは下記のようになっているので指示通りに書き直します。</p>
+<pre><code>Please make sure you've read the [pull request](http://docs.mattermost.com/developer/contribution-guide.html#preparing-a-pull-request) section of our [code contribution guidelines](http://docs.mattermost.com/developer/contribution-guide.html).
+
+When filling in a section please remove the help text and the above text.
+
+#### Summary
+[A brief description of what this pull request does.]
+
+#### Ticket Link
+[Please link the GitHub issue or Jira ticket this PR addresses.]
+
+#### Checklist
+[Place an '[x]' (no spaces) in all applicable fields. Please remove unrelated fields.]
+- [ ] Added or updated unit tests (required for all new features)
+- [ ] Added API documentation (required for all new APIs)
+- [ ] All new/modified APIs include changes to the drivers
+- [ ] Has enterprise changes (please link)
+- [ ] Has UI changes
+- [ ] Includes text changes and localization file ([.../i18n/en.json](https://github.com/mattermost/platform/blob/master/i18n/en.json) and [.../webapp/i18n/en.json](https://github.com/mattermost/platform/tree/master/webapp/i18n/en.json)) updates
+- [ ] Touches critical sections of the codebase (auth, upgrade, etc.)
+</code></pre><p>この辺りの詳細については<a href="https://docs.mattermost.com/developer/developer-flow.html#workflow">Workflow</a>に記述があります。</p>
+<h3 id="レビュー">レビュー</h3>
+<p>Pull Requestを作成後、mergeされるためにはPMによるレビューと二人以上ののDeveloperによるレビューを通す必要があります。
+PullRequestのレビューステータスはGithub上のラベル<code>1: PM Review</code>、<code>2: PM Review</code>などで表現されています。</p>
+<p>また、<code>Setup Test Server</code>のラベルが貼られると、自動でPull Requestのコードを含んだMattermostを立ち上げ、その環境のURLをPull Requestにコメントしてくれる機能があるようです。
+これらラベルの操作はコアチームしか操作できません。</p>
+<p>レビュー完了までにConflictが発生するとrebaseを求められるので、対応します。
+私は<a href="http://d.hatena.ne.jp/wyukawa/touch/20140603/1401797290">こちらのエントリ</a>を参考にしながら対応しています。</p>
+<hr>
+<p>上記がCode Contributionの流れです。</p>
+<h1 id="所感">所感</h1>
+<p>今回、大きめと思われるオープンソースへのコントリビューションを体験してみましたが、基本的には一般的に良いと言われているプラクティスをしっかり遂行しているという感じで、大きな驚きはありませんでした。
+ツールを選べば社内でも遂行できますし、実際に社内でもWebベースのレビューツールやチャット、Jenkinsを利用したCIなども行っていたこともあるため、キーワードだけ見れば同じ開発スタイルを遂行できると思います。</p>
+<p>ただ、開発に参加するときは事務作業など考えず、コードだけをに集中できるため気が楽でした。社内との一番の違いはそこかと思います。</p>
+<p>また、Mattermostチームはコントリビューターに対してとても親切だと感じました。PullRequestに対する対応も(リリース前後でなければ)基本的には早いですし、「Issue対応したいんだけど、どこから手をつけたらいい？」というような初歩的な質問にも丁寧に回答してくれます。
+きちんと組織立ったOSSであるMattermostに参加できたことは、OSSに参加する上での不安や躊躇いを払拭する意味で有意義だったと感じます。</p>
+<h1 id="おわりに">おわりに</h1>
+<p><a href="http://tnaoto.hatenablog.com/entry/2016/12/02/114611">二日目の高橋さんのエントリ</a>にもあったように</p>
+<blockquote>
+<p>自分たちの体験こそが知見ノウハウであり、お客様のビジネスをよりよくするための糧になると私は考えています。（個人の見解です）
+ということだと思っています。</p>
+</blockquote>
+<p>また、こちらの前半部分については個人的にとても同意できます。</p>
+<!-- raw HTML omitted -->
+<p>OSSを選択・OSSに参加するかどうかは個人個人考え方は違うでしょうが、他の組織の開発にも気軽に参加出来る時代なので、いろいろ見て回っていきたいです。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/oss/">OSS</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">Mattermost</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

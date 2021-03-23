@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost4.6の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost4.6の新機能"/>
+<meta name="twitter:description" content="はじめに 2018/01/16にMattermost 4.6.0がリリースされたので、追加された機能などについて簡単に紹介します。 詳細については"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermost4.6の新機能
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2018/01/16にMattermost 4.6.0がリリースされたので、追加された機能などについて簡単に紹介します。</p>
+<p>詳細については公式のリリースを確認ください。
+<a href="https://about.mattermost.com/releases/mattermost-4-6/">Mattermost 4.6: Faster channels, enhanced 508 compliance – Mattermost</a>
+<a href="https://docs.mattermost.com/administration/changelog.html#release-v4-6">Mattermost Changelog — Mattermost 4.6 documentation</a></p>
+<h1 id="新機能">新機能</h1>
+<p>今回のリリースでは年末年始の休暇を挟んだこともあり、大きな新機能のリリースは無く、改善系の更新が多かった模様です。</p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#webアプリのパフォーマンス改善">Webアプリのパフォーマンス改善</a></li>
+    <li><a href="#通知設定のデフォルト値の更新">通知設定のデフォルト値の更新</a></li>
+    <li><a href="#apiv4が公式apiに">APIv4が公式APIに</a></li>
+    <li><a href="#オープンソースプロジェクト">オープンソースプロジェクト</a>
+      <ul>
+        <li><a href="#mattermost-poll-integration-with-firebase">Mattermost Poll Integration with Firebase</a></li>
+        <li><a href="#cloudapp-integration">CloudApp Integration</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="webアプリのパフォーマンス改善">Webアプリのパフォーマンス改善</h2>
+<p>MattermostのWebアプリのパフォーマンスが改善されました。</p>
+<ul>
+<li>同じチーム内でチャンネルを切り替える際の時間が、最大で45%ほど短縮されたようです</li>
+<li>チャンネルを切り替えた際のメモリ使用量が最大で85%削減されたようです</li>
+<li>アイコンやロゴのサイズも70-80%ほど削減されたようです</li>
+</ul>
+<h2 id="通知設定のデフォルト値の更新">通知設定のデフォルト値の更新</h2>
+<p>デフォルト通知設定がMattermostユーザー・コミュニティによって推奨された設定に変更されたようです。</p>
+<ul>
+<li>デスクトップ通知はメンションとダイレクトメッセージがあった時のみ通知されます</li>
+<li>モバイルプッシュ通知はユーザーが離席中かオフラインの時のみ通知され、オンラインの際は通知されません</li>
+<li>ファーストネームでのメンションでは通知されません</li>
+</ul>
+<p>上記の通設定は、アカウント設定よりいつでも変更できます。</p>
+<h2 id="apiv4が公式apiに">APIv4が公式APIに</h2>
+<p>今回のリリースより、APIv3がdeprecatedになり、APIv4が公式のAPIとなりました。
+APIv3はサポート対象外となり、Mattermost5.0で削除されます。</p>
+<p>APIv3からAPIv4へのマイグレーションについてのTIPSが下記にあります。
+<a href="https://api.mattermost.com/#tag/schema">Mattermost API Reference</a></p>
+<h2 id="オープンソースプロジェクト">オープンソースプロジェクト</h2>
+<h3 id="mattermost-poll-integration-with-firebase">Mattermost Poll Integration with Firebase</h3>
+<p>Firebaseを利用したMattermost上での投票機能のようです。
+<a href="https://github.com/jedfonner/MattermostOnFire">jedfonner/MattermostOnFire: Firebase Realtime Database and Firebase Cloud Function code to power a Mattermost slash command for creating a poll using Mattermost Interactive Buttons.</a></p>
+<h3 id="cloudapp-integration">CloudApp Integration</h3>
+<p>デスクトップのキャプチャやGIF動画などを作成できるサービスである<a href="https://www.getcloudapp.com/">CoundApp</a>とMattermostとの連携機能のようです。
+<a href="https://www.getcloudapp.com/integrations/mattermost">Mattermost Integration I CloudApp Video Screen Recorder</a></p>
+<h1 id="mvp">MVP</h1>
+<p>私事ですが、今回のv4.6リリースのMVPに選ばれていました。
+大きな貢献はまだできていないですが、日本語の翻訳や、細々したコントリビュートなどが評価されたものと思っています。
+また、年末年始の休暇中に時間を割くようなワーカホリックな国民性の賜物かと思っています。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/a0db2679-9999-d4e1-cf5c-bdbc6788e80f.jpeg" alt="DUO-M8QVoAAI-7r.jpg"></p>
+<h1 id="おわりに">おわりに</h1>
+<p>次回の <code>v4.7.0</code>のリリースは2018/2/16を予定しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/releases/">releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

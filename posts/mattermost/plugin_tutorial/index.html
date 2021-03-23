@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermostプラグインの作り方</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermostプラグインの作り方"/>
+<meta name="twitter:description" content="(追記 2020/04/12) 本記事でも使用しているdepがもうメンテナンスされておらず、本記事で紹介している内容でMattermostの最新版を利用したプラグイ"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermostプラグインの作り方
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p><strong>(追記 2020/04/12)</strong></p>
+<p>本記事でも使用している<code>dep</code>がもうメンテナンスされておらず、本記事で紹介している内容でMattermostの最新版を利用したプラグインの開発が困難になっているようです。</p>
+<p>今後Mattermostプラグイン開発を始める場合、<a href="https://blog.kaakaa.dev/posts/mattermost/plugin-template/">Mattermostプラグイン用のリポジトリテンプレート</a> でも紹介していますが、Mattermost公式チームがメンテナンスしているテンプレートリポジトリ <a href="https://github.com/mattermost/mattermost-plugin-starter-template">https://github.com/mattermost/mattermost-plugin-starter-template</a> を利用することを推奨します。</p>
+<p><strong>(追記おわり)</strong></p>
+<h1 id="はじめに">はじめに</h1>
+<p>2017/11/16にリリースされたMattermost v4.4.0で、Mattermost自体の機能拡張を行うためのプラグイン機能が追加されました。
+その後、2018/08/16にリリースされたMattermost v5.2.0で、破壊的変更となるプラグインアーキテクチャの一新が行われ、現在も新たな拡張ポイントやAPIが追加され続けています。</p>
+<p>Mattermostプラグインでは、サーバーサイド(Go言語)とフロントエンド(React.js)両方の拡張が行えます。サーバーサイドを拡張したい場合はGo言語、フロントエンドを拡張したい場合はJavascripnt(React.js)を書くことになります。
+Mattermostプラグインを実装することで、新たなユーザーがチーム/チャンネルに参加した際の処理を追加したり、投稿を表すReactコンポーネントを自作のものに置き換えるなど、今まで手を入れることができなかった部分にまで機能追加を行うことができるようになります。</p>
+<p>今回は、簡単な実装例を交えながらMattermostプラグインの作成方法について紹介していきたいと思います。</p>
+<p>この記事で紹介しているコードは、下記のリポジトリで公開しています。
+<a href="https://github.com/kaakaa/mattermost-plugin-first">https://github.com/kaakaa/mattermost-plugin-first</a>
+(Mattermost v5.6を対象に動作確認を行なっています）</p>
+<h1 id="step-1-プラグイン開発アップロード">Step 1: プラグイン開発・アップロード</h1>
+<p>まず、何も機能を持たない空のプラグインを作成し、そのプラグインをアップロードするまでのフローを見ていきます。</p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#マニフェストファイル">マニフェストファイル</a></li>
+    <li><a href="#プラグイン作成">プラグイン作成</a></li>
+    <li><a href="#プラグインアップロード用の設定">プラグインアップロード用の設定</a></li>
+    <li><a href="#プラグインのアップロード">プラグインのアップロード</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#maingo">main.go</a></li>
+    <li><a href="#plugingo">plugin.go</a></li>
+    <li><a href="#hooksgo">hooks.go</a></li>
+    <li><a href="#gopkgtoml">Gopkg.toml</a></li>
+    <li><a href="#ビルド">ビルド</a></li>
+    <li><a href="#プラグインアップロード有効化">プラグインアップロード・有効化</a></li>
+    <li><a href="#動作確認">動作確認</a></li>
+    <li><a href="#まとめ">まとめ</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#indexjs">index.js</a></li>
+    <li><a href="#actionjs">action.js</a></li>
+    <li><a href="#ビルド-1">ビルド</a></li>
+    <li><a href="#プラグインアップロード有効化-1">プラグインアップロード・有効化</a></li>
+    <li><a href="#動作確認-1">動作確認</a></li>
+    <li><a href="#まとめ-1">まとめ</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#参考資料">参考資料</a>
+      <ul>
+        <li><a href="#開発者向けドキュメント">開発者向けドキュメント</a></li>
+        <li><a href="#サンプルプラグイン">サンプルプラグイン</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="マニフェストファイル">マニフェストファイル</h2>
+<p>Mattermostプラグインの実体は<code>.tar.gz</code>形式のファイルとなります。
+<code>.tar.gz</code>ファイルの中身として最低限必要なファイルは<strong>マニフェストファイル</strong>だけです。</p>
+<p>JSON形式(<code>plugin.json</code>)かYAML形式(<code>plugin.yaml</code>)で、プラグインのID、名前、バージョンや実行バイナリのパスなどのメタ情報を記述するファイルです。</p>
+<p>マニフェストファイル記述できる内容については、下記のリファレンスを参照してください。
+<a href="https://developers.mattermost.com/extend/plugins/manifest-reference/">https://developers.mattermost.com/extend/plugins/manifest-reference/</a></p>
+<p>まず、下記のようにマニフェストファイルを作成します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json:plugin.json" data-lang="json:plugin.json">{
+    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;org.kaakaa.mattermost-plugin-first&#34;</span>,
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Mattermost Plugin Sample&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;このプラグインはQiita記事用のMattermostプラグインです。&#34;</span>,
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.1&#34;</span>
+}
+</code></pre></div><h2 id="プラグイン作成">プラグイン作成</h2>
+<p>上記のマニフェストファイルを含む<code>.tar.gz</code>ファイルを作成するため、下記のようなMakefileを作成します。（makeの環境がない場合は、手動でコマンドを実行しても構いません）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Makefile" data-lang="Makefile">PLUGIN_ID <span style="color:#f92672">?=</span> org.kaakaa.mattermost-plugin-first
+PLUGIN_VERSION <span style="color:#f92672">?=</span> 0.0.1
+BUNDLE_NAME <span style="color:#f92672">?=</span> <span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>_<span style="color:#66d9ef">$(</span>PLUGIN_VERSION<span style="color:#66d9ef">)</span>.tar.gz
+
+<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span>
+	rm -rf dist/
+	mkdir -p dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>
+	cp plugin.json dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/
+
+	cd dist <span style="color:#f92672">&amp;&amp;</span> tar -cvzf <span style="color:#66d9ef">$(</span>BUNDLE_NAME<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>
+
+	@echo plugin built at: dist/<span style="color:#66d9ef">$(</span>BUNDLE_NAME<span style="color:#66d9ef">)</span>
+</code></pre></div><p><code>make build</code>を実行することで<code>dist/org.kaakaa.mattermost-plugin-first_0.0.1.tar.gz</code>というファイルが作成されます。</p>
+<h2 id="プラグインアップロード用の設定">プラグインアップロード用の設定</h2>
+<p>作成したプラグインをアップロードしていきます。
+まず、プラグインをシステムコンソールからアップロードできるようにするために、Mattermostサーバーの設定ファイル(<code>config.json</code>)を編集します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">
+<span style="color:#960050;background-color:#1e0010">...</span>
+    <span style="color:#960050;background-color:#1e0010">},</span>
+    <span style="color:#e6db74">&#34;PluginSettings&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+        <span style="color:#f92672">&#34;Enable&#34;</span>: <span style="color:#66d9ef">true</span>,
+        <span style="color:#f92672">&#34;EnableUploads&#34;</span>: <span style="color:#66d9ef">true</span>,
+        <span style="color:#f92672">&#34;Directory&#34;</span>: <span style="color:#e6db74">&#34;./plugins&#34;</span>,
+<span style="color:#960050;background-color:#1e0010">...</span>
+</code></pre></div><p>Mattermost設定ファイル内の<code>PluginSettings</code>にある<code>Enable</code>と<code>EnableUploads</code>を<code>true</code>にし、Mattermostサーバーを再起動します。</p>
+<h2 id="プラグインのアップロード">プラグインのアップロード</h2>
+<p>Mattermostの <strong>システムコンソール</strong> &gt; <strong>プラグイン(ベータ版)</strong> &gt; <strong>管理</strong>画面からプラグインをアップロードします。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/9d56287e-75d6-02a1-5ee8-529c54a95823.png" alt="スクリーンショット 2019-01-01 10.36.28.png"></p>
+<p><strong>ファイルを選択する</strong> ボタンを押し、先ほど作成した<code>dist/org.kaakaa.mattermost-plugin-first_0.0.1.tar.gz</code>を選択し、<strong>アップロード</strong>ボタンを押すことでプラグインがアップロードされます。
+プラグインが正常にアップロードされると<strong>インストール済みプラグイン</strong>に表示されます。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/2de7b8f6-3280-0468-0236-7c6726de1c60.png" alt="スクリーンショット 2019-01-01 10.42.33.png"></p>
+<p>アップロードされたプラグインの<strong>有効にする</strong>ボタンを押すことでプラグインを有効にすることができますが、現在はプラグインの実装が行われていないため、エラーメッセージ「このプラグインを起動できませんでした。エラーに関するシステムログを確認してください。」が表示されるはずです。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/35f8c473-079d-bdc6-fa72-87226bc1a216.png" alt="スクリーンショット 2019-01-01 10.43.14.png"></p>
+<h1 id="step-2-サーバーサイドプラグインの実装">Step 2: サーバーサイドプラグインの実装</h1>
+<p>Step 1で作成したプラグインにサーバーサイドの実装を加えていきます。
+<code>server</code>というディレクトリを作成し、そこにGoコードを書いていきます。</p>
+<pre><code>root/
+  ├ dist/
+  │  └ org.kaakaa.mattermost-plugin-first_0.0.2.tar.gz
+  ├ server/
+  │  ├ main.go
+  │  ├ plugin.go
+  │  └ Gopkg.toml
+  └ plugin.json
+</code></pre><p>依存ライブラリの管理には<a href="https://github.com/golang/dep">golang/dep</a>を使用しています。</p>
+<h2 id="maingo">main.go</h2>
+<p>まずGo言語のmainメソッドでMattermostプラグインを認識させるために<code>plugin.ClientMain</code>メソッドを呼び出し、自作のPlugin用の構造体(<code>FirstPlugin</code>)を読み込ませます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/main.go" data-lang="go:server/main.go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/plugin&#34;</span>
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">ClientMain</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">FirstPlugin</span>{})
+}
+</code></pre></div><p>この自作のFirstPlugin構造体にプラグインの実装を追加していきます。</p>
+<h2 id="plugingo">plugin.go</h2>
+<p><code>FirstPlugin</code>構造体に最低限求められるのは、<code>plugin.MattermostPlugin</code>を継承することです。
+<code>plugin.MattermostPlugin</code>を継承することでMattermostプラグインとして認識され、この構造体の持つ<code>API</code>というフィールドを通じて<a href="https://developers.mattermost.com/extend/plugins/server/reference/#API">プラグイン用の各種API</a>を実行できるようになります。
+実際のAPIの呼び出し方については、次の<code>hooks.go</code>のセクションで説明しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin.go" data-lang="go:server/plugin.go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/plugin&#34;</span>
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">FirstPlugin</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">MattermostPlugin</span>
+}
+</code></pre></div><p>これでサーバーサイドのプラグインを実装することはできましたが、このプラグインはまだ何の機能も持っていません。
+Mattermost本体の動作に影響を及ぼすには、いずれかのHooksを実装する必要があります。</p>
+<p><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks">https://developers.mattermost.com/extend/plugins/server/reference/#Hooks</a></p>
+<h2 id="hooksgo">hooks.go</h2>
+<p>ここでは、<code>MessageWillBePosted</code>のHooksを実装し、Mattermost上にQiitaのリンクを含む投稿が行われた際に自動で<code>#Qiita</code>というハッシュタグを付与する機能を実装していきます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/hooks.go" data-lang="go:server/hooks.go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;strings&#34;</span>
+
+	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/model&#34;</span>
+	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/plugin&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">FirstPlugin</span>) <span style="color:#a6e22e">MessageWillBePosted</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">post</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>, <span style="color:#66d9ef">string</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Index</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#e6db74">&#34;https://qiita.com/&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">post</span>, <span style="color:#e6db74">&#34;&#34;</span>
+	}
+
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogDebug</span>(<span style="color:#e6db74">&#34;Qiita link is detected.&#34;</span>)
+	<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s #Qiita&#34;</span>, <span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span>)
+	<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Hashtags</span> = <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s #Qiita&#34;</span>, <span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Hashtags</span>)
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">post</span>, <span style="color:#e6db74">&#34;&#34;</span>
+}
+</code></pre></div><p><code>MessageWillBePosted</code>メソッドを実装することで、ユーザーから投稿されたメッセージがDBに保存される直前に実行される処理を記述できます。
+ここでは、投稿内容に<code>https://qiita.com/</code>というURLを含む場合に、自動で<code>#Qiita</code>というハッシュタグを付与するよう実装になっています。</p>
+<p>途中で<code>p.API.LogDebug</code>というメソッドを利用してログ出力を行なっています。このメソッドを通じて出力されたログは下記のように <strong>システムコンソール</strong> &gt; <strong>ログ</strong> に出力されます。</p>
+<blockquote>
+<p>2018-12-31T21:42:59.988+0900	debug	app/plugin_api.go:623	Qiita link is detected.	{&ldquo;plugin_id&rdquo;: &ldquo;org.kaakaa.mattermost-plugin-first&rdquo;}</p>
+</blockquote>
+<h2 id="gopkgtoml">Gopkg.toml</h2>
+<p>ここまで書けたら、依存ライブラリを取得するために<code>dep</code>コマンドを使用します。</p>
+<p><code>server</code>ディレクトリ配下で<code>dep init</code>を実行することで、依存ライブラリの検出・取得を行うことができます。</p>
+<pre><code>$ cd server
+$ dep init
+</code></pre><h2 id="ビルド">ビルド</h2>
+<p>サーバーサイドの実装を含むプラグイン <code>.tar.gz</code>ファイルを作成していきます。</p>
+<p>まず、<code>plugin.json</code>にサーバーサイドのプラグインを認識させるために<code>server</code>というセクションを追加します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json:plugin.json" data-lang="json:plugin.json">{
+    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;org.kaakaa.mattermost-plugin-first&#34;</span>,
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Mattermost Plugin Sample&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;このプラグインはQiita記事用のMattermostプラグインです。&#34;</span>,
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.2&#34;</span>,
+    <span style="color:#f92672">&#34;server&#34;</span>: {
+        <span style="color:#f92672">&#34;executables&#34;</span>: {
+            <span style="color:#f92672">&#34;linux-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-linux-amd64&#34;</span>,
+            <span style="color:#f92672">&#34;darwin-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-darwin-amd64&#34;</span>,
+            <span style="color:#f92672">&#34;windows-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-windows-amd64.exe&#34;</span>
+        },
+        <span style="color:#f92672">&#34;executable&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+    }
+}
+</code></pre></div><p><a href="https://developers.mattermost.com/extend/plugins/manifest-reference/#server"><code>server</code>セクション</a>には、.tar.gzファイル内のGoバイナリの位置を指定します。<code>executable</code>セクションでは各OSごとのバイナリを指定することもできます。</p>
+<p><code>plugin.json</code>に書かれた構成通りに<code>.tar.gz</code>ファイルが作成されるよう、<code>Makefile</code>を下記のように修正します。</p>
+<pre><code>PLUGIN_ID ?= org.kaakaa.mattermost-plugin-first
+PLUGIN_VERSION ?= 0.0.2
+BUNDLE_NAME ?= $(PLUGIN_ID)_$(PLUGIN_VERSION).tar.gz
+
+build:
+	mkdir -p server/dist
+	cd server &amp;&amp; env GOOS=linux GOARCH=amd64 GO build -o dist/plugin-linux-amd64
+	cd server &amp;&amp; env GOOS=darwin GOARCH=amd64 GO build -o dist/plugin-darwin-amd64
+	cd server &amp;&amp; env GOOS=windows GOARCH=amd64 GO build -o dist/plugin-windows-amd64.exe
+
+	rm -rf dist/
+	mkdir -p dist/$(PLUGIN_ID)
+	cp plugin.json dist/$(PLUGIN_ID)/
+
+	mkdir -p dist/$(PLUGIN_ID)/server/dist
+	cp -r server/dist/* dist/$(PLUGIN_ID)/server/dist
+
+	cd dist &amp;&amp; tar -cvzf $(BUNDLE_NAME) $(PLUGIN_ID)
+
+	@echo plugin built at: dist/$(BUNDLE_NAME)
+</code></pre><p><code>make build</code>を実行することでサーバーサイドの実装を含むプラグインファイルが作成されます。</p>
+<h2 id="プラグインアップロード有効化">プラグインアップロード・有効化</h2>
+<p>先ほどと同様、<strong>システムコンソール</strong> &gt; <strong>プラグイン(ベータ版)</strong> &gt; <strong>管理</strong> よりプラグインファイルをアップロードし、同画面から<strong>有効にする</strong>リンクをクリックしてプラグインを有効化します。今度は「このプラグインは起動中です。」というメッセージが表示されると思います。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/94b65442-26e0-1f1b-a765-980db0599500.png" alt="スクリーンショット 2019-01-01 10.59.34.png"></p>
+<h2 id="動作確認">動作確認</h2>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/548309ab-c5cf-b368-4384-92c5b64a888b.gif" alt="plugin.mov.gif"></p>
+<h2 id="まとめ">まとめ</h2>
+<p>以上のように、Mattermostプラグインのサーバーサイドの実装を行うことができます。
+今回は触れませんが、サーバーサイドの拡張ポイント(Hooks)は他にも数多くあるのでユースケースに合致する組み合わせを探して見てください。</p>
+<p><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks">https://developers.mattermost.com/extend/plugins/server/reference/#Hooks</a></p>
+<ul>
+<li><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnActivate">OnActivate</a> / <a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnDeactivate">OnDeactivate</a>
+<ul>
+<li>プラグインを有効化/無効化した時に呼ばれるメソッド</li>
+<li>このメソッド内で<a href="https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand">RegisterCommand</a>/<a href="https://developers.mattermost.com/extend/plugins/server/reference/#API.UnregisterCommand">UnregisterCommand</a>のAPIを実行し、スラッシュコマンドを追加するようなプラグインで利用することができます (<code>ExecutedCommand</code>のHooksも実装する必要がある)</li>
+</ul>
+</li>
+<li><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand">ExecutedCommand</a>
+<ul>
+<li>プラグインを通じて追加されたコマンドが実行された時に呼ばれるメソッド</li>
+</ul>
+</li>
+<li><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP">ServeHTTP</a>
+<ul>
+<li>プラグイン専用のエンドポイントを追加することができます</li>
+<li>追加されたエンドポイントのルートは <code>${MATTERMOST_SITEURL}/plugins/${PLUGIN_ID}/</code> になります</li>
+</ul>
+</li>
+<li><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnConfigurationChange">OnConfigurationChange</a>
+<ul>
+<li>プラグインの設定が変更された時に呼び出されるメソッドです</li>
+<li>マニフェストファイルに<a href="https://developers.mattermost.com/extend/plugins/manifest-reference/#settings_schema">setting_schema</a>セクションを追加することで、プラグインの設定画面が出現します</li>
+</ul>
+</li>
+</ul>
+<h1 id="step-3-フロントエンドプラグインの実装">Step 3: フロントエンドプラグインの実装</h1>
+<p>最後にフロントエンドプラグインの実装について見ていきます。</p>
+<p>フロントエンドの拡張ポイントは下記に挙げられています。
+<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registry">https://developers.mattermost.com/extend/plugins/webapp/reference/#registry</a></p>
+<p>今回は<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderButtonAction"><code>registerChannelHeaderButtonAction</code></a>を使い、チャンネルヘッダーボタンから投稿を作成するサンプルを作っていきます。</p>
+<pre><code>root/
+  ├ dist/
+  │  └ org.kaakaa.mattermost-plugin-first_0.0.3.tar.gz
+  ├ server/
+  │  ├ ...
+  ├ webapp
+  │  ├ src/
+  │  │  ├ index.js
+  │  │  └ action.js
+  │  ├ package.json
+  │  └ webpack.config.js
+  └ plugin.json
+</code></pre><h2 id="indexjs">index.js</h2>
+<p>プラグインの読み込みと実装を<code>index.js</code>というファイルに書いていきます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript:webapp/src/index.js" data-lang="javascript:webapp/src/index.js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">React</span> <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">React</span>;
+<span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">Glyphicon</span>} <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">ReactBootstrap</span>;
+
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">createPluginPost</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action&#39;</span>
+
+window.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#34;org.kaakaa.mattermost-plugin-first&#34;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Plugin</span>());
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerChannelHeaderButtonAction</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">Glyphicon</span> <span style="color:#a6e22e">glyph</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pencil&#34;</span> <span style="color:#f92672">/&gt;</span>,
+            (<span style="color:#a6e22e">channel</span>) =&gt; {
+                <span style="color:#a6e22e">createPluginPost</span>(<span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">id</span>)(<span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>, <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">getState</span>)
+            },
+            <span style="color:#e6db74">&#39;First Plugin&#39;</span>,
+            <span style="color:#e6db74">&#39;This is plugin tooltip&#39;</span>,
+        )
+    }
+}
+</code></pre></div><p>フロントエンドプラグインは<code>window.registerPlugin</code>メソッドにプラグインIDとプラグインを実装したクラスのインスタンスを与えることで読み込まれます。
+プラグイン実装クラス(<code>Plugin</code>)は<code>initialize</code>メソッドを持ち、このメソッドの<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registry">第一引数である<code>registry</code>が持つメソッド</a>を呼び出すことで機能を追加することができます。</p>
+<p>今回はチャンネルヘッダーボタンを追加する部分を実装するため、<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderButtonAction">registry.registerChannelHeaderButtonAction</a>を呼び出しています。</p>
+<p>このメソッドの第１引数には、ボタンのアイコンとなるReact要素を指定します。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/7bb6c0cc-c8ab-4346-4a0a-dc1e5a81083a.png" alt="スクリーンショット 2019-01-01 11.13.12.png"></p>
+<p>MattermostプラグインではReact Bootstrapがexportされているため、<code>const {Glyphicon} = window.ReactBootstrap;</code>と書くことでReact Bootstrapの機能をimportすることができます。(exportされているライブラリ一覧は<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#exported-libraries-and-functions">Exported Libraries and Functions</a>)。</p>
+<p>第２引数にボタンが押された時の動作を記述します。今回は投稿を作成する<code>createPluginPost</code>という処理をactionsとして実装しました。
+第３引数には、複数のプラグインが<code>registerChannelHeaderButtonAction</code>を実装していた場合に、ドロップダウンメニューとして使われるテキストです。
+第４引数にはチャンネルヘッダボタンのツールチップテキストです。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/592b31ef-45d3-ffd0-9904-5f1e6ece8518.png" alt="スクリーンショット 2019-01-01 11.14.30.png"></p>
+<h2 id="actionjs">action.js</h2>
+<p>チャンネルヘッダーボタンを押した時に行われる処理を<code>action.js</code>に書いています。
+MattermostのJavascriptドライバーである<code>mattermost-redux</code>を利用して、簡単なメッセージを投稿する機能を下記のように実装しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript:webapp/src/action.js" data-lang="javascript:webapp/src/action.js"><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">createPost</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;mattermost-redux/actions/posts&#39;</span>;
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">getCurrentUserId</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;mattermost-redux/selectors/entities/users&#39;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createPluginPost</span>(<span style="color:#a6e22e">channelId</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">dispatch</span>, <span style="color:#a6e22e">getState</span>) =&gt; {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getState</span>();
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getCurrentUserId</span>(<span style="color:#a6e22e">state</span>)
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">post</span> <span style="color:#f92672">=</span> {
+            <span style="color:#a6e22e">channel_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">channelId</span>,
+            <span style="color:#a6e22e">user_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">userId</span>,
+            <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Post from webapp plugin&#34;</span>,
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">createPost</span>(<span style="color:#a6e22e">post</span>));
+    }
+}
+</code></pre></div><h2 id="ビルド-1">ビルド</h2>
+<p>まず、<code>plugin.json</code>にフロントエンドのプラグインを認識させるために<code>webapp</code>というセクションを追加します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json:plugin.json" data-lang="json:plugin.json">{
+    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;org.kaakaa.mattermost-plugin-first&#34;</span>,
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Mattermost Plugin Sample&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;このプラグインはQiita記事用のMattermostプラグインです。&#34;</span>,
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.3&#34;</span>,
+    <span style="color:#f92672">&#34;server&#34;</span>: {
+        <span style="color:#f92672">&#34;executables&#34;</span>: {
+            <span style="color:#f92672">&#34;linux-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-linux-amd64&#34;</span>,
+            <span style="color:#f92672">&#34;darwin-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-darwin-amd64&#34;</span>,
+            <span style="color:#f92672">&#34;windows-amd64&#34;</span>: <span style="color:#e6db74">&#34;server/dist/plugin-windows-amd64.exe&#34;</span>
+        },
+        <span style="color:#f92672">&#34;executable&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>
+    },
+    <span style="color:#f92672">&#34;webapp&#34;</span>: {
+        <span style="color:#f92672">&#34;bundle_path&#34;</span>: <span style="color:#e6db74">&#34;webapp/dist/main.js&#34;</span>
+    }
+}
+</code></pre></div><p>実装してきた<code>.js</code>ファイルを、マニフェストファイルで指定したした<code>webapp/dist/main.js</code>にバンドルされるように<code>webpack.config.js</code>を用意します。
+（フロントエンドに明るくないので<a href="https://github.com/mattermost/mattermost-plugin-demo/blob/master/webapp/webpack.config.js">公式のサンプル</a>をベースにしています）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript:webapp/webpack.config.js" data-lang="javascript:webapp/webpack.config.js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> [
+        <span style="color:#e6db74">&#39;./src/index.js&#39;</span>,
+    ],
+    <span style="color:#a6e22e">resolve</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">modules</span><span style="color:#f92672">:</span> [
+            <span style="color:#e6db74">&#39;src&#39;</span>,
+            <span style="color:#e6db74">&#39;node_modules&#39;</span>,
+        ],
+        <span style="color:#a6e22e">extensions</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;*&#39;</span>, <span style="color:#e6db74">&#39;.js&#39;</span>, <span style="color:#e6db74">&#39;.jsx&#39;</span>],
+    },
+    <span style="color:#a6e22e">module</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">rules</span><span style="color:#f92672">:</span> [
+            {
+                <span style="color:#a6e22e">test</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/\.(js|jsx)$/</span>,
+                <span style="color:#a6e22e">exclude</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/node_modules/</span>,
+                <span style="color:#a6e22e">use</span><span style="color:#f92672">:</span> {
+                    <span style="color:#a6e22e">loader</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;babel-loader&#39;</span>,
+                    <span style="color:#a6e22e">options</span><span style="color:#f92672">:</span> {
+                        <span style="color:#a6e22e">presets</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;@babel/preset-env&#39;</span>,<span style="color:#e6db74">&#39;@babel/preset-react&#39;</span>],
+                        <span style="color:#a6e22e">plugins</span><span style="color:#f92672">:</span> [
+                            <span style="color:#e6db74">&#39;transform-class-properties&#39;</span>,
+                            <span style="color:#e6db74">&#39;@babel/plugin-proposal-object-rest-spread&#39;</span>
+                        ],
+                    },
+                },
+            },
+        ],
+    },
+    <span style="color:#a6e22e">externals</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">react</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;React&#39;</span>,
+        <span style="color:#a6e22e">redux</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Redux&#39;</span>,
+        <span style="color:#e6db74">&#39;react-redux&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ReactRedux&#39;</span>,
+    },
+    <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;/dist&#39;</span>),
+        <span style="color:#a6e22e">publicPath</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;/&#39;</span>,
+        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;main.js&#39;</span>,
+    },
+};
+</code></pre></div><p>下記のような<code>package.json</code>を用意し、<code>npm install</code>してから<code>npm run build</code>を実行し、正常にコマンドが完了すれば準備は完了です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json:webapp/package.json" data-lang="json:webapp/package.json">{
+  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;webapp&#34;</span>,
+  <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;0.0.3&#34;</span>,
+  <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Post today&#39;s metal from channel header button&#34;</span>,
+  <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;src/index.js&#34;</span>,
+  <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;webpack --mode=production&#34;</span>,
+    <span style="color:#f92672">&#34;test&#34;</span>: <span style="color:#e6db74">&#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;</span>
+  },
+  <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+  <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+  <span style="color:#f92672">&#34;dependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;mattermost-redux&#34;</span>: <span style="color:#e6db74">&#34;^5.6.2&#34;</span>
+  },
+  <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;@babel/core&#34;</span>: <span style="color:#e6db74">&#34;^7.2.2&#34;</span>,
+    <span style="color:#f92672">&#34;@babel/plugin-proposal-object-rest-spread&#34;</span>: <span style="color:#e6db74">&#34;^7.2.0&#34;</span>,
+    <span style="color:#f92672">&#34;@babel/preset-env&#34;</span>: <span style="color:#e6db74">&#34;^7.2.3&#34;</span>,
+    <span style="color:#f92672">&#34;@babel/preset-react&#34;</span>: <span style="color:#e6db74">&#34;^7.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;babel-loader&#34;</span>: <span style="color:#e6db74">&#34;^8.0.4&#34;</span>,
+    <span style="color:#f92672">&#34;babel-plugin-transform-class-properties&#34;</span>: <span style="color:#e6db74">&#34;^6.24.1&#34;</span>,
+    <span style="color:#f92672">&#34;babel-plugin-transform-object-rest-spread&#34;</span>: <span style="color:#e6db74">&#34;^6.26.0&#34;</span>,
+    <span style="color:#f92672">&#34;webpack&#34;</span>: <span style="color:#e6db74">&#34;^4.28.3&#34;</span>,
+    <span style="color:#f92672">&#34;webpack-cli&#34;</span>: <span style="color:#e6db74">&#34;^3.1.2&#34;</span>
+  }
+}
+</code></pre></div><p>最後にルートディレクトリにあるMakefileを下記のように編集し、で<code>make build</code>を実行することで、フロントエンドプラグインを含むプラグイン<code>.tar.gz</code>ファイルが<code>dist</code>ディレクトリ内に作成されるはずです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Makefile" data-lang="Makefile">PLUGIN_ID <span style="color:#f92672">?=</span> org.kaakaa.mattermost-plugin-first
+PLUGIN_VERSION <span style="color:#f92672">?=</span> 0.0.3
+BUNDLE_NAME <span style="color:#f92672">?=</span> <span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>_<span style="color:#66d9ef">$(</span>PLUGIN_VERSION<span style="color:#66d9ef">)</span>.tar.gz
+
+<span style="color:#a6e22e">build</span><span style="color:#f92672">:</span>
+	mkdir -p server/dist
+	cd server <span style="color:#f92672">&amp;&amp;</span> env GOOS<span style="color:#f92672">=</span>linux GOARCH<span style="color:#f92672">=</span>amd64 GO build -o dist/plugin-linux-amd64
+	cd server <span style="color:#f92672">&amp;&amp;</span> env GOOS<span style="color:#f92672">=</span>darwin GOARCH<span style="color:#f92672">=</span>amd64 GO build -o dist/plugin-darwin-amd64
+	cd server <span style="color:#f92672">&amp;&amp;</span> env GOOS<span style="color:#f92672">=</span>windows GOARCH<span style="color:#f92672">=</span>amd64 GO build -o dist/plugin-windows-amd64.exe
+
+	cd webapp <span style="color:#f92672">&amp;&amp;</span> npm run build;
+
+	rm -rf dist/
+	mkdir -p dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>
+	cp plugin.json dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/
+
+	mkdir -p dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/server/dist
+	cp -r server/dist/* dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/server/dist
+	mkdir -p dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/webapp/dist;
+	cp -r webapp/dist/* dist/<span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>/webapp/dist/;
+
+	cd dist <span style="color:#f92672">&amp;&amp;</span> tar -cvzf <span style="color:#66d9ef">$(</span>BUNDLE_NAME<span style="color:#66d9ef">)</span> <span style="color:#66d9ef">$(</span>PLUGIN_ID<span style="color:#66d9ef">)</span>
+
+	@echo plugin built at: dist/<span style="color:#66d9ef">$(</span>BUNDLE_NAME<span style="color:#66d9ef">)</span>
+</code></pre></div><h2 id="プラグインアップロード有効化-1">プラグインアップロード・有効化</h2>
+<p>先ほどと同様、<strong>システムコンソール</strong> &gt; <strong>プラグイン(ベータ版)</strong> &gt; <strong>管理</strong> よりプラグインファイルをアップロードし、プラグインを有効化します。</p>
+<h2 id="動作確認-1">動作確認</h2>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/7098d243-a8db-3af1-2295-bfa528be7d21.gif" alt="webapp.mov.gif"></p>
+<h2 id="まとめ-1">まとめ</h2>
+<p>以上のように、Mattermostプラグインのフロントエンドの実装を行うことができます。
+他にも<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registry">多くの拡張ポイント</a>があるので、実装方法については公式のサンプルリポジトリの実装を参照してみてください。
+<a href="https://github.com/mattermost/mattermost-plugin-demo">https://github.com/mattermost/mattermost-plugin-demo</a></p>
+<h1 id="おわりに">おわりに</h1>
+<p>以上がMattermost severプラグインの開発方法になります。</p>
+<p>今まではMattermostを他のシステムと連携する場合、連携機能専用のサーバーを立ち上げなければならず、連携機能が増えるたびにサーバーを運用する手間が増えていましたが、プラグイン機能を使うことで運用の手間をMattermostインスタンスに一元化することができます。</p>
+<p>また、プラグイン機能では今まで以上に細かな動作にまで手を加えることができるようになりました。
+例えば、<a href="https://github.com/mattermost/mattermost-plugin-antivirus">mattermost/mattermost-plugin-antivirus</a>のようにファイルがアップロードされた際に、そのファイルに対してセキュリティのチェックをかけたりできるようになります。</p>
+<p>Slackとは違い、オンプレミスでの運用もメインターゲットとなるMattermostでは、プラグイン機能によるインフラ運用コストの削減や、企業特有のポリシーを実装するための細かなカスタマイズ性は非常に大きなメリットとなります。
+プラグイン実装にまつわる本体のアップデートの追従などのメンテナンスコストは今後問題となる可能性がありますが、その辺りをどのようにクリアしていくかを含め、開発に協力しながらウォッチしていければと思います。</p>
+<h2 id="参考資料">参考資料</h2>
+<h3 id="開発者向けドキュメント">開発者向けドキュメント</h3>
+<ul>
+<li><a href="https://developers.mattermost.com/">https://developers.mattermost.com/</a></li>
+<li><a href="https://github.com/mattermost/mattermost-developer-documentation">https://github.com/mattermost/mattermost-developer-documentation</a></li>
+</ul>
+<p>このサイトでは、プラグイン開発についてだけでなく、その他の統合機能であるウェブフックやスラッシュコマンドなどの開発方法や、Mattermostへのコントリビュート手順などについてもまとめられています。</p>
+<h3 id="サンプルプラグイン">サンプルプラグイン</h3>
+<ul>
+<li><a href="https://github.com/mattermost/mattermost-plugin-demo">https://github.com/mattermost/mattermost-plugin-demo</a></li>
+</ul>
+<p>公式で開発されているデモ用のプラグインです。
+プラグイン向けに提供されている拡張ポイントの多くを利用しているので、実装する際の参考になると思います。</p>
+<ul>
+<li><a href="https://github.com/mattermost/mattermost-plugins">https://github.com/mattermost/mattermost-plugins</a></li>
+</ul>
+<p>このリポジトリでは、Official/Unofficial問わずMattermostプラグイン開発プロジェクトのGitHubリポジトリがまとめられています。
+文書よりも動くコードのほうが分かりやすいという方には参考になると思います。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/plugin/">plugin</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

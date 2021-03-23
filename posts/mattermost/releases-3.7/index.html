@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost3.7の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost3.7の新機能"/>
+<meta name="twitter:description" content="はじめに 2017/03/16にMattermost 3.7.0がリリースされました。 リリースから２週間ほど経ってしまいましたが、追加された機能"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermost3.7の新機能
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2017/03/16にMattermost 3.7.0がリリースされました。
+リリースから２週間ほど経ってしまいましたが、追加された機能などについて簡単に紹介します。
+現在、セキュリティfixなどを含んだ v3.7.3 が最新バージョンとなっています</p>
+<p>詳細については公式のリリースを確認ください。
+<a href="https://about.mattermost.com/mattermost-3-7/">Mattermost 3.7: Auto-deploy to cloud, multi-person direct messaging and much more</a></p>
+<p>その他、細かい変更や修正は下記にまとめられています。
+<a href="https://docs.mattermost.com/administration/changelog.html">Mattermost Changelog</a></p>
+<h1 id="変更点">変更点</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cloud-platform-auto-deploy">Cloud Platform Auto-deploy</a></li>
+    <li><a href="#group-messaging-for-quick-direct-chatshttpsaboutmattermostcommattermost-3-7group-messaging"><a href="https://about.mattermost.com/mattermost-3-7/#group-messaging">Group Messaging for Quick, Direct Chats</a></a></li>
+    <li><a href="#more-flexibilityhttpsaboutmattermostcommattermost-3-7more-flexibility"><a href="https://about.mattermost.com/mattermost-3-7/#more-flexibility">More Flexibility</a></a>
+      <ul>
+        <li><a href="#api-version-4-early-beta-releasehttpsaboutmattermostcommattermost-3-7api-v4"><a href="https://about.mattermost.com/mattermost-3-7/#api-v4">API Version 4 (early beta release)</a></a></li>
+        <li><a href="#new-website-link-previewshttpsaboutmattermostcommattermost-3-7link-previews"><a href="https://about.mattermost.com/mattermost-3-7/#link-previews">New Website Link Previews</a></a></li>
+        <li><a href="#channel-push-notification-preferenceshttpsaboutmattermostcommattermost-3-7channel-mobile-notif"><a href="https://about.mattermost.com/mattermost-3-7/#channel-mobile-notif">Channel Push Notification Preferences</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#スケーラビリティの改善">スケーラビリティの改善</a>
+      <ul>
+        <li><a href="#faster-server-side-processinghttpsaboutmattermostcommattermost-3-7performance"><a href="https://about.mattermost.com/mattermost-3-7/#performance">Faster Server-side Processing</a></a></li>
+        <li><a href="#simplified-import-of-bulk-datahttpsaboutmattermostcommattermost-3-7bulk-import"><a href="https://about.mattermost.com/mattermost-3-7/#bulk-import">Simplified Import of Bulk Data</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#セキュリティ関係の新機能">セキュリティ関係の新機能</a>
+      <ul>
+        <li><a href="#new-channel-administrator-role-enterprise-edition-e10--e20httpsaboutmattermostcommattermost-3-7channel-admin"><a href="https://about.mattermost.com/mattermost-3-7/#channel-admin">New “Channel Administrator” Role (Enterprise Edition E10 &amp; E20)</a></a></li>
+        <li><a href="#onelogin-support-enterprise-edition-e20httpsaboutmattermostcommattermost-3-7onelogin"><a href="https://about.mattermost.com/mattermost-3-7/#onelogin">OneLogin Support (Enterprise Edition E20)</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#second-generation-mobile-apps-beta-release-in-marchhttpsaboutmattermostcommattermost-3-7react-native-app"><a href="https://about.mattermost.com/mattermost-3-7/#react-native-app">Second Generation Mobile Apps: Beta Release in March</a></a></li>
+    <li><a href="#新しいコミュニティ連携">新しいコミュニティ連携</a>
+      <ul>
+        <li><a href="#mattermost-tuleap-bot-plug-inhttpsaboutmattermostcommattermost-3-7mattermost-tuleap"><a href="https://about.mattermost.com/mattermost-3-7/#mattermost-tuleap">Mattermost-Tuleap Bot Plug-in</a></a></li>
+        <li><a href="#new-simple-github-integrationhttpsaboutmattermostcommattermost-3-7github-integration"><a href="https://about.mattermost.com/mattermost-3-7/#github-integration">New Simple GitHub Integration</a></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="cloud-platform-auto-deploy">Cloud Platform Auto-deploy</h2>
+<p><a href="https://docs.mattermost.com/guides/orchestration.html">Deployment Solutions Programs</a>が公開されています。
+(Mattermostのデプロイメントを体系的にしたもの？）</p>
+<p>また、<a href="https://bitnami.com/stack/mattermost">Bitnami Mattermost Team Edition Stack</a>によってMattermostのTeam Edition(<a href="https://about.mattermost.com/pricing/">OSS版のこと</a>)の主要パプリッククラウドサービスへのデプロイが容易になりました。
+Azureのプライベートクラウドプラットフォームである<a href="https://about.mattermost.com/open-source-slack-alternative-for-azure-government-plus-aws-gcp-and-ocp-via-bitnami-mattermost-team-edition-stack/">Azure Goverment Cloudにも適用できるようです。</a></p>
+<p>BitnamiからAzureへMattermostをデプロイし、Slackからデータをインポートする手順についての<a href="https://www.youtube.com/watch?v=AKqHWqrAgpk">動画</a>が公開されています。</p>
+<h2 id="group-messaging-for-quick-direct-chatshttpsaboutmattermostcommattermost-3-7group-messaging"><a href="https://about.mattermost.com/mattermost-3-7/#group-messaging">Group Messaging for Quick, Direct Chats</a></h2>
+<p>素早く複数人でのメッセージングを行う <strong>グループメッセージ</strong> の機能が追加されました。
+<strong>ダイレクトメッセージ</strong> の機能拡張のようなものです。</p>
+<p>以前のダイレクトメッセージ機能では１対１の会話のみが可能でしたが、<strong>グループメッセージ</strong>では最大8人での会話が可能です。
+8人を超える場合は <strong>非公開グループ</strong> の作成が推奨されています。</p>
+<h2 id="more-flexibilityhttpsaboutmattermostcommattermost-3-7more-flexibility"><a href="https://about.mattermost.com/mattermost-3-7/#more-flexibility">More Flexibility</a></h2>
+<h3 id="api-version-4-early-beta-releasehttpsaboutmattermostcommattermost-3-7api-v4"><a href="https://about.mattermost.com/mattermost-3-7/#api-v4">API Version 4 (early beta release)</a></h3>
+<p>Mattermost APIの新バージョンのベータリリースです。
+<a href="https://api.mattermost.com/v4/">Mattermost API Reference (v4.0.0)</a></p>
+<p>現在のAPI v3は <strong>2017/9/16</strong> までサポートされます。</p>
+<h3 id="new-website-link-previewshttpsaboutmattermostcommattermost-3-7link-previews"><a href="https://about.mattermost.com/mattermost-3-7/#link-previews">New Website Link Previews</a></h3>
+<p>Website Linkを投稿すると、リンク先の内容を表示するようになります。
+v3.6までのプレビュー機能では日本語が文字化けしていましたが、v3.7からは文字化けしていないようです。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/e1c89b1a-6fb5-c3fd-6ca2-64998abae69b.png" alt="mm3.7_preview_1.png"></p>
+<p>プレビュー機能を有効にするには、システムコンソールでプレビュー機能を有効にした上で、各アカウントごとに設定します。</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/6724d0c2-09e5-b135-4004-9b5be14e511d.png" alt="mm3.7_preview_2.png"></p>
+<h3 id="channel-push-notification-preferenceshttpsaboutmattermostcommattermost-3-7channel-mobile-notif"><a href="https://about.mattermost.com/mattermost-3-7/#channel-mobile-notif">Channel Push Notification Preferences</a></h3>
+<p>モバイルプッシュ通知の設定をチャンネルごとに行えるようになりました。
+(モバイルプッシュ通知の設定が行われている場合のみ)</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/f1d05b58-b506-e910-6c8f-2573737abd9d.png" alt="notification.png"></p>
+<h2 id="スケーラビリティの改善">スケーラビリティの改善</h2>
+<h3 id="faster-server-side-processinghttpsaboutmattermostcommattermost-3-7performance"><a href="https://about.mattermost.com/mattermost-3-7/#performance">Faster Server-side Processing</a></h3>
+<p>サーバーサイドのパフォーマンス改善が行われました。<br>
+キャッシュ・クエリ最適化によるCPU/DBのボトルネック低減や、不要なWebSocketの呼び出しを削除したとのことです。
+詳しい改善内容は<a href="https://docs.mattermost.com/administration/changelog.html#performance">Mattermost Changelog - Performance</a>にまとめられています。</p>
+<p>また、パフォーマンス改善について、<a href="https://www.youtube.com/watch?v=pJsfXAHxAjM&amp;t">動画 Mattermost Developer Brown Bag - Performance</a>で語られています。</p>
+<h3 id="simplified-import-of-bulk-datahttpsaboutmattermostcommattermost-3-7bulk-import"><a href="https://about.mattermost.com/mattermost-3-7/#bulk-import">Simplified Import of Bulk Data</a></h3>
+<p>他のシステムからチーム、チャンネル、ユーザー、投稿をインポートするツールが使えるようになりました。
+明示的なリンクはないのですが、おそらく<a href="https://docs.mattermost.com/deployment/bulk-loading.html">Bulk Loading Data</a>の事だと思います。</p>
+<h2 id="セキュリティ関係の新機能">セキュリティ関係の新機能</h2>
+<h3 id="new-channel-administrator-role-enterprise-edition-e10--e20httpsaboutmattermostcommattermost-3-7channel-admin"><a href="https://about.mattermost.com/mattermost-3-7/#channel-admin">New “Channel Administrator” Role (Enterprise Edition E10 &amp; E20)</a></h3>
+<p>チャンネル名の変更とチャンネルの削除を行うことができる<strong>チャンネル管理者</strong>のロールが追加されました。
+Enterprise版(E10,E20)のみの機能となります。</p>
+<h3 id="onelogin-support-enterprise-edition-e20httpsaboutmattermostcommattermost-3-7onelogin"><a href="https://about.mattermost.com/mattermost-3-7/#onelogin">OneLogin Support (Enterprise Edition E20)</a></h3>
+<p>v3.6までは<a href="https://docs.mattermost.com/deployment/sso-saml-okta.html">Okta</a>か<a href="https://docs.mattermost.com/deployment/sso-saml-adfs.html">Microsoft ADFS</a>を利用したSAML SSOを利用できましたが、v3.7から<a href="https://docs.mattermost.com/deployment/sso-saml-onelogin.html">OneLogin</a>を使用したSAML SSOも行うことが可能になりました。
+Enterprise版(E20)のみの機能になります。</p>
+<h2 id="second-generation-mobile-apps-beta-release-in-marchhttpsaboutmattermostcommattermost-3-7react-native-app"><a href="https://about.mattermost.com/mattermost-3-7/#react-native-app">Second Generation Mobile Apps: Beta Release in March</a></h2>
+<p>React Native製のiOS/Androidアプリのβ版が今月中にリリースされる<del>そうです。</del> 3/29にリリースされました。 =&gt; <a href="https://about.mattermost.com/a-native-mobile-experience-second-generation-mobile-apps-released-in-beta/">A Native Mobile Experience – Second Generation Mobile Apps Released in Beta</a></p>
+<p><a href="https://play.google.com/apps/testing/com.mattermost.react.native">Android版</a>、<a href="https://mattermost-fastlane.herokuapp.com">iOS版</a>それぞれβ版を試してみることができます。
+(iOS版はTestFlightアプリのインストールが必要でした)</p>
+<p>開発は<a href="https://github.com/mattermost/mattermost-mobile#how-to-contribute">mattermost/mattermost-mobile</a>で行われています。</p>
+<h2 id="新しいコミュニティ連携">新しいコミュニティ連携</h2>
+<h3 id="mattermost-tuleap-bot-plug-inhttpsaboutmattermostcommattermost-3-7mattermost-tuleap"><a href="https://about.mattermost.com/mattermost-3-7/#mattermost-tuleap">Mattermost-Tuleap Bot Plug-in</a></h3>
+<p>OSSの開発サポートツールである<a href="https://www.tuleap.org">Tuleap</a>との連携機能です。
+TuleapへのGitプッシュとScrumレポートのLattermostへの通知を行えるようです。
+<a href="https://www.tuleap.org/mattermost-connectors-tuleap-scrum-reports-and-git-now-available">Mattermost connectors for Tuleap Scrum reports and Git now available</a></p>
+<h3 id="new-simple-github-integrationhttpsaboutmattermostcommattermost-3-7github-integration"><a href="https://about.mattermost.com/mattermost-3-7/#github-integration">New Simple GitHub Integration</a></h3>
+<p>Haskell製のGithub連携ツールです。
+<a href="https://github.com/UlfS/ghmm">UlfS/ghmm</a></p>
+<p>python/flask製のGithub連携ツール <a href="https://github.com/softdevteam/mattermost-github-integration">softdevteam/mattermost-github-integration</a> のメンテも継続されています。</p>
+<h1 id="おわりに">おわりに</h1>
+<p>次のバージョンであるMattermost v3.8.0は2017/4/17リリースを予定しています。
+<a href="https://github.com/mattermost/platform/pull/4217">Pinned Post</a>や<a href="https://github.com/mattermost/platform/pull/5157">Emoji Picker</a>,<a href="https://github.com/mattermost/platform/pull/5816">Reaction Picker</a>などの機能が追加される予定です。
+<a href="https://pre-release.mattermost.com/core">Core Team向けMattermost</a>では、すでに利用可能です。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/releases/">releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

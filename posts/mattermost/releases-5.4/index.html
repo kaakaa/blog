@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.4の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.4の新機能"/>
+<meta name="twitter:description" content="はじめに 2018/10/16にMattermost 5.4.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermost5.4の新機能
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2018/10/16にMattermost 5.4.0がリリースされたので、アップデートの内容について簡単に紹介します。</p>
+<p>詳細については公式のリリースを確認ください。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-4">Mattermost Changelog — Mattermost 5.4 documentation</a></li>
+<li><a href="https://mattermost.com/blog/mattermost-5-4-user-focused-features-new-data-export-tool-mobile-enhancements-and-more/">Mattermost 5.4: User-focused features, new data export tool, mobile enhancements and more - Mattermost Private Cloud Messaging</a></li>
+</ul>
+<hr>
+<h1 id="アップデート内容">アップデート内容</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#ユーザーの生産性向上のための改善">ユーザーの生産性向上のための改善</a>
+      <ul>
+        <li><a href="#メッセージ作成中の表示">メッセージ作成中の表示</a></li>
+        <li><a href="#ジャンボ絵文字">ジャンボ絵文字</a></li>
+        <li><a href="#ダイレクトメッセージグループメッセージを指定した検索">ダイレクトメッセージ・グループメッセージを指定した検索</a></li>
+        <li><a href="#メッセージ入力ボックスの拡張">メッセージ入力ボックスの拡張</a></li>
+        <li><a href="#interactive-messageにセレクトメニューが追加">Interactive Messageにセレクトメニューが追加</a></li>
+        <li><a href="#コードブロックのctrl--enterでの送信">コードブロックのCTRL + ENTERでの送信</a></li>
+        <li><a href="#ピン留めされたメッセージの更新">ピン留めされたメッセージの更新</a></li>
+      </ul>
+    </li>
+    <li><a href="#mattermostサーバーの統合">Mattermostサーバーの統合</a></li>
+    <li><a href="#管理機能">管理機能</a>
+      <ul>
+        <li><a href="#参加脱退メッセージの非表示オプション">参加/脱退メッセージの非表示オプション</a></li>
+        <li><a href="#チーム管理者に他ユーザーの投稿の編集権限を付与するかの設定">チーム管理者に他ユーザーの投稿の編集権限を付与するかの設定</a></li>
+      </ul>
+    </li>
+    <li><a href="#コンプライアンス">コンプライアンス</a>
+      <ul>
+        <li><a href="#e20-カスタム利用規約">E20: カスタム利用規約</a></li>
+      </ul>
+    </li>
+    <li><a href="#モバイルアプリの改善">モバイルアプリの改善</a></li>
+  </ul>
+</nav><h2 id="ユーザーの生産性向上のための改善">ユーザーの生産性向上のための改善</h2>
+<h3 id="メッセージ作成中の表示">メッセージ作成中の表示</h3>
+<p>メッセージ作成中に別のチャンネルに移動した際、チャンネルの表示アイコンが変更されるようになり、送信前のメッセージが残っていることが一目でわかるようになりました。
+サイドバーとチャンネル切替画面で確認できます。</p>
+<!-- raw HTML omitted -->
+<h3 id="ジャンボ絵文字">ジャンボ絵文字</h3>
+<p>絵文字だけの投稿を行った際、絵文字が大きく表示されるようになりました。
+大きさは <code>### :+1:</code> と同じぐらいなので、Markdown形式で <code># :+1:</code> とすればより大きな絵文字を表示することもできます。</p>
+<!-- raw HTML omitted -->
+<h3 id="ダイレクトメッセージグループメッセージを指定した検索">ダイレクトメッセージ・グループメッセージを指定した検索</h3>
+<p>以前より、メッセージ検索ボックスで <code>in:</code> と入力することで検索対象のチャンネルを指定して検索することができましたが、v5.4から <code>in:</code> でのチャンネル指定にダイレクトメッセージチャンネルとグループメッセージチャンネルを指定できるようになりました。</p>
+<h3 id="メッセージ入力ボックスの拡張">メッセージ入力ボックスの拡張</h3>
+<p>長いメッセージを入力する際、メッセージ入力ボックスの高さが今まで以上に拡張されるようになりました。
+v5.3以前は7行程度までの表示でしたが、v5.4以降は13行ほど表示できるようになっています。</p>
+<!-- raw HTML omitted -->
+<h3 id="interactive-messageにセレクトメニューが追加">Interactive Messageにセレクトメニューが追加</h3>
+<p><a href="https://docs.mattermost.com/developer/interactive-messages.html#message-menus">Interactive Message</a>のアクションとして、ボタンだけでなくセレクトメニューを指定できるようになりました。</p>
+<!-- raw HTML omitted -->
+<h3 id="コードブロックのctrl--enterでの送信">コードブロックのCTRL + ENTERでの送信</h3>
+<p><strong>アカウント設定</strong> &gt; <strong>詳細</strong> &gt; <strong>CTRL + ENTER でメッセージを投稿する</strong>をオフにしている場合に限り、<strong>アカウント設定</strong> &gt; <strong>詳細</strong> &gt; <strong>CTRL + ENTERでコードブロックメッセージを送信します</strong>というメニューが現れます。
+これを <code>オン</code> にすると、”```” で始まるコードブロック入力中はENTERキーで改行を入力でき、その状態で<code>CTRL + ETNER</code>を押すとコードブロック終了の ”```” を入力しなくてもコードブロックとしてメッセージを送信することができます。</p>
+<!-- raw HTML omitted -->
+<h3 id="ピン留めされたメッセージの更新">ピン留めされたメッセージの更新</h3>
+<p><code>ピン留めされた投稿</code>のサイドバーを開いた状態でチャンネルを切り替えると、<code>ピン留めされた投稿</code>のサイドバーの内容も切り替え先のチャンネルの内容に切り替わるようになりました。</p>
+<h2 id="mattermostサーバーの統合">Mattermostサーバーの統合</h2>
+<p>新たなデータエクスポート用のCLIツールが追加され、複数のMattermostサーバーをマージできるようになりました。
+このツールで現在エクスポート可能なデータは、基本的なデータである投稿・ユーザー・返信・チーム・チャンネルのみですが、コミュニティによってより多くのデータが対象になるよう改善が進められています。</p>
+<p><a href="https://docs.mattermost.com/administration/bulk-export.html">Bulk Export Tool — Mattermost 5.4 documentation</a>
+<a href="https://docs.mattermost.com/deployment/bulk-loading.html">Bulk Loading Data — Mattermost 5.4 documentation</a></p>
+<p>10月中に開催されている<a href="https://hacktoberfest.digitalocean.com/">Hacktober</a>を利用して多くの機能拡張が行われている最中です。<a href="https://github.com/mattermost/mattermost-server/search?q=bulk+export&amp;type=Issues">Search · bulk export</a></p>
+<h2 id="管理機能">管理機能</h2>
+<h3 id="参加脱退メッセージの非表示オプション">参加/脱退メッセージの非表示オプション</h3>
+<p><strong>アカウント設定</strong> &gt; <strong>詳細</strong> &gt; <strong>参加/脱退メッセージを有効にする</strong> を<code>オフ</code>にすることで、ユーザーがチャンネルに参加・脱退した時に表示されるシステムメッセージを非表示にすることができるようになりました。</p>
+<!-- raw HTML omitted -->
+<p>数百人が参加するようなチームだとタウンスクエアなどのチャンネルが参加通知ばかりになり会話をしにくいこともあるため、そのような場合に有効な設定です。</p>
+<!-- raw HTML omitted -->
+<h3 id="チーム管理者に他ユーザーの投稿の編集権限を付与するかの設定">チーム管理者に他ユーザーの投稿の編集権限を付与するかの設定</h3>
+<p><strong>システムコンソール</strong> &gt; <strong>全般</strong> &gt; <strong>ユーザーとチーム</strong> &gt; <strong>チーム管理者が他者の投稿を編集できるようにする</strong> からチーム管理者に他ユーザーの投稿を編集する権限を付与するかどうかを設定することができるようになりました。
+この設定に関わらずシステム管理者は常に他ユーザーの投稿を編集することができます。</p>
+<h2 id="コンプライアンス">コンプライアンス</h2>
+<h3 id="e20-カスタム利用規約">E20: カスタム利用規約</h3>
+<p>E20版限定ですが、利用者独自の利用規約を設定し、その規約に同意しないと利用できないよう設定することができるようになりました。
+企業・組織内で運用する場合に必要になる機能かと思います。</p>
+<p><strong>システムコンソール</strong> &gt; <strong>カスタマイズ</strong> &gt; <strong>法的事項とサポート</strong> &gt; <strong>カスタム利用規約を有効にする(ベータ版)</strong> から設定することができます。</p>
+<h2 id="モバイルアプリの改善">モバイルアプリの改善</h2>
+<ul>
+<li>投稿に対するハッシュタグを利用することができるようになりました</li>
+<li>リアクション絵文字を長押しすることで、誰がリアクションしたかを確認できるようになりました</li>
+<li>iPhone XR、 XS、 XS Maxのサポートが追加されました</li>
+</ul>
+<h1 id="おわりに">おわりに</h1>
+<p>次回の<code>v5.5</code>のリリースは2018/11/16(Fri)を予定しています。</p>
+<p>次回のリリースから、Mattermostは新しいリリースサイクルを採用し、<strong>奇数月</strong>のリリースはバグフィックスなどの品質向上に関する修正のみを加えたリリース、<strong>偶数月</strong>に新規機能の追加を含むリリースを行うそうです。</p>
+<p><a href="https://github.com/mattermost/mattermost-server/pull/9616#issuecomment-429815195">Document minimum server version for plugin API methods by hanzei · Pull Request #9616 · mattermost/mattermost-server</a></p>
+<blockquote>
+<p>Mattermost is moving to a different release cycle starting in October, where</p>
+<ul>
+<li>every second month we have a feature release (October, December, February, ..), and</li>
+<li>every second month we have a quality/bug fix release (November, January, ..).
+So given this is not a bug fix, it&rsquo;s shipped in v5.6 by default.</li>
+</ul>
+</blockquote>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/releases/">releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

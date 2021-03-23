@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>[Mattermost Integrations] Plugin (Server hooks)</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Mattermost Integrations] Plugin (Server hooks)"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第18日目の記事です。 本記事では、Mat"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              [Mattermost Integrations] Plugin (Server hooks)
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#本記事について">本記事について</a></li>
+    <li><a href="#mattermost-plugin-server-について">Mattermost Plugin (Server) について</a></li>
+    <li><a href="#server-hooks">Server Hooks</a>
+      <ul>
+        <li><a href="#onactivate">OnActivate</a></li>
+        <li><a href="#implemented">Implemented</a></li>
+        <li><a href="#ondeactivate">OnDeactivate</a></li>
+        <li><a href="#onconfigurationchange">OnConfigurationChange</a></li>
+        <li><a href="#servehttp">ServeHTTP</a></li>
+        <li><a href="#executecommand">ExecuteCommand</a></li>
+        <li><a href="#userhasbeencreated">UserHasBeenCreated</a></li>
+        <li><a href="#userwilllogin">UserWillLogIn</a></li>
+        <li><a href="#userhasloggedin">UserHasLoggedIn</a></li>
+        <li><a href="#messagewillbeposted">MessageWillBePosted</a></li>
+        <li><a href="#messagewillbeupdated">MessageWillBeUpdated</a></li>
+        <li><a href="#messagehasbeenposted">MessageHasBeenPosted</a></li>
+        <li><a href="#messagehasbeedupdated">MessageHasBeedUpdated</a></li>
+        <li><a href="#channelhasbeencreated">ChannelHasBeenCreated</a></li>
+        <li><a href="#userhasjoinedchannel">UserHasJoinedChannel</a></li>
+        <li><a href="#userhasleftchannel">UserHasLeftChannel</a></li>
+        <li><a href="#userhasjoinedteam">UserHasJoinedTeam</a></li>
+        <li><a href="#userhasleftteam">UserHasLeftTeam</a></li>
+        <li><a href="#filewillbeuploaded">FileWillBeUploaded</a></li>
+      </ul>
+    </li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav><h2 id="本記事について">本記事について</h2>
+<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第18日目の記事です。</p>
+<p>本記事では、Mattermost上の様々な操作に対応した処理を追加できるMattermost Pluginの<strong>Server</strong>サイドの機能である<strong>Server Hooks</strong>について紹介します。</p>
+<p>Mattermost Pluginについての公式ドキュメントは下記になります。
+<a href="https://developers.mattermost.com/extend/plugins/overview/">https://developers.mattermost.com/extend/plugins/overview/</a></p>
+<h2 id="mattermost-plugin-server-について">Mattermost Plugin (Server) について</h2>
+<p><strong>Server Hooks</strong>の説明の前に、Mattermost Pluginの本体について紹介します。</p>
+<p>Mattermostの<strong>Server</strong>サイドのPluginを実装する場合、<a href="https://github.com/mattermost/mattermost-server/blob/f2571099539ee6e432d59e5bb4bc390652426a0e/plugin/client.go#L39"><code>plugin.MattermostPlugin</code></a>を埋め込んだ構造体がPlugin本体となります。<code>plugin.MattermostPlugin</code>を埋め込んだ構造体は、<code>API</code>と<code>Helper</code>というフィールドを持ち、これらのフィールドを経由してMattermostのリソースを処理する様々なメソッドを呼び出すことができます。また、<code>plugin.MattermostPlugin</code>を埋め込んだ構造体に対して<strong>Server Hooks</strong>と同じインターフェースを持つメソッドを実装することで、<strong>Server Hooks</strong>を利用することができるようになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/v5/plugin&#34;</span>
+)
+
+<span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SamplePlugin</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">MattermostPlugin</span>
+}
+
+<span style="color:#75715e">// OnActivate Hooksの実装
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">OnActivate</span>() <span style="color:#66d9ef">error</span> {
+    <span style="color:#75715e">// `API`フィールドを通じたPlugin APIの呼び出し
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">RegisterCommand</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Command</span>{
+		<span style="color:#a6e22e">Trigger</span>: <span style="color:#e6db74">&#34;sample-command&#34;</span>,
+	}); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to register  command&#34;</span>)
+	}
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p><code>main</code>メソッドで<code>plugin.MattermostPlugin</code>を埋め込んだ構造体を引数として<code>plugin.ClientMain</code>メソッドを呼ぶことで、プラグインを起動することができます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/v5/plugin&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">ClientMain</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">SamplePlugin</span>{})
+}
+</code></pre></div><h2 id="server-hooks">Server Hooks</h2>
+<p>Mattermost PluginのServer Hooksは、Mattermost上でユーザーがチャンネルに参加したときや、ユーザーがMattermostにログインしたときなど、何かのアクションに応じて実行される処理を追加できる機能です。
+<code>plugin.MattermostPlugin</code>を埋め込んだ構造体に、Server Hooksと同じインターフェースを持つメソッドを実装することで利用可能になります。</p>
+<p>Server Hooksの一覧は下記から確認できます。</p>
+<p><a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks">https://developers.mattermost.com/extend/plugins/server/reference/#Hooks</a></p>
+<h3 id="onactivate">OnActivate</h3>
+<p><code>OnActivate</code>はPluginが起動したときに呼ばれるHookです。Botを使うPluginの場合はこのHook内でBotユーザーを作成したり、Slash Commandを使うPluginならSlashCommandの登録などを行います。(Pluginから登録したSlash Commandは、通常の統合機能として作成したSlash Commandと違い外部アプリケーションにリクエストは送信されません。Slash Commandが実行された時の処理は、Server Hooksの<code>ExecuteCommand</code>で実装します。)</p>
+<p>`error``が返却された場合は、プラグインが起動されません。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">OnActivate</span>() <span style="color:#66d9ef">error</span> {
+	<span style="color:#75715e">// Botの登録
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">bot</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Bot</span>{
+		<span style="color:#a6e22e">Username</span>:    <span style="color:#e6db74">&#34;test-bot&#34;</span>,
+		<span style="color:#a6e22e">DisplayName</span>: <span style="color:#e6db74">&#34;Sample Bot&#34;</span>,
+	}
+	<span style="color:#a6e22e">botUserID</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Helpers</span>.<span style="color:#a6e22e">EnsureBot</span>(<span style="color:#a6e22e">bot</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">appErr</span>, <span style="color:#e6db74">&#34;failed to ensure bot user&#34;</span>)
+	}
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span> = <span style="color:#a6e22e">botUserID</span>
+
+	<span style="color:#75715e">// Slash Commandの登録
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">RegisterCommand</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Command</span>{
+		<span style="color:#a6e22e">Trigger</span>:      <span style="color:#e6db74">&#34;sample&#34;</span>,
+		<span style="color:#a6e22e">AutoComplete</span>: <span style="color:#66d9ef">true</span>,
+	}); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to register  command&#34;</span>)
+	}
+
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="implemented">Implemented</h3>
+<p><code>Implemented</code>は、Pluginが実装しているHookの名前を返すためのHooksです。しかし、実装されているのを見たことがないので、用途はないかもしれません。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">Implemented</span>() ([]<span style="color:#66d9ef">string</span>, <span style="color:#66d9ef">error</span>) {
+    <span style="color:#66d9ef">return</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;OnActivate&#34;</span>, <span style="color:#e6db74">&#34;Implemented&#34;</span>}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="ondeactivate">OnDeactivate</h3>
+<p><code>OnDeactivate</code>はプラグインが停止された時に実行されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">OnDeactivate</span>() <span style="color:#66d9ef">error</span> {
+    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">clean</span>()
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="onconfigurationchange">OnConfigurationChange</h3>
+<p>Plugin専用の設定が変更された際に実行されます。
+Mattermost Pluginの<a href="https://developers.mattermost.com/extend/plugins/manifest-reference/">Manifestファイル</a>に<code>settings</code>を記述することで、Plugin専用の設定画面を持つことができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/configuration-page.png" alt="IMAGE"></p>
+<p><code>OnConfigurationChange</code>周りの処理は下記のStarterテンプレートのコードを流用すると良いです。
+<a href="https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go">https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">configuration</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">SampleSetting</span> <span style="color:#66d9ef">string</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">OnConfigurationChange</span>() <span style="color:#66d9ef">error</span> {
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">configuration</span> = new(<span style="color:#a6e22e">configuration</span>)
+
+	<span style="color:#75715e">// Load the public configuration fields from the Mattermost server configuration.
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LoadPluginConfiguration</span>(<span style="color:#a6e22e">configuration</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to load plugin configuration&#34;</span>)
+	}
+
+    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">setConfiguration</span>(<span style="color:#a6e22e">configuration</span>)
+    
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="servehttp">ServeHTTP</h3>
+<p>Mattermost Plugin専用のエンドポイントに対してリクエストが送信された時に実行されます。</p>
+<p>Mattermost PluginにはPluginごとにエンドポイントが存在します。Mattermostが<code>https://example.com:8065</code>で起動していたとすると、<code>https://example.com:8065/plugins/{PLUGING_ID}</code>がPlugin専用のエンドポイントになります。ここに送られたリクエストを処理するのが<code>ServeHTTP</code>です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">w</span>, <span style="color:#e6db74">&#34;Hello, world!&#34;</span>)
+}
+</code></pre></div><p><a href="https://docs.mattermost.com/developer/interactive-messages.html">Interactive Message</a>などのリクエスト送信先をPlugin用のエンドポイントにするなどの利用方法があります。</p>
+<h3 id="executecommand">ExecuteCommand</h3>
+<p>Plugin APIの<a href="https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand"><code>RegisterCommand</code></a>で登録されたコマンドが実行された時に処理されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">OnActivate</span>() <span style="color:#66d9ef">error</span> {
+	<span style="color:#75715e">// Slash Commandの登録
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">RegisterCommand</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Command</span>{
+		<span style="color:#a6e22e">Trigger</span>:      <span style="color:#e6db74">&#34;sample&#34;</span>,
+		<span style="color:#a6e22e">AutoComplete</span>: <span style="color:#66d9ef">true</span>,
+	}); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to register  command&#34;</span>)
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{<span style="color:#a6e22e">Text</span>: <span style="color:#e6db74">&#34;Hello by plugin&#34;</span>}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="userhasbeencreated">UserHasBeenCreated</h3>
+<p><code>UserHasBeenCreated</code>は、ユーザーが新規に作成された場合に実行されます。
+新しく参加したユーザーにBotからメッセージを送る場合などに使用できます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-been-created.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasBeenCreated</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) {
+	<span style="color:#a6e22e">channel</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetDirectChannel</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to get direct channel&#34;</span>, <span style="color:#e6db74">&#34;user_id1&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>, <span style="color:#e6db74">&#34;user_id2&#34;</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+		<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Id</span>,
+		<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
+		<span style="color:#a6e22e">Message</span>:   <span style="color:#e6db74">&#34;Welcome to Our Mattermost!&#34;</span>,
+	}); <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to create welcome post.&#34;</span>, <span style="color:#e6db74">&#34;channel_id&#34;</span>, <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
+	}
+}
+</code></pre></div><h3 id="userwilllogin">UserWillLogIn</h3>
+<p><code>UserWillLogIn</code>は、ユーザーがログインする直前に実行されます。</p>
+<p>空文字以外の文字列を返すとログインが取り消されますが、現在のバージョンでは返却した文字列はユーザーには表示されず、ユーザー名とパスワードが合っていても<code>Enter a valid email or username and/or password</code>というメッセージが表示されてしまうようです。さらに、プラグインを管理できるユーザーがログアウトしてしまうと、前記のエラーでログインできず、利用可能な状態に戻すのが困難になってしまうかもしれないため、使用には注意が必要そうです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">unc</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserWillLogIn</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) <span style="color:#66d9ef">string</span> {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">check</span>(); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>()
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+}
+</code></pre></div><h3 id="userhasloggedin">UserHasLoggedIn</h3>
+<p><code>UserHasLoggedIn</code>は、ユーザーがログインした直後に実行されます。</p>
+<p>前回ログアウト(オフライン)してから、7日以上経過していた場合にBotからメッセージを送信する場合などに利用できます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-logged-in.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasLoggedIn</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">user</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) {
+	<span style="color:#a6e22e">status</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetUserStatus</span>(<span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to get user status&#34;</span>, <span style="color:#e6db74">&#34;user_id&#34;</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Unix</span>(<span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">LastActivityAt</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">LastActivityAt</span><span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">status</span>.<span style="color:#a6e22e">Status</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">STATUS_OFFLINE</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">After</span>(<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">AddDate</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">7</span>)) {
+		<span style="color:#a6e22e">channel</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetDirectChannel</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to get direct channel&#34;</span>, <span style="color:#e6db74">&#34;user_id1&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>, <span style="color:#e6db74">&#34;user_id2&#34;</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
+			<span style="color:#66d9ef">return</span>
+		}
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+			<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Id</span>,
+			<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
+			<span style="color:#a6e22e">Message</span>:   <span style="color:#e6db74">&#34;Hi! :wave:&#34;</span>,
+		}); <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to create post.&#34;</span>, <span style="color:#e6db74">&#34;channel_id&#34;</span>, <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
+		}
+	}
+}
+</code></pre></div><h3 id="messagewillbeposted">MessageWillBePosted</h3>
+<p><code>MessageWillBePosted</code>は、投稿されたメッセージがデータベースに保存される前に実行されます。投稿を拒否したり、投稿内容を自動で編集したい場合などに利用できます。投稿作成時に拒否や編集以外の処理を実行する場合は、投稿がデータベースに保存された後に実行される<code>MessageHasBeenPosted</code>の利用が推奨されています。</p>
+<p>投稿を拒否する場合は、２つ目のreturn値に空でない文字列を指定します。一つ目の返却値の<code>*model.Post</code>には内容を編集した後の<code>*model.Post</code>を指定します。<code>nil</code>を指定した場合でも、引数で与えられた<code>*model.Post</code>が指定されたものと解釈されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">MessageWillBePosted</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">post</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>, <span style="color:#66d9ef">string</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#e6db74">&#34;shit&#34;</span>) <span style="color:#f92672">||</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#e6db74">&#34;💩&#34;</span>) {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#e6db74">&#34;You can&#39;t use `shit` and 💩 on this server.&#34;</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#e6db74">&#34;&#34;</span>
+}
+</code></pre></div><p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-will-be-posted.png" alt="IMAGE"></p>
+<p>このHookによって投稿が拒否された場合、ユーザーからはその拒否理由が見えないようなので、拒否基準を明文化したり、拒否理由をBotから通知するなどの対応が必要そうです。</p>
+<h3 id="messagewillbeupdated">MessageWillBeUpdated</h3>
+<p><code>MessageWillBeUpdated</code>は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存される直前に実行される処理です。
+<code>MessageWillBePosted</code>とほぼ同じ内容のため、例は省略します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">MessageWillBeUpdated</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">newPost</span>, <span style="color:#a6e22e">oldPost</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>, <span style="color:#66d9ef">string</span>) {
+    <span style="color:#f92672">...</span>
+} 
+</code></pre></div><h3 id="messagehasbeenposted">MessageHasBeenPosted</h3>
+<p><code>MessageHasBeenPosted</code>は、投稿がデータベースに保存された直後に実行される処理です。</p>
+<p>特定のキーワードを含むメッセージが作成された場合に、特定のチャンネルに通知するようなコードは下記のようになります。
+Botが作成した投稿もこのHookで処理されるため、考慮が漏れると処理が無限ループしてしまうため注意が必要です。また、非公開チャンネルの投稿なども処理されてしまうため、その点を考慮する必要もあります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/message-has-been-posted.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">MessageHasBeenPosted</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">post</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>) {
+	<span style="color:#a6e22e">postUrl</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;http://localhost:8065/_redirect/pl/%s&#34;</span>, <span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Id</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Contains</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">Message</span>, <span style="color:#e6db74">&#34;mattermost&#34;</span>) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">UserId</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+			<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Post refered to `mattermost` is created. See [here](%s) &#34;</span>, <span style="color:#a6e22e">postUrl</span>),
+			<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
+			<span style="color:#a6e22e">ChannelId</span>: <span style="color:#e6db74">&#34;su7w9z51atnspjufg1c73ijx8w&#34;</span>,
+		})
+	}
+}
+</code></pre></div><h3 id="messagehasbeedupdated">MessageHasBeedUpdated</h3>
+<p><code>MessageHasBeenUpdated</code>は、投稿済みのメッセージを編集した際、編集内容がデータベースに保存された直後に実行される処理です。
+こちらも<code>MessageHasBeenPosted</code>とほぼ同じ内容のため、例は省略します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">MessageHasBeenUpdated</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">newPost</span>, <span style="color:#a6e22e">oldPost</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>) {
+    <span style="color:#f92672">...</span>
+}
+</code></pre></div><h3 id="channelhasbeencreated">ChannelHasBeenCreated</h3>
+<p><code>ChannelHasBeenCreated</code>は、チャンネルが作成された直後に実行されます。</p>
+<p>チャンネルが作成されたことを<code>town-square</code>チャンネルに通知するコードは下記のようになります。このHookについても、非公開チャンネルが作成された場合の考慮が必要になります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/channel-has-been-created.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ChannelHasBeenCreated</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">channel</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Channel</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Type</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CHANNEL_OPEN</span> {
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#a6e22e">u</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetUser</span>(<span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">CreatorId</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogError</span>(<span style="color:#e6db74">&#34;Failed to get user&#34;</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">townSquare</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetChannelByName</span>(<span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">TeamId</span>, <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">DEFAULT_CHANNEL</span>, <span style="color:#66d9ef">false</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogError</span>(<span style="color:#e6db74">&#34;Failed to get channel&#34;</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>)
+		<span style="color:#66d9ef">return</span>
+	}
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+		<span style="color:#a6e22e">Type</span>:      <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">POST_DEFAULT</span>,
+		<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">townSquare</span>.<span style="color:#a6e22e">Id</span>,
+		<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
+		<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;Channel ~%s has been created by %s.&#34;</span>, <span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">Name</span>, <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">GetDisplayName</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">SHOW_USERNAME</span>)),
+	}); <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogError</span>(<span style="color:#e6db74">&#34;Failed to create post&#34;</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">appErr</span>)
+	}
+}
+</code></pre></div><h3 id="userhasjoinedchannel">UserHasJoinedChannel</h3>
+<p><code>UserHasJoinedChannel</code>は、ユーザーがチャンネルに参加した直後に実行されます。第３引数の<code>actor</code>は、他のユーザーがユーザーをチャンネルに追加した場合など、ユーザーをチャンネルに追加する処理を実行した人の情報が入ります。</p>
+<p>チャンネルに新しく参加したユーザーに読んで欲しいリンクなどを通知する場合に利用できます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/user-has-joined-channel.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasJoinedChannel</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">channelMember</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">ChannelMember</span>, <span style="color:#a6e22e">actor</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">channelMember</span>.<span style="color:#a6e22e">ChannelId</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">TargetChannelID</span> {
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">SendEphemeralPost</span>(<span style="color:#a6e22e">actor</span>.<span style="color:#a6e22e">Id</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+		<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">channelMember</span>.<span style="color:#a6e22e">ChannelId</span>,
+		<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
+		<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;This chanels is for XXX user. You&#39;d better to read [notes for this channel](%s).&#34;</span>, <span style="color:#a6e22e">UrlForNotes</span>),
+	})
+}
+</code></pre></div><h3 id="userhasleftchannel">UserHasLeftChannel</h3>
+<p><code>UserHasLeftChannel</code>は、ユーザーがチャンネルから脱退した直後に実行されます。
+<code>UserHasJoinedChannel</code>とほぼ同じ内容のため、例は省略します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasLeftChannel</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">channelMember</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">ChannelMember</span>, <span style="color:#a6e22e">actor</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) {
+    <span style="color:#f92672">...</span>
+}
+</code></pre></div><h3 id="userhasjoinedteam">UserHasJoinedTeam</h3>
+<p><code>UserHasJoinedTeam</code>は、ユーザーがチームに参加した直後に実行されます。
+<code>UserHasJoinedChannel</code>とほぼ同じ内容のため、例は省略します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasJoinedTeam</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">teamMember</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">TeamMember</span>, <span style="color:#a6e22e">actor</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>)  {
+    <span style="color:#f92672">...</span>
+}
+</code></pre></div><h3 id="userhasleftteam">UserHasLeftTeam</h3>
+<p><code>UserHasLeftTeam</code>は、ユーザーがチャンネルから脱退した直後に実行されます。
+<code>UserHasJoinedChannel</code>とほぼ同じ内容のため、例は省略します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">UserHasLeftTeam</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">teamMember</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">TeamMember</span>, <span style="color:#a6e22e">actor</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">User</span>) {
+    <span style="color:#f92672">...</span>
+}
+</code></pre></div><h3 id="filewillbeuploaded">FileWillBeUploaded</h3>
+<p><code>FileWillBeUploaded</code>は、メッセージ入力欄にファイルが添付された時に実行されます。ユーザーが投稿作成を実行する前にファイルが変換されます。</p>
+<p>添付されたファイルの情報は第2引数の<a href="https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#FileInfo"><code>*model.FileInfo</code></a>から、ファイルの内容は第3引数の<code>io.Reader</code>から取得できます。添付ファイルに変更を加えた場合は、第4引数の<code>io.Writer</code>に書き込みます。
+また、ファイルの添付を拒否する場合は、2つ目の返却値に空でない文字列を指定します。1つ目の返却値の<code>*model.FileInfo</code>には内容を編集した後の<code>*model.FileInfo</code>を指定します。もしファイルを編集した場合、編集後のファイルサイズについては自動で更新されるため、<code>FileWillBeUploaded</code>内で計算する必要はありません。</p>
+<p>画像にフィルタをかける例は下記のようになります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day18/file-will-be-uploaded.png" alt="IMAGE"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">FileWillBeUploaded</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">info</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">FileInfo</span>, <span style="color:#a6e22e">file</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Reader</span>, <span style="color:#a6e22e">output</span> <span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">Writer</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">FileInfo</span>, <span style="color:#66d9ef">string</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">info</span>.<span style="color:#a6e22e">IsImage</span>() {
+		<span style="color:#75715e">// Decode original image
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">img</span>, <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Decode</span>(<span style="color:#a6e22e">file</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;failed to decode uploaded image&#34;</span>, <span style="color:#e6db74">&#34;details&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#e6db74">&#34;&#34;</span>
+		}
+		<span style="color:#75715e">// Draw original image
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">base</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">NewRGBA</span>(<span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Rect</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dx</span>(), <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dy</span>()))
+		<span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">Draw</span>(<span style="color:#a6e22e">base</span>, <span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Bounds</span>(), <span style="color:#a6e22e">img</span>, <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">ZP</span>, <span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">Src</span>)
+
+		<span style="color:#75715e">// Create green filter
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">src</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">NewRGBA</span>(<span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Rect</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dx</span>(), <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dy</span>()))
+		<span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">Draw</span>(<span style="color:#a6e22e">src</span>, <span style="color:#a6e22e">src</span>.<span style="color:#a6e22e">Bounds</span>(), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Uniform</span>{<span style="color:#a6e22e">color</span>.<span style="color:#a6e22e">RGBA</span>{<span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">128</span>, <span style="color:#ae81ff">255</span>, <span style="color:#ae81ff">128</span>}}, <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">ZP</span>, <span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">Src</span>)
+
+		<span style="color:#75715e">// Mask original image
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">mask</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">Rect</span>(<span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">25</span>, <span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dx</span>()<span style="color:#f92672">-</span><span style="color:#ae81ff">25</span>, <span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Bounds</span>().<span style="color:#a6e22e">Dy</span>()<span style="color:#f92672">-</span><span style="color:#ae81ff">25</span>)
+		<span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">DrawMask</span>(<span style="color:#a6e22e">base</span>, <span style="color:#a6e22e">base</span>.<span style="color:#a6e22e">Bounds</span>(), <span style="color:#a6e22e">src</span>, <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">ZP</span>, <span style="color:#a6e22e">mask</span>, <span style="color:#a6e22e">image</span>.<span style="color:#a6e22e">ZP</span>, <span style="color:#a6e22e">draw</span>.<span style="color:#a6e22e">Over</span>)
+
+		<span style="color:#75715e">// Write masked image
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">png</span>.<span style="color:#a6e22e">Encode</span>(<span style="color:#a6e22e">output</span>, <span style="color:#a6e22e">base</span>)
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">info</span>, <span style="color:#e6db74">&#34;&#34;</span>
+}
+</code></pre></div><p>画像ファイルのExifを削除するなどで利用することもできますが、処理自体はMattermostサーバーにファイルが送られた後に実行されるため、注意が必要です。</p>
+<h2 id="さいごに">さいごに</h2>
+<p>本日は、Mattermost PluginのServer Hooksについて紹介しました。
+明日も、Mattermost Pluginの<strong>Server</strong>サイドで使用できるAPIとHelper関数について紹介します。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/integration/">integration</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/plugin/">plugin</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/server/">server</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/hooks/">hooks</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

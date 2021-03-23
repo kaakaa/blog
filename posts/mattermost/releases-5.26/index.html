@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.26の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.26の新機能"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/8/14にMattermost v5.26.0がリリースされました。 変更内容の詳細について"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              Mattermost5.26の新機能
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id="はじめに">はじめに</h1>
+<p>2020/8/14にMattermost v5.26.0がリリースされました。</p>
+<p>変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-release-v5-26/">Mattermost Release v5.26 is now available - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-26-feature-release">Mattermost Changelog — Mattermost 5.26 documentation</a></li>
+</ul>
+<hr>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#実験的な機能-チャンネルのカテゴリ化と順序の入れ替え">(実験的な機能) チャンネルのカテゴリ化と順序の入れ替え</a>
+      <ul>
+        <li><a href="#設定方法">設定方法</a></li>
+        <li><a href="#カテゴリ作成">カテゴリ作成</a></li>
+        <li><a href="#ダイレクトメッセージの表示順変更">ダイレクトメッセージの表示順変更</a></li>
+        <li><a href="#チャンネルサイドバー改善作業の今後">チャンネルサイドバー改善作業の今後</a></li>
+      </ul>
+    </li>
+    <li><a href="#enterprise版の改善">Enterprise版の改善</a>
+      <ul>
+        <li><a href="#e20-チャンネルのアーカイブ復元がシステムコンソールから可能に">(E20) チャンネルのアーカイブ・復元がシステムコンソールから可能に</a></li>
+        <li><a href="#e20-システムコンソールでのメンバーチャンネルの">(E20) システムコンソールでのメンバー・チャンネルの</a></li>
+        <li><a href="#e20-ログ設定のカスタマイズ">(E20) ログ設定のカスタマイズ</a></li>
+        <li><a href="#e20ベータ版-モバイルアプリからもadldapグループへのメンションが利用可能に">(E20・ベータ版) モバイルアプリからもAD/LDAPグループへのメンションが利用可能に</a></li>
+      </ul>
+    </li>
+    <li><a href="#その他の変更">その他の変更</a>
+      <ul>
+        <li><a href="#ask-the-community-リンクの追加"><code>Ask the community</code> リンクの追加</a></li>
+        <li><a href="#postgresql-10のサポート">PostgreSQL 10のサポート</a></li>
+        <li><a href="#破壊的変更">破壊的変更</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="実験的な機能-チャンネルのカテゴリ化と順序の入れ替え">(実験的な機能) チャンネルのカテゴリ化と順序の入れ替え</h2>
+<p>Mattermostにもチャンネルのカテゴリ化の機能が追加されました！ 🎉</p>
+<p>Mattermostでは最近チャンネルサイドバーの改善が行われていますが、ついにチャンネルをカテゴリ毎にまとめる機能が（実験的な機能としてではありますが）使えるようになりました。</p>
+<h3 id="設定方法">設定方法</h3>
+<p><strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; 実験的なサイドバー機能</strong> を <code>有効化</code> に設定する必要があります。<strong>実験的なサイドバー機能</strong>はユーザー毎にOn/Offの切り替えが可能であり、システムコンソールで<code>有効化 (デフォルト On)</code> に設定するとサーバー上の全てのユーザーに対して実験的なサイドバー機能を <code>On</code> にすることができ、<code>有効化 (デフォルt Off)</code> にするとユーザー自身で有効化しない限り <strong>実験的なサイドバー機能</strong> は Onになりません。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_settings.png" alt="settings"></p>
+<p>システムコンソールで <strong>実験的なサイドバー機能</strong> が <code>有効化 (デフォルト On)</code> もしくは <code>有効化 (デフォルト Off)</code> に設定されている場合、ユーザーは <strong>アカウント設定 &gt; サイドバー &gt; 実験的なサイドバー機能</strong> から、機能のOn/Offを切り替えることができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_account_settings.png" alt="account settings"></p>
+<p>機能を有効にすると、Mattermostの画面にカテゴリの作成方法に関するポップアップが表示されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_popup.png" alt="popup"></p>
+<h3 id="カテゴリ作成">カテゴリ作成</h3>
+<p><strong>実験的なサイドバー機能</strong>を有効にしてから、サイドバーの <code>チャンネル</code>セクションの横にある <code>...</code> をクリックし、<code>新しいカテゴリを作成する</code>をクリックすることでカテゴリを作成することができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_create.png" alt="create"></p>
+<p>カテゴリを作成したら、サイドバーにある各チャンネルをドラッグ＆ドロップすることで、カテゴリにチャンネルを追加していくことができます。（カテゴリに追加するだけでなく、ドラッグ＆ドロップ操作でチャンネルの順序を入れ替えることもできるようになっています）</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_activity.gif" alt="activity">
+（画像は<a href="https://mattermost.com/blog/mattermost-release-v5-26/#sidebar">公式ブログ</a>から）</p>
+<p>カテゴリ名の部分をクリックすることで、カテゴリに追加されたチャンネルの表示・非表示を切り替えることができ、チャンネルを非表示にした状態でも未読の投稿があるとチャンネル名が表示されるようです。（未読であってもチャンネル名を表示したくない場合もある気がしますが、その場合は優先度の低いチャンネルのカテゴリを作って、そのカテゴリを一番下に持っていくなどの対応が必要そうです）</p>
+<p>その他、チャンネル名の横にあるメニューからも、様々な操作が可能になっているようです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/category_collapse.gif" alt="collapse"></p>
+<h3 id="ダイレクトメッセージの表示順変更">ダイレクトメッセージの表示順変更</h3>
+<p>また、ダイレクトメッセージチャンネルの表示順を「新しい順」と「アルファベット順」で切り替えることができるようになっています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/dm_order.gif" alt="dm order"></p>
+<h3 id="チャンネルサイドバー改善作業の今後">チャンネルサイドバー改善作業の今後</h3>
+<p>チャンネルサイドバー改善については公式ブログの下記エントリにまとめられています。
+<a href="https://mattermost.com/blog/upcoming-channel-sidebar-features/">https://mattermost.com/blog/upcoming-channel-sidebar-features/</a></p>
+<p>今後の改善としては、2020年中にカテゴリのミュート機能とダイレクトメッセージの新しい順でのソート機能（今回追加されたもの？）が予定されており、さらに2020年中に実験的な機能から正式な機能への格上げが予定されているようです。</p>
+<blockquote>
+<ul>
+<li>Phase 1 (v5.22): Unreads filtering, collapsible favorites, public, private, and direct message categories</li>
+<li>Phase 2 (v5.26): User-defined custom categories with drag &amp; drop of channels and categories, quick access menus</li>
+<li>Phase 3 (Q4 2020): Muting categories, direct message recency sorting</li>
+<li>Phase 4 (Q4 2020): General availability (i.e., remove the experimental config setting and release these features to all users)</li>
+</ul>
+</blockquote>
+<h2 id="enterprise版の改善">Enterprise版の改善</h2>
+<p>（Enterprise版の機能は動作確認が取れる環境がないので伝聞調の書き方になります&hellip;）</p>
+<h3 id="e20-チャンネルのアーカイブ復元がシステムコンソールから可能に">(E20) チャンネルのアーカイブ・復元がシステムコンソールから可能に</h3>
+<p>チャンネルのアーカイブ、アーカイブされたチャンネルの復元が、システムコンソールから実行可能になったようです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/channel-configuration.png" alt="channel configuration">
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/channel-configuration-2.png" alt="channge configuration2"></p>
+<p>（画像は<a href="https://mattermost.com/blog/mattermost-release-v5-26/#archive">公式ブログ</a>から）</p>
+<h3 id="e20-システムコンソールでのメンバーチャンネルの">(E20) システムコンソールでのメンバー・チャンネルの</h3>
+<p>チームメンバ管理、チャンネルメンバ管理ページで、ユーザーを役割(ゲスト、システム管理者、等)でフィルタリング可能になったようです。
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/filters.png" alt="filter"></p>
+<p>また、チャンネル管理画面では、チャンネルのタイプ(公開チャンネル、非公開チャンネル、AD/LDAPグループと同期したチャンネル、等)でフィルタリング可能になったようです。
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/filters-2.png" alt="filter2"></p>
+<p>（画像は<a href="https://mattermost.com/blog/mattermost-release-v5-26/#filters">公式ブログ</a>から）</p>
+<h3 id="e20-ログ設定のカスタマイズ">(E20) ログ設定のカスタマイズ</h3>
+<p>Mattermostが出力するログについて、出力先をコンソール、ファイル、syslog、 TCPから選択できるようになり、さらにそれぞれの出力先に対して異なるログレベルを設定するなど柔軟なログ出力の設定が可能になったようです。</p>
+<p>設定方法については公式ドキュメントを参照ください。
+<a href="https://docs.mattermost.com/administration/config-settings.html#output-logs-to-multiple-targets">https://docs.mattermost.com/administration/config-settings.html#output-logs-to-multiple-targets</a></p>
+<h3 id="e20ベータ版-モバイルアプリからもadldapグループへのメンションが利用可能に">(E20・ベータ版) モバイルアプリからもAD/LDAPグループへのメンションが利用可能に</h3>
+<p>モバイルアプリからも、メンションするAD/LDAPグループの補完、グループメンバーメンションのハイライト、5人以上が属するグループへメンションする際の警告ダイアログが利用可能になったようです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/auto-suggest-groups.png" alt="groups"></p>
+<h2 id="その他の変更">その他の変更</h2>
+<h3 id="ask-the-community-リンクの追加"><code>Ask the community</code> リンクの追加</h3>
+<p>Mattermostのヘッダ部分にヘルプアイコンが追加され、そこからMattermostチームが利用している公式インスタンスの <code>Peer-to-peer Help</code> チャンネルへ移動できるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.26/ask_community.png" alt="ask"></p>
+<p>(画像中に翻訳ミスの部分がありますが修正しておきます&hellip;)</p>
+<p><code>Peer-to-peer Help</code>チャンネルでは、やりとりは基本的に英語ですが、開発チームも見ているチャンネルのため素早い回答が期待できるのではないかと思います。</p>
+<p>また、Mattermostは質問用のフォーラムも運用してしおり、こちらからも質問を投稿することができます。
+<a href="https://forum.mattermost.org/">https://forum.mattermost.org/</a></p>
+<p>上記フォーラムも基本的に英語でやりとりが行われていますが、一応、日本語のフォーラムもあります。（あまり利用されてはいないですが&hellip;）
+<a href="https://forum.mattermost.org/c/international/japanese/29">https://forum.mattermost.org/c/international/japanese/29</a></p>
+<h3 id="postgresql-10のサポート">PostgreSQL 10のサポート</h3>
+<p>今までサポート対象だったPostgreSQL 9.4のLTSが2020年2月に終了したことを受け、Mattermostも5.26から公式にPostgreSQL 10をサポートするようになりました。今後もMattermost v5系はPostgreSQL 9.4でも動作可能となりますが、Mattermost v6.0(リリース時期未定)ではPostgreSQL 9.4はサポート対象外となる予定です。</p>
+<h3 id="破壊的変更">破壊的変更</h3>
+<ul>
+<li>Mattermost v5.26では、Elasticsearchのインデックスを再作成する必要があるそうです</li>
+<li>Gossipプロトコルを使用したクラスター間の通信を暗号化するオプションが追加されたそうです</li>
+</ul>
+<h1 id="おわりに">おわりに</h1>
+<p>次の<code>v5.27</code>のリリースは2020/9/16(Wed)を予定しています。
+そして機能追加が行われる<code>v5.28</code>は恐らく2020/10/16(Fri)のリリースになるかと思います。</p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/releases/">releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

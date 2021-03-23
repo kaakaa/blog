@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>[Mattermost Integrations] Plugin (Webapp)</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Mattermost Integrations] Plugin (Webapp)"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第20日目の記事です。 本記事では、Mat"/>
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.72.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="posts-heading">
+          
+            <h1>
+              [Mattermost Integrations] Plugin (Webapp)
+            </h1>
+          
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#本記事について">本記事について</a></li>
+    <li><a href="#mattermost-plugin-webapp-について">Mattermost Plugin (Webapp) について</a></li>
+    <li><a href="#webapp-plugin-api">Webapp Plugin API</a>
+      <ul>
+        <li><a href="#registerrootcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterrootcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerRootComponent">registerRootComponent</a></a></li>
+        <li><a href="#registerpopoveruserattributescomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpopoveruserattributescomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserAttributesComponent">registerPopoverUserAttributesComponent</a></a></li>
+        <li><a href="#registerpopoveruseractionscomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpopoveruseractionscomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserActionsComponent">registerPopoverUserActionsComponent</a></a></li>
+        <li><a href="#registerleftsidebarheadercomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterleftsidebarheadercomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLeftSidebarHeaderComponent">registerLeftSidebarHeaderComponent</a></a></li>
+        <li><a href="#registerbottomteamsidebarcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterbottomteamsidebarcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerBottomTeamSidebarComponent">registerBottomTeamSidebarComponent</a></a></li>
+        <li><a href="#registerlinktooltipcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterlinktooltipcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLinkTooltipComponent">registerLinkTooltipComponent</a></a></li>
+        <li><a href="#registerchannelheaderbuttonactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterchannelheaderbuttonaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderButtonAction">registerChannelHeaderButtonAction</a></a></li>
+        <li><a href="#registerposttypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterposttypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent">registerPostTypeComponent</a></a></li>
+        <li><a href="#registerpostcardtypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostcardtypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostCardTypeComponent">registerPostCardTypeComponent</a></a></li>
+        <li><a href="#registerpostwillrenderembedcomponent-httpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostwillrenderembedcomponent-"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostWillRenderEmbedComponent">registerPostWillRenderEmbedComponent </a></a></li>
+        <li><a href="#registermainmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregistermainmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMainMenuAction">registerMainMenuAction</a></a></li>
+        <li><a href="#registerchannelheadermenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterchannelheadermenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderMenuAction">registerChannelHeaderMenuAction</a></a></li>
+        <li><a href="#registerpostdropdownmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuAction">registerPostDropdownMenuAction</a></a></li>
+        <li><a href="#registerpostdropdownsubmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownsubmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownSubMenuAction">registerPostDropdownSubMenuAction</a></a></li>
+        <li><a href="#registerpostdropdownmenucomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownmenucomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuComponent">registerPostDropdownMenuComponent</a></a></li>
+        <li><a href="#registerfileuploadmethodhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterfileuploadmethod"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFileUploadMethod">registerFileUploadMethod</a></a></li>
+        <li><a href="#registerfileswilluploadhookhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterfileswilluploadhook"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFilesWillUploadHook">registerFilesWillUploadHook</a></a></li>
+        <li><a href="#unregistercomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceunregistercomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterComponent">unregisterComponent</a></a></li>
+        <li><a href="#unregisterposttypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceunregisterposttypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterPostTypeComponent">unregisterPostTypeComponent</a></a></li>
+        <li><a href="#registerreducerhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterreducer"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerReducer">registerReducer</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav><h2 id="本記事について">本記事について</h2>
+<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第20日目の記事です。</p>
+<p>本記事では、Mattermost上の様々な操作に対応した処理を追加できるMattermost Pluginの<strong>Webapp</strong>サイドの機能を紹介していきます。</p>
+<p>記事が長いので2日に分けて紹介していきます。それでも長いです。</p>
+<p>Mattermost Pluginについての公式ドキュメントは下記になります。
+<a href="https://developers.mattermost.com/extend/plugins/overview/">https://developers.mattermost.com/extend/plugins/overview/</a></p>
+<p>サンプルコードは下記リポジトリにコミットしています。
+<a href="https://github.com/kaakaa/mattermost-plugin-api-sample">https://github.com/kaakaa/mattermost-plugin-api-sample</a></p>
+<h2 id="mattermost-plugin-webapp-について">Mattermost Plugin (Webapp) について</h2>
+<p>Mattermost Plugin (Webapp) の本体について紹介します。</p>
+<p>Mattermostの<strong>Webapp</strong>サイドのPluginを実装する場合、プラグイン本体は<code>registry</code>と<code>store</code>を引数にとる<code>initialize</code>メソッドを持つクラスです。<code>registry</code>はMattermost Plugin (Webapp)の機能を呼び出すためのメソッドを持つオブジェクトで、<code>store</code>はMattermostのデータにアクセスするためのインターフェースです。</p>
+<p>公式ドキュメントでは、以下のような<code>PluginClass</code>が紹介されています。
+<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/">https://developers.mattermost.com/extend/plugins/webapp/reference/</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PluginClass</span> {
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">    * initialize is called by the webapp when the plugin is first loaded.
+</span><span style="color:#75715e">    * Receives the following:
+</span><span style="color:#75715e">    * - registry - an instance of the registry tied to your plugin id
+</span><span style="color:#75715e">    * - store - the Redux store of the web app.
+</span><span style="color:#75715e">    */</span>
+    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>)
+
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">    * uninitialize is called by the webapp if your plugin is uninstalled
+</span><span style="color:#75715e">    */</span>
+    <span style="color:#a6e22e">uninitialize</span>()
+}
+</code></pre></div><p>この<code>PluginClass</code>のインスタンスを<code>window</code>オブジェクトが持つ<code>registerPlugin</code>関数にPlugin IDと共に与えることで、Pluginが有効になります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">window.<span style="color:#a6e22e">registerPlugin</span>(<span style="color:#e6db74">&#39;myplugin&#39;</span>, <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PluginClass</span>());
+</code></pre></div><h2 id="webapp-plugin-api">Webapp Plugin API</h2>
+<h3 id="registerrootcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterrootcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerRootComponent">registerRootComponent</a></h3>
+<p><code>registerRootComponent</code>は、画面全体に表示されるモーダルのReact Componentを登録するAPIです。Componentが登録されると、Componentを一意に識別するためのIDが返却されます。</p>
+<p>ここで登録したRoot Componentは、登録するだけで表示されるわけではなく、別のアクションから起動されることで表示されます。</p>
+<p>登録されたComponentで使用できるpropsは特にありません。<a href="https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/channel_layout/channel_controller.jsx#L86">channel_controller.jsx</a></p>
+<p>今回は、チャンネルのヘッダー部分にボタンを追加する<code>registerChannelHeaderButtonAction</code> APIを使ってRoot Componentを表示する例を以下に示します。全てのプログラムを記述すると非常に長くなってしまうため、Reduxによるデータのやりとりなど部分については本記事では割愛します。プログラム全体について知りたい場合は、<a href="https://github.com/kaakaa/mattermost-plugin-api-sample%E3%82%92%E5%8F%82%E7%85%A7%E3%81%97%E3%81%A6%E3%81%8F%E3%81%A0%E3%81%95%E3%81%84%E3%80%82">kaakaa/mattermost-plugin-api-sample</a>
+また、Mattermost公式チームにより作成されているデモ用プラグイン<a href="https://github.com/mattermost/mattermost-plugin-demo/tree/master/webapp">mattermost-plugin-demo</a>の実装も参考になります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/root-component.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">...
+
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">openRootModal</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./actions&#39;</span>
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/root&#39;</span>;
+
+...
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+        <span style="color:#75715e">// (1) Root Componentの登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerRootComponent</span>(<span style="color:#a6e22e">Root</span>)
+
+        <span style="color:#75715e">// (2) Root Componentを呼び出すアクションの登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerChannelHeaderButtonAction</span>(
+            <span style="color:#a6e22e">channelHeaderButtonIcon</span>,
+            () =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),
+            <span style="color:#e6db74">&#34;Open Root modal&#34;</span>,<span style="color:#e6db74">&#34;Open Root modal&#34;</span>
+        );
+
+        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerReducer</span>(<span style="color:#a6e22e">reducer</span>);
+    }
+}
+</code></pre></div><p>上記の例では、<code>(1)</code>でRoot ComponentとなるReact Componentを登録し、<code>(2)</code>でRoot Componentを表示するアクションをチャンネルヘッダーボタンに与えています。<code>(2)</code>の<code>store.dispatch(openRootModal())</code>がRoot Componentを表示する処理ですが、これはRoot Componentを表示するstateを流す処理になります。</p>
+<p>Root Componentは以下のようなコードであり、<code>visible = true</code>となることで画面に表示されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Root</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">visible</span>, <span style="color:#a6e22e">close</span>}) =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">visible</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+    }
+
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">style</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getStyle</span>();
+
+    <span style="color:#66d9ef">return</span> (
+        <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span>
+            <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">backdrop</span>}
+            <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">close</span>}
+        <span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">style</span>.<span style="color:#a6e22e">modal</span>}<span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">p</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">modal</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/p&gt;</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+    );
+};
+
+<span style="color:#a6e22e">Root</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">visible</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">bool</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">close</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">getStyle</span> <span style="color:#f92672">=</span> () =&gt; ({
+    <span style="color:#a6e22e">backdrop</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;absolute&#39;</span>,
+        <span style="color:#a6e22e">display</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;flex&#39;</span>,
+        <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+        <span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+        <span style="color:#a6e22e">right</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+        <span style="color:#a6e22e">bottom</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>,
+        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;rgba(0, 0, 0, 0.50)&#39;</span>,
+        <span style="color:#a6e22e">zIndex</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">2000</span>,
+        <span style="color:#a6e22e">alignItems</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+        <span style="color:#a6e22e">justifyContent</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;center&#39;</span>,
+    },
+    <span style="color:#a6e22e">modal</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">height</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;300px&#39;</span>,
+        <span style="color:#a6e22e">width</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;500px&#39;</span>,
+        <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1em&#39;</span>,
+        <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;black&#39;</span>,
+        <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>,
+    },
+});
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Root</span>;
+</code></pre></div><p>Root ComponentはReact Componentのため、様々な要素を表示することができますが、基本的には通知のために利用し、ユーザーに入力を促すようなユースケースの場合は<a href="https://docs.mattermost.com/developer/interactive-dialogs.html"><code>Interactive Dialog</code></a>を使用すべきだと思います。</p>
+<h3 id="registerpopoveruserattributescomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpopoveruserattributescomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserAttributesComponent">registerPopoverUserAttributesComponent</a></h3>
+<p><code>registerPopoverUserAttributesComponent</code>は、ユーザーアイコンをクリックすると表示されるpopover内に表示されるComponentを登録します。</p>
+<p>Mattermost外からユーザーの情報を取得して表示する際に使用できます。所属の名称がコロコロ変わる会社などでLDAPから所属を引いて表示しておくと便利です。</p>
+<p>登録したComponentは以下のpropsを受け取れます。<a href="https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/profile_popover/profile_popover.jsx#L356">profile_popover.jsx</a></p>
+<ul>
+<li><code>user</code>: popoverで表示しているユーザーのオブジェクト
+<ul>
+<li>アクセスできるのは<a href="https://github.com/mattermost/mattermost-server/blob/master/model/user.go#L68">User</a>モデルで定義されている情報になると思います</li>
+<li><code>User</code>モデルで<code>omitempty</code>となっているものは空の場合除外されるため、値がある場合のみアクセスできます</li>
+</ul>
+</li>
+<li><code>hide</code>: popoverを閉じる関数</li>
+<li><code>status</code>: popoverで表示しているユーザーのstatus
+<ul>
+<li><code>online</code>, <code>offline</code>などの単なる文字列のようです</li>
+</ul>
+</li>
+</ul>
+<p>ここでは、固定文字列を表示する例を示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/user-attribute.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">UserAttributes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/user_attributes&#39;</span>
+
+...
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// (1) User Popoverに説明を追加するComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPopoverUserAttributesComponent</span>(<span style="color:#a6e22e">UserAttributes</span>)
+		...
+    }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/user_attributes.jsx" data-lang="js:components/user_attributes.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">UserAttributes</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">hide</span>, <span style="color:#a6e22e">status</span>}) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>);
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span>&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;{<span style="color:#e6db74">&#39;UserId: &#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">user</span>.<span style="color:#a6e22e">id</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    );
+}
+
+<span style="color:#a6e22e">UserAttributes</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">hide</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">UserAttributes</span>;
+</code></pre></div><h3 id="registerpopoveruseractionscomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpopoveruseractionscomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPopoverUserActionsComponent">registerPopoverUserActionsComponent</a></h3>
+<p><code>registerPopoverUserActionsComponent</code>は、ユーザーアイコンをクリックすると表示されるpopover内に表示されるComponentを登録します。<code>registerPopoverUserAttributesComponent</code>と似ていますが、表示される位置が異なるだけの違いだと思います。</p>
+<p>登録したComponentは、<code>registerPopoverUserAttributesComponent</code>と同じく以下のpropsを受け取れます。<a href="https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/profile_popover/profile_popover.jsx#L483">profile_popover.jsx</a></p>
+<ul>
+<li><code>user</code>: popoverで表示しているユーザーのオブジェクト</li>
+<li><code>hide</code>: popoverを閉じる関数</li>
+<li><code>status</code>: popoverで表示しているユーザーのstatus</li>
+</ul>
+<p><code>registerPopoverUserActionsComponent</code>で、RootComponentを表示する例は以下のようになります。（処理を一部割愛しているため、プログラム全体は <a href="https://github.com/kaakaa/mattermost-plugin-api-sample">https://github.com/kaakaa/mattermost-plugin-api-sample</a> から確認してください）</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/user-action.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">UserAction</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/user_action&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// User Popoverにアクションを追加するComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPopoverUserActionsComponent</span>(<span style="color:#a6e22e">UserAction</span>)
+		...
+	}
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/user_action/user_action.jsx" data-lang="js:components/user_action/user_action.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">UserActionComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">openRootModal</span>, <span style="color:#a6e22e">user</span>, <span style="color:#a6e22e">hide</span>, <span style="color:#a6e22e">status</span>}) =&gt; {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">onClick</span> <span style="color:#f92672">=</span> () =&gt; {
+		<span style="color:#a6e22e">openRootModal</span>();
+		<span style="color:#a6e22e">hide</span>();
+	};
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span>&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">User</span> <span style="color:#a6e22e">Action</span> &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">onClick</span>}&gt;<span style="color:#a6e22e">Action</span>&lt;/<span style="color:#f92672">button</span>&gt;&lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    )
+};
+
+<span style="color:#a6e22e">UserActionComponent</span>.<span style="color:#a6e22e">PropTypes</span> <span style="color:#f92672">=</span> {
+	<span style="color:#a6e22e">openRootModal</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">user</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">hide</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">status</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">UserActionComponent</span>;
+</code></pre></div><h3 id="registerleftsidebarheadercomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterleftsidebarheadercomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLeftSidebarHeaderComponent">registerLeftSidebarHeaderComponent</a></h3>
+<p><code>registerLeftSidebarHeaderComponent</code>は、Mattermost画面の左サイドバーに表示するComponentを登録します。</p>
+<p>登録されたComponentで使用できるpropsは特にありません。<a href="https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/sidebar/sidebar.tsx#L179">sidebar.tsx</a></p>
+<p>常に表示されている部分のため、職場の室温やCO2濃度などを表示するなどの利用方法があるかと思います。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/left-sidebar-header.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">LeftSidebarHeader</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/left_sidebar_header&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// User Popoverにアクションを追加するComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerLeftSidebarHeaderComponent</span>(<span style="color:#a6e22e">LeftSidebarHeader</span>)
+		...
+	}
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/left_sidebar_header.jsx" data-lang="js:components/left_sidebar_header.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">LeftSidebarHeaderComponent</span> <span style="color:#f92672">=</span> () =&gt; {
+	<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">style</span> <span style="color:#f92672">=</span> {
+		<span style="color:#a6e22e">color</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>,
+	};
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">style</span>}&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;<span style="color:#a6e22e">left</span> <span style="color:#a6e22e">sidear</span> <span style="color:#a6e22e">header</span>&lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    );
+}
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">LeftSidebarHeader</span>;
+</code></pre></div><h3 id="registerbottomteamsidebarcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterbottomteamsidebarcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerBottomTeamSidebarComponent">registerBottomTeamSidebarComponent</a></h3>
+<p><code>registerBottomTeamSidebarComponent</code>は、チーム選択サイドバーの下部に表示されるComponentを登録します。１つのチームにしか参加していない場合、チーム選択サイドバー自体が表示されないため、ここで登録したComponentも表示されません。</p>
+<p>登録されたComponentで使用できるpropsは特にありません。<a href="https://github.com/mattermost/mattermost-webapp/blob/61a4de5e36f994955bacc47c8d56734f9a699a5a/components/legacy_team_sidebar/legacy_team_sidebar_controller.tsx#L283">legacy_team_sidebar_controller.tsx</a></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/bottom-team-sidebar.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">BottomTeamSidebar</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/bottom_team_sidebar&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// User Popoverにアクションを追加するComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerLeftSidebarHeaderComponent</span>(<span style="color:#a6e22e">BottomTeamSidebar</span>)
+		...
+	}
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/bottom_team_sidebar.jsx" data-lang="js:components/bottom_team_sidebar.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">BottomTeamSidebarComponent</span> <span style="color:#f92672">=</span> () =&gt; (
+    &lt;&gt;
+        &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://github.com/&#34;</span>&gt;
+            &lt;<span style="color:#f92672">i</span>
+                <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-github&#39;</span>
+                <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">color</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>}}
+            /&gt;
+        &lt;/<span style="color:#f92672">a</span>&gt;
+    &lt;/&gt;
+);
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">BottomTeamSidebarComponent</span>;
+</code></pre></div><h3 id="registerlinktooltipcomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterlinktooltipcomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerLinkTooltipComponent">registerLinkTooltipComponent</a></h3>
+<p><code>registerLinkTooltipComponent</code>は、リンクをhoverした時に表示されるtooltipのComponentを登録します。</p>
+<p>登録したComponentは以下のpropsを受け取れます。<a href="https://github.com/mattermost/mattermost-webapp/blob/cc4ba4576ad978d2a29e6c51c3f12966d121f0d6/components/link_tooltip/link_tooltip.tsx#L113">link_tooltip.tsx</a></p>
+<ul>
+<li><code>href</code>: hoverしているリンクのURL</li>
+<li><code>show</code>: tooltipが表示されているかどうかのフラグ</li>
+</ul>
+<p>以下の例では単にhoverしているリンクのURLを表示しているだけですが、リンク先から情報を取得して表示するようなこともできます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/link-tooltip.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">LinkTooltip</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/link_tooltip&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// User Popoverにアクションを追加するComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerLinkTooltipComponent</span>(<span style="color:#a6e22e">LinkTooltip</span>)
+		...
+	}
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/link_tooltip.jsx" data-lang="js:components/link_tooltip.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">LinkTooltipComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">href</span>}) =&gt; {
+    <span style="color:#66d9ef">return</span> (
+        &lt;&gt;
+            &lt;<span style="color:#f92672">p</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{
+                <span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;white&#39;</span>,
+                <span style="color:#a6e22e">color</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;black&#39;</span>,
+                <span style="color:#a6e22e">padding</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;25px&#39;</span>,
+                <span style="color:#a6e22e">border</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;1px solid red&#39;</span>,
+            }}&gt;
+                {<span style="color:#a6e22e">href</span>}
+            &lt;/<span style="color:#f92672">p</span>&gt;
+        &lt;/&gt;
+    )
+}
+
+<span style="color:#a6e22e">LinkTooltipComponent</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">href</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">LinkTooltipComponent</span>;
+</code></pre></div><h3 id="registerchannelheaderbuttonactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterchannelheaderbuttonaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderButtonAction">registerChannelHeaderButtonAction</a></h3>
+<p><code>registerChannelHeaderButtonAction</code>は、<code>registerRootComponent</code>のところでも使用しましたが、チャンネルのヘッダ部分にアクション付きのボタンを登録します。</p>
+<p><code>registerChannelHeaderButtonAction</code>は、<code>(icon, action, dropdownText, tooltipText)</code>の４つの引数を取ります。</p>
+<ul>
+<li><code>icon</code>: ボタンのアイコンを表すReact Element</li>
+<li><code>action</code>: ボタンがクリックされたときに実行されるアクション
+<ul>
+<li>ボタンが押されたチャンネルの情報を持つ<a href="https://github.com/mattermost/mattermost-server/blob/master/model/channel.go#L36"><code>channel</code></a>と、ボタンを押したユーザーの<a href="https://github.com/mattermost/mattermost-server/blob/master/model/channel_member.go#L44"><code>channelMember</code></a>を引数に取ることができます</li>
+</ul>
+</li>
+<li><code>dropdown_text</code>: ボタンが複数登録されると一つのアイコンにまとめられ、ドロップダウンメニューから選ぶ形式になりますが、その時のドロップダウンメニューに表示される文字列</li>
+<li><code>tooltip_text</code>: ボタンをhoverした時にtooltipとして表示される文字列</li>
+</ul>
+<p><strong>ボタン形式</strong></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/channel-header-button-button.png" alt=""></p>
+<p><strong>ドロップダウン形式</strong></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/channel-header-button-dropdown.png" alt=""></p>
+<p>ここでは、先ほどのRoot Comopnentを開くButtonと、クリックすると投稿を作成するButtonの2つのButtonを表示する例を示します。投稿の作成は<a href="https://github.com/mattermost/mattermost-redux">mattermost-redux</a>を使って投稿を作成するactionsを作成し、Channel Header Buttonのactionから呼び出しています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/channel-header-button.gif" alt="movie"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js"><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">openRootModal</span>, <span style="color:#a6e22e">createPluginPost</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./actions&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Root</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/root&#39;</span>;
+
+...
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+        <span style="color:#75715e">// Root Componentの登録
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootComponentId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerRootComponent</span>(<span style="color:#a6e22e">Root</span>)
+
+        <span style="color:#75715e">// Root Componentを呼び出すアクションの登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerChannelHeaderButtonAction</span>(
+            () =&gt; (<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-commenting-o&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>, <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;relative&#39;</span>, <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;-1px&#39;</span>}}<span style="color:#f92672">/&gt;</span>),
+            () =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),
+            <span style="color:#e6db74">&#34;Open Root modal&#34;</span>,<span style="color:#e6db74">&#34;Open Root modal&#34;</span>
+		);
+		
+		...
+
+        <span style="color:#75715e">// 投稿を作成するチャンネルヘッダボタンを登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerChannelHeaderButtonAction</span>(
+            () =&gt; (<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-commenting-o&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>, <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;relative&#39;</span>, <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;-1px&#39;</span>}}<span style="color:#f92672">/&gt;</span>),
+            (<span style="color:#a6e22e">channel</span>, <span style="color:#a6e22e">channelMembers</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">createPluginPost</span>(<span style="color:#a6e22e">channel</span>.<span style="color:#a6e22e">id</span>)),
+            <span style="color:#e6db74">&#34;Create Sample Post&#34;</span>, <span style="color:#e6db74">&#34;Create Sample Post&#34;</span>
+        );
+
+        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerReducer</span>(<span style="color:#a6e22e">reducer</span>);
+    }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:actions.js" data-lang="js:actions.js"><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">createPost</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;mattermost-redux/actions/posts&#39;</span>;
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">getCurrentUserId</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;mattermost-redux/selectors/entities/users&#39;</span>;
+
+...
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">createPluginPost</span>(<span style="color:#a6e22e">channelId</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">async</span> (<span style="color:#a6e22e">dispatch</span>, <span style="color:#a6e22e">getState</span>) =&gt; {
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getState</span>();
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">getCurrentUserId</span>(<span style="color:#a6e22e">state</span>)
+        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">post</span> <span style="color:#f92672">=</span> {
+            <span style="color:#a6e22e">channel_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">channelId</span>,
+            <span style="color:#a6e22e">user_id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">userId</span>,
+            <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;Post from webapp plugin&#34;</span>,
+        }
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">await</span> <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">createPost</span>(<span style="color:#a6e22e">post</span>));
+    }
+}
+</code></pre></div><h3 id="registerposttypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterposttypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent">registerPostTypeComponent</a></h3>
+<p><code>registerPostTypeComponent</code>は、特定のtypeを持つ投稿をレンダリングする時に使用されるComponentを登録します。投稿（<code>Post</code>）に独自のtypeを指定する場合、そのtypeは<code>custom_</code>で始まる必要があります。</p>
+<p>登録したComponentは以下のpropsを受け取れます。</p>
+<ul>
+<li><code>post</code>: 投稿の内容 <a href="https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72">post.go</a></li>
+<li><code>theme</code>: Mattermost画面の配色テーマ <a href="https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047">constants.jsx</a></li>
+</ul>
+<p>typeに<code>custom_sample_post</code>を持つ投稿が作成された場合、背景色が赤の投稿をレンダリングする例を以下に示します。今回は、Incoming Webhookで投稿を作成する際のパラメータとして<code>custom_sample_post</code>の独自typeを指定しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;type&#34;: &#34;custom_sample_post&#34;, &#34;text&#34;: &#34;Sample Message&#34;, &#34;props&#34;: {&#34;card&#34;: &#34;## Sample\n* foo\n* bar&#34;}}&#39;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8065/hooks/ucw5qjw86jgeum77o1uw8197jr
+</code></pre></div><p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-type.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CustomPost</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/custom_post&#39;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// type: custom_sample_post を持つ投稿をレンダリングするComponentの登録
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostTypeComponent</span>(<span style="color:#e6db74">&#39;custom_sample_post&#39;</span>, <span style="color:#a6e22e">CustomPost</span>);
+	}
+}
+...
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/custom_post.jsx" data-lang="js:components/custom_post.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">formatText</span>, <span style="color:#a6e22e">messageHtmlToComponent</span>} <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">PostUtils</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CustomPostComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">post</span>, <span style="color:#a6e22e">theme</span>}) =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">formattedText</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">messageHtmlToComponent</span>(<span style="color:#a6e22e">formatText</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">message</span>));
+
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;theme&#39;</span>, <span style="color:#a6e22e">theme</span>);
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#ffcccc&#39;</span>}}&gt;
+            {<span style="color:#a6e22e">formattedText</span>}
+            &lt;<span style="color:#f92672">pre</span>&gt;
+                {<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">props</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">4</span>)}
+            &lt;/<span style="color:#f92672">pre</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    )
+}
+
+<span style="color:#a6e22e">CustomPostComponent</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">post</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CustomPostComponent</span>;
+</code></pre></div><p>独自のtypeを指定した投稿を作成した後にPluginを無効にするなど、typeに対応したComponentが登録されていない場合は、通常の投稿と同じようにレンダリングされます。</p>
+<h3 id="registerpostcardtypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostcardtypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostCardTypeComponent">registerPostCardTypeComponent</a></h3>
+<p><code>registerPostCardTypeComponent</code>は、特定のtypeを持つ投稿の<code>card</code>要素をレンダリングする時に使用されるComponentを登録します。投稿（<code>Post</code>）に独自のtypeを指定する場合、そのtypeは<code>custom_</code>で始まる必要があります。</p>
+<p>登録したComponentは以下のpropsを受け取れます。</p>
+<ul>
+<li><code>post</code>: 投稿の内容 <a href="https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72">post.go</a></li>
+<li><code>theme</code>: Mattermost画面の配色テーマ <a href="https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047">constants.jsx</a></li>
+</ul>
+<p>typeに<code>custom_sample_card</code>を持つ投稿が作成された場合、背景色が青のカード要素を持つ投稿をレンダリングする例を以下に示します。<code>custom_sample_card</code>という独自typeはIncoming Webhookのパラメータとして指定しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{&#34;type&#34;: &#34;custom_sample_card&#34;, &#34;text&#34;: &#34;Sample Message&#34;, &#34;props&#34;: {&#34;card&#34;: &#34;## Sample\n* foo\n* bar&#34;}}&#39;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8065/hooks/ucw5qjw86jgeum77o1uw8197jr
+</code></pre></div><p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-card-type.png" alt=""></p>
+<p>作成する投稿に<code>props.card</code>プロパティがない場合、<code>card</code>要素を表示するための<code>i</code>ボタンが表示されないためカード要素を表示することができません。必ず<code>props.card</code>要素を指定する必要があります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CustomCard</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/custom_card&#39;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// type: custom_sample_card を持つ投稿をレンダリングするComponentの登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostCardTypeComponent</span>(<span style="color:#e6db74">&#39;custom_sample_card&#39;</span>, <span style="color:#a6e22e">CustomCard</span>);
+	}
+}
+...
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/custom_card.jsx" data-lang="js:components/custom_card.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">formatText</span>, <span style="color:#a6e22e">messageHtmlToComponent</span>} <span style="color:#f92672">=</span> window.<span style="color:#a6e22e">PostUtils</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CustomCardComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">post</span>, <span style="color:#a6e22e">theme</span>}) =&gt; {
+    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">formattedText</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">messageHtmlToComponent</span>(<span style="color:#a6e22e">formatText</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">message</span>));
+
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;theme&#39;</span>, <span style="color:#a6e22e">theme</span>);
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#ccccff&#39;</span>}}&gt;
+            {<span style="color:#a6e22e">formattedText</span>}
+            &lt;<span style="color:#f92672">pre</span>&gt;
+                {<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">post</span>.<span style="color:#a6e22e">props</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">4</span>)}
+            &lt;/<span style="color:#f92672">pre</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    )
+}
+
+<span style="color:#a6e22e">CustomCardComponent</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">post</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CustomCardComponent</span>;
+</code></pre></div><p>独自のtypeを指定した投稿を作成した後にPluginを無効にするなど、typeに対応したComponentが登録されていない場合は、通常の投稿と同じようにレンダリングされます。</p>
+<h3 id="registerpostwillrenderembedcomponent-httpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostwillrenderembedcomponent-"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostWillRenderEmbedComponent">registerPostWillRenderEmbedComponent </a></h3>
+<p><code>registerPostWillRenderEmbedComponent</code>は、投稿内で最初に出現するURLの内容をプレビュー表示する部分のコンポーネントを登録します。OpenGraphの情報を表示するアレです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-will-render-embed-sample.png" alt=""></p>
+<p><code>registerPostWillRenderEmbedComponent</code>は3つの引数を取ります。</p>
+<ul>
+<li><code>match</code>: ここで指定したコンポーネントでプレビュー要素をレンダリングするかどうかを決定するための関数。プレビュー表示対象のURLや種別を使い、<code>true</code>を返すとここで指定したコンポーネントを使用する。</li>
+<li><code>component</code>: プレビュー要素をレンダリングするコンポーネント</li>
+<li><code>toggleable</code>: プレビュー要素を折り畳み可能にするかどうかのフラグ</li>
+</ul>
+<p>また、登録した<code>Component</code>は以下のpropsを受け取れます。</p>
+<ul>
+<li><code>embed</code>: 投稿の内容 <a href="https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72">post.go</a>
+<ul>
+<li><code>type</code>: <code>url</code>から取得できるプレビューの種別。<code>opengraph</code>や<code>image</code>などの値が入る</li>
+<li><code>url</code>: 投稿ないで最初に出現するURL</li>
+<li><code>data</code>: <code>url</code>から取得できるプレビュー内容に関する情報が格納されるらしいが、試している中では値が取得できなかった</li>
+</ul>
+</li>
+</ul>
+<p><code>https://github.com/mattermost</code>で始まるURLが指定された場合に、青い背景色のプレビューをレンダリングする例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-will-render-embed.png" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CustomEmbed</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/custom_embed&#39;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// 投稿に含まれるURLのプレビューをレンダリングするComponentの登録
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostWillRenderEmbedComponent</span>(
+            (<span style="color:#a6e22e">embed</span>) =&gt; <span style="color:#a6e22e">embed</span>.<span style="color:#a6e22e">url</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">embed</span>.<span style="color:#a6e22e">url</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#e6db74">`https://github.com/mattermost/`</span>),
+            <span style="color:#a6e22e">CustomEmbed</span>,
+            <span style="color:#66d9ef">true</span>
+        );
+    }
+}
+...
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/custom_embed.jsx" data-lang="js:components/custom_embed.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CustomEmbedComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">embed</span>}) =&gt; {
+    <span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">type</span>, <span style="color:#a6e22e">url</span>, <span style="color:#a6e22e">data</span>} <span style="color:#f92672">=</span> <span style="color:#a6e22e">embed</span>;
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#ccffcc&#39;</span>}}&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;{<span style="color:#a6e22e">type</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+            &lt;<span style="color:#f92672">p</span>&gt;{<span style="color:#a6e22e">url</span>}&lt;/<span style="color:#f92672">p</span>&gt;
+            &lt;<span style="color:#f92672">pre</span>&gt;
+                {<span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">data</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">4</span>)}
+            &lt;/<span style="color:#f92672">pre</span>&gt;
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    )
+}
+
+<span style="color:#a6e22e">CustomEmbedComponent</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">embed</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">shape</span> ({
+        <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">isRequired</span>,
+        <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">isRequired</span>,
+        <span style="color:#a6e22e">data</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    })
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CustomEmbedComponent</span>;
+</code></pre></div><p>以下のリポジトリの<code>oEmbed-plugin</code>ブランチに、Mattermost公式チームによる<code>registerPostWillRenderEmbedComponent</code>を使用したプラグインの実装が残っています。（作りかけで止まっているようですが）
+<a href="https://github.com/mattermost/mattermost-plugin-oembed/tree/oEmbed-plugin">https://github.com/mattermost/mattermost-plugin-oembed/tree/oEmbed-plugin</a></p>
+<h3 id="registermainmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregistermainmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerMainMenuAction">registerMainMenuAction</a></h3>
+<p><code>registerMainMenuAction</code>は、Mattermostのメインメニュー部分に独自のメニューを追加します。</p>
+<p><code>registerPostWillRenderEmbedComponent</code>は3つの引数を取ります。</p>
+<ul>
+<li><code>text</code>: メインメニューに表示される文字列かReact Elementを指定します</li>
+<li><code>action</code>: メインメニューが選択された際に実行されるアクションを登録します</li>
+<li><code>mobileIcon</code>: モバイルアプリで表示されるアイコンを登録します（が、モバイルアプリだとメインメニュー表示されない&hellip;?）</li>
+</ul>
+<p>モーダルを開くアクションが登録されたメインメニューを追加する例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/main-menu.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// メインメニューを追加する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerMainMenuAction</span>(
+            <span style="color:#e6db74">&#39;Sample Main Menu&#39;</span>,
+            () =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),
+            () =&gt; (<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>, <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;relative&#39;</span>, <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;-1px&#39;</span>}}<span style="color:#f92672">/&gt;</span>)
+        );
+    }
+}
+...
+</code></pre></div><h3 id="registerchannelheadermenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterchannelheadermenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerChannelHeaderMenuAction">registerChannelHeaderMenuAction</a></h3>
+<p><code>registerChannelHeaderMenuAction</code>は、チャンネル名の部分をクリックした時に表示されるメニューに独自のメニューを追加します。</p>
+<p><code>registerPostWillRenderEmbedComponent</code>は2つの引数を取ります。</p>
+<ul>
+<li><code>text</code>: メニューに表示される文字列かReact Element</li>
+<li><code>action</code>: メニューが選択された際に実行されるアクション。実行されたチャンネルのチャンネルIDが渡されます。</li>
+</ul>
+<p>モーダルを開くアクションが登録されたチャンネルヘッダーメニューを追加する例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/channel-header-menu-action.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// チャンネル名をクリックした際に表示されるメニューに独自メニューを追加する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerChannelHeaderMenuAction</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>, <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;relative&#39;</span>, <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;-1px&#39;</span>}}<span style="color:#f92672">&gt;</span>{<span style="color:#e6db74">&#39;Sample Menu&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/i&gt;,</span>
+            (<span style="color:#a6e22e">chnnelId</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>())
+        );
+    }
+}
+...
+</code></pre></div><h3 id="registerpostdropdownmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuAction">registerPostDropdownMenuAction</a></h3>
+<p><code>registerPostDropdownMenuAction</code>は、投稿に対するドロップダウンメニューに独自のメニューを追加します。</p>
+<p><code>registerPostDropdownMenuAction</code>は3つの引数を取ります。</p>
+<ul>
+<li><code>text</code>: メニューに表示される文字列かReact Element</li>
+<li><code>action</code>: メニューが選択された際に実行されるアクション。メニューが実行された投稿のPostIDが渡されます。</li>
+<li><code>filter</code>: メニューを表示するかどうかを決定する関数。実行された投稿のPostIDが渡されます。</li>
+</ul>
+<p>モーダルを開くアクションが登録されたドロップダウンメニューを追加する例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-menu-action.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// 投稿に対するドロップダウンメニューに独自メニューを追加する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostDropdownMenuAction</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>}}<span style="color:#f92672">&gt;</span>{<span style="color:#e6db74">&#39;Sample Post Menu&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/i&gt;,</span>
+            (<span style="color:#a6e22e">postId</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),
+            (<span style="color:#a6e22e">postId</span>) =&gt; { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>; }
+        );
+    }
+}
+...
+</code></pre></div><h3 id="registerpostdropdownsubmenuactionhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownsubmenuaction"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownSubMenuAction">registerPostDropdownSubMenuAction</a></h3>
+<p><code>registerPostDropdownSubMenuAction</code>は、投稿に対するドロップダウンメニューにサブメニュー付きの独自のメニューを追加します。</p>
+<p>まず、<code>registerPostDropdownSubMenuAction</code>は3つの引数を取ります。</p>
+<ul>
+<li><code>text</code>: メニューに表示される文字列かReact Element</li>
+<li><code>action</code>: メニューが選択された際に実行されるアクション。実行された投稿のPostIDが渡されます。(しかし、クリックしても何も実行されないようです)</li>
+<li><code>filter</code>: メニューを表示するかどうかを決定する関数。メニューが実行された投稿のPostIDが渡されます。</li>
+</ul>
+<p><code>registerPostDropdownSubMenuAction</code>は、返り値として登録したアクションのIDと、サブメニューを登録するための関数を返します。ここで返される関数を使ってサブメニューを登録していきますが、この関数は2つの引数を取ります。</p>
+<ul>
+<li><code>text</code>: メニューに表示される文字列かReact Element</li>
+<li><code>action</code>: メニューが選択された際に実行されるアクション。メニューが実行された投稿のPostIDが渡されます。</li>
+</ul>
+<p>（サブメニューを登録する関数の第3引数として<code>filter</code>となる関数を渡しても、特に効果はないようです）</p>
+<p>モーダルを開くアクションが登録されたドロップダウンサブメニューを追加する例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-submenu.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// 投稿に対するサブメニュー付きのドロップダウンメニューを追加する
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> {<span style="color:#a6e22e">id</span>, <span style="color:#a6e22e">rootRegisterMenuItem</span>} <span style="color:#f92672">=</span> <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostDropdownSubMenuAction</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>}}<span style="color:#f92672">&gt;</span>{<span style="color:#e6db74">&#39;Sample SubMenu&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/i&gt;,</span>
+            (<span style="color:#a6e22e">postId</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),  <span style="color:#75715e">// 実行されない
+</span><span style="color:#75715e"></span>            (<span style="color:#a6e22e">postId</span>) =&gt; { <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>; }
+        );
+        <span style="color:#a6e22e">rootRegisterMenuItem</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>}}<span style="color:#f92672">&gt;</span>{<span style="color:#e6db74">&#39;SubMenu 1&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/i&gt;,</span>
+            (<span style="color:#a6e22e">postId</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>()),
+        );
+        <span style="color:#a6e22e">rootRegisterMenuItem</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>}}<span style="color:#f92672">&gt;</span>{<span style="color:#e6db74">&#39;SubMenu 2&#39;</span>}<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/i&gt;,</span>
+            (<span style="color:#a6e22e">postId</span>) =&gt; <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>())
+        );
+    }
+}
+...
+</code></pre></div><h3 id="registerpostdropdownmenucomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceregisterpostdropdownmenucomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostDropdownMenuComponent">registerPostDropdownMenuComponent</a></h3>
+<p><code>registerPostDropdownMenuComponent</code>は、投稿に対するドロップダウンメニューに独自のコンポーネントを追加します。</p>
+<p>登録したComponentは以下のpropsを受け取れます。</p>
+<ul>
+<li><code>postId</code>: アクションが実行された投稿のPostID</li>
+<li><code>theme</code>: Mattermost画面の配色テーマ <a href="https://github.com/mattermost/mattermost-webapp/blob/0b47780407e1f36e703df45e7fe694c7cf750244/utils/constants.jsx#L1047">constants.jsx</a></li>
+<li><code>dispatch</code>: actionをdispatchするための関数</li>
+</ul>
+<p>モーダルを開くアクションが登録されたドロップダウンメニューを追加する例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/post-dropdown-component.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">CustomPostDropdown</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./components/custom_post_dropdown&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// 投稿に対するドロップダウンメニューにコンポーネントを登録する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostDropdownMenuComponent</span>(<span style="color:#a6e22e">CustomPostDropdown</span>);
+		...
+	}
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:components/custom_post_dropdown.jsx" data-lang="js:components/custom_post_dropdown.jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">openRootModal</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;actions&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CustomPostDropdownComponent</span> <span style="color:#f92672">=</span> ({<span style="color:#a6e22e">postId</span>, <span style="color:#a6e22e">theme</span>, <span style="color:#a6e22e">dispatch</span>}) =&gt; {
+    <span style="color:#66d9ef">return</span> (
+        &lt;<span style="color:#f92672">div</span>
+            <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">backgroundColor</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#ffcccc&#39;</span>}}
+            <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{() =&gt; <span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">openRootModal</span>())}
+        &gt;
+            {<span style="color:#a6e22e">postId</span>}
+        &lt;/<span style="color:#f92672">div</span>&gt;
+    )
+}
+
+<span style="color:#a6e22e">CustomPostDropdownComponent</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">postId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">theme</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">object</span>.<span style="color:#a6e22e">isRequired</span>,
+    <span style="color:#a6e22e">dispatch</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">func</span>.<span style="color:#a6e22e">isRequired</span>,
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">CustomPostDropdownComponent</span>;
+</code></pre></div><h3 id="registerfileuploadmethodhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterfileuploadmethod"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFileUploadMethod">registerFileUploadMethod</a></h3>
+<p><code>registerFileUploadMethod</code>は、ファイルアップロードメニューに独自のメニューを追加します。</p>
+<p><code>registerFileUploadMethod</code>は3つの引数を取ります。(公式ドキュメントは引数の順序が違っているので注意)</p>
+<ul>
+<li><code>icon</code>: JSX形式のメニューに表示されるアイコン</li>
+<li><code>action</code>: メニューが選択された際に実行されるアクション。ファイルをアップロードするための関数が渡されます。</li>
+<li><code>text</code>: メニューに表示されるテキスト</li>
+</ul>
+<p>メニューが選択されると、テキストファイルが2つアップロードされる例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/file-upload-method.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// ファイルアップロードメニューを追加する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerFileUploadMethod</span>(
+            <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-pencil-square-o&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>}}<span style="color:#f92672">/&gt;</span>,
+            (<span style="color:#a6e22e">upload</span>) =&gt; <span style="color:#a6e22e">upload</span>([
+                <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">File</span>([<span style="color:#e6db74">&#34;test1&#34;</span>], <span style="color:#e6db74">&#34;sample1.txt&#34;</span>),
+                <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">File</span>([<span style="color:#e6db74">&#34;test2&#34;</span>], <span style="color:#e6db74">&#39;sample2.txt&#39;</span>)
+            ]),
+            <span style="color:#e6db74">&#39;Sample File Upload&#39;</span>
+        );
+    }
+}
+...
+</code></pre></div><h3 id="registerfileswilluploadhookhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterfileswilluploadhook"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerFilesWillUploadHook">registerFilesWillUploadHook</a></h3>
+<p><code>registerFilesWillUploadHook</code>は、ファイルアップロード時に実行される関数を登録できます。</p>
+<p><code>registerFilesWillUploadHook</code>は2つの引数を取る関数を引数に取ります。</p>
+<ul>
+<li><code>files</code>: アップロードしようとしているファイルの配列</li>
+<li><code>upload</code>: ファイルをアップロードするための関数
+<ul>
+<li>この関数を使わなくとも、アップロードしたいファイルを返却値として指定することでファイルをアップロードできます</li>
+</ul>
+</li>
+</ul>
+<p>返り値として以下のフィールドを持つオブジェクトを返却する必要があります。</p>
+<ul>
+<li><code>message</code>: 処理結果として画面に表示されるメッセージを指定します</li>
+<li><code>files</code>: 処理結果としてアップロードするファイルを配列として指定します。<code>null</code>を指定するとアップロードをrejectします。</li>
+</ul>
+<p>2つ以上のファイルを同時にアップロードしようとするとアップロードをrejectする例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/files-will-upload-hook.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+
+        <span style="color:#75715e">// ファイルアップロード時の処理を登録する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerFilesWillUploadHook</span>((<span style="color:#a6e22e">files</span>, <span style="color:#a6e22e">upload</span>) =&gt; {
+            <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">files</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span> ) {
+                <span style="color:#a6e22e">files</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+                <span style="color:#a6e22e">msg</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Must upload one by one.&#39;</span>;
+            }
+            <span style="color:#66d9ef">return</span> {
+                <span style="color:#a6e22e">message</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">msg</span>,
+                <span style="color:#a6e22e">files</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">files</span>,
+            };
+        });
+    }
+}
+...
+</code></pre></div><h3 id="unregistercomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceunregistercomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterComponent">unregisterComponent</a></h3>
+<p><code>unregisterComponent</code>は、プラグインとして登録したComponentやHookを登録から除外します。</p>
+<p><code>registerLeftSidebarHeaderComponent</code>によって登録したコンポーネントを登録から除外するメインメニューの例を以下に示します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day20/unregister-component.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// 左サイドバーの上部に表示されるComponentの登録
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">leftSidebarHeaderComponentId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerLeftSidebarHeaderComponent</span>(<span style="color:#a6e22e">LeftSidebarHeader</span>);
+        ...
+        <span style="color:#75715e">// プラグインによって登録されたコンポーネントを登録から除外する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerMainMenuAction</span>(
+            <span style="color:#e6db74">&#39;Unregister LeftSideberHeader&#39;</span>,
+            () =&gt; <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">unregisterComponent</span>(<span style="color:#a6e22e">leftSidebarHeaderComponentId</span>),
+            () =&gt; (<span style="color:#f92672">&lt;</span><span style="color:#a6e22e">i</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;icon fa fa-plug&#39;</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{<span style="color:#a6e22e">fontSize</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;15px&#39;</span>, <span style="color:#a6e22e">position</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;relative&#39;</span>, <span style="color:#a6e22e">top</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;-1px&#39;</span>}}<span style="color:#f92672">/&gt;</span>)
+        );
+    }
+}
+...
+</code></pre></div><h3 id="unregisterposttypecomponenthttpsdevelopersmattermostcomextendpluginswebappreferenceunregisterposttypecomponent"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterPostTypeComponent">unregisterPostTypeComponent</a></h3>
+<p><code>unregisterPostTypeComponent</code>は、<code>unregisterComponent</code>と同様、独自の<code>PostType</code>に対して設定したComponentを登録から除外します。</p>
+<p>例は省略します。</p>
+<h3 id="registerreducerhttpsdevelopersmattermostcomextendpluginswebappreferenceregisterreducer"><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerReducer">registerReducer</a></h3>
+<p><code>registerReducer</code>は、プラグイン内で使用するReducerを登録します。</p>
+<p>ここまでに紹介してきた例では、モーダルを開くアクションが実行された場合などに<code>registerReducer</code>によって登録されたreducerを利用しています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:index.js" data-lang="js:index.js">...
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reducer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./reducer&#39;</span>;
+...
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Plugin</span> {
+    <span style="color:#75715e">// eslint-disable-next-line no-unused-vars
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+		...
+        <span style="color:#75715e">// Reducerを登録する
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerReducer</span>(<span style="color:#a6e22e">reducer</span>);
+    }
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:reducer.js" data-lang="js:reducer.js"><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">combineReducers</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;redux&#39;</span>;
+
+<span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">OPEN_ROOT_MODAL</span>, <span style="color:#a6e22e">CLOSE_ROOT_MODAL</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./action_types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">rootModalVisible</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">state</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>, <span style="color:#a6e22e">action</span>) =&gt; {
+    <span style="color:#66d9ef">switch</span> (<span style="color:#a6e22e">action</span>.<span style="color:#a6e22e">type</span>) {
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">OPEN_ROOT_MODAL</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+    <span style="color:#66d9ef">case</span> <span style="color:#a6e22e">CLOSE_ROOT_MODAL</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">state</span>;
+    }
+};
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">combineReducers</span>({
+    <span style="color:#a6e22e">rootModalVisible</span>,
+});
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js:action_types.js" data-lang="js:action_types.js"><span style="color:#66d9ef">import</span> {<span style="color:#a6e22e">id</span> <span style="color:#a6e22e">as</span> <span style="color:#a6e22e">pluginId</span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./manifest&#39;</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">OPEN_ROOT_MODAL</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pluginId</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_open_root_modal&#39;</span>;
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">CLOSE_ROOT_MODAL</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">pluginId</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_close_root_modal&#39;</span>;
+</code></pre></div><h2 id="さいごに">さいごに</h2>
+<p>本日は、Mattermost Pluginの<strong>Webapp</strong>サイドの実装について紹介しました。
+明日は、残りの<strong>Webapp</strong>サイドのAPIを紹介していきます。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a href="https://blog.kaakaa.dev/tags/mattermost/">mattermost</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/integration/">integration</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/plugin/">plugin</a
+            >&nbsp;
+          
+            <a href="https://blog.kaakaa.dev/tags/webapp/">webapp</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+  <div>
+    
+      <a href="https://github.com/kaakaa" name="GitHub"
+        ><em class="fab fa-github-alt fa-lg"></em
+      ></a>
+    
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
+        ><em class="fab fa-twitter fa-lg"></em
+      ></a>
+    
+
+
+    
+    
+    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+    <img src="https://blog.kaakaa.dev/images/qiita.png"
+        width="20"
+        height="20"
+        alt="Qiita">
+    </a>
+    
+</div>
+
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
