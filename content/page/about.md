@@ -23,6 +23,7 @@ disable_comments: true
 - [Twitter: @kaakaa_hoe_prog](https://twitter.com/kaakaa_hoe_prog)
 - [Qiita: @kaakaa](https://qiita.com/kaakaa_hoe)
 - [Zenn: @kaakaa](https://zenn.dev/kaakaa)
+- [LeetCode: @kaakaa](https://leetcode.com/kaakaa/)
 
 ## Support
 
