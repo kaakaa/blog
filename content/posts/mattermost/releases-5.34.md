@@ -1,6 +1,6 @@
 ---
 title: "Mattermost 5.34の新機能"
-date: 2021-04-XXT10:00:00+09:00
+date: 2021-04-17T10:00:00+09:00
 draft: false
 toc: true
 tags: ["mattermost", "releases"]
@@ -53,7 +53,7 @@ Incident Collaboratoin Plugin では、インシデント対応手順を予め P
 
 ## その他の機能
 
-### 新たなプラグイン (CircleCI / )
+### 新たなプラグイン (CircleCI / Dice Roller)
 
 新たなプラグインが紹介されています。
 
@@ -151,5 +151,3 @@ Mattermost の公式ブログで、今までの Mattermost の活動をどのよ
 ---
 
 [Mattermost 日本語\(@mattermost_jp\)さん \| Twitter](https://twitter.com/mattermost_jp?lang=ja) で Mattermost に関する日本語の情報を提供しています。
-
-
