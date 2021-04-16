@@ -3,23 +3,23 @@ name: Deploy Pages
 on:
   push:
     branches:
-    - master
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: public
-        HUGO_VERSION: 0.72.0
-        BUILD_SCRIPT: |
-          wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
-          dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
-          git submodule update --init
-          hugo -v
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.1
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: public
+          HUGO_VERSION: 0.72.0
+          BUILD_SCRIPT: |
+            wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
+            dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+            git submodule update --init
+            hugo -v
