@@ -41,7 +41,7 @@ MySQL のパスワードに特殊文字を使用している場合、Mattermost 
 
 見出しの前に何もない場合、Team Edition(OSS 版)でも利用可能な機能です。
 
-## (Cloud/E20) Incident Collaboration のおけるインシデント開始時操作の自動化
+## (Cloud/E20) Incident Collaboration におけるインシデント開始時操作の自動化
 
 ここ数ヶ月開発が活発な[Incident Collaboration Plugin](https://github.com/mattermost/mattermost-plugin-incident-collaboration)に、インシデント開始時の操作を自動化する機能が追加されました。
 
