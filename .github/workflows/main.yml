@@ -22,6 +22,6 @@ jobs:
         run: hugo --minify
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
-        env:
+        with:
           branch: gh-pages
           folder: public
