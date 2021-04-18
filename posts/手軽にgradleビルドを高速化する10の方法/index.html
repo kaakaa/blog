@@ -1,384 +1,63 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
-<title>手軽にGradleビルドを高速化する10の方法</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-57299975-4');
-  </script>
-  
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="手軽にGradleビルドを高速化する10の方法"/>
-<meta name="twitter:description" content="はじめに Gradleのビルドを高速化する方法について、下記エントリを参考に調べてみました。 10 Tips to Improve Your Gradle Build Time — Medium 記事の冒頭でも書かれている通り"/>
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.72.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
-</nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="posts-heading">
-          
-            <h1>
-              手軽にGradleビルドを高速化する10の方法
-            </h1>
-          
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="はじめに">はじめに</h1>
-<p>Gradleのビルドを高速化する方法について、下記エントリを参考に調べてみました。
-<a href="https://medium.com/@kenodoggy/10-tips-to-improve-your-gradle-build-time-1ddeca924759#.hsxgddism">10 Tips to Improve Your Gradle Build Time — Medium</a></p>
-<p>記事の冒頭でも書かれている通り、上記のエントリはAndroidプロジェクト向けに書かれていますが、AndroidプロジェクトでなくてもGradleプロジェクトならば適用できる方法ばかりです。
+<!doctype html><html lang=ja-jp><head><meta charset=utf-8><title>手軽にGradleビルドを高速化する10の方法</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-57299975-4')</script><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1"><link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog"><meta name=twitter:card content="summary"><meta name=twitter:title content="手軽にGradleビルドを高速化する10の方法"><meta name=twitter:description content="はじめに Gradleのビルドを高速化する方法について、下記エントリを参考に調べてみました。 10 Tips to Improve Your Gradle Build Time — Medium 記事の冒頭でも書かれている通り"><link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css><link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css><script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script><script src=https://blog.kaakaa.dev/js/bundle.js></script><script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script><meta name=generator content="Hugo 0.82.0"></head><body><header><nav class=navbar><div class=nav><ul class=nav-links><li><a href=/ id=Home><em class="fas fa-home fa-lg"></em></a></li><li><a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a></li><li><a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a></li><li><a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a></li><li><a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a></li></ul></div></nav><div class=intro-header><div class=container><div class=posts-heading><h1>手軽にGradleビルドを高速化する10の方法</h1></div></div></div></header><div class=container role=main><article class=article class=blog-post><h1 id=はじめに>はじめに</h1><p>Gradleのビルドを高速化する方法について、下記エントリを参考に調べてみました。
+<a href=https://medium.com/@kenodoggy/10-tips-to-improve-your-gradle-build-time-1ddeca924759#.hsxgddism>10 Tips to Improve Your Gradle Build Time — Medium</a></p><p>記事の冒頭でも書かれている通り、上記のエントリはAndroidプロジェクト向けに書かれていますが、AndroidプロジェクトでなくてもGradleプロジェクトならば適用できる方法ばかりです。
 （一つAndroid限定のものもありますが）
-特にマルチプロジェクト構成の際に効果が高いものばかりなので、大規模なGradleプロジェクトを構築する際の参考になりそうです。</p>
-<p>ただ、最後のまとめにも書きましたが、ビルド時間の大半を占めるのがテスト実行時間であることが多いため、劇的にビルドが早くなるという訳では無いかと思いました。</p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#0-ドキュメント">0. ドキュメント</a></li>
-    <li><a href="#1-デーモン化">1. デーモン化</a>
-      <ul>
-        <li><a href="#指定方法">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#2-並列ビルド-incubating">2. 並列ビルド (incubating)</a>
-      <ul>
-        <li><a href="#指定方法-1">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#3-オンデマンドconfigure-incubating">3. オンデマンドConfigure (incubating)</a>
-      <ul>
-        <li><a href="#指定方法-2">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#4-グローバル設定">4. グローバル設定</a></li>
-    <li><a href="#5-最小化">5. 最小化</a>
-      <ul>
-        <li><a href="#指定方法-3">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#6-minsdkversionを設定してartのみを対象に">6. minSdkVersionを設定してARTのみを対象に</a>
-      <ul>
-        <li><a href="#指定方法-4">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#7-オフライン実行">7. オフライン実行</a>
-      <ul>
-        <li><a href="#指定方法-5">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#8-gradleのバージョンを24まで上げる">8. Gradleのバージョンを2.4まで上げる</a></li>
-    <li><a href="#9-jcenterの利用">9. jCenterの利用</a></li>
-    <li><a href="#10-profile">10. Profile!</a>
-      <ul>
-        <li><a href="#指定方法-6">指定方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#さいごに">さいごに</a></li>
-  </ul>
-</nav><h2 id="0-ドキュメント">0. ドキュメント</h2>
-<p>Gradleのコマンドラインオプションと実行時オプションを利用する方法が多いため、公式ドキュメントを載せておきます。</p>
-<p><a href="https://docs.gradle.org/current/userguide/gradle_command_line.html">Appendix D. Gradle Command Line</a>
-<a href="https://docs.gradle.org/current/userguide/build_environment.html">The Build Environment - Gradle User Guide Version 2.14</a></p>
-<h2 id="1-デーモン化">1. デーモン化</h2>
-<p>これは昔から推奨されてましたね。
-Gradleプロセスを常駐化させることで、JVMの起動や必須ライブラリの読み込みを毎回行わなくて済むようにする方法。</p>
-<p><a href="https://docs.gradle.org/current/userguide/gradle_daemon.html">The Gradle Daemon - Gradle User Guide Version 2.14</a></p>
-<h3 id="指定方法">指定方法</h3>
-<pre><code class="language-gradle.properties" data-lang="gradle.properties">org.gradle.daemon=true
-</code></pre><p>or</p>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew　--daemon # 一度起動するとそのまま常駐します
+特にマルチプロジェクト構成の際に効果が高いものばかりなので、大規模なGradleプロジェクトを構築する際の参考になりそうです。</p><p>ただ、最後のまとめにも書きましたが、ビルド時間の大半を占めるのがテスト実行時間であることが多いため、劇的にビルドが早くなるという訳では無いかと思いました。</p><nav id=TableOfContents><ul><li><a href=#0-ドキュメント>0. ドキュメント</a></li><li><a href=#1-デーモン化>1. デーモン化</a><ul><li><a href=#指定方法>指定方法</a></li></ul></li><li><a href=#2-並列ビルド-incubating>2. 並列ビルド (incubating)</a><ul><li><a href=#指定方法-1>指定方法</a></li></ul></li><li><a href=#3-オンデマンドconfigure-incubating>3. オンデマンドConfigure (incubating)</a><ul><li><a href=#指定方法-2>指定方法</a></li></ul></li><li><a href=#4-グローバル設定>4. グローバル設定</a></li><li><a href=#5-最小化>5. 最小化</a><ul><li><a href=#指定方法-3>指定方法</a></li></ul></li><li><a href=#6-minsdkversionを設定してartのみを対象に>6. minSdkVersionを設定してARTのみを対象に</a><ul><li><a href=#指定方法-4>指定方法</a></li></ul></li><li><a href=#7-オフライン実行>7. オフライン実行</a><ul><li><a href=#指定方法-5>指定方法</a></li></ul></li><li><a href=#8-gradleのバージョンを24まで上げる>8. Gradleのバージョンを2.4まで上げる</a></li><li><a href=#9-jcenterの利用>9. jCenterの利用</a></li><li><a href=#10-profile>10. Profile!</a><ul><li><a href=#指定方法-6>指定方法</a></li></ul></li><li><a href=#さいごに>さいごに</a></li></ul></nav><h2 id=0-ドキュメント>0. ドキュメント</h2><p>Gradleのコマンドラインオプションと実行時オプションを利用する方法が多いため、公式ドキュメントを載せておきます。</p><p><a href=https://docs.gradle.org/current/userguide/gradle_command_line.html>Appendix D. Gradle Command Line</a>
+<a href=https://docs.gradle.org/current/userguide/build_environment.html>The Build Environment - Gradle User Guide Version 2.14</a></p><h2 id=1-デーモン化>1. デーモン化</h2><p>これは昔から推奨されてましたね。
+Gradleプロセスを常駐化させることで、JVMの起動や必須ライブラリの読み込みを毎回行わなくて済むようにする方法。</p><p><a href=https://docs.gradle.org/current/userguide/gradle_daemon.html>The Gradle Daemon - Gradle User Guide Version 2.14</a></p><h3 id=指定方法>指定方法</h3><pre><code class=language-gradle.properties data-lang=gradle.properties>org.gradle.daemon=true
+</code></pre><p>or</p><pre><code class=language-command:cli data-lang=command:cli>./gradlew　--daemon # 一度起動するとそのまま常駐します
 ./gradlew build
-</code></pre><h2 id="2-並列ビルド-incubating">2. 並列ビルド (incubating)</h2>
-<p><strong>マルチプロジェクトビルド限定</strong>です。
-互いに参照しあっていないプロジェクト(<a href="https://docs.gradle.org/current/userguide/multi_project_builds.html#sec:decoupled_projects">Decoupled Project</a>)のビルドを並列実行できます。</p>
-<h3 id="指定方法-1">指定方法</h3>
-<pre><code class="language-gradle.properties" data-lang="gradle.properties">org.gradle.parallel=true
+</code></pre><h2 id=2-並列ビルド-incubating>2. 並列ビルド (incubating)</h2><p><strong>マルチプロジェクトビルド限定</strong>です。
+互いに参照しあっていないプロジェクト(<a href=https://docs.gradle.org/current/userguide/multi_project_builds.html#sec:decoupled_projects>Decoupled Project</a>)のビルドを並列実行できます。</p><h3 id=指定方法-1>指定方法</h3><pre><code class=language-gradle.properties data-lang=gradle.properties>org.gradle.parallel=true
 org.gradle.workers.max=4  # 並列の最大数(デフォルトではプロセッサの数)
-</code></pre><p>or</p>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew build --parallel --max-workers=4
+</code></pre><p>or</p><pre><code class=language-command:cli data-lang=command:cli>./gradlew build --parallel --max-workers=4
 ./gradlew build --parallel --parallel-threads=4
 </code></pre><p><code>--max-workers</code>と<code>--parallel-thread</code>はどちらも<code>org.gradle.workers.max</code>と同じく、並列の最大数を指定するオプションです。
-同時に指定された場合、<code>--parallel-thread</code>が優先されるそうです。</p>
-<h2 id="3-オンデマンドconfigure-incubating">3. オンデマンドConfigure (incubating)</h2>
-<p><a href="https://docs.gradle.org/current/userguide/multi_project_builds.html#sec:configuration_on_demand">Multi-project Builds - Gradle User Guide Version 2.14</a></p>
-<p>GradleビルドのConfigure Phaseを必要なときだけ行うということですかね。
-ちょっとここらへん理解が浅いです。</p>
-<h3 id="指定方法-2">指定方法</h3>
-<pre><code class="language-gradle.properties" data-lang="gradle.properties">org.gradle.configureondemand=true
-</code></pre><p>or</p>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew build --configure-on-demand
-</code></pre><h2 id="4-グローバル設定">4. グローバル設定</h2>
-<p>今まで紹介した手法と趣向が異なります。</p>
-<p>1-3でも登場した<code>gradle.properteis</code>ファイルは、下記のいずれかの場所に置くことでビルド時に読み込まれます。</p>
-<ul>
-<li>Gradleプロジェクトのトップディレクトリ</li>
-<li><code>$USER_HOME/.gradle/gradle.properties</code></li>
-<li><code>$GRADLE_USER_HOME/gradle.properties</code></li>
-</ul>
-<p>1-3に挙げているようなオプションは、プロジェクト関係なく有効な手法なのでユーザ設定にしてしてしまっても良さそうです。</p>
-<p><a href="https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties">The Build Environment - Gradle User Guide Version 2.14</a></p>
-<h2 id="5-最小化">5. 最小化</h2>
-<p>ビルド実行時のコマンドラインオプションで実行しないタスクを指定できます。
-<a href="https://docs.gradle.org/current/userguide/tutorial_gradle_command_line.html">Using the Gradle Command-Line - Gradle User Guide Version 2.14</a></p>
-<h3 id="指定方法-3">指定方法</h3>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew build -x test
+同時に指定された場合、<code>--parallel-thread</code>が優先されるそうです。</p><h2 id=3-オンデマンドconfigure-incubating>3. オンデマンドConfigure (incubating)</h2><p><a href=https://docs.gradle.org/current/userguide/multi_project_builds.html#sec:configuration_on_demand>Multi-project Builds - Gradle User Guide Version 2.14</a></p><p>GradleビルドのConfigure Phaseを必要なときだけ行うということですかね。
+ちょっとここらへん理解が浅いです。</p><h3 id=指定方法-2>指定方法</h3><pre><code class=language-gradle.properties data-lang=gradle.properties>org.gradle.configureondemand=true
+</code></pre><p>or</p><pre><code class=language-command:cli data-lang=command:cli>./gradlew build --configure-on-demand
+</code></pre><h2 id=4-グローバル設定>4. グローバル設定</h2><p>今まで紹介した手法と趣向が異なります。</p><p>1-3でも登場した<code>gradle.properteis</code>ファイルは、下記のいずれかの場所に置くことでビルド時に読み込まれます。</p><ul><li>Gradleプロジェクトのトップディレクトリ</li><li><code>$USER_HOME/.gradle/gradle.properties</code></li><li><code>$GRADLE_USER_HOME/gradle.properties</code></li></ul><p>1-3に挙げているようなオプションは、プロジェクト関係なく有効な手法なのでユーザ設定にしてしてしまっても良さそうです。</p><p><a href=https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties>The Build Environment - Gradle User Guide Version 2.14</a></p><h2 id=5-最小化>5. 最小化</h2><p>ビルド実行時のコマンドラインオプションで実行しないタスクを指定できます。
+<a href=https://docs.gradle.org/current/userguide/tutorial_gradle_command_line.html>Using the Gradle Command-Line - Gradle User Guide Version 2.14</a></p><h3 id=指定方法-3>指定方法</h3><pre><code class=language-command:cli data-lang=command:cli>./gradlew build -x test
 ./gradlew build --exclude-task test
-</code></pre><h2 id="6-minsdkversionを設定してartのみを対象に">6. minSdkVersionを設定してARTのみを対象に</h2>
-<p><strong>Androidプロジェクト限定</strong>です。
-Android SDKの最低バージョンを<code>23</code>に設定することでDalvik向けのdexing?をしないようにするみたいです。</p>
-<p>Android Studioのドキュメントでも紹介されているやり方のようで。
-<a href="https://developer.android.com/studio/build/multidex.html#dev-build">Configure Apps with Over 64K Methods | Android Studio</a></p>
-<h3 id="指定方法-4">指定方法</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-build.gradle" data-lang="build.gradle"><span style="color:#f92672">...</span>
+</code></pre><h2 id=6-minsdkversionを設定してartのみを対象に>6. minSdkVersionを設定してARTのみを対象に</h2><p><strong>Androidプロジェクト限定</strong>です。
+Android SDKの最低バージョンを<code>23</code>に設定することでDalvik向けのdexing?をしないようにするみたいです。</p><p>Android Studioのドキュメントでも紹介されているやり方のようで。
+<a href=https://developer.android.com/studio/build/multidex.html#dev-build>Configure Apps with Over 64K Methods | Android Studio</a></p><h3 id=指定方法-4>指定方法</h3><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-build.gradle data-lang=build.gradle><span style=color:#f92672>...</span>
 
-<span style="color:#66d9ef">def</span> minSdk <span style="color:#f92672">=</span> hasProperty<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;minSdk&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">?</span> minSdk <span style="color:#f92672">:</span> <span style="color:#ae81ff">16</span>
+<span style=color:#66d9ef>def</span> minSdk <span style=color:#f92672>=</span> hasProperty<span style=color:#f92672>(</span><span style=color:#e6db74>&#39;minSdk&#39;</span><span style=color:#f92672>)</span> <span style=color:#f92672>?</span> minSdk <span style=color:#f92672>:</span> <span style=color:#ae81ff>16</span>
 
-android <span style="color:#f92672">{</span>
-    compileSdkVersion <span style="color:#ae81ff">23</span>
-    buildToolsVersion <span style="color:#e6db74">&#34;23.0.2&#34;</span>
+android <span style=color:#f92672>{</span>
+    compileSdkVersion <span style=color:#ae81ff>23</span>
+    buildToolsVersion <span style=color:#e6db74>&#34;23.0.2&#34;</span>
 
-    dexOptions <span style="color:#f92672">{</span>
-        javaMaxHeapSize <span style="color:#e6db74">&#34;4g&#34;</span>
-        jumboMode <span style="color:#66d9ef">true</span>
-    <span style="color:#f92672">}</span>
+    dexOptions <span style=color:#f92672>{</span>
+        javaMaxHeapSize <span style=color:#e6db74>&#34;4g&#34;</span>
+        jumboMode <span style=color:#66d9ef>true</span>
+    <span style=color:#f92672>}</span>
 
-    defaultConfig <span style="color:#f92672">{</span>
-        applicationid <span style="color:#e6db74">&#34;com.myapplication.app&#34;</span>
+    defaultConfig <span style=color:#f92672>{</span>
+        applicationid <span style=color:#e6db74>&#34;com.myapplication.app&#34;</span>
 
         minSdkVersion minSdk
-        targetSdkVersion <span style="color:#ae81ff">23</span>
-<span style="color:#f92672">...</span>
+        targetSdkVersion <span style=color:#ae81ff>23</span>
+<span style=color:#f92672>...</span>
 
-</code></pre></div><pre><code class="language-command:cli" data-lang="command:cli">./gradlew assembleDebug -PminSdk=23
+</code></pre></div><pre><code class=language-command:cli data-lang=command:cli>./gradlew assembleDebug -PminSdk=23
 </code></pre><p>Android Studioでの指定方法については下記を参考に。
-<a href="https://gist.github.com/cesarferreira/8480ea6fd0b95ba57f98">How to make faster Android build without sacrificing new api lint check</a></p>
-<h2 id="7-オフライン実行">7. オフライン実行</h2>
-<p>Gradleがネットワークリソースへアクセスするのを抑止するオプションのようです。
-一度、ビルドに必要な資産をダウンロードすれば、以降はオフラインでも良さそう。</p>
-<h3 id="指定方法-5">指定方法</h3>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew build --offline
-</code></pre><h2 id="8-gradleのバージョンを24まで上げる">8. Gradleのバージョンを2.4まで上げる</h2>
-<p>公式ブログでもアナウンスがあったように、Gradle2.4では2.3の時よりconfiguration timeが34%も削減されているそうで。
-<a href="https://gradle.org/blog/gradle-2-4-the-fastest-yet/">Gradle 2.4: The fastest yet - Gradle</a></p>
-<p>現在、Gradle2.14までリリースされているので、2.3以下を使っている場合はちょっと古すぎるので上げておくべきかと。</p>
-<h2 id="9-jcenterの利用">9. jCenterの利用</h2>
-<p>MavenCentralよりjCenterを利用しましょうということらしいです。
-確かにGradleのbuild-init pluginを使って生成したbuild.gradleでも、jCenterを利用するよう設定されています。</p>
-<p>理由については、下記のエントリが紹介されています。</p>
-<ul>
-<li><a href="https://blog.bintray.com/2015/02/09/android-studio-migration-from-maven-central-to-jcenter/">Android Studio – Migration from Maven Central to JCenter | Blog @Bintray</a></li>
-<li><a href="https://code.google.com/p/android/issues/detail?id=72061">Issue 72061 - android - The Maven index is <em>huge</em>! - Android Open Source Project - Issue Tracker - Google Project Hosting</a></li>
-<li><a href="https://blog.bintray.com/2014/08/04/feel-secure-with-ssl-think-again/">Feel secure with SSL? Think again. | Blog @Bintray</a></li>
-</ul>
-<h2 id="10-profile">10. Profile!</h2>
-<p>ちゃんとプロファイリングして、自分たちのビルドの内容を把握しておこうということですね。
-<code>--profile</code>オプションを付けてビルドを実行すると、ビルドプロファイリングのHTMLファイルが出力されます。</p>
-<p><a href="https://docs.gradle.org/current/userguide/tutorial_gradle_command_line.html#sec:profiling_build">Using the Gradle Command-Line - Gradle User Guide Version 2.14</a></p>
-<p>また、Gradle Inc.は<a href="https://scans.gradle.com/">Gradle Build Scans</a>というサービスを開始しているので、コレを利用するのも良いかもしれません。
+<a href=https://gist.github.com/cesarferreira/8480ea6fd0b95ba57f98>How to make faster Android build without sacrificing new api lint check</a></p><h2 id=7-オフライン実行>7. オフライン実行</h2><p>Gradleがネットワークリソースへアクセスするのを抑止するオプションのようです。
+一度、ビルドに必要な資産をダウンロードすれば、以降はオフラインでも良さそう。</p><h3 id=指定方法-5>指定方法</h3><pre><code class=language-command:cli data-lang=command:cli>./gradlew build --offline
+</code></pre><h2 id=8-gradleのバージョンを24まで上げる>8. Gradleのバージョンを2.4まで上げる</h2><p>公式ブログでもアナウンスがあったように、Gradle2.4では2.3の時よりconfiguration timeが34%も削減されているそうで。
+<a href=https://gradle.org/blog/gradle-2-4-the-fastest-yet/>Gradle 2.4: The fastest yet - Gradle</a></p><p>現在、Gradle2.14までリリースされているので、2.3以下を使っている場合はちょっと古すぎるので上げておくべきかと。</p><h2 id=9-jcenterの利用>9. jCenterの利用</h2><p>MavenCentralよりjCenterを利用しましょうということらしいです。
+確かにGradleのbuild-init pluginを使って生成したbuild.gradleでも、jCenterを利用するよう設定されています。</p><p>理由については、下記のエントリが紹介されています。</p><ul><li><a href=https://blog.bintray.com/2015/02/09/android-studio-migration-from-maven-central-to-jcenter/>Android Studio – Migration from Maven Central to JCenter | Blog @Bintray</a></li><li><a href="https://code.google.com/p/android/issues/detail?id=72061">Issue 72061 - android - The Maven index is <em>huge</em>! - Android Open Source Project - Issue Tracker - Google Project Hosting</a></li><li><a href=https://blog.bintray.com/2014/08/04/feel-secure-with-ssl-think-again/>Feel secure with SSL? Think again. | Blog @Bintray</a></li></ul><h2 id=10-profile>10. Profile!</h2><p>ちゃんとプロファイリングして、自分たちのビルドの内容を把握しておこうということですね。
+<code>--profile</code>オプションを付けてビルドを実行すると、ビルドプロファイリングのHTMLファイルが出力されます。</p><p><a href=https://docs.gradle.org/current/userguide/tutorial_gradle_command_line.html#sec:profiling_build>Using the Gradle Command-Line - Gradle User Guide Version 2.14</a></p><p>また、Gradle Inc.は<a href=https://scans.gradle.com/>Gradle Build Scans</a>というサービスを開始しているので、コレを利用するのも良いかもしれません。
 このサービスについては、私のブログで少し紹介しています。
-<a href="http://kaakaa.hatenablog.com/entry/2016/06/15/000223">Gradleがビルド結果解析サービス Gradle.com を開始していた - kaakaa Blog</a></p>
-<h3 id="指定方法-6">指定方法</h3>
-<pre><code class="language-command:cli" data-lang="command:cli">./gradlew build --profile
-</code></pre><h2 id="さいごに">さいごに</h2>
-<p>いくつかの高速化手法について、<a href="https://github.com/Netflix/Hystrix">Netflix/Hystrix</a>を対象にビルド所要時間を測定してみましたが、やはりビルドで一番時間がかかるのはテスト実行のため、ほぼ高速化を体感できませんでした。
-ただし、並列ビルドについてはサブプロジェクトのテストが並列に実行されるため、とても効果がありました。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a href="https://blog.kaakaa.dev/tags/gradle/">gradle</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-  <div>
-    
-      <a href="https://github.com/kaakaa" name="GitHub"
-        ><em class="fab fa-github-alt fa-lg"></em
-      ></a>
-    
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter"
-        ><em class="fab fa-twitter fa-lg"></em
-      ></a>
-    
-
-
-    
-    
-    <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-    <img src="https://blog.kaakaa.dev/images/qiita.png"
-        width="20"
-        height="20"
-        alt="Qiita">
-    </a>
-    
-</div>
-
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2021
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
-</footer>
-
-  </body>
-</html>
+<a href=http://kaakaa.hatenablog.com/entry/2016/06/15/000223>Gradleがビルド結果解析サービス Gradle.com を開始していた - kaakaa Blog</a></p><h3 id=指定方法-6>指定方法</h3><pre><code class=language-command:cli data-lang=command:cli>./gradlew build --profile
+</code></pre><h2 id=さいごに>さいごに</h2><p>いくつかの高速化手法について、<a href=https://github.com/Netflix/Hystrix>Netflix/Hystrix</a>を対象にビルド所要時間を測定してみましたが、やはりビルドで一番時間がかかるのはテスト実行のため、ほぼ高速化を体感できませんでした。
+ただし、並列ビルドについてはサブプロジェクトのテストが並列に実行されるため、とても効果がありました。</p><div class=blog-tags><a href=https://blog.kaakaa.dev/tags/gradle/>gradle</a>&nbsp;</div></article><div id=disqus_thread></div><script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script><noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><footer><div><a href=https://github.com/kaakaa name=GitHub><em class="fab fa-github-alt fa-lg"></em></a><a href=https://twitter.com/kaakaa_hoe_prog name=Twitter><em class="fab fa-twitter fa-lg"></em></a><a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita><img src=https://blog.kaakaa.dev/images/qiita.png width=20 height=20 alt=Qiita></a></div><div class=container><p class="credits copyright"><a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2021
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em></p><p class="credits theme-by">Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a></p></div></footer></body></html>
