@@ -11,19 +11,19 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 # はじめに
 
 2021/04/15 に Mattermost v5.34.0 がリリースされました。  
-現在、MySQL を使用している場合に発生する可能性のある問題に対応中のため、MySQL を利用している場合は問題が修正するまでアップデートを控えた方が良さそうです。
+その後、MySQL を使用している場合に発生する可能性のある問題に対応したパッチバージョンをリリースしており、MySQL を利用している場合は注意が必要そうです。以下の Changelog を確認し、最新のリリースを利用するようにしてください。
 
 https://docs.mattermost.com/administration/changelog.html#release-v5-34-feature-release
-
-> v5.34.2, release day TBD
-> Fixing an issue where installs with some special characters in the MySQL password will break and fail to start.
 
 v5.34.0 へのアップグレード時に実行される DB マイグレーションがタイムアウトすることがあり、この問題については v5.34.1 で解消されています。v5.34.1 にアップグレードする場合、大規模なインスタンスだとマイグレーションに時間がかかる可能性があります。
 
-https://docs.mattermost.com/administration/changelog.html#release-v5-34-feature-release
-
 > v5.34.1, released 2021-04-15
 > Fixed an issue where upgrading to v5.34.0 runs a migration that could cause timeouts on MySQL installations. Upgrading to v5.34.1 may also execute missing migrations that were scheduled for v5.32.0. These additions can be lengthy on very big MySQL (version 5.x) installations.
+
+MySQL のパスワードに特殊文字を使用している場合、Mattermost の開始に失敗する問題への対処が v5.34.2 にて加えられています。
+
+> v5.34.2, released 2021-04-17
+> Fixing an issue where installs with some special characters in the MySQL password will break and fail to start.
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。（なので、Enterprise 版限定の機能などについてはリリースノート書いてあることの紹介程度となっています）
 
