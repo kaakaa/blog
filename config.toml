@@ -72,3 +72,9 @@ disqusShortname = "kaakaa-blog"
   name = "Qiita"
   url = "https://twitter.com/kaakaa_hoe_prog"
   icon = "qiita.png"
+
+[taxonomies]
+series = "series"
+
+[Params]
+images = ["images/icon.png"]
