@@ -10,9 +10,6 @@ footnoteReturnLinkContents = "^"
 googleAnalytics = "UA-57299975-4"
 disqusShortname = "kaakaa-blog"
 
-[params]
-  enableGoogleAnalytics = true
-
 [Author]
   name = "Yusuke Nemoto"
 
@@ -21,6 +18,19 @@ disqusShortname = "kaakaa-blog"
 
 [permalinks]
   page = "/:filename/"
+
+[taxonomies]
+series = "series"
+
+[params]
+  enableGoogleAnalytics = true
+  favicon = "favicon.ico"
+
+  [params.logo]
+    url = "icon.png"
+    width = 50
+    height = 50
+    alt = "Logo"
 
 [[params.nav]]
   identifier = "home"
@@ -73,8 +83,3 @@ disqusShortname = "kaakaa-blog"
   url = "https://twitter.com/kaakaa_hoe_prog"
   icon = "qiita.png"
 
-[taxonomies]
-series = "series"
-
-[Params]
-images = ["images/icon.png"]
