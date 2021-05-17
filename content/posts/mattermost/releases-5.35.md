@@ -68,7 +68,7 @@ $ go get github.com/JalfResi/justext
 ファイル検索について、詳細は以下の公式ブログを参照ください。
 [Search for files and document contents in Mattermost](https://mattermost.com/blog/file-search/)
 
-## Incident Collaborationの改善
+## (E20/Cloud) Incident Collaborationの改善
 
 ### Ad hoc tasks
 
@@ -101,14 +101,14 @@ Incident Collaborationサイドバーの下部に表示されている `Overview
 ![incident_settings](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.35/incident_settings.png)
 
 
-## (E20) システムコンソールページに対する詳細な権限設定
+## (E20/Cloud) システムコンソールページに対する詳細な権限設定
 
 システムコンソールの各設定ページに対する編集/閲覧権限に関する設定項目が細分化されました。
 新たに **Experimental**(実験的な機能), **About**(エディションとライセンス),**Environment**(環境),**Site Configuration**(サイト設定),**Authemtication**(認可),**Integration**(統合機能),**Compliance**(コンプライアンス)のセクションが追加され、それぞれのサブセクションごとの権限設定が可能になっています。
 
 ![granular_access](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.35/granular_access.png)
 
-## (E20) 共有チャンネル
+## (E20/Cloud) 共有チャンネル
 
 Mattermostクラスタ間でチャンネルを共有できる機能が実験的な機能として追加されました。Enterprise E20ライセンスが必要です。また、共有チャンネル機能はデフォルトでは無効化されています。
 
@@ -119,7 +119,6 @@ Mattermostクラスタ間でチャンネルを共有できる機能が実験的�
 共有するインスタンスを持っていないので実際の動作は確かめられませんでしたが、共有チャンネルは以下のような見た目になるそうです。(※画像は[公式ブログ](https://mattermost.com/blog/mattermost-release-v5-35/)から)
 
 ![Shared-channels](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.35/Shared-channels.webp)
-
 
 ## Apps Framework (Developer Preview)
 
