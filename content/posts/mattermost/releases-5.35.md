@@ -1,6 +1,6 @@
 ---
 title: "Mattermost 5.35の新機能"
-date: 2021-05-178T07:30:00+09:00
+date: 2021-05-18T07:30:00+09:00
 draft: false
 toc: true
 tags: ["mattermost", "releases"]
