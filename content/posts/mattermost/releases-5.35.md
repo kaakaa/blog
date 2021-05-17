@@ -51,6 +51,9 @@ v5.35へのアップグレードに関連するいくつかの注意事項があ
 
 Mattermostにアップロードされたファイルの内容を検索できるようになりました。
 
+![search_file](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.35/search_file.gif)
+
+
 検索対象となるファイルの形式は、`.pdf`, `.pptx`, `.odt`, `.html` と plain textドキュメントです。
 [Cloud版](https://mattermost.com/mattermost-cloud/)では、さらに`.docx` も検索対象になります。
 Team Edition(OSS版)でも、下記の依存ライブラリをインストールすることで、`.docx`, `.rtf`, `.pages`ファイルを検索対象とすることもできるようです。(Linuxのみ？)
