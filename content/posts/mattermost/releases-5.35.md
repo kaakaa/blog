@@ -28,14 +28,14 @@ https://docs.mattermost.com/administration/changelog.html#release-v5-35-feature-
 
 ---
 
-## [Important Upgrade Notes](https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes)
+## [アップロード時の注意事項](https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes)
 
 v5.35へのアップグレードに関連するいくつかの注意事項があります。
 
 * Mattermost v5.35では、今後リリース予定の共有チャンネル機能や、返信スレッドの折り畳み機能に必要なデータベースのマイグレーションが行われており、**アップグレードに時間がかかる**ことがあります。データベースのサイズにもよりますが、**数分から、MySQL 5.x系を利用している場合は数時間かかる**こともあります。パフォーマンスへの影響については[5\.35 Migration](https://gist.github.com/streamer45/9aee4906639a49ebde68b2f3c0f924c1)も確認ください。
 * v5.35から導入されたファイル検索機能は、デフォルトではすでにアップロード済みのファイルに対してはファイル名のみの検索しか動作しません。**アップロード済みのファイルの内容で検索を行いたい場合、[`mattermost extract-documents-content`](https://docs.mattermost.com/administration/command-line-tools.html#mattermost-extract-documents-content)コマンドを実行**する必要があります。また、**検索に`Elasticsearch`もしくは`Bleve`を利用している**場合は、`mattermost extract-documents-content`が完了した後で、**検索インデックスの再構築**を行う必要があります。ファイル検索機能については、[Search for files and document contents in Mattermost](https://mattermost.com/blog/file-search/)でも説明されています。
 * **Bulk Import**により追加されたユーザーに設定されるパスワードは、**比較的脆弱なパスワード**となっていたため、Bulk Import後に一度もパスワードを変更していないユーザーがいた場合、そのユーザーのパスワードをリセットすることをおすすめします。
-* v5.38にて、`config.json`ファイルを監視し、変更を自動でリロードする ** `config watcher`の機能が廃止**されます。
+* v5.38にて、`config.json`ファイルを監視し、変更を自動でリロードする `config watcher`**の機能が廃止**されます。
 
 ---
 
@@ -144,7 +144,7 @@ Mattermost Appsについて詳しくは、公式ドキュメント[Apps \(Develo
 
 ## その他の機能
 
-## (E20) Entrepriseトライアルの改善
+### (E20) Entrepriseトライアルの改善
 
 Enterprise E20トライアルの開始時、終了３日前、終了日にシステム管理者に対してバナー警告が表示されるようになりました。
 
