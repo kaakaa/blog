@@ -28,7 +28,7 @@ https://docs.mattermost.com/administration/changelog.html#release-v5-35-feature-
 
 ---
 
-## [アップロード時の注意事項](https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes)
+## [アップグレード時の注意事項](https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes)
 
 v5.35へのアップグレードに関連するいくつかの注意事項があります。
 
@@ -113,7 +113,7 @@ Incident Collaborationサイドバーの下部に表示されている `Overview
 
 ## (E20/Cloud) 共有チャンネル
 
-Mattermostクラスタ間でチャンネルを共有できる機能が実験的な機能として追加されました。Enterprise E20ライセンスが必要です。また、共有チャンネル機能はデフォルトでは無効化されています。
+Mattermostインスタンス間でチャンネルを共有できる機能が実験的な機能として追加されました。Enterprise E20ライセンスが必要です。また、共有チャンネル機能はデフォルトでは無効化されています。
 
 **システムコンソール > 実験的機能 > 機能** から有効にでき、スラッシュコマンド `/share` で共有チャンネルを管理するようです。
 
