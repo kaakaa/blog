@@ -58,7 +58,7 @@ MattermostへのプロキシとしてnginxやApacheを使用している場合�
 
 ## (E20/Cloud) Incident Collaborationの改善
 
-今月もMattermost Incident Collaboration Pluginの改善があります。
+今月も[Mattermost Incident Collaboration Plugin](https://github.com/mattermost/mattermost-plugin-incident-collaboration)の改善があります。
 
 ### チーム全体に対するPlaybookアクセス権設定
 
