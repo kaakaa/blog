@@ -27,7 +27,7 @@ Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## (E20) Incident Managementプラグインの改善
 
-v5.30から導入されたMattermost上でインシデント管理ができるIncident Mangementプラグインについて、機能改善が行われました。(Incident Managementプラグインについては、[前回の記事](https://blog.kaakaa.dev/posts/mattermost/releases-5.30/#e20-mattermost%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E7%AE%A1%E7%90%86)で無償版でも使えそうと書いていましたが、やはりEnterprise版限定のプラグインのようです)
+v5.30から導入されたMattermost上でインシデント管理ができるIncident Mangementプラグインについて、機能改善が行われました。(Incident Managementプラグインについては、[前回の記事](https://blog.kaakaa.dev/post/mattermost/releases-5.30/#e20-mattermost%E3%81%A7%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E7%AE%A1%E7%90%86)で無償版でも使えそうと書いていましたが、やはりEnterprise版限定のプラグインのようです)
 
 新しいバージョンのプラグインでは、インシデント対応のテンプレートを定義するPlaybookを作成する際の設定項目が追加されています。
 * インシデントに対する更新があった場合に、更新内容を通知するチャンネルを指定
@@ -57,7 +57,7 @@ Mattermost上に[GIPHY](https://media.giphy.com/headers/2020-09-10-58-1599746331
 
 ### 実験的なチャンネルサイドバーの改善
 
-[Mattermost v5.26より実験的な機能としてチャンネルサイドバーに独自のカテゴリを作成できるようになりました](https://blog.kaakaa.dev/posts/mattermost/releases-5.26/#%E5%AE%9F%E9%A8%93%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD-%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%8C%96%E3%81%A8%E9%A0%86%E5%BA%8F%E3%81%AE%E5%85%A5%E3%82%8C%E6%9B%BF%E3%81%88)が、作成したカテゴリ単位でチャンネルのミュートを指定できるようになりました。
+[Mattermost v5.26より実験的な機能としてチャンネルサイドバーに独自のカテゴリを作成できるようになりました](https://blog.kaakaa.dev/post/mattermost/releases-5.26/#%E5%AE%9F%E9%A8%93%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD-%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E5%8C%96%E3%81%A8%E9%A0%86%E5%BA%8F%E3%81%AE%E5%85%A5%E3%82%8C%E6%9B%BF%E3%81%88)が、作成したカテゴリ単位でチャンネルのミュートを指定できるようになりました。
 
 ![mute category](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.31/mute-category.png)
 

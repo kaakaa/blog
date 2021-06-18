@@ -40,7 +40,7 @@ MatterpollはMattermost上で投票を行うことができるPluginであり、
 
 また、実際に開発を始める場合はGitHubで公開されているMattermost Plugin用のテンプレートリポジトリ [https://github.com/mattermost/mattermost-plugin-starter-template](https://github.com/mattermost/mattermost-plugin-starter-template) を使用するのがおすすめです。テンプレートリポジトリを使った開発の始め方については、下記の記事で紹介しています。（少し情報が古いかもしれません...）
 
-[Mattermostプラグイン用のリポジトリテンプレート · kaakaa blog](https://blog.kaakaa.dev/posts/mattermost/plugin-template/)
+[Mattermostプラグイン用のリポジトリテンプレート · kaakaa blog](https://blog.kaakaa.dev/post/mattermost/plugin-template/)
 
 ## 概要
 
@@ -148,7 +148,7 @@ Matterpollにより作成された投稿では、メッセージに埋め込ま�
 
 ![Message Button](https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-sample.png)
 
-このボタンはMattermostの [Interacitve Message]([https://docs.mattermost.com/developer/interactive-messages.html](https://docs.mattermost.com/developer/interactive-messages.html)) 機能を利用して実装されています (Interactive Messageについては[第14日目](https://blog.kaakaa.dev/posts/mattermost/advent-calendar-2020/day14-interactive-message-button/)、[第15日目](https://blog.kaakaa.dev/posts/mattermost/advent-calendar-2020/day15-interactive-message-menu/)の記事で紹介しています)。Matterpollでは [https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186](https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186) のあたりで実装されています。）
+このボタンはMattermostの [Interacitve Message]([https://docs.mattermost.com/developer/interactive-messages.html](https://docs.mattermost.com/developer/interactive-messages.html)) 機能を利用して実装されています (Interactive Messageについては[第14日目](https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day14-interactive-message-button/)、[第15日目](https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day15-interactive-message-menu/)の記事で紹介しています)。Matterpollでは [https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186](https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186) のあたりで実装されています。）
 
 Matterpollが作成する投稿に表示されているボタンは、クリックするとそれぞれ異なるURLへHTTPリクエストが送信されます。このHTTPリクエストをMatterpollのServer側が受け取り、どのユーザーがどの回答に投票したかを解析し、データベースに保存されている投票のデータを更新することで投票処理を実行しています。
 

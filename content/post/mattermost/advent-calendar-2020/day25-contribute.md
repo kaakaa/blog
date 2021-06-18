@@ -20,7 +20,7 @@ MattermostはOSSとして開発が進められており、そのコードやド�
 
 https://github.com/mattermost
 
-コントリビューションの仕方などは本日の記事では紹介しませんが、以下のページにMattermostとしてのコントリビューションのやり方などについてまとめてあります。コントリビューションを続けることで[様々なギフト](https://blog.kaakaa.dev/posts/mattermost/advent-calendar-2020/day13-swags/)を貰うことができるので、興味のある方は是非コントリビューションしてみてください。
+コントリビューションの仕方などは本日の記事では紹介しませんが、以下のページにMattermostとしてのコントリビューションのやり方などについてまとめてあります。コントリビューションを続けることで[様々なギフト](https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day13-swags/)を貰うことができるので、興味のある方は是非コントリビューションしてみてください。
 
 https://mattermost.com/contribute/
 

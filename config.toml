@@ -13,7 +13,7 @@ disqusShortname = "kaakaa-blog"
 [Author]
   name = "Yusuke Nemoto"
 
-[outpus]
+[outputs]
   section = ["JSON", "HTML"]
 
 [permalinks]

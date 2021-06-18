@@ -1,10 +1,8 @@
 ---
 title: "Mattermost 5.36の新機能"
 emoji: "🎉"
-type: "tech" # tech: 技術記事 / idea: アイデア
 published: true
 date: 2021-06-18T07:30:00+09:00
-draft: false
 toc: true
 tags: ["mattermost", "releases"]
 ---

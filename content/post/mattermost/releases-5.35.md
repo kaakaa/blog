@@ -98,7 +98,7 @@ Incident Collaborationサイドバーの下部に表示されている `Overview
 
 ### インシデント開始に係る処理の自動化
 
-[先月のリリース時点と比較すると](https://blog.kaakaa.dev/posts/mattermost/releases-5.34/#cloude20-incident-collaboration-%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E9%96%8B%E5%A7%8B%E6%99%82%E6%93%8D%E4%BD%9C%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96)、Playbookの設定に`Announce in another channel`と`Send a webhook`という項目が追加されているようです。
+[先月のリリース時点と比較すると](https://blog.kaakaa.dev/post/mattermost/releases-5.34/#cloude20-incident-collaboration-%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E9%96%8B%E5%A7%8B%E6%99%82%E6%93%8D%E4%BD%9C%E3%81%AE%E8%87%AA%E5%8B%95%E5%8C%96)、Playbookの設定に`Announce in another channel`と`Send a webhook`という項目が追加されているようです。
 この設定により、(おそらく)Incidentに関するイベントを他のチャンネルに通知したり、Webhook経由で別のサーバーへ通知して他サービスと連携するなどができるようになっているようです。
 
 ![incident_settings](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.35/incident_settings.png)

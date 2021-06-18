@@ -48,7 +48,7 @@ Mattermostを新しいバージョンに上げた後にログインすると、�
 #### 検索除外文字のみを指定した場合でも検索結果を返す
 [過去にIssueも立てていましたが](https://github.com/mattermost/mattermost-server/issues/14641)、チャンネルと検索**除外**ワードのみを指定した場合に、検索結果が空になってしまう問題が解決しました。チャンネル内の検索除外ワードを含む投稿を除いた投稿が検索結果として返されるようになります。
 
-関連記事: [Mattermostの検索機能についてちょっと調べた · kaakaa blog](https://blog.kaakaa.dev/posts/mattermost%E3%81%AE%E6%A4%9C%E7%B4%A2%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%AA%BF%E3%81%B9%E3%81%9F/)
+関連記事: [Mattermostの検索機能についてちょっと調べた · kaakaa blog](https://blog.kaakaa.dev/post/mattermost%E3%81%AE%E6%A4%9C%E7%B4%A2%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%AA%BF%E3%81%B9%E3%81%9F/)
 
 #### 通知音の切り替え
 
