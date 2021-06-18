@@ -21,6 +21,7 @@ disqusShortname = "kaakaa-blog"
 
 [taxonomies]
 series = "series"
+tag = "tags"
 
 [params]
   enableGoogleAnalytics = true
