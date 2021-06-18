@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.12の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.12の新機能"/>
+<meta name="twitter:description" content="はじめに 2019/6/13にMattermost v5.12.0がリリースされました。 この記事では、アップデートの内容について簡単に紹介してい"/>
+
+
+  <meta property="og:title" content="Mattermost5.12の新機能" />
+<meta property="og:description" content="はじめに 2019/6/13にMattermost v5.12.0がリリースされました。 この記事では、アップデートの内容について簡単に紹介してい" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.12/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2019-06-16T10:15:49&#43;09:00" />
+<meta property="article:modified_time" content="2019-06-16T10:15:49&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost5.12の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Jun 16, 2019
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2019/6/13にMattermost v5.12.0がリリースされました。
+この記事では、アップデートの内容について簡単に紹介していきます。</p>
+<p>変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-5-12-infinite-scrolling-bot-accounts-deeper-jira-integration-and-more/">Mattermost 5.12: Infinite scrolling, bot accounts, deeper Jira integration, and more - Mattermost Private Cloud Messaging</a></li>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-12-feature-release">Mattermost Changelog — Mattermost 5.12 documentation</a></li>
+</ul>
+<hr>
+<h1 id="アップデート内容">アップデート内容</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mattermostへのフィードバック">Mattermostへのフィードバック</a></li>
+    <li><a href="#無限スクロール">無限スクロール</a></li>
+    <li><a href="#botアカウント">Botアカウント</a></li>
+    <li><a href="#jiraプラグインのアップデート">Jiraプラグインのアップデート</a></li>
+    <li><a href="#デフォルトプラグインの追加">デフォルトプラグインの追加</a></li>
+    <li><a href="#システムコンソール画面の再構築">システムコンソール画面の再構築</a></li>
+    <li><a href="#e20版のみの追加機能">E20版のみの追加機能</a></li>
+    <li><a href="#モバイルアプリのタブレット向け改善">モバイルアプリのタブレット向け改善</a></li>
+    <li><a href="#破壊的変更">破壊的変更</a></li>
+  </ul>
+</nav><h2 id="mattermostへのフィードバック">Mattermostへのフィードバック</h2>
+<p>Mattermostの改善を目的とした、ユーザーへのアンケート機能が追加されました。
+これにより、Mattermostの使い勝手に関するアンケートメッセージがBotから送信されるようになります。</p>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/bc07b62b-7687-bc8e-5195-4e6c9ee2eb17.png" alt="image.png"></p>
+<p>Mattermostを5.12にアップデートすると、実際にアンケートが送信される前に、システム管理者に対してアンケートが予定されていることを伝える電子メールかダイレクトメッセージが送信されると思います。アンケートは3週間後に設定されているはずです。</p>
+<!-- raw HTML omitted -->
+<p>現在、アンケートは英語で送信されるため、アンケートが送信されるとユーザーが混乱してしまう場合など、アンケートをを実施したくない場合は、<strong>システムコンソール &gt; プラグイン &gt; Net Promoter Score &gt; Enable Net Promoter Score Survey</strong>を<code>無効</code>に設定してください。</p>
+<h2 id="無限スクロール">無限スクロール</h2>
+<p>チャンネル内の古い投稿を見るとき、<code>もっとメッセージを読み込む</code>というリンクをクリックする必要がなくなりました。チャンネルの一番上までスクロールすると、自動で古いメッセージの読み込みが開始されます。</p>
+<p>(この機能はIE11では利用できません)</p>
+<h2 id="botアカウント">Botアカウント</h2>
+<p>MattermostでBot用のアカウントを作成できるようになりました。Botアカウントは電子メールやパスワード、またはその他の認証方法を必要とせずにユーザーとやり取りができるアカウントです。これにより、統合機能用のダミーのアカウントを作る必要がなくなります。</p>
+<p>さらに、Botアカウントは下記のような特徴を持ちます。</p>
+<ul>
+<li>非公開チーム、非公開チャンネル、ダイレクトメッセージなど、どのチャンネルにも投稿することができます</li>
+<li>統合機能をBotアカウントに関連づけておくことで、その統合機能を開発したユーザーが退職した後も統合機能を使い続けることができるようになります</li>
+<li>Botアカウントはサーバー上の誰もがやり取り可能で、どのチーム、チャンネルにも追加することができます</li>
+</ul>
+<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/0435acc1-99bf-4483-4a1e-f339f580bb71.png" alt="image.png"></p>
+<p>また、Enterprise版においてBotアカウントはライセンス上のユーザーとしてカウントされません。</p>
+<p>Botアカウントについて詳しくは下記のドキュメントを参照してください。
+<a href="https://docs.mattermost.com/developer/bot-accounts.html">https://docs.mattermost.com/developer/bot-accounts.html</a></p>
+<h2 id="jiraプラグインのアップデート">Jiraプラグインのアップデート</h2>
+<p>MattermostにバンドルされているJiraプラグインのバージョンが2.0になりました。このアップデートにより、MattermostとJiraをより深く統合することができるようになりました。</p>
+<ul>
+<li>Issue作成、更新、コメント追加をMattermostチャンネルに通知</li>
+<li>Jira Issueの作成や、Mattermost上のコメントのJira Issueへの反映、また、Issueの状態の更新などをMattermostから実行</li>
+</ul>
+<p>より詳しい情報は、下記を参照してください。
+<a href="https://github.com/mattermost/mattermost-plugin-jira#jira-20-features">https://github.com/mattermost/mattermost-plugin-jira#jira-20-features</a></p>
+<h2 id="デフォルトプラグインの追加">デフォルトプラグインの追加</h2>
+<p>Mattermost 5.12から、さまざまなプラグインがMattermostにデフォルトでバンドルされるようになりました。</p>
+<ul>
+<li><a href="https://github.com/mattermost/mattermost-plugin-github"><strong>GitHub Plugin</strong></a>: GitHubの通知やリマインドをMattermostに投稿することができるプラグイン。SaaS版やオンプレミスのGitHub Enterpriseにも対応しています。</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-autolink"><strong>Autolink Plugin</strong></a>: あるテキストを自動でハイパーリンク化することができるプラグイン。(例えば、Issue TrackerのIssue番号を投稿すると、自動でリンクに変換してくれます)</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-custom-attributes"><strong>Custom Attributes Plugin</strong></a>: ユーザープロフィールのポップオーバーに属性を追加するプラグイン</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-welcomebot"><strong>Welcome Bot Plugin</strong></a>: 新規メンバーが追加された時にメッセージを通知するプラグイン</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-aws-sns"><strong>Amazon SNS CloudWatch plugin</strong></a>: <a href="https://aws.amazon.com/jp/cloudwatch/">Amazon CloudWatch</a>のアラートをAWS SNS経由でMattermostに通知できるようになるプラグイン。</li>
+</ul>
+<p>他にも下記サイトから様々なMattermostの拡張機能を検索することができます。
+<a href="https://integrations.mattermost.com/">https://integrations.mattermost.com/</a></p>
+<h2 id="システムコンソール画面の再構築">システムコンソール画面の再構築</h2>
+<p>Mattermost 5.12からシステムコンソール画面の構成が変わりました。</p>
+<p>この変更は、Mattermost Private Cloudなど、システムコンソールを使わず<a href="https://docs.mattermost.com/administration/config-settings.html#configuration-settings">環境変数でMattermostの設定を指定する</a>際に、よりロジカルにしたいという意図があるそうです。</p>
+<!-- raw HTML omitted -->
+<h2 id="e20版のみの追加機能">E20版のみの追加機能</h2>
+<ul>
+<li>非公開チーム/チャンネルに関する権限の管理を個別に操作することなく、AD/LDPグループを通じて管理できるようになりました。</li>
+<li>Elasticsearchの自動補完機能により検索機能を利用する際にユーザー/チャンネルが入力しやすくなりました</li>
+</ul>
+<h2 id="モバイルアプリのタブレット向け改善">モバイルアプリのタブレット向け改善</h2>
+<p>モバイルアプリ v1.20もリリースされています。</p>
+<ul>
+<li>チャンネルサイドバーが表示され続けるようになりました</li>
+<li>iOSでキーボードが表示されている際、スワイプダウンすることでキーボードを閉じることができるようになりました</li>
+</ul>
+<p>そのほかの変更については下記を参照ください。
+<a href="https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1200-release">https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1200-release</a></p>
+<h2 id="破壊的変更">破壊的変更</h2>
+<p>Mattermost v5.10以前のバージョンからアップデートをする場合、統合機能に関する下記の破壊的変更があります。</p>
+<ul>
+<li>(v5.12~) プラグインAPI <code>DeleteEphemeralMessage</code> の引数が<code>(userId string, post *model.Post)</code>から<code>(userId, postId string)</code>に変更</li>
+<li>(v5.11~) 統合機能で既に投稿されている投稿の内容を更新する際、投稿のProps属性を<code>Update.Props == nil</code> のように<code>nil</code>を指定してクリアする方法は利用できなくなりました。代わりに<code>Update.Props == {}</code>のように、空の要素を指定する必要があります。</li>
+</ul>
+<h1 id="おわりに">おわりに</h1>
+<p>次の<code>v5.13</code>のリリースは2019/7/16(Tue)を予定しています。
+そして機能追加が行われる<code>v5.14</code>は恐らく2019/8/16(Fri)のリリースになるかと思います。</p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

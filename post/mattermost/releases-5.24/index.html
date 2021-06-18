@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.24の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.24の新機能"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/6/17にMattermost v5.24.0がリリースされました。 (2020/06/20"/>
+
+
+  <meta property="og:title" content="Mattermost5.24の新機能" />
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/6/17にMattermost v5.24.0がリリースされました。 (2020/06/20" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.24/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-06-20T12:56:12&#43;09:00" />
+<meta property="article:modified_time" content="2020-06-20T12:56:12&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost5.24の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Jun 20, 2020
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id="はじめに">はじめに</h1>
+<p>2020/6/17にMattermost v5.24.0がリリースされました。<br>
+(2020/06/20現在、<a href="https://docs.mattermost.com/administration/changelog.html#release-v5-24-feature-release">バグFixを含む v5.24.1 のリリースが計画されています</a>)。</p>
+<p>変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-release-v5-24/">Mattermost Release v5.24 is now available - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-24-feature-release">https://docs.mattermost.com/administration/changelog.html#release-v5-24-feature-release</a></li>
+</ul>
+<hr>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#mattermostアプリ使用時にセッション維持期間を自動で延長する">Mattermostアプリ使用時にセッション維持期間を自動で延長する</a></li>
+    <li><a href="#検索フィルタの改善">検索フィルタの改善</a></li>
+    <li><a href="#絵文字リアクション操作が簡単に-モバイル">絵文字リアクション操作が簡単に (モバイル)</a></li>
+    <li><a href="#自動補完を使用したスラッシュコマンド入力-beta">自動補完を使用したスラッシュコマンド入力 (BETA)</a></li>
+    <li><a href="#bleveを利用した全文検索で日本語検索も可能に実験的機能">Bleveを利用した全文検索で日本語検索も可能に！（実験的機能）</a></li>
+    <li><a href="#enterprise版の改善">Enterprise版の改善</a>
+      <ul>
+        <li><a href="#office365カレンダーの同期-e20">Office365カレンダーの同期 (E20)</a></li>
+        <li><a href="#adldap-グループメンション機能-beta-e20">AD/LDAP グループメンション機能 (BETA) (E20)</a></li>
+        <li><a href="#チームチャンネルのメンバーシップ管理がシステムコンソールから可能に-e20">チーム/チャンネルのメンバーシップ管理がシステムコンソールから可能に (E20)</a></li>
+        <li><a href="#プロフィール画像をadldapと同期-e10e20">プロフィール画像をAD/LDAPと同期 (E10/E20)</a></li>
+      </ul>
+    </li>
+    <li><a href="#その他の変更">その他の変更</a></li>
+  </ul>
+</nav><h2 id="mattermostアプリ使用時にセッション維持期間を自動で延長する">Mattermostアプリ使用時にセッション維持期間を自動で延長する</h2>
+<p>Mattermostにはセッション維持期間の設定項目があり、ログイン成功時からそのセッション維持期間で指定した期間が経過すると自動でログアウトされ、ユーザーは再度ログイン処理を行わなければなりませんでした。セキュリティ向上のためにセッション維持期間は短くしたいが、短くしてしまうとユーザーに再認証を要求するまでの期間も短くなってしまい、その結果、セッション切れから再認証までの間の通知を見落としてしまうというジレンマがありました。</p>
+<p>それを解決するため、ユーザーがMattermost上でチャンネル切替やタイピングなどの行動を行った場合に、その時点から再度セッションが開始される設定が追加されました。</p>
+<p>この設定は、<strong>システムコンソール &gt; セッション維持期間 &gt; 活動中はセッション維持期間を延長する</strong> から行うことができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/extending_session.png" alt="extend session"></p>
+<p>詳しくは、下記の公式ブログで説明されています。
+<a href="https://mattermost.com/blog/session-expiry-experience/">Automatically extend Mattermost sessions for less frequent logouts and happier end users - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></p>
+<h2 id="検索フィルタの改善">検索フィルタの改善</h2>
+<p>Mattermostヘッダ部分にある検索画面で、検索フィルタが利用しやすくなりました。
+今までのバージョンでは空の検索画面をクリックすると検索フィルタについての説明が表示されるだけでしたが、今回のバージョンから検索フィルタの入力方法が改善され、検索フィルタの↑、↓、Enterキーでの選択入力や、日付指定フィルタ入力時のカレンダー表示などが行えるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/search_filter.gif" alt="search filter"></p>
+<h2 id="絵文字リアクション操作が簡単に-モバイル">絵文字リアクション操作が簡単に (モバイル)</h2>
+<p>モバイルアプリ v1.32から、投稿を長押しすると出てくるメニューによく使われるリアクションが表示されるようになり、今までより簡単に絵文字リアクションが付けられるようになりました。</p>
+<!-- raw HTML omitted -->
+<h2 id="自動補完を使用したスラッシュコマンド入力-beta">自動補完を使用したスラッシュコマンド入力 (BETA)</h2>
+<p>今までのバージョンでも、メッセージ入力欄で <code>/</code> を入力すると利用可能なスラッシュコマンドの自動補完を行うことができましたが、今回のバージョンから、さらに選択したスラッシュコマンドで利用可能なオプション部分についても自動補完が可能となりました。</p>
+<!-- raw HTML omitted -->
+<h2 id="bleveを利用した全文検索で日本語検索も可能に実験的機能">Bleveを利用した全文検索で日本語検索も可能に！（実験的機能）</h2>
+<p>今まで、Mattermost内の日本語メッセージを検索するためには、有償版のElasticsearch機能を使うか、DBに対して設定を追加する必要がありました。今回のバージョンから、Mattermost内のメッセージの全文検索に<a href="http://blevesearch.com/">Bleve</a>を利用できるようになり、Bleveを使用することで、無償版でもDBへの設定なしに日本語を含む文字列を検索できるようになります。</p>
+<p>Bleveの利用設定は <strong>システムコンソール &gt; 実験的機能 &gt; Bleve</strong> から行うことができます。
+<strong>Bleveのインデックス付与を有効にする</strong> を有効にし、<strong>IndexDir</strong> にインデックスファイルを配置するディレクトリを指定する。（ここで指定したディレクトリの親ディレクトリが無いと、インデックス作成時にエラーが発生します）</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_settings.png" alt="bleve_settings"></p>
+<p>上記の設定を保存したら、<strong>一括インデックス付与 &gt; インデックス付与をいますぐ開始する</strong>をクリックすることで、Bleveによるインデックス付与を開始することができます。メッセージ数が多い場合、この処理には時間がかかる可能性があります。インデックス付与はバックグラウンド処理として行われるため、処理中もMattermostは利用可能ですが、検索結果に不整合が発生する可能性があります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_indexing.png" alt="bleve_indexing"></p>
+<p>インデックス付与が完了したら、<strong>Bleveの検索クエリを有効にする</strong>、<strong>Bleveの自動補完クエリを有効にする</strong>を有効に設定することで、Bleveを利用した検索が行えるようになります。設定完了後は、新しいメッセージも自動でインデックス付与が行われるため、インデックス最新かのための操作は必要ありません。</p>
+<p>設定完了後、Mattermost上で検索を行うことで、日本語一文字だけでも検索できるようになります。</p>
+<!-- raw HTML omitted -->
+<p>Bleveによる全文検索機能は実験的な機能のため、予期せぬ事象が発生する可能性があります。また、私も数件のメッセージがある環境でしか試していないため、大量のメッセージが存在する環境でどのような事象が発生するかは確認できていません。</p>
+<h2 id="enterprise版の改善">Enterprise版の改善</h2>
+<h3 id="office365カレンダーの同期-e20">Office365カレンダーの同期 (E20)</h3>
+<p>Mattermost上でOffice365カレンダーの予定を管理できるようになりました。</p>
+<ul>
+<li>その日のカレンダーイベントの確認</li>
+<li>Office365カレンダーのstatusとMattermostのステータスを同期 (会議中は&quot;離席中&quot;になる、等)</li>
+<li>カレンダーイベントの承認/拒否がMattermrost上で可能に</li>
+</ul>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/office365_calendar.png" alt="office365_calendar">
+(画像は<a href="https://mattermost.com/blog/mattermost-release-v5-24/">公式リリースブログ</a>より転載)</p>
+<h3 id="adldap-グループメンション機能-beta-e20">AD/LDAP グループメンション機能 (BETA) (E20)</h3>
+<p>AD/LDAPグループに対して @メンション が行えるようになり、これにより複数の人に対して簡単にメンションを飛ばすことができるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/group_mention.png" alt="group_mention">
+(画像は<a href="https://mattermost.com/blog/mattermost-release-v5-24/">公式リリースブログ</a>より転載)</p>
+<p>モバイルアプリでは、自動補完ドロップダウンでLDAPグループメンションのセクションは見えないようです。</p>
+<p><a href="https://docs.mattermost.com/administration/changelog.html#breaking-changes">https://docs.mattermost.com/administration/changelog.html#breaking-changes</a></p>
+<blockquote>
+<p>Breaking Changes</p>
+<ul>
+<li>On mobile apps, users will not be able to see LDAP group mentions (E20 feature) in the autocomplete dropdown. Users will still receive notifications if they are part of an LDAP group. However, the group mention keyword will not be highlighted.</li>
+</ul>
+</blockquote>
+<h3 id="チームチャンネルのメンバーシップ管理がシステムコンソールから可能に-e20">チーム/チャンネルのメンバーシップ管理がシステムコンソールから可能に (E20)</h3>
+<p>今までチームやチャンネルのメンバーシップ管理は、そのチーム/チャンネルの画面からしか行うことが行うことができませんでしたが、今回のバージョンからシステムコンソール上で行うことができるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/team_setting.png" alt="team_setting">
+(画像は<a href="https://mattermost.com/blog/mattermost-release-v5-24/">公式リリースブログ</a>より転載)</p>
+<h3 id="プロフィール画像をadldapと同期-e10e20">プロフィール画像をAD/LDAPと同期 (E10/E20)</h3>
+<p>Mattermost上でのプロフィール画像をAD/LDAPのプロフィール画像と同期することができるようになりました。</p>
+<h2 id="その他の変更">その他の変更</h2>
+<ul>
+<li>チャンネル内のピン留めされた投稿の数がヘッダ部分に表示されるようになりました
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/count_pin.png" alt="count_pin"></li>
+<li>その他、多くの機能追加がありますが、詳細は<a href="https://docs.mattermost.com/administration/changelog.html#release-v5-24-feature-release">Changelog</a>からご確認ください</li>
+</ul>
+<h1 id="おわりに">おわりに</h1>
+<p>次の<code>v5.25</code>のリリースは2020/7/15(Thu)を予定しています。
+そして機能追加が行われる<code>v5.26</code>は恐らく2020/8/14(Fri)のリリースになるかと思います。</p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

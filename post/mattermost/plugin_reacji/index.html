@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost Reacji Channeler plugin</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost Reacji Channeler plugin"/>
+<meta name="twitter:description" content="Mattermost Reacji Channeler Plugin Mattermost 上で動くReacji Channeler的なプラグインを作った。 まだ動くところまで作ったというレベルで、まだまだ破壊的な変更も必要そ"/>
+
+
+  <meta property="og:title" content="Mattermost Reacji Channeler plugin" />
+<meta property="og:description" content="Mattermost Reacji Channeler Plugin Mattermost 上で動くReacji Channeler的なプラグインを作った。 まだ動くところまで作ったというレベルで、まだまだ破壊的な変更も必要そ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/plugin_reacji/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-05-02T23:05:21&#43;09:00" />
+<meta property="article:modified_time" content="2021-05-02T23:05:21&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost Reacji Channeler plugin
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;May 2, 2021
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mattermost-reacji-channeler-plugin">Mattermost Reacji Channeler Plugin</a></li>
+    <li><a href="#overview">Overview</a>
+      <ul>
+        <li><a href="#1-slashcommand">(1) SlashCommand</a></li>
+        <li><a href="#2-plugin-hook-reactionhasbeenadded">(2) (Plugin Hook) ReactionHasBeenAdded</a></li>
+        <li><a href="#3-store-shared-info">(3) Store shared info</a></li>
+      </ul>
+    </li>
+    <li><a href="#まとめ">まとめ</a></li>
+  </ul>
+</nav><h2 id="mattermost-reacji-channeler-plugin">Mattermost Reacji Channeler Plugin</h2>
+<p>Mattermost 上で動く<a href="https://slack.com/intl/ja-jp/help/articles/360000482666-Slack-%E7%94%A8%E3%83%AA%E3%82%A2%E3%82%AF%E5%AD%97%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%A9%E3%83%BC">Reacji Channeler</a>的なプラグインを作った。
+まだ動くところまで作ったというレベルで、まだまだ破壊的な変更も必要そうな気がするけど、作ってる最中にいろいろ悩んでた部分を書き残しておきたいということで書いておく。</p>
+<p>使い方等については README で。どういう風に動作するかについても、README にスクリーンキャストを載せてる。</p>
+<p><a href="https://github.com/kaakaa/mattermost-plugin-reacji#mattermost-plugin-reacji">kaakaa/mattermost-plugin-reacji</a></p>
+<p>Slack の Reacji Channeler が数年前に日本で話題になってた時から面白そうな機能だなと思っていて、Mattermost v5.30 から<a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ReactionHasBeenAdded">ReactionHasBeenAdded</a>というリアクションが付与された時に処理を差し込める Hook が追加されたので、勢いで作ってみた。（その少し前から WebSocket API 使った形である程度の形はできてたけど）</p>
+<h2 id="overview">Overview</h2>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/plugin-reacji/overview.dio.png" alt=""></p>
+<p>悩んだ箇所は下記で、それぞれのセクションで細かなところを書き残している。</p>
+<ul>
+<li><strong>(1) SlashCommand</strong> - Plugin KeyValue Store の Key 長制約について</li>
+<li><strong>(2) (PluginHook) ReactionHasBeenAdded</strong> - 絵文字エイリアスについて</li>
+<li><strong>(3) Store shared info</strong> - Plugin KeyValue Store の Key 長制約について</li>
+</ul>
+<h3 id="1-slashcommand">(1) SlashCommand</h3>
+<p>Reacji Channeler Plugin を有効にすると、<code>/reacji</code>というスラッシュコマンドが使えるようになる。
+プラグインごとのスラッシュコマンドの実装は、<a href="https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand"><code>API.reagisterCommand</code></a>でコマンドを登録して、コマンド実行時の処理を<a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand"><code>Hooks.ExecuteCommand</code></a>に記述する。</p>
+<p><code>/reacji add</code> というサブコマンドが実行されると、新たな Reacji を<code>ReacjiList</code>というインスタンスに格納する。その他にも参照や削除系のサブコマンドがあるが、使い方の話は<a href="https://github.com/kaakaa/mattermost-plugin-reacji">README</a>で。</p>
+<p>スラッシュコマンドのサブコマンドの実装についてはは<code>switch</code>文で地道に書く必要がある。<br>
+以下のコードのようにスラッシュコマンドにサブコマンド的な実装を追加することもできるけど、これはスラッシュコマンド実行時の候補提示用の機能のため、実行時の処理についてはサポートしてくれない。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">createAutoCompleteData</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AutocompleteData</span> {
+	<span style="color:#a6e22e">suggestions</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;reacji&#34;</span>, <span style="color:#e6db74">&#34;[command]&#34;</span>, <span style="color:#e6db74">&#34;Available commands: add, list, remove, remove-all, help&#34;</span>)
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;add&#34;</span>, <span style="color:#e6db74">&#34;:EMOJI: ~CHANNEL&#34;</span>, <span style="color:#e6db74">&#34;Register new reacji. If you attach EMOJI to the post in any channels except for DM/GM, the post will share to CHANNEL.&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;add-from-here&#34;</span>, <span style="color:#e6db74">&#34;:EMOJI: ~CHANNEL&#34;</span>, <span style="color:#e6db74">&#34;Register new reacji. If you attach EMOJI to the post in the channel where this command is executed, the post will share to CHANNEL.&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;list&#34;</span>, <span style="color:#e6db74">&#34;[--all]&#34;</span>, <span style="color:#e6db74">&#34;List reacjis in this channel. With `--all` list all registered reacjis in this server.&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;remove&#34;</span>, <span style="color:#e6db74">&#34;[DeleteKey...]&#34;</span>, <span style="color:#e6db74">&#34;[CREATOR or SYSTEM_ADMIN only] Remove reacji by DeleteKey. You can see `DeleteKey` by `/reacji list`&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;remove-all&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;[SYSTEM_ADMIN only] Remove all reacjis in this server.&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;refresh-caches&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;[SYSTEM_ADMIN only] Delete all caches. Reacji plugin caches data about shared post for a certain period in order to prevent duplicate sharing.&#34;</span>))
+	<span style="color:#a6e22e">suggestions</span>.<span style="color:#a6e22e">AddCommand</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAutocompleteData</span>(<span style="color:#e6db74">&#34;help&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;Show help&#34;</span>))
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">suggestions</span>
+}
+</code></pre></div><p><a href="https://github.com/kaakaa/mattermost-plugin-reacji/blob/3fe45b50563c912b783a0f120c18faec82e47ae9/server/plugin/command.go#L418">https://github.com/kaakaa/mattermost-plugin-reacji/blob/3fe45b50563c912b783a0f120c18faec82e47ae9/server/plugin/command.go#L418</a></p>
+<p>登録された Reacji をどう管理するかで、いろいろ悩んだ。<br>
+Reacji は<code>ReacjiList</code>というまとまった形で管理するより、登録された Reacji 1 つが KeyValue Store の 1 データの対応するように作るのが無難だとは思うけど、Plugin 用に用意されている KeyValue Store は<a href="https://github.com/mattermost/mattermost-server/blob/df695115be82e09c27d9b54de754889599b0bf20/model/plugin_key_value.go#L13">Key の最大長が 50 文字</a>までという制限があるため、Mattermost のチャンネル ID が 26 文字、<a href="https://github.com/mattermost/mattermost-server/blob/df695115be82e09c27d9b54de754889599b0bf20/model/emoji.go#L14">カスタム絵文字名の最大長が 64 文字</a>という 2 つの情報を上手く 1 つの Key で表現することができなかった。
+具体的なシーンとしては、あるチャンネルの投稿に絵文字が付与された場合、この情報を元に KeyValue Store からデータを取り出したいが、その場合、Key が最短でも<code>${CHANNEL_ID}${EMOJI_NAME} (26+64=90文字)</code>となってしまい、Key の最大長を超えてしまう。チャンネル ID と絵文字名からハッシュ値を作って管理することも考えたが、チャンネル ID と絵文字が一緒でも、共有先のチャンネルが違う Reacji というのも存在することがあり、そのようなデータの CRUD をどう管理すれば良いかいい案がなかったため、それならプラグイン起動時に全 Reacji を保持する<code>ReacjiList</code>のようなインスタンスを作って管理した方が I/O 少なくなって良いかと思った。その分、メモリを圧迫するので、プラグインの設定として登録できる Reacji の最大数を指定できるようにしてある。</p>
+<p>そんな作りなのでマルチクラスタ構成で複数インスタンスで Mattermost が動いていると意図しない動きをしそうな気がする。マルチクラスタの時に KeyValue Store はどういう同期方法になっているんだろうか&hellip;.</p>
+<h3 id="2-plugin-hook-reactionhasbeenadded">(2) (Plugin Hook) ReactionHasBeenAdded</h3>
+<p>冒頭でも触れたけど、Mattermost v5.30 から追加された投稿にリアクションが付けられた時に実行される処理を登録することができる Hook。
+<a href="https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ReactionHasBeenAdded">ReactionHasBeenAdded</a></p>
+<p>この Hook 自体はわかりやすいものだったけど、Mattermost の絵文字エイリアスの扱いにちょっとハマったので少し書く
+Mattermost デフォルトの絵文字リアクションには、1 つの絵文字に対して本来の絵文字名とは別の名前(絵文字エイリアス) を持っている絵文字がいくつか存在する。例えば、Mattermost の絵文字リアクション選択ダイアログで、<code>:uk:</code>と入力すると、<code>:gb: :uk:</code> という 2 つの名前で同じ絵文字を参照できることがわかる。ここで、この絵文字を選択すると <code>:gb:</code> でリアクションされたことになる。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/plugin-reacji/emoji-alias.png" alt=""></p>
+<p>Reacji の観点からすると、<code>/reacji add :uk: ~CHANNEL</code> という感じで<code>:uk:</code>を使った Reacji を登録し、絵文字選択ダイアログから<code>:uk:</code>を入力しても、実際に指定されるのは<code>:gb:</code>のため、<code>:uk:</code>で登録された Reacji は反応しないことになる。</p>
+<p>絵文字エイリアスのデータは<a href="https://github.com/mattermost/mattermost-webapp/blob/master/utils/emoji.json">mattermost-webapp に登録されており</a>、このデータから絵文字エイリアスについてまとめたのが下記のドキュメント。<code>aliases</code>列にある絵文字はあまり使わない方が良さそう。</p>
+<p><a href="https://github.com/kaakaa/mattermost-plugin-reacji/blob/master/notes-alias.md">https://github.com/kaakaa/mattermost-plugin-reacji/blob/master/notes-alias.md</a></p>
+<p>絵文字エイリアスは Mattermost デフォルト絵文字のみの機能で、カスタム絵文字では使えないのでカスタム絵文字の方は気にする必要はない。</p>
+<hr>
+<p>さらに話をややこしくすると、Mattermost 上で<code>+:uk:</code>というような投稿を行うと、直前の投稿に<code>:uk:</code>の絵文字リアクションを行うという機能があり、これで絵文字リアクションをすると、絵文字エイリアスは機能せず、<code>:uk:</code>という絵文字でリアクションできる。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/plugin-reacji/emoji-alias-reaction.png" alt=""></p>
+<p>また、Mattermost の画面上からは存在が確認できないが、実際は使用できる絵文字というのもあり、<a href="https://github.com/mattermost/mattermost-server/blob/master/model/emoji_data.go">Mattermost 上で本当に使用できる全絵文字のデータは mattermost-server 内に書かれている</a>。例えば、<code>:older_man_medium_light_skin_tone:</code>などは Mattermost 上で補完などが効かないため存在を確認することはできないが、実際に投稿してみると存在することがわかる。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/plugin-reacji/blind-emoji.png" alt=""></p>
+<p>とりあえず絵文字エイリアスには気をつけてというぐらいしかない。</p>
+<h3 id="3-store-shared-info">(3) Store shared info</h3>
+<p>1 度 Reacji によって共有されたメッセージを再度同じチャンネルに共有しないようにするという話。絵文字が付けられるたびに同じ投稿が何度もチャンネルに共有されるのは邪魔ですからね。</p>
+<p><a href="https://github.com/kaakaa/mattermost-plugin-reacji/issues/1">Clicking on the emoticon re-triggers the shared from · Issue #1 · kaakaa/mattermost-plugin-reacji</a></p>
+<p>すでに Reacji によって投稿が行われたかどうかは、Reacji の情報、投稿の PostID などから判断する必要があるため、これも<code>(1)</code>と同様に Plugin KeyValue Store の Key 長の制約が絡んでくる。ただ、今回はある条件を満たすデータが存在するかどうか(投稿が共有済みかどうか)を判断するだけでよく、Key に一意性もあるため、共有済みかどうかチェックするのに必要な情報からハッシュ値を求めて管理することにした。</p>
+<p>Reacji によって共有されたという情報は KeyValue Store 上に格納されるが、デフォルトでは 30 日間経ったら格納された情報が消去されるようにしてある。30 日も前の投稿にリアクションすることはほぼ無いだろうという想定。この 30 日という期間については、プラグインの設定で変更することができる。また、システム管理者限定で共有されたという情報を削除する<code>reacji refresh-caches</code>というサブコマンドも入れてある。</p>
+<p>とりあえず機能としては達成できたように見えるけど、もっと細かな要求があるような気がしている。</p>
+<h2 id="まとめ">まとめ</h2>
+<p>リアクション扱う Hook が実装されたので勢いで作ってみたけど、やっぱり作り始めるといろんな制約によって窮屈になってくる。KeyValue Store の Key 長さの制約とか絵文字エイリアスとかは、実際に不具合に当たらないと真剣に見ようとは思わないところなので、やっぱりいろいろ動かしてみないと見えてこない部分はたくさんありますね。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/plugin/"
+              >plugin</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/reacji/"
+              >reacji</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

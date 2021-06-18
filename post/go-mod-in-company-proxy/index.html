@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Go Mod in Company Proxy</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go Mod in Company Proxy"/>
+<meta name="twitter:description" content="追記 単純にhttp_proxyとhttps_proxyを設定してないだけだった&hellip;。 (追記ここまで) Goをv1.14.1にアップ"/>
+
+
+  <meta property="og:title" content="Go Mod in Company Proxy" />
+<meta property="og:description" content="追記 単純にhttp_proxyとhttps_proxyを設定してないだけだった&hellip;。 (追記ここまで) Goをv1.14.1にアップ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/go-mod-in-company-proxy/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-04-03T00:04:58&#43;09:00" />
+<meta property="article:modified_time" content="2020-04-03T00:04:58&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Go Mod in Company Proxy
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Apr 3, 2020
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      
+  <h3 id="追記">追記</h3>
+<p>単純に<code>http_proxy</code>と<code>https_proxy</code>を設定してないだけだった&hellip;。</p>
+<p>(追記ここまで)</p>
+<p>Goをv1.14.1にアップデートし、<code>go mod tidy</code>を実行したところエラーが出た。</p>
+<pre><code>$ go mod tidy
+go: github.com/mattermost/mattermost-server/v5@v5.21.0: Get &quot;https://proxy.golang.org/github.com/mattermost/mattermost-server/v5/@v/v5.21.0.mod&quot;: dial tcp 172.217.26.113:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+</code></pre><p>メッセージから会社のプロキシに引っかかってるんだろうなーという予想はたったが、対処法がわからない。ググって <code>GOPROXY=direct</code>を付ければよさそうと思い、再度実行してみたがダメ。</p>
+<pre><code>$ GOPROXY=direct go mod tidy
+go: github.com/mattermost/mattermost-server/v5@v5.21.0/go.mod: verifying module: github.com/mattermost/mattermost-server/v5@v5.21.0/go.mod: Get &quot;https://sum.golang.org/lookup/github.com/mattermost/mattermost-server/v5@v5.21.0&quot;: dial tcp 216.58.196.241:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+</code></pre><p>ただ、エラ〜メッセージは変わっているのでもう少し調べるとこんな情報。</p>
+<p><a href="https://text.baldanders.info/golang/mirror-index-and-checksum-database-for-go-module/">Go モジュールのミラーリング・サービス【正式版】 — プログラミング言語 Go | text.Baldanders.info</a></p>
+<blockquote>
+<p>チェックサム・データベース</p>
+</blockquote>
+<p>なるほど、確かに二番目のログは <code>sum.golang.org</code> に接続しようとしている。というわけで、<code>GOSUMDB=off</code> も付けてチェックサムデータベースへのアクセスも取りやめれば良い、と。</p>
+<pre><code>$ GOPROXY=direct GOSUMDB=off go mod tidy
+go: github.com/mattermost/mattermost-server/v5@v5.21.0 requires
+go.uber.org/atomic@v1.5.1: unrecognized import path &quot;go.uber.org/atomic&quot;: https fetch: Get &quot;https://go.uber.org/atomic?go-get=1&quot;: dial tcp 216.58.199.243:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
+</code></pre><p>はい。<code>go.user.org</code>に接続できないとなりました。コレはプロキシ経由しないと無理だなぁ&hellip;。どうすれば&hellip;。</p>
+
+
+
+
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

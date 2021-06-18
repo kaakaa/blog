@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>[Mattermost Integrations] Incoming WebHook 基本編</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Mattermost Integrations] Incoming WebHook 基本編"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第2日目の記事です。 本記事では、Matt"/>
+
+
+  <meta property="og:title" content="[Mattermost Integrations] Incoming WebHook 基本編" />
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第2日目の記事です。 本記事では、Matt" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day2-incoming-webhook/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-02T00:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2020-12-02T00:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              [Mattermost Integrations] Incoming WebHook 基本編
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Dec 2, 2020
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#本記事について">本記事について</a></li>
+    <li><a href="#incoming-webhook">Incoming WebHook</a>
+      <ul>
+        <li><a href="#設定">設定</a></li>
+        <li><a href="#作成">作成</a></li>
+        <li><a href="#実行">実行</a></li>
+      </ul>
+    </li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav><h2 id="本記事について">本記事について</h2>
+<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第2日目の記事です。</p>
+<p>本記事では、Mattermostの最も簡易な統合機能であるIncoming WebHook(内向きのウェブフック)機能について紹介します。</p>
+<h2 id="incoming-webhook">Incoming WebHook</h2>
+<p>Incoming WebHookは外部アプリケーションからMattermostの投稿を作成するための機能です。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/overview.drawio.png" alt="overview"></p>
+<p>Incoming WebHookを使うことで、Mattermostの外側で発生したイベントを簡単にMattermost上に通知することができます。</p>
+<p>Incoming WebHookに関する公式ドキュメントは下記になります。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/developer/webhooks-incoming.html">https://docs.mattermost.com/developer/webhooks-incoming.html</a></li>
+<li><a href="https://developers.mattermost.com/integrate/incoming-webhooks/">https://developers.mattermost.com/integrate/incoming-webhooks/</a></li>
+</ul>
+<p>一つ目の公式ドキュメントはIncoming WebHookの概要について記述しており、二つ目のDeveloper Documentはより細かい開発者向けの情報が書かれています。</p>
+<h3 id="設定">設定</h3>
+<p>Incoming WebHookを利用するには、<strong>システムコンソール &gt; 統合機能管理 &gt; 内向きのウェブフックを有効にする</strong> の設定が<code>有効</code>になっている必要があります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/config-incoming-webhook.png" alt="system console"></p>
+<p>また、統合機能はデフォルトではシステム管理者とチーム管理者しか作成することができませんが、誰でも作成できるようにしたい場合、<strong>システムコンソール &gt; 統合機能管理 &gt; 統合機能の管理を管理者のみに制限する</strong>の設定を<code>無効</code>してください。</p>
+<h3 id="作成">作成</h3>
+<p><strong>メインメニュー &gt; 統合機能</strong>から統合機能の画面を開き、</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/main-menu.png" alt="main menu"></p>
+<p><strong>内向きのウェブフック &gt; 内向きのウェブフックを追加する</strong>から、新たなIncoming WebHookを追加します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/integration-menu.png" alt="menu"></p>
+<p>ウェブフックの作成画面で入力する情報は下記の通りです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/create-incoming-webhook.png" alt="incoming webhook"></p>
+<ul>
+<li><strong>タイトル</strong>: ウェブフックの一覧ページに表示されるタイトルです</li>
+<li><strong>説明</strong>: ウェブフックの説明です</li>
+<li><strong>チャンネル</strong>: チャンネル名を指定せずにIncoming WebHookを実行した場合、ここで指定したチャンネルに投稿が作成されます</li>
+<li><strong>このチャンネルに固定する</strong>: このIncoming WebHookでは、<strong>チャンネル</strong>で指定したチャンネルにしか投稿を作成できなくなります</li>
+</ul>
+<p>Incoming WebHookの作成が完了すると、WebHook実行時に指定するURLが表示されます。このURLに対してHTTPリクエストを送信することで、外部アプリケーションからMattermostに投稿を作成することができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/complete-incoming-webhook.png" alt="complete"></p>
+<p>作成したIncoming WebHookは後で編集することも可能です。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/list-incoming-webhook.png" alt="list"></p>
+<h3 id="実行">実行</h3>
+<p>今回は、<code>curl</code>コマンドを使って、定期的にマシンのDISK容量を通知するスクリプトを作ってみます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">DISK<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>df -h /System/Volumes/Data<span style="color:#e6db74">`</span>
+
+curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;{\&#34;text\&#34;: \&#34;</span><span style="color:#e6db74">${</span>DISK<span style="color:#e6db74">}</span><span style="color:#e6db74">\&#34;}&#34;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8065/hooks/ucw5qjw86jgeum77o1uw8197jr
+</code></pre></div><p>先ほど生成されたWebHookのURLに<code>text</code>フィールドを持つJSONを送信するだけで投稿を作成することができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day2/execute-incoming-webhook.png" alt="post"></p>
+<p><code>curl</code>コマンドを実行するスクリプトを<code>cron</code>などで毎日定刻に実行することで、毎日ディスクの状況をチェックしたりすることができます。</p>
+<h2 id="さいごに">さいごに</h2>
+<p>Incoming WebHookの基本的な使い方について紹介しました。
+明日は、Incoming WebHook実行時のパラメータについて紹介します。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/integration/"
+              >integration</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/webhook/"
+              >webhook</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/incoming/"
+              >incoming</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost5.3の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost5.3の新機能"/>
+<meta name="twitter:description" content="はじめに 2018/09/14にMattermost 5.3.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については"/>
+
+
+  <meta property="og:title" content="Mattermost5.3の新機能" />
+<meta property="og:description" content="はじめに 2018/09/14にMattermost 5.3.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.3/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2018-09-20T22:06:57&#43;09:00" />
+<meta property="article:modified_time" content="2018-09-20T22:06:57&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost5.3の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Sep 20, 2018
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <h1 id="はじめに">はじめに</h1>
+<p>2018/09/14にMattermost 5.3.0がリリースされたので、アップデートの内容について簡単に紹介します。</p>
+<p>詳細については公式のリリースを確認ください。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-3">Mattermost Changelog — Mattermost 5.3 documentation</a></li>
+<li><a href="https://mattermost.com/blog/mattermost-5-3-enhanced-search-on-desktop-and-mobile-plugin-hackathon-highlights-and-more/">Mattermost 5.3: Enhanced search on desktop and mobile, plugin hackathon highlights and more - Mattermost Private Cloud Messaging</a></li>
+</ul>
+<hr>
+<p>v5.3.0のリリース作業でミスがあり翻訳が一部壊れています。英語以外の翻訳版を利用されている場合はv5.3.1を利用してください。
+<a href="https://mattermost.com/blog/mattermost-5-3-1-released/">Mattermost 5.3.1 released - Mattermost Private Cloud Messaging</a></p>
+<h1 id="アップデート内容">アップデート内容</h1>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#日付指定検索">日付指定検索</a></li>
+    <li><a href="#samlユーザーへのid設定">SAMLユーザーへのID設定</a></li>
+    <li><a href="#プラグインハッカソンの成果">プラグインハッカソンの成果</a></li>
+    <li><a href="#その他">その他</a>
+      <ul>
+        <li><a href="#リックソフトがmattermostとパートナー契約を締結">リックソフトがMattermostとパートナー契約を締結</a></li>
+        <li><a href="#matterpoll">Matterpoll</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav><h2 id="日付指定検索">日付指定検索</h2>
+<p>Mattermostメッセージ検索機能で投稿日付を指定できるようになりました。</p>
+<ul>
+<li><code>before:YYYY-MM-DD</code>: 指定日付より前の投稿を検索</li>
+<li><code>on:YYYY-MM-DD</code>: 指定日付に行われた投稿を検索</li>
+<li><code>after:YYYY-MM-DD</code>: 指定日付より後の投稿を検索</li>
+</ul>
+<p>また、右上の検索欄に<code>after:</code>、<code>on:</code>、<code>before:</code>を入力することで、日付選択モーダルが現れます。</p>
+<!-- raw HTML omitted -->
+<h2 id="samlユーザーへのid設定">SAMLユーザーへのID設定</h2>
+<p>ID ProviderとしてSAMLを設定している場合、過去に無効化されたユーザーと同じメールアドレスを持つユーザーを新たに追加すると、無効化されたユーザーの履歴にアクセスできてしまうという問題がありました。
+この問題を解決するために、メールアドレスの代わりとなるIDを指定することができるようになりました。
+IDを指定することができるようになったことにより、結婚による姓の変更などに起因するメールアドレスの変更にも対応できるようになりました。</p>
+<h2 id="プラグインハッカソンの成果">プラグインハッカソンの成果</h2>
+<p>2018/8/16,17に行われたMattermostプラグインハッカソンで開発された<del>プラグイン</del>機能の紹介です。</p>
+<ul>
+<li><a href="https://github.com/jespino/matterfeed"><strong>RSS feed</strong></a>: <del>RSSのフィードを行えるプラグインのようです</del> RSSのフィードを購読する連携機能のようです。この機能はプラグインではないですが、プラグインハッカソン中に開発された成果として紹介されていたようです</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-welcomebot/tree/master"><strong>Webcome bot</strong></a>: 新しくチームに加入したユーザーにウェルカムメッセージを投稿できます</li>
+<li><a href="https://github.com/matterpoll/matterpoll"><strong>Matterpoll</strong></a>: Mattermost上で投票を行える機能です</li>
+<li><a href="https://github.com/scottleedavis/mattermost-plugin-remind"><strong>/remind</strong></a>: 指定した時間が経過した後にリマインドをしてくれるプラグインです。</li>
+<li><strong>Crosspost</strong>: つのチャンネルを複数のMattermostサーバーとリンクすることができ流ようです</li>
+<li><a href="https://github.com/mattermost/mattermost-plugin-autotranslate"><strong>Auto-translator</strong></a>: Amazon Translateを使って様々な言語を英語に自動変換するプラグインです</li>
+</ul>
+<p>その他にもリッチなエディタ機能を追加するプラグインや、<a href="https://github.com/mattermost/mattermost-plugin-walltime">表示時間をユーザーのローカルタイムゾーンに合わせてくれるプラグイン</a>などの開発が行われています。
+また、Mattermost CTOによるハッカソンの<a href="https://mattermost.com/blog/plugin-hackathon/">振り返り</a>やプラグインの<a href="https://www.youtube.com/watch?v=Cx2EBkGkz00">ビデオチュートリアル</a>などが公開されています。</p>
+<h2 id="その他">その他</h2>
+<h3 id="リックソフトがmattermostとパートナー契約を締結">リックソフトがMattermostとパートナー契約を締結</h3>
+<p><a href="https://www.ricksoft.jp/news/n20180920.html">ニュースリリース：20180920 リックソフト Slackライクなオンプレミス型チャットツール Mattermostのパートナー契約を締結</a></p>
+<p>アトラシアン社のパートナー企業として有名なリックソフト社がHipChat Server販売終了を受け、Mattermostとのパートナー契約を締結したそうです。
+私の知る限りでは、国内初のパートナー企業となるかと思います。（他にあったらゴメンナサイ）
+<a href="https://docs.mattermost.com/process/partner-programs.html">Mattermost Partner Programs — Mattermost 5.3 documentation</a></p>
+<h3 id="matterpoll">Matterpoll</h3>
+<p>現在、Mattermostプラグイン機能を活用した投票機能である<code>Matterpoll</code>というOSSを開発しています。
+まだ安定バージョンではないため今後も破壊的変更が入る可能性は高いですが、もしご興味がある方がいらっしゃいましたら導入・Contributeをお願いします。
+<a href="https://github.com/matterpoll/matterpoll">matterpoll/matterpoll: Poll command for Mattermost</a></p>
+<!-- raw HTML omitted -->
+<h1 id="おわりに">おわりに</h1>
+<p>次回の<code>v5.4</code>のリリースは2018/10/16(Tue)を予定しています。</p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>意識の低いGradleのバージョンアップ</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="意識の低いGradleのバージョンアップ"/>
+<meta name="twitter:description" content="※Gradle 2.4以下の場合は正規の形で再インストールすることが推奨されています Gradle 2.4: The fastest yet - Gradle 0.背景 Gradleは便利ですが2,3ヶ月ご"/>
+
+
+  <meta property="og:title" content="意識の低いGradleのバージョンアップ" />
+<meta property="og:description" content="※Gradle 2.4以下の場合は正規の形で再インストールすることが推奨されています Gradle 2.4: The fastest yet - Gradle 0.背景 Gradleは便利ですが2,3ヶ月ご" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/%E6%84%8F%E8%AD%98%E3%81%AE%E4%BD%8E%E3%81%84gradle%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%83%E3%83%97/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2016-06-07T20:14:14&#43;09:00" />
+<meta property="article:modified_time" content="2016-06-07T20:14:14&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              意識の低いGradleのバージョンアップ
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Jun 7, 2016
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>※Gradle 2.4以下の場合は正規の形で再インストールすることが推奨されています
+<a href="https://gradle.org/blog/gradle-2-4-the-fastest-yet/">Gradle 2.4: The fastest yet - Gradle</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#0背景">0.背景</a></li>
+    <li><a href="#1-buildgradleを書こう">1. build.gradleを書こう</a></li>
+    <li><a href="#2-wrapperタスクを実行する">2. wrapperタスクを実行する</a></li>
+    <li><a href="#3-gradlewを実行する">3. gradlewを実行する</a></li>
+    <li><a href="#注意点">注意点</a></li>
+  </ul>
+</nav><h2 id="0背景">0.背景</h2>
+<p>Gradleは便利ですが2,3ヶ月ごとにバージョンアップするので、付いて行くのが大変です。</p>
+<pre><code>$ gradle -v
+
+------------------------------------------------------------
+Gradle 2.5
+------------------------------------------------------------
+
+Build time:   2015-07-08 07:38:37 UTC
+Build number: none
+Revision:     093765bccd3ee722ed5310583e5ed140688a8c2b
+
+Groovy:       2.3.10
+Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM:          1.8.0_45 (Oracle Corporation 25.45-b02)
+OS:           Windows 8.1 6.3 amd64
+</code></pre><p>よくあります。
+（2016/6/7時点で最新はv2.13。v2.14-rc4も出てるのでもうすぐバージョンアップしそう）</p>
+<p>ここからgradleのバージョンアップをするには下記手順が必要です。</p>
+<ol>
+<li>ブラウザを開く</li>
+<li><code>gradle</code>でググる</li>
+<li>Gradleのサイトへ行く</li>
+<li>ダウンロードボタンを探す</li>
+<li>ダウンロードする</li>
+<li>ダウンロードしたファイルを解凍する</li>
+<li>解凍したフォルダを所定の場所へ移動する</li>
+<li>必要ならば<code>PATH</code>を書き換える</li>
+<li><code>PATH</code>を書き換えた、かつWindowsならばコマンドプロンプトを再起動する</li>
+</ol>
+<p>絶望だ。</p>
+<p>意識が低い時は Gradle Wrapper を使うと便利です。</p>
+<p><a href="http://gradle.monochromeroad.com/docs/userguide/gradle_wrapper.html">第62章 Gradleラッパー</a>
+（最新ドキュメントではChapter 5に昇格している模様 <a href="https://docs.gradle.org/current/userguide/gradle_wrapper.html">Chapter 5. The Gradle Wrapper</a>）</p>
+<h2 id="1-buildgradleを書こう">1. build.gradleを書こう</h2>
+<p>wrapperを作るため<code>build.gradle</code>を書きます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy">task <span style="color:#a6e22e">wrapper</span><span style="color:#f92672">(</span>type: Wrapper<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  gradleVersion <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2.12&#39;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>意識が低くてもコレだけは覚えておきましょう。</p>
+<h2 id="2-wrapperタスクを実行する">2. wrapperタスクを実行する</h2>
+<pre><code>gradle wrapper
+</code></pre><p>これでwrapperファイルが生成されます。</p>
+<h2 id="3-gradlewを実行する">3. gradlewを実行する</h2>
+<p>ダウンロードに時間がかかる。</p>
+<pre><code>$ gradlew.bat -v
+Downloading https://services.gradle.org/distributions/gradle-2.12-bin.zip
+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+Unzipping C:\Users\kaakaa_hoe\.gradle\wrapper\dists\gradle-2.12-bin\avhnk0p45wmm16bas931at19r\gradle-2.12-bin.zip to C:\Users\kaakaa_hoe\.gradle\wrapper\dists\gradle-2.12-bin\avhnk0p45wmm16bas931at19r
+
+------------------------------------------------------------
+Gradle 2.12
+------------------------------------------------------------
+
+Build time:   2016-03-14 08:32:03 UTC
+Build number: none
+Revision:     b29fbb64ad6b068cb3f05f7e40dc670472129bc0
+
+Groovy:       2.4.4
+Ant:          Apache Ant(TM) version 1.9.3 compiled on December 23 2013
+JVM:          1.8.0_45 (Oracle Corporation 25.45-b02)
+OS:           Windows 8.1 6.3 amd64
+</code></pre><p>（最新がv2.13なのに、上の表示がv2.12なのは意識が低いからです）</p>
+<h2 id="注意点">注意点</h2>
+<ul>
+<li>バージョンアップ時にGradle wrapperの最適化がされることもある</li>
+<li>毎回、build.gradleの記述の労力とwrapperによるダウンロード時間がかかる</li>
+</ul>
+<p>最新版をちゃんとダウンロードして使うのが健全ですが、意識が低い時のための手段として。
+Gradle Wrapperのファイルだけをコミットしたリポジトリを作っておけば、バージョン部分だけを書き換えて使えるので、その方法も良いかと思います。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/gradle/"
+              >gradle</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

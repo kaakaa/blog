@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>[Mattermost Integrations] Plugin (Server API)</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Mattermost Integrations] Plugin (Server API)"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第19日目の記事です。 本記事では、Mat"/>
+
+
+  <meta property="og:title" content="[Mattermost Integrations] Plugin (Server API)" />
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第19日目の記事です。 本記事では、Mat" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day19-plugin-server-api/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-19T00:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2020-12-19T00:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              [Mattermost Integrations] Plugin (Server API)
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Dec 19, 2020
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#本記事について">本記事について</a></li>
+    <li><a href="#mattermost-plugin-api">Mattermost Plugin API</a>
+      <ul>
+        <li><a href="#getconfig">GetConfig</a></li>
+        <li><a href="#openinteractivedialog">OpenInteractiveDialog</a></li>
+        <li><a href="#publishwebsocketevent">PublishWebSocketEvent</a></li>
+        <li><a href="#sendmail">SendMail</a></li>
+        <li><a href="#kvget--kvset">KVGet / KVSet</a></li>
+      </ul>
+    </li>
+    <li><a href="#helpers">Helpers</a>
+      <ul>
+        <li><a href="#kvgetjson--kvsetjson">KVGetJSON / KVSetJSON</a></li>
+        <li><a href="#checkrequiredserverconfiguration">CheckRequiredServerConfiguration</a></li>
+      </ul>
+    </li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav><h2 id="本記事について">本記事について</h2>
+<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第19日目の記事です。</p>
+<p>本記事では、Mattermost Server Pluginの開発に利用できるAPIについて紹介します。</p>
+<p>Mattermost Pluginについての公式ドキュメントは下記になります。
+<a href="https://developers.mattermost.com/extend/plugins/overview/">https://developers.mattermost.com/extend/plugins/overview/</a></p>
+<h2 id="mattermost-plugin-api">Mattermost Plugin API</h2>
+<p>Mattermost Server Pluginの開発に利用できるAPIの一覧は下記にあります。</p>
+<p><a href="https://developers.mattermost.com/extend/plugins/server/reference/">https://developers.mattermost.com/extend/plugins/server/reference/</a></p>
+<p>ユーザーやチャンネル、投稿などの操作についてはREST APIとほぼ同様の機能を有しています。数が多いため全ては紹介しませんが、Server Plugin特有の処理に関するAPIを紹介していこうと思います。</p>
+<h3 id="getconfig">GetConfig</h3>
+<p><code>GetConfig</code>は、Mattermost Serverのシステムコンソールの設定情報を取得します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">siteURL</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetConfig</span>().<span style="color:#a6e22e">ServiceSettings</span>.<span style="color:#a6e22e">SiteURL</span>
+</code></pre></div><p><code>p.API.GetConfig()</code>下記の<code>OnConfigurationChange</code>内で実行し、Plugin構造体のフィールドとして保持しておくのが良いそうです。
+<a href="https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go">https://github.com/mattermost/mattermost-plugin-starter-template/blob/master/server/configuration.go</a></p>
+<h3 id="openinteractivedialog">OpenInteractiveDialog</h3>
+<p><code>OpenInteractiveDialog</code>は、第16日目の記事でも紹介したInteractive DialogをPluginから開くためのAPIです。Interactive Dialogを開くには<code>TriggerId</code>というパラメータが必須であり、<code>TriggerId</code>はSlash Command実行時、もしくはInteractive Message Button/Menu実行時に送信されるリクエストからしか取得できません。</p>
+<p>以下の例はSlash Command実行時にInteractive Dialogを開き、入力された情報を整形して投稿を作成するコードです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day19/open-interactive-dialog.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
+	<span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">OpenInteractiveDialog</span>(<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">OpenDialogRequest</span>{
+		<span style="color:#a6e22e">TriggerId</span>: <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">TriggerId</span>,
+		<span style="color:#a6e22e">URL</span>:       <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s/plugins/com.github.kaakaa.mattermost-plugin-starter-template/callback&#34;</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetConfig</span>().<span style="color:#a6e22e">ServiceSettings</span>.<span style="color:#a6e22e">SiteURL</span>),
+		<span style="color:#a6e22e">Dialog</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Dialog</span>{
+			<span style="color:#a6e22e">Title</span>:       <span style="color:#e6db74">&#34;Sample Plugin Dialog&#34;</span>,
+			<span style="color:#a6e22e">SubmitLabel</span>: <span style="color:#e6db74">&#34;Submit&#34;</span>,
+			<span style="color:#a6e22e">Elements</span>: []<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">DialogElement</span>{
+				{
+					<span style="color:#a6e22e">DisplayName</span>: <span style="color:#e6db74">&#34;タイトル&#34;</span>,
+					<span style="color:#a6e22e">Name</span>:        <span style="color:#e6db74">&#34;title&#34;</span>,
+					<span style="color:#a6e22e">Placeholder</span>: <span style="color:#e6db74">&#34;Title&#34;</span>,
+					<span style="color:#a6e22e">Type</span>:        <span style="color:#e6db74">&#34;text&#34;</span>,
+				},
+				{
+					<span style="color:#a6e22e">DisplayName</span>: <span style="color:#e6db74">&#34;Snippet&#34;</span>,
+					<span style="color:#a6e22e">Name</span>:        <span style="color:#e6db74">&#34;snippet&#34;</span>,
+					<span style="color:#a6e22e">Type</span>:        <span style="color:#e6db74">&#34;textarea&#34;</span>,
+				},
+			},
+		},
+	})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">appErr</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p>Interactive Dialogのリクエスト送信先を</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">		<span style="color:#a6e22e">URL</span>:       <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;%s/plugins/com.github.kaakaa.mattermost-plugin-starter-template/callback&#34;</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">GetConfig</span>().<span style="color:#a6e22e">ServiceSettings</span>.<span style="color:#a6e22e">SiteURL</span>),
+</code></pre></div><p>のようにすることで、Pluginから開いたInteractive DialogのリクエストをPluginで処理することもできます。このリクエストの受信先として、Mattermost Plugin Server Hookである<code>ServeHTTP</code>を使って<code>/callback</code>のエンドポイントを受け取る処理を追加します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Path</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;/callback&#34;</span> {
+		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+		<span style="color:#a6e22e">request</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">SubmitDialogRequestFromJson</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>)
+		<span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">Submission</span>[<span style="color:#e6db74">&#34;title&#34;</span>]
+		<span style="color:#a6e22e">s</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">Submission</span>[<span style="color:#e6db74">&#34;snippet&#34;</span>]
+		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+			<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">UserId</span>,
+			<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">request</span>.<span style="color:#a6e22e">ChannelId</span>,
+			<span style="color:#a6e22e">Message</span>:   <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;## %s\n\n```\n%s\n```&#34;</span>, <span style="color:#a6e22e">t</span>, <span style="color:#a6e22e">s</span>),
+		})
+		<span style="color:#66d9ef">return</span>
+	}
+	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">w</span>, <span style="color:#e6db74">&#34;Hello, world!&#34;</span>)
+}
+</code></pre></div><p>このようにすることで、Interactive Dialogの起動からリクエストの処理までをPluginだけで完結させることができます。</p>
+<h3 id="publishwebsocketevent">PublishWebSocketEvent</h3>
+<p><code>PublishWebSocketEvent</code>は、プラグイン独自のWebSoketイベントを送信するAPIです。</p>
+<p><code>PublishWebSocketEvent</code>は、3つの引数を取ります。</p>
+<ul>
+<li><code>event string</code>: WebSocketイベント名を指定します。実際に送信されるWebSocketイベントには接頭辞として<code>custom_&lt;PluginID&gt;_</code>が付与されます</li>
+<li><code>payload map[string]interface{}</code>: 送信されるデータの内容を指定します</li>
+<li><code>broadcast *model.WebsocketBroadcast</code>: WebSocketを送信する対象を指定します
+<ul>
+<li><a href="https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#WebsocketBroadcast"><code>model.WebsocketBroadcast</code></a>で、ユーザー、チャンネル、チームを指定したり、受信対象から外すユーザーを指定したりできます</li>
+</ul>
+</li>
+</ul>
+<p>Webapp Plugin APIの<a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler"><code>registerWebSocketEventHandler</code></a>と組み合わせることで、プラグイン内でWebSocketイベントに関する処理を完結させることができます。
+この辺りの使用例は第22日目以降の記事で紹介する予定です。</p>
+<h3 id="sendmail">SendMail</h3>
+<p><code>SendMail</code>は、Mattermost PluginからHTMLメールを送信するAPIです。システムコンソールでSMTPの設定が完了している必要があります。</p>
+<p>Slash Commandを実行した際にメールを送信する例は以下のようになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
+	<span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">SendMail</span>(
+		<span style="color:#e6db74">&#34;test@example.com&#34;</span>,
+		<span style="color:#e6db74">&#34;Sample Title&#34;</span>,
+		<span style="color:#e6db74">&#34;&lt;h1&gt;Mail from plugin&lt;/h1&gt;&lt;div&gt;&lt;p&gt;Sample Mail&lt;/p&gt;&lt;/div&gt;&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">appErr</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day19/send-mail.jpg" alt=""></p>
+<h3 id="kvget--kvset">KVGet / KVSet</h3>
+<p><code>KVGet</code>, <code>KVSet</code>は、プラグインごとに割り当てられたKey Valueストアから値を取得、または値を設定するAPIです。Key Valueストアには<code>[]byte</code>型のデータを格納できるため、格納用データの構造体を作成し、<code>json.Marshal</code>で<code>[]byte</code>型のデータ化したものを出し入れするのが主な使い方になるのではないかと思います。</p>
+<p>Key Valueストアを使用してカウンターを実装した例が以下になります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day19/kvget-kvset.gif" alt=""></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">counter</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Count</span>     <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;count&#34;`</span>
+	<span style="color:#a6e22e">CreatedAt</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;created_at&#34;`</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
+	<span style="color:#75715e">// read data
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">KVGet</span>(<span style="color:#e6db74">&#34;counter&#34;</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">appErr</span>
+	}
+	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ct</span> <span style="color:#a6e22e">counter</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#75715e">// init if data is not found
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">ct</span> = <span style="color:#a6e22e">counter</span>{
+			<span style="color:#a6e22e">Count</span>:     <span style="color:#ae81ff">0</span>,
+			<span style="color:#a6e22e">CreatedAt</span>: <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>),
+		}
+	} <span style="color:#66d9ef">else</span> {
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">b</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ct</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAppError</span>(<span style="color:#e6db74">&#34;where&#34;</span>, <span style="color:#e6db74">&#34;id&#34;</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+		}
+	}
+	<span style="color:#75715e">// count up
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span> = <span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+	<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">ct</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAppError</span>(<span style="color:#e6db74">&#34;where&#34;</span>, <span style="color:#e6db74">&#34;id&#34;</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+	}
+	<span style="color:#75715e">// set data
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">KVSet</span>(<span style="color:#e6db74">&#34;counter&#34;</span>, <span style="color:#a6e22e">b</span>); <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">appErr</span>
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{<span style="color:#a6e22e">Text</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;counter: %d&#34;</span>, <span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span>)}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><p>Key Valueストアを操作するAPIは<code>KVGet</code>, <code>KVSet</code>以外にも数多くあります。データを削除する<code>KVDelete</code>や、プラグイン内で保存済みのデータの<code>key</code>を取得する<code>KVList</code>、期間を指定して値を格納できる<code>KVSetWithExpiry</code>などがあります。また、同時に<code>KVSet</code>が実行された場合に不整合が起きないようにするため、AtomicなKey Valueストアの操作を強制するための<code>KVCompareAndSet</code>などもあります。</p>
+<p>APIの一覧については公式ドキュメントを参照してください。
+<a href="https://developers.mattermost.com/extend/plugins/server/reference/">https://developers.mattermost.com/extend/plugins/server/reference/</a></p>
+<h2 id="helpers">Helpers</h2>
+<p>Mattermost Plugin APIは数多くあるため、Mattermostに対するほとんどの操作を実行することはできますが、より簡単にPlugin APIを実行するためのHelper関数がいくつか存在します。</p>
+<p>ここでは、Helper関数のうち一部を紹介します。</p>
+<p>Helper関数の一覧は下記の公式ドキュメントにあります。
+<a href="https://developers.mattermost.com/extend/plugins/server/reference/#Helpers">https://developers.mattermost.com/extend/plugins/server/reference/#Helpers</a></p>
+<h3 id="kvgetjson--kvsetjson">KVGetJSON / KVSetJSON</h3>
+<p>先ほどの<code>KVGet</code>、<code>KVSet</code>のコードでは、構造体を<code>[]byte</code>に変換するために<code>KVSet</code>を呼ぶ前に<code>json.Marshal</code>を、<code>KVGet</code>を呼んだ後に<code>json.Unmarshal</code>を呼んでいましたが、<code>KVGetJSON</code>、<code>KVSetJSON</code>を使用することで、その必要がなくなります。</p>
+<p>そのため、先ほどの処理を多少すっきりと書くことができます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">counter</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Count</span>     <span style="color:#66d9ef">int</span>    <span style="color:#e6db74">`json:&#34;count&#34;`</span>
+	<span style="color:#a6e22e">CreatedAt</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;created_at&#34;`</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
+	<span style="color:#75715e">// read data
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ct</span> <span style="color:#a6e22e">counter</span>
+	<span style="color:#a6e22e">exists</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Helpers</span>.<span style="color:#a6e22e">KVGetJSON</span>(<span style="color:#e6db74">&#34;counter&#34;</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">ct</span>)
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAppError</span>(<span style="color:#e6db74">&#34;where&#34;</span>, <span style="color:#e6db74">&#34;id&#34;</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+	}
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">exists</span> {
+		<span style="color:#a6e22e">ct</span> = <span style="color:#a6e22e">counter</span>{
+			<span style="color:#a6e22e">Count</span>:     <span style="color:#ae81ff">0</span>,
+			<span style="color:#a6e22e">CreatedAt</span>: <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>),
+		}
+	}
+
+	<span style="color:#75715e">// count up
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span> = <span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+	<span style="color:#75715e">// set data
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Helpers</span>.<span style="color:#a6e22e">KVSetJSON</span>(<span style="color:#e6db74">&#34;counter&#34;</span>, <span style="color:#a6e22e">ct</span>); <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">NewAppError</span>(<span style="color:#e6db74">&#34;where&#34;</span>, <span style="color:#e6db74">&#34;id&#34;</span>, <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+	}
+
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{<span style="color:#a6e22e">Text</span>: <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;counter: %d&#34;</span>, <span style="color:#a6e22e">ct</span>.<span style="color:#a6e22e">Count</span>)}, <span style="color:#66d9ef">nil</span>
+}
+</code></pre></div><h3 id="checkrequiredserverconfiguration">CheckRequiredServerConfiguration</h3>
+<p><code>CheckRequiredServerConfiguration</code>は、システムコンソールの設定をチェックするためのHelper関数です。</p>
+<p>引数に指定した<a href="https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#Config"><code>model.Config</code></a>と同じ設定になっているかをチェックし、異なる設定だった場合は<code>false</code>を返します。</p>
+<p><strong>システムコンソール &gt; Botアカウント &gt; Botアカウントの作成を有効にする</strong>の設定が有効になっていない場合にプラグインの起動を停止するような例は以下のようになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:plugin.go" data-lang="go:plugin.go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">toPtr</span>(<span style="color:#a6e22e">v</span> <span style="color:#66d9ef">bool</span>) <span style="color:#f92672">*</span><span style="color:#66d9ef">bool</span> {
+	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">v</span>
+}
+
+<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">SamplePlugin</span>) <span style="color:#a6e22e">OnActivate</span>() <span style="color:#66d9ef">error</span> {
+	<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">Helpers</span>.<span style="color:#a6e22e">CheckRequiredServerConfiguration</span>(<span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Config</span>{
+		<span style="color:#a6e22e">ServiceSettings</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">ServiceSettings</span>{
+			<span style="color:#a6e22e">EnableBotAccountCreation</span>: <span style="color:#a6e22e">toPtr</span>(<span style="color:#66d9ef">true</span>),
+		},
+	})
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	}
+	<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">b</span> {
+		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">New</span>(<span style="color:#e6db74">&#34;EnableBotAccountCreation must be true.&#34;</span>)
+	}
+
+    <span style="color:#f92672">...</span>
+</code></pre></div><p>プラグイン起動時、サーバーのログには以下のようなログが出力されます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">2020-12-13T00:16:01.409+0900    error   mlog/log.go:229 Unable to restart plugin on upgrade.    <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/api/v4/plugins&#34;</span>, <span style="color:#e6db74">&#34;request_id&#34;</span>: <span style="color:#e6db74">&#34;u31bzwuyhbyibratzznjxgxzrr&#34;</span>, <span style="color:#e6db74">&#34;ip_addr&#34;</span>: <span style="color:#e6db74">&#34;::1&#34;</span>, <span style="color:#e6db74">&#34;user_id&#34;</span>: <span style="color:#e6db74">&#34;87x93uo8pfnzdro9ktcmobpa1r&#34;</span>, <span style="color:#e6db74">&#34;method&#34;</span>: <span style="color:#e6db74">&#34;POST&#34;</span>, <span style="color:#e6db74">&#34;err_where&#34;</span>: <span style="color:#e6db74">&#34;installExtractedPlugin&#34;</span>, <span style="color:#e6db74">&#34;http_code&#34;</span>: 500, <span style="color:#e6db74">&#34;err_details&#34;</span>: <span style="color:#e6db74">&#34;EnableBotAccountCreation must be true.&#34;</span><span style="color:#f92672">}</span>
+</code></pre></div><h2 id="さいごに">さいごに</h2>
+<p>本日は、Mattermost PluginのServer APIについて紹介しました。
+明日からは、Mattermost Pluginの<strong>Webapp</strong>サイドの実装について紹介します。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/integration/"
+              >integration</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/plugin/"
+              >plugin</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/server/"
+              >server</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/hooks/"
+              >hooks</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

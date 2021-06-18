@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>[Mattermost Integrations] Interactive Message Menu</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Mattermost Integrations] Interactive Message Menu"/>
+<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第15日目の記事です。 本記事では、Mat"/>
+
+
+  <meta property="og:title" content="[Mattermost Integrations] Interactive Message Menu" />
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第15日目の記事です。 本記事では、Mat" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day15-interactive-message-menu/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-12-15T00:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2020-12-15T00:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              [Mattermost Integrations] Interactive Message Menu
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Dec 15, 2020
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#本記事について">本記事について</a></li>
+    <li><a href="#interactive-message-menu概要">Interactive Message Menu概要</a>
+      <ul>
+        <li><a href="#作成">作成</a></li>
+        <li><a href="#実行">実行</a></li>
+      </ul>
+    </li>
+    <li><a href="#さいごに">さいごに</a></li>
+  </ul>
+</nav><h2 id="本記事について">本記事について</h2>
+<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第15日目の記事です。</p>
+<p>本記事では、Mattermostの投稿にユーザーが操作できるセレクトボックスを追加するInteractive Message Menuの機能について紹介します。</p>
+<h2 id="interactive-message-menu概要">Interactive Message Menu概要</h2>
+<p>Interactive Message Menuは、昨日紹介したInteractive Message Buttontと同様の機能です。</p>
+<p>Interactive Message Buttonは、Mattermostの投稿にボタンを表示する機能でしたが、Interactive Message Menuでは、Mattermostの投稿にセレクトボックスを表示することができます。</p>
+<p>Interactive Messageに関する公式ドキュメントは下記になります。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/developer/interactive-messages.html">https://docs.mattermost.com/developer/interactive-messages.html</a></li>
+</ul>
+<h3 id="作成">作成</h3>
+<p>Interactive Message Menuを含む投稿を作成する方法はInteractive Message Buttonの時とほぼ同じです。</p>
+<p>Incoming Webhook(内向きのウェブフック)を使って作成する例は下記のようになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">BODY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{
+</span><span style="color:#e6db74">  &#34;attachments&#34;: [{
+</span><span style="color:#e6db74">    &#34;title&#34;: &#34;Echo text&#34;,
+</span><span style="color:#e6db74">    &#34;actions&#34;: [{
+</span><span style="color:#e6db74">	  &#34;id&#34;: &#34;echo&#34;,
+</span><span style="color:#e6db74">      &#34;name&#34;: &#34;Would you like to echo?&#34;,
+</span><span style="color:#e6db74">      &#34;integration&#34;: {
+</span><span style="color:#e6db74">        &#34;url&#34;: &#34;http://localhost:8080/actions/echo&#34;,
+</span><span style="color:#e6db74">        &#34;context&#34;: {
+</span><span style="color:#e6db74">          &#34;text&#34;: &#34;sample text&#34;
+</span><span style="color:#e6db74">		}
+</span><span style="color:#e6db74">	  },
+</span><span style="color:#e6db74">	  &#34;type&#34;: &#34;select&#34;,
+</span><span style="color:#e6db74">	  &#34;options&#34;: [{
+</span><span style="color:#e6db74">		  &#34;text&#34;: &#34;Echo&#34;,
+</span><span style="color:#e6db74">		  &#34;value&#34;: &#34;echo&#34;
+</span><span style="color:#e6db74">	  }, {
+</span><span style="color:#e6db74">		  &#34;text&#34;: &#34;Reject&#34;,
+</span><span style="color:#e6db74">		  &#34;value&#34;: &#34;reject&#34;
+</span><span style="color:#e6db74">	  }]
+</span><span style="color:#e6db74">	}]
+</span><span style="color:#e6db74">  }]
+</span><span style="color:#e6db74">}&#39;</span>
+
+curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;</span>$BODY<span style="color:#e6db74">&#34;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8065/hooks/ucw5qjw86jgeum77o1uw8197jr
+</code></pre></div><p>上記のリクエストを実行すると、下記のようなセレクトボックスを含む投稿が作成されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day15/first-example.png" alt="first exmple"></p>
+<p><code>options</code>に指定したオプションがセレクトボックスから選べるようになっています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day15/first-example2.png" alt="first example2"></p>
+<p>セレクトボックスから要素を選択すると、対応するオプションの<code>value</code>に指定した値を含むリクエストが<code>Integration</code>に指定したURLへ送信されることになります。</p>
+<h4 id="パラメータ">パラメータ</h4>
+<p><code>actions</code>フィールドに指定できるパラメータは、Interactive Message Buttonと同じ<code>PostAction</code>構造体として宣言されています。
+<a href="https://github.com/mattermost/mattermost-server/blob/master/model/integration_action.go#L37">https://github.com/mattermost/mattermost-server/blob/master/model/integration_action.go#L37</a></p>
+<p>昨日の記事にも載せましたが、再掲します。</p>
+<ul>
+<li><code>id</code>: 1投稿内でユニークとなるボタンのIDを指定します。指定しない場合、Mattermost側で一意のIDが付与されます。</li>
+<li><code>type</code>: Interactive Messageの種別を指定します。<code>select</code>か<code>button</code>を指定でき、何も指定しないと<code>button</code>が指定されます。</li>
+<li><code>name</code>: Mattermost内でボタンのラベルとして表示される文字列を指定します。</li>
+<li><code>disabled</code>: ボタンを無効化するオプションです。<code>true</code>を指定するとボタンが押せなくなります。</li>
+<li><code>style</code>: ボタンの色を指定できます。<code>default</code>, <code>primary</code>, <code>success</code>, <code>good</code>, <code>warning</code>, <code>danger</code>, もしくは任意のHex color(<code>&quot;#FF9900&quot;</code>など)を指定できます。
+Outgoing WebHookを利用するには、<strong>システムコンソール &gt; 統合機能管理 &gt; 外向きのウェブフックを有効にする</strong> の設定が<code>有効</code>になっている必要があります。</li>
+<li><code>data_source</code>: Interactive Message <strong>Button</strong>では使用しません。Interactie Message <strong>Menu</strong>でのみ使用します。</li>
+<li><code>options</code>: Interactive Message <strong>Button</strong>では使用しません。Interactie Message <strong>Menu</strong>でのみ使用します。</li>
+<li><code>default_option</code>: Interactive Message <strong>Button</strong>では使用しません。Interactie Message <strong>Menu</strong>でのみ使用します。</li>
+<li><code>integration</code>: アクションを実行した際に送信されるリクエストに関する情報を指定します。
+<ul>
+<li><code>url</code>: リクエスト送信先のURLを指定します。</li>
+<li><code>context</code>: 送信されるリクエストに含まれる追加情報を指定します</li>
+<li><code>integration</code>に指定した情報はリクエスト送信時にしか読み出されないため、(httpsなどで通信経路のセキュリティが担保されていれば)アクセストークンのような秘密情報なども含めることができます。</li>
+</ul>
+</li>
+</ul>
+<p>この中で、Interactive Message Menuのみで使用できるパラメータは<code>data_source</code>, <code>options</code>, <code>default_option</code>になります。</p>
+<p><code>options</code>は、先ほどの例にも示したようにセレクトボックスで選択する要素を定義するフィールドです。
+<code>default_option</code>は、デフォルトで選択されているオプションを指定することができます。<code>options</code>内のいずれかのオプションの<code>value</code>の値を指定します。</p>
+<p><code>data_source</code>は特殊なオプションです。<code>users</code>か<code>channels</code>を指定でき、これを指定するとセレクトボックスから選択できるオプションがそれぞれMattermost上の<strong>ユーザー</strong>かMattermost上の<strong>公開チャンネル</strong>になります。<code>data_source</code>を指定した場合、<code>options</code>に指定されたオプションは無視されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day15/data-source.png" alt="data source"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">BODY<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;{
+</span><span style="color:#e6db74">  &#34;attachments&#34;: [{
+</span><span style="color:#e6db74">    &#34;title&#34;: &#34;Echo text&#34;,
+</span><span style="color:#e6db74">    &#34;actions&#34;: [{
+</span><span style="color:#e6db74">	  &#34;id&#34;: &#34;echo&#34;,
+</span><span style="color:#e6db74">      &#34;name&#34;: &#34;Would you like to echo?&#34;,
+</span><span style="color:#e6db74">      &#34;integration&#34;: {
+</span><span style="color:#e6db74">        &#34;url&#34;: &#34;http://localhost:8080/actions/echo&#34;,
+</span><span style="color:#e6db74">        &#34;context&#34;: {
+</span><span style="color:#e6db74">          &#34;text&#34;: &#34;sample text&#34;
+</span><span style="color:#e6db74">		}
+</span><span style="color:#e6db74">	  },
+</span><span style="color:#e6db74">	  &#34;type&#34;: &#34;select&#34;,
+</span><span style="color:#e6db74">	  &#34;data_source&#34;: &#34;channels&#34;
+</span><span style="color:#e6db74">	}]
+</span><span style="color:#e6db74">  }]
+</span><span style="color:#e6db74">}&#39;</span>
+
+curl <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#34;</span>$BODY<span style="color:#e6db74">&#34;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  http://localhost:8065/hooks/ucw5qjw86jgeum77o1uw8197jr
+</code></pre></div><h3 id="実行">実行</h3>
+<p>今回は、slash commandの引数に指定したテキストをセレクトボックスで選択されたチャンネルへEchoするようなInteractive Message Menuを紹介します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day15/interactive-menu.gif" alt="video"></p>
+<p>slash command、Interactive Message Menuからのリクエストを受け取るサーバーアプリのサンプルコードは下記のようになります。</p>
+<p>(今回の例ではslash command、Interactive Message Button共に、Mattermostから<code>localhost</code>に対してリクエストが送信されるため、<strong>システムコンソール &gt; 開発者 &gt; 信頼されていない内部接続を許可する</strong>の設定に、リクエスト送信先のサーバーを記述しておく必要があります。詳しくは<a href="https://docs.mattermost.com/administration/config-settings.html#allow-untrusted-internal-connections-to">公式ドキュメント</a>を参照ください。)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+
+<span style="color:#f92672">import</span> (
+	<span style="color:#e6db74">&#34;encoding/json&#34;</span>
+	<span style="color:#e6db74">&#34;fmt&#34;</span>
+	<span style="color:#e6db74">&#34;io&#34;</span>
+	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+	<span style="color:#e6db74">&#34;net/http&#34;</span>
+
+	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/v5/model&#34;</span>
+)
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/command&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+		<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ParseForm</span>()
+
+		<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{
+			<span style="color:#a6e22e">ResponseType</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">COMMAND_RESPONSE_TYPE_IN_CHANNEL</span>,
+			<span style="color:#a6e22e">Attachments</span>: []<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">SlackAttachment</span>{{
+				<span style="color:#a6e22e">Title</span>: <span style="color:#e6db74">&#34;Echo server&#34;</span>,
+				<span style="color:#a6e22e">Actions</span>: []<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostAction</span>{{
+					<span style="color:#75715e">// (1) Echoメニュー
+</span><span style="color:#75715e"></span>					<span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;Echo&#34;</span>,
+					<span style="color:#a6e22e">Integration</span>: <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionIntegration</span>{
+						<span style="color:#a6e22e">URL</span>: <span style="color:#e6db74">&#34;http://localhost:8080/actions/echo&#34;</span>,
+						<span style="color:#a6e22e">Context</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
+							<span style="color:#e6db74">&#34;text&#34;</span>: <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Form</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;text&#34;</span>),
+						},
+					},
+					<span style="color:#a6e22e">Type</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">POST_ACTION_TYPE_SELECT</span>,
+					<span style="color:#a6e22e">Options</span>: []<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionOptions</span>{{
+						<span style="color:#a6e22e">Text</span>:  <span style="color:#e6db74">&#34;Echo&#34;</span>,
+						<span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;echo&#34;</span>,
+					}, {
+						<span style="color:#a6e22e">Text</span>:  <span style="color:#e6db74">&#34;Reject&#34;</span>,
+						<span style="color:#a6e22e">Value</span>: <span style="color:#e6db74">&#34;reject&#34;</span>,
+					}},
+				}},
+			}},
+		}
+
+		<span style="color:#75715e">// Need to set header. if not, just json string will be posted.
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+		<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ToJson</span>())
+	})
+
+	<span style="color:#75715e">// (2) Echo Buttonが押されたときの処理
+</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/actions/echo&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+
+		<span style="color:#75715e">// (3) リクエストデータの読み出し
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Body</span>)
+		<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payload</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionIntegrationRequest</span>
+		<span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Unmarshal</span>(<span style="color:#a6e22e">b</span>, <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">payload</span>)
+
+		<span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">Context</span>[<span style="color:#e6db74">&#34;text&#34;</span>].(<span style="color:#66d9ef">string</span>)
+		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+			<span style="color:#a6e22e">resp</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionIntegrationResponse</span>{<span style="color:#a6e22e">EphemeralText</span>: <span style="color:#e6db74">&#34;invalid request. Context[&#39;text&#39;] is not found.&#34;</span>}
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">ToJson</span>())
+			<span style="color:#66d9ef">return</span>
+		}
+
+		<span style="color:#a6e22e">selected</span>, <span style="color:#a6e22e">ok</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">Context</span>[<span style="color:#e6db74">&#34;selected_option&#34;</span>].(<span style="color:#66d9ef">string</span>)
+		<span style="color:#66d9ef">if</span> !<span style="color:#a6e22e">ok</span> {
+			<span style="color:#a6e22e">resp</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionIntegrationResponse</span>{<span style="color:#a6e22e">EphemeralText</span>: <span style="color:#e6db74">&#34;invalid request. Context[&#39;selected_option&#39;] is not found.&#34;</span>}
+			<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprint</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">resp</span>.<span style="color:#a6e22e">ToJson</span>())
+			<span style="color:#66d9ef">return</span>
+		}
+
+		<span style="color:#75715e">// (4) レスポンスの構築
+</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PostActionIntegrationResponse</span>{}
+		<span style="color:#66d9ef">switch</span> <span style="color:#a6e22e">selected</span> {
+		<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;echo&#34;</span>:
+			<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">Update</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
+				<span style="color:#a6e22e">Message</span>: <span style="color:#a6e22e">text</span>,
+				<span style="color:#a6e22e">Props</span>:   <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">StringInterface</span>{},
+			}
+		<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;reject&#34;</span>:
+			<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">Update</span> = <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{<span style="color:#a6e22e">Props</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">StringInterface</span>{}}
+			<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">EphemeralText</span> = <span style="color:#e6db74">&#34;Echoing was rejected&#34;</span>
+		<span style="color:#66d9ef">default</span>:
+			<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">EphemeralText</span> = <span style="color:#e6db74">&#34;invalid operation&#34;</span>
+		}
+
+		<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+		<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, string(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ToJson</span>()))
+	})
+
+	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#66d9ef">nil</span>)
+}
+</code></pre></div><p><code>(1)</code>ではInteractive Message Menuの内容を定義しています。<code>Integration.URL</code>にリクエスト送信先として<code>http://localhost:8080/actions/echo</code>を、<code>Integration.Context</code>に、slash commandの引数として指定された文字列を保持しています。また、<code>Echo</code>と<code>Reject</code>のオプションを<code>options</code>に定義しています。</p>
+<p><code>(2)</code>で、セレクトボックスからオプションが選択された時に送信されるリクエストを処理しています。<code>(3)</code>で送信されたリクエストを読み出しています。送信されるリクエストの形式は、Interactive Message Menuから送信されるリクエストもInteractive Message Buttonと同じく<a href="https://github.com/mattermost/mattermost-server/blob/master/model/integration_action.go#L173"><code>PostActionIntegrationRequest</code></a>として定義されています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PostActionIntegrationRequest</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">UserId</span>      <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;user_id&#34;`</span>
+	<span style="color:#a6e22e">UserName</span>    <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;user_name&#34;`</span>
+	<span style="color:#a6e22e">ChannelId</span>   <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;channel_id&#34;`</span>
+	<span style="color:#a6e22e">ChannelName</span> <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;channel_name&#34;`</span>
+	<span style="color:#a6e22e">TeamId</span>      <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;team_id&#34;`</span>
+	<span style="color:#a6e22e">TeamName</span>    <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;team_domain&#34;`</span>
+	<span style="color:#a6e22e">PostId</span>      <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;post_id&#34;`</span>
+	<span style="color:#a6e22e">TriggerId</span>   <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;trigger_id&#34;`</span>
+	<span style="color:#a6e22e">Type</span>        <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;type&#34;`</span>
+	<span style="color:#a6e22e">DataSource</span>  <span style="color:#66d9ef">string</span>                 <span style="color:#e6db74">`json:&#34;data_source&#34;`</span>
+	<span style="color:#a6e22e">Context</span>     <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{} <span style="color:#e6db74">`json:&#34;context,omitempty&#34;`</span>
+}
+</code></pre></div><p>今回は<code>Context</code>から<code>text</code>をキーとして格納されているslash command実行時の引数と、<code>selected_option</code>をキーとして格納されている選択されたオプションを読み出しています。
+そして、<code>(4)</code>で読み出した<code>selected_option</code>の値に応じてレスポンスを構築しています。レスポンスの形式もInteractie Message Buttonと同じく<a href="https://github.com/mattermost/mattermost-server/blob/master/model/integration_action.go#L187"><code>PostActionIntegrationResponse</code></a>として定義されています。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">PostActionIntegrationResponse</span> <span style="color:#66d9ef">struct</span> {
+	<span style="color:#a6e22e">Update</span>           <span style="color:#f92672">*</span><span style="color:#a6e22e">Post</span>  <span style="color:#e6db74">`json:&#34;update&#34;`</span>
+	<span style="color:#a6e22e">EphemeralText</span>    <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;ephemeral_text&#34;`</span>
+	<span style="color:#a6e22e">SkipSlackParsing</span> <span style="color:#66d9ef">bool</span>   <span style="color:#e6db74">`json:&#34;skip_slack_parsing&#34;`</span> <span style="color:#75715e">// Set to `true` to skip the Slack-compatibility handling of Text.
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h2 id="さいごに">さいごに</h2>
+<p>本日は、Interactive Message Menuの使い方について紹介しました。
+明日は、Interactive Dialogについて紹介します。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/integration/"
+              >integration</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/interactive_message/"
+              >interactive_message</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/menu/"
+              >menu</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
