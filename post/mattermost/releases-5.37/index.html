@@ -226,45 +226,45 @@
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/collapsed-threads-system-console.png" alt="collapsed-threads-system-console"></p>
 <p>上記設定を有効にした上で、<strong>アカウント設定 &gt; 表示 &gt; 返信スレッドの折りたたみ (ベータ版)</strong> を <strong>On</strong> に設定することでアカウントごとに機能が有効になります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/collapsed-threads-account-setting.png" alt="collapsed-threads-account-setting"></p>
-<p>本機能はまだベータ版の段階のため、既知の問題を含め、問題が発生する可能性を考慮して利用した方が良さそうです。
-<a href="https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues">https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues</a></p>
+<p>本機能はまだベータ版の段階のため、既知の問題を含め、問題が発生する可能性を考慮して利用した方が良さそうです。</p>
+<p><a href="https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues">https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues</a></p>
 <h2 id="incident-collaborationの改善">Incident Collaborationの改善</h2>
 <p>今月も<a href="https://github.com/mattermost/mattermost-plugin-incident-collaboration">Mattermost Incident Collaboration Plugin</a>の改善があります。</p>
 <h3 id="全エディションで利用可能に">全エディションで利用可能に</h3>
 <p>今までMattermost CloudとEnterprise E20プランでしか利用できなかったIncident CollaborationがOSS版のTeam Edition(Enterprise E0)を含む全エディションで利用可能になりました。
 Team EditionではPlaybookが1つしか作成できないなど制限はありますが、機能の使用感の確認などはできるようになります。</p>
-<p><a href="https://mattermost.com/pricing-self-managed/">https://mattermost.com/pricing-self-managed/</a>
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-all-edition.png" alt="incident-all-edition"></p>
-<p>Incident Collaborationプラグインは、<strong>メインメニュー &gt; マーケットプレース</strong>から簡単にインストールできます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-install.png" alt="incident-install"></p>
-<p>インストールが完了すると、<code>Install</code>ボタンが<code>Configure</code>ボタンに変わるので、<code>Configure</code>ボタンをクリックして設定画面へ移動し、<strong>プラグインを有効にする</strong> を <strong>有効</strong> にすることでプラグインが利用可能になります。</p>
+<p><a href="https://mattermost.com/pricing-self-managed/">https://mattermost.com/pricing-self-managed/</a></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-all-edition.png" alt="incident-all-edition"></p>
+<p>Incident Collaborationプラグインは、<strong>メインメニュー &gt; マーケットプレース</strong> から簡単にインストールできます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-install.png" alt="incident-install"></p>
+<p>インストールが完了すると、上記画像中の<code>Install</code>ボタンが<code>Configure</code>ボタンに変わるので、<code>Configure</code>ボタンをクリックして設定画面へ移動し、<strong>プラグインを有効にする</strong> を <strong>有効</strong> にすることでプラグインが利用可能になります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-system-console.png" alt="incident-system-console"></p>
 <p>プラグインを有効にすると <strong>メインメニュー &gt; Incident Collaboration</strong>からIncident Collaborationプラグインを利用することができるようになります。</p>
 <h3 id="プレイブックキーワードの監視">プレイブックキーワードの監視</h3>
-<p>プレイブックに関するキーワードを設定することができるようになり、Mattermost上での会話で設定されたキーワードを含むメッセージが投稿された際にプレイブックの開始を促すメッセージを自動で表示できるようになりました。</p>
-<p><strong>メインメニュー &gt; Incident Collaboration &gt; Playbooksタブ</strong>からキーワードを設定したいプレイブックを選び、<strong>Edit &gt; Actions &gt; Prompt to run the playbook when a user posts a message &gt; Containing any of these keywords</strong>にキーワードを入力します。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-setting.png" alt="incident-keyword-setting"></p>
-<p>設定したキーワードを含む投稿を行うと、Playbook Botがプレイブックの開始を促すメッセージを投稿します。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-react.png" alt="incident-keyword-react"></p>
-<p><code>Yes, run playbook</code>を選択すると、作成するプレイブックの内容を指定するモーダルが開きます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-modal.png" alt="incident-keyword-modal"></p>
-<p>インシデント作成のきっかけとなった投稿とともにプレイブックを開始できます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-creation.png" alt="incident-keyword-creation"></p>
+<p>プレイブックに関するキーワードを設定することができるようになり、Mattermost上で設定されたキーワードを含むメッセージが投稿された際にプレイブックの開始を促すメッセージを自動で表示できるようになりました。</p>
+<p>キーワードを設定するには、<strong>メインメニュー &gt; Incident Collaboration &gt; Playbooksタブ</strong>からキーワードを設定したいプレイブックを選び、<strong>Edit &gt; Actions &gt; Prompt to run the playbook when a user posts a message &gt; Containing any of these keywords</strong>にキーワードを入力します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-setting.png" alt="incident-keyword-setting"></p>
+<p>設定したキーワードを含む投稿を行うと、Playbook Botがプレイブックの開始を促すメッセージを投稿します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-react.png" alt="incident-keyword-react"></p>
+<p><code>Yes, run playbook</code>を選択すると、作成するプレイブックの内容を指定するモーダルが開きます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-modal.png" alt="incident-keyword-modal"></p>
+<p>内容を入力し、<code>Start run</code>ボタンを押すとインシデント作成のきっかけとなった投稿とともにプレイブックを開始できます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-creation.png" alt="incident-keyword-creation"></p>
 <h3 id="e10e20cloud-retrospectiveレポート">(E10/E20/Cloud) Retrospectiveレポート</h3>
-<p>作成したプレイブックに関するRetrospective(振り返り)レポートを作成できるようになりました。RetrospectiveレポートをPublishすると、チャンネルに内容が投稿されます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro.png" alt="incident-retro"></p>
-<p>Playbookの設定から、Retrospectiveレポートのテンプレート等を設定できます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro-template.png" alt="incident-retro-template"></p>
+<p>作成したプレイブックに関するRetrospective(振り返り)レポートを作成できるようになりました。RetrospectiveレポートをPublishすると、チャンネルに内容が投稿されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro.png" alt="incident-retro"></p>
+<p>Playbookの設定から、Retrospectiveレポートのテンプレート等を設定できます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro-template.png" alt="incident-retro-template"></p>
 <h3 id="e20clout-playbookダッシュボード">(E20/Clout) Playbookダッシュボード</h3>
 <p>プレイブックの過去の実行結果を把握するためのダッシュボードを表示できるようになりました。インシデントの発生頻度やインシデント対応の参加者数、対応にかかった時間などを俯瞰することで、インシデント対応方針の改善やリソース割り当ての見直し等に役立てることができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-dashboard.png" alt="incident-dashboard"></p>
 <h2 id="絵文字のスキントーン選択">絵文字のスキントーン選択</h2>
 <p>Emoji 13.0に基づく絵文字を利用できるようになり、絵文字ピッカーから絵文字を選択する際にスキントーン（肌の色）を選択できるようになりました。</p>
-<p>![emoji-skin-tone]](<a href="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/emoji-skin-tone.webp">https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/emoji-skin-tone.webp</a>)</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/emoji-skin-tone.webp" alt="emoji-skin-tone"></p>
 <p>(画像は<a href="https://mattermost.com/blog/mattermost-v5-37/#emoji">公式ブログ</a>から)</p>
 <h2 id="focalboard-plugin">Focalboard Plugin</h2>
-<p><a href="https://www.focalboard.com/">Focalboard</a>にも改善があります。
-現在、Mattermost Pluginとして利用できるFocalboardの最新バージョンは <code>v0.7.0</code> で、このバージョンのインストール方法については以下の公式ドキュメントを参照してください。
+<p><a href="https://www.focalboard.com/">Focalboard</a>にも改善があります。</p>
+<p>現在、Mattermost Pluginとして利用できるFocalboardの最新バージョンは <code>v0.7.0</code> で、このバージョンのインストール方法については以下の公式ドキュメントを参照してください。　　
 <a href="https://www.focalboard.com/download/mattermost/latest-plugin/">https://www.focalboard.com/download/mattermost/latest-plugin/</a></p>
 <p>Focalboard自体は先日<a href="https://github.com/mattermost/focalboard/releases/tag/v0.8.0"><code>v0.8.0</code></a>がリリースされています。</p>
 <h3 id="プロパティ値によるテーブルのグルーピング">プロパティ値によるテーブルのグルーピング</h3>
@@ -282,15 +282,16 @@ Team EditionではPlaybookが1つしか作成できないなど制限はあり�
 <p>カスタムステータスを設定する際に、ステータスの有効期限を設定できるようになりました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/custom-status.png" alt="custom-status"></p>
 <h3 id="platform-バイナリの廃止"><code>platform</code> バイナリの廃止</h3>
-<p>以前、Mattermostサーバーは <code>mattermost/platform</code> というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして<code>platform</code>バイナリというものが残っていましたが、今回のリリースで<code>platform</code>バイナリや、<code>--platform</code>オプションが利用できなくなったようです。
-現在ではリポジトリは<a href="https://github.com/mattermost/mattermost-server"><code>mattermost/mattermost-server</code></a>に移行され、Mattermostサーバー管理用のCLIツールとして<code>mattermost</code>バイナリが利用可能になっているため、今後は<code>mattermost</code>バイナリを使用することが推奨されています。</p>
+<p>以前、Mattermostサーバーは <code>mattermost/platform</code> というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして<code>platform</code>バイナリというものが残っていました。今回のリリースでこの<code>platform</code>バイナリや<code>--platform</code>オプションが利用できなくなりました。
+現在では、リポジトリは<a href="https://github.com/mattermost/mattermost-server"><code>mattermost/mattermost-server</code></a>に移行され、Mattermostサーバー管理用のCLIツールとして<code>mattermost</code>バイナリが利用可能になっているため、今後は<code>mattermost</code>バイナリを使用することが推奨されています。</p>
 <h2 id="その他のトピック">その他のトピック</h2>
 <h3 id="mattermost-dockathon">Mattermost Dockathon</h3>
-<p>Mattermostの公式ドキュメントサイトである <a href="https://docs.mattermost.com">https://docs.mattermost.com</a> の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から <strong>Mattermost Docathon</strong> というドキュメント改善のためのイベントを開催するようです。Top5のコントリビュータにはAirPod Proが贈呈されます。
-<a href="https://mattermost.com/blog/docathon-2021/">Join Us for our First Mattermost &lsquo;Docathon&rsquo; and win swag and more!</a></p>
+<p>Mattermostの公式ドキュメントサイトである <a href="https://docs.mattermost.com">https://docs.mattermost.com</a> の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から <strong>Mattermost Docathon</strong> というドキュメント改善のためのイベントを開催するようです。</p>
+<p><a href="https://mattermost.com/blog/docathon-2021/">Join Us for our First Mattermost &lsquo;Docathon&rsquo; and win swag and more!</a></p>
+<p>このイベント期間中のコントリビュートが多かった上位5名にMattermostロゴ入りAirPod Proがプレゼントされるようです。1件のみのコントリビュートでもグッズがもらえるようです。</p>
 <h3 id="mattermost-v60">Mattermost v6.0</h3>
-<p>先月の記事で少し触れたMattermot v6.0について、公式ブログで紹介がありました。
-<a href="https://mattermost.com/blog/looking-forward-to-mattermost-v6-0/">Looking ahead to Mattermost v6.0, which ships Fall 2021</a></p>
+<p>先月の記事で少し触れたMattermot v6.0について、公式ブログで紹介がありました。</p>
+<p><a href="https://mattermost.com/blog/looking-forward-to-mattermost-v6-0/">Looking ahead to Mattermost v6.0, which ships Fall 2021</a></p>
 <p>ベータ版からGA(Generally Available)に昇格予定の機能や、廃止予定の機能などが紹介されています。</p>
 <h2 id="おわりに">おわりに</h2>
 <p>次の<code>v5.38</code>のリリースは 2021/08/16(Mon)を予定しています。</p>
