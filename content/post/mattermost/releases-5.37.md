@@ -156,18 +156,9 @@ Mattermost上で `Ctrl(Cmd) + K` を入力することで開く **チャンネ�
 以前、Mattermostサーバーは `mattermost/platform` というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして`platform`バイナリというものが残っていましたが、今回のリリースで`platform`バイナリや、`--platform`オプションが利用できなくなったようです。
 現在ではリポジトリは[`mattermost/mattermost-server`](https://github.com/mattermost/mattermost-server)に移行され、Mattermostサーバー管理用のCLIツールとして`mattermost`バイナリが利用可能になっているため、今後は`mattermost`バイナリを使用することが推奨されています。
 
-
-## 破壊的変更
-
-### 高可用モードの通信がゴシッププロトコルに
-
-商用版を利用しているユーザーで、[可用性を高めるためのクラスタリング機能](https://docs.mattermost.com/deployment/cluster.html#high-availability-cluster-e20)を利用している場合に、クラスタ間の通信が[ゴシッププロトコル](https://ja.wikipedia.org/wiki/%E3%82%B4%E3%82%B7%E3%83%83%E3%83%97%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB)で行われるようになりました。今まではゴシッププロトコルの使用はオプションでしたが、そのオプションが廃止され、ゴシッププロトコルのみが用いられるようになります。クラスタ構成では、全てのノードが同じプロトコルを利用して通信している必要があるため、現在ゴシッププロトコルを利用していない場合は、ゴシッププロトコルを使用したアップグレードを行うか、一度全てのノードをシャットダウンしてからアプグレードする必要があるそうです。
-
-https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes
-
 ## その他のトピック
 
-## Mattermost Dockathon
+### Mattermost Dockathon
 
 Mattermostの公式ドキュメントサイトである [https://docs.mattermost.com](https://docs.mattermost.com) の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から **Mattermost Docathon** というドキュメント改善のためのイベントを開催するようです。Top5のコントリビュータにはAirPod Proが贈呈されます。
 [Join Us for our First Mattermost 'Docathon' and win swag and more\!](https://mattermost.com/blog/docathon-2021/)
