@@ -16,7 +16,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
 
-[Mattermost v5\.37 is now available \- Upgrade today](https://mattermost.com/blog/mattermost-v5-37/)
+- [Mattermost v5\.37 is now available \- Upgrade today](https://mattermost.com/blog/mattermost-v5-37/)
 - [Mattermost Changelog](https://docs.mattermost.com/install/self-managed-changelog.html#release-v5-37-extended-support-release)
 
 ---
