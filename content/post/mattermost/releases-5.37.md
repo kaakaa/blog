@@ -46,6 +46,8 @@ Mattermostの[Feature Requestフォーラムでも最も人気のあった](http
 
 実際の動作の様子は、[公式ドキュメント](https://docs.mattermost.com/messaging/organizing-conversations.html)で確認できます。
 
+![collapsed-threads-demo](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/collapsed-threads-demo.webp)
+(上記画像は[公式ブログ](https://mattermost.com/blog/mattermost-v5-37/#collapsed)から)
 
 ---
 
