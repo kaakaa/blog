@@ -60,6 +60,7 @@ Mattermostの[Feature Requestフォーラムでも最も人気のあった](http
 ![collapsed-threads-account-setting](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/collapsed-threads-account-setting.png)
 
 本機能はまだベータ版の段階のため、既知の問題を含め、問題が発生する可能性を考慮して利用した方が良さそうです。
+
 https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues
 
 ## Incident Collaborationの改善
@@ -72,12 +73,14 @@ https://docs.mattermost.com/messaging/organizing-conversations.html#known-issues
 Team EditionではPlaybookが1つしか作成できないなど制限はありますが、機能の使用感の確認などはできるようになります。
 
 https://mattermost.com/pricing-self-managed/
+
 ![incident-all-edition](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-all-edition.png)
 
-Incident Collaborationプラグインは、**メインメニュー > マーケットプレース**から簡単にインストールできます。
+Incident Collaborationプラグインは、**メインメニュー > マーケットプレース** から簡単にインストールできます。
+
 ![incident-install](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-install.png)
 
-インストールが完了すると、`Install`ボタンが`Configure`ボタンに変わるので、`Configure`ボタンをクリックして設定画面へ移動し、**プラグインを有効にする** を **有効** にすることでプラグインが利用可能になります。
+インストールが完了すると、上記画像中の`Install`ボタンが`Configure`ボタンに変わるので、`Configure`ボタンをクリックして設定画面へ移動し、**プラグインを有効にする** を **有効** にすることでプラグインが利用可能になります。
 
 ![incident-system-console](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-system-console.png)
 
@@ -85,26 +88,32 @@ Incident Collaborationプラグインは、**メインメニュー > マーケ�
 
 ### プレイブックキーワードの監視
 
-プレイブックに関するキーワードを設定することができるようになり、Mattermost上での会話で設定されたキーワードを含むメッセージが投稿された際にプレイブックの開始を促すメッセージを自動で表示できるようになりました。
+プレイブックに関するキーワードを設定することができるようになり、Mattermost上で設定されたキーワードを含むメッセージが投稿された際にプレイブックの開始を促すメッセージを自動で表示できるようになりました。
 
-**メインメニュー > Incident Collaboration > Playbooksタブ**からキーワードを設定したいプレイブックを選び、**Edit > Actions > Prompt to run the playbook when a user posts a message > Containing any of these keywords**にキーワードを入力します。
+キーワードを設定するには、**メインメニュー > Incident Collaboration > Playbooksタブ**からキーワードを設定したいプレイブックを選び、**Edit > Actions > Prompt to run the playbook when a user posts a message > Containing any of these keywords**にキーワードを入力します。
+
 ![incident-keyword-setting](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-setting.png)
 
 設定したキーワードを含む投稿を行うと、Playbook Botがプレイブックの開始を促すメッセージを投稿します。
+
 ![incident-keyword-react](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-react.png)
 
 `Yes, run playbook`を選択すると、作成するプレイブックの内容を指定するモーダルが開きます。
+
 ![incident-keyword-modal](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-modal.png)
 
-インシデント作成のきっかけとなった投稿とともにプレイブックを開始できます。
+内容を入力し、`Start run`ボタンを押すとインシデント作成のきっかけとなった投稿とともにプレイブックを開始できます。
+
 ![incident-keyword-creation](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-keyword-creation.png)
 
 ### (E10/E20/Cloud) Retrospectiveレポート
 
 作成したプレイブックに関するRetrospective(振り返り)レポートを作成できるようになりました。RetrospectiveレポートをPublishすると、チャンネルに内容が投稿されます。
+
 ![incident-retro](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro.png)
 
 Playbookの設定から、Retrospectiveレポートのテンプレート等を設定できます。
+
 ![incident-retro-template](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/incident-retro-template.png)
 
 ### (E20/Clout) Playbookダッシュボード
@@ -116,14 +125,15 @@ Playbookの設定から、Retrospectiveレポートのテンプレート等を�
 
 Emoji 13.0に基づく絵文字を利用できるようになり、絵文字ピッカーから絵文字を選択する際にスキントーン（肌の色）を選択できるようになりました。
 
-![emoji-skin-tone]](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/emoji-skin-tone.webp)
+![emoji-skin-tone](https://blog.kaakaa.dev/images/posts/mattermost/releases-5.37/emoji-skin-tone.webp)
 
 (画像は[公式ブログ](https://mattermost.com/blog/mattermost-v5-37/#emoji)から)
 
 ## Focalboard Plugin
 
 [Focalboard](https://www.focalboard.com/)にも改善があります。
-現在、Mattermost Pluginとして利用できるFocalboardの最新バージョンは `v0.7.0` で、このバージョンのインストール方法については以下の公式ドキュメントを参照してください。
+
+現在、Mattermost Pluginとして利用できるFocalboardの最新バージョンは `v0.7.0` で、このバージョンのインストール方法については以下の公式ドキュメントを参照してください。　　
 https://www.focalboard.com/download/mattermost/latest-plugin/
 
 Focalboard自体は先日[`v0.8.0`](https://github.com/mattermost/focalboard/releases/tag/v0.8.0)がリリースされています。
@@ -155,20 +165,23 @@ Mattermost上で `Ctrl(Cmd) + K` を入力することで開く **チャンネ�
 
 ### `platform` バイナリの廃止
 
-以前、Mattermostサーバーは `mattermost/platform` というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして`platform`バイナリというものが残っていましたが、今回のリリースで`platform`バイナリや、`--platform`オプションが利用できなくなったようです。
-現在ではリポジトリは[`mattermost/mattermost-server`](https://github.com/mattermost/mattermost-server)に移行され、Mattermostサーバー管理用のCLIツールとして`mattermost`バイナリが利用可能になっているため、今後は`mattermost`バイナリを使用することが推奨されています。
+以前、Mattermostサーバーは `mattermost/platform` というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして`platform`バイナリというものが残っていました。今回のリリースでこの`platform`バイナリや`--platform`オプションが利用できなくなりました。
+現在では、リポジトリは[`mattermost/mattermost-server`](https://github.com/mattermost/mattermost-server)に移行され、Mattermostサーバー管理用のCLIツールとして`mattermost`バイナリが利用可能になっているため、今後は`mattermost`バイナリを使用することが推奨されています。
 
 ## その他のトピック
 
 ### Mattermost Dockathon
 
-Mattermostの公式ドキュメントサイトである [https://docs.mattermost.com](https://docs.mattermost.com) の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から **Mattermost Docathon** というドキュメント改善のためのイベントを開催するようです。Top5のコントリビュータにはAirPod Proが贈呈されます。
+Mattermostの公式ドキュメントサイトである [https://docs.mattermost.com](https://docs.mattermost.com) の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から **Mattermost Docathon** というドキュメント改善のためのイベントを開催するようです。
+
 [Join Us for our First Mattermost 'Docathon' and win swag and more\!](https://mattermost.com/blog/docathon-2021/)
 
+このイベント期間中のコントリビュートが多かった上位5名にMattermostロゴ入りAirPod Proがプレゼントされるようです。1件のみのコントリビュートでもグッズがもらえるようです。
 
 ### Mattermost v6.0
 
 先月の記事で少し触れたMattermot v6.0について、公式ブログで紹介がありました。
+
 [Looking ahead to Mattermost v6\.0, which ships Fall 2021](https://mattermost.com/blog/looking-forward-to-mattermost-v6-0/)
 
 ベータ版からGA(Generally Available)に昇格予定の機能や、廃止予定の機能などが紹介されています。
