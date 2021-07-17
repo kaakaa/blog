@@ -192,14 +192,9 @@
         <li><a href="#platform-バイナリの廃止"><code>platform</code> バイナリの廃止</a></li>
       </ul>
     </li>
-    <li><a href="#破壊的変更">破壊的変更</a>
+    <li><a href="#その他のトピック">その他のトピック</a>
       <ul>
-        <li><a href="#高可用モードの通信がゴシッププロトコルに">高可用モードの通信がゴシッププロトコルに</a></li>
-      </ul>
-    </li>
-    <li><a href="#その他のトピック">その他のトピック</a></li>
-    <li><a href="#mattermost-dockathon">Mattermost Dockathon</a>
-      <ul>
+        <li><a href="#mattermost-dockathon">Mattermost Dockathon</a></li>
         <li><a href="#mattermost-v60">Mattermost v6.0</a></li>
       </ul>
     </li>
@@ -287,12 +282,8 @@ Team EditionではPlaybookが1つしか作成できないなど制限はあり�
 <h3 id="platform-バイナリの廃止"><code>platform</code> バイナリの廃止</h3>
 <p>以前、Mattermostサーバーは <code>mattermost/platform</code> というリポジトリで管理されており、当時の名残でMattermostサーバー管理用のCLIツールとして<code>platform</code>バイナリというものが残っていましたが、今回のリリースで<code>platform</code>バイナリや、<code>--platform</code>オプションが利用できなくなったようです。
 現在ではリポジトリは<a href="https://github.com/mattermost/mattermost-server"><code>mattermost/mattermost-server</code></a>に移行され、Mattermostサーバー管理用のCLIツールとして<code>mattermost</code>バイナリが利用可能になっているため、今後は<code>mattermost</code>バイナリを使用することが推奨されています。</p>
-<h2 id="破壊的変更">破壊的変更</h2>
-<h3 id="高可用モードの通信がゴシッププロトコルに">高可用モードの通信がゴシッププロトコルに</h3>
-<p>商用版を利用しているユーザーで、<a href="https://docs.mattermost.com/deployment/cluster.html#high-availability-cluster-e20">可用性を高めるためのクラスタリング機能</a>を利用している場合に、クラスタ間の通信が<a href="https://ja.wikipedia.org/wiki/%E3%82%B4%E3%82%B7%E3%83%83%E3%83%97%E3%83%97%E3%83%AD%E3%83%88%E3%82%B3%E3%83%AB">ゴシッププロトコル</a>で行われるようになりました。今まではゴシッププロトコルの使用はオプションでしたが、そのオプションが廃止され、ゴシッププロトコルのみが用いられるようになります。クラスタ構成では、全てのノードが同じプロトコルを利用して通信している必要があるため、現在ゴシッププロトコルを利用していない場合は、ゴシッププロトコルを使用したアップグレードを行うか、一度全てのノードをシャットダウンしてからアプグレードする必要があるそうです。</p>
-<p><a href="https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes">https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes</a></p>
 <h2 id="その他のトピック">その他のトピック</h2>
-<h2 id="mattermost-dockathon">Mattermost Dockathon</h2>
+<h3 id="mattermost-dockathon">Mattermost Dockathon</h3>
 <p>Mattermostの公式ドキュメントサイトである <a href="https://docs.mattermost.com">https://docs.mattermost.com</a> の構成などを改善する作業を開始しているようで、それに伴い、今月下旬から <strong>Mattermost Docathon</strong> というドキュメント改善のためのイベントを開催するようです。Top5のコントリビュータにはAirPod Proが贈呈されます。
 <a href="https://mattermost.com/blog/docathon-2021/">Join Us for our First Mattermost &lsquo;Docathon&rsquo; and win swag and more!</a></p>
 <h3 id="mattermost-v60">Mattermost v6.0</h3>
