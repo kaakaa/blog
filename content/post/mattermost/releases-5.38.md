@@ -55,9 +55,11 @@ https://github.com/mattermost/mattermost-plugin-playbooks
 * Playbookチャンネル参加時、左サイドバーが自動で整理されるトリガーの追加
 * Playbookが終了した際に自動でチャンネルエクスポート(E20/Cloud)が実行されるトリガーの追加
 
+機能追加の詳細については [公式ブログ](https://mattermost.com/blog/mattermost-v5-38/#playbooks) を参照ください。
+
 ## `Focalboard`の更新
 
-[Focalboard](https://www.focalboard.com/)も更新されています。
+Mattermost v5.38のリリースに合わせて [Focalboard](https://www.focalboard.com/)も`v0.8.2`に更新されています。
 
 * `作成者`プロパティの追加
 * DBコネクションのパフォーマンス改善
@@ -66,12 +68,14 @@ https://github.com/mattermost/mattermost-plugin-playbooks
 
 本バージョンからデータ保持ポリシーを特定のチーム及びチャンネルごとに設定できるようになりました。これによりコンプライアンスの維持とストレージの最適化を両立することができます。
 
+(公式ブログでの本機能の紹介と、動作確認をしている[Mattermost Cloud](https://mattermost.com/mattermost-cloud/)の画面が一致していないように見えるため、詳細については割愛します)
+
 ## その他のトピック
 
 ### Mattermost Dockathon
 
 ドキュメント改善をテーマにしたハッカソンである Mattermost Dockathon が 2021/07/26~08/06に行われました。
-約2週間の間に26コントリビューターから178のコントリビュートがあったようです。
+約2週間の間に **26** コントリビューターから **178** のコントリビュートがあったようです。
 
 結果については以下のエントリにまとめられています。
 
