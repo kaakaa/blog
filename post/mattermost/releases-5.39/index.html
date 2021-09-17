@@ -160,7 +160,7 @@
 <h1 id="はじめに">はじめに</h1>
 <p>2021/09/16 に Mattermost <code>v5.39.0</code> がリリースされました。
 <code>v5.39</code>はいつものような <strong>Feature Release</strong> ではなく、<strong>Quality Release</strong>となっているため、新機能の追加は無く、改善系の変更のみのリリースとなっています。</p>
-<p>先月の記事で、今月はメジャーバージョンアップであるv6.0のリリース日であると書きましたが、<strong>v6.0のリリースは来月(10/15)だった</strong>ようです。（リリース日については、いつもMattermost公式チャットの<a href="https://community-daily.mattermost.com/core/channels/release-discussion">Release: Self-Managed</a>チャンネルのチャンネルヘッダーを見て書いているのですが、見間違えたか変更されたかしていたようです）</p>
+<p>先月の記事で、今月はメジャーバージョンアップであるv6.0のリリース日であると書きましたが、<strong>v6.0のリリースは来月(10/13)だった</strong>ようです。（リリース日については、いつもMattermost公式チャットの<a href="https://community-daily.mattermost.com/core/channels/release-discussion">Release: Self-Managed</a>チャンネルのチャンネルヘッダーを見て書いているのですが、見間違えたか変更されたかしていたようです）</p>
 <p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
@@ -201,14 +201,13 @@
 <p>その他 <code>v6.0</code> で変更が予定されている点は、以下の公式ブログエントリにまとめられています。</p>
 <p><a href="https://mattermost.com/blog/looking-forward-to-mattermost-v6-0/">Looking forward to the next big Mattermost product milestone: Mattermost v6.0</a></p>
 <hr>
-<p>Mattermost v6.0へのアップグレード時にDBのマイグレーションが実行されますが、メジャーバージョンアップのため、このマイグレーション処理に時間がかかることが予想されます。マイグレーションにかかる時間に関する分析が <a href="https://gist.github.com/streamer45/59b3582118913d4fc5e8ff81ea78b055">Mattermost v6.0 DB Schema Migrations Analysis</a>で公開されているため、アップデート作業時の参考にご利用ください。</p>
+<p>Mattermost v6.0へのアップグレード時にDBのマイグレーションが実行されますが、このマイグレーション処理に時間がかかることが予想されます。マイグレーションにかかる時間に関する分析が <a href="https://gist.github.com/streamer45/59b3582118913d4fc5e8ff81ea78b055">Mattermost v6.0 DB Schema Migrations Analysis</a>で公開されているため、アップデート作業時の参考にご利用ください。</p>
 <hr>
 <p>デスクトップアプリ、モバイルアプリに対しては後方互換性が保たれているため、現在のバージョンのままでもMattermost v6.0を利用できるようです。ただし、どちらもMattermost v6.0と同時期にリリースされる最新バージョンへのアップデートが推奨されています。</p>
 <hr>
 <p>Extended Support Release (ESR) となっている Mattermost v5.37 は、引き続き2021年年4月までサポートされます。</p>
 <h2 id="プラグインの更新">プラグインの更新</h2>
-<p>Mattermost本体の機能追加がないためか、最近 (?) 更新のあったプラグインが紹介されています。</p>
-<p>どちらのプラグインもプラグインマーケットプレースから簡単にインストールすることができます。</p>
+<p>Mattermost本体の機能追加がないためか、最近 (?) 更新のあったプラグインが紹介されています。どちらのプラグインもプラグインマーケットプレースから簡単にインストールすることができます。</p>
 <h3 id="webex-v12">Webex v1.2</h3>
 <p><a href="https://www.webex.com/ja/video-conferencing.html">Cisco Webex</a>と連携するプラグインについて、Linuxクライアントを使用している場合のMeeting URLの改善をはじめ、いくつかの改善が加えられた新たなバージョンがリリースされています。</p>
 <p><a href="https://github.com/mattermost/mattermost-plugin-webex/releases/tag/v1.2.0">https://github.com/mattermost/mattermost-plugin-webex/releases/tag/v1.2.0</a></p>
