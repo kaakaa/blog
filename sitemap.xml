@@ -3,21 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kaakaa.dev/</loc>
-    <lastmod>2021-07-17T13:30:00+09:00</lastmod>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/mattermost/</loc>
-    <lastmod>2021-07-17T13:30:00+09:00</lastmod>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</loc>
-    <lastmod>2021-07-17T13:30:00+09:00</lastmod>
+    <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</loc>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/</loc>
-    <lastmod>2021-07-17T13:30:00+09:00</lastmod>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/releases/</loc>
-    <lastmod>2021-07-17T13:30:00+09:00</lastmod>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/</loc>
+    <lastmod>2021-09-17T11:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</loc>
+    <lastmod>2021-08-21T00:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</loc>
     <lastmod>2021-07-17T13:30:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.36/</loc>

@@ -14,6 +14,22 @@
 		<atom:link href="/tags/reacji/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 5.39の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</link>
+			<pubDate>Fri, 17 Sep 2021 11:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/09/16 に Mattermost v5.39.0 がリリースされました。 v5.39はいつものような Feature Release ではなく、Quality Releaseとなっているため、</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 5.38の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</link>
+			<pubDate>Sat, 21 Aug 2021 00:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 5.37の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</link>
 			<pubDate>Sat, 17 Jul 2021 13:30:00 +0900</pubDate>
@@ -75,22 +91,6 @@
 			<pubDate>Sat, 20 Mar 2021 10:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.33/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/03/17 に Mattermost v5.33.0 がリリースされました。 また、近いうちに TLS 接続をしている際に WebSocket 通信が失敗する問題の修正を加えた v5.33.1 がリリースされ</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost5.32の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.32/</link>
-			<pubDate>Sat, 20 Feb 2021 06:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.32/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/02/16 に Mattermost v5.32.0 がリリースされました。 また、02/17 に PostgreSQL を使用している際の検索機能に関する修正を行った v5.32.1 がリリースされてい</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost5.31の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.31/</link>
-			<pubDate>Sun, 17 Jan 2021 00:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.31/</guid>
-			<description>Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/01/16にMattermost v5.31.0がリリースされました。 本記事は、個人的に気</description>
 		</item>
       	
 	</channel>

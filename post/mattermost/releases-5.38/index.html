@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost 5.38の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost 5.38の新機能"/>
+<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン"/>
+
+
+  <meta property="og:title" content="Mattermost 5.38の新機能" />
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.38/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-21T00:30:00&#43;09:00" />
+<meta property="article:modified_time" content="2021-08-21T00:30:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost 5.38の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Aug 21, 2021
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id="はじめに">はじめに</h1>
+<p>2021/08/16 に Mattermost <code>v5.38.0</code> がリリースされました。
+その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がインストールできない問題に対応した <code>v5.38.1</code> がリリースされています。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-v5-38/">Mattermost v5.38 is now available - Upgrade today</a>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-5-38-1-released/">Mattermost 5.38.1 released - Upgrade today if your deployment is affected</a></li>
+</ul>
+</li>
+<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v5-38-feature-release">Mattermost Changelog</a></li>
+</ul>
+<hr>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#アップグレード時の注意事項httpsdocsmattermostcomadministrationchangeloghtmlimportant-upgrade-notes"><a href="https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes">アップグレード時の注意事項</a></a></li>
+    <li><a href="#はじめてログインした際の案内画面の改善">はじめてログインした際の案内画面の改善</a></li>
+    <li><a href="#mattermost-incident-collaboration-が-mattermost-playbooks-へリブランディング"><code>Mattermost Incident Collaboration</code> が <code>Mattermost Playbooks</code> へリブランディング</a></li>
+    <li><a href="#focalboardの更新"><code>Focalboard</code>の更新</a></li>
+    <li><a href="#e20-詳細なデータ保持ポリシー設定">(E20) 詳細なデータ保持ポリシー設定</a></li>
+    <li><a href="#その他のトピック">その他のトピック</a>
+      <ul>
+        <li><a href="#mattermost-dockathon">Mattermost Dockathon</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav><h2 id="アップグレード時の注意事項httpsdocsmattermostcomadministrationchangeloghtmlimportant-upgrade-notes"><a href="https://docs.mattermost.com/administration/changelog.html#important-upgrade-notes">アップグレード時の注意事項</a></h2>
+<ul>
+<li>返信スレッドの折りたたみ機能(ベータ版)導入によりスレッドやチャンネルのメンション数や未読数が不正確となってしまう問題が発生していました。この改善が<code>v5.38</code>にて行われていますが、大規模なデータベースの場合、<code>v5.38</code>アップグレード時のDBマイグレーションに数分かかることがあります。</li>
+<li>Mattermost v5.38.0と同時にリリースされたFocalboard v0.8.2 は、新たに追加されたデータベースコネクションシステムの影響でMattermost v5.37以降のバージョンでないと動作しなくなっています</li>
+</ul>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><code>Cloud</code>: <a href="https://mattermost.com/pricing-cloud/">Mattermost Cloud</a></li>
+<li><code>E20/E10</code>: <a href="https://mattermost.com/pricing-self-managed/">Enterprise E20/E10</a></li>
+</ul>
+<p>見出しの前に何もない場合、Team Edition(OSS 版)でも利用可能な機能です。</p>
+<h2 id="はじめてログインした際の案内画面の改善">はじめてログインした際の案内画面の改善</h2>
+<p>Matttermostにアカウントを作成し、初めてログインした時に表示される「はじめに」に当たる画面の内容が改善されました。この画面から、プロフィールの入力、デスクトップ通知の設定、ユーザーの招待を行うことができます。
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.38/gettingstarted.png" alt="getting started"></p>
+<h2 id="mattermost-incident-collaboration-が-mattermost-playbooks-へリブランディング"><code>Mattermost Incident Collaboration</code> が <code>Mattermost Playbooks</code> へリブランディング</h2>
+<p>最近、活発に開発が行われていた<code>Mattermost Incident Collaboration Plugin</code>ですが、インシデント管理に限らず、あらゆる種類のチーム活動に訴求できるということから<code>Mattermost Playbooks</code>にリブランディングされました。</p>
+<p><a href="https://github.com/mattermost/mattermost-plugin-playbooks">https://github.com/mattermost/mattermost-plugin-playbooks</a></p>
+<p>また、以下のような機能追加も行われています。</p>
+<ul>
+<li>右サイドバーの表示内容改善</li>
+<li>Mattermostプロジェクトで培われたベストプラクティスのテンプレート化</li>
+<li>Playbookチャンネル参加時、左サイドバーが自動で整理されるトリガーの追加</li>
+<li>Playbookが終了した際に自動でチャンネルエクスポート(E20/Cloud)が実行されるトリガーの追加</li>
+</ul>
+<p>機能追加の詳細については <a href="https://mattermost.com/blog/mattermost-v5-38/#playbooks">公式ブログ</a> を参照ください。</p>
+<h2 id="focalboardの更新"><code>Focalboard</code>の更新</h2>
+<p>Mattermost v5.38のリリースに合わせて <a href="https://www.focalboard.com/">Focalboard</a>も<code>v0.8.2</code>に更新されています。</p>
+<ul>
+<li><code>作成者</code>プロパティの追加</li>
+<li>DBコネクションのパフォーマンス改善</li>
+</ul>
+<h2 id="e20-詳細なデータ保持ポリシー設定">(E20) 詳細なデータ保持ポリシー設定</h2>
+<p>本バージョンからデータ保持ポリシーを特定のチーム及びチャンネルごとに設定できるようになりました。これによりコンプライアンスの維持とストレージの最適化を両立することができます。</p>
+<p>(公式ブログでの本機能の紹介と、動作確認をしている<a href="https://mattermost.com/mattermost-cloud/">Mattermost Cloud</a>の画面が一致していないように見えるため、詳細については割愛します)</p>
+<h2 id="その他のトピック">その他のトピック</h2>
+<h3 id="mattermost-dockathon">Mattermost Dockathon</h3>
+<p>ドキュメント改善をテーマにしたハッカソンである Mattermost Dockathon が 2021/07/26~08/06に行われました。
+約2週間の間に <strong>26</strong> コントリビューターから <strong>178</strong> のコントリビュートがあったようです。</p>
+<p>結果については以下のエントリにまとめられています。</p>
+<p><a href="https://mattermost.com/blog/mattermost-docathon-2021-highlights/">Highlights from the first-ever Mattermost Docathon</a></p>
+<h2 id="おわりに">おわりに</h2>
+<p>3年半ぶりのメジャーバージョンアップとなる、次の<code>v6.0</code>のリリースは 2021/09/15(Web)を予定しています。</p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> で Mattermost に関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost 5.39の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost 5.39の新機能"/>
+<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/09/16 に Mattermost v5.39.0 がリリースされました。 v5.39はいつものような Feature Release ではなく、Quality Releaseとなっているため、"/>
+
+
+  <meta property="og:title" content="Mattermost 5.39の新機能" />
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/09/16 に Mattermost v5.39.0 がリリースされました。 v5.39はいつものような Feature Release ではなく、Quality Releaseとなっているため、" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.39/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-17T11:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2021-09-17T11:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost 5.39の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Sep 17, 2021
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id="はじめに">はじめに</h1>
+<p>2021/09/16 に Mattermost <code>v5.39.0</code> がリリースされました。
+<code>v5.39</code>はいつものような <strong>Feature Release</strong> ではなく、<strong>Quality Release</strong>となっているため、新機能の追加は無く、改善系の変更のみのリリースとなっています。</p>
+<p>先月の記事で、今月はメジャーバージョンアップであるv6.0のリリース日であると書きましたが、<strong>v6.0のリリースは来月(10/15)だった</strong>ようです。（リリース日については、いつもMattermost公式チャットの<a href="https://community-daily.mattermost.com/core/channels/release-discussion">Release: Self-Managed</a>チャンネルのチャンネルヘッダーを見て書いているのですが、見間違えたか変更されたかしていたようです）</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-v5-39/">Mattermost v5.39 is now available - Upgrade today</a></li>
+<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v5-39-quality-release">Mattermost Changelog</a></li>
+</ul>
+<hr>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#返信スレッドの折り畳み機能の改善">返信スレッドの折り畳み機能の改善</a></li>
+    <li><a href="#mattermost-v60が10月にリリース">Mattermost v6.0が10月にリリース</a></li>
+    <li><a href="#プラグインの更新">プラグインの更新</a>
+      <ul>
+        <li><a href="#webex-v12">Webex v1.2</a></li>
+        <li><a href="#gif-commander-v210">Gif Commander v2.1.0</a></li>
+      </ul>
+    </li>
+    <li><a href="#mattermostコミュニティイベント">Mattermostコミュニティイベント</a></li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav><h2 id="返信スレッドの折り畳み機能の改善">返信スレッドの折り畳み機能の改善</h2>
+<p>2021年7月にリリースされたMattermost v5.37にてベータ版として導入され、先月のリリースからモバイルアプリでも利用可能になった返信スレッドの折り畳み機能のバグ修正がいくつか行われています。<br>
+この機能を利用している場合は、バグ修正を適用するために v5.39 へアップデートすることをお勧めします。</p>
+<p>現在ベータ版の本機能は、2021/4Q (2021年10月~12月) にベータ版ではなくGeneric Availableとしてリリースされる予定だそうです。
+<a href="https://mattermost.com/blog/collapsed-reply-threads-ga/">Looking ahead to general availability of Collapsed Reply Threads</a></p>
+<h2 id="mattermost-v60が10月にリリース">Mattermost v6.0が10月にリリース</h2>
+<p>冒頭でも触れましたが、来月10/13(Wed)にMattermostのメジャーバージョンアップである v6.0 がリリースされます。
+<code>v6.0</code>では今までベータ版としてリリースされていた以下のような機能が、Generic Availableとしてリリースされます。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/configure/configuration-settings.html#allow-users-to-view-archived-channels-beta">Archived Channels</a>: アーカイブされたチャンネルの内容を検索する機能</li>
+<li><a href="https://docs.mattermost.com/comply/compliance-export.html">Compliance Exports(E20)</a>: コンプラインアンス向けデータエクスポート機能</li>
+<li><a href="https://docs.mattermost.com/comply/custom-terms-of-service.html">Custom Term of Service(E20)</a>: 独自の利用規約設定機能機能</li>
+<li><a href="https://docs.mattermost.com/onboard/guest-accounts.html">Guest Accounts(E20)</a>: ゲストアカウント機能機能</li>
+<li><a href="https://docs.mattermost.com/manage/mmctl-command-line-tool.html">mmctl</a>: 管理者向けMattermost管理CLIツール</li>
+<li><a href="https://docs.mattermost.com/onboard/system-admin-roles.html">Additional System Admin Roles(E20)</a>: システム管理ロールの追加</li>
+<li><a href="https://developers.mattermost.com/integrate/admin-guide/admin-plugins-beta/">Plugin</a>: Mattermostプラグイン機能</li>
+</ul>
+<p>その他 <code>v6.0</code> で変更が予定されている点は、以下の公式ブログエントリにまとめられています。</p>
+<p><a href="https://mattermost.com/blog/looking-forward-to-mattermost-v6-0/">Looking forward to the next big Mattermost product milestone: Mattermost v6.0</a></p>
+<hr>
+<p>Mattermost v6.0へのアップグレード時にDBのマイグレーションが実行されますが、メジャーバージョンアップのため、このマイグレーション処理に時間がかかることが予想されます。マイグレーションにかかる時間に関する分析が <a href="https://gist.github.com/streamer45/59b3582118913d4fc5e8ff81ea78b055">Mattermost v6.0 DB Schema Migrations Analysis</a>で公開されているため、アップデート作業時の参考にご利用ください。</p>
+<hr>
+<p>デスクトップアプリ、モバイルアプリに対しては後方互換性が保たれているため、現在のバージョンのままでもMattermost v6.0を利用できるようです。ただし、どちらもMattermost v6.0と同時期にリリースされる最新バージョンへのアップデートが推奨されています。</p>
+<hr>
+<p>Extended Support Release (ESR) となっている Mattermost v5.37 は、引き続き2021年年4月までサポートされます。</p>
+<h2 id="プラグインの更新">プラグインの更新</h2>
+<p>Mattermost本体の機能追加がないためか、最近 (?) 更新のあったプラグインが紹介されています。</p>
+<p>どちらのプラグインもプラグインマーケットプレースから簡単にインストールすることができます。</p>
+<h3 id="webex-v12">Webex v1.2</h3>
+<p><a href="https://www.webex.com/ja/video-conferencing.html">Cisco Webex</a>と連携するプラグインについて、Linuxクライアントを使用している場合のMeeting URLの改善をはじめ、いくつかの改善が加えられた新たなバージョンがリリースされています。</p>
+<p><a href="https://github.com/mattermost/mattermost-plugin-webex/releases/tag/v1.2.0">https://github.com/mattermost/mattermost-plugin-webex/releases/tag/v1.2.0</a></p>
+<h3 id="gif-commander-v210">Gif Commander v2.1.0</h3>
+<p>アニメーションGifをMattermostに投稿するプラグインについてもいくつか改善が行われています。</p>
+<p><a href="https://github.com/moussetc/mattermost-plugin-giphy/releases/tag/v2.1.0">https://github.com/moussetc/mattermost-plugin-giphy/releases/tag/v2.1.0</a></p>
+<h2 id="mattermostコミュニティイベント">Mattermostコミュニティイベント</h2>
+<p>Mattermostのメンバーが今後数週間のうちにいくつかのイベントに登壇する予定のようです。</p>
+<p>Mattermostのイベント登壇を含むPublic向けのイベント情報は以下のカレンダーから確認できます。
+<a href="https://mattermost.com/events/public/">Mattermost Public Events Calendar</a></p>
+<p>また、今年も<a href="https://hacktoberfest.digitalocean.com">Hacktoberfest</a>への参加を予定しているそうです。</p>
+<hr>
+<h2 id="おわりに">おわりに</h2>
+<p>3年半ぶりのメジャーバージョンアップとなる、次の<code>v6.0</code>のリリースは 2021/10/13(Web) を予定しています。</p>
+<p><a href="https://community-daily.mattermost.com/">Mattermost公式コミュニティチャット</a>の方では、一足先にMattermost v6.0を触ってみることができます。まだ開発途中のため、実際にリリースされるものとは異なりますが、雰囲気を感じることができると思います。
+個人的には、メインメニューが画面上部にヘッダとしてまとめられてスッキリとしている印象があったのと、デフォルトのテーマが <code>Denim</code> になっておりシックになった感じがしました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.39/mattermost-v6.jpeg" alt="v6"></p>
+<p>また、画面左上のメニューからは、最近開発に力を入れている<a href="https://github.com/mattermost/mattermost-plugin-playbooks">Playbook</a>や<a href="https://www.focalboard.com/">Focalboard</a>へ移動するメニューが追加されており、v6では、チャットをベースとしたDevOpsプラットフォームとしての発展に力を入れていくのかなと思いました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.39/mattermost-menu.jpeg" alt="menu"></p>
+<hr>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> で Mattermost に関する日本語の情報を提供しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2021
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
