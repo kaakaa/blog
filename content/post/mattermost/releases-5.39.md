@@ -14,7 +14,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 2021/09/16 に Mattermost `v5.39.0` がリリースされました。
 `v5.39`はいつものような **Feature Release** ではなく、**Quality Release**となっているため、新機能の追加は無く、改善系の変更のみのリリースとなっています。
 
-先月の記事で、今月はメジャーバージョンアップであるv6.0のリリース日であると書きましたが、**v6.0のリリースは来月(10/15)だった**ようです。（リリース日については、いつもMattermost公式チャットの[Release: Self-Managed](https://community-daily.mattermost.com/core/channels/release-discussion)チャンネルのチャンネルヘッダーを見て書いているのですが、見間違えたか変更されたかしていたようです）
+先月の記事で、今月はメジャーバージョンアップであるv6.0のリリース日であると書きましたが、**v6.0のリリースは来月(10/13)だった**ようです。（リリース日については、いつもMattermost公式チャットの[Release: Self-Managed](https://community-daily.mattermost.com/core/channels/release-discussion)チャンネルのチャンネルヘッダーを見て書いているのですが、見間違えたか変更されたかしていたようです）
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
@@ -53,7 +53,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ---
 
-Mattermost v6.0へのアップグレード時にDBのマイグレーションが実行されますが、メジャーバージョンアップのため、このマイグレーション処理に時間がかかることが予想されます。マイグレーションにかかる時間に関する分析が [Mattermost v6.0 DB Schema Migrations Analysis](https://gist.github.com/streamer45/59b3582118913d4fc5e8ff81ea78b055)で公開されているため、アップデート作業時の参考にご利用ください。
+Mattermost v6.0へのアップグレード時にDBのマイグレーションが実行されますが、このマイグレーション処理に時間がかかることが予想されます。マイグレーションにかかる時間に関する分析が [Mattermost v6.0 DB Schema Migrations Analysis](https://gist.github.com/streamer45/59b3582118913d4fc5e8ff81ea78b055)で公開されているため、アップデート作業時の参考にご利用ください。
 
 ---
 
@@ -65,9 +65,7 @@ Extended Support Release (ESR) となっている Mattermost v5.37 は、引き�
 
 ## プラグインの更新
 
-Mattermost本体の機能追加がないためか、最近 (?) 更新のあったプラグインが紹介されています。
-
-どちらのプラグインもプラグインマーケットプレースから簡単にインストールすることができます。
+Mattermost本体の機能追加がないためか、最近 (?) 更新のあったプラグインが紹介されています。どちらのプラグインもプラグインマーケットプレースから簡単にインストールすることができます。
 
 ### Webex v1.2
 
