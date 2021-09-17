@@ -41,8 +41,8 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
  
 - [Archived Channels](https://docs.mattermost.com/configure/configuration-settings.html#allow-users-to-view-archived-channels-beta): アーカイブされたチャンネルの内容を検索する機能
 - [Compliance Exports(E20)](https://docs.mattermost.com/comply/compliance-export.html): コンプラインアンス向けデータエクスポート機能
-- [Custom Term of Service(E20)](https://docs.mattermost.com/comply/custom-terms-of-service.html): 独自の利用規約設定機能機能
-- [Guest Accounts(E20)](https://docs.mattermost.com/onboard/guest-accounts.html): ゲストアカウント機能機能
+- [Custom Term of Service(E20)](https://docs.mattermost.com/comply/custom-terms-of-service.html): 独自の利用規約設定機能
+- [Guest Accounts(E20)](https://docs.mattermost.com/onboard/guest-accounts.html): ゲストアカウント機能
 - [mmctl](https://docs.mattermost.com/manage/mmctl-command-line-tool.html): 管理者向けMattermost管理CLIツール
 - [Additional System Admin Roles(E20)](https://docs.mattermost.com/onboard/system-admin-roles.html): システム管理ロールの追加
 - [Plugin](https://developers.mattermost.com/integrate/admin-guide/admin-plugins-beta/): Mattermostプラグイン機能
