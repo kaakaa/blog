@@ -14,6 +14,14 @@
 		<atom:link href="/tags/command/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>第二子出産に伴う育児休暇を取得したので雑感</title>
+			<link>https://blog.kaakaa.dev/post/life/life-with-baby/</link>
+			<pubDate>Fri, 08 Oct 2021 00:19:05 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/life-with-baby/</guid>
+			<description>この記事は、子育てに関する有用な知見や耳寄りな情報があるわけでもなく、単に記録として書いているだけのものです。 はじめに 8月下旬に第二子となる</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 5.39の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</link>
 			<pubDate>Fri, 17 Sep 2021 11:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 20 Mar 2021 15:05:21 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/plugin_emojigen/</guid>
 			<description>Mattermost EmojiGen Mattermost 上でテキストから絵文字を作成できるプラグインを作ってた。 下記にスクリーンキャストを載せてる。 kaakaa/mattermost-emojigen: Creating custom emoji from slash command 2 年前ぐらいに作ってたやつだ</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.33の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.33/</link>
-			<pubDate>Sat, 20 Mar 2021 10:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.33/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/03/17 に Mattermost v5.33.0 がリリースされました。 また、近いうちに TLS 接続をしている際に WebSocket 通信が失敗する問題の修正を加えた v5.33.1 がリリースされ</description>
 		</item>
       	
 	</channel>
