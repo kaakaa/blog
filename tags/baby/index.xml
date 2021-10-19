@@ -14,6 +14,14 @@
 		<atom:link href="/tags/baby/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 6.0の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</link>
+			<pubDate>Tue, 19 Oct 2021 22:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/10/13 に Mattermost のメジャーバージョンアップである v6.0.0 がリリースされました。 また、10/18にMedium Level Security Fixを含む v6.0.1 がリリ</description>
+		</item>
+      	
+		<item>
 			<title>第二子出産に伴う育児休職を取得したので雑感</title>
 			<link>https://blog.kaakaa.dev/post/life/life-with-baby/</link>
 			<pubDate>Fri, 08 Oct 2021 00:19:05 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 17 Apr 2021 10:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.34/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/04/15 に Mattermost v5.34.0 がリリースされました。 その後、MySQL を使用している場合に発生する可能性のある問題に対応したパッチバージョ</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost EmojiGen plugin</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/plugin_emojigen/</link>
-			<pubDate>Sat, 20 Mar 2021 15:05:21 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/plugin_emojigen/</guid>
-			<description>Mattermost EmojiGen Mattermost 上でテキストから絵文字を作成できるプラグインを作ってた。 下記にスクリーンキャストを載せてる。 kaakaa/mattermost-emojigen: Creating custom emoji from slash command 2 年前ぐらいに作ってたやつだ</description>
 		</item>
       	
 	</channel>
