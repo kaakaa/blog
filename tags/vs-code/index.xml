@@ -14,6 +14,14 @@
 		<atom:link href="/tags/vs-code/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 6.1の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</link>
+			<pubDate>Fri, 19 Nov 2021 17:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Mattermost 日本語(@mattermost_jp)さん | Twitter で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/11/16 に Mattermost のメジャーバージョン</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 6.0の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</link>
 			<pubDate>Tue, 19 Oct 2021 22:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sun, 02 May 2021 23:05:21 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/plugin_reacji/</guid>
 			<description>Mattermost Reacji Channeler Plugin Mattermost 上で動くReacji Channeler的なプラグインを作った。 まだ動くところまで作ったというレベルで、まだまだ破壊的な変更も必要そ</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.34の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.34/</link>
-			<pubDate>Sat, 17 Apr 2021 10:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.34/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/04/15 に Mattermost v5.34.0 がリリースされました。 その後、MySQL を使用している場合に発生する可能性のある問題に対応したパッチバージョ</description>
 		</item>
       	
 	</channel>
