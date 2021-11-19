@@ -9,12 +9,11 @@ tags: ["mattermost", "releases"]
 
 Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
-[Mattermost 日本語\(@mattermost_jp\)さん \| Twitter](https://twitter.com/mattermost_jp?lang=ja) で Mattermost に関する日本語の情報を提供しています。
+[Twitter: @mattermost_jp](https://twitter.com/mattermost_jp?lang=ja) で Mattermost に関する日本語の情報を提供しています。
 
 # はじめに
 
 2021/11/16 に Mattermost のメジャーバージョンアップである `v6.1.0` がリリースされました。  
-また、10/18にMedium Level Security Fixを含む `v6.0.1` がリリースされています。今後、v6へアップグレードする場合は `v6.0.1` を使用してください。
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
@@ -27,9 +26,9 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 ## [アップグレード時の注意事項](https://docs.mattermost.com/install/self-managed-changelog.html#important-upgrade-notes)
 
 
-* v6.1へのアップグレード処理でデータベーススキーマの変更が行われます。v6へのメジャーアップデートほど大掛かりではないですが、多少時間がかかります。
+* v6.1へのアップグレード処理でデータベーススキーマの変更が行われます。v6へのメジャーアップデートほど大掛かりではないですが、多少時間がかかるため、アップグレード前に変更内容を確認することをことをおすすめします
   * スキーマ変更の内容と、所要時間の目安については[Mattermost v6\.1\.0 schema migration analysis](https://gist.github.com/streamer45/997b726a86b5d2a624ac2af435a66086)に記述があります
-* オプションの検索エンジンとして搭載されているBleveの検索インデックスがScorch indexに変更されます。Scorch indexを採用することにより、検索にまつわるディスク使用量の削減を行うことができます。
+* オプションの検索エンジンとして搭載されている[Bleve](https://docs.mattermost.com/deploy/bleve-search.html)の検索インデックスがScorch indexに変更されます。Scorch indexを採用することにより、ディスク使用量の削減ができるようです。
   * Mattermostサーバーのアップグレード後、システムコンソールからBleveインデックスの破棄と再生成を行うことでScorch indexに切り替えることができます
   * 過去のバージョンで作成された検索インデックスでも動作はするため、インデックス種別を切り替えたくない場合、何も操作は必要ありません
 
@@ -44,7 +43,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## Channels: チーム横断でのメンション検索
 
-あなたへのメンションを含む投稿や、保存された投稿を一覧する機能は以前よりありましたが、Mattermost上のチームごとに管理されており、別のチームで行われたメンションや、保存された投稿を確認するには、まずチームの切り替えを行う必要がありました。本バージョンから、所属している全チームのメンションと保存された投稿が一つの画面に表示されるようになったため、チーム切り替えを行う必要がなくなりました。
+あなたへのメンションを含む投稿や、保存された投稿を一覧する機能は以前からありましたが、Mattermostのチームごとに管理されていたため、別のチームで行われたメンションや保存された投稿を確認するには、まずチームの切り替えを行う必要がありました。本バージョンから、所属している全チームのメンションと保存された投稿が一つの画面に表示されるようになったため、チーム切り替えを行うことなく別チームのメンション・保存投稿を確認できるようになりました。
 
 ![ch-cross-team](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-cross-team.png)
 
@@ -54,20 +53,20 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ![ch-recent-reaction](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-recent-reaction.png)
 
-**設定 > 表示 > 1クリックでメッセージに反応する**から、この機能のON/OFFをユーザーごとに設定することができます。
+`設定 > 表示 > 1クリックでメッセージに反応する`から、この機能のON/OFFをユーザーごとに設定することができます。
 
 ![ch-recent-reaction-setting](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-recent-reaction-setting.png)
 
 ## Channels: `取り込み中`状態の有効期間設定
 
-Mattermostでは、オンラインや離籍中など、ユーザーの現在の状態を設定することができますが、この状態表示のうち`取り込み中`を選択する際、`取り込み中`が継続する期間を設定することができるようになりました。
+Mattermostでは、"オンライン"や"離席中"など、ユーザーの現在の状態を設定することができます。この状態表示のうち`取り込み中`を選択する際、`取り込み中`の状態が継続する期間を設定することができるようになりました。
 `取り込み中`を設定した場合、Mattermostからの通知が送信されなくなりますが、これが指定時間経過後に自動で解除され、通知が送信されるようになります。
 
 ![ch-do-not-disturb](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-do-not-disturb.png)
 
 ## Playbooks: プレビュー表示
 
-本バージョンからPlaybook作成時に指定した内容をプレビュー表示できるようになりました。これにより、Playbookの概要を簡単に把握できるようになります。
+本バージョンからPlaybookの内容をプレビュー表示できるようになりました。これにより、Playbookの概要を簡単に把握できるようになります。
 
 ![pl-preview](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/pl-preview.png)
 
@@ -84,21 +83,22 @@ Playbookの参加者とオーナーへ、割り当てられているタスクの
 
 ## Boards: ボード作成UIの改善
 
-ボード作成ボタンがサイドバーの上部に移動しました（今まではサイドバー下部だった）。また、ボード作成画面も全画面形式に変更されています。
+（以前のバージョンではサイドバー下部にあった）ボード作成ボタンがサイドバーの上部に移動しました。また、ボード作成画面も全画面形式に変更されています。
 
 ![bo-create-board](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/bo-create-board.png)
 
 ## Boards: メトリクス選択
 
-以前のバージョンでは、Board内のカラム名の横にはそのカラムに属するカードの数が表示されるだけでしたが、この数値の集計方法を以下のように指定できるようになりました。
+以前のバージョンでは、Board内のカラム名の横にはそのカラムに属するカードの数が表示されるだけでしたが、この数値の集計方法を指定できるようになりました。  
+例えば以下のような数値をカラムごとに集計して表示することができます。
 
-* 特定のプロパティが空のカードの数を表示する (重要な情報が未入力なカードを見つけやすくする)
+* 指定したプロパティの内容が空のカードの数を表示する (重要な情報が未入力なカードを見つけやすくする)
 * 機能の開発にかかる時間の合計を表示する
 * 見積もり期間の範囲を表示する
 
 ![bo-calculate](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/bo-calculate.png)
 
-Sum, Averageなどのメニューは、カードに数値のプロパティが存在する場合のみ表示・選択できるようになります。
+Sum, Averageなどのメニューは、カードに数値プロパティが存在する場合のみ表示・選択できるようになります。
 
 ## Boards: @mention notification
 
@@ -119,7 +119,7 @@ Sum, Averageなどのメニューは、カードに数値のプロパティが�
 
 ### 編集済マークの表示位置変更
 
-投稿後にメッセージ内容を編集した際に表示される`編集済`マークの表示位置が変更され、メッセージの最後に表示されるようになりました。
+投稿後にメッセージ内容を編集した際に表示される`編集済`マークの表示位置が変更され、メッセージの末尾に表示されるようになりました。
 
 ![ch-edit-indicator](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-edit-indicator.png)
 
@@ -129,7 +129,7 @@ Sum, Averageなどのメニューは、カードに数値のプロパティが�
 
 ![ch-inline-latex](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.1/ch-inline-latex.png)
 
-詳しくは以下のドキュメントを参照ください。
+詳しくは以下のドキュメントを参照ください。  
 [Formatting Text - Math Formulas](https://docs.mattermost.com/messaging/formatting-text.html#math-formulas)
 
 ### ブラウザサポートバージョンの変更
@@ -144,21 +144,6 @@ Sum, Averageなどのメニューは、カードに数値のプロパティが�
 ### Mattermost Cloud
 10ユーザー以内なら無料として利用できたMattermost Cloudですが、2022/2/15に無償プランが廃止され、有償のStarter plan(月額$12.41 or 年額 $149)への移行が必要となるようです。
 2022/2/15までにクレジットカードの情報を入力するか、何もアクションがない場合は利用継続できなくなってしまうようです。
-
-### Hacktoberfest
-
-[Join Mattermost for Hacktoberfest 2021](https://mattermost.com/blog/hacktoberfest-2021/)
-
-今年もMattermostはHacktoberfestのPartnerとして参加しています。 
-
-https://hacktoberfest.digitalocean.com/
-
-Hacktoberfestの景品とは別に、Mattermost独自のSwagを用意しています。
-10月中に一つでもコントリビュートを行なった場合は、限定ステッカーがもらえるようです。このステッカーは、日本のJapanese Maple Treeをモチーフにしているそうです。
-
-![Fall Sticker](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.0/fall_sticker.jpeg)
-
-さらに、各カテゴリ(**Focalboard**, **Mattermost App**, **Writing Program**, **Translation**, **QA Testing**)でトップコントリビューターに選ばれた場合、オリジナルのメカニカルキーボードがプレゼントされるようです。
 
 ## おわりに
 
