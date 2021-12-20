@@ -22,6 +22,14 @@
 		</item>
       	
 		<item>
+			<title>Mattermost 6.2の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</link>
+			<pubDate>Wed, 20 Oct 2021 13:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/12/16 に Mattermost のメジャーバージョンアップである v6.2.0 がリリースされました。 また、2</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 6.0の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</link>
 			<pubDate>Tue, 19 Oct 2021 22:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 08 May 2021 23:05:21 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/apps-sample/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに Mattermost の新たな統合機能である Apps Framework が Developer Preview になりました。 https://twitter.com/Mattermost/status/1390333864820813831 既存の統合機能やプラグイン機能との違いを確かめるべく、公式開発者向</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost Reacji Channeler plugin</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/plugin_reacji/</link>
-			<pubDate>Sun, 02 May 2021 23:05:21 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/plugin_reacji/</guid>
-			<description>Mattermost Reacji Channeler Plugin Mattermost 上で動くReacji Channeler的なプラグインを作った。 まだ動くところまで作ったというレベルで、まだまだ破壊的な変更も必要そ</description>
 		</item>
       	
 	</channel>
