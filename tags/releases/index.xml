@@ -9,7 +9,7 @@
 		
 		<managingEditor>Page(/tags/releases) (Yusuke Nemoto)</managingEditor>
     	
-  		<lastBuildDate>Fri, 19 Nov 2021 17:00:00 +0900</lastBuildDate>
+  		<lastBuildDate>Mon, 20 Dec 2021 12:00:00 +0900</lastBuildDate>
 		
 		<atom:link href="/tags/releases/" rel="self" type="application/rss+xml" />
 		
@@ -19,6 +19,14 @@
 			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/merge-instances/</guid>
 			<description>この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.2の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</link>
+			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/12/16 に Mattermost のメジャーバージョンアップである v6.2.0 がリリースされました。 また、2</description>
 		</item>
       	
 		<item>
@@ -83,14 +91,6 @@
 			<pubDate>Tue, 18 May 2021 07:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.35/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに (最近Qiitaでの体験があまり良くないので、来月の記事からZennに移行しようと思っています。既存の記事も移行し、</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost Apps Frameworkを触ってみた</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/apps-sample/</link>
-			<pubDate>Sat, 08 May 2021 23:05:21 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/apps-sample/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに Mattermost の新たな統合機能である Apps Framework が Developer Preview になりました。 https://twitter.com/Mattermost/status/1390333864820813831 既存の統合機能やプラグイン機能との違いを確かめるべく、公式開発者向</description>
 		</item>
       	
 	</channel>
