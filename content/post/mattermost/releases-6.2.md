@@ -2,7 +2,7 @@
 title: "Mattermost 6.2の新機能"
 emoji: "🎉"
 published: true
-date: 2021-12-20T13:00:00+09:00
+date: 2021-12-20T12:00:00+09:00
 toc: true
 tags: ["mattermost", "releases"]
 ---
