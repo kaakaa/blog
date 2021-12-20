@@ -2,7 +2,7 @@
 title: "Lessons learned from merging Mattermost instances"
 emoji: "🎉"
 published: true
-date: 2021-12-20T`1:00:00+09:00
+date: 2021-12-20T12:00:00+09:00
 toc: true
 tags: ["mattermost", "bulk-export", "bulk-import", "advent-calendar", "tips"]
 ---
