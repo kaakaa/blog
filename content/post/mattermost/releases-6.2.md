@@ -50,7 +50,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 Mattermostでメッセージを投稿する際、メッセージ入力欄に`~`を入力するとチャンネル一覧が表示され、このチャンネル一覧から選択することでチャンネルへのリンクを簡単に入力できるという機能がありました。
 今までのバージョンでは、この一覧に表示されるチャンネルは公開チャンネルのみでしたが、本バージョンからは自分が所属している非公開チャンネルも一覧に表示されるようになります。
 
-![Autocomplete Private Channel](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.2/channels-autocomplete-private.png)
+![Autocomplete Private Channel](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.2/channels-autocomplete-private.gif)
 
 ## Channels: 返信スレッドに関する操作性改善
 
@@ -81,13 +81,13 @@ Board上のカードをカレンダー上に表示できるようになり、締
 
 ![Calendar property](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.2/boards-switch-calendar-property.png)
 
-(画像は公式ブログから)
-
 ## その他のトピック
 
 ### Mattermostのインスタンス統合により得た知見
 
 弊社で2つのMattermostインスタンスを統合した事例について、アドベントカレンダーの記事として公開しました。
+
+[Lessons learned from merging Mattermost instances](https://zenn.dev/kaakaa/articles/mattermost-merge-instances)
 
 2つのMattermostインスタンスの統合は公式ではサポートされていなかったため、統合の際に問題となった点や対処方法、また失う可能性のあるデータ等についてまとめ増田。
 
