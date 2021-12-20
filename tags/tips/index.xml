@@ -9,22 +9,24 @@
 		
 		<managingEditor>Page(/tags/tips) (Yusuke Nemoto)</managingEditor>
     	
+  		<lastBuildDate>Mon, 20 Dec 2021 12:00:00 +0900</lastBuildDate>
+		
 		<atom:link href="/tags/tips/" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Lessons learned from merging Mattermost instances</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/merge-instances/</link>
+			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/merge-instances/</guid>
+			<description>この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例</description>
+		</item>
+      	
 		<item>
 			<title>Mattermost 6.1の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</link>
 			<pubDate>Fri, 19 Nov 2021 17:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/11/16 に Mattermost のメジャーバージョンアップである v6.1.0 がリリースされました。 本記事は</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 6.2の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</link>
-			<pubDate>Wed, 20 Oct 2021 13:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/12/16 に Mattermost のメジャーバージョンアップである v6.2.0 がリリースされました。 また、2</description>
 		</item>
       	
 		<item>
