@@ -160,6 +160,7 @@
 <p>今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例について紹介します。</p>
 <nav id="TableOfContents">
   <ul>
+    <li><a href="#変更履歴">変更履歴</a></li>
     <li><a href="#背景">背景</a>
       <ul>
         <li><a href="#免責事項">免責事項</a></li>
@@ -191,7 +192,12 @@
     <li><a href="#さいごに">さいごに</a></li>
     <li><a href="#謝辞">謝辞</a></li>
   </ul>
-</nav><h2 id="背景">背景</h2>
+</nav><h2 id="変更履歴">変更履歴</h2>
+<ul>
+<li>2021/12/22: <strong>移行時に実行したコマンド</strong> にて、Bulk Exportコマンドに<code>--attachments</code>オプションが付与されていなかったため追加</li>
+<li>2021/12/22: <strong>移行時に実行したコマンド</strong> について説明を追加</li>
+</ul>
+<h2 id="背景">背景</h2>
 <p>社内では、オンプレミスで運用できるチャット基盤としてOSSの<a href="https://mattermost.com/">Mattermost</a>を利用しているところが数多くあります。もちろんコミュニケーション基盤は統一的なインスタンスで運用できているのが望ましいですが、MattermostはOSSで誰でも使えるということもあり、過去に同時発生的に有志によるMattermostの運用が始まってしまったため、それぞれのインスタンスでの運用が続いているという状況があります。</p>
 <p>今回統合を行った2つのMattermostインスタンスは、幾度かの組織変更により両方のインスタンスにアカウントを持つユーザーが増えてきているということもあって、以前からユーザーの利便性のためにも統合したいねという話が出ていました。<a href="https://pr.fujitsu.com/jp/news/2021/01/28-2.pdf">今年の4月に大きなグループ再編の動き</a>があったことから、この流れに乗ってMattermostインスタンスの統合に踏み切りました。</p>
 <p>Mattermostのインスタンスを統合した事例は今まで目にしたことは無いため、公開されている事例としては世界初になるのではないかと思っています(あったら教えて欲しい)。(refs: <a href="https://forum.mattermost.org/t/consolidate-two-instances/5265/4">Mattermost Forum</a>)</p>
@@ -221,13 +227,13 @@
 <h3 id="mattermostの機能について">Mattermostの機能について</h3>
 <p>Mattermostには、2つの異なるインスタンス間の共有や移行に関する以下のような機能があります。</p>
 <h4 id="shared-channelhttpsdocsmattermostcomonboardshared-channelshtml"><a href="https://docs.mattermost.com/onboard/shared-channels.html">Shared Channel</a></h4>
-<p>複数インスタンス間でチャンネルを共有する機能です。
+<p>複数インスタンス間でチャンネルを共有する機能です。<br>
 今回は、ユーザーの利便性のためにインスタンス自体を統合したいという要求であったため、この方法は採用しませんでした。(また、この機能は有償版限定のためそもそも採用できませんでした)</p>
 <h4 id="migration-guidehttpsdocsmattermostcomonboardmigrating-to-mattermosthtml"><a href="https://docs.mattermost.com/onboard/migrating-to-mattermost.html">Migration Guide</a></h4>
-<p>Mattermostは、稼働中のインスタンスを別サーバーを移行するための手順を公開しています(Slackなどの他のメッセージングサービスからからMattermostへ移行する手順の紹介などもあります)。
+<p>Mattermostは、稼働中のインスタンスを別サーバーを移行するための手順を公開しています(Slackなどの他のメッセージングサービスからからMattermostへ移行する手順の紹介などもあります)。<br>
 ただし、この手順によるMattermostサーバーの移行は、データベースごと新しいインスタンスへ移行する方式のため、既にデータの存在するMattermostインスタンスへの移行には適用できませんでした。</p>
 <h4 id="bulk-exporthttpsdocsmattermostcommanagebulk-export-toolhtml--bulk-importloadinghttpsdocsmattermostcomonboardbulk-loading-datahtml"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> / <a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a></h4>
-<p><strong>Bulk Export/Bulk Import(Loading)</strong> 機能は、インスタンス上のデータをファイル形式でExportする機能と、Exportされたファイル形式を元にImport処理を行う機能です。
+<p><strong>Bulk Export/Bulk Import(Loading)</strong> 機能は、インスタンス上のデータをファイル形式でExportする機能と、Exportされたファイル形式を元にImport処理を行う機能です。<br>
 これらの機能も、Mattermostインスタンス上のデータをアーカイブとして出力することを目的とした <strong>Bulk Export</strong> と、他のメッセージングシステム(Slack, HipChat等)からExportしたデータをMattermostへImportする際のデータ形式を定めた <strong>Bulk Import</strong> の機能という位置づけであり、2つのMattermostインスタンスの統合をサポートしているものではありません。単純に <strong>Bulk Export</strong> したデータを、そのまま既にデータの存在するMattermostインスタンスへ <strong>Bulk Import</strong> すると、様々なデータの不整合が発生する可能性があります。</p>
 <p>しかし、その他にインスタンスを統合する有効な手段が無かったため、今回はこの<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a>/<a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a>の機能をベースにインスタンス統合の作業を行いました。</p>
 <p>本記事では、 <strong>Bulk Export/Bulk Import</strong> 機能を利用したインスタンス統合において発生した問題と、対処方法について紹介していきます。</p>
@@ -284,23 +290,26 @@
 .
 .
 .
-</code></pre><p>Mattermost内のリソースが1行のJSONデータとして各行に記録されており、Bulk Import実行時も1行ずつ処理されていきます。
+</code></pre><p>Mattermost内のリソースが1行のJSONデータとして各行に記録されており、Bulk Import実行時も1行ずつ処理されていきます。<br>
 投稿に対する添付ファイルや、カスタム絵文字のファイルの実体などは、このJSONLファイルとは別に出力されており、Bulk Import実行時に併せて読みだされてMattermostへ登録されていきます。</p>
 <p>Exportされるデータ種別やその内容については、公式ドキュメントを参照してください。
 <a href="https://docs.mattermost.com/manage/bulk-export-tool.html">https://docs.mattermost.com/manage/bulk-export-tool.html</a></p>
 <h3 id="移行時に実行したコマンド">移行時に実行したコマンド</h3>
 <p>統合実行時のコマンドは以下になります。</p>
+<p>まず、移行元のサーバーでBulk Exportのコマンドを実行します。<br>
+この時、<code>--config</code>オプションの値には起動しているMattermostサーバーの<code>config.json</code>を指定します。また、<code>mattermost-export-YYYY-MM-DD.txt</code>が出力ファイルとなるのですが、<strong>このファイルの出力先フォルダにMattermostの添付ファイルを格納している<code>data/</code>フォルダが存在すると、その内容がすべて0byteのファイルで上書きされてしまいます。Bulk Exportコマンドの出力先には十分注意してください。</strong></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Export</span>
-$ ./bin/mattermost --config ~/config.json export bulk ~/mattermost-export-YYYY-MM-DD.txt
+$ ./bin/mattermost --config ~/config.json export bulk ~/mattermost-export-YYYY-MM-DD.txt --attachments
+</code></pre></div><p>先にも述べましたが、既にデータの存在するインスタンスに対して、ExportしたJSONLファイルをそのままImportしようすると、データの不整合が発生する可能性があります。そのため、Exportされたデータに対してsedによる置換を実施しています。また、Bulk Import実行時にエラーとならないようファイルの拡張子を<code>.jsonl</code>に変更しています。sedによる置換内容については以降のセクションで紹介していきます。</p>
+<pre><code># Edit exported data
+$ sed -f migration.sed ~/mattermost-export-YYYY-MM-DD.txt &gt; ~/mattermost-import-YYYY-MM-DD.jsonl
+</code></pre><p>最後に、Bulk Exportによって出力された<code>data/</code>,<code>exported_emoji/</code>,<code>mattermost-import-YYYY-MM-DD.jsonl</code>を移行先のMattermostサーバーへコピーし、Bulk Importを実行します。この時、<code>mattermost-import-YYYY-MM-DD.jsonl</code>と<code>data/</code>,<code>exported_emoji/</code>フォルダは同じフォルダ内に置いておく必要があります。</p>
+<pre><code># Validation
+$ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-MM-DD.jsonl --import-path ~/data --validate
 
-<span style="color:#75715e"># Edit exported data</span>
-$ sed -f migration.sed ~/mattermost-export-YYYY-MM-DD.txt &gt; ~/mattermost-import-YYYY-MM-DD.txt
-
-<span style="color:#75715e"># Import</span>
-$ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-MM-DD.txt --import-path ~/data --apply
-</code></pre></div><p>先にも述べましたが、既にデータの存在するインスタンスに対して、ExportしたJSONLファイルをそのままImportしようすると、データの不整合が発生する可能性があります。
-そのため、Exportされたデータに対してsedによる置換を実施しています。sedによる置換内容については以降のセクションで紹介していきます。</p>
-<p>(余談ですが、今回統合を実施した環境では、Mattermostの管理CLIツールが<code>mattermost</code>コマンドから<code>mmctl</code>コマンドへ移行する過渡期であり、ところどころの調査では<code>mmctl</code>コマンドを利用していたりもします。Mattermost v6からは管理CLIコマンドの大部分が<code>mmctl</code>コマンドに集約されているため、Mattermost v6移行の環境で統合を実施する場合は実行コマンドが変わるかもしれません。)</p>
+# Import
+$ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-MM-DD.jsonl --import-path ~/data --apply
+</code></pre><p>(余談ですが、今回統合を実施した環境では、Mattermostの管理CLIツールが<code>mattermost</code>コマンドから<code>mmctl</code>コマンドへ移行する過渡期であり、ところどころの調査では<code>mmctl</code>コマンドを利用していたりもします。Mattermost v6からは管理CLIコマンドの大部分が<code>mmctl</code>コマンドに集約されているため、Mattermost v6移行の環境で統合を実施する場合は実行コマンドが変わるかもしれません。)</p>
 <h2 id="統合実施時に注意が必要なデータ">統合実施時に注意が必要なデータ</h2>
 <h3 id="team-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlteam-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#team-object">Team object</a></h3>
 <p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-team-object">Example Team object</a></p>
@@ -333,11 +342,11 @@ $ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-M
 </code></pre></div><h4 id="teamname"><code>team</code>/<code>name</code></h4>
 <p>移行元/移行先の両方に同じ　<strong>チーム名/チャンネル名</strong>　を持つチャンネルが存在する場合、2つのチャンネルの投稿が1つのチャンネルにマージされます（すごい）。
 今回のインスタンス統合では、移行元/移行先で同名となるチャンネルについて事前に調査を行い、マージを希望しないチャンネルについては、移行元のインスタンスのチャンネル名に <strong>特定のprefixを付ける</strong> ことでマージが実施されないように対処しました。一部、マージを希望するチャンネルについては同名チャンネルのまま統合作業を行いましたが、<strong>特に問題なく移行元/移行先のチャンネルのマージが行われました</strong>(すごい)。</p>
-<p>ただし、Mattermostでチームを作成した時に自動で作成される <code>town-square</code>、<code>off-topic</code> チャンネルには注意が必要です。
+<p>ただし、Mattermostでチームを作成した時に自動で作成される <code>town-square</code>、<code>off-topic</code> チャンネルには注意が必要です。<br>
 この2つのチャンネルは、ユーザーがチームに新しく参加した時に自動で参加するチャンネルであり、事前にチャンネル名を変更してしまうと、新たにユーザーをチームに参加させたときにエラーが発生してしまいます(<code>off-topic</code>はUIから名前を変更できますが、<code>town-square</code>はシステム的な固有値だったはず)。この2つのチャンネルのチャンネル名を変更する場合はExportされたデータ上でチャンネル名を編集した方が良いです。</p>
 <hr>
 <p>また、Mattermost内に日本語を含むチャンネル表示名がある場合も注意が必要です。</p>
-<p>Mattermostではチャンネルの名前を表す属性として <strong>チャンネル名</strong>  (<code>name</code>) と <strong>チャンネル表示名</strong>  (<code>display_name</code>) の2つがあります。普段Mattermost画面上で見ている名前は <strong>チャンネル表示名</strong>  (<code>display_name</code>) で、URLに使われる文字列が <strong>チャンネル名</strong> (<code>name</code>) です。
+<p>Mattermostではチャンネルの名前を表す属性として <strong>チャンネル名</strong>  (<code>name</code>) と <strong>チャンネル表示名</strong>  (<code>display_name</code>) の2つがあります。普段Mattermost画面上で見ている名前は <strong>チャンネル表示名</strong>  (<code>display_name</code>) で、URLに使われる文字列が <strong>チャンネル名</strong> (<code>name</code>) です。<br>
 Mattermostで画面上からチャンネルを作成する際に入力する名前は <strong>チャンネル表示名</strong> (<code>display_name</code>)になりますが、表示名を入力すると自動で <strong>チャンネル名</strong> (<code>name</code>)の方も同じ文字列で設定されます（チャンネル名のみを変更することも可能）。英語のみで構成されている <strong>チャンネル表示名</strong> であれば同じ値が設定されますが、もし日本語などのマルチバイト文字が含まれる場合、Mattermostはそれらのマルチバイト文字を無視して英語部分だけで <strong>チャンネル名</strong> を設定します。そのため「○○PJ(プロジェクトの意味)」のような、日本語を含む短い <strong>チャンネル表示名</strong> を設定している場合、意図せず <strong>チャンネル名</strong>  (<code>name</code>) が重複することが有ります。</p>
 <p>このため、日本語を含むチャンネル名が多く存在する場合、チャンネル名のConflictが発生しやすくなっており、事前の調査がとても重要になります。</p>
 <hr>
@@ -392,16 +401,16 @@ Mattermostで画面上からチャンネルを作成する際に入力する名�
 </ol>
 </li>
 </ul>
-<p><code>ii.</code>の事象については、もし、別々の人が移行元/移行先で同じユーザー名を使っていた場合、アカウントを乗っ取られたような動作になるので対処が必要になります。
-<code>iv.</code>の事象については、本来は正常動作ですが、同じユーザーがが移行元/移行先で<strong>異なるユーザー名 / 異なるメールアドレス</strong>のユーザーを持っていた場合、そのユーザーに対して2つのアカウントが生成されることになります。本来あまり起こらない事象だとは思いますが、過去に全社的にメールアドレスのドメイン名が微妙に変更になったことが有り(以前のメールアドレスも利用可能)、このような事象が発生しやすくなっていました。</p>
+<p><code>2.</code>の事象については、もし、別々の人が移行元/移行先で同じユーザー名を使っていた場合、アカウントを乗っ取られたような動作になるので対処が必要になります。
+<code>4.</code>の事象については、本来は正常動作ですが、同じユーザーがが移行元/移行先で<strong>異なるユーザー名 / 異なるメールアドレス</strong>のユーザーを持っていた場合、そのユーザーに対して2つのアカウントが生成されることになります。本来あまり起こらない事象だとは思いますが、過去に全社的にメールアドレスのドメイン名が微妙に変更になったことが有り(以前のメールアドレスも利用可能)、このような事象が発生しやすくなっていました。</p>
 <p>これらの点についても、事前にユーザー名/メールアドレスの情報を突合せ、問題が発生する可能性のあるアカウントについては事前にユーザー名/メールアドレスの変更をお願いしたり、移行先のデータが書き換えられないようExportデータの内容を変更するなどして対処しました。</p>
 <h4 id="auth_serviceauth_data"><code>auth_service</code>/<code>auth_data</code></h4>
 <p>移行元/移行先で異なる認証サービスを利用していた場合、Export後のJSONLファイルに対する対処が必要です。</p>
-<p>今回の統合においては、<strong>移行元のMattermostではGitLab認証</strong>を利用しており、<strong>移行先ではMattermost自身のパスワード認証</strong>を利用していました。ただ、移行元で利用していたGitLabは、<a href="https://dev.classmethod.jp/articles/github-constellation-conf-fujitsu/">富士通研究所としてGitHub Enterpriseが導入された</a>こともあってMattermost認証のためのアカウント管理機能ぐらいしか使われていなかったため、統合に併せてアカウント管理も移行先のMattermostに寄せることにしました。
+<p>今回の統合においては、<strong>移行元のMattermostではGitLab認証</strong>を利用しており、<strong>移行先ではMattermost自身のパスワード認証</strong>を利用していました。ただ、移行元で利用していたGitLabは、<a href="https://dev.classmethod.jp/articles/github-constellation-conf-fujitsu/">富士通研究所としてGitHub Enterpriseが導入された</a>こともあってMattermost認証のためのアカウント管理機能ぐらいしか使われていなかったため、統合に併せてアカウント管理も移行先のMattermostに寄せることにしました。<br>
 認証関連の情報は、 User object が持つ <code>auth_service</code>/<code>auth_data</code> 要素として格納されているため、Import実施前にこれらの要素を<code>{..., &quot;auth_service&quot;:null, ...}</code>のみ(<code>auth_data</code>要素は削除)に編集しました。これにより、Import実施時にシステム側でパスワードが生成・設定されるようになります。システム側で設定されたパスワードを知る術がないので、移行先のインスタンスでパスワードリセットの操作を行う必要がありました。</p>
 <h4 id="roles"><code>roles</code></h4>
 <p>ユーザーの権限に関するデータである<code>roles</code>は <strong>非常に注意が必要です</strong>。</p>
-<p>移行元/移行先の両方に同じユーザー名のアカウントが存在した場合、そのユーザーの権限はExportデータ内の<code>roles</code>の値で上書かれてしまいます。もし、移行先のシステム管理者ユーザーが移行元システムの一般ユーザー権限で上書かれ、<strong>移行先にシステム管理者がいなくなってしまった場合</strong>、そのインスタンスの運用を続けることが困難になってしまいます。統合にあたって事前にテストするなどして、このような状況が発生しないよう十分に注意してください。</p>
+<p>移行元/移行先の両方に同じユーザー名のアカウントが存在した場合、そのユーザーの権限はExportデータ内の<code>roles</code>の値で上書きされてしまいます。もし、移行先のシステム管理者ユーザーが移行元システムの一般ユーザー権限で上書きされ、<strong>移行先にシステム管理者がいなくなってしまった場合</strong>、そのインスタンスの運用を続けることが困難になってしまいます。統合にあたって事前にテストするなどして、このような状況が発生しないよう十分に注意してください。</p>
 <h4 id="localethemenotify_props"><code>locale</code>/<code>theme</code>/<code>notify_props</code>/&hellip;</h4>
 <p>その他、ユーザーのアカウントに関する設定（表示言語、テーマ、通知設定など）も、移行元/移行先で同じユーザー名のユーザーが存在した場合、移行元のデータで置き換えられてしまいます。</p>
 <h3 id="post-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlpost-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#post-object">Post object</a></h3>
@@ -454,7 +463,7 @@ Mattermostで画面上からチャンネルを作成する際に入力する名�
   }
 }
 </code></pre></div><h4 id="attachments">Attachments</h4>
-<p>投稿に添付されたファイルの拡張子と実際に添付されたファイルの形式が異なる場合、<strong>Import処理でエラー</strong>が発生します。
+<p>投稿に添付されたファイルの拡張子と実際に添付されたファイルの形式が異なる場合、<strong>Import処理でエラー</strong>が発生します。<br>
 Import処理では、投稿に添付された画像ファイルなどに対してサムネイルを作成する処理が自動で実行されます。この時、Mattermostはファイル名の拡張子を元にサムネイル作成処理を実行しようとしますが、ファイル名の拡張子と実際のファイル形式が異なる場合、エラーが発生します。</p>
 <p>今回の統合作業でも、移行元のインスタンスに、<code>.gif</code>という拡張子を持つJPEGファイルなどが存在したため、以下のようなエラーが発生しました。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">GetInfoForBytes</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Could</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">decode</span> <span style="color:#a6e22e">gif</span>., <span style="color:#a6e22e">gif</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">can</span><span style="color:#e6db74">&#39;t recognize format &#34;\xff\xd8\xff\xe0\x00\x10&#34;
@@ -473,7 +482,7 @@ Import処理では、投稿に添付された画像ファイルなどに対し�
   }
 }
 </code></pre></div><h4 id="name-1"><code>name</code></h4>
-<p>移行元/移行先で同名のカスタム絵文字が登録されている場合、<strong>移行元の画像でカスタム絵文字が上書かれて</strong> しまいます。
+<p>移行元/移行先で同名のカスタム絵文字が登録されている場合、<strong>移行元の画像でカスタム絵文字が上書きされて</strong> しまいます。
 今回の移行では、同名のカスタム絵文字については移行元のデータを削除することで対応しました。もし、Exportデータ内でカスタム絵文字の名前を変更するという対処を行う場合、投稿のデータにもリアクションとしてカスタム絵文字名が使用されている場合があるため、併せてそちらも修正する必要があると思います。</p>
 <h2 id="ossへの貢献">OSSへの貢献</h2>
 <p>Mattermost Bulk Export/Importツールについてはあまり利用例がないのか、移行にあたっていくつか問題が発生しました。これらの問題について、MattermostへIssueによる報告や、PRによる改善要望を送っています。</p>
@@ -521,7 +530,7 @@ Import処理では、投稿に添付された画像ファイルなどに対し�
 </li>
 </ul>
 <h2 id="さいごに">さいごに</h2>
-<p>今回は、Mattermostの<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> / <a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a>の機能を使い、2つのMattermostインスタンスの統合を行いました。そして、インスタンス統合時に発生するデータ不整合と、その不整合にどのように対応したかについて紹介しました。
+<p>今回は、Mattermostの<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> / <a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a>の機能を使い、2つのMattermostインスタンスの統合を行いました。そして、インスタンス統合時に発生するデータ不整合と、その不整合にどのように対応したかについて紹介しました。<br>
 2つのMattermostを完全な形で移行することは出来ませんでしたが、制限事項の部分以外は移行後も大きな問題が起こることも無く、現時点で数か月運用が出来ています。</p>
 <p>今回、インスタンス統合実施時に発生する問題に対処しつつ作業を完遂出来たのは、MattermostがOSSであったという点が大きいと思っています。問題が発生しても、データとコードを読み解くことで問題の原因を特定でき、原因に対してソフトウェアの方を修正するという対処も取りながら作業を進めることが出来ました。Mattermostは、<strong>自分たちのコミュニケーションのデータを自分たちの自由にできないフラストレーション</strong> から生まれたプロダクトであり、今回はその恩恵を十分に受けることができたと思います。(refs: <a href="https://flagsmith.com/podcast/ian-tien-mattermost/">The Mattermost Origin Story - The Craft of Open Source - Flagsmith</a>)</p>
 <h2 id="謝辞">謝辞</h2>
