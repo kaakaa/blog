@@ -10,6 +10,7 @@ tags: ["music","recap","2021"]
 
 * メタル民。スラッジ/ドゥーム/サイケな感じが好き。
 * サブスクはApple Music
+* BGMとしてリピートで流し続けることが多いので、再生回数多くなりがち
 
 ## Top 10 Albums
 
@@ -30,7 +31,7 @@ https://Replay.music.apple.com/up
 | 7 | Opeth | In Live Cconcert at the Royal Albert Hall | 2010 | 167 |
 | 8 | 下村陽子 | 聖剣伝説 Legend of Mana (Original Soundtrack) | 2004 | 162 |
 | 9 | Robert Glasper Experiment | Black Radio | 2012 | 155 |
-| 10 | The Album Leaf | In a Safe Place | 2004 |  |
+| 10 | The Album Leaf | In a Safe Place | 2004 | 142 |
 
 2,6のオルゴール系は、子供を寝かしつけるときに流してたもの。  
 Opeth/下村陽子は昔から聴いているBGM。  
@@ -52,7 +53,7 @@ Opeth/下村陽子は昔から聴いているBGM。
 
 ### The Album Leaf
 
-**The Album Leaf**は学生時代に結構聴いていて、ふとしたタイミングで思い出して流してた。好きなアーティストとして名前をあげる事はあまりなかったけど、曲はずっと印象に残ってる。幻想的だけど哀しさ・寂しさみたいなのを感じる。ノスタルジー。
+4位と10位に入ってる。**The Album Leaf**は学生時代に結構聴いていて、ふとしたタイミングで思い出して流してた。好きなアーティストとして名前をあげる事はあまりなかったけど、曲はずっと印象に残ってる。幻想的だけど哀しさ・寂しさみたいなのを感じる。ノスタルジー。
 
 {{< youtube 1jYr2fDgn64 >}}
 
