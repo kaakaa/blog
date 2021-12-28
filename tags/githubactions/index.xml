@@ -14,6 +14,14 @@
 		<atom:link href="/tags/githubactions/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>2021年 音楽振り返り</title>
+			<link>https://blog.kaakaa.dev/post/life/music-2021/</link>
+			<pubDate>Tue, 28 Dec 2021 14:00:05 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/music-2021/</guid>
+			<description>今年聞いた音楽の振り返り。 メタル民。スラッジ/ドゥーム/サイケな感じが好き。 サブスクはApple Music Top 10 Albums Apple Musicでは、1年の間によく聞い</description>
+		</item>
+      	
+		<item>
 			<title>Lessons learned from merging Mattermost instances</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/merge-instances/</link>
 			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Fri, 18 Jun 2021 07:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.36/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/06/16 に Mattermost v5.36.0 がリリースされました。 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。 変更内</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.35の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.35/</link>
-			<pubDate>Tue, 18 May 2021 07:30:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.35/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに (最近Qiitaでの体験があまり良くないので、来月の記事からZennに移行しようと思っています。既存の記事も移行し、</description>
 		</item>
       	
 	</channel>
