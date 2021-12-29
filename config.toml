@@ -80,6 +80,11 @@ tag = "tags"
   icon = "fab fa-twitter fa-lg"
 
 [[params.social_static]]
+  name = "Zenn"
+  url = "https://zenn.dev/kaakaa"
+  icon = "zenn.svg"
+
+[[params.social_static]]
   name = "Qiita"
   url = "https://twitter.com/kaakaa_hoe_prog"
   icon = "qiita.png"
