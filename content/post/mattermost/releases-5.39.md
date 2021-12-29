@@ -61,7 +61,7 @@ Mattermost v6.0へのアップグレード時にDBのマイグレーションが
 
 ---
 
-Extended Support Release (ESR) となっている Mattermost v5.37 は、引き続き2021年年4月までサポートされます。
+Extended Support Release (ESR) となっている Mattermost v5.37 は、引き続き2021年4月までサポートされます。
 
 ## プラグインの更新
 
