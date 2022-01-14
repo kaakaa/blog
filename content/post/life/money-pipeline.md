@@ -8,7 +8,7 @@ tags: ["life","money","pipeline","whimsical"]
 
 ## 背景
 
-以下のPodcastで [@yuya_takeyamaさん](https://yuyat.jp/) が**お金のパイプライン**について話していたのを聴いた
+以下のPodcastで [@yuya_takeyamaさん](https://yuyat.jp/) が**お金のパイプライン**について話していたのを聴いた。
 
 [Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts](https://podcasts.apple.com/us/podcast/managing-money-like-a-ci-cd-pipeline/id1590564888?i=1000541727761)
 
@@ -23,7 +23,7 @@ tags: ["life","money","pipeline","whimsical"]
 
 ![pipeline](https://blog.kaakaa.dev/images/posts/life/money-pipeline.png)
 
-Whimsicalは思い通りにかけて良い感じだった。アイコンもモダンな感じだし、コネクタも扱いやすいので描いてて楽しい。とりあえずPNG形式でExportはできるので、ブログ用にサクッとダイアグラムを描きたいだけの時とかは便利。無償枠だと置けるオブジェクト数に限りがあるけど、個人で使う分にはそんなに問題にならそう。
+Whimsicalはアイコンもモダンな感じだし、コネクタも扱いやすいので描いてて楽しい。PNG形式でExportできるので、ブログ用にサクッとダイアグラムを描きたいだけの時とかは機能的に十分な感じ。無償枠だと置けるオブジェクト数に限りがあるけど、個人で使う分にはそんなに問題にならなそう。
 
 ## 描いてみた感想
 
