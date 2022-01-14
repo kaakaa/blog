@@ -2,25 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.kaakaa.dev/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/life/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/money/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/pipeline/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/whimsical/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/life/money-pipeline/</loc>
+    <lastmod>2022-01-14T18:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://blog.kaakaa.dev/tags/2021/</loc>
     <lastmod>2021-12-28T14:00:05+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/life/music-2021/</loc>
     <lastmod>2021-12-28T14:00:05+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/</loc>
-    <lastmod>2021-12-28T14:00:05+09:00</lastmod>
-  </url><url>
     <loc>https://blog.kaakaa.dev/tags/music/</loc>
     <lastmod>2021-12-28T14:00:05+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/post/</loc>
-    <lastmod>2021-12-28T14:00:05+09:00</lastmod>
-  </url><url>
     <loc>https://blog.kaakaa.dev/tags/recap/</loc>
-    <lastmod>2021-12-28T14:00:05+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/</loc>
     <lastmod>2021-12-28T14:00:05+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/advent-calendar/</loc>
@@ -54,9 +69,6 @@
     <lastmod>2021-10-19T22:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/baby/</loc>
-    <lastmod>2021-10-08T00:19:05+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/life/</loc>
     <lastmod>2021-10-08T00:19:05+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/life/life-with-baby/</loc>

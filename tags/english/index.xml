@@ -14,6 +14,14 @@
 		<atom:link href="/tags/english/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Whimsicalでお金のパイプラインを描いてみた</title>
+			<link>https://blog.kaakaa.dev/post/life/money-pipeline/</link>
+			<pubDate>Fri, 14 Jan 2022 18:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/money-pipeline/</guid>
+			<description>背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパイ</description>
+		</item>
+      	
+		<item>
 			<title>2021年 音楽振り返り</title>
 			<link>https://blog.kaakaa.dev/post/life/music-2021/</link>
 			<pubDate>Tue, 28 Dec 2021 14:00:05 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 17 Jul 2021 13:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/07/16 に Mattermost v5.37.0 がリリースされました。 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。 変更内</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.36の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.36/</link>
-			<pubDate>Fri, 18 Jun 2021 07:30:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.36/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/06/16 に Mattermost v5.36.0 がリリースされました。 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。 変更内</description>
 		</item>
       	
 	</channel>

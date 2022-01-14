@@ -1,0 +1,97 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>pipeline on kaakaa blog</title>
+		<link>https://blog.kaakaa.dev/tags/pipeline/</link>
+		<description>Recent content in pipeline </description>
+		<generator>Hugo -- gohugo.io</generator>
+		
+  		<language>ja-JP</language>
+		
+		<managingEditor>Page(/tags/pipeline) (Yusuke Nemoto)</managingEditor>
+    	
+  		<lastBuildDate>Fri, 14 Jan 2022 18:00:00 +0900</lastBuildDate>
+		
+		<atom:link href="/tags/pipeline/" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Whimsicalでお金のパイプラインを描いてみた</title>
+			<link>https://blog.kaakaa.dev/post/life/money-pipeline/</link>
+			<pubDate>Fri, 14 Jan 2022 18:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/money-pipeline/</guid>
+			<description>背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパイ</description>
+		</item>
+      	
+		<item>
+			<title>2021年 音楽振り返り</title>
+			<link>https://blog.kaakaa.dev/post/life/music-2021/</link>
+			<pubDate>Tue, 28 Dec 2021 14:00:05 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/music-2021/</guid>
+			<description>今年聞いた音楽の振り返り。 メタル民。スラッジ/ドゥーム/サイケな感じが好き。 サブスクはApple Music BGMとしてリピートで流し続けることが多い</description>
+		</item>
+      	
+		<item>
+			<title>Lessons learned from merging Mattermost instances</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/merge-instances/</link>
+			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/merge-instances/</guid>
+			<description>この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.2の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</link>
+			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.2/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/12/16 に Mattermost のメジャーバージョンアップである v6.2.0 がリリースされました。 また、2</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.1の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</link>
+			<pubDate>Fri, 19 Nov 2021 17:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.1/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2021/11/16 に Mattermost のメジャーバージョンアップである v6.1.0 がリリースされました。 本記事は</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.0の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</link>
+			<pubDate>Tue, 19 Oct 2021 22:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/10/13 に Mattermost のメジャーバージョンアップである v6.0.0 がリリースされました。 また、10/18にMedium Level Security Fixを含む v6.0.1 がリリ</description>
+		</item>
+      	
+		<item>
+			<title>第二子出産に伴う育児休職を取得したので雑感</title>
+			<link>https://blog.kaakaa.dev/post/life/life-with-baby/</link>
+			<pubDate>Fri, 08 Oct 2021 00:19:05 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/life-with-baby/</guid>
+			<description>この記事は、子育てに関する有用な知見や耳寄りな情報があるわけでもなく、単に記録として書いているだけのものです。 はじめに 8月下旬に第二子となる</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 5.39の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</link>
+			<pubDate>Fri, 17 Sep 2021 11:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/09/16 に Mattermost v5.39.0 がリリースされました。 v5.39はいつものような Feature Release ではなく、Quality Releaseとなっているため、</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 5.38の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</link>
+			<pubDate>Sat, 21 Aug 2021 00:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 5.37の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</link>
+			<pubDate>Sat, 17 Jul 2021 13:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/07/16 に Mattermost v5.37.0 がリリースされました。 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。 変更内</description>
+		</item>
+      	
+	</channel>
+</rss>

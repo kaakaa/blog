@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Whimsicalでお金のパイプラインを描いてみた</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Whimsicalでお金のパイプラインを描いてみた"/>
+<meta name="twitter:description" content="背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパイ"/>
+
+
+  <meta property="og:title" content="Whimsicalでお金のパイプラインを描いてみた" />
+<meta property="og:description" content="背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパイ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/life/money-pipeline/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-01-14T18:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-01-14T18:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Whimsicalでお金のパイプラインを描いてみた
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Jan 14, 2022
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景">背景</a></li>
+    <li><a href="#パイプライン">パイプライン</a></li>
+    <li><a href="#描いてみた感想">描いてみた感想</a></li>
+  </ul>
+</nav><h2 id="背景">背景</h2>
+<p>以下のPodcastで <a href="https://yuyat.jp/">@yuya_takeyamaさん</a> が<strong>お金のパイプライン</strong>について話していたのを聴いた</p>
+<p><a href="https://podcasts.apple.com/us/podcast/managing-money-like-a-ci-cd-pipeline/id1590564888?i=1000541727761">Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts</a></p>
+<p><strong>お金のパイプライン</strong>とは、ざっくりいうと自分を取り巻くお金の流れをCI/CDパイプラインのように考えようというもの。</p>
+<p>自分は、クレカ作成や投資や公共料金の払込みなど、イベント発生した時に調べてやりはするけど、見直すのは気が向いたときに〜みたいな感じだったので、どこでどう支払いが繋がっているのかなどは都度調べないと思い出せないような状態だった。
+ちょうど年末年始に子供の口座を作るイベントが発生するなど、諸々の資産管理を見直そうと思っていたところだったので、ついでにパイプラインを描いてみようと思った。</p>
+<h2 id="パイプライン">パイプライン</h2>
+<p>チキンなので具体名は載せないけど、<a href="https://whimsical.com/">Whimsical</a>使ってこんなふうに描いてみた。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/life/money-pipeline.png" alt="pipeline"></p>
+<p>Whimsicalは思い通りにかけて良い感じだった。アイコンもモダンな感じだし、コネクタも扱いやすいので描いてて楽しかった。とりあえずPNG形式でExportはできるので、ブログ用にサクッとダイアグラムを描きたいだけの時とかは便利そう。無償枠だと置けるオブジェクト数に限りがあるけど、個人で使う分にはそんなに問題にならなそう。</p>
+<h2 id="描いてみた感想">描いてみた感想</h2>
+<p>パイプラインとして可視化することで「ここはこの金融機関にした方が繋げやすそう」とか「ここの支払いこっちでやった方が良いじゃん」とかが見えてくるので体験として良かった。
+また、Whimsicalでは、各オブジェクトにコメントを書くことが出来るため、「そのオブジェクトに求められる要件」みたいなのを書いておくことで、後々サービスの改悪などで移行が必要になった場合に便利になりそうという期待もある。</p>
+<p>あと、家庭における支払いはだいたい自分が担当しているのだけど、自分にもしものことがあったときのためにお金の流れを可視化しておくのは良いと思った。リストよりフローの方がどこから対処したら良いか分かり易いだろうし(これはCIパイプラインとか普段から考えてる職業だからかもしれない)。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/life/"
+              >life</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/money/"
+              >money</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/pipeline/"
+              >pipeline</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/whimsical/"
+              >whimsical</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
+        <img
+          src="https://blog.kaakaa.dev/images/zenn.svg"
+          alt="Zenn"
+        />
+      </a>
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2022
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
