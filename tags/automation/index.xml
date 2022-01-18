@@ -14,6 +14,14 @@
 		<atom:link href="/tags/automation/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 6.3の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.3/</link>
+			<pubDate>Tue, 18 Jan 2022 18:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.3/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/01/14 に Mattermost の新しいバージョン v6.3.0 がリリースされました。 本バージョンはExte</description>
+		</item>
+      	
+		<item>
 			<title>Whimsicalでお金のパイプラインを描いてみた</title>
 			<link>https://blog.kaakaa.dev/post/life/money-pipeline/</link>
 			<pubDate>Fri, 14 Jan 2022 18:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 21 Aug 2021 00:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.37の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</link>
-			<pubDate>Sat, 17 Jul 2021 13:30:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.37/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/07/16 に Mattermost v5.37.0 がリリースされました。 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。 変更内</description>
 		</item>
       	
 	</channel>
