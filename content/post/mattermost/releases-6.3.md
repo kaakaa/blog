@@ -104,6 +104,7 @@ Board機能が正式にGeneral Availability(GA)な機能となりました。
 2021年中にMattermostへ貢献をした3,400名のうち、目立った貢献をしたコントリビューターを表彰するMattermost Community Awardsに **Top Overall Mattermost Contributors** として選出していだだきました。
 
 > Yusuke Nemoto
+> 
 > Yusuke is proof that you can have a huge impact on an open source community without contributing large volumes of code. To start, he’s our unofficial Japanese diplomat and has been at the center of our community growth in Japanese audiences. He dedicates considerable time to maintaining Japanese translations of Mattermost release announcements on his personal blog and is highly active in our localization community for Japanese translations. He’s also active on social media, where he maintains our community-run Japanese Twitter account. All the while, Yusuke contributes code to multiple Mattermost repos regularly.
 
 ## おわりに
