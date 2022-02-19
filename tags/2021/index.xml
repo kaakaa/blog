@@ -14,6 +14,14 @@
 		<atom:link href="/tags/2021/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 6.4の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.4/</link>
+			<pubDate>Sat, 19 Feb 2022 17:40:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.4/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/02/16 に Mattermost の新しいバージョン v6.4.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 6.3の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.3/</link>
 			<pubDate>Tue, 18 Jan 2022 18:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Fri, 17 Sep 2021 11:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.39/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/09/16 に Mattermost v5.39.0 がリリースされました。 v5.39はいつものような Feature Release ではなく、Quality Releaseとなっているため、</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 5.38の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</link>
-			<pubDate>Sat, 21 Aug 2021 00:30:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-5.38/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/08/16 に Mattermost v5.38.0 がリリースされました。 その後、2021/08/18 に 同梱されているMattermost Playbook (旧: Mattermost Incident Collaboration) v1.16.0 がイン</description>
 		</item>
       	
 	</channel>
