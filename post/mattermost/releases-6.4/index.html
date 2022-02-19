@@ -180,7 +180,7 @@
     <li><a href="#その他の変更">その他の変更</a></li>
     <li><a href="#その他のトピック">その他のトピック</a>
       <ul>
-        <li><a href="#7-steps-to-chatops-for-enterprise-teamshttpsmattermostcomchatops-guide"><a href="https://mattermost.com/chatops-guide/#">7 Steps to ChatOps for Enterprise Teams</a></a></li>
+        <li><a href="#chatops導入ガイドの公開">ChatOps導入ガイドの公開</a></li>
       </ul>
     </li>
     <li><a href="#おわりに">おわりに</a></li>
@@ -204,42 +204,40 @@
 <li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
 </ul>
 <h2 id="channels-mattermost-cloudからの新しい移行方法">Channels: Mattermost Cloudからの新しい移行方法</h2>
-<p>Mattermost Cloud上のデータをセルフホストのMattermostインスタンスへ移行する場合の新しいプロセスが公開されました。<code>mmctl</code>コマンドを利用したデータ移行方法となっているようです。</p>
+<p>Mattermost Cloud上のデータをセルフホストのMattermostインスタンスへ移行する場合の新しいプロセスが公開されました。<code>mmctl</code>コマンドを利用したデータ移行方法となっており、セルフホストのMattermostインスタンスのデータをMattermost Cloudへ移行する方法も今後同じページで公開されるようです。</p>
 <p><a href="https://docs.mattermost.com/manage/cloud-data-export.html">Mattermost Workspace Migration</a></p>
-<p>セルフホストのMattermostインスタンスのデータをMattermost Cloudへ移行する方法も今後同じページで公開されるようです。</p>
-<p>また、Mattermost Cloudへの移行をサポートするツールとして、新たにAWAT (= Automatic Workspace Archive Translator) というツールが公開されています。
+<p>また、Mattermost Cloudへの移行をサポートするツールとして、新たにAWAT (= Automatic Workspace Archive Translator) というツールが公開されています。<br>
 <a href="https://github.com/mattermost/awat">https://github.com/mattermost/awat</a></p>
-<p>これは、セルフホストのMattermostだけでなく、Slackのワークスペース情報などもMattermost Cloudのデータ形式に翻訳して移行をサポートするツールのようです。</p>
+<p>これは、セルフホストのMattermostだけでなく、Slackのワークスペース情報などもMattermost Cloudのデータ形式に翻訳した上で移行するなど、Mattermostインスタンスの移行をサポートするツールのようです。</p>
 <h2 id="playbooks-teamstarter-editionでもplaybookを無制限に作成可能に">Playbooks: Team/Starter EditionでもPlaybookを無制限に作成可能に</h2>
 <p>Mattermost v6.0でMattermostの機能として提供されるようになったPlaybooksの機能ですが、無償版のユーザーはPlaybookを一つしか作成できないよう制限されていました。
 しかし、ユーザーからのフィードバックを受け、v6.4からは無償版のユーザーでもPlaybooksを無制限に作成できるようになりました。</p>
-<p>この変更を受けてか、Playbooks機能をソフトウェア開発のなかでどのように利用しているかについて記事を書いてくれる人を探すWritingキャンペーンを開始しています。
-<a href="https://mattermost.com/blog/write-about-mattermost-playbooks/">Get Paid to Write About Mattermost Playbooks - Mattermost</a></p>
+<p>この変更を受けてか、Playbooks機能を利用事例に関する記事執筆を求めるWritingキャンペーンを開始しています。</p>
+<p><a href="https://mattermost.com/blog/write-about-mattermost-playbooks/">Get Paid to Write About Mattermost Playbooks - Mattermost</a></p>
 <h2 id="boards-テンプレートプレビュー">Boards: テンプレートプレビュー</h2>
-<p>Board作成時にBoardのテンプレートを選択することができますが、テンプレート選択時にそのテンプレートの内容をプレビューできるようになりました。
-これにより、よりプロジェクトに適したBoardを選択しやすくなります。</p>
+<p>Boardを新規に作成する際にBoardのテンプレートを選択することができますが、このテンプレートを選択する画面が新しくなり、テンプレートの内容をプレビューできるようになりました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-template.png" alt="boards-template"></p>
-<p>また、デフォルトで選択できるBoardテンプレートが刷新され、また、新しいテンプレートも追加されまsあ。</p>
+<p>また、デフォルトで選択できるBoardテンプレートの内容が刷新され、さらに新しいテンプレートも追加されています。</p>
 <h2 id="boards-画像を含む新たなアーカイブ形式">Boards: 画像を含む新たなアーカイブ形式</h2>
-<p>Boardの内容をエクスポートした際に、カードに添付された画像データなどもエクスポートファイル含まれるようになりました。
-また、エクスポートファイルの拡張子が <code>.focalboard</code> から <code>.boardarchive</code> に変更されました。古い <code>.focalboard</code> という拡張子でエクスポートされデータは、現時点ではインポートできますが、今後のバージョンでインポートできなくなる予定です。</p>
+<p>Boardの内容をエクスポートした際に、カードに添付された画像データなどもエクスポートファイルに含まれるようになりました。
+また、エクスポートファイルの拡張子が <code>.focalboard</code> から <code>.boardarchive</code> に変更されました。古い <code>.focalboard</code> という拡張子でエクスポートされデータも現時点ではインポートすることが可能ですが、今後のバージョンでインポートできなくなる予定です。</p>
 <h2 id="boards-カードバッジ">Boards: カードバッジ</h2>
-<p>カード内に説明やコメント、チェックリストなどが存在する場合、Board画面にカードバッジとして表示されるようになり、カードを開くことなく概要を確認することができるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-card-badge.png" alt="boards-card-badge"></p>
-<p>カードバッジはBoardの<strong>プロパティ &gt; Comments and Description</strong> で表示/非表示を切り替えることができます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-show-badge.png" alt="boards-show-badge"></p>
+<p>カード内に説明やコメント、チェックリストなどが存在する場合、Board画面でカードバッジとして表示されるようになり、カードを開くことなく概要を確認することができるようになりました。<br>
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-card-badge.png" alt="boards-card-badge"></p>
+<p>カードバッジはBoardの<strong>プロパティ &gt; Comments and Description</strong> で表示/非表示を切り替えることができます。<br>
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-show-badge.png" alt="boards-show-badge"></p>
 <h2 id="boards-urlプロパティの改善">Boards: URLプロパティの改善</h2>
-<p>URLプロパティを設定した場合、そのURLリンクを開くためには小さなリンクアイコンをクリックしなけれなりませんでしたが、本バージョンからURL文字列全体がリンクとしてクリックできるようになりました。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-url.png" alt="boards-url"></p>
+<p>URLプロパティを設定した場合、そのURLリンクを開くためには小さなリンクアイコンをクリックしなけれなりませんでしたが、本バージョンからURL文字列全体がリンクとしてクリックできるようになりました。<br>
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-url.png" alt="boards-url"></p>
 <h2 id="boards-カードの説明にgifが利用可能に">Boards: カードの説明にGIFが利用可能に</h2>
 <p>カードの概要にアニメーションGIFを利用することできるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-agif.gif" alt="boards-agif"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-agif.gif" alt="boards-agif"></p>
 <h2 id="その他の変更">その他の変更</h2>
 <ul>
 <li><strong>アカウント設定</strong>というメニューは無くなり、<strong>設定</strong>という名前になりました</li>
 </ul>
 <h2 id="その他のトピック">その他のトピック</h2>
-<h3 id="7-steps-to-chatops-for-enterprise-teamshttpsmattermostcomchatops-guide"><a href="https://mattermost.com/chatops-guide/#">7 Steps to ChatOps for Enterprise Teams</a></h3>
+<h3 id="chatops導入ガイドの公開">ChatOps導入ガイドの公開</h3>
 <p>Mattermostから、エンタープライズチームにChatOpsを導入するための7つのステップが公開されました。</p>
 <p><a href="https://mattermost.com/chatops-guide/#step-6-build-smarter-bots-and-workflows">7 Steps to ChatOps for Enterprise Teams - Mattermost</a></p>
 <p>Mattermostの機能や実際の事例と絡めながら、ChatOpsを組織に導入するステップが説明されています。</p>
