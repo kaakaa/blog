@@ -47,65 +47,62 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## Channels: Mattermost Cloudからの新しい移行方法
 
-Mattermost Cloud上のデータをセルフホストのMattermostインスタンスへ移行する場合の新しいプロセスが公開されました。`mmctl`コマンドを利用したデータ移行方法となっているようです。
+Mattermost Cloud上のデータをセルフホストのMattermostインスタンスへ移行する場合の新しいプロセスが公開されました。`mmctl`コマンドを利用したデータ移行方法となっており、セルフホストのMattermostインスタンスのデータをMattermost Cloudへ移行する方法も今後同じページで公開されるようです。
 
 [Mattermost Workspace Migration](https://docs.mattermost.com/manage/cloud-data-export.html)
 
-セルフホストのMattermostインスタンスのデータをMattermost Cloudへ移行する方法も今後同じページで公開されるようです。
-
-また、Mattermost Cloudへの移行をサポートするツールとして、新たにAWAT (= Automatic Workspace Archive Translator) というツールが公開されています。
+また、Mattermost Cloudへの移行をサポートするツールとして、新たにAWAT (= Automatic Workspace Archive Translator) というツールが公開されています。  
 https://github.com/mattermost/awat
 
-これは、セルフホストのMattermostだけでなく、Slackのワークスペース情報などもMattermost Cloudのデータ形式に翻訳して移行をサポートするツールのようです。
+これは、セルフホストのMattermostだけでなく、Slackのワークスペース情報などもMattermost Cloudのデータ形式に翻訳した上で移行するなど、Mattermostインスタンスの移行をサポートするツールのようです。
 
 ## Playbooks: Team/Starter EditionでもPlaybookを無制限に作成可能に
 
 Mattermost v6.0でMattermostの機能として提供されるようになったPlaybooksの機能ですが、無償版のユーザーはPlaybookを一つしか作成できないよう制限されていました。
 しかし、ユーザーからのフィードバックを受け、v6.4からは無償版のユーザーでもPlaybooksを無制限に作成できるようになりました。
 
-この変更を受けてか、Playbooks機能をソフトウェア開発のなかでどのように利用しているかについて記事を書いてくれる人を探すWritingキャンペーンを開始しています。
+この変更を受けてか、Playbooks機能を利用事例に関する記事執筆を求めるWritingキャンペーンを開始しています。
+
 [Get Paid to Write About Mattermost Playbooks \- Mattermost](https://mattermost.com/blog/write-about-mattermost-playbooks/)
 
 ## Boards: テンプレートプレビュー
 
-Board作成時にBoardのテンプレートを選択することができますが、テンプレート選択時にそのテンプレートの内容をプレビューできるようになりました。
-これにより、よりプロジェクトに適したBoardを選択しやすくなります。
+Boardを新規に作成する際にBoardのテンプレートを選択することができますが、このテンプレートを選択する画面が新しくなり、テンプレートの内容をプレビューできるようになりました。
 
 ![boards-template](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-template.png)
 
-また、デフォルトで選択できるBoardテンプレートが刷新され、また、新しいテンプレートも追加されまsあ。
+また、デフォルトで選択できるBoardテンプレートの内容が刷新され、さらに新しいテンプレートも追加されています。
 
 ## Boards: 画像を含む新たなアーカイブ形式
 
-Boardの内容をエクスポートした際に、カードに添付された画像データなどもエクスポートファイル含まれるようになりました。
-また、エクスポートファイルの拡張子が `.focalboard` から `.boardarchive` に変更されました。古い `.focalboard` という拡張子でエクスポートされデータは、現時点ではインポートできますが、今後のバージョンでインポートできなくなる予定です。
+Boardの内容をエクスポートした際に、カードに添付された画像データなどもエクスポートファイルに含まれるようになりました。
+また、エクスポートファイルの拡張子が `.focalboard` から `.boardarchive` に変更されました。古い `.focalboard` という拡張子でエクスポートされデータも現時点ではインポートすることが可能ですが、今後のバージョンでインポートできなくなる予定です。
 
 ## Boards: カードバッジ
 
-カード内に説明やコメント、チェックリストなどが存在する場合、Board画面にカードバッジとして表示されるようになり、カードを開くことなく概要を確認することができるようになりました。
+カード内に説明やコメント、チェックリストなどが存在する場合、Board画面でカードバッジとして表示されるようになり、カードを開くことなく概要を確認することができるようになりました。  
+![boards-card-badge](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-card-badge.png)
 
-![boards-card-badge](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-card-badge.png)
-
-カードバッジはBoardの**プロパティ > Comments and Description** で表示/非表示を切り替えることができます。
-![boards-show-badge](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-show-badge.png)
+カードバッジはBoardの**プロパティ > Comments and Description** で表示/非表示を切り替えることができます。  
+![boards-show-badge](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-show-badge.png)
 
 ## Boards: URLプロパティの改善
 
-URLプロパティを設定した場合、そのURLリンクを開くためには小さなリンクアイコンをクリックしなけれなりませんでしたが、本バージョンからURL文字列全体がリンクとしてクリックできるようになりました。
-![boards-url](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-url.png)
+URLプロパティを設定した場合、そのURLリンクを開くためには小さなリンクアイコンをクリックしなけれなりませんでしたが、本バージョンからURL文字列全体がリンクとしてクリックできるようになりました。  
+![boards-url](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-url.png)
 
 ## Boards: カードの説明にGIFが利用可能に
 
 カードの概要にアニメーションGIFを利用することできるようになりました。
 
-![boards-agif](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.3/boards-agif.gif)
+![boards-agif](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.4/boards-agif.gif)
 
 ## その他の変更
 * **アカウント設定**というメニューは無くなり、**設定**という名前になりました
 
 ## その他のトピック
 
-### [7 Steps to ChatOps for Enterprise Teams](https://mattermost.com/chatops-guide/#)
+### ChatOps導入ガイドの公開
 
 Mattermostから、エンタープライズチームにChatOpsを導入するための7つのステップが公開されました。
 
