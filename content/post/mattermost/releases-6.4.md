@@ -61,7 +61,7 @@ https://github.com/mattermost/awat
 Mattermost v6.0でMattermostの機能として提供されるようになったPlaybooksの機能ですが、無償版のユーザーはPlaybookを一つしか作成できないよう制限されていました。
 しかし、ユーザーからのフィードバックを受け、v6.4からは無償版のユーザーでもPlaybooksを無制限に作成できるようになりました。
 
-この変更を受けてか、Playbooks機能を利用事例に関する記事執筆を求めるWritingキャンペーンを開始しています。
+この変更を受けてか、Playbooks機能を利用した事例に関する記事執筆を求めるWritingキャンペーンを開始しています。
 
 [Get Paid to Write About Mattermost Playbooks \- Mattermost](https://mattermost.com/blog/write-about-mattermost-playbooks/)
 
