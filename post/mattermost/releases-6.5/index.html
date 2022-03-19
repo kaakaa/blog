@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost 6.5の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-57299975-4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-57299975-4');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost 6.5の新機能"/>
+<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/03/16 に Mattermost の新しいバージョン v6.5.0 がリリースされました。 本記事は、個人的に気に"/>
+
+
+  <meta property="og:title" content="Mattermost 6.5の新機能" />
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/03/16 に Mattermost の新しいバージョン v6.5.0 がリリースされました。 本記事は、個人的に気に" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-6.5/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-03-19T12:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-03-19T12:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost 6.5の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Mar 19, 2022
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href="https://twitter.com/mattermost_jp?lang=ja">Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id="はじめに">はじめに</h1>
+<p>2022/03/16 に Mattermost の新しいバージョン <code>v6.5.0</code> がリリースされました。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/">Mattermost v6.5 is now available - Upgrade your deployment today</a></li>
+<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v6-5-feature-release">Mattermost Self-Hosted Changelog</a></li>
+</ul>
+<hr>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#アップグレード時の注意事項httpsdocsmattermostcomupgradeimportant-upgrade-noteshtml"><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">アップグレード時の注意事項</a></a></li>
+    <li><a href="#enterpriseprofessiona-channels-カスタムグループ-ベータ版httpsmattermostcomblogmattermost-v6-5-is-now-availablegroups">(Enterprise/Professiona) <a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#groups">Channels: カスタムグループ (ベータ版)</a></a></li>
+    <li><a href="#channels-チーム横断的なチャンネル移動が可能にhttpsmattermostcomblogmattermost-v6-5-is-now-availablecross"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#cross">Channels: チーム横断的なチャンネル移動が可能に</a></a></li>
+    <li><a href="#playbooks-複製インポートエクスポートhttpsmattermostcomblogmattermost-v6-5-is-now-availableplaybooks"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#playbooks">Playbooks: 複製、インポート、エクスポート</a></a></li>
+    <li><a href="#boards-共有機能のui改善httpsmattermostcomblogmattermost-v6-5-is-now-availableshare"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#share">Boards: 共有機能のUI改善</a></a></li>
+    <li><a href="#boards-チャンネルイントロにboardへのリンクが表示されるようにhttpsmattermostcomblogmattermost-v6-5-is-now-availableintro"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#intro">Boards: チャンネルイントロにBoardへのリンクが表示されるように</a></a></li>
+    <li><a href="#boards-インポート機能のドキュメントへのリンクhttpsmattermostcomblogmattermost-v6-5-is-now-availablehelp"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#help">Boards: インポート機能のドキュメントへのリンク</a></a></li>
+    <li><a href="#integration-統合機能">Integration: 統合機能</a>
+      <ul>
+        <li><a href="#atlassian-bitbucket-cloud-pluginhttpsmattermostcomblogmattermost-v6-5-is-now-availablebitbucket"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#bitbucket">Atlassian Bitbucket Cloud Plugin</a></a></li>
+        <li><a href="#configuration-wizardhttpsmattermostcomblogmattermost-v6-5-is-now-availableconfiguration"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#configuration">Configuration Wizard</a></a></li>
+        <li><a href="#github-plugin-v21httpsmattermostcomblogmattermost-v6-5-is-now-availablegithub"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#github">GitHub Plugin v2.1</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#platform">Platform</a>
+      <ul>
+        <li><a href="#ワークスペースの最適化httpsmattermostcomblogmattermost-v6-5-is-now-availableworkspace"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#workspace">ワークスペースの最適化</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#onboarding-tourの改善httpsmattermostcomblogmattermost-v6-5-is-now-availableonboarding"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#onboarding">Onboarding tourの改善</a></a></li>
+    <li><a href="#その他の変更">その他の変更</a></li>
+    <li><a href="#その他のトピック">その他のトピック</a>
+      <ul>
+        <li><a href="#go-conference-jp">Go Conference JP</a></li>
+        <li><a href="#boardsのコメント欄に日本語を入力できない問題">Boardsのコメント欄に日本語を入力できない問題</a></li>
+        <li><a href="#ロシアベラルーシを輸出禁止国に追加">ロシア/ベラルーシを輸出禁止国に追加</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav><h2 id="アップグレード時の注意事項httpsdocsmattermostcomupgradeimportant-upgrade-noteshtml"><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">アップグレード時の注意事項</a></h2>
+<p>DB Versionを利用しない実装になったことにより、CLIコマンド<code>mattermost version</code>の実行結果にデータベースのバージョンが含まれなくなりました（今までのバージョンでは実行結果に<code>DB Version: 6.5.0</code>のようにDBのバージョンも出力されていました）。また、<code>mattermost version</code>がDBとのやり取りを行わなくなり、DBマイグレーションも実行しなくなったため、DBマイグレーションを行うための新たなコマンド <code>mattermost db migrate</code>が追加されました。<a href="https://github.com/mattermost/mattermost-server/pull/19364">Issue</a></p>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href="https://mattermost.com/pricing/">Professional</a></li>
+<li><a href="https://mattermost.com/pricing/">Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Starter(OSS 版)でも利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/guides/channels.html">Channels</a>: 従来のチャット機能</li>
+<li><a href="https://docs.mattermost.com/guides/playbooks.html">Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
+</ul>
+<h2 id="enterpriseprofessiona-channels-カスタムグループ-ベータ版httpsmattermostcomblogmattermost-v6-5-is-now-availablegroups">(Enterprise/Professiona) <a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#groups">Channels: カスタムグループ (ベータ版)</a></h2>
+<p>複数のユーザーにメンションを送信する際に利用できる<strong>カスタムグループ</strong>を作成できるようになりました。例えば、<code>developer</code>というグループを作成し、そのグループにユーザーを追加しておくと、<code>@developer</code>というメンションで、グループ内の全員にメンションすることができます。　<br>
+今までのバージョンでもAD/LDAP連携を設定している場合は<a href="https://docs.mattermost.com/channels/mention-people.html#groupname">LDAP上で設定されたグループに対してメンションを送る機能</a>はありましたが、今回追加されたカスタムグループの機能によりAD/LDAP連携を行なっていなくてもグループメンションが利用できるようになりました。</p>
+<p>カスタムグループの作成はMattermost UIのProduct Menuから行うことができます。操作概要については、公式リリースブログの <code>Channels: Custom groups (Beta)</code> セクションの動画を参照ください。</p>
+<p><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#groups">Mattermost v6.5 is now available - Upgrade your deployment today</a></p>
+<p>また、スラッシュコマンド<code>/invite</code>で、ユーザーをグループに追加することもできます。</p>
+<p>カスタムグループ機能について、詳しくは以下のドキュメントを参照ください。</p>
+<p><a href="https://docs.mattermost.com/welcome/manage-custom-groups.html">Manage Custom Groups</a></p>
+<h2 id="channels-チーム横断的なチャンネル移動が可能にhttpsmattermostcomblogmattermost-v6-5-is-now-availablecross"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#cross">Channels: チーム横断的なチャンネル移動が可能に</a></h2>
+<p><code>Ctrl + k</code> のショートカットで開くことができるチャンネル検索ダイアログで、他のチームのチャンネルも横断的に検索できるようになりました。
+今までのバージョンでは、チャンネル検索ダイアログで検索できるチャンネルは現在アクセスしているチームのチャンネルのみに限定されていましたが、今回のバージョンより参加したことのあるチャンネルであればチームに関係なく検索することができるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/channels-cross-team.png" alt="channels-cross-team"></p>
+<p>検索結果のチャンネル名の右側にチーム名が表示されます。</p>
+<h2 id="playbooks-複製インポートエクスポートhttpsmattermostcomblogmattermost-v6-5-is-now-availableplaybooks"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#playbooks">Playbooks: 複製、インポート、エクスポート</a></h2>
+<p>既存のPlaybookを複製することができるようになりました。</p>
+<p>また、Playbook内容をJSON形式でエクスポートできるようになり、Playbookのバックアップや、インポート機能と組み合わせて別のMattermostインスタンスへのPlaybookの移行などが実施できるようになりましたう。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/playbooks-duplicate.png" alt="playbooks-duplicate"></p>
+<p><code>複製</code>メニューをクリックすると、<code>Copy of ${Playbook名}</code> という名前のPlaybookが新たに作成されます。</p>
+<h2 id="boards-共有機能のui改善httpsmattermostcomblogmattermost-v6-5-is-now-availableshare"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#share">Boards: 共有機能のUI改善</a></h2>
+<p>Boardsの共有リンクを取得する際のUIが改善されました。</p>
+<p>まず、Board画面に共有（Share）ボタンが表示されるようになりました。（今までは、オプションメニュー内に表示されていました）</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-share.png" alt="boards-share"></p>
+<p>また、リンクを生成する際に、Mattermostユーザー向けの内部リンクを作成する画面と、MattermostユーザーアカウントがなくてもBoardの内容が確認できる読取専用の公開リンクを作成する画面が別画面になりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-share-internal.png" alt="boards-share-internal"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-share-publish.png" alt="boards-share-publish"></p>
+<h2 id="boards-チャンネルイントロにboardへのリンクが表示されるようにhttpsmattermostcomblogmattermost-v6-5-is-now-availableintro"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#intro">Boards: チャンネルイントロにBoardへのリンクが表示されるように</a></h2>
+<p>チャンネル作成時に一番最初に表示されるテキストにBoardへのリンクが含まれるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-intro-link.png" alt="boards-intro-link"></p>
+<h2 id="boards-インポート機能のドキュメントへのリンクhttpsmattermostcomblogmattermost-v6-5-is-now-availablehelp"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#help">Boards: インポート機能のドキュメントへのリンク</a></h2>
+<p>Trello・Jira・NotionなどのツールからBoardsへデータをインポートする際の手順に関するドキュメントへのリンクが追加されました。<br>
+Boardsの設定メニューから表示することができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-import-link.png" alt="boards-import-link"></p>
+<p>他ツールからBoardsへのインポート機能について、詳しくは以下のリンク先を参照してください。
+<a href="https://docs.mattermost.com/boards/data-and-archives.html#import-your-data">Import your data</a></p>
+<h2 id="integration-統合機能">Integration: 統合機能</h2>
+<p>Mattermostを他機能を連携させる統合機能について、いくつかのアップデートがあります。</p>
+<h3 id="atlassian-bitbucket-cloud-pluginhttpsmattermostcomblogmattermost-v6-5-is-now-availablebitbucket"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#bitbucket">Atlassian Bitbucket Cloud Plugin</a></h3>
+<p>Atlassian社のGitリポジトリ管理ツールであるBitbuket CloudとMattermostを連携させる統合機能がリリースされています。</p>
+<p>毎日Mattermostへログインした際にBitbucket　Cloud内で行われた重要な活動が通知される機能や、Bitbucket Cloud内であなたがメンションされたことをMattermostのDMで通知してくれる機能などが利用できるようになります。  また、PRのリストが常にMattermostのサイドバーに表示されるようになります。</p>
+<p>インストール方法など、詳しくは以下のリンク先を参照してください。<br>
+<a href="https://mattermost.gitbook.io/bitbucket-plugin/">Mattermost/Bitbucket Plugin - BitBucket Plugin</a></p>
+<h3 id="configuration-wizardhttpsmattermostcomblogmattermost-v6-5-is-now-availableconfiguration"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#configuration">Configuration Wizard</a></h3>
+<p>いくつかの統合機能は、インストール後にセットアップ手順を実行する必要があります。
+いくつかの統合機能について、このセットアップ手順がプラグインインストール時にMattermostのDMとして投稿されるようになりました。これにより、外部サイトを参照しながらセットアップを行う必要がなくなります。(<a href="https://github.com/mattermost/mattermost-plugin-github/releases/tag/v2.1.0">Mattermost GitHub Plugin v2.1.0</a>で試してみましたが、うまく動作しませんでした)</p>
+<h3 id="github-plugin-v21httpsmattermostcomblogmattermost-v6-5-is-now-availablegithub"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#github">GitHub Plugin v2.1</a></h3>
+<p>Mattermost GitHub Plugin v2.1がリリースされました。</p>
+<p>MattermostのメッセージからGitHubにIssueを作成する際に利用できる <code>Create Issue in GitHub</code> メニューなどが追加されています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/integrations-github.png" alt="integrations-github"></p>
+<p>変更点について詳しくはリリースノートを参照してください。</p>
+<p><a href="https://github.com/mattermost/mattermost-plugin-github/releases/tag/v2.1.0">Release v2.1.0 · mattermost/mattermost-plugin-github</a></p>
+<h2 id="platform">Platform</h2>
+<p>Mattermostインスタンス全体 (Platform) についても、いくつか更新点があります。</p>
+<h3 id="ワークスペースの最適化httpsmattermostcomblogmattermost-v6-5-is-now-availableworkspace"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#workspace">ワークスペースの最適化</a></h3>
+<p>運用中のMattermostインスタンスが最適な設定で運用されているかどうかを判定し、最適でない場合にどのように変更すべきかを提案するダッシュボード機能が追加されました。
+<strong>システムコンソール &gt; ワークスペースの最適化</strong>から確認することができます。（手元の環境ではメニューが表示されませんでした&hellip;）</p>
+<p>詳しくは、以下の公式ドキュメントを参照してください。
+<a href="https://docs.mattermost.com/configure/optimize-your-workspace.html?highlight=optimization">Optimize Your Mattermost Workspace</a></p>
+<h2 id="onboarding-tourの改善httpsmattermostcomblogmattermost-v6-5-is-now-availableonboarding"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#onboarding">Onboarding tourの改善</a></h2>
+<p>初めてMattermostにアクセスした際に表示されるオンボーディングが、Board/Playbookでも表示されるようになりました。<br>
+Boards/Playbooks機能の利用方法をチュートリアル形式で確認していくことができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/platform-onbording.png" alt="platform-onbording"></p>
+<h2 id="その他の変更">その他の変更</h2>
+<ul>
+<li>Firefox の利用推奨最低バージョンが　<code>v78</code>から<code>v91</code>に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19271">Issue</a></li>
+<li>Safari の利用推奨最低バージョンが <code>v12</code> から <code>v14.1</code> に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19564">Issue</a></li>
+</ul>
+<h2 id="その他のトピック">その他のトピック</h2>
+<h3 id="go-conference-jp">Go Conference JP</h3>
+<p>2022/04/23に日本で(オンライン)開催される Go Conference Online 2022 SpringにMattermost社の<a href="https://github.com/jespino/">Jesús Espino</a>氏が登壇します。</p>
+<p><a href="https://gocon.jp/2022spring/sessions/a3-l/">Go Conference 2022 Spring | Dissecting Slices, Maps and Channels in Go</a></p>
+<p>Jesus氏はMattermostの開発者ブログでも、Goに関するエントリをいくつか書いています。</p>
+<ul>
+<li><a href="https://developers.mattermost.com/blog/maintaining-consistency-in-codebases-with-go-vet/">Maintaining Consistency in Codebases with Go vet</a></li>
+<li><a href="https://developers.mattermost.com/blog/layered-store-and-struct-embedding/">Layered Store and Struct Embedding in Go</a></li>
+</ul>
+<p>今回の発表もGo言語のランタイムにおいて、Slice, Map, Channelがどのように動作しているかというディープな話になりそうです。</p>
+<h3 id="boardsのコメント欄に日本語を入力できない問題">Boardsのコメント欄に日本語を入力できない問題</h3>
+<p>Boardsのカード内のコメントに日本語を入力しようとすると、Enterキーで入力を確定したタイミングで入力内容が消えてしまう事象が発生しています。</p>
+<p>この問題については、以下のIssueで対応が進められています。
+<a href="https://github.com/mattermost/focalboard/issues/2343">Bug: Unable to enter Japanese text into comments field · Issue #2343 · mattermost/focalboard</a></p>
+<h3 id="ロシアベラルーシを輸出禁止国に追加">ロシア/ベラルーシを輸出禁止国に追加</h3>
+<p>米国政府による制裁に応じ、Mattermost社もロシア・ベラルーシを輸出禁止国のリストに追加したそうです。</p>
+<p><a href="https://mattermost.com/blog/mattermost-policy-changes-due-to-conflict-in-ukraine/">Mattermost policy changes due to conflict in Ukraine - Mattermost</a></p>
+<h2 id="おわりに">おわりに</h2>
+<p>次の<code>v6.6</code>のリリースは 2022/04/14(Thu)を予定しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
+        <img
+          src="https://blog.kaakaa.dev/images/zenn.svg"
+          alt="Zenn"
+        />
+      </a>
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2022
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
