@@ -200,7 +200,7 @@
     <li><a href="#おわりに">おわりに</a></li>
   </ul>
 </nav><h2 id="アップグレード時の注意事項httpsdocsmattermostcomupgradeimportant-upgrade-noteshtml"><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">アップグレード時の注意事項</a></h2>
-<p>DB Versionを利用しない実装になったことにより、CLIコマンド<code>mattermost version</code>の実行結果にデータベースのバージョンが含まれなくなりました（今までのバージョンでは実行結果に<code>DB Version: 6.5.0</code>のようにDBのバージョンも出力されていました）。また、<code>mattermost version</code>がDBとのやり取りを行わなくなり、DBマイグレーションも実行しなくなったため、DBマイグレーションを行うための新たなコマンド <code>mattermost db migrate</code>が追加されました。<a href="https://github.com/mattermost/mattermost-server/pull/19364">Issue</a></p>
+<p>CLIコマンド<code>mattermost version</code>の実行結果にデータベースのバージョンが含まれなくなりました（今までのバージョンでは実行結果に<code>DB Version: 6.5.0</code>のようにDBのバージョンも出力されていました）。また、<code>mattermost version</code>がDBとのやり取りを行わなくなり、DBマイグレーションも実行しなくなったため、DBマイグレーションを行うための新たなコマンド <code>mattermost db migrate</code>が追加されました。<a href="https://github.com/mattermost/mattermost-server/pull/19364">(PR)</a></p>
 <hr>
 <p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
 <ul>
@@ -224,12 +224,12 @@
 <p><a href="https://docs.mattermost.com/welcome/manage-custom-groups.html">Manage Custom Groups</a></p>
 <h2 id="channels-チーム横断的なチャンネル移動が可能にhttpsmattermostcomblogmattermost-v6-5-is-now-availablecross"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#cross">Channels: チーム横断的なチャンネル移動が可能に</a></h2>
 <p><code>Ctrl + k</code> のショートカットで開くことができるチャンネル検索ダイアログで、他のチームのチャンネルも横断的に検索できるようになりました。
-今までのバージョンでは、チャンネル検索ダイアログで検索できるチャンネルは現在アクセスしているチームのチャンネルのみに限定されていましたが、今回のバージョンより参加したことのあるチャンネルであればチームに関係なく検索することができるようになりました。</p>
+今までのバージョンでは、チャンネル検索ダイアログで検索できるチャンネルは現在アクセスしているチームのチャンネルのみに限定されていましたが、今回のバージョンより参加したことのあるチャンネルであればチームに関係なく検索することができるようになります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/channels-cross-team.png" alt="channels-cross-team"></p>
-<p>検索結果のチャンネル名の右側にチーム名が表示されます。</p>
+<p>検索結果のチャンネル名の右側にチーム名が表示されるため、複数のチームに同名のチャンネルが存在しても見分けることができます。</p>
 <h2 id="playbooks-複製インポートエクスポートhttpsmattermostcomblogmattermost-v6-5-is-now-availableplaybooks"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#playbooks">Playbooks: 複製、インポート、エクスポート</a></h2>
 <p>既存のPlaybookを複製することができるようになりました。</p>
-<p>また、Playbook内容をJSON形式でエクスポートできるようになり、Playbookのバックアップや、インポート機能と組み合わせて別のMattermostインスタンスへのPlaybookの移行などが実施できるようになりましたう。</p>
+<p>また、Playbook内容をJSON形式でエクスポートできるようになり、Playbookのバックアップや、インポート機能と組み合わせて別のMattermostインスタンスへのPlaybookの移行などが実施できるようになりました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/playbooks-duplicate.png" alt="playbooks-duplicate"></p>
 <p><code>複製</code>メニューをクリックすると、<code>Copy of ${Playbook名}</code> という名前のPlaybookが新たに作成されます。</p>
 <h2 id="boards-共有機能のui改善httpsmattermostcomblogmattermost-v6-5-is-now-availableshare"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#share">Boards: 共有機能のUI改善</a></h2>
@@ -246,8 +246,8 @@
 <p>Trello・Jira・NotionなどのツールからBoardsへデータをインポートする際の手順に関するドキュメントへのリンクが追加されました。<br>
 Boardsの設定メニューから表示することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-import-link.png" alt="boards-import-link"></p>
-<p>他ツールからBoardsへのインポート機能について、詳しくは以下のリンク先を参照してください。
-<a href="https://docs.mattermost.com/boards/data-and-archives.html#import-your-data">Import your data</a></p>
+<p>他ツールからBoardsへのインポート機能について、詳しくは以下のリンク先を参照してください。</p>
+<p><a href="https://docs.mattermost.com/boards/data-and-archives.html#import-your-data">Import your data</a></p>
 <h2 id="integration-統合機能">Integration: 統合機能</h2>
 <p>Mattermostを他機能を連携させる統合機能について、いくつかのアップデートがあります。</p>
 <h3 id="atlassian-bitbucket-cloud-pluginhttpsmattermostcomblogmattermost-v6-5-is-now-availablebitbucket"><a href="https://mattermost.com/blog/mattermost-v6-5-is-now-available/#bitbucket">Atlassian Bitbucket Cloud Plugin</a></h3>
@@ -277,8 +277,8 @@ Boards/Playbooks機能の利用方法をチュートリアル形式で確認し�
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/platform-onbording.png" alt="platform-onbording"></p>
 <h2 id="その他の変更">その他の変更</h2>
 <ul>
-<li>Firefox の利用推奨最低バージョンが　<code>v78</code>から<code>v91</code>に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19271">Issue</a></li>
-<li>Safari の利用推奨最低バージョンが <code>v12</code> から <code>v14.1</code> に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19564">Issue</a></li>
+<li>Firefox の利用推奨最低バージョンが<code>v78</code>から<code>v91</code>に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19271">（PR）</a></li>
+<li>Safari の利用推奨最低バージョンが<code>v12</code>から<code>v14.1</code>に変更されました <a href="https://github.com/mattermost/mattermost-server/pull/19564">（PR）</a></li>
 </ul>
 <h2 id="その他のトピック">その他のトピック</h2>
 <h3 id="go-conference-jp">Go Conference JP</h3>
