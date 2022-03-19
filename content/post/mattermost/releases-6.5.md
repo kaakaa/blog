@@ -25,7 +25,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## [アップグレード時の注意事項](https://docs.mattermost.com/upgrade/important-upgrade-notes.html)
 
-DB Versionを利用しない実装になったことにより、CLIコマンド`mattermost version`の実行結果にデータベースのバージョンが含まれなくなりました（今までのバージョンでは実行結果に`DB Version: 6.5.0`のようにDBのバージョンも出力されていました）。また、`mattermost version`がDBとのやり取りを行わなくなり、DBマイグレーションも実行しなくなったため、DBマイグレーションを行うための新たなコマンド `mattermost db migrate`が追加されました。[Issue](https://github.com/mattermost/mattermost-server/pull/19364)
+CLIコマンド`mattermost version`の実行結果にデータベースのバージョンが含まれなくなりました（今までのバージョンでは実行結果に`DB Version: 6.5.0`のようにDBのバージョンも出力されていました）。また、`mattermost version`がDBとのやり取りを行わなくなり、DBマイグレーションも実行しなくなったため、DBマイグレーションを行うための新たなコマンド `mattermost db migrate`が追加されました。[(PR)](https://github.com/mattermost/mattermost-server/pull/19364)
 
 
 ---
@@ -62,17 +62,17 @@ DB Versionを利用しない実装になったことにより、CLIコマンド`
 ## [Channels: チーム横断的なチャンネル移動が可能に](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#cross)
 
 `Ctrl + k` のショートカットで開くことができるチャンネル検索ダイアログで、他のチームのチャンネルも横断的に検索できるようになりました。
-今までのバージョンでは、チャンネル検索ダイアログで検索できるチャンネルは現在アクセスしているチームのチャンネルのみに限定されていましたが、今回のバージョンより参加したことのあるチャンネルであればチームに関係なく検索することができるようになりました。
+今までのバージョンでは、チャンネル検索ダイアログで検索できるチャンネルは現在アクセスしているチームのチャンネルのみに限定されていましたが、今回のバージョンより参加したことのあるチャンネルであればチームに関係なく検索することができるようになります。
 
 ![channels-cross-team](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/channels-cross-team.png)
 
-検索結果のチャンネル名の右側にチーム名が表示されます。
+検索結果のチャンネル名の右側にチーム名が表示されるため、複数のチームに同名のチャンネルが存在しても見分けることができます。
 
 ## [Playbooks: 複製、インポート、エクスポート](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#playbooks)
 
 既存のPlaybookを複製することができるようになりました。  
 
-また、Playbook内容をJSON形式でエクスポートできるようになり、Playbookのバックアップや、インポート機能と組み合わせて別のMattermostインスタンスへのPlaybookの移行などが実施できるようになりましたう。
+また、Playbook内容をJSON形式でエクスポートできるようになり、Playbookのバックアップや、インポート機能と組み合わせて別のMattermostインスタンスへのPlaybookの移行などが実施できるようになりました。
 
 ![playbooks-duplicate](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/playbooks-duplicate.png)
 
@@ -107,6 +107,7 @@ Boardsの設定メニューから表示することができます。
 ![boards-import-link](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.5/boards-import-link.png)
 
 他ツールからBoardsへのインポート機能について、詳しくは以下のリンク先を参照してください。
+
 [Import your data](https://docs.mattermost.com/boards/data-and-archives.html#import-your-data)
 
 
@@ -163,8 +164,8 @@ Boards/Playbooks機能の利用方法をチュートリアル形式で確認し�
 
 
 ## その他の変更
-* Firefox の利用推奨最低バージョンが　`v78`から`v91`に変更されました [Issue](https://github.com/mattermost/mattermost-server/pull/19271)
-* Safari の利用推奨最低バージョンが `v12` から `v14.1` に変更されました [Issue](https://github.com/mattermost/mattermost-server/pull/19564)
+* Firefox の利用推奨最低バージョンが`v78`から`v91`に変更されました [（PR）](https://github.com/mattermost/mattermost-server/pull/19271)
+* Safari の利用推奨最低バージョンが`v12`から`v14.1`に変更されました [（PR）](https://github.com/mattermost/mattermost-server/pull/19564)
 
 ## その他のトピック
 
