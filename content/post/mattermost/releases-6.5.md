@@ -113,7 +113,7 @@ Boardsの設定メニューから表示することができます。
 
 ## Integration: 統合機能
 
-Mattermostを他機能を連携させる統合機能について、いくつかのアップデートがあります。
+Mattermostと他機能を連携させる統合機能について、いくつかのアップデートがあります。
 
 ### [Atlassian Bitbucket Cloud Plugin](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#bitbucket)
 
