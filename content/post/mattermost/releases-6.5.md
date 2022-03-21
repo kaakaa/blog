@@ -43,7 +43,7 @@ CLIコマンド`mattermost version`の実行結果にデータベースのバー
 - [Playbook](https://docs.mattermost.com/guides/playbooks.html): Mattermost v6.0から追加されたインシデント管理機能
 - [Boards](https://docs.mattermost.com/guides/boards.html): Mattermost v6.0から追加されたKanbanボード機能 ([Focalboard](https://www.focalboard.com/))
 
-## (Enterprise/Professiona) [Channels: カスタムグループ (ベータ版)](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#groups)
+## (Enterprise/Professional) [Channels: カスタムグループ (ベータ版)](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#groups)
 
 複数のユーザーにメンションを送信する際に利用できる**カスタムグループ**を作成できるようになりました。例えば、`developer`というグループを作成し、そのグループにユーザーを追加しておくと、`@developer`というメンションで、グループ内の全員にメンションすることができます。　  
 今までのバージョンでもAD/LDAP連携を設定している場合は[LDAP上で設定されたグループに対してメンションを送る機能](https://docs.mattermost.com/channels/mention-people.html#groupname)はありましたが、今回追加されたカスタムグループの機能によりAD/LDAP連携を行なっていなくてもグループメンションが利用できるようになりました。
@@ -113,7 +113,7 @@ Boardsの設定メニューから表示することができます。
 
 ## Integration: 統合機能
 
-Mattermostを他機能を連携させる統合機能について、いくつかのアップデートがあります。
+Mattermostと他機能を連携させる統合機能について、いくつかのアップデートがあります。
 
 ### [Atlassian Bitbucket Cloud Plugin](https://mattermost.com/blog/mattermost-v6-5-is-now-available/#bitbucket)
 
