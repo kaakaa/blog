@@ -119,7 +119,7 @@ Mattermostを他機能を連携させる統合機能について、いくつか�
 
 Atlassian社のGitリポジトリ管理ツールであるBitbuket CloudとMattermostを連携させる統合機能がリリースされています。
 
-毎日Mattermostへログインした際にBitbucket　Cloud内で行われた重要な活動が通知される機能や、Bitbucket Cloud内であなたがメンションされたことをMattermostのDMで通知してくれる機能などが利用できるようになります。  また、PRのリストが常にMattermostのサイドバーに表示されるようになります。
+毎日Mattermostへログインした際にBitbucket　Cloud内で行われた重要な活動が通知される機能や、Bitbucket Cloud内で自分がメンションされたことをMattermostのDMで通知してくれる機能などが利用できるようになります。  また、PRのリストが常にMattermostのサイドバーに表示されるようになります。
 
 インストール方法など、詳しくは以下のリンク先を参照してください。  
 [Mattermost/Bitbucket Plugin \- BitBucket Plugin](https://mattermost.gitbook.io/bitbucket-plugin/)
