@@ -14,6 +14,14 @@
 		<atom:link href="/tags/githubactions/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 6.6の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</link>
+			<pubDate>Sat, 23 Apr 2022 13:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/04/16 に Mattermost の新しいバージョン v6.6.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 6.5の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.5/</link>
 			<pubDate>Sat, 19 Mar 2022 12:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Tue, 19 Oct 2021 22:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.0/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2021/10/13 に Mattermost のメジャーバージョンアップである v6.0.0 がリリースされました。 また、10/18にMedium Level Security Fixを含む v6.0.1 がリリ</description>
-		</item>
-      	
-		<item>
-			<title>第二子出産に伴う育児休職を取得したので雑感</title>
-			<link>https://blog.kaakaa.dev/post/life/life-with-baby/</link>
-			<pubDate>Fri, 08 Oct 2021 00:19:05 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/life/life-with-baby/</guid>
-			<description>この記事は、子育てに関する有用な知見や耳寄りな情報があるわけでもなく、単に記録として書いているだけのものです。 はじめに 8月下旬に第二子となる</description>
 		</item>
       	
 	</channel>
