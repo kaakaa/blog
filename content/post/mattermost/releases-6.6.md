@@ -124,7 +124,7 @@ Mattermost Apps Frameworkについて日本語で書かれている記事は、�
 
 ### チャンネル情報が右サイドバーに
 
-チャンネルヘッダ部分にチャンネル情報を表示するためのボタンが追加されました。  ボタンをクリックすると、右サイドバーにチャンネル情報が表示されます。
+チャンネル情報を表示するためのボタンがチャンネルヘッダ部分に追加されました。  ボタンをクリックすると、右サイドバーにチャンネル情報が表示されます。
 
 ![channels-channel-info](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.6/channels-channel-info.png)
 
