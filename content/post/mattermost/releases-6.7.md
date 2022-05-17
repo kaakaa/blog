@@ -1,5 +1,5 @@
 ---
-title: "Mattermost 6.6の新機能"
+title: "Mattermost 6.7の新機能"
 emoji: "🎉"
 published: true
 date: 2022-05-17T15:00:00+09:00
