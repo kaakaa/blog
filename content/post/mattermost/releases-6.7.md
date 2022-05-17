@@ -71,8 +71,7 @@ Mattermost Desktop Appに自動アップデートの機能が追加されまし�
 
 Windows向けのMattermost Desktop Appを使用している場合、新しいバージョンが利用可能になると、アプリ上で更新を促すアラートが表示され、1クリックでDesktop Appのアップデートを完了することができます。
 
-macOSでは、[GitHubのReleasesページ](https://github.com/mattermost/desktop/releases)からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。
-App Storeからインストールした場合のみ、新しいバージョンが自動で利用可能になるようですが、まだApp Storeでは公開されておらず、公開されている公式ドキュメントからはApp Storeからのインストール手順が削除されています。App Storeで公開され次第、再度ドキュメントが更新されるのだと思います。
+macOSでは、[GitHubのReleasesページ](https://github.com/mattermost/desktop/releases)からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。App Storeからインストールした場合のみ、新しいバージョンが自動で利用可能になるようですが、まだApp StoreではMattermost Desktop Appは公開されていないようで、公式ドキュメントからもApp Storeからのインストール手順が削除されています。App Storeで公開され次第、再度ドキュメントが更新されるのだと思います。
 
 [Desktop App Automatic & Manual Updates by cwarnermm · Pull Request \#5628 · mattermost/docs](https://github.com/mattermost/docs/pull/5628/files#r872856733)
 
