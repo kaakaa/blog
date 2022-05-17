@@ -25,14 +25,14 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## アップグレード時の注意事項
 
-今回のアップグレードではデータベースのスキーマ変更が行われるため、アップグレードに時間がかかる可能性があります。MySQLを利用していて900万投稿程度のデータが存在する場合、アップグレードに2分程度の時間がかかるようです(インスタンス: [db.r5.xlarge](https://aws.amazon.com/jp/rds/instance-types/))
+今回のアップグレードではデータベースのスキーマ変更が行われるため、アップグレードに時間がかかる可能性があります。MySQLを利用していて900万投稿程度のデータが存在する場合、アップグレードに2分程度の時間がかかるようです(インスタンスは[db.r5.xlarge](https://aws.amazon.com/jp/rds/instance-types/)を使用)。
 
 アップグレード時のダウンタイムを0にしたい場合、アップグレード前に以下のSQLを手動で実行し、事前にスキーマ変更を済ませておくこともできます。
 
 * For MySQL: `CREATE INDEX idx_posts_create_at_id on Posts(CreateAt, Id) LOCK=NONE;`
 * For Postgres: `CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_posts_create_at_id on posts(createat, id);`
 
-これらのSQLによる変更は、テーブルロックを取得するもなく、既存のオペレーションに対する影響はないため、Mattermost起動中でも実行することができます。
+これらのSQLによる変更は、テーブルロックを取得せず、既存のオペレーションに対する影響はないため、Mattermost起動中でも実行することができます。
 
 詳しくは公式ドキュメントを参照してください。
 
@@ -59,7 +59,7 @@ Playbookに設定したチェックリスト内の各タスクに対して期限
 
 ![playbooks-set-task-due](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.7/playbooks-set-task-due.png)
 
-タスクの期限を設定することにより、Playbooksの日次ダイジェスト通知には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、通知ノイズを減らすことができます。
+Playbooksの日次ダイジェスト通知には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、タスクの期限を設定することで通知ノイズを減らすことができます。
 
 この機能は、**Professional**/**Enterprise**プラン限定の機能です。
 
@@ -69,11 +69,14 @@ Playbookに設定したチェックリスト内の各タスクに対して期限
 
 Mattermost Desktop Appに自動アップデートの機能が追加されました。  
 
-Windows向けのMattermost Desktop Appを使用している場合、新しいバージョンが利用可能になると、アプリ上で更新を促すアラートが表示され、1クリックでアップデートが完了します。
+Windows向けのMattermost Desktop Appを使用している場合、新しいバージョンが利用可能になると、アプリ上で更新を促すアラートが表示され、1クリックでDesktop Appのアップデートを完了することができます。
 
-macOSでは、App StoreからMattermost Desktop Appをインストールした場合に新しいバージョンが自動で利用可能になるようです。[GitHubのReleasesページ](https://github.com/mattermost/desktop/releases)からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。
+macOSでは、[GitHubのReleasesページ](https://github.com/mattermost/desktop/releases)からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。
+App Storeからインストールした場合のみ、新しいバージョンが自動で利用可能になるようですが、まだApp Storeでは公開されておらず、公開されている公式ドキュメントからはApp Storeからのインストール手順が削除されています。App Storeで公開され次第、再度ドキュメントが更新されるのだと思います。
 
-Linux OSでは、自動アップデートはサポートされていないそうです。
+[Desktop App Automatic & Manual Updates by cwarnermm · Pull Request \#5628 · mattermost/docs](https://github.com/mattermost/docs/pull/5628/files#r872856733)
+
+Linux OSでは、自動アップデートはサポートされていないようです。
 
 詳しくは下記のドキュメントを参照ください。  
 
