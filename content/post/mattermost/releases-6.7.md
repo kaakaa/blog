@@ -59,7 +59,7 @@ Playbookに設定したチェックリスト内の各タスクに対して期限
 
 ![playbooks-set-task-due](https://blog.kaakaa.dev/images/posts/mattermost/releases-6.7/playbooks-set-task-due.png)
 
-Playbooksの日次ダイジェスト通知には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、タスクの期限を設定することで通知ノイズを減らすことができます。
+Playbooksの[日次ダイジェスト通知](https://docs.mattermost.com/playbooks/notifications-and-updates.html#daily-digest)には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、タスクの期限を設定することで通知ノイズを減らすことができます。
 
 この機能は、**Professional**/**Enterprise**プラン限定の機能です。
 
