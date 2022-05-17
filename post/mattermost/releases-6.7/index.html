@@ -186,13 +186,13 @@
     <li><a href="#おわりに">おわりに</a></li>
   </ul>
 </nav><h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
-<p>今回のアップグレードではデータベースのスキーマ変更が行われるため、アップグレードに時間がかかる可能性があります。MySQLを利用していて900万投稿程度のデータが存在する場合、アップグレードに2分程度の時間がかかるようです(インスタンス: <a href="https://aws.amazon.com/jp/rds/instance-types/">db.r5.xlarge</a>)</p>
+<p>今回のアップグレードではデータベースのスキーマ変更が行われるため、アップグレードに時間がかかる可能性があります。MySQLを利用していて900万投稿程度のデータが存在する場合、アップグレードに2分程度の時間がかかるようです(インスタンスは<a href="https://aws.amazon.com/jp/rds/instance-types/">db.r5.xlarge</a>を使用)。</p>
 <p>アップグレード時のダウンタイムを0にしたい場合、アップグレード前に以下のSQLを手動で実行し、事前にスキーマ変更を済ませておくこともできます。</p>
 <ul>
 <li>For MySQL: <code>CREATE INDEX idx_posts_create_at_id on Posts(CreateAt, Id) LOCK=NONE;</code></li>
 <li>For Postgres: <code>CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_posts_create_at_id on posts(createat, id);</code></li>
 </ul>
-<p>これらのSQLによる変更は、テーブルロックを取得するもなく、既存のオペレーションに対する影響はないため、Mattermost起動中でも実行することができます。</p>
+<p>これらのSQLによる変更は、テーブルロックを取得せず、既存のオペレーションに対する影響はないため、Mattermost起動中でも実行することができます。</p>
 <p>詳しくは公式ドキュメントを参照してください。</p>
 <p><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html#important-upgrade-notes">Important Upgrade Notes</a></p>
 <hr>
@@ -211,14 +211,16 @@
 <h2 id="professionalenterprise-playbooks-タスクの期限を設定可能に">(Professional/Enterprise) Playbooks: タスクの期限を設定可能に</h2>
 <p>Playbookに設定したチェックリスト内の各タスクに対して期限を設定できるようになりました。期限は 今日/明日/次週を選択するか、<code>At 5:00 pm in three days</code> のような自然言語(英語のみ)を使って設定することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-6.7/playbooks-set-task-due.png" alt="playbooks-set-task-due"></p>
-<p>タスクの期限を設定することにより、Playbooksの日次ダイジェスト通知には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、通知ノイズを減らすことができます。</p>
+<p>Playbooksの日次ダイジェスト通知には期限の迫ったタスクと期限の過ぎたタスクのみが通知されるようになるため、タスクの期限を設定することで通知ノイズを減らすことができます。</p>
 <p>この機能は、<strong>Professional</strong>/<strong>Enterprise</strong>プラン限定の機能です。</p>
 <h2 id="その他の変更">その他の変更</h2>
 <h3 id="mattermost-desktop-app-自動アップデート機能">Mattermost Desktop App: 自動アップデート機能</h3>
 <p>Mattermost Desktop Appに自動アップデートの機能が追加されました。</p>
-<p>Windows向けのMattermost Desktop Appを使用している場合、新しいバージョンが利用可能になると、アプリ上で更新を促すアラートが表示され、1クリックでアップデートが完了します。</p>
-<p>macOSでは、App StoreからMattermost Desktop Appをインストールした場合に新しいバージョンが自動で利用可能になるようです。<a href="https://github.com/mattermost/desktop/releases">GitHubのReleasesページ</a>からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。</p>
-<p>Linux OSでは、自動アップデートはサポートされていないそうです。</p>
+<p>Windows向けのMattermost Desktop Appを使用している場合、新しいバージョンが利用可能になると、アプリ上で更新を促すアラートが表示され、1クリックでDesktop Appのアップデートを完了することができます。</p>
+<p>macOSでは、<a href="https://github.com/mattermost/desktop/releases">GitHubのReleasesページ</a>からバイナリをインストールして利用している場合、自動アップデートは機能しないそうです。
+App Storeからインストールした場合のみ、新しいバージョンが自動で利用可能になるようですが、まだApp Storeでは公開されておらず、公開されている公式ドキュメントからはApp Storeからのインストール手順が削除されています。App Storeで公開され次第、再度ドキュメントが更新されるのだと思います。</p>
+<p><a href="https://github.com/mattermost/docs/pull/5628/files#r872856733">Desktop App Automatic &amp; Manual Updates by cwarnermm · Pull Request #5628 · mattermost/docs</a></p>
+<p>Linux OSでは、自動アップデートはサポートされていないようです。</p>
 <p>詳しくは下記のドキュメントを参照ください。</p>
 <p><a href="https://docs.mattermost.com/install/desktop-app-install.html">Desktop App install guides</a></p>
 <h3 id="channelsのui変更">ChannelsのUI変更</h3>
