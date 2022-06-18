@@ -1,8 +1,8 @@
 ---
-title: "Mattermost 6.7の新機能"
+title: "Mattermost 7.0の新機能"
 emoji: "🎉"
 published: true
-date: 2022-05-17T15:00:00+09:00
+date: 2022-06-18T12:30:00+09:00
 toc: true
 tags: ["mattermost", "releases"]
 ---
@@ -45,6 +45,10 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 正式リリースとなったことにより、全てのユーザーが**設定 > 表示 > 返信スレッドの折りたたみ**から本機能のON/OFFを選択できるようになりました。(以前バージョンではベータ版としてリリースだったため、返信スレッドの折りたたみ設定を表示するには**システムコンソール > 実験的機能 > 機能 > 返信スレッドの折りたたみ**から設定を有効にする必要がありました)
 
+![channels-crt-ga-us](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga-us.png)
+
+(翻訳の更新があたっていないのか、英語以外の多くの言語で "(ベータ版)" の表記が残ってしまっていますが、正式版です。この表記は次のリリースで修正されていると思います。)
+
 もし、返信スレッドの折りたたみ機能をMattermostインスタンス全体として無効にしたい場合などは、**システムコンソール > サイト設定 > 投稿 > 返信スレッドの折りたたみ**から設定することができます。
 
 ![channels-crt-ga](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga.png)
@@ -56,25 +60,30 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 ベータ版の利用方法については、公式のリリースブログを参照してください。  
 [Channels: Mobile v2.0 (Beta)](https://mattermost.com/blog/mattermost-v7-0-is-now-available/#mobile)
 
+複数サーバーへ接続する機能は、以下のような操作性になるようです。  
+Mattermost画面左上にあるサーバーのようなアイコンをクリックすると、接続するサーバーを選択するメニューが表示されます。
+
+
+![channels-mobile-v2](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-mobile-v2.jpg)
 ## Channels: 音声通話と画面共有 (Beta)
 
 Slackのハドルミーティングのような音声通話機能がMattermostにも追加されました。  
 チャンネルごとに音声通話を開始することができ、通話中でもMattermostの機能を通常通り使用することができます。
 
-以下に自環境で動作させた時の様子を載せています。
+以下に自環境でブラウザを2つ横に並べて音声通話機能を動作させた時の様子を載せています。
 
 ![channels-call](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call.gif)
 
-Desktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。  
+音声通話/画面共有機能はDesktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。  
 Mobileアプリでも共有された画面を綺麗に見ることができました。共有画面のサイズが大きい場合は厳しそうですが。また、前述のMobileアプリv2.0では利用できませんでした。
 
-![channels-call-mobile](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg)
+<img width="70%" alt="channels-call-mobile" src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg" />
 
 本機能はWebRTCをベースに構築されており、Mattermost PluginプロジェクトとしてGitHubで開発が進められています。 (`mattermost-plugins-calls`プラグインは、コンパイル済みのプラグインを利用する場合はMITライセンスの条件の下で利用することが可能ですが、ソースコードを改変して利用する場合は特殊な条件があるようなので注意が必要です。)
 
 https://github.com/mattermost/mattermost-plugin-calls
 
-[Mattermost公式のクラウドサービス](https://customers.mattermost.com/cloud/connect-workspace)を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができます。セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。
+[Mattermost公式のクラウドサービス](https://customers.mattermost.com/cloud/connect-workspace)を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができますが、セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。
 
 [Start a call \(beta\)](https://docs.mattermost.com/channels/make-calls.html)
 
@@ -103,7 +112,7 @@ Playbooksの利用統計情報がシステムコンソールから確認でき�
 
 ## Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加
 
-実行中のPlaybookのステータスが更新された際に、その更新内容の配信先となるチャンネルと外向きのウェブフックを実行ごとに指定できるようになりました。今までも作成したPlaybookに配信先を指定することはできましたが、本バージョンからPlaybookの実行ごとに配信先を指定することができます。
+実行中のPlaybookのステータスが更新された際に、その更新内容の配信先となるチャンネルと外向きのウェブフックを実行ごとに指定できるようになりました。今までもPlaybook単位で配信先を指定することはできましたが、本バージョンからPlaybookの実行ごとに配信先を追加で設定することができます。
 
 ![playbooks-trigger-action](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-trigger-action.gif)
 
@@ -111,9 +120,9 @@ Playbooksの利用統計情報がシステムコンソールから確認でき�
 
 Mattermost統合機能のアイコンを表示する領域として、新たに画面右端にApps Barという領域が追加されました。
 
-今までのバージョンでも、MattermostにはPluginやApps等の統合機能によってチャンネルヘッダ部分に統合機能専用のアイコンを表示することができました。ただ、追加される統合機能が多くなると全てのチャンネルのヘッダ部分に統合機能のアイコンが数多く並ぶようになり、チャンネルヘッダのテキストなど、現在表示しているチャンネルに特化した情報が埋もれるようになっていました。Mattermost v6.0で刷新された新しいUIでは、チャンネルヘッダにはそのチャンネルに特化した情報を表示すべきという明確な目的が与えられたため、統合機能のアイコンが別の場所(Apps Bar)に移動されることになったようです。
-
 ![integrations-appsbar](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/integrations-appsbar.png)
+
+今までのバージョンでも、MattermostにはPluginやApps等の統合機能によってチャンネルヘッダ部分に統合機能専用のアイコンを表示することができました。ただ、追加される統合機能が多くなると全てのチャンネルのヘッダ部分に統合機能のアイコンが数多く並ぶようになり、チャンネルヘッダのテキストなど、現在表示しているチャンネルに特化した情報が埋もれるようになっていました。Mattermost v6.0で刷新された新しいUIでは、チャンネルヘッダにはそのチャンネルに特化した情報を表示すべきという明確な目的が与えられたため、v7で統合機能のアイコンを表示するための専用の場所(Apps Bar)が作成されたようです。
 
 Apps Bar機能は**システムコンソール > 実験的機能 > 機能 > Enable App Bar**から有効/無効を設定できます。
 
@@ -162,22 +171,21 @@ v7より追加されたApp Bar機能を**システムコンソール > 実験的
 
 以前のバージョンでは、特定の状況下で`ServiceSettings.TrustedProxyIPHeader`のデフォルト設定値が空配列にならないバグが存在しましたが、本バージョンからデフォルト値が空配列になるよう修正されました。以前のバージョンからv7へアップデートする場合、この設定値を確認し、意図しない値が設定されている場合は `nil` を設定する必要があります。
 
-当該設定項目に関する説明は[Configuration settings](https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header)を参照してください。また、この変更は[このIssue](https://github.com/mattermost/mattermost-server/pull/20217/files)で実施されたようです。
+当該設定項目に関する説明は[Configuration settings](https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header)を参照してください。
 
 
 ## その他のトピック
 
 ### チャンネル名コンテスト
 
-MattermostのTwitterで、実際に運用されているユニークなMattermostチャンネル名を募集しています。6/22まで募集しており、5名の勝者にはグッズが送られるようです。
+MattermostのTwitterで、実際に運用されているユニークなMattermostチャンネル名を表彰するコンテストが開催されています。募集期限は6/22 PM12:00(ET) まで募集しており、最もユニークなチャンネル名を投稿した5名の勝者にはグッズが送られるようです。
 
 応募方法など詳しくは、以下のツイートツリーを参照ください。
 
 https://twitter.com/Mattermost/status/1537080481384124419
 
-
 ### Happy Pride Month
-6月は、アメリカやカナダ、オーストラリアを始め様々な国でLGBTQ+の権利についての啓発を行うイベントが開催されるPride Monthとされています。仕事をする上でもPrideを尊重することは生産性と幸福を高めると考えており、Pride Monthに関する意識を向上させるために、6月の毎週金曜日にPride Monthに関するクイズを出し、最初に正解した人にグッズを贈呈するというイベントを開催しています。
+6月は、アメリカやカナダ、オーストラリアを始め様々な国でLGBTQ+の権利についての啓発を行うイベントが開催されるPride Monthとされています。Mattermost社は仕事をする上でもPrideを尊重することは生産性と幸福を高めると考えており、Pride Monthに関する意識を向上させるために、6月の毎週金曜日にPride Monthに関するクイズを出し、最初に正解した人にグッズを贈呈するというイベントを開催しています。
 
 ![etc-hpm](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hpm.png)  
 https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw
