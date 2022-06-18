@@ -77,7 +77,9 @@ Slackのハドルミーティングのような音声通話機能がMattermost�
 音声通話/画面共有機能はDesktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。  
 Mobileアプリでも共有された画面を綺麗に見ることができました。共有画面のサイズが大きい場合は厳しそうですが。また、前述のMobileアプリv2.0では利用できませんでした。
 
-<img width="70%" alt="channels-call-mobile" src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg" />
+![channels-call-mobile](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg)
+
+
 
 本機能はWebRTCをベースに構築されており、Mattermost PluginプロジェクトとしてGitHubで開発が進められています。 (`mattermost-plugins-calls`プラグインは、コンパイル済みのプラグインを利用する場合はMITライセンスの条件の下で利用することが可能ですが、ソースコードを改変して利用する場合は特殊な条件があるようなので注意が必要です。)
 
