@@ -10,6 +10,11 @@ footnoteReturnLinkContents = "^"
 googleAnalytics = "UA-57299975-4"
 disqusShortname = "kaakaa-blog"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [Author]
   name = "Yusuke Nemoto"
 
