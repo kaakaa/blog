@@ -2,7 +2,7 @@
 <html lang="ja-JP">
   <head>
     <meta charset="utf-8" />
-<title>Mattermost 6.7の新機能</title>
+<title>Mattermost 7.0の新機能</title>
 
 
   
@@ -28,16 +28,16 @@
   title="kaakaa blog"
 />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost 6.7の新機能"/>
+<meta name="twitter:title" content="Mattermost 7.0の新機能"/>
 <meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本"/>
 
 
-  <meta property="og:title" content="Mattermost 6.7の新機能" />
+  <meta property="og:title" content="Mattermost 7.0の新機能" />
 <meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.0/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-05-17T15:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2022-05-17T15:00:00&#43;09:00" />
+<meta property="article:published_time" content="2022-06-18T12:30:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-06-18T12:30:00&#43;09:00" />
 
 
 
@@ -136,13 +136,13 @@
         <div class="post-heading">
           
             <h1>
-              Mattermost 6.7の新機能
+              Mattermost 7.0の新機能
             </h1>
           
           
             <span class="meta-post">
   <em class="fa fa-calendar-alt"></em
-  >&nbsp;May 17, 2022
+  >&nbsp;Jun 18, 2022
   
 </span>
 
@@ -218,23 +218,28 @@
 <p>返信スレッドの折りたたみ機能の概要は、以下の動画で確認することができます。<br>
 <a href="https://www.youtube.com/watch?v=_jR2KWGtgEU">Tutorial: Using Collapsed Reply Threads on Mattermost - YouTube</a></p>
 <p>正式リリースとなったことにより、全てのユーザーが<strong>設定 &gt; 表示 &gt; 返信スレッドの折りたたみ</strong>から本機能のON/OFFを選択できるようになりました。(以前バージョンではベータ版としてリリースだったため、返信スレッドの折りたたみ設定を表示するには<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; 返信スレッドの折りたたみ</strong>から設定を有効にする必要がありました)</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga-us.png" alt="channels-crt-ga-us"></p>
+<p>(翻訳の更新があたっていないのか、英語以外の多くの言語で &ldquo;(ベータ版)&rdquo; の表記が残ってしまっていますが、正式版です。この表記は次のリリースで修正されていると思います。)</p>
 <p>もし、返信スレッドの折りたたみ機能をMattermostインスタンス全体として無効にしたい場合などは、<strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; 返信スレッドの折りたたみ</strong>から設定することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga.png" alt="channels-crt-ga"></p>
 <h2 id="channels-mobile-v20-beta">Channels: Mobile v2.0 (Beta)</h2>
 <p><a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/10975938-ios-and-android-apps-should-allow-multiple-server">Feature Request Forumで二番目に多くの要望を集めていた</a>モバイルアプリで複数サーバーへ接続する機能を含む、Mattermostモバイルアプリのメジャーアップデートとなるv2.0のリリースが今年の後半に予定されています。それに先立ち、v2.0のベータ版を試用してくれるユーザーを募集しているようです。</p>
 <p>ベータ版の利用方法については、公式のリリースブログを参照してください。<br>
 <a href="https://mattermost.com/blog/mattermost-v7-0-is-now-available/#mobile">Channels: Mobile v2.0 (Beta)</a></p>
+<p>複数サーバーへ接続する機能は、以下のような操作性になるようです。<br>
+Mattermost画面左上にあるサーバーのようなアイコンをクリックすると、接続するサーバーを選択するメニューが表示されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-mobile-v2.jpg" alt="channels-mobile-v2"></p>
 <h2 id="channels-音声通話と画面共有-beta">Channels: 音声通話と画面共有 (Beta)</h2>
 <p>Slackのハドルミーティングのような音声通話機能がMattermostにも追加されました。<br>
 チャンネルごとに音声通話を開始することができ、通話中でもMattermostの機能を通常通り使用することができます。</p>
-<p>以下に自環境で動作させた時の様子を載せています。</p>
+<p>以下に自環境でブラウザを2つ横に並べて音声通話機能を動作させた時の様子を載せています。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call.gif" alt="channels-call"></p>
-<p>Desktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。<br>
+<p>音声通話/画面共有機能はDesktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。<br>
 Mobileアプリでも共有された画面を綺麗に見ることができました。共有画面のサイズが大きい場合は厳しそうですが。また、前述のMobileアプリv2.0では利用できませんでした。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg" alt="channels-call-mobile"></p>
+<p><!-- raw HTML omitted --></p>
 <p>本機能はWebRTCをベースに構築されており、Mattermost PluginプロジェクトとしてGitHubで開発が進められています。 (<code>mattermost-plugins-calls</code>プラグインは、コンパイル済みのプラグインを利用する場合はMITライセンスの条件の下で利用することが可能ですが、ソースコードを改変して利用する場合は特殊な条件があるようなので注意が必要です。)</p>
 <p><a href="https://github.com/mattermost/mattermost-plugin-calls">https://github.com/mattermost/mattermost-plugin-calls</a></p>
-<p><a href="https://customers.mattermost.com/cloud/connect-workspace">Mattermost公式のクラウドサービス</a>を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができます。セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。</p>
+<p><a href="https://customers.mattermost.com/cloud/connect-workspace">Mattermost公式のクラウドサービス</a>を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができますが、セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。</p>
 <p><a href="https://docs.mattermost.com/channels/make-calls.html">Start a call (beta)</a></p>
 <h2 id="channels-メッセージ書式設定ツールバー">Channels: メッセージ書式設定ツールバー</h2>
 <p>Mattermostのメッセージ入力欄にWYSIWYG風なボタンが追加され、ボタンによるメッセージの書式設定を行えるようになりました。</p>
@@ -249,12 +254,12 @@ Mobileアプリでも共有された画面を綺麗に見ることができま�
 <p>Playbooksの利用統計情報がシステムコンソールから確認できるようになり、インスタンス内でPlaybooksがどの程度利用されているかを把握しやすくなりました。。<strong>システムコンソール &gt; レポート &gt; サイトの使用統計</strong>から確認することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-stats.png" alt="playbooks-stats"></p>
 <h2 id="playbooks-実行中のplaybookに対するアクションとトリガーの追加">Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加</h2>
-<p>実行中のPlaybookのステータスが更新された際に、その更新内容の配信先となるチャンネルと外向きのウェブフックを実行ごとに指定できるようになりました。今までも作成したPlaybookに配信先を指定することはできましたが、本バージョンからPlaybookの実行ごとに配信先を指定することができます。</p>
+<p>実行中のPlaybookのステータスが更新された際に、その更新内容の配信先となるチャンネルと外向きのウェブフックを実行ごとに指定できるようになりました。今までもPlaybook単位で配信先を指定することはできましたが、本バージョンからPlaybookの実行ごとに配信先を追加で設定することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-trigger-action.gif" alt="playbooks-trigger-action"></p>
 <h2 id="integrations-apps-bar-ベータ版">Integrations: Apps Bar (ベータ版)</h2>
 <p>Mattermost統合機能のアイコンを表示する領域として、新たに画面右端にApps Barという領域が追加されました。</p>
-<p>今までのバージョンでも、MattermostにはPluginやApps等の統合機能によってチャンネルヘッダ部分に統合機能専用のアイコンを表示することができました。ただ、追加される統合機能が多くなると全てのチャンネルのヘッダ部分に統合機能のアイコンが数多く並ぶようになり、チャンネルヘッダのテキストなど、現在表示しているチャンネルに特化した情報が埋もれるようになっていました。Mattermost v6.0で刷新された新しいUIでは、チャンネルヘッダにはそのチャンネルに特化した情報を表示すべきという明確な目的が与えられたため、統合機能のアイコンが別の場所(Apps Bar)に移動されることになったようです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/integrations-appsbar.png" alt="integrations-appsbar"></p>
+<p>今までのバージョンでも、MattermostにはPluginやApps等の統合機能によってチャンネルヘッダ部分に統合機能専用のアイコンを表示することができました。ただ、追加される統合機能が多くなると全てのチャンネルのヘッダ部分に統合機能のアイコンが数多く並ぶようになり、チャンネルヘッダのテキストなど、現在表示しているチャンネルに特化した情報が埋もれるようになっていました。Mattermost v6.0で刷新された新しいUIでは、チャンネルヘッダにはそのチャンネルに特化した情報を表示すべきという明確な目的が与えられたため、v7で統合機能のアイコンを表示するための専用の場所(Apps Bar)が作成されたようです。</p>
 <p>Apps Bar機能は<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; Enable App Bar</strong>から有効/無効を設定できます。</p>
 <h2 id="platform-デスクトップアプリがmacos-app-storeからインストール可能に">Platform: デスクトップアプリがmacOS App Storeからインストール可能に</h2>
 <p>MattermostデスクトップアプリがmacOS App Storeから取得できるようになりました。　</p>
@@ -279,14 +284,14 @@ Mobileアプリでも共有された画面を綺麗に見ることができま�
 <p>v7より追加されたApp Bar機能を<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; Enable App Bar</strong>から有効にした場合、プラグインによってチャンネルヘッダーに追加された全てのアイコンが、AppBar領域に移動されます。セルフホスト版では、AppBar機能はデフォルトで無効になっています。</p>
 <h3 id="trustedproxyipheaderの設定値の確認"><code>TrustedProxyIPHeader</code>の設定値の確認</h3>
 <p>以前のバージョンでは、特定の状況下で<code>ServiceSettings.TrustedProxyIPHeader</code>のデフォルト設定値が空配列にならないバグが存在しましたが、本バージョンからデフォルト値が空配列になるよう修正されました。以前のバージョンからv7へアップデートする場合、この設定値を確認し、意図しない値が設定されている場合は <code>nil</code> を設定する必要があります。</p>
-<p>当該設定項目に関する説明は<a href="https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header">Configuration settings</a>を参照してください。また、この変更は<a href="https://github.com/mattermost/mattermost-server/pull/20217/files">このIssue</a>で実施されたようです。</p>
+<p>当該設定項目に関する説明は<a href="https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header">Configuration settings</a>を参照してください。</p>
 <h2 id="その他のトピック">その他のトピック</h2>
 <h3 id="チャンネル名コンテスト">チャンネル名コンテスト</h3>
-<p>MattermostのTwitterで、実際に運用されているユニークなMattermostチャンネル名を募集しています。6/22まで募集しており、5名の勝者にはグッズが送られるようです。</p>
+<p>MattermostのTwitterで、実際に運用されているユニークなMattermostチャンネル名を表彰するコンテストが開催されています。募集期限は6/22 PM12:00(ET) まで募集しており、最もユニークなチャンネル名を投稿した5名の勝者にはグッズが送られるようです。</p>
 <p>応募方法など詳しくは、以下のツイートツリーを参照ください。</p>
 <p><a href="https://twitter.com/Mattermost/status/1537080481384124419">https://twitter.com/Mattermost/status/1537080481384124419</a></p>
 <h3 id="happy-pride-month">Happy Pride Month</h3>
-<p>6月は、アメリカやカナダ、オーストラリアを始め様々な国でLGBTQ+の権利についての啓発を行うイベントが開催されるPride Monthとされています。仕事をする上でもPrideを尊重することは生産性と幸福を高めると考えており、Pride Monthに関する意識を向上させるために、6月の毎週金曜日にPride Monthに関するクイズを出し、最初に正解した人にグッズを贈呈するというイベントを開催しています。</p>
+<p>6月は、アメリカやカナダ、オーストラリアを始め様々な国でLGBTQ+の権利についての啓発を行うイベントが開催されるPride Monthとされています。Mattermost社は仕事をする上でもPrideを尊重することは生産性と幸福を高めると考えており、Pride Monthに関する意識を向上させるために、6月の毎週金曜日にPride Monthに関するクイズを出し、最初に正解した人にグッズを贈呈するというイベントを開催しています。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hpm.png" alt="etc-hpm"><br>
 <a href="https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw">https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw</a></p>
 <h3 id="hackathon">Hackathon</h3>
