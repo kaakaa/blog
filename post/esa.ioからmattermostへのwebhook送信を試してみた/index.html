@@ -170,32 +170,32 @@
 <h2 id="mattermostの設定">Mattermostの設定</h2>
 <p>まず、Mattermost側にesa.ioからのWebhookを受け取るための内向きのウェブフックを作成する必要があります。</p>
 <p>Mattermostのメインメニューから<strong>統合機能</strong>を選択します。
-<!-- raw HTML omitted --></p>
+<img alt="スクリーンショット 2018-07-07 22.39.24.png" src="https://qiita-image-store.s3.amazonaws.com/0/9891/258af11d-5a3c-43e2-250c-7985ecb64efc.png" width="20%"></p>
 <p>統合機能のメニューから<strong>内向きのウェブフック</strong>を選択し、<strong>内向きのウェブフックを追加する</strong>ボタンを押します。
-<!-- raw HTML omitted --></p>
+<img alt="スクリーンショット 2018-07-07 22.39.47.png" src="https://qiita-image-store.s3.amazonaws.com/0/9891/269e7bec-a002-deaf-742c-314c8a97963f.png" width="70%"></p>
 <p>ウェブフックを作成する際に必須の項目は<strong>タイトル</strong>と、通知を投稿する<strong>チャンネル</strong>のみですので、この２つは必ず指定してください。その他の情報は必要に応じて指定してください。
 入力か完了したら<strong>保存する</strong>ボタンを押します。</p>
-<!-- raw HTML omitted -->
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/cb8bbc85-1c2f-5b2e-3cba-e265868eccab.png" width="70%">
 <p>すると、新しい内向きのウェブフックが作成されるため、表示されているURLをコピーしておきます。
-<!-- raw HTML omitted --></p>
+<img alt="スクリーンショット 2018-07-07 23.00.50.png" src="https://qiita-image-store.s3.amazonaws.com/0/9891/3888ac41-6e30-a06f-b9ea-4cdabe0789f8.png" width="70%"></p>
 <p>これでMattermost側の設定は完了です。</p>
 <h2 id="esaioの設定">esa.ioの設定</h2>
 <p>次にesa.ioの設定を行います。</p>
 <p><code>https://{team}.esa.io/team/webhooks</code>よりウェブフックのメニューを開き、<strong>Add webhook</strong>ボタンを押します。
-<!-- raw HTML omitted --></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/8f5bb3d1-7175-5352-98eb-09576bab04bd.png" width="70%"></p>
 <p>ウェブフックのメニューから<strong>Mattermost</strong>を選択し、<strong>Incoming Webhook URL</strong>に、先ほどコピーしたMattermostの内向きのウェブフックのURLをペースとします。
 Labelやチェックボックスなどは必要に応じて変更してください。今回は投稿を作成した際に通知が飛ぶようにするため、**on post create (only ShipIt)**にチェックをしています。
-<!-- raw HTML omitted --></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/d0fe802e-a680-43e4-c95f-3fc731a4046f.png" width="50%"></p>
 <p><strong>Save</strong>ボタンを押してウェブフックが作成されたらesa.ioの設定も完了です。</p>
-<!-- raw HTML omitted -->
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/eb4d663f-ec6d-804a-f251-e0c0df8e980e.png" width="70%">
 <h2 id="通知の確認">通知の確認</h2>
 <p>esa.io側のウェブフックの設定を行なった段階で、Mattermostへ通知が飛びます。
 Mattermostで内向きのウェブフックを作成した時に選択したチャンネルを開いてみましょう<code>(\( ⁰⊖⁰)/)</code>。
-<!-- raw HTML omitted --></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/ce0af763-27bc-b89d-3f3e-1c6eb494e707.png" width="100%"></p>
 <p>次に、esa.io側で新しい投稿を作成し、<code>ShipIt</code>します。
-<!-- raw HTML omitted --></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/03168f23-5f3f-37f0-ecfa-d2e1d9758345.png" width="70%"></p>
 <p>すると、Mattermostの方に通知が飛びます。
-<!-- raw HTML omitted --></p>
+<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/46b29361-b612-49ea-57ca-388d6d3eb7a5.png" width="100%"></p>
 <p>投稿されるメッセージはesa.io側の<code>Change log</code>の内容のようです。
 リンクになっている<code>esa.ioへの通知テスト</code>をクリックすると、esa.ioで作成された投稿へ飛ぶことができます。</p>
 

@@ -196,10 +196,11 @@
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/search_filter.gif" alt="search filter"></p>
 <h2 id="絵文字リアクション操作が簡単に-モバイル">絵文字リアクション操作が簡単に (モバイル)</h2>
 <p>モバイルアプリ v1.32から、投稿を長押しすると出てくるメニューによく使われるリアクションが表示されるようになり、今までより簡単に絵文字リアクションが付けられるようになりました。</p>
-<!-- raw HTML omitted -->
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/emoji_mobile.jpg" height=480/>
 <h2 id="自動補完を使用したスラッシュコマンド入力-beta">自動補完を使用したスラッシュコマンド入力 (BETA)</h2>
 <p>今までのバージョンでも、メッセージ入力欄で <code>/</code> を入力すると利用可能なスラッシュコマンドの自動補完を行うことができましたが、今回のバージョンから、さらに選択したスラッシュコマンドで利用可能なオプション部分についても自動補完が可能となりました。</p>
-<!-- raw HTML omitted -->
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/slash_autocomplete.gif" height=480/>
+(画像は[公式リリースブログ](https://mattermost.com/blog/mattermost-release-v5-24/)より転載)
 <h2 id="bleveを利用した全文検索で日本語検索も可能に実験的機能">Bleveを利用した全文検索で日本語検索も可能に！（実験的機能）</h2>
 <p>今まで、Mattermost内の日本語メッセージを検索するためには、有償版のElasticsearch機能を使うか、DBに対して設定を追加する必要がありました。今回のバージョンから、Mattermost内のメッセージの全文検索に<a href="http://blevesearch.com/">Bleve</a>を利用できるようになり、Bleveを使用することで、無償版でもDBへの設定なしに日本語を含む文字列を検索できるようになります。</p>
 <p>Bleveの利用設定は <strong>システムコンソール &gt; 実験的機能 &gt; Bleve</strong> から行うことができます。
@@ -209,7 +210,7 @@
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_indexing.png" alt="bleve_indexing"></p>
 <p>インデックス付与が完了したら、<strong>Bleveの検索クエリを有効にする</strong>、<strong>Bleveの自動補完クエリを有効にする</strong>を有効に設定することで、Bleveを利用した検索が行えるようになります。設定完了後は、新しいメッセージも自動でインデックス付与が行われるため、インデックス最新かのための操作は必要ありません。</p>
 <p>設定完了後、Mattermost上で検索を行うことで、日本語一文字だけでも検索できるようになります。</p>
-<!-- raw HTML omitted -->
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.24/bleve_search.png" height=480/>
 <p>Bleveによる全文検索機能は実験的な機能のため、予期せぬ事象が発生する可能性があります。また、私も数件のメッセージがある環境でしか試していないため、大量のメッセージが存在する環境でどのような事象が発生するかは確認できていません。</p>
 <h2 id="enterprise版の改善">Enterprise版の改善</h2>
 <h3 id="office365カレンダーの同期-e20">Office365カレンダーの同期 (E20)</h3>

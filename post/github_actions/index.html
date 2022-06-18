@@ -208,12 +208,12 @@
   </ul>
 </nav><h2 id="github-actionsの作成">GitHub Actionsの作成</h2>
 <p>Actionsを使いたいリポジトリのタブの部分に <code>Actions</code> というメニューが生えているため、そこをクリックします。</p>
-<!-- raw HTML omitted -->
+<img width="645" alt="スクリーンショット 2019-08-31 10.01.26.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b1276252-5a63-2823-aeb7-33c41590be69.png">
 <p>まだActionsが設定されていない場合は、Workflowのサンプルがいくつか表示されています。
 自分は何も分からなかったので右上の <code>Set up a workflow yourself</code> のボタンを選択しました。</p>
-<!-- raw HTML omitted -->
+<img width="1188" alt="スクリーンショット 2019-08-31 10.05.34.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/db8fde68-bc9c-f430-aa60-20efbf10f693.png">
 <p>すると、 <code>.github/workflows/main.yml</code> というファイルにサンプルのワークフローの定義ファイルを作成する画面に移ります。CircleCIの設定ファイルによく似てますね。</p>
-<!-- raw HTML omitted -->
+<img width="1012" alt="スクリーンショット 2019-08-31 10.07.06.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b6c65c5b-fae2-72a7-af04-33c273b18684.png">
 <p>右ペインに簡単な説明が書かれているのでそれを見たり、<a href="https://help.github.com/en/categories/automating-your-workflow-with-github-actions">ドキュメント</a>を見たりしながら編集していきます。</p>
 <h2 id="完成品-mainyml">完成品 (main.yml)</h2>
 <p>とりあえず動くものが出来ました。</p>
@@ -248,13 +248,13 @@
 <p><code>env: ACCESS_TOKEN:</code> のところで <code>secrets.ACCESS_TOKEN</code> と言う変数を使っていますが、これはリポジトリのSettingsメニューから設定できる変数を使っているようです。
 <strong>Settings &gt; Secrets &gt; Add a new secret</strong>を選択し、変数名とその値を入れるとActionsの定義ファイル(<code>main.yml</code>)でその変数を使えるようになります。</p>
 <p>詳しくは<a href="https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables">公式ドキュメント</a>を。</p>
-<!-- raw HTML omitted -->
+<img width="1009" alt="スクリーンショット 2019-08-31 10.29.54.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/2910d27e-fd10-c161-d9e1-cfa1c7b98c2f.png">
 <h3 id="微妙な点">微妙な点</h3>
 <p>このステップの <code>BUILD_SCRIPT</code> のところでHugoでのビルドを行っているのですが、ここでHugoのインストールまでここでやっているのがちょっと微妙です。別のステップを作って、その中でHugoのインストールを行ってみたりしたのですが、<code>hugo</code>コマンドが見つからないと言うエラーとなり、別のステップでの変更は持ち込めないようでした。
 なんかやり方あるのかな？</p>
 <h2 id="動作確認">動作確認</h2>
 <p>コミットを契機にビルドが開始される設定となっているので、<code>.github/workflows/main.yml</code> をコミットすると、Actionsが開始されます。結果はActionsタブから確認できます。ビルドログも見れます。</p>
-<!-- raw HTML omitted -->
+<img width="1003" alt="スクリーンショット 2019-08-31 10.33.42.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/cd34afd7-6a2e-149a-f64b-7d648436a199.png">
 <h1 id="おわりに">おわりに</h1>
 <p>深くは使ってないので判断はできませんが、GitHubだけで完結できるのは楽ですね。</p>
 <p>今年の初めぐらいに<a href="https://blog.travis-ci.com/2019-01-23-travis-ci-joins-idera-inc">TravisがIderaに買収</a>されたり、<a href="https://news.ycombinator.com/item?id=19218036">Travisのエンジニアが解雇された</a>りとTravis周りはキナ臭い話が多く、それを機にCircleCIに移行するプロジェクトも多かったと思いましたが、そこでビッグウェーブに乗らずに移行しなかったために難なくGitHub Actionsに移れてよかったです。果報は寝て待てですね（動きが遅かっただけ）。</p>
