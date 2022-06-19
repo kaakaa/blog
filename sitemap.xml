@@ -2,8 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.kaakaa.dev/tags/github/</loc>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
+  </url><url>
     <loc>https://blog.kaakaa.dev/</loc>
-    <lastmod>2022-06-18T12:30:00+09:00</lastmod>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/</loc>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/pull-request/</loc>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/</loc>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/tech/github-pr-update-branch/</loc>
+    <lastmod>2022-06-19T12:30:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/mattermost/</loc>
     <lastmod>2022-06-18T12:30:00+09:00</lastmod>
@@ -11,13 +26,7 @@
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</loc>
     <lastmod>2022-06-18T12:30:00+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/post/</loc>
-    <lastmod>2022-06-18T12:30:00+09:00</lastmod>
-  </url><url>
     <loc>https://blog.kaakaa.dev/tags/releases/</loc>
-    <lastmod>2022-06-18T12:30:00+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/</loc>
     <lastmod>2022-06-18T12:30:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</loc>
@@ -400,9 +409,6 @@
   </url><url>
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-5.16/</loc>
     <lastmod>2019-10-19T10:15:49+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/github/</loc>
-    <lastmod>2019-08-31T10:50:21+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/github-pages/</loc>
     <lastmod>2019-08-31T10:50:21+09:00</lastmod>
