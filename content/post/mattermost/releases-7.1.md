@@ -37,15 +37,13 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 - [Boards](https://docs.mattermost.com/guides/boards.html): Mattermost v6.0から追加されたKanbanボード機能 ([Focalboard](https://www.focalboard.com/))
 - Platform: 上記機能を含むMattermost全体
 
-## (Professional/Enterprise) Channels: インサイト (ベータ版)
+## (Professional/Enterprise) Platform: インサイト (ベータ版)
 
-ワークスペース内の利用状況や活動状況を一目で確認できるインサイト機能が追加されました。(有償版限定の機能です。)
-
-[Insights](https://docs.mattermost.com/welcome/insights.html)
+ワークスペース内の利用状況や活動状況を一目で確認できる[**インサイト機能**](https://docs.mattermost.com/welcome/insights.html)が追加されました。(有償版限定の機能です。)
 
 ![channels-insight](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight.png)
 
-インサイトはチーム全体に関するインサイト (**チームインサイト**)と、自分が参加しているチャンネル・スレッドのみの情報を集めたインサイト(**私のインサイト**)の2つから選んで表示することができます。
+インサイトは、自分が参加しているチャンネル・スレッドのみの情報を集めたインサイト(**私のインサイト**)と、チーム全体に関するインサイト (**チームインサイト**)の2つから選んで表示することができます。
 
 ![channels-insight-menu](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight-menu.png)
 
@@ -57,7 +55,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ![channels-insight-widget](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight-widget.png)
 
-**チームインサイト**の**トップスレッド**には、自分が参加していないチャンネルのスレッドも表示されるため、会話が盛り上がっているチャンネルを見つけることなどができるようにもなります。
+**チームインサイト**の**トップスレッド**には、自分が参加していないチャンネルのスレッドも表示されるため、会話が盛り上がっているチャンネルを見つけることなどができるようにもなりそうです。
 
 ## Channels: Mobile v2.0(ベータ版)の開発に伴う各種更新
 
@@ -77,8 +75,8 @@ Mobileアプリ v2.0のベータテストに参加する方法は、以下のブ
 
 Mattermost 7.1にはデータベースのスキーマ変更が存在します。アップグレード時にスキーマ変更にかかる時間については以下のテスト結果を参考にしてください。
 
-* MySQL, 投稿数1200万, リアクション数250万: ~1分34秒 (8 core CPU / 16GB RAM)
-* PostgreSQL, 投稿数1200万, リアクション数250万: ~1分18秒 (db.r5.2xlarge)
+* MySQL, 投稿数1200万, リアクション数250万 → ~1分34秒 (8 core CPU / 16GB RAM)
+* PostgreSQL, 投稿数1200万, リアクション数250万 → ~1分18秒 (db.r5.2xlarge)
 
 以下のSQLを実行することでアップグレード前に手動でスキーマ変更を行うことができますが、このクエリは`Reaction`テーブルへのロックを取得するため、SQL実行中にユーザーが投稿したリアクションはデータベースに反映されません。
 
