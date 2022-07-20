@@ -182,7 +182,7 @@
 </ul>
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#professionalenterprise-channels-インサイト-ベータ版">(Professional/Enterprise) Channels: インサイト (ベータ版)</a></li>
+    <li><a href="#professionalenterprise-platform-インサイト-ベータ版">(Professional/Enterprise) Platform: インサイト (ベータ版)</a></li>
     <li><a href="#channels-mobile-v20ベータ版の開発に伴う各種更新">Channels: Mobile v2.0(ベータ版)の開発に伴う各種更新</a></li>
     <li><a href="#アップグレード時の注意事項">アップグレード時の注意事項</a>
       <ul>
@@ -192,17 +192,16 @@
     </li>
     <li><a href="#おわりに">おわりに</a></li>
   </ul>
-</nav><h2 id="professionalenterprise-channels-インサイト-ベータ版">(Professional/Enterprise) Channels: インサイト (ベータ版)</h2>
-<p>ワークスペース内の利用状況や活動状況を一目で確認できるインサイト機能が追加されました。(有償版限定の機能です。)</p>
-<p><a href="https://docs.mattermost.com/welcome/insights.html">Insights</a></p>
+</nav><h2 id="professionalenterprise-platform-インサイト-ベータ版">(Professional/Enterprise) Platform: インサイト (ベータ版)</h2>
+<p>ワークスペース内の利用状況や活動状況を一目で確認できる<a href="https://docs.mattermost.com/welcome/insights.html"><strong>インサイト機能</strong></a>が追加されました。(有償版限定の機能です。)</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight.png" alt="channels-insight"></p>
-<p>インサイトはチーム全体に関するインサイト (<strong>チームインサイト</strong>)と、自分が参加しているチャンネル・スレッドのみの情報を集めたインサイト(<strong>私のインサイト</strong>)の2つから選んで表示することができます。</p>
+<p>インサイトは、自分が参加しているチャンネル・スレッドのみの情報を集めたインサイト(<strong>私のインサイト</strong>)と、チーム全体に関するインサイト (<strong>チームインサイト</strong>)の2つから選んで表示することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight-menu.png" alt="channels-insight-menu"></p>
 <p>また、インサイトの集計期間は、<strong>今日</strong>、<strong>直近7日間</strong>、<strong>直近28日間</strong>から選ぶことができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight-timeframes.png" alt="channels-insight-timeframes"></p>
 <p>各ウィジェットのタイトル部分をクリックすると、トップスレッドは上位5スレッド、トップボードとトップリアクションは上位10項目まで確認することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.1/channels-insight-widget.png" alt="channels-insight-widget"></p>
-<p><strong>チームインサイト</strong>の<strong>トップスレッド</strong>には、自分が参加していないチャンネルのスレッドも表示されるため、会話が盛り上がっているチャンネルを見つけることなどができるようにもなります。</p>
+<p><strong>チームインサイト</strong>の<strong>トップスレッド</strong>には、自分が参加していないチャンネルのスレッドも表示されるため、会話が盛り上がっているチャンネルを見つけることなどができるようにもなりそうです。</p>
 <h2 id="channels-mobile-v20ベータ版の開発に伴う各種更新">Channels: Mobile v2.0(ベータ版)の開発に伴う各種更新</h2>
 <p>今回のリリースには、先月紹介した<a href="https://blog.kaakaa.dev/post/mattermost/releases-7.0/#channels-mobile-v20-beta">Mobileアプリ v2.0のベータ版</a>の開発に伴う更新が含まれています。Mobile v2.0(Beta)は、機能追加やバグ修正が毎週行われており、ユーザーからのフィードバックも歓迎しています。正式版のリリースは今年末を予定しているそうです。</p>
 <p>Mobileアプリ v2.0のベータテストに参加する方法は、以下のブログエントリに説明があります。<br>
@@ -213,8 +212,8 @@
 <h3 id="スキーマ変更にかかる所要時間">スキーマ変更にかかる所要時間</h3>
 <p>Mattermost 7.1にはデータベースのスキーマ変更が存在します。アップグレード時にスキーマ変更にかかる時間については以下のテスト結果を参考にしてください。</p>
 <ul>
-<li>MySQL, 投稿数1200万, リアクション数250万: ~1分34秒 (8 core CPU / 16GB RAM)</li>
-<li>PostgreSQL, 投稿数1200万, リアクション数250万: ~1分18秒 (db.r5.2xlarge)</li>
+<li>MySQL, 投稿数1200万, リアクション数250万 → ~1分34秒 (8 core CPU / 16GB RAM)</li>
+<li>PostgreSQL, 投稿数1200万, リアクション数250万 → ~1分18秒 (db.r5.2xlarge)</li>
 </ul>
 <p>以下のSQLを実行することでアップグレード前に手動でスキーマ変更を行うことができますが、このクエリは<code>Reaction</code>テーブルへのロックを取得するため、SQL実行中にユーザーが投稿したリアクションはデータベースに反映されません。</p>
 <ul>
