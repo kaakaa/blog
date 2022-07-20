@@ -14,6 +14,14 @@
 		<atom:link href="/tags/line/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 7.1の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</link>
+			<pubDate>Wed, 20 Jul 2022 23:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/07/15 に Mattermost のアップデートとなる v7.1.0 がリリースされました。また、同日にMark</description>
+		</item>
+      	
+		<item>
 			<title>他人の作ったPull Requestのブランチをbaseブランチに追従させたい</title>
 			<link>https://blog.kaakaa.dev/post/tech/github-pr-update-branch/</link>
 			<pubDate>Sun, 19 Jun 2022 12:30:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Tue, 28 Dec 2021 14:00:05 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/life/music-2021/</guid>
 			<description>今年聞いた音楽の振り返り。 メタル民。スラッジ/ドゥーム/サイケな感じが好き。 サブスクはApple Music BGMとしてリピートで流し続けることが多い</description>
-		</item>
-      	
-		<item>
-			<title>Lessons learned from merging Mattermost instances</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/merge-instances/</link>
-			<pubDate>Mon, 20 Dec 2021 12:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/merge-instances/</guid>
-			<description>この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例</description>
 		</item>
       	
 	</channel>
