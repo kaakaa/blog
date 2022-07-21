@@ -208,7 +208,7 @@
 <a href="https://mattermost.com/blog/mobile-beta-program-v2/">Join the Mattermost mobile beta program: v2.0 is now live! - Mattermost</a></p>
 <h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
 <h3 id="新たに追加されたmaximagedecoderconcurrencyの設定値について">新たに追加された<code>MaxImageDecoderConcurrency</code>の設定値について</h3>
-<p>新たに追加された画像デコード同時実行数に関する設定 <code>MaxImageDecoderConcurrency</code> にはデフォルトで <code>-1</code> が設定されており、これはCPUと同数であることを表しています。この設定はサーバーのメモリ消費量に影響があり、単一の画像を処理する際の最大メモリ消費量は <code>画像の解像度 * 24</code>バイトになります。そのため、<code>最大の画像解像度 * MaxImageDecoderConcurrency * 24</code>バイトが割り当てられたメモリより小さくなるよう設定することをお勧めします。</p>
+<p>新たに追加された画像デコード同時実行数に関する設定 <code>MaxImageDecoderConcurrency</code> にはデフォルトで <code>-1</code> が設定されており、これはCPUと同数であることを表しています。この設定はサーバーのメモリ消費量に影響があり、単一の画像を処理する際の最大メモリ消費量は <code>最大の画像の解像度 * 24</code>バイトになります。そのため、<code>最大の画像解像度 * MaxImageDecoderConcurrency * 24</code>バイトが割り当てられたメモリより小さくなるよう設定することをお勧めします。</p>
 <h3 id="スキーマ変更にかかる所要時間">スキーマ変更にかかる所要時間</h3>
 <p>Mattermost 7.1にはデータベースのスキーマ変更が存在します。アップグレード時にスキーマ変更にかかる時間については以下のテスト結果を参考にしてください。</p>
 <ul>
