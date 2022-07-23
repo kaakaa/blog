@@ -210,7 +210,7 @@
 <h3 id="新たに追加されたmaximagedecoderconcurrencyの設定値について">新たに追加された<code>MaxImageDecoderConcurrency</code>の設定値について</h3>
 <p>新たに追加された画像デコード同時実行数に関する設定 MaxImageDecoderConcurrency にはデフォルトで -1 が設定されており、これはCPUと同数であることを表しています。</p>
 <p>この設定は、Mattermostサーバーのメモリ消費量に影響があり、設定値の決定に注意が必要です。<br>
-まず、Mattermostで単一の画像を処理する際の最大メモリ消費量は、最大画像解像度の設定MaxImageResolutionの設定値を使用して MaxImageResolution * 24バイトと計算することができます。さらに、本バージョンより追加されたMaxImageDecoderConcurrencyによる画像処理の同時実行数を考慮すると、MaxImageResolution * MaxImageDecoderConcurrency * 24バイトが、Mattermostに割り当てられたメモリより小さくなるよう設定値を決定することをお勧めします。</p>
+まず、Mattermostで単一の画像を処理する際の最大メモリ消費量は、最大画像解像度の設定<a href="https://docs.mattermost.com/configure/configuration-settings.html#maximum-image-resolution">MaxImageResolution</a>の設定値を使用して MaxImageResolution * 24バイトと計算することができます。さらに、本バージョンより追加されたMaxImageDecoderConcurrencyによる画像処理の同時実行数を考慮すると、MaxImageResolution * MaxImageDecoderConcurrency * 24バイトが、Mattermostに割り当てられたメモリより小さくなるよう設定値を決定することをお勧めします。</p>
 <h3 id="スキーマ変更にかかる所要時間">スキーマ変更にかかる所要時間</h3>
 <p>Mattermost 7.1にはデータベースのスキーマ変更が存在します。アップグレード時にスキーマ変更にかかる時間については以下のテスト結果を参考にしてください。</p>
 <ul>
