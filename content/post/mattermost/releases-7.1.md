@@ -72,7 +72,7 @@ Mobileアプリ v2.0のベータテストに参加する方法は、以下のブ
 新たに追加された画像デコード同時実行数に関する設定 MaxImageDecoderConcurrency にはデフォルトで -1 が設定されており、これはCPUと同数であることを表しています。
 
 この設定は、Mattermostサーバーのメモリ消費量に影響があり、設定値の決定に注意が必要です。  
-まず、Mattermostで単一の画像を処理する際の最大メモリ消費量は、最大画像解像度の設定MaxImageResolutionの設定値を使用して MaxImageResolution * 24バイトと計算することができます。さらに、本バージョンより追加されたMaxImageDecoderConcurrencyによる画像処理の同時実行数を考慮すると、MaxImageResolution * MaxImageDecoderConcurrency * 24バイトが、Mattermostに割り当てられたメモリより小さくなるよう設定値を決定することをお勧めします。
+まず、Mattermostで単一の画像を処理する際の最大メモリ消費量は、最大画像解像度の設定[MaxImageResolution](https://docs.mattermost.com/configure/configuration-settings.html#maximum-image-resolution)の設定値を使用して MaxImageResolution * 24バイトと計算することができます。さらに、本バージョンより追加されたMaxImageDecoderConcurrencyによる画像処理の同時実行数を考慮すると、MaxImageResolution * MaxImageDecoderConcurrency * 24バイトが、Mattermostに割り当てられたメモリより小さくなるよう設定値を決定することをお勧めします。
 
 ### スキーマ変更にかかる所要時間
 
