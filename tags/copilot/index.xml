@@ -1,0 +1,97 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>copilot on kaakaa blog</title>
+		<link>https://blog.kaakaa.dev/tags/copilot/</link>
+		<description>Recent content in copilot </description>
+		<generator>Hugo -- gohugo.io</generator>
+		
+  		<language>ja-JP</language>
+		
+		<managingEditor>Page(/tags/copilot) (Yusuke Nemoto)</managingEditor>
+    	
+  		<lastBuildDate>Wed, 03 Aug 2022 23:00:00 +0900</lastBuildDate>
+		
+		<atom:link href="/tags/copilot/" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>オープンソースの権利とGitHub Copilotについて調べたことと私見</title>
+			<link>https://blog.kaakaa.dev/post/tech/copilot-rights/</link>
+			<pubDate>Wed, 03 Aug 2022 23:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/tech/copilot-rights/</guid>
+			<description>はじめに AIによるペアプログラミングを掲げるGitHub Copilotが正式リリースとなった1。 GitHub Copilotは、IDE上で自然言語でプロ</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 7.1の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</link>
+			<pubDate>Wed, 20 Jul 2022 23:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/07/15 に Mattermost のアップデートとなる v7.1.0 がリリースされました。また、同日にMark</description>
+		</item>
+      	
+		<item>
+			<title>他人の作ったPull Requestのブランチをbaseブランチに追従させたい</title>
+			<link>https://blog.kaakaa.dev/post/tech/github-pr-update-branch/</link>
+			<pubDate>Sun, 19 Jun 2022 12:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/tech/github-pr-update-branch/</guid>
+			<description>背景 CIが壊れてるときにPRをもらってしまい、CIがコケてCheckが通らずマージができないという事態。 CIを直すにはCIスクリプトの方を直</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 7.0の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</link>
+			<pubDate>Sat, 18 Jun 2022 12:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.7の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</link>
+			<pubDate>Tue, 17 May 2022 15:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/05/16 に Mattermost の新しいバージョン v6.7.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.6の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</link>
+			<pubDate>Sat, 23 Apr 2022 13:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/04/16 に Mattermost の新しいバージョン v6.6.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.5の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.5/</link>
+			<pubDate>Sat, 19 Mar 2022 12:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.5/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/03/16 に Mattermost の新しいバージョン v6.5.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.4の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.4/</link>
+			<pubDate>Sat, 19 Feb 2022 17:40:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.4/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/02/16 に Mattermost の新しいバージョン v6.4.0 がリリースされました。 本記事は、個人的に気に</description>
+		</item>
+      	
+		<item>
+			<title>Mattermost 6.3の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.3/</link>
+			<pubDate>Tue, 18 Jan 2022 18:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.3/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/01/14 に Mattermost の新しいバージョン v6.3.0 がリリースされました。 本バージョンはExte</description>
+		</item>
+      	
+		<item>
+			<title>Whimsicalでお金のパイプラインを描いてみた</title>
+			<link>https://blog.kaakaa.dev/post/life/money-pipeline/</link>
+			<pubDate>Fri, 14 Jan 2022 18:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/life/money-pipeline/</guid>
+			<description>背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた。 Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパ</description>
+		</item>
+      	
+	</channel>
+</rss>

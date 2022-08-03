@@ -9,10 +9,18 @@
 		
 		<managingEditor>Page(/tags) (Yusuke Nemoto)</managingEditor>
     	
-  		<lastBuildDate>Wed, 20 Jul 2022 23:00:00 +0900</lastBuildDate>
+  		<lastBuildDate>Wed, 03 Aug 2022 23:00:00 +0900</lastBuildDate>
 		
 		<atom:link href="/tags/" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>オープンソースの権利とGitHub Copilotについて調べたことと私見</title>
+			<link>https://blog.kaakaa.dev/post/tech/copilot-rights/</link>
+			<pubDate>Wed, 03 Aug 2022 23:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/tech/copilot-rights/</guid>
+			<description>はじめに AIによるペアプログラミングを掲げるGitHub Copilotが正式リリースとなった1。 GitHub Copilotは、IDE上で自然言語でプロ</description>
+		</item>
+      	
 		<item>
 			<title>Mattermost 7.1の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</link>
@@ -83,14 +91,6 @@
 			<pubDate>Fri, 14 Jan 2022 18:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/life/money-pipeline/</guid>
 			<description>背景 以下のPodcastで @yuya_takeyamaさん がお金のパイプラインについて話していたのを聴いた。 Middle Aged Developers: Managing money like a CI/CD pipeline on Apple Podcasts お金のパ</description>
-		</item>
-      	
-		<item>
-			<title>2021年 音楽振り返り</title>
-			<link>https://blog.kaakaa.dev/post/life/music-2021/</link>
-			<pubDate>Tue, 28 Dec 2021 14:00:05 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/life/music-2021/</guid>
-			<description>今年聞いた音楽の振り返り。 メタル民。スラッジ/ドゥーム/サイケな感じが好き。 サブスクはApple Music BGMとしてリピートで流し続けることが多い</description>
 		</item>
       	
 	</channel>
