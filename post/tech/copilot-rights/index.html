@@ -207,7 +207,7 @@
 <p>「はじめに」でも述べたが、Copilot正式リリースが話題に上るとともに、Copilotが既存プロジェクトのコード片と合致するコードを提案する可能性があることへの懸念に関する言及も多くあった。</p>
 <p>後述するが、まず、GitHub等の<u>インターネット上に公開されているデータを機械学習の用に利用することは&quot;fair-use&quot;</u>である。また、サービス提供者であるGitHub/OpenAI社は、<u>GitHub Copilotが提案するコード片をどのように扱うかについてはCopilot利用者側に責任がある</u>としており、Copilotを利用して開発されたソフトウェアに権利侵害が見つかった場合、それは利用者側の責任ということになる。これらの点については、調査の対象外とする。</p>
 <p>本エントリでは、「<strong>GitHub CopilotがCopilot利用者に対して提案するコードが学習元プロジェクトの権利侵害にあたらないか</strong>」という点について主に取り上げている。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-overview.dio.png" alt="copilot-overview.dio.png"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-overview.png" alt="copilot-overview"></p>
 <h2 id="調査-開発側github社-openai社-の解釈についての推察">調査: 開発側(GitHub社, OpenAI社) の解釈についての推察</h2>
 <p>GitHub Copilotおよび、その裏で動いているOpenAI Codexを開発/提供しているGitHub社,OpenAI社がこの問題についてどのように捉えているのか、公開情報を元に調べてみた。</p>
 <h3 id="openai社">OpenAI社</h3>
@@ -272,7 +272,7 @@
 </blockquote>
 <p>このFAQでは、GitHub Copilotに<u>提案内容が公開コードと一致しているかチェックする機能が存在し、一致している場合は提案しないようもできるオプションを備えている</u>と言っている。</p>
 <p>このオプションはGitHubのSetings &gt; GitHub Copilotから設定することができるようだ。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-setting.dio.png" alt="copilot-setting"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-setting.png" alt="copilot-setting"></p>
 <p>ひとつ前のFAQより、GitHub社自身はCopilotの提案するコードが直接的に他者の権利侵害に繋がることはないと判断しているように思えるが、AI生成物の権利について未だ確たる結論がない以上、公開コードとの一致による権利侵害に懸念を持っている利用者もいるはずであり、そのような人向けのオプションも用意しているということだろうか。</p>
 <hr>
 <p>少し脇道に逸れるが、ここで生じる新たな疑問として「<strong>コードの完全な一致(maching)さえ防ぐことができれば、学習元プロジェクトに対する権利侵害を回避できるのか?</strong>」というものがある。</p>
@@ -325,7 +325,7 @@
 <p>このサービスには、推奨コードが特定のトレーニングデータに類似しているかどうかを検出するリファレンストラッカーも含まれています。開発者はコードの例を簡単に見つけて確認し、プロジェクトでそのコードを使用するかどうかを決定できます。</p>
 </blockquote>
 <p>CodeWhiperer の解説記事<sup id="fnref:20"><a href="#fn:20" class="footnote-ref" role="doc-noteref">20</a></sup>の方に、スクリーンショット付きでこの機能の解説がある。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/codewhisperer-reference-log.dio.png" alt="codewhisperer-reference-log"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/tech/copilot-rights/codewhisperer-reference-log.png" alt="codewhisperer-reference-log"></p>
 <p>これを見ると、確かに採用した提案コードがどのようなライセンスの元で公開されているのかを一目で確認でき、採用不採用を決定するのに役に立ちそう。</p>
 <p>少し気になったので、スクリーンショットで例として表示されているリポジトリの記述が正しいのか調べてみた。</p>
 <p><code>github drfs</code> で検索すると <a href="https://github.com/datarevenue-berlin/drfs">https://github.com/datarevenue-berlin/drfs</a> がヒットし、このリポジトリはMITライセンスで公開されており、また、S3に関する処理があり、Pythonで書かれていることから、このリポジトリの例を表示しているように見える。このプロジェクトの2021/12/23最新コミットで、提案されているコードと同様の記述を探すと、以下が見つかる。</p>
