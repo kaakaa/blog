@@ -60,8 +60,7 @@ GitHub上のプログラムについて考えると、上述の通り、**著作
 
 本エントリでは、「**GitHub CopilotがCopilot利用者に対して提案するコードが学習元プロジェクトの権利侵害にあたらないか**」という点について主に取り上げている。
 
-![copilot-overview.dio.png](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-overview.dio.png)
-
+![copilot-overview](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-overview.png)
 ## 調査: 開発側(GitHub社, OpenAI社) の解釈についての推察
 
 GitHub Copilotおよび、その裏で動いているOpenAI Codexを開発/提供しているGitHub社,OpenAI社がこの問題についてどのように捉えているのか、公開情報を元に調べてみた。
@@ -173,7 +172,7 @@ OpenAI社の論文でもそうであったが、GitHub側のステートメン�
 
 このオプションはGitHubのSetings > GitHub Copilotから設定することができるようだ。
 
-![copilot-setting](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-setting.dio.png)
+![copilot-setting](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/copilot-setting.png)
 
 ひとつ前のFAQより、GitHub社自身はCopilotの提案するコードが直接的に他者の権利侵害に繋がることはないと判断しているように思えるが、AI生成物の権利について未だ確たる結論がない以上、公開コードとの一致による権利侵害に懸念を持っている利用者もいるはずであり、そのような人向けのオプションも用意しているということだろうか。
 
@@ -275,7 +274,7 @@ Amazon CodeWhispererは、GitHub Copilotと同様、開発者によるコメン�
 
 CodeWhiperer の解説記事[^20]の方に、スクリーンショット付きでこの機能の解説がある。
 
-![codewhisperer-reference-log](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/codewhisperer-reference-log.dio.png)
+![codewhisperer-reference-log](https://blog.kaakaa.dev/images/posts/tech/copilot-rights/codewhisperer-reference-log.png)
 
 [^20]: [ntroducing Amazon CodeWhisperer, the ML-powered coding companion | AWS Machine Learning Blog](https://aws.amazon.com/jp/blogs/machine-learning/introducing-amazon-codewhisperer-the-ml-powered-coding-companion/)
 
