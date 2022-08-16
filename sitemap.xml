@@ -2,13 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.kaakaa.dev/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/mattermost/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/tech/enhancement-mattermost-japanese-search/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/releases/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/tags/</loc>
+    <lastmod>2022-08-16T17:00:00+09:00</lastmod>
+  </url><url>
     <loc>https://blog.kaakaa.dev/tags/copilot/</loc>
     <lastmod>2022-08-03T23:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/github/</loc>
-    <lastmod>2022-08-03T23:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/</loc>
     <lastmod>2022-08-03T23:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/license/</loc>
@@ -17,22 +32,10 @@
     <loc>https://blog.kaakaa.dev/tags/oss/</loc>
     <lastmod>2022-08-03T23:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/post/</loc>
-    <lastmod>2022-08-03T23:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/</loc>
-    <lastmod>2022-08-03T23:00:00+09:00</lastmod>
-  </url><url>
     <loc>https://blog.kaakaa.dev/post/tech/copilot-rights/</loc>
     <lastmod>2022-08-03T23:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/tags/mattermost/</loc>
-    <lastmod>2022-07-20T23:00:00+09:00</lastmod>
-  </url><url>
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.1/</loc>
-    <lastmod>2022-07-20T23:00:00+09:00</lastmod>
-  </url><url>
-    <loc>https://blog.kaakaa.dev/tags/releases/</loc>
     <lastmod>2022-07-20T23:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/pull-request/</loc>
