@@ -4,7 +4,7 @@ emoji: "🎉"
 published: true
 date: 2022-08-16T17:00:00+09:00
 toc: true
-tags: ["mattermost", "releases"]
+tags: ["mattermost", "bleve", "japanese", "search"]
 ---
 
 ## 背景: Mattermost Bleve検索
