@@ -182,7 +182,7 @@
 </ul>
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#board-roleベースの権限設定">Board: Roleベースの権限設定</a></li>
+    <li><a href="#boards-roleベースの権限設定">Boards: Roleベースの権限設定</a></li>
     <li><a href="#boards-新しいサイドバーナビゲーション">Boards: 新しいサイドバーナビゲーション</a></li>
     <li><a href="#boards-カスタムテンプレートが簡単に共有可能に">Boards: カスタムテンプレートが簡単に共有可能に</a></li>
     <li><a href="#playbooks-サイドバーの刷新">Playbooks: サイドバーの刷新</a></li>
@@ -204,20 +204,20 @@
     </li>
     <li><a href="#おわりに">おわりに</a></li>
   </ul>
-</nav><h2 id="board-roleベースの権限設定">Board: Roleベースの権限設定</h2>
-<p>今までBoard機能の各ボードの権限はMattermostのチャンネルに基づいて管理されていましたが、今回のバージョンからRoleベースの権限管理に変更されました。</p>
-<p>Board画面の右上に表示される <strong>共有</strong> ボタンから、Boardに対する権限設定を行うことができます。</p>
+</nav><h2 id="boards-roleベースの権限設定">Boards: Roleベースの権限設定</h2>
+<p>今までBoards機能の各ボードの権限はMattermostのチャンネルに基づいて管理されていましたが、今回のバージョンからRoleベースの権限管理に変更されました。</p>
+<p>ボード画面の右上に表示される <strong>共有</strong> ボタンから、ボードに対する権限設定を行うことができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/boards-share.png" alt="boards-share"></p>
 <p>チーム全体に対する権限と、チャンネル・ユーザーごとの権限を設定できるようになっています。</p>
 <p>ユーザーに対する権限は、ボードの内容を編集できる「<strong>編集者(Editor)</strong>」と、それに加えてボードの権限設定まで行うことができる「<strong>管理者(Admin)</strong>」から選択できます。また、今後のリリースでは、コメントの追加のみ可能な「<strong>Commenter</strong>」とBoardの閲覧のみ可能な「<strong>Viewer</strong>」の権限が追加される予定です。</p>
-<p>Mattermostのチャンネル全体に権限を与えるには、ボードをMattermostチャンネルに<strong>リンク</strong>する必要があります。ボードとの<strong>リンク</strong>を行うと、そのMattermostチャンネルのメンバー全員にボードに対する**編集者(Editor)**権限を付与することができます。ボードは一つのMattermostチャンネルとリンクすることができ、Mattermostチャンネルとリンクした場合、チャンネル画面の右サイドバーに表示されるようになります。</p>
+<p>Mattermostチャンネルのメンバー全員に権限を与えるには、ボードをMattermostチャンネルに<strong>リンク</strong>する必要があります。ボードとの<strong>リンク</strong>を行うと、そのMattermostチャンネルのメンバー全員にボードに対する <strong>編集者(Editor)</strong> 権限が付与されます。ボードは一つのMattermostチャンネルとリンクすることができ、Mattermostチャンネルとボードをリンクすると、チャンネル画面の右サイドバーにリンクされたボードの一覧が表示されるようになります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/boards-rhs.png" alt="boards-rhs"></p>
 <p>ボードの共有メニューでは、リンク済みのチャンネルに対する <strong>リンク解除(Unlink)</strong> を実行することができます。既にMattermostチャンネルにリンクされてるボードを別のMattermostチャンネルにリンクしようとすると、元々リンク済みだったチャンネルとのリンクが解除されるという警告メッセージが表示されます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/boards-link-warning.png" alt="boards-link-warning"></p>
 <p>Boardの権限や共有の設定について、詳しくは公式ドキュメントを参照してください。<br>
 <a href="https://docs.mattermost.com/welcome/whats-new-in-v72.html#sharing">Sharing | What’s new in Mattermost Boards</a></p>
 <h2 id="boards-新しいサイドバーナビゲーション">Boards: 新しいサイドバーナビゲーション</h2>
-<p>Boardsのサイドバーが刷新され、Mattermost Channels(チャット機能)と同じような見た目になりました。</p>
+<p>Boardsのサイドバーが刷新されました。</p>
 <p>以前のバージョンでは、チャンネルごとにボードが設定されており、別のチャンネルにリンクされているボードを開くには、左上のメニューからチャンネルを切り替える必要がありました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/boards-sidebar-old.png" alt="boards-sidebar-old"></p>
 <p>今回のバージョンからボードを開く際にチャンネルを選択する必要はなくなり、Mattermostチーム内の全てのボードを一つの画面で閲覧できるようになりました。また、Channelsのサイドバーと同様、<code>Ctrl+K</code> / <code>Cmd + K</code>のショートカットでチーム内のボードを検索することができ、さらに、カスタムカテゴリを作成してユーザー独自のグルーピングを行うことができるようになっています。</p>
@@ -230,14 +230,14 @@
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/boards-share-template.png" alt="boards-share-template"></p>
 <h2 id="playbooks-サイドバーの刷新">Playbooks: サイドバーの刷新</h2>
 <p>Playbooks機能もサイドバーナビゲーションが刷新され、Mattermost Channels(チャット機能)と同様の見た目になりました。</p>
-<p>以前のバージョン(画面右)では、プレイブックと実行(Run)がそれぞれ全画面で表示されてるため、それぞれの内容を確認するためには画面を切り替える必要がありました。今回のバージョン(画面左)からは、全てのプレイブックと実行(Run)をサイドバーから一覧することができるようにな、プレイブック、実行(Run)へのアクセスが容易になりました。</p>
+<p>以前のバージョン(下画像・右)では、プレイブックと実行(Run)がそれぞれ全画面で表示されてるため、それぞれの内容を確認するためにはタブを切り替える必要がありました。今回のバージョン(下画像・左)からは、全てのプレイブックと実行(Run)をサイドバーから一覧することができるようになり、プレイブック・実行(Run)へのアクセスが容易になりました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/playbooks-sidebar.png" alt="playbooks-sidebar"></p>
 <p>今後、カスタムカテゴリによるグルーピング機能もリリース予定だそうです。</p>
 <h2 id="platform-インサイト機能の改善">Platform: インサイト機能の改善</h2>
 <p>インサイトに表示される項目が追加されました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.3/platform-insight.png" alt="platform-insight"></p>
 <p>「<strong>新しいチームメンバー</strong>」では、Mattermostチームに新たに参加したユーザーを確認することができます。<code>チームインサイト</code>では「<strong>新しいチームメンバー</strong>」が表示されますが、自分に関するインサイトである<code>私のインサイト</code>画面では、同じ場所に「<strong>もっともアクティブなダイレクトメッセージ</strong>」が表示され、DMのやり取りの回数の多いユーザーが表示されます。<br>
-「<strong>最もアクティブでないチャンネル</strong>」では、活動のないチャンネルを確認することができます。活動の少ないチャンネルに対しては、再び投稿を作成して注意をひいたり、チャンネルを脱退するなどの判断に利用することができます。<br>
+「<strong>最もアクティブでないチャンネル</strong>」では、活動の少ないチャンネルを確認することができます。活動の少ないチャンネルの情報は、再び投稿を作成して注意をひくよう計画したり、チャンネルを脱退するなどの判断に利用することができます。<br>
 「<strong>トップPlaybooks</strong>」では、最も実行回数の多いプレイブックを確認することができます。</p>
 <h2 id="その他の変更">その他の変更</h2>
 <h3 id="enterprise-channels-call機能専用のcallサーバーが利用可能に">(Enterprise) Channels: Call機能専用のCallサーバーが利用可能に</h3>
