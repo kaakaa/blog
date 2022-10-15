@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost 7.4の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7H97CTR9R6');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost 7.4の新機能"/>
+<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/10/14 に Mattermost のアップデートとなる v7.4.0 がリリースされました。 本記事は、個人的に気"/>
+
+
+  <meta property="og:title" content="Mattermost 7.4の新機能" />
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/10/14 に Mattermost のアップデートとなる v7.4.0 がリリースされました。 本記事は、個人的に気" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.4/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-10-15T16:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-10-15T16:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost 7.4の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Oct 15, 2022
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href="https://twitter.com/mattermost_jp">Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id="はじめに">はじめに</h1>
+<p>2022/10/14 に Mattermost のアップデートとなる <code>v7.4.0</code> がリリースされました。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-v7-4-is-now-available/">Mattermost v7.4 is now available - Mattermost</a></li>
+<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-4-feature-release">Mattermost self-hosted changelog</a></li>
+</ul>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href="https://mattermost.com/pricing/">Professional</a></li>
+<li><a href="https://mattermost.com/pricing/">Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Starter(OSS 版)でも利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/guides/channels.html">Channels</a>: 従来のチャット機能</li>
+<li><a href="https://docs.mattermost.com/guides/playbooks.html">Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
+<li>Platform: 上記機能を含むMattermost全体</li>
+</ul>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#calls-キーボードショートカットが利用可能に">Calls: キーボードショートカットが利用可能に</a></li>
+    <li><a href="#boards-commenterviewerロールの追加">Boards: Commenter/Viewerロールの追加</a></li>
+    <li><a href="#boards-ゲストアカウントでもboards機能が利用可能に">Boards: ゲストアカウントでもBoards機能が利用可能に</a></li>
+    <li><a href="#boards-メンバー追加時に自動補完リストが表示されるように">Boards: メンバー追加時に自動補完リストが表示されるように</a></li>
+    <li><a href="#boards-boardのリンクリンク解除操作がチャンネルに通知されるように">Boards: Boardのリンク/リンク解除操作がチャンネルに通知されるように</a></li>
+    <li><a href="#boards-multi-personプロパティの追加">Boards: Multi-personプロパティの追加</a></li>
+    <li><a href="#その他の変更">その他の変更</a>
+      <ul>
+        <li><a href="#メッセージ転送機能における日本語入力時の不具合改善">メッセージ転送機能における日本語入力時の不具合改善</a></li>
+      </ul>
+    </li>
+    <li><a href="#その他のトピック">その他のトピック</a>
+      <ul>
+        <li><a href="#hacktoberfest">Hacktoberfest</a></li>
+        <li><a href="#mattermost関連の記事紹介">Mattermost関連の記事紹介</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav><h2 id="calls-キーボードショートカットが利用可能に">Calls: キーボードショートカットが利用可能に</h2>
+<p>Calls機能の操作を行うためのキーボードショートカットが追加されました。
+ミュート解除やスクリーン共有などの操作をする際にマウスを操作する必要がなくなるので、キーボードから手を離す必要がなくなります。</p>
+<p>現在サポートされているキーボードショートカットは以下の通りです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/calls-shortcut.png" alt="calls-shortcut"></p>
+<p><a href="https://docs.mattermost.com/channels/keyboard-shortcuts-for-channels.html#calls-shortcuts">Keyboard shortcuts for Channels</a></p>
+<h2 id="boards-commenterviewerロールの追加">Boards: Commenter/Viewerロールの追加</h2>
+<p>Boardsの権限ロールに、コメントの追加が可能な<strong>Commenter</strong>と、Boardおよびその内容の閲覧のみが可能な<strong>Viewer</strong> が追加されました。これらの権限が追加されたことで、Board内容の意図せぬ変更の可能性を減らすことができるようになります。</p>
+<p>Boardsに対する権限ロールの設定は、Boards画面右上の <strong>Share</strong> ボタンから行うことができます</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-new-role.png" alt="boards-new-role"></p>
+<hr>
+<p>現在、<strong>Commenter</strong> の日本語訳が <strong>コメントした人</strong> となっていますが、次バージョンでは<strong>コメンター</strong>に修正されているかと思います。</p>
+<p>また、 <strong>Viewer</strong>(閲覧者)以外のロールが設定されたユーザーのロールを変更しようとすると、<strong>Viewer</strong>(閲覧者)の表示位置がずれてしまいます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-new-role-misaligned.png" alt="boards-new-role-misaligned"></p>
+<p>こちらについても既に修正済みのため、次バージョンで修正されているかと思います。<br>
+<a href="https://github.com/mattermost/focalboard/pull/3926">Fix misaligned &lsquo;viewer&rsquo; role on share board/template dialog by vivekkj123 · Pull Request #3926 · mattermost/focalboard</a></p>
+<!-- 
+## Boards: Minimum default board roles
+(新しい機能の話でなくユースケースの話であり、説明しようとすると複雑になり混乱を与えそうなので割愛)
+-->
+<h2 id="boards-ゲストアカウントでもboards機能が利用可能に">Boards: ゲストアカウントでもBoards機能が利用可能に</h2>
+<p>Mattermostには昔から組織外のユーザー用に<a href="https://docs.mattermost.com/onboard/guest-accounts.html"><strong>ゲストアカウント</strong></a>を作成する機能がありましたが、本バージョンからゲストアカウントもBoardにアクセスできるようになりました。　
+ただし、正規のユーザーとは異なり「新しいBoardの作成は行えない」や「Boardの管理者権限は付与できない」などの制限があります。詳しくは<a href="https://docs.mattermost.com/boards/share-and-collaborate.html#guest-accounts">公式ドキュメント</a>を参照してください。</p>
+<h2 id="boards-メンバー追加時に自動補完リストが表示されるように">Boards: メンバー追加時に自動補完リストが表示されるように</h2>
+<p>Cardの内容やコメントを追加する際に <code>@</code> を入力することで、ユーザーの自動補完リストが表示されるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-autocomplete.png" alt="boards-autocomplete"></p>
+<p>もし、Boardのユーザーではないユーザーの場合、自動補完リストのユーザー名の横に <strong>(not board member)</strong> と表示され、このユーザーに対する@メンションを行おうとすると、そのユーザーの権限を設定するダイアログが表示されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-autocomplete-permission.png" alt="boards-autocomplete-permission"></p>
+<p>この自動補完リストは、Cardのプロパティでも動作します。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-autocomplete-property.png" alt="boards-autocomplete-property"></p>
+<h2 id="boards-boardのリンクリンク解除操作がチャンネルに通知されるように">Boards: Boardのリンク/リンク解除操作がチャンネルに通知されるように</h2>
+<p>ChannelsのAppBar(右サイドバー)からチャンネルをBoardにリンクもしくはリンクの解除を実行すると、チャンネルに通知メッセージが投稿されるようになりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-channel-notification.png" alt="boards-channel-notification"></p>
+<h2 id="boards-multi-personプロパティの追加">Boards: Multi-personプロパティの追加</h2>
+<p>Cardのプロパティに複数のユーザーを指定できる <strong>Multi-person</strong> というプロパティ種別が追加されました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-multi-person.png" alt="boards-multi-person"></p>
+<p>今までのバージョンでは、一人のユーザーのみ指定できる <strong>Person</strong> タイプしか選択できず、例えばCardに対する担当者(Assignee)を設定する場合は、複数のプロパティを作成する必要がありましたが、<strong>Multi-person</strong>が追加されたことで、一つのプロパティを用意するだけで良くなりました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-.png" alt="boards-"></p>
+<h2 id="その他の変更">その他の変更</h2>
+<h3 id="メッセージ転送機能における日本語入力時の不具合改善">メッセージ転送機能における日本語入力時の不具合改善</h3>
+<p>Mattermost v7.2で追加されたメッセージ転送(Message Forwarding)機能で、転送メッセージを日本語で入力する際に入力確定の <code>Enter</code> を押下するとメッセージ転送が実行されてしまう不具合がありました。<br>
+<a href="https://blog.kaakaa.dev/post/mattermost/releases-7.2/#%E6%B3%A8%E6%84%8F-%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9B%E6%99%82%E3%81%AE%E4%B8%8D%E5%85%B7%E5%90%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">Mattermost 7.2の新機能 - 注意: 日本語入力時の不具合について</a></p>
+<p>この不具合はv7.4で解消されました。<br>
+<a href="https://github.com/mattermost/mattermost-server/issues/20838">Unable to add Japanese comments correctly in Message Forwarding Dialog · Issue #20838 · mattermost/mattermost-server</a></p>
+<h2 id="その他のトピック">その他のトピック</h2>
+<h3 id="hacktoberfest">Hacktoberfest</h3>
+<p>今年もMattermostは<a href="https://hacktoberfest.com/">Hacktoberfest</a>に力を入れています。<br>
+<a href="https://mattermost.com/blog/hacktoberfest-2022/">Hacktoberfest is here again! - Mattermost</a></p>
+<p><a href="https://hacktoberfest.com/">Hacktoberfest</a>の期間中(10月中)にMattermostへのコントリビューを行うと、オリジナルのステッカーが貰えるそうです。また、期間中のトップコントリビューターに選ばれると、Tシャツやマグカップ等も貰えるようです。</p>
+<h3 id="mattermost関連の記事紹介">Mattermost関連の記事紹介</h3>
+<h4 id="mattermost構築">Mattermost構築</h4>
+<ul>
+<li><a href="https://qiita.com/nanbuwks/items/b20e2df483f6806909ab">Mattermost を Docker でローカルサーバにインストール - Qiita</a>
+<ul>
+<li><a href="https://github.com/mattermost/docker">mattermost/docker</a>を利用したMattermost構築方法について</li>
+</ul>
+</li>
+<li><a href="https://twitter.com/kanetugu2020/status/1577185142896230401">森　崇さんはTwitterを使っています: 「仕事でmattermostに大量のユーザ/ポストを登録必要があり、バッチ・スクリプト群を一般公開ししました。 負荷テストやるときに便利と思います〜。 https://t.co/0ErNlJhI2w #mattermost」 / Twitter</a>
+<ul>
+<li>Mattermostに任意のデータを一括登録するスクリプトの紹介</li>
+</ul>
+</li>
+<li><a href="https://qiita.com/Power-mind74/items/6e8cbe5cb42d7094ca57">MattermostサーバをGCPパッケージを使って構築する - Qiita</a>
+<ul>
+<li>GCPにMattermostを構築する手順について</li>
+</ul>
+</li>
+</ul>
+<h4 id="tech">Tech</h4>
+<ul>
+<li><a href="https://zenn.dev/kiyasu7028/articles/20295d293aa0ae">Mattermost サンプルデータの作成</a>
+<ul>
+<li>公式CLIツール(<a href="https://github.com/mattermost/mmctl">mmctl</a>)を使ったMattermostサンプルデータの自動生成について</li>
+</ul>
+</li>
+<li><a href="https://zenn.dev/kiyasu7028/articles/f2a59351495c58">Mattermost 投稿内容の出力</a>
+<ul>
+<li>公式CLIツール(<a href="https://github.com/mattermost/mmctl">mmctl</a>)を使ったMattermost投稿データの取得について</li>
+</ul>
+</li>
+<li><a href="https://zenn.dev/kiyasu7028/articles/83b38aff54f4b6">Mattermost 投稿数順に集計して通知</a>
+<ul>
+<li>投稿数ランキングをMattermostで通知する方法について (Python)</li>
+</ul>
+</li>
+<li><a href="https://qiita.com/kanetugu2018/items/bf0e22a58d2ecd8f4062">Mattermot APIのPHPドライバを Laravel で実行する手順 - Qiita</a>
+<ul>
+<li>Mattermost PHPドライバ (コミュニティ製) の実行方法の紹介</li>
+</ul>
+</li>
+</ul>
+<h2 id="おわりに">おわりに</h2>
+<p>次の<code>v7.5</code>のリリースは 2022/11/16(We)を予定しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
+        <img
+          src="https://blog.kaakaa.dev/images/zenn.svg"
+          alt="Zenn"
+        />
+      </a>
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2022
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>
