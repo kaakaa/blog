@@ -84,9 +84,12 @@ Cardの内容やコメントを追加する際に `@` を入力することで�
 
 ![boards-autocomplete](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-autocomplete.png)
 
-もし、Boardのユーザーではないユーザーの場合、自動補完リストのユーザー名の横に **(not board member)** と表示され、このユーザーに対する@メンションを行おうとすると、そのユーザーの権限を設定するダイアログが表示されます。
+もし、Boardのユーザーではないユーザーの場合、自動補完リストのユーザー名の横に **(not board member)** と表示されます。  
+また、このユーザーに対する@メンションを行おうとすると、そのユーザーの権限を設定するダイアログが表示されます。
 
 ![boards-autocomplete-permission](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-autocomplete-permission.png)
+
+これにより、@メンションの対象となったユーザーをBoardに追加するとともに、そのユーザーの権限も同時に設定することができます。
 
 この自動補完リストは、Cardのプロパティでも動作します。
 
@@ -94,7 +97,7 @@ Cardの内容やコメントを追加する際に `@` を入力することで�
 
 ## Boards: Boardのリンク/リンク解除操作がチャンネルに通知されるように
 
-ChannelsのAppBar(右サイドバー)からチャンネルをBoardにリンクもしくはリンクの解除を実行すると、チャンネルに通知メッセージが投稿されるようになりました。
+ChannelsのAppBar(右サイドバー)からチャンネルをBoardにリンク、もしくはチャンネルとのリンクの解除を実行すると、チャンネルに通知メッセージが投稿されるようになりました。
 
 ![boards-channel-notification](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-channel-notification.png)
 
@@ -104,16 +107,13 @@ Cardのプロパティに複数のユーザーを指定できる **Multi-person*
 
 ![boards-multi-person](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-multi-person.png)
 
-今までのバージョンでは、一人のユーザーのみ指定できる **Person** タイプしか選択できず、例えばCardに対する担当者(Assignee)を設定する場合は、複数のプロパティを作成する必要がありましたが、**Multi-person**が追加されたことで、一つのプロパティを用意するだけで良くなりました。
-
-
-![boards-](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/boards-.png)
+今までのバージョンでは、一人のユーザーのみ指定できる **Person** タイプしか選択できませんでした、そのため、例えばCardに対する担当者(Assignee)を複数人設定したい場合は、複数のプロパティ(**Assignee1**, **Assignee2**, ...)を作成する必要がありました。しかし、**Multi-person**が追加されたことで、一つのプロパティで複数人の担当者を扱えるようになります。
 
 ## その他の変更
 
 ### メッセージ転送機能における日本語入力時の不具合改善
 
-Mattermost v7.2で追加されたメッセージ転送(Message Forwarding)機能で、転送メッセージを日本語で入力する際に入力確定の `Enter` を押下するとメッセージ転送が実行されてしまう不具合がありました。  
+Mattermost v7.2で追加されたメッセージ転送(Message Forwarding)機能にて転送メッセージを日本語で入力する際、入力確定の `Enter` を押下すると、意図せずメッセージ転送が実行されてしまうという不具合がありました。  
 [Mattermost 7.2の新機能 - 注意: 日本語入力時の不具合について](https://blog.kaakaa.dev/post/mattermost/releases-7.2/#%E6%B3%A8%E6%84%8F-%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%85%A5%E5%8A%9B%E6%99%82%E3%81%AE%E4%B8%8D%E5%85%B7%E5%90%88%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)
 
 この不具合はv7.4で解消されました。  
@@ -129,16 +129,18 @@ Mattermost v7.2で追加されたメッセージ転送(Message Forwarding)機能
 
 [Hacktoberfest](https://hacktoberfest.com/)の期間中(10月中)にMattermostへのコントリビューを行うと、オリジナルのステッカーが貰えるそうです。また、期間中のトップコントリビューターに選ばれると、Tシャツやマグカップ等も貰えるようです。
 
+![event-hacktoberfest-swags](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.4/event-hacktoberfest-swags.png)
+
 ### Mattermost関連の記事紹介
 
 #### Mattermost構築
 
 * [Mattermost を Docker でローカルサーバにインストール \- Qiita](https://qiita.com/nanbuwks/items/b20e2df483f6806909ab)
   * [mattermost/docker](https://github.com/mattermost/docker)を利用したMattermost構築方法について
-* [森　崇さんはTwitterを使っています: 「仕事でmattermostに大量のユーザ/ポストを登録必要があり、バッチ・スクリプト群を一般公開ししました。 負荷テストやるときに便利と思います〜。 https://t\.co/0ErNlJhI2w \#mattermost」 / Twitter](https://twitter.com/kanetugu2020/status/1577185142896230401)
-  * Mattermostに任意のデータを一括登録するスクリプトの紹介
 * [MattermostサーバをGCPパッケージを使って構築する \- Qiita](https://qiita.com/Power-mind74/items/6e8cbe5cb42d7094ca57)
   * GCPにMattermostを構築する手順について
+* [森　崇さんはTwitterを使っています: 「仕事でmattermostに大量のユーザ/ポストを登録必要があり、バッチ・スクリプト群を一般公開ししました。 負荷テストやるときに便利と思います〜。 https://t\.co/0ErNlJhI2w \#mattermost」 / Twitter](https://twitter.com/kanetugu2020/status/1577185142896230401)
+  * Mattermostに任意のデータを一括登録するスクリプトの紹介
 
 #### Tech
 
