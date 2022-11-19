@@ -184,11 +184,7 @@
 <nav id="TableOfContents">
   <ul>
     <li><a href="#calls-メッセージスレッド">Calls: メッセージスレッド</a></li>
-    <li><a href="#boards-ボードテンプレートの追加">Boards: ボードテンプレートの追加</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
+    <li><a href="#boards-ボードテンプレートの追加">Boards: ボードテンプレートの追加</a></li>
     <li><a href="#boards-テキストプロパティでのフィルタリング">Boards: テキストプロパティでのフィルタリング</a></li>
     <li><a href="#boards-ボードの統計情報">Boards: ボードの統計情報</a></li>
     <li><a href="#channels-最終活動日時の表示">Channels: 最終活動日時の表示</a></li>
@@ -208,6 +204,10 @@
       <ul>
         <li><a href="#starterプランの名称がfreeに変更"><code>Starter</code>プランの名称が<code>Free</code>に変更</a></li>
         <li><a href="#未読チャンネルをフィルタするためのショートカットが追加">未読チャンネルをフィルタするためのショートカットが追加</a></li>
+      </ul>
+    </li>
+    <li><a href="#その他のトピック">その他のトピック</a>
+      <ul>
         <li><a href="#mattermost関連の記事紹介">Mattermost関連の記事紹介</a></li>
       </ul>
     </li>
@@ -227,26 +227,26 @@ Callsのメッセージスレッドでは、通常のメッセージスレッド
 <h2 id="boards-ボードテンプレートの追加">Boards: ボードテンプレートの追加</h2>
 <p>ボードを新規に作成する際に選択できるテンプレートに、新たに以下の6つが追加されました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-new-templates.png" alt="boards-new-templates"></p>
-<h4 id="company-goals--okrs">Company goals &amp; OKRs</h4>
+<p><strong>Company goals &amp; OKRs</strong></p>
 <p>組織のゴールや、OKRの管理を行うためのテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-okr.png" alt="boards-template-okr"></p>
 <p>Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Competion等のプロパティで達成度合いを管理することができます。また、QuarterやDepartment(部署)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
-<h4 id="competitive-analysis">Competitive analysis</h4>
+<p><strong>Competitive analysis</strong></p>
 <p>競合分析用のテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-competitive.png" alt="boards-template-competitive"></p>
 <p>競合企業の情報 (Website, Location, Revenue,&hellip;) や各企業のMarket Positionなどを一覧化することができます。Market Positionごとにカードを並べたビューもデフォルトで作成されます。</p>
-<h4 id="sales-pipeline-crm">Sales pipeline CRM</h4>
+<p><strong>Sales pipeline CRM</strong></p>
 <p>セールスの状況を管理するためのテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-sales.png" alt="boards-template-sales"></p>
 <p>各顧客に関する情報や商談の状況などを一覧化することができます。商談の状況(Open Deals)や商談フェーズ(Pipeline Tracker)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
-<h4 id="sprint-planner">Sprint planner</h4>
+<p><strong>Sprint planner</strong></p>
 <p>スプリント計画やリリースに向けたタスク管理を行うためのテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-sprint.png" alt="boards-template-sprint"></p>
 <p>スプリントごとのタスク一覧を管理することができます。タスクの状況(Status)やタスクの種別(Type)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
-<h4 id="team-retrospective">Team retrospective</h4>
+<p><strong>Team retrospective</strong></p>
 <p>うまく行ったことや改善点など、将来に向けた振り返りを行うためのテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-retrospective.png" alt="boards-template-retrospective"></p>
-<h4 id="user-research-sessions">User research sessions</h4>
+<p><strong>User research sessions</strong></p>
 <p>ユーザーリサーチの状況を管理するためのテンプレートです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-user-research.png" alt="boards-template-user-research"></p>
 <p>ユーザーへのインタビュー状況を一覧で管理することができます。インタビュー予定(Date)や状況(Status)ごとにタスクを一覧化するビューもデフォルトで作成されます。</p>
@@ -273,11 +273,11 @@ Callsのメッセージスレッドでは、通常のメッセージスレッド
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-last-activity-settings.png" alt="channels-last-activity-settings"></p>
 <h2 id="platform-desktop-v52">Platform: Desktop v5.2</h2>
 <p>Mattermost Desktopアプリv5.2 がリリースされました。</p>
-<p>ファイルダウンロードの状況を表示するダイアログが追加されています。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-download.png" alt="desktop-download"></p>
+<p>ファイルダウンロードの状況を表示するダイアログが追加されています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-download.png" alt="desktop-download"></p>
 <h3 id="ローカライズ">ローカライズ</h3>
 <p>デスクトップアプリのメニュー等がローカライズされるようになりました。日本語にも対応しています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-loaclize.png" alt="desktop-localize"></p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-localize.png" alt="desktop-localize"></p>
 <h2 id="platform-mobile-app-v1551-esr">Platform: Mobile App v1.55.1 (ESR)</h2>
 <p>9月にリリースされたv1.55.1が、モバイルアプリとしては初めてのESR(Extended Support Release)として設定されました。このバージョンは2023/06までサポートされます。<br>
 モバイルアプリのメジャーバージョンアップであるv2.0が12月にリリース予定となりますが、モバイルアプリのカスタムビルドを利用しているユーザーのための経過措置になります。</p>
@@ -293,6 +293,7 @@ Callsのメッセージスレッドでは、通常のメッセージスレッド
 <h3 id="未読チャンネルをフィルタするためのショートカットが追加">未読チャンネルをフィルタするためのショートカットが追加</h3>
 <p>未読のチャンネルのみを表示するためショートカットとして <code>Ctrl/Cmd + Shift + U</code>が追加されました。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-shortcut-unreads.png" alt="channels-shortcut-unreads"></p>
+<h2 id="その他のトピック">その他のトピック</h2>
 <h3 id="mattermost関連の記事紹介">Mattermost関連の記事紹介</h3>
 <h4 id="mattermost構築">Mattermost構築</h4>
 <ul>
