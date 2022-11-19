@@ -152,11 +152,13 @@ Mattermost CloudのFreeプランではカード数の上限が **10,000** まで
 
 Mattermost Desktopアプリv5.2 がリリースされました。
 
+### ファイルダウンロード状況の表示
+
 ファイルダウンロードの状況を表示するダイアログが追加されています。
 
 ![desktop-download](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-download.png)
 
-### ローカライズ
+### メッセージの翻訳
 
 デスクトップアプリのメニュー等がローカライズされるようになりました。日本語にも対応しています。
 
