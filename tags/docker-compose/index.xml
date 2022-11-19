@@ -14,6 +14,14 @@
 		<atom:link href="/tags/docker-compose/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 7.5の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.5/</link>
+			<pubDate>Sat, 19 Nov 2022 10:00:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.5/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/11/16 に Mattermost のアップデートとなる v7.5.0 がリリースされました。 また、同日にUbun</description>
+		</item>
+      	
+		<item>
 			<title>Mattermost 7.4の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.4/</link>
 			<pubDate>Sat, 15 Oct 2022 16:00:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Tue, 17 May 2022 15:00:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/05/16 に Mattermost の新しいバージョン v6.7.0 がリリースされました。 本記事は、個人的に気に</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 6.6の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</link>
-			<pubDate>Sat, 23 Apr 2022 13:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.6/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/04/16 に Mattermost の新しいバージョン v6.6.0 がリリースされました。 本記事は、個人的に気に</description>
 		</item>
       	
 	</channel>

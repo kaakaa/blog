@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8" />
+<title>Mattermost 7.5の新機能</title>
+
+
+  
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7H97CTR9R6');
+  </script>
+  
+
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  href="https://blog.kaakaa.dev/index.xml"
+  title="kaakaa blog"
+/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mattermost 7.5の新機能"/>
+<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/11/16 に Mattermost のアップデートとなる v7.5.0 がリリースされました。 また、同日にUbun"/>
+
+
+  <meta property="og:title" content="Mattermost 7.5の新機能" />
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/11/16 に Mattermost のアップデートとなる v7.5.0 がリリースされました。 また、同日にUbun" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.5/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2022-11-19T10:00:00&#43;09:00" />
+<meta property="article:modified_time" content="2022-11-19T10:00:00&#43;09:00" />
+
+
+
+
+<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
+
+<link
+  id="dark-mode-theme"
+  rel="stylesheet"
+  href="https://blog.kaakaa.dev/css/dark.css"
+/>
+
+<script>
+  var darkTheme = document.getElementById('dark-mode-theme')
+  var storedTheme = localStorage.getItem('dark-mode-storage')
+  if (storedTheme === 'dark') {
+    darkTheme.disabled = false
+  } else if (storedTheme === 'light') {
+    darkTheme.disabled = true
+  }
+</script>
+
+<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
+<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
+<meta name="generator" content="Hugo 0.82.0" />
+  </head>
+  <body>
+    
+  
+
+
+
+
+  <header>
+    <nav class="navbar">
+  <div class="nav">
+    
+      <a href="https://blog.kaakaa.dev/" class="nav-logo">
+        <img
+          src="https://blog.kaakaa.dev/images/icon.png"
+          width="50"
+          height="50"
+          alt="Logo"
+        />
+      </a>
+    
+
+    <ul class="nav-links">
+      
+        
+          <li>
+            <a href="/" id="Home"
+              ><em class="fas fa-home fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/about/" id="About"
+              ><em class="fas fa-user fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/tags/" id="Tags"
+              ><em class="fas fa-tag fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/search/" id="Search"
+              ><em class="fas fa-search fa-lg"></em
+            ></a>
+          </li>
+          
+      
+        
+          <li>
+            <a href="/index.xml" id="Subscribe"
+              ><em class="fas fa-rss fa-lg"></em
+            ></a>
+          </li>
+          
+      
+    </ul>
+  </div>
+</nav>
+
+    <div class="intro-header">
+      <div class="container">
+        <div class="post-heading">
+          
+            <h1>
+              Mattermost 7.5の新機能
+            </h1>
+          
+          
+            <span class="meta-post">
+  <em class="fa fa-calendar-alt"></em
+  >&nbsp;Nov 19, 2022
+  
+</span>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+    
+  <div class="container" role="main">
+    <article class="article" class="blog-post">
+      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href="https://twitter.com/mattermost_jp">Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id="はじめに">はじめに</h1>
+<p>2022/11/16 に Mattermost のアップデートとなる <code>v7.5.0</code> がリリースされました。
+また、同日にUbuntu 18.04環境でアップグレード時に発生する問題の修正を含む <code>v7.5.1</code>がリリースされています。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href="https://mattermost.com/blog/mattermost-v7-5-is-now-available/">Mattermost v7.5 is now available - Upgrade your deployment today</a></li>
+<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-5-feature-release">Mattermost self-hosted changelog</a></li>
+</ul>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href="https://mattermost.com/pricing/">Professional</a></li>
+<li><a href="https://mattermost.com/pricing/">Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Free版も利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href="https://docs.mattermost.com/guides/channels.html">Channels</a>: 従来のチャット機能</li>
+<li><a href="https://docs.mattermost.com/guides/playbooks.html">Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
+<li>Platform: 上記機能を含むMattermost全体</li>
+</ul>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#calls-メッセージスレッド">Calls: メッセージスレッド</a></li>
+    <li><a href="#boards-ボードテンプレートの追加">Boards: ボードテンプレートの追加</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#boards-テキストプロパティでのフィルタリング">Boards: テキストプロパティでのフィルタリング</a></li>
+    <li><a href="#boards-ボードの統計情報">Boards: ボードの統計情報</a></li>
+    <li><a href="#channels-最終活動日時の表示">Channels: 最終活動日時の表示</a></li>
+    <li><a href="#platform-desktop-v52">Platform: Desktop v5.2</a>
+      <ul>
+        <li><a href="#ローカライズ">ローカライズ</a></li>
+      </ul>
+    </li>
+    <li><a href="#platform-mobile-app-v1551-esr">Platform: Mobile App v1.55.1 (ESR)</a></li>
+    <li><a href="#アップグレード時の注意事項">アップグレード時の注意事項</a>
+      <ul>
+        <li><a href="#dbマイグレーション">DBマイグレーション</a></li>
+        <li><a href="#webappプラグイン">Webappプラグイン</a></li>
+      </ul>
+    </li>
+    <li><a href="#その他の変更">その他の変更</a>
+      <ul>
+        <li><a href="#starterプランの名称がfreeに変更"><code>Starter</code>プランの名称が<code>Free</code>に変更</a></li>
+        <li><a href="#未読チャンネルをフィルタするためのショートカットが追加">未読チャンネルをフィルタするためのショートカットが追加</a></li>
+        <li><a href="#mattermost関連の記事紹介">Mattermost関連の記事紹介</a></li>
+      </ul>
+    </li>
+    <li><a href="#おわりに">おわりに</a></li>
+  </ul>
+</nav><h2 id="calls-メッセージスレッド">Calls: メッセージスレッド</h2>
+<p>Calls機能を利用中に、スレッド形式でメッセージをやり取りできるようになりました。<br>
+Callsのメッセージスレッドでは、通常のメッセージスレッドと同様に絵文字リアクションや@メンションを利用することができます。</p>
+<p>メッセージスレッドを利用するには、Callへ参加し、Windowsモードにし、コメントアイコンをクリックすることで、メッセージスレッドを開くことができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/calls-message-open.png" alt="calls-message-open"></p>
+<p>このスレッドでのやり取りは、通常のメッセージスレッドと同様、チャンネルに残ります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/calls-message-channel.png" alt="calls-message-channel"></p>
+<hr>
+<p><a href="https://mattermost.com/sign-up/">Mattermost Cloud</a>の方でCallsプラグインを <a href="https://github.com/mattermost/mattermost-plugin-calls/releases/tag/v0.10.0">v0.10.0</a>にアップデートしたところ、Webブラウザ/Decksopアプリからはコメントアイコンが表示されず、モバイルアプリ v2 (Beta)の方では <code>チャットスレッド</code> のメニューが表示されるという状態でした。</p>
+<p>一方、公式の<a href="https://community.mattermost.com">Community向けMattermost</a>の方で試したみたところ、Webブラウザ/Desktopアプリではコメントアイコンが表示され、モバイルアプリの方では <code>チャットスレッド</code> のメニューが現れないという状態でした。</p>
+<p>一応ブラウザのキャッシュ削除等は試してみたのですが解消せず、ちょっと原因がわかりませんでした。</p>
+<h2 id="boards-ボードテンプレートの追加">Boards: ボードテンプレートの追加</h2>
+<p>ボードを新規に作成する際に選択できるテンプレートに、新たに以下の6つが追加されました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-new-templates.png" alt="boards-new-templates"></p>
+<h4 id="company-goals--okrs">Company goals &amp; OKRs</h4>
+<p>組織のゴールや、OKRの管理を行うためのテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-okr.png" alt="boards-template-okr"></p>
+<p>Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Competion等のプロパティで達成度合いを管理することができます。また、QuarterやDepartment(部署)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
+<h4 id="competitive-analysis">Competitive analysis</h4>
+<p>競合分析用のテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-competitive.png" alt="boards-template-competitive"></p>
+<p>競合企業の情報 (Website, Location, Revenue,&hellip;) や各企業のMarket Positionなどを一覧化することができます。Market Positionごとにカードを並べたビューもデフォルトで作成されます。</p>
+<h4 id="sales-pipeline-crm">Sales pipeline CRM</h4>
+<p>セールスの状況を管理するためのテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-sales.png" alt="boards-template-sales"></p>
+<p>各顧客に関する情報や商談の状況などを一覧化することができます。商談の状況(Open Deals)や商談フェーズ(Pipeline Tracker)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
+<h4 id="sprint-planner">Sprint planner</h4>
+<p>スプリント計画やリリースに向けたタスク管理を行うためのテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-sprint.png" alt="boards-template-sprint"></p>
+<p>スプリントごとのタスク一覧を管理することができます。タスクの状況(Status)やタスクの種別(Type)ごとにタスクを一覧化できるビューもデフォルトで作成されます。</p>
+<h4 id="team-retrospective">Team retrospective</h4>
+<p>うまく行ったことや改善点など、将来に向けた振り返りを行うためのテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-retrospective.png" alt="boards-template-retrospective"></p>
+<h4 id="user-research-sessions">User research sessions</h4>
+<p>ユーザーリサーチの状況を管理するためのテンプレートです。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-user-research.png" alt="boards-template-user-research"></p>
+<p>ユーザーへのインタビュー状況を一覧で管理することができます。インタビュー予定(Date)や状況(Status)ごとにタスクを一覧化するビューもデフォルトで作成されます。</p>
+<h2 id="boards-テキストプロパティでのフィルタリング">Boards: テキストプロパティでのフィルタリング</h2>
+<p>ボード内のカードをフィルタリングをする際に、以下のプロパティの値でフィルタリングできるようになりました。</p>
+<ul>
+<li>Text</li>
+<li>Email</li>
+<li>Phone</li>
+<li>URL</li>
+</ul>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-text-filtering.png" alt="boards-text-filtering"></p>
+<h2 id="boards-ボードの統計情報">Boards: ボードの統計情報</h2>
+<p><strong>システムコンソール &gt; サイトの使用統計</strong>に、ボードに関する統計情報が表示されるようになりました。ボード数とカード数が表示されるようになります。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-statistics.png" alt="boards-statistics"></p>
+<p>Mattermost CloudのFreeプランではカード数の上限が <strong>10,000</strong> までに設定されているため、Freeプランの上限を超えないためにカード数の総数を把握しやすくなったのは良いことだと思います。</p>
+<h2 id="channels-最終活動日時の表示">Channels: 最終活動日時の表示</h2>
+<p>ユーザープロフィールを表示するポップアップに、そのユーザーが最後に活動した時間が表示されるようになりました。
+ステータスがアクティブでないユーザーのみ表示されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-last-activity.png" alt="channels-last-activity"></p>
+<p>この機能は <strong>システムコンソール &gt; サイト設定 &gt; ユーザーとチーム &gt; 最終活動日時を有効にする</strong> から無効化することもできます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-last-activity-console.png" alt="channels-last-activity-console"></p>
+<p>また、<strong>設定 &gt; 表示 &gt; 最終活動日時を共有する</strong>から、ユーザーごとにこの情報を表示しないよう設定することもできます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-last-activity-settings.png" alt="channels-last-activity-settings"></p>
+<h2 id="platform-desktop-v52">Platform: Desktop v5.2</h2>
+<p>Mattermost Desktopアプリv5.2 がリリースされました。</p>
+<p>ファイルダウンロードの状況を表示するダイアログが追加されています。
+<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-download.png" alt="desktop-download"></p>
+<h3 id="ローカライズ">ローカライズ</h3>
+<p>デスクトップアプリのメニュー等がローカライズされるようになりました。日本語にも対応しています。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-loaclize.png" alt="desktop-localize"></p>
+<h2 id="platform-mobile-app-v1551-esr">Platform: Mobile App v1.55.1 (ESR)</h2>
+<p>9月にリリースされたv1.55.1が、モバイルアプリとしては初めてのESR(Extended Support Release)として設定されました。このバージョンは2023/06までサポートされます。<br>
+モバイルアプリのメジャーバージョンアップであるv2.0が12月にリリース予定となりますが、モバイルアプリのカスタムビルドを利用しているユーザーのための経過措置になります。</p>
+<h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
+<h3 id="dbマイグレーション">DBマイグレーション</h3>
+<p><code>Posts</code>テーブル内の<code>ParentID</code>カラムを削除するDBマイグレーションが実行されますが、MySQLを利用している場合、<code>Posts</code>テーブルのサイズによってはこの処理によってCPU使用率が上昇する場合があります。
+また、このマイグレーション実行中は書き込みが制限されます。</p>
+<h3 id="webappプラグイン">Webappプラグイン</h3>
+<p><a href="https://developers.mattermost.com/integrate/plugins/components/webapp/reference/#registerCustomRoute"><code>PluginRegistry.registerCustomRoute</code></a>を利用したプラグイン開発を行なっている場合、CSS<code>grid-area: center</code>が設定されていないとコンポーネントが適正な位置に表示されなくなります。</p>
+<h2 id="その他の変更">その他の変更</h2>
+<h3 id="starterプランの名称がfreeに変更"><code>Starter</code>プランの名称が<code>Free</code>に変更</h3>
+<p>今まで、Mattermostの無償プランは<code>Starter</code>プランと呼ばれていましたが、これからは<code>Free</code>プランと呼ぶようになりました。</p>
+<h3 id="未読チャンネルをフィルタするためのショートカットが追加">未読チャンネルをフィルタするためのショートカットが追加</h3>
+<p>未読のチャンネルのみを表示するためショートカットとして <code>Ctrl/Cmd + Shift + U</code>が追加されました。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-shortcut-unreads.png" alt="channels-shortcut-unreads"></p>
+<h3 id="mattermost関連の記事紹介">Mattermost関連の記事紹介</h3>
+<h4 id="mattermost構築">Mattermost構築</h4>
+<ul>
+<li><a href="https://tech.willserver.asia/2022/10/21/tool-mattermost_self_setup/">【Tool】Mattermostのセルフホスティングを導入してみる | willserver for tech-future</a>
+<ul>
+<li>AWS LightsailにMattermostを構築する手順について</li>
+</ul>
+</li>
+<li><a href="https://tech.willserver.asia/2022/10/24/tool-mattermost-client/">【Tool】Mattermostクライアントインストール手順(Windows、macOS、Linux) | willserver for tech-future</a>
+<ul>
+<li>Mattermost Desktopアプリ(Windows/Linux/macOS) のインストール方法について</li>
+</ul>
+</li>
+<li><a href="https://qiita.com/showchan33/items/e9a3860b1d1becdca0ed">Slackの投稿データをMattermostに移行してみる - Qiita</a>
+<ul>
+<li>SlackのデータをMattermostへ移行する方法について</li>
+</ul>
+</li>
+</ul>
+<h4 id="mattermostの紹介">Mattermostの紹介</h4>
+<ul>
+<li><a href="https://www.designet.co.jp/ossinfo/mattermost/">Mattermost〜OSSのチャットツール〜 | OSSのデージーネット</a>
+<ul>
+<li>Mattermostの概要・機能紹介</li>
+</ul>
+</li>
+</ul>
+<h2 id="おわりに">おわりに</h2>
+<p>次の<code>v7.6</code>のリリースは 2022/12/15(Thu)を予定しています。</p>
+
+
+
+      
+        <div class="blog-tags">
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/mattermost/"
+              >mattermost</a
+            >&nbsp;
+          
+            <a
+              href="https://blog.kaakaa.dev/tags/releases/"
+              >releases</a
+            >&nbsp;
+          
+        </div>
+      
+    </article>
+    
+    
+      
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+        (function() {
+            
+            
+            if (window.location.hostname == "localhost") return;
+
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            var disqus_shortname = 'kaakaa-blog';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+  <a href="https://disqus.com/" class="dsq-brlink"
+    >comments powered by <span class="logo-disqus">Disqus</span></a
+  >
+
+
+    
+  </div>
+
+    <footer>
+  
+
+<div class="social-icons">
+  
+    
+    
+      
+      <a href="https://github.com/kaakaa" name="GitHub">
+        <em class="fab fa-github-alt fa-lg"></em>
+      </a>
+    
+       &nbsp;&ndash;&nbsp;
+      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
+        <em class="fab fa-twitter fa-lg"></em>
+      </a>
+    
+  
+
+  
+    
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
+        <img
+          src="https://blog.kaakaa.dev/images/zenn.svg"
+          alt="Zenn"
+        />
+      </a>
+    
+       &nbsp;&ndash;&nbsp; 
+      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
+        <img
+          src="https://blog.kaakaa.dev/images/qiita.png"
+          alt="Qiita"
+        />
+      </a>
+    
+  
+</div>
+
+
+  
+  <div class="container">
+    <p class="credits copyright">
+      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
+      &nbsp;&copy;
+      2022
+      
+        &nbsp;/&nbsp;
+        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
+      
+      &nbsp;&ndash;&nbsp;
+      <em class="fas fa-moon" id="dark-mode-toggle"></em>
+    </p>
+
+    <p class="credits theme-by">
+      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
+      Theme
+      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
+    </p>
+  </div>
+</footer>
+
+  </body>
+</html>

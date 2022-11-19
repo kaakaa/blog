@@ -3,21 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.kaakaa.dev/</loc>
-    <lastmod>2022-10-15T16:00:00+09:00</lastmod>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/mattermost/</loc>
-    <lastmod>2022-10-15T16:00:00+09:00</lastmod>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
   </url><url>
-    <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.4/</loc>
-    <lastmod>2022-10-15T16:00:00+09:00</lastmod>
+    <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.5/</loc>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/</loc>
-    <lastmod>2022-10-15T16:00:00+09:00</lastmod>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/releases/</loc>
-    <lastmod>2022-10-15T16:00:00+09:00</lastmod>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/tags/</loc>
+    <lastmod>2022-11-19T10:00:00+09:00</lastmod>
+  </url><url>
+    <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.4/</loc>
     <lastmod>2022-10-15T16:00:00+09:00</lastmod>
   </url><url>
     <loc>https://blog.kaakaa.dev/post/mattermost/releases-7.3/</loc>
