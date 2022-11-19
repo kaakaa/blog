@@ -66,7 +66,7 @@ Callsのメッセージスレッドでは、通常のメッセージスレッド
 
 ![boards-new-templates](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-new-templates.png)
 
-#### Company goals & OKRs
+**Company goals & OKRs**
 
 組織のゴールや、OKRの管理を行うためのテンプレートです。
 
@@ -74,7 +74,7 @@ Callsのメッセージスレッドでは、通常のメッセージスレッド
 
 Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Competion等のプロパティで達成度合いを管理することができます。また、QuarterやDepartment(部署)ごとにタスクを一覧化できるビューもデフォルトで作成されます。
 
-#### Competitive analysis
+**Competitive analysis**
 
 競合分析用のテンプレートです。
 
@@ -82,7 +82,7 @@ Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Compe
 
 競合企業の情報 (Website, Location, Revenue,...) や各企業のMarket Positionなどを一覧化することができます。Market Positionごとにカードを並べたビューもデフォルトで作成されます。
 
-#### Sales pipeline CRM
+**Sales pipeline CRM**
 
 セールスの状況を管理するためのテンプレートです。
 
@@ -90,7 +90,7 @@ Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Compe
 
 各顧客に関する情報や商談の状況などを一覧化することができます。商談の状況(Open Deals)や商談フェーズ(Pipeline Tracker)ごとにタスクを一覧化できるビューもデフォルトで作成されます。
 
-#### Sprint planner
+**Sprint planner**
 
 スプリント計画やリリースに向けたタスク管理を行うためのテンプレートです。
 
@@ -98,13 +98,13 @@ Objective(目標)ごとにタスク(カード)を作成し、Target/Actual/Compe
 
 スプリントごとのタスク一覧を管理することができます。タスクの状況(Status)やタスクの種別(Type)ごとにタスクを一覧化できるビューもデフォルトで作成されます。
 
-#### Team retrospective
+**Team retrospective**
 
 うまく行ったことや改善点など、将来に向けた振り返りを行うためのテンプレートです。
 
 ![boards-template-retrospective](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/boards-template-retrospective.png)
 
-#### User research sessions
+**User research sessions**
 
 ユーザーリサーチの状況を管理するためのテンプレートです。
 
@@ -153,13 +153,14 @@ Mattermost CloudのFreeプランではカード数の上限が **10,000** まで
 Mattermost Desktopアプリv5.2 がリリースされました。
 
 ファイルダウンロードの状況を表示するダイアログが追加されています。
+
 ![desktop-download](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-download.png)
 
 ### ローカライズ
 
 デスクトップアプリのメニュー等がローカライズされるようになりました。日本語にも対応しています。
 
-![desktop-localize](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-loaclize.png)
+![desktop-localize](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/desktop-localize.png)
 
 ## Platform: Mobile App v1.55.1 (ESR)
 
@@ -190,7 +191,7 @@ Mattermost Desktopアプリv5.2 がリリースされました。
 
 ![channels-shortcut-unreads](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.5/channels-shortcut-unreads.png)
 
-
+## その他のトピック
 ### Mattermost関連の記事紹介
   
 #### Mattermost構築
