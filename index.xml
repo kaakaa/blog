@@ -9,10 +9,18 @@
 		
 		<managingEditor>Page(&#34;kaakaa blog&#34;) (Yusuke Nemoto)</managingEditor>
     	
-  		<lastBuildDate>Sat, 19 Nov 2022 10:00:00 +0900</lastBuildDate>
+  		<lastBuildDate>Thu, 05 Jan 2023 23:40:00 +0900</lastBuildDate>
 		
 		<atom:link href="/" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>go-gitで特定のコミットをDepth=1でCloneする</title>
+			<link>https://blog.kaakaa.dev/post/tech/git-fetch-specific-commit-depth-1/</link>
+			<pubDate>Thu, 05 Jan 2023 23:40:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/tech/git-fetch-specific-commit-depth-1/</guid>
+			<description>背景 大きなGitリポジトリをCloneする際に --depth &amp;lt;depth&amp;gt; オプションを使用すると、指定した数だけの履歴を持つShallow Copyを取得するようにな</description>
+		</item>
+      	
 		<item>
 			<title>Mattermost 7.5の新機能</title>
 			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.5/</link>
@@ -83,14 +91,6 @@
 			<pubDate>Sat, 18 Jun 2022 12:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</guid>
 			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 6.7の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</link>
-			<pubDate>Tue, 17 May 2022 15:00:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-6.7/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/05/16 に Mattermost の新しいバージョン v6.7.0 がリリースされました。 本記事は、個人的に気に</description>
 		</item>
       	
 	</channel>
