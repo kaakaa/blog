@@ -87,7 +87,7 @@ Opeth/下村陽子は昔から聴いているBGM。
 
 オバマ元大統領のFavorite Music of 2021にも入ってたり、各種年間ベストでよく名前が出てたりする。
 
-{{< tweet 1471865356557893639 >}}
+{{< tweet user="BarackObama" id="1471865356557893639" >}}
 
 ### Cynic / Ascension Codes
 
