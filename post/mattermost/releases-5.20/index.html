@@ -1,328 +1,167 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost5.20の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost5.20の新機能"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/2/14にMattermost v5.20.0がリリースされました。また、2/16にバグF"/>
-
-
-  <meta property="og:title" content="Mattermost5.20の新機能" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/2/14にMattermost v5.20.0がリリースされました。また、2/16にバグF" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.20/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-02-17T22:56:12&#43;09:00" />
-<meta property="article:modified_time" content="2020-02-17T22:56:12&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost5.20の新機能">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/2/14にMattermost v5.20.0がリリースされました。また、2/16にバグF">
+<meta property="og:title" content="Mattermost5.20の新機能">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/2/14にMattermost v5.20.0がリリースされました。また、2/16にバグF">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.20/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-02-17T22:56:12+09:00">
+<meta property="article:modified_time" content="2020-02-17T22:56:12+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost5.20の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Feb 17, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost5.20の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Feb 17, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id=はじめに>はじめに</h1>
 <p>2020/2/14にMattermost v5.20.0がリリースされました。また、2/16にバグFixを含んだ <code>v5.20.1</code> がリリースされています。</p>
 <p>変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-5-20-new-mobile-editor-desktop-dark-theme/">Mattermost 5.20: New mobile editor, desktop dark theme, and more - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-20-feature-release">https://docs.mattermost.com/administration/changelog.html#release-v5-20-feature-release</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-20-new-mobile-editor-desktop-dark-theme/>Mattermost 5.20: New mobile editor, desktop dark theme, and more - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-20-feature-release>https://docs.mattermost.com/administration/changelog.html#release-v5-20-feature-release</a></li>
 </ul>
 <hr>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#モバイルアプリのメッセージ編集画面の改善">モバイルアプリのメッセージ編集画面の改善</a></li>
-    <li><a href="#最新のメッセージへ移動するためのバナー">最新のメッセージへ移動するためのバナー</a></li>
-    <li><a href="#mmctl-のリリース"><code>mmctl</code> のリリース</a></li>
-    <li><a href="#同梱プラグイン">同梱プラグイン</a></li>
-    <li><a href="#デスクトップアプリのuiux改善">デスクトップアプリのUI/UX改善</a></li>
-    <li><a href="#未読メッセージがある場合のfavicon">未読メッセージがある場合のfavicon</a></li>
-  </ul>
-</nav><h2 id="モバイルアプリのメッセージ編集画面の改善">モバイルアプリのメッセージ編集画面の改善</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#モバイルアプリのメッセージ編集画面の改善>モバイルアプリのメッセージ編集画面の改善</a></li>
+<li><a href=#最新のメッセージへ移動するためのバナー>最新のメッセージへ移動するためのバナー</a></li>
+<li><a href=#mmctl-のリリース><code>mmctl</code> のリリース</a></li>
+<li><a href=#同梱プラグイン>同梱プラグイン</a></li>
+<li><a href=#デスクトップアプリのuiux改善>デスクトップアプリのUI/UX改善</a></li>
+<li><a href=#未読メッセージがある場合のfavicon>未読メッセージがある場合のfavicon</a></li>
+</ul>
+</nav><h2 id=モバイルアプリのメッセージ編集画面の改善>モバイルアプリのメッセージ編集画面の改善</h2>
 <p>Mattermost v5.20.0と同時にリリースされているMattermostモバイルアプリv1.28.0で、@メンションやスラッシュコマンド呼び出しなど、よく使う機能にすぐにアクセスするためのボタンが追加されました。</p>
-<p><img src="https://mattermost.com/wp-content/uploads/2020/02/New-mobile-editor.png" alt="mobileapp">
+<p><img src=https://mattermost.com/wp-content/uploads/2020/02/New-mobile-editor.png alt=mobileapp>
 (公式ブログに掲載されている画像です)</p>
-<h2 id="最新のメッセージへ移動するためのバナー">最新のメッセージへ移動するためのバナー</h2>
+<h2 id=最新のメッセージへ移動するためのバナー>最新のメッセージへ移動するためのバナー</h2>
 <p>未読メッセージが多くあるチャンネルに、クリックすると最新の投稿へ移動するためのバナーが表示されるようになりました。</p>
-<p><img src="https://mattermost.com/wp-content/uploads/2020/02/Jump-to-recent-posts.png" alt="banner">
+<p><img src=https://mattermost.com/wp-content/uploads/2020/02/Jump-to-recent-posts.png alt=banner>
 (公式ブログに掲載されている画像です)</p>
-<h2 id="mmctl-のリリース"><code>mmctl</code> のリリース</h2>
+<h2 id=mmctl-のリリース><code>mmctl</code> のリリース</h2>
 <p>リモートサーバーにあるMattermostを操作するためのCLIツールである <code>mmctl</code> がリリースされました。</p>
-<p><a href="https://github.com/mattermost/mmctl">https://github.com/mattermost/mmctl</a></p>
-<h2 id="同梱プラグイン">同梱プラグイン</h2>
+<p><a href=https://github.com/mattermost/mmctl>https://github.com/mattermost/mmctl</a></p>
+<h2 id=同梱プラグイン>同梱プラグイン</h2>
 <p>セキュリティの問題などでMattermostサーバーをインターネットへ接続できないように設定していた場合、いくつかの同梱プラグインはプリインストールされた状態で利用することはできましたが、プラグインマーケットプレースを通じたプラグインの管理を行うことができませんでした。
 しかし、Mattermost 5.20からはインターネットから切断されたサーバーであっても、Mattermost本体に同梱されたバイナリについてはマーケットプレースを通じて管理できるようになりました。同梱プラグインは公式チームが開発しているものに限ります。</p>
 <p>また、マーケットプレース画面で、「公式プラグイン」「コミュニティプラグイン」「ベータ版」などを識別しやすくなりました。</p>
-<p><img src="https://mattermost.com/wp-content/uploads/2020/02/Plugins.png" alt="marketplace">
+<p><img src=https://mattermost.com/wp-content/uploads/2020/02/Plugins.png alt=marketplace>
 (公式ブログに掲載されている画像です)</p>
-<p>さらに、独自で開発したMattermostプラグインがある場合、下記フォームからプラグインの情報を送ることで<a href="https://integrations.mattermost.com/">Mattermost Integrations</a>に追加することができます。
-<a href="https://spinpunch.wufoo.com/forms/mattermost-integrations-and-installers/">Mattermost Integrations and Installers</a></p>
-<h2 id="デスクトップアプリのuiux改善">デスクトップアプリのUI/UX改善</h2>
+<p>さらに、独自で開発したMattermostプラグインがある場合、下記フォームからプラグインの情報を送ることで<a href=https://integrations.mattermost.com/>Mattermost Integrations</a>に追加することができます。
+<a href=https://spinpunch.wufoo.com/forms/mattermost-integrations-and-installers/>Mattermost Integrations and Installers</a></p>
+<h2 id=デスクトップアプリのuiux改善>デスクトップアプリのUI/UX改善</h2>
 <ul>
 <li>新しいダークテーマ</li>
 <li>タブをドラッグ＆ドロップで並べ替え可能に</li>
 <li>タブでメンションと未読を表すデザインを更新
-<img src="https://mattermost.com/wp-content/uploads/2020/02/Desktop-app-dark-theme.png" alt="darktheme">
+<img src=https://mattermost.com/wp-content/uploads/2020/02/Desktop-app-dark-theme.png alt=darktheme>
 (公式ブログに掲載されている画像です)</li>
 </ul>
-<h2 id="未読メッセージがある場合のfavicon">未読メッセージがある場合のfavicon</h2>
+<h2 id=未読メッセージがある場合のfavicon>未読メッセージがある場合のfavicon</h2>
 <p>未読のメンションがある場合、faviconに赤いドットが付与されるようになりました
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.20/favicon.png" alt="favicon"></p>
-<h1 id="おわりに">おわりに</h1>
+<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.20/favicon.png alt=favicon></p>
+<h1 id=おわりに>おわりに</h1>
 <p>次の<code>v5.21</code>のリリースは2020/3/16(Mon)を予定しています。
 そして機能追加が行われる<code>v5.22</code>は恐らく2020/4/17(Thu)のリリースになるかと思います。</p>
 <hr>
 <p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

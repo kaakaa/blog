@@ -1,207 +1,115 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost5.14の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost5.14の新機能"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2019/8/16にMattermost v5.14.0がリリースされました。 その後すぐにv5.14"/>
-
-
-  <meta property="og:title" content="Mattermost5.14の新機能" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2019/8/16にMattermost v5.14.0がリリースされました。 その後すぐにv5.14" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.14/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-29T10:15:49&#43;09:00" />
-<meta property="article:modified_time" content="2019-08-29T10:15:49&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost5.14の新機能">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2019/8/16にMattermost v5.14.0がリリースされました。 その後すぐにv5.14">
+<meta property="og:title" content="Mattermost5.14の新機能">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2019/8/16にMattermost v5.14.0がリリースされました。 その後すぐにv5.14">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.14/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-08-29T10:15:49+09:00">
+<meta property="article:modified_time" content="2019-08-29T10:15:49+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost5.14の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Aug 29, 2019
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost5.14の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Aug 29, 2019
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id=はじめに>はじめに</h1>
 <p>2019/8/16にMattermost v5.14.0がリリースされました。
 その後すぐにv5.14.1のリリースが予告され、2019/8/28にキーボードアクセシビリティのバグ修正を含むv5.14.1がリリースされました。
 この記事では、アップデートの内容について簡単に紹介していきます。</p>
 <p>変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-5-14-accessibility-improvements-enhanced-jira-integration-ldap-group-sync-upgrade-and-more/">Mattermost 5.14: Accessibility improvements, enhanced Jira integration, LDAP group sync upgrade, and more - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
-<li><a href="https://mattermost.com/blog/mattermost-5-14-1-released/">Mattermost 5.14.1 released - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-14-feature-release">Mattermost Changelog — Mattermost 5.14 documentation</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-14-accessibility-improvements-enhanced-jira-integration-ldap-group-sync-upgrade-and-more/>Mattermost 5.14: Accessibility improvements, enhanced Jira integration, LDAP group sync upgrade, and more - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-14-1-released/>Mattermost 5.14.1 released - Mattermost - Open Source, On-Prem or Private Cloud Messaging</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-14-feature-release>Mattermost Changelog — Mattermost 5.14 documentation</a></li>
 </ul>
 <hr>
-<h1 id="アップデート内容">アップデート内容</h1>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#アクセシビリティの改善">アクセシビリティの改善</a></li>
-    <li><a href="#jira連携機能の改善">JIRA連携機能の改善</a></li>
-    <li><a href="#ldapグループ管理-e10e20">LDAPグループ管理 (E10/E20)</a></li>
-    <li><a href="#未読メッセージが見つけやすく">未読メッセージが見つけやすく</a></li>
-    <li><a href="#その他">その他</a>
-      <ul>
-        <li><a href="#ieサポートの廃止">IEサポートの廃止</a></li>
-        <li><a href="#破壊的変更">破壊的変更</a></li>
-        <li><a href="#インストール済みプラグインの追加">インストール済みプラグインの追加</a></li>
-        <li><a href="#ウェブフック投稿のアイコンに絵文字">ウェブフック投稿のアイコンに絵文字</a></li>
-      </ul>
-    </li>
-    <li><a href="#misc">misc</a>
-      <ul>
-        <li><a href="#plugin-marketplace">Plugin Marketplace</a></li>
-        <li><a href="#private-cloud-k8s">Private Cloud (k8s)</a></li>
-      </ul>
-    </li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="アクセシビリティの改善">アクセシビリティの改善</h2>
+<h1 id=アップデート内容>アップデート内容</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#アクセシビリティの改善>アクセシビリティの改善</a></li>
+<li><a href=#jira連携機能の改善>JIRA連携機能の改善</a></li>
+<li><a href=#ldapグループ管理-e10e20>LDAPグループ管理 (E10/E20)</a></li>
+<li><a href=#未読メッセージが見つけやすく>未読メッセージが見つけやすく</a></li>
+<li><a href=#その他>その他</a>
+<ul>
+<li><a href=#ieサポートの廃止>IEサポートの廃止</a></li>
+<li><a href=#破壊的変更>破壊的変更</a></li>
+<li><a href=#インストール済みプラグインの追加>インストール済みプラグインの追加</a></li>
+<li><a href=#ウェブフック投稿のアイコンに絵文字>ウェブフック投稿のアイコンに絵文字</a></li>
+</ul>
+</li>
+<li><a href=#misc>misc</a>
+<ul>
+<li><a href=#plugin-marketplace>Plugin Marketplace</a></li>
+<li><a href=#private-cloud-k8s>Private Cloud (k8s)</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=アクセシビリティの改善>アクセシビリティの改善</h2>
 <p>Mattermostの画面上をキーボードで移動できるようになりました。</p>
 <p>デスクトップアプリ上では <code>F6</code>、Webブラウザ上では <code>Ctrl + F6</code> で、サイドバー、ヘッダー、投稿表示部分などにカーソルを移動することができます。
 また、<code>TAB</code>ボタンで画面上のボタンやリンクにカーソルを移動することができ、<code>ENTER</code>キーで操作することができます。</p>
-<p><img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/a4f30ce1-ea97-075e-8396-d55299ed4611.gif" alt="mm5.14_accessibility.gif"></p>
+<p><img src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/a4f30ce1-ea97-075e-8396-d55299ed4611.gif alt=mm5.14_accessibility.gif></p>
 <p>また、スクリーンリーダーとの相性がさらに良くなりました。</p>
 <p>視覚的な障碍のある方にもMattermostを効果的に利用してもらえるよう、ボタンやリンク、アプリ表示部分の読み上げがより正確になりました。</p>
-<p>詳しくは <a href="https://docs.mattermost.com/help/getting-started/accessibility.html">Keyboard Accessibility — Mattermost 5.14 documentation</a> を参照ください。</p>
+<p>詳しくは <a href=https://docs.mattermost.com/help/getting-started/accessibility.html>Keyboard Accessibility — Mattermost 5.14 documentation</a> を参照ください。</p>
 <p>Mattermostは米国リハビリテーション法第508条の遵守に取り組んでおり、継続的にアクセシビリティの改善を行なっています。
-<a href="https://docs.mattermost.com/overview/vpat.html">Voluntary Product Accessibility Template (VPAT) — Mattermost 5.14 documentation</a></p>
-<h2 id="jira連携機能の改善">JIRA連携機能の改善</h2>
+<a href=https://docs.mattermost.com/overview/vpat.html>Voluntary Product Accessibility Template (VPAT) — Mattermost 5.14 documentation</a></p>
+<h2 id=jira連携機能の改善>JIRA連携機能の改善</h2>
 <p>Mattermostに同梱されているJIRAプラグインがアップデートされました。
 より効率的に作業を行える多くの機能が追加されています。</p>
 <ul>
@@ -217,170 +125,101 @@
 </li>
 <li>JIRAのIssueを作成、管理、閲覧でき、通知の設定を管理できるスラッシュコマンド</li>
 </ul>
-<p>詳しくは <a href="https://github.com/mattermost/mattermost-plugin-jira#jira-21-features">mattermost/mattermost-plugin-jira: JIRA plugin for Mattermost 🔌</a> を参照してください。</p>
-<h2 id="ldapグループ管理-e10e20">LDAPグループ管理 (E10/E20)</h2>
+<p>詳しくは <a href=https://github.com/mattermost/mattermost-plugin-jira#jira-21-features>mattermost/mattermost-plugin-jira: JIRA plugin for Mattermost 🔌</a> を参照してください。</p>
+<h2 id=ldapグループ管理-e10e20>LDAPグループ管理 (E10/E20)</h2>
 <p>LDAPグループ同期機能によるチームとチャンネルの管理に関して新たなオプションが追加されました。</p>
 <p>今回追加されたオプションでは、Mattermost v5.12で追加されたCLIのグループコマンドに加え、システムコンソールに追加された新しいチーム/チャンネルのページからLDAPグループ同期によるメンバーシップの管理を行うことができるようになりました。</p>
-<p>詳しくは <a href="https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html">Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership — Mattermost 5.14 documentation</a> を参照してください。</p>
-<h2 id="未読メッセージが見つけやすく">未読メッセージが見つけやすく</h2>
+<p>詳しくは <a href=https://docs.mattermost.com/deployment/ldap-group-constrained-team-channel.html>Using AD/LDAP Synchronized Groups to Manage Team or Private Channel Membership — Mattermost 5.14 documentation</a> を参照してください。</p>
+<h2 id=未読メッセージが見つけやすく>未読メッセージが見つけやすく</h2>
 <p>チャンネルを開いたときに、もっとも古い未読メッセージが自動で表示されるようになりました。これにより未読メッセージを追うために投稿を遡ってスクロールする必要が無くなりました。</p>
-<h2 id="その他">その他</h2>
-<h3 id="ieサポートの廃止">IEサポートの廃止</h3>
+<h2 id=その他>その他</h2>
+<h3 id=ieサポートの廃止>IEサポートの廃止</h3>
 <p>2019/10/16リリース予定のMattermost v5.16からInternet Explorerのサポートが廃止されます。
-<a href="https://mattermost.com/blog/mattermost-5-13-community-plugins-devops-integrations-series-b-announcement-and-more/#ie11">End of support for Internet Explorer 11 coming in October</a></p>
-<p>Mattermostがサポートしているブラウザは <a href="https://docs.mattermost.com/install/requirements.html#pc-web">Software and Hardware Requirements</a> から確認できます。</p>
-<h3 id="破壊的変更">破壊的変更</h3>
+<a href=https://mattermost.com/blog/mattermost-5-13-community-plugins-devops-integrations-series-b-announcement-and-more/#ie11>End of support for Internet Explorer 11 coming in October</a></p>
+<p>Mattermostがサポートしているブラウザは <a href=https://docs.mattermost.com/install/requirements.html#pc-web>Software and Hardware Requirements</a> から確認できます。</p>
+<h3 id=破壊的変更>破壊的変更</h3>
 <ul>
 <li>内向き/外向きのウェブフック編集画面で、他のユーザーが作成したウェブフックを見ることができなくなりました。システム管理者は全てのウェブフックを見ることができます</li>
-<li>Google Single Sign-On (E20) の機能を利用している場合、ログインに利用するサービスが Google+ から Google People に変更されたため、設定の変更が必要です。詳しくは <a href="https://docs.mattermost.com/deployment/sso-google.html">Google Single Sign-On (E20)</a> を参照してください。</li>
+<li>Google Single Sign-On (E20) の機能を利用している場合、ログインに利用するサービスが Google+ から Google People に変更されたため、設定の変更が必要です。詳しくは <a href=https://docs.mattermost.com/deployment/sso-google.html>Google Single Sign-On (E20)</a> を参照してください。</li>
 </ul>
-<h3 id="インストール済みプラグインの追加">インストール済みプラグインの追加</h3>
+<h3 id=インストール済みプラグインの追加>インストール済みプラグインの追加</h3>
 <p>Jenkins, Antivirus, GitLabのプラグインがデフォルトインストール済みプラグインとして追加されました。
 それぞれのプラグインの機能については下記を参照してください。</p>
 <ul>
-<li><a href="https://github.com/mattermost/mattermost-plugin-jenkins">mattermost/mattermost-plugin-jenkins: A Mattermost plugin to interact with Jenkins</a></li>
-<li><a href="https://github.com/mattermost/mattermost-plugin-antivirus">mattermost/mattermost-plugin-antivirus: Antivirus plugin for scanning files uploaded to Mattermost</a></li>
-<li><a href="https://github.com/mattermost/mattermost-plugin-gitlab">mattermost/mattermost-plugin-gitlab: GitLab plugin for Mattermost</a></li>
+<li><a href=https://github.com/mattermost/mattermost-plugin-jenkins>mattermost/mattermost-plugin-jenkins: A Mattermost plugin to interact with Jenkins</a></li>
+<li><a href=https://github.com/mattermost/mattermost-plugin-antivirus>mattermost/mattermost-plugin-antivirus: Antivirus plugin for scanning files uploaded to Mattermost</a></li>
+<li><a href=https://github.com/mattermost/mattermost-plugin-gitlab>mattermost/mattermost-plugin-gitlab: GitLab plugin for Mattermost</a></li>
 </ul>
-<h3 id="ウェブフック投稿のアイコンに絵文字">ウェブフック投稿のアイコンに絵文字</h3>
+<h3 id=ウェブフック投稿のアイコンに絵文字>ウェブフック投稿のアイコンに絵文字</h3>
 <p>内向きのウェブフックのペイロードに <code>icon_emoji</code> というフィールドが追加され、ここに絵文字名を指定してウェブフックを飛ばすと、ウェブフックにより作成された投稿のプロフィール画像に絵文字が表示されるようになりました。</p>
-<pre><code>curl -v -XPOST -H 'Content-Type: application/json' -d '{&quot;text&quot;: &quot;hello&quot;, &quot;icon_emoji&quot;:&quot;+1&quot;}' https://example.com:8065/hooks/XXXXXXXXXXXXXXXXXXXXXXXXXX
+<pre tabindex=0><code>curl -v -XPOST -H 'Content-Type: application/json' -d '{&quot;text&quot;: &quot;hello&quot;, &quot;icon_emoji&quot;:&quot;+1&quot;}' https://example.com:8065/hooks/XXXXXXXXXXXXXXXXXXXXXXXXXX
 </code></pre><p>↑ のようなリクエストを送ると ↓ のような投稿が作成されます。</p>
-<img width="288" alt="スクリーンショット 2019-08-30 0.13.37.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/ad7d122e-d755-8dc3-ee94-bd7fac642580.png">
-<h2 id="misc">misc</h2>
+<img width=288 alt="スクリーンショット 2019-08-30 0.13.37.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/ad7d122e-d755-8dc3-ee94-bd7fac642580.png>
+<h2 id=misc>misc</h2>
 <p>以下、最近あまり追えてないですがMattermostチームでの気になる動きについて紹介します。</p>
-<h3 id="plugin-marketplace">Plugin Marketplace</h3>
+<h3 id=plugin-marketplace>Plugin Marketplace</h3>
 <p>最近、新しいバージョンが増えるごとにMattermost本体に同梱されるプラグインが増えるなど、MattermostチームはPlugin機能に力を入れているようです。
 その中の大きな動きの一つとして、Mattermost が Plugin Marketplace の開設があります。
-<a href="https://github.com/mattermost/mattermost-marketplace">https://github.com/mattermost/mattermost-marketplace</a></p>
+<a href=https://github.com/mattermost/mattermost-marketplace>https://github.com/mattermost/mattermost-marketplace</a></p>
 <p>全容はわかりませんが、システムコンソール画面でプラグインのURLを指定するだけで、プラグインをインストールできる仕組みを開発しているようです。（一時期masterブランチから起動すると画面が見れましたが、今は見れなくなっているようです）</p>
-<h3 id="private-cloud-k8s">Private Cloud (k8s)</h3>
+<h3 id=private-cloud-k8s>Private Cloud (k8s)</h3>
 <p>もう一つの気になる動きとして、MattermostコアチームのチャットでPrivate Cloudというチャンネルが立っており、k8s関係のツールの開発が進んでいるようです。</p>
 <ul>
-<li><a href="https://github.com/mattermost/mattermost-operator">mattermost/mattermost-operator: Mattermost Operator for Kubernetes</a></li>
-<li><a href="https://github.com/mattermost/mattermost-helm">mattermost/mattermost-helm: Mattermost Helm charts for Kubernetes</a></li>
+<li><a href=https://github.com/mattermost/mattermost-operator>mattermost/mattermost-operator: Mattermost Operator for Kubernetes</a></li>
+<li><a href=https://github.com/mattermost/mattermost-helm>mattermost/mattermost-helm: Mattermost Helm charts for Kubernetes</a></li>
 </ul>
 <p>こちらも全容は掴めておりませんが、OSSプロジェクトらしくドキュメントが公開されているため、興味のある方はそちらを参照してください。
-<a href="https://drive.google.com/drive/folders/1iayrTYRjQXpdqUAB4pbrnn9QQh_g8oNC">https://drive.google.com/drive/folders/1iayrTYRjQXpdqUAB4pbrnn9QQh_g8oNC</a></p>
-<h2 id="おわりに">おわりに</h2>
+<a href=https://drive.google.com/drive/folders/1iayrTYRjQXpdqUAB4pbrnn9QQh_g8oNC>https://drive.google.com/drive/folders/1iayrTYRjQXpdqUAB4pbrnn9QQh_g8oNC</a></p>
+<h2 id=おわりに>おわりに</h2>
 <p>次の<code>v5.15</code>のリリースは2019/9/16(Mon)を予定しています。
 そして機能追加が行われる<code>v5.16</code>は恐らく2019/10/16(Wed)のリリースになるかと思います。</p>
 <hr>
 <p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

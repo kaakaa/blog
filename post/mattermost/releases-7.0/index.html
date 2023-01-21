@@ -1,421 +1,260 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost 7.0の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost 7.0の新機能"/>
-<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本"/>
-
-
-  <meta property="og:title" content="Mattermost 7.0の新機能" />
-<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.0/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-06-18T12:30:00&#43;09:00" />
-<meta property="article:modified_time" content="2022-06-18T12:30:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 7.0の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本">
+<meta property="og:title" content="Mattermost 7.0の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.0/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-06-18T12:30:00+09:00">
+<meta property="article:modified_time" content="2022-06-18T12:30:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost 7.0の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Jun 18, 2022
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 7.0の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Jun 18, 2022
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<p><a href="https://twitter.com/mattermost_jp">Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
-<h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
 <p>2022/06/15 に Mattermost のメジャーバージョンアップデートとなる <code>v7.0.0</code> がリリースされました。</p>
 <p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-v7-0-is-now-available/">Mattermost v7.0 is now available - Mattermost</a></li>
-<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-0-major-release">Mattermost self-hosted changelog</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-v7-0-is-now-available/>Mattermost v7.0 is now available - Mattermost</a></li>
+<li><a href=https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-0-major-release>Mattermost self-hosted changelog</a></li>
 </ul>
 <hr>
 <p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
 <ul>
-<li><a href="https://mattermost.com/pricing/">Professional</a></li>
-<li><a href="https://mattermost.com/pricing/">Enterprise</a></li>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
 </ul>
 <p>見出しの前に何もない場合、Starter(OSS 版)でも利用可能な機能です。</p>
 <p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
 <ul>
-<li><a href="https://docs.mattermost.com/guides/channels.html">Channels</a>: 従来のチャット機能</li>
-<li><a href="https://docs.mattermost.com/guides/playbooks.html">Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
-<li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
+<li><a href=https://docs.mattermost.com/guides/channels.html>Channels</a>: 従来のチャット機能</li>
+<li><a href=https://docs.mattermost.com/guides/playbooks.html>Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href=https://docs.mattermost.com/guides/boards.html>Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href=https://www.focalboard.com/>Focalboard</a>)</li>
 </ul>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#channels-返信スレッドの折りたたみ機能がgageneral-availabilityへ昇格">Channels: 返信スレッドの折りたたみ機能がGA(General Availability)へ昇格</a></li>
-    <li><a href="#channels-mobile-v20-beta">Channels: Mobile v2.0 (Beta)</a></li>
-    <li><a href="#channels-音声通話と画面共有-beta">Channels: 音声通話と画面共有 (Beta)</a></li>
-    <li><a href="#channels-メッセージ書式設定ツールバー">Channels: メッセージ書式設定ツールバー</a></li>
-    <li><a href="#playbooks-インラインplaybookエディタ">Playbooks: インラインPlaybookエディタ</a></li>
-    <li><a href="#playbooks-playbooksの利用統計">Playbooks: Playbooksの利用統計</a></li>
-    <li><a href="#playbooks-実行中のplaybookに対するアクションとトリガーの追加">Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加</a></li>
-    <li><a href="#integrations-apps-bar-ベータ版">Integrations: Apps Bar (ベータ版)</a></li>
-    <li><a href="#platform-デスクトップアプリがmacos-app-storeからインストール可能に">Platform: デスクトップアプリがmacOS App Storeからインストール可能に</a></li>
-    <li><a href="#platform-デスクトップアプリのdebrpmパッケージリリース">Platform デスクトップアプリのDEB/RPMパッケージリリース</a></li>
-    <li><a href="#その他の変更">その他の変更</a>
-      <ul>
-        <li><a href="#ログイン画面の更新">ログイン画面の更新</a></li>
-      </ul>
-    </li>
-    <li><a href="#アップグレード時の注意事項">アップグレード時の注意事項</a>
-      <ul>
-        <li><a href="#ログインセッション維持期間に関する設定変更への対応">ログインセッション維持期間に関する設定変更への対応</a></li>
-        <li><a href="#mysqlを使用している場合アップグレード時のマイグレーションに時間がかかる可能性有">MySQLを使用している場合、アップグレード時のマイグレーションに時間がかかる可能性有</a></li>
-        <li><a href="#プラグインにより追加されたチャンネルヘッダーアイコンがappbar領域へ">プラグインにより追加されたチャンネルヘッダーアイコンがAppBar領域へ</a></li>
-        <li><a href="#trustedproxyipheaderの設定値の確認"><code>TrustedProxyIPHeader</code>の設定値の確認</a></li>
-      </ul>
-    </li>
-    <li><a href="#その他のトピック">その他のトピック</a>
-      <ul>
-        <li><a href="#チャンネル名コンテスト">チャンネル名コンテスト</a></li>
-        <li><a href="#happy-pride-month">Happy Pride Month</a></li>
-        <li><a href="#hackathon">Hackathon</a></li>
-      </ul>
-    </li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="channels-返信スレッドの折りたたみ機能がgageneral-availabilityへ昇格">Channels: 返信スレッドの折りたたみ機能がGA(General Availability)へ昇格</h2>
-<p><a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/19572469-make-threads-collapsible">Feature Request Forumで最も多くの要望を集めていた</a>返信スレッドの折りたたみ機能が正式にリリースされました。</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#channels-返信スレッドの折りたたみ機能がgageneral-availabilityへ昇格>Channels: 返信スレッドの折りたたみ機能がGA(General Availability)へ昇格</a></li>
+<li><a href=#channels-mobile-v20-beta>Channels: Mobile v2.0 (Beta)</a></li>
+<li><a href=#channels-音声通話と画面共有-beta>Channels: 音声通話と画面共有 (Beta)</a></li>
+<li><a href=#channels-メッセージ書式設定ツールバー>Channels: メッセージ書式設定ツールバー</a></li>
+<li><a href=#playbooks-インラインplaybookエディタ>Playbooks: インラインPlaybookエディタ</a></li>
+<li><a href=#playbooks-playbooksの利用統計>Playbooks: Playbooksの利用統計</a></li>
+<li><a href=#playbooks-実行中のplaybookに対するアクションとトリガーの追加>Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加</a></li>
+<li><a href=#integrations-apps-bar-ベータ版>Integrations: Apps Bar (ベータ版)</a></li>
+<li><a href=#platform-デスクトップアプリがmacos-app-storeからインストール可能に>Platform: デスクトップアプリがmacOS App Storeからインストール可能に</a></li>
+<li><a href=#platform-デスクトップアプリのdebrpmパッケージリリース>Platform デスクトップアプリのDEB/RPMパッケージリリース</a></li>
+<li><a href=#その他の変更>その他の変更</a>
+<ul>
+<li><a href=#ログイン画面の更新>ログイン画面の更新</a></li>
+</ul>
+</li>
+<li><a href=#アップグレード時の注意事項>アップグレード時の注意事項</a>
+<ul>
+<li><a href=#ログインセッション維持期間に関する設定変更への対応>ログインセッション維持期間に関する設定変更への対応</a></li>
+<li><a href=#mysqlを使用している場合アップグレード時のマイグレーションに時間がかかる可能性有>MySQLを使用している場合、アップグレード時のマイグレーションに時間がかかる可能性有</a></li>
+<li><a href=#プラグインにより追加されたチャンネルヘッダーアイコンがappbar領域へ>プラグインにより追加されたチャンネルヘッダーアイコンがAppBar領域へ</a></li>
+<li><a href=#trustedproxyipheaderの設定値の確認><code>TrustedProxyIPHeader</code>の設定値の確認</a></li>
+</ul>
+</li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#チャンネル名コンテスト>チャンネル名コンテスト</a></li>
+<li><a href=#happy-pride-month>Happy Pride Month</a></li>
+<li><a href=#hackathon>Hackathon</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=channels-返信スレッドの折りたたみ機能がgageneral-availabilityへ昇格>Channels: 返信スレッドの折りたたみ機能がGA(General Availability)へ昇格</h2>
+<p><a href=https://mattermost.uservoice.com/forums/306457-general/suggestions/19572469-make-threads-collapsible>Feature Request Forumで最も多くの要望を集めていた</a>返信スレッドの折りたたみ機能が正式にリリースされました。</p>
 <p>返信スレッドの折りたたみ機能の概要は、以下の動画で確認することができます。<br>
 <a href="https://www.youtube.com/watch?v=_jR2KWGtgEU">Tutorial: Using Collapsed Reply Threads on Mattermost - YouTube</a></p>
-<p>正式リリースとなったことにより、全てのユーザーが<strong>設定 &gt; 表示 &gt; 返信スレッドの折りたたみ</strong>から本機能のON/OFFを選択できるようになりました。(以前バージョンではベータ版としてリリースだったため、返信スレッドの折りたたみ設定を表示するには<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; 返信スレッドの折りたたみ</strong>から設定を有効にする必要がありました)</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga-us.png" alt="channels-crt-ga-us"></p>
+<p>正式リリースとなったことにより、全てのユーザーが<strong>設定 > 表示 > 返信スレッドの折りたたみ</strong>から本機能のON/OFFを選択できるようになりました。(以前バージョンではベータ版としてリリースだったため、返信スレッドの折りたたみ設定を表示するには<strong>システムコンソール > 実験的機能 > 機能 > 返信スレッドの折りたたみ</strong>から設定を有効にする必要がありました)</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga-us.png alt=channels-crt-ga-us></p>
 <p>(翻訳の更新があたっていないのか、英語以外の多くの言語で &ldquo;(ベータ版)&rdquo; の表記が残ってしまっていますが、正式版です。この表記は次のリリースで修正されていると思います。)</p>
-<p>もし、返信スレッドの折りたたみ機能をMattermostインスタンス全体として無効にしたい場合などは、<strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; 返信スレッドの折りたたみ</strong>から設定することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga.png" alt="channels-crt-ga"></p>
-<h2 id="channels-mobile-v20-beta">Channels: Mobile v2.0 (Beta)</h2>
-<p><a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/10975938-ios-and-android-apps-should-allow-multiple-server">Feature Request Forumで二番目に多くの要望を集めていた</a>モバイルアプリで複数サーバーへ接続する機能を含む、Mattermostモバイルアプリのメジャーアップデートとなるv2.0のリリースが今年の後半に予定されています。それに先立ち、v2.0のベータ版を試用してくれるユーザーを募集しているようです。</p>
+<p>もし、返信スレッドの折りたたみ機能をMattermostインスタンス全体として無効にしたい場合などは、<strong>システムコンソール > サイト設定 > 投稿 > 返信スレッドの折りたたみ</strong>から設定することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-crt-ga.png alt=channels-crt-ga></p>
+<h2 id=channels-mobile-v20-beta>Channels: Mobile v2.0 (Beta)</h2>
+<p><a href=https://mattermost.uservoice.com/forums/306457-general/suggestions/10975938-ios-and-android-apps-should-allow-multiple-server>Feature Request Forumで二番目に多くの要望を集めていた</a>モバイルアプリで複数サーバーへ接続する機能を含む、Mattermostモバイルアプリのメジャーアップデートとなるv2.0のリリースが今年の後半に予定されています。それに先立ち、v2.0のベータ版を試用してくれるユーザーを募集しているようです。</p>
 <p>ベータ版の利用方法については、公式のリリースブログを参照してください。<br>
-<a href="https://mattermost.com/blog/mattermost-v7-0-is-now-available/#mobile">Channels: Mobile v2.0 (Beta)</a></p>
+<a href=https://mattermost.com/blog/mattermost-v7-0-is-now-available/#mobile>Channels: Mobile v2.0 (Beta)</a></p>
 <p>複数サーバーへ接続する機能は、以下のような操作性になるようです。<br>
 Mattermost画面左上にあるサーバーのようなアイコンをクリックすると、接続するサーバーを選択するメニューが表示されます。</p>
-<img alt="channels-mobile-v2" src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-mobile-v2.jpg" style="display: block; margin: auto; width: 400px;">
-<h2 id="channels-音声通話と画面共有-beta">Channels: 音声通話と画面共有 (Beta)</h2>
+<img alt=channels-mobile-v2 src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-mobile-v2.jpg style=display:block;margin:auto;width:400px>
+<h2 id=channels-音声通話と画面共有-beta>Channels: 音声通話と画面共有 (Beta)</h2>
 <p>Slackのハドルミーティングのような音声通話機能がMattermostにも追加されました。<br>
 チャンネルごとに音声通話を開始することができ、通話中でもMattermostの機能を通常通り使用することができます。</p>
 <p>以下に自環境でブラウザを2つ横に並べて音声通話機能を動作させた時の様子を載せています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call.gif" alt="channels-call"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call.gif alt=channels-call></p>
 <p>音声通話/画面共有機能はDesktopアプリ、Mobileアプリ、およびブラウザ上で利用することができます。<br>
 Mobileアプリでも共有された画面を綺麗に見ることができました。共有画面のサイズが大きい場合は厳しそうですが。また、前述のMobileアプリv2.0では利用できませんでした。</p>
-<img alt="channels-call-mobile" src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg" style="display: block; margin: auto; width: 400px;">
+<img alt=channels-call-mobile src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-call-mobile.jpg style=display:block;margin:auto;width:400px>
 <p>本機能はWebRTCをベースに構築されており、Mattermost PluginプロジェクトとしてGitHubで開発が進められています。 (<code>mattermost-plugins-calls</code>プラグインは、コンパイル済みのプラグインを利用する場合はMITライセンスの条件の下で利用することが可能ですが、ソースコードを改変して利用する場合は特殊な条件があるようなので注意が必要です。)</p>
-<p><a href="https://github.com/mattermost/mattermost-plugin-calls">https://github.com/mattermost/mattermost-plugin-calls</a></p>
-<p><a href="https://customers.mattermost.com/cloud/connect-workspace">Mattermost公式のクラウドサービス</a>を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができますが、セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。</p>
-<p><a href="https://docs.mattermost.com/channels/make-calls.html">Start a call (beta)</a></p>
-<h2 id="channels-メッセージ書式設定ツールバー">Channels: メッセージ書式設定ツールバー</h2>
+<p><a href=https://github.com/mattermost/mattermost-plugin-calls>https://github.com/mattermost/mattermost-plugin-calls</a></p>
+<p><a href=https://customers.mattermost.com/cloud/connect-workspace>Mattermost公式のクラウドサービス</a>を利用している場合、音声通話機能の設定が完了した状態で提供されるため、すぐに使い始めることができますが、セルフホスト版を利用している場合は、以下のドキュメントを参考にプラグインの設定を行う必要があります。</p>
+<p><a href=https://docs.mattermost.com/channels/make-calls.html>Start a call (beta)</a></p>
+<h2 id=channels-メッセージ書式設定ツールバー>Channels: メッセージ書式設定ツールバー</h2>
 <p>Mattermostのメッセージ入力欄にWYSIWYG風なボタンが追加され、ボタンによるメッセージの書式設定を行えるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-message-format.png" alt="channels-message-format"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/channels-message-format.png alt=channels-message-format></p>
 <p>書式設定のボタンは追加されていますが、メッセージ入力自体は今まで通りMarkdown形式で入力することができ、追加されたボタンはMarkdown形式の入力を補助する機能という位置付けのようです。<br>
 動作している様子については公式ブログを参照ください。</p>
-<p><a href="https://mattermost.com/blog/mattermost-v7-0-is-now-available/#toolbar">Channels: Message Formatting Toolbar</a></p>
-<h2 id="playbooks-インラインplaybookエディタ">Playbooks: インラインPlaybookエディタ</h2>
+<p><a href=https://mattermost.com/blog/mattermost-v7-0-is-now-available/#toolbar>Channels: Message Formatting Toolbar</a></p>
+<h2 id=playbooks-インラインplaybookエディタ>Playbooks: インラインPlaybookエディタ</h2>
 <p>Playbookの編集画面が新しくなり、各セクションごとに分割して表示されているのでは無く、1枚のレポートのように各セクションがシームレスに結合されて表示されるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-inline-editor.png" alt="playbooks-inline-editor"></p>
-<h2 id="playbooks-playbooksの利用統計">Playbooks: Playbooksの利用統計</h2>
-<p>Playbooksの利用統計情報がシステムコンソールから確認できるようになり、インスタンス内でPlaybooksがどの程度利用されているかを把握しやすくなりました。。<strong>システムコンソール &gt; レポート &gt; サイトの使用統計</strong>から確認することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-stats.png" alt="playbooks-stats"></p>
-<h2 id="playbooks-実行中のplaybookに対するアクションとトリガーの追加">Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加</h2>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-inline-editor.png alt=playbooks-inline-editor></p>
+<h2 id=playbooks-playbooksの利用統計>Playbooks: Playbooksの利用統計</h2>
+<p>Playbooksの利用統計情報がシステムコンソールから確認できるようになり、インスタンス内でPlaybooksがどの程度利用されているかを把握しやすくなりました。。<strong>システムコンソール > レポート > サイトの使用統計</strong>から確認することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-stats.png alt=playbooks-stats></p>
+<h2 id=playbooks-実行中のplaybookに対するアクションとトリガーの追加>Playbooks: 実行中のPlaybookに対するアクションとトリガーの追加</h2>
 <p>実行中のPlaybookのステータスが更新された際に、その更新内容の配信先となるチャンネルと外向きのウェブフックを実行ごとに指定できるようになりました。今までもPlaybook単位で配信先を指定することはできましたが、本バージョンからPlaybookの実行ごとに配信先を追加で設定することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-trigger-action.gif" alt="playbooks-trigger-action"></p>
-<h2 id="integrations-apps-bar-ベータ版">Integrations: Apps Bar (ベータ版)</h2>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/playbooks-trigger-action.gif alt=playbooks-trigger-action></p>
+<h2 id=integrations-apps-bar-ベータ版>Integrations: Apps Bar (ベータ版)</h2>
 <p>Mattermost統合機能のアイコンを表示する領域として、新たに画面右端にApps Barという領域が追加されました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/integrations-appsbar.png" alt="integrations-appsbar"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/integrations-appsbar.png alt=integrations-appsbar></p>
 <p>今までのバージョンでも、MattermostにはPluginやApps等の統合機能によってチャンネルヘッダ部分に統合機能専用のアイコンを表示することができました。ただ、追加される統合機能が多くなると全てのチャンネルのヘッダ部分に統合機能のアイコンが数多く並ぶようになり、チャンネルヘッダのテキストなど、現在表示しているチャンネルに特化した情報が埋もれるようになっていました。Mattermost v6.0で刷新された新しいUIでは、チャンネルヘッダにはそのチャンネルに特化した情報を表示すべきという明確な目的が与えられたため、v7で統合機能のアイコンを表示するための専用の場所(Apps Bar)が作成されたようです。</p>
-<p>Apps Bar機能は<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; Enable App Bar</strong>から有効/無効を設定できます。</p>
-<h2 id="platform-デスクトップアプリがmacos-app-storeからインストール可能に">Platform: デスクトップアプリがmacOS App Storeからインストール可能に</h2>
+<p>Apps Bar機能は<strong>システムコンソール > 実験的機能 > 機能 > Enable App Bar</strong>から有効/無効を設定できます。</p>
+<h2 id=platform-デスクトップアプリがmacos-app-storeからインストール可能に>Platform: デスクトップアプリがmacOS App Storeからインストール可能に</h2>
 <p>MattermostデスクトップアプリがmacOS App Storeから取得できるようになりました。　</p>
-<p><a href="https://apps.apple.com/app/mattermost-desktop/id1614666244">Mattermost Desktop on the Mac App Store</a></p>
+<p><a href=https://apps.apple.com/app/mattermost-desktop/id1614666244>Mattermost Desktop on the Mac App Store</a></p>
 <p>App Storeからインストールした場合、新しいバージョンがリリースされると自動でデスクトップアプリがアップデートされるようになります。</p>
-<h2 id="platform-デスクトップアプリのdebrpmパッケージリリース">Platform デスクトップアプリのDEB/RPMパッケージリリース</h2>
+<h2 id=platform-デスクトップアプリのdebrpmパッケージリリース>Platform デスクトップアプリのDEB/RPMパッケージリリース</h2>
 <p>Linux向けにもMattemrostデスクトップアプリのDEB/RPMパッケージがリリースされました。<br>
 インストール方法については公式ブログを参照ください。</p>
-<p><a href="https://mattermost.com/blog/mattermost-v7-0-is-now-available/#packages">Platform: Linux DEB and RPM packages for Desktop App</a></p>
-<h2 id="その他の変更">その他の変更</h2>
-<h3 id="ログイン画面の更新">ログイン画面の更新</h3>
+<p><a href=https://mattermost.com/blog/mattermost-v7-0-is-now-available/#packages>Platform: Linux DEB and RPM packages for Desktop App</a></p>
+<h2 id=その他の変更>その他の変更</h2>
+<h3 id=ログイン画面の更新>ログイン画面の更新</h3>
 <p>ログイン画面のデザインが更新されました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/platform-login.png" alt="platform-login"></p>
-<h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
-<h3 id="ログインセッション維持期間に関する設定変更への対応">ログインセッション維持期間に関する設定変更への対応</h3>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/platform-login.png alt=platform-login></p>
+<h2 id=アップグレード時の注意事項>アップグレード時の注意事項</h2>
+<h3 id=ログインセッション維持期間に関する設定変更への対応>ログインセッション維持期間に関する設定変更への対応</h3>
 <p>Mattermostのログインセッションの維持期間に関する設定が、日(day)単位から時間(hour)単位に変更されました。<code>config.json</code> を使ったファイル形式で設定を管理している場合、セッション維持期間に関する設定値は自動的に新しい形式へ変換されますが、環境変数を通じて設定している場合は設定する環境変数を変更する必要があります。環境変数による設定の変更方法について詳しくは以下の公式ドキュメントを参照してください。</p>
-<p><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">Important Upgrade Notes</a></p>
-<h3 id="mysqlを使用している場合アップグレード時のマイグレーションに時間がかかる可能性有">MySQLを使用している場合、アップグレード時のマイグレーションに時間がかかる可能性有</h3>
+<p><a href=https://docs.mattermost.com/upgrade/important-upgrade-notes.html>Important Upgrade Notes</a></p>
+<h3 id=mysqlを使用している場合アップグレード時のマイグレーションに時間がかかる可能性有>MySQLを使用している場合、アップグレード時のマイグレーションに時間がかかる可能性有</h3>
 <p>セルフホストのMySQLを使ってMattermostを構築している場合、<code>FileInfo</code>テーブルに格納されているデータの数によっては、アップグレード時のマイグレーション処理に時間がかかる可能性があります。<br>
-参考情報として、CPU: Intel i7 <a href="mailto:6cores@2.6GHz">6cores@2.6GHz</a>、Memory: 16GBの環境で、<code>FileInfo</code>テーブルに70万行のデータが格納されている場合、マイグレーションに19秒かかったとのことです。PostgreSQLの場合、マイグレーションの処理時間は無視できるほどです。</p>
-<h3 id="プラグインにより追加されたチャンネルヘッダーアイコンがappbar領域へ">プラグインにより追加されたチャンネルヘッダーアイコンがAppBar領域へ</h3>
-<p>v7より追加されたApp Bar機能を<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; Enable App Bar</strong>から有効にした場合、プラグインによってチャンネルヘッダーに追加された全てのアイコンが、AppBar領域に移動されます。セルフホスト版では、AppBar機能はデフォルトで無効になっています。</p>
-<h3 id="trustedproxyipheaderの設定値の確認"><code>TrustedProxyIPHeader</code>の設定値の確認</h3>
+参考情報として、CPU: Intel i7 <a href=mailto:6cores@2.6GHz>6cores@2.6GHz</a>、Memory: 16GBの環境で、<code>FileInfo</code>テーブルに70万行のデータが格納されている場合、マイグレーションに19秒かかったとのことです。PostgreSQLの場合、マイグレーションの処理時間は無視できるほどです。</p>
+<h3 id=プラグインにより追加されたチャンネルヘッダーアイコンがappbar領域へ>プラグインにより追加されたチャンネルヘッダーアイコンがAppBar領域へ</h3>
+<p>v7より追加されたApp Bar機能を<strong>システムコンソール > 実験的機能 > 機能 > Enable App Bar</strong>から有効にした場合、プラグインによってチャンネルヘッダーに追加された全てのアイコンが、AppBar領域に移動されます。セルフホスト版では、AppBar機能はデフォルトで無効になっています。</p>
+<h3 id=trustedproxyipheaderの設定値の確認><code>TrustedProxyIPHeader</code>の設定値の確認</h3>
 <p>以前のバージョンでは、特定の状況下で<code>ServiceSettings.TrustedProxyIPHeader</code>のデフォルト設定値が空配列にならないバグが存在しましたが、本バージョンからデフォルト値が空配列になるよう修正されました。以前のバージョンからv7へアップデートする場合、この設定値を確認し、意図しない値が設定されている場合は <code>nil</code> を設定する必要があります。</p>
-<p>当該設定項目に関する説明は<a href="https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header">Configuration settings</a>を参照してください。</p>
-<h2 id="その他のトピック">その他のトピック</h2>
-<h3 id="チャンネル名コンテスト">チャンネル名コンテスト</h3>
+<p>当該設定項目に関する説明は<a href=https://docs.mattermost.com/configure/configuration-settings.html#trusted-proxy-ip-header>Configuration settings</a>を参照してください。</p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<h3 id=チャンネル名コンテスト>チャンネル名コンテスト</h3>
 <p>MattermostのTwitterで、実際に運用されているユニークなMattermostチャンネル名を表彰するコンテストが開催されています。募集期限は6/22 PM12:00(ET) まで募集しており、最もユニークなチャンネル名を投稿した5名の勝者にはグッズが送られるようです。</p>
 <p>応募方法など詳しくは、以下のツイートツリーを参照ください。</p>
-<p><a href="https://twitter.com/Mattermost/status/1537080481384124419">https://twitter.com/Mattermost/status/1537080481384124419</a></p>
-<h3 id="happy-pride-month">Happy Pride Month</h3>
+<p><a href=https://twitter.com/Mattermost/status/1537080481384124419>https://twitter.com/Mattermost/status/1537080481384124419</a></p>
+<h3 id=happy-pride-month>Happy Pride Month</h3>
 <p>6月は、アメリカやカナダ、オーストラリアを始め様々な国でLGBTQ+の権利についての啓発を行うイベントが開催されるPride Monthとされています。Mattermost社は仕事をする上でもPrideを尊重することは生産性と幸福を高めると考えており、Pride Monthに関する意識を向上させるために、6月の毎週金曜日にPride Monthに関するクイズを出し、最初に正解した人にグッズを贈呈するというイベントを開催しています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hpm.png" alt="etc-hpm"><br>
-<a href="https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw">https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw</a></p>
-<h3 id="hackathon">Hackathon</h3>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hpm.png alt=etc-hpm><br>
+<a href=https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw>https://community-daily.mattermost.com/core/channels/off-topic-pub/9hwibadgfp8jxj8sdfur5qt7kw</a></p>
+<h3 id=hackathon>Hackathon</h3>
 <p>Mattermost社のプロダクト(Channels, Playbooks, Boardsなどを指しているものだと思います)を、うまく活用したソリューションのアイデアを集めるためのハッカソンが6月下旬に予定されています。<br>
-Mattermost社のR&amp;Dチームが主体となって開催しているものですが、コミュニティメンバーの参加も歓迎されています。</p>
+Mattermost社のR&Dチームが主体となって開催しているものですが、コミュニティメンバーの参加も歓迎されています。</p>
 <p><a href="https://docs.google.com/presentation/d/1ZBlYdwEShXjNTG_6EeqrqxuS-ceMmO27otg3F2KO56Q/edit#slide=id.ge9b7e537ec_0_0">Mattermost Hackathon 2022 - Google スライド</a></p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hackathon.png" alt="etc-hackathon"></p>
-<h2 id="おわりに">おわりに</h2>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.0/etc-hackathon.png alt=etc-hackathon></p>
+<h2 id=おわりに>おわりに</h2>
 <p>次の<code>v7.1</code>のリリースは 2022/07/15(Fri)を予定しています。</p>
 <hr>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

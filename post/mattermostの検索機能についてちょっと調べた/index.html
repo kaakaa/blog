@@ -1,246 +1,154 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermostの検索機能についてちょっと調べた</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermostの検索機能についてちょっと調べた"/>
-<meta name="twitter:description" content="Mattemrost の検索機能について少し調べた この前、Mattermostnの検索機能について質問を受けました。 検索欄に in:channel_name と入力して、チャンネル指定だけして"/>
-
-
-  <meta property="og:title" content="Mattermostの検索機能についてちょっと調べた" />
-<meta property="og:description" content="Mattemrost の検索機能について少し調べた この前、Mattermostnの検索機能について質問を受けました。 検索欄に in:channel_name と入力して、チャンネル指定だけして" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost%E3%81%AE%E6%A4%9C%E7%B4%A2%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%AA%BF%E3%81%B9%E3%81%9F/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-05-24T15:16:57&#43;09:00" />
-<meta property="article:modified_time" content="2020-05-24T15:16:57&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermostの検索機能についてちょっと調べた">
+<meta name=twitter:description content="Mattemrost の検索機能について少し調べた この前、Mattermostnの検索機能について質問を受けました。 検索欄に in:channel_name と入力して、チャンネル指定だけして">
+<meta property="og:title" content="Mattermostの検索機能についてちょっと調べた">
+<meta property="og:description" content="Mattemrost の検索機能について少し調べた この前、Mattermostnの検索機能について質問を受けました。 検索欄に in:channel_name と入力して、チャンネル指定だけして">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost%E3%81%AE%E6%A4%9C%E7%B4%A2%E6%A9%9F%E8%83%BD%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%A1%E3%82%87%E3%81%A3%E3%81%A8%E8%AA%BF%E3%81%B9%E3%81%9F/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-05-24T15:16:57+09:00">
+<meta property="article:modified_time" content="2020-05-24T15:16:57+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermostの検索機能についてちょっと調べた
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;May 24, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermostの検索機能についてちょっと調べた
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;May 24, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="mattemrost-の検索機能について少し調べた">Mattemrost の検索機能について少し調べた</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=mattemrost-の検索機能について少し調べた>Mattemrost の検索機能について少し調べた</h1>
 <p>この前、Mattermostnの検索機能について質問を受けました。
 検索欄に <code>in:channel_name</code> と入力して、チャンネル指定だけして検索を実行するとチャンネル内の全てのメッセージが検索できるけど、そこから除外文字だけ設定する(<code>in:channel_name -excluded_term</code>)と検索結果が0件になってしまうとのこと。</p>
 <p>2020/05/24時点の最新コミット (v5.24開発中)を元に見ていきます。
-<a href="https://github.com/mattermost/mattermost-server/commit/2135096d886dad9055640edf881661004312c69b">https://github.com/mattermost/mattermost-server/commit/2135096d886dad9055640edf881661004312c69b</a></p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#mattermostの投稿検索">Mattermostの投稿検索</a>
-      <ul>
-        <li><a href="#検索ワード検索除外ワードが共に指定されていない場合">検索ワード/検索除外ワードが共に指定されていない場合</a></li>
-        <li><a href="#検索ワード有り-かつ-postgresqlの場合">検索ワード有り かつ PostgreSQLの場合</a></li>
-        <li><a href="#検索ワード有り-かつ-mysqlの場合">検索ワード有り かつ MySQLの場合</a></li>
-      </ul>
-    </li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="mattermostの投稿検索">Mattermostの投稿検索</h2>
-<p><code>search</code>機能の本体は<a href="https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1134"><code>store/sqlstore/post_store.go</code>内の<code>search</code>メソッド</a>な模様。
-<a href="https://github.com/mattermost/mattermost-server/blob/master/model/search_params.go#L15"><code>model.SearchParams</code></a>が検索条件を持つモデルで、この中の<code>Terms</code>、<code>ExcludedTerms</code>あたりが検索ワードに関するパラメータっぽい。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">SearchParams</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">Terms</span>                  <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedTerms</span>          <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">IsHashtag</span>              <span style="color:#66d9ef">bool</span>
-	<span style="color:#a6e22e">InChannels</span>             []<span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedChannels</span>       []<span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">FromUsers</span>              []<span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedUsers</span>          []<span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">AfterDate</span>              <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedAfterDate</span>      <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">BeforeDate</span>             <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedBeforeDate</span>     <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">OnDate</span>                 <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">ExcludedDate</span>           <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">OrTerms</span>                <span style="color:#66d9ef">bool</span>
-	<span style="color:#a6e22e">IncludeDeletedChannels</span> <span style="color:#66d9ef">bool</span>
-	<span style="color:#a6e22e">TimeZoneOffset</span>         <span style="color:#66d9ef">int</span>
-	<span style="color:#75715e">// True if this search doesn&#39;t originate from a &#34;current user&#34;.
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">SearchWithoutUserId</span> <span style="color:#66d9ef">bool</span>
+<a href=https://github.com/mattermost/mattermost-server/commit/2135096d886dad9055640edf881661004312c69b>https://github.com/mattermost/mattermost-server/commit/2135096d886dad9055640edf881661004312c69b</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#mattermostの投稿検索>Mattermostの投稿検索</a>
+<ul>
+<li><a href=#検索ワード検索除外ワードが共に指定されていない場合>検索ワード/検索除外ワードが共に指定されていない場合</a></li>
+<li><a href=#検索ワード有り-かつ-postgresqlの場合>検索ワード有り かつ PostgreSQLの場合</a></li>
+<li><a href=#検索ワード有り-かつ-mysqlの場合>検索ワード有り かつ MySQLの場合</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=mattermostの投稿検索>Mattermostの投稿検索</h2>
+<p><code>search</code>機能の本体は<a href=https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1134><code>store/sqlstore/post_store.go</code>内の<code>search</code>メソッド</a>な模様。
+<a href=https://github.com/mattermost/mattermost-server/blob/master/model/search_params.go#L15><code>model.SearchParams</code></a>が検索条件を持つモデルで、この中の<code>Terms</code>、<code>ExcludedTerms</code>あたりが検索ワードに関するパラメータっぽい。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>SearchParams</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>Terms</span>                  <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedTerms</span>          <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>IsHashtag</span>              <span style=color:#66d9ef>bool</span>
+	<span style=color:#a6e22e>InChannels</span>             []<span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedChannels</span>       []<span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>FromUsers</span>              []<span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedUsers</span>          []<span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>AfterDate</span>              <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedAfterDate</span>      <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>BeforeDate</span>             <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedBeforeDate</span>     <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>OnDate</span>                 <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>ExcludedDate</span>           <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>OrTerms</span>                <span style=color:#66d9ef>bool</span>
+	<span style=color:#a6e22e>IncludeDeletedChannels</span> <span style=color:#66d9ef>bool</span>
+	<span style=color:#a6e22e>TimeZoneOffset</span>         <span style=color:#66d9ef>int</span>
+	<span style=color:#75715e>// True if this search doesn&#39;t originate from a &#34;current user&#34;.
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>SearchWithoutUserId</span> <span style=color:#66d9ef>bool</span>
 }
 </code></pre></div><p>それぞれ一度変数に読み出しているので、こちらの変数を追っていく。</p>
-<p><a href="https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1200">https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1200</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#a6e22e">terms</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">Terms</span>
-<span style="color:#a6e22e">excludedTerms</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">params</span>.<span style="color:#a6e22e">ExcludedTerms</span>
-</code></pre></div><p><a href="https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1217">1217行目</a>あたりで、これらの変数で分岐しているところがあったのでここらへんが怪しい。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">terms</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">excludedTerms</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
-	<span style="color:#75715e">// we&#39;ve already confirmed that we have a channel or user to search for
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">searchQuery</span> = <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Replace</span>(<span style="color:#a6e22e">searchQuery</span>, <span style="color:#e6db74">&#34;SEARCH_CLAUSE&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#ae81ff">1</span>)
-} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">DriverName</span>() <span style="color:#f92672">==</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">DATABASE_DRIVER_POSTGRES</span> {
-    <span style="color:#f92672">...</span>
-} <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">DriverName</span>() <span style="color:#f92672">==</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">DATABASE_DRIVER_MYSQL</span> {
-    <span style="color:#f92672">...</span>
+<p><a href=https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1200>https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1200</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#a6e22e>terms</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>params</span>.<span style=color:#a6e22e>Terms</span>
+<span style=color:#a6e22e>excludedTerms</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>params</span>.<span style=color:#a6e22e>ExcludedTerms</span>
+</code></pre></div><p><a href=https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1217>1217行目</a>あたりで、これらの変数で分岐しているところがあったのでここらへんが怪しい。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#66d9ef>if</span> <span style=color:#a6e22e>terms</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>excludedTerms</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;&#34;</span> {
+	<span style=color:#75715e>// we&#39;ve already confirmed that we have a channel or user to search for
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>searchQuery</span> = <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>Replace</span>(<span style=color:#a6e22e>searchQuery</span>, <span style=color:#e6db74>&#34;SEARCH_CLAUSE&#34;</span>, <span style=color:#e6db74>&#34;&#34;</span>, <span style=color:#ae81ff>1</span>)
+} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>s</span>.<span style=color:#a6e22e>DriverName</span>() <span style=color:#f92672>==</span> <span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>DATABASE_DRIVER_POSTGRES</span> {
+    <span style=color:#f92672>...</span>
+} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#a6e22e>s</span>.<span style=color:#a6e22e>DriverName</span>() <span style=color:#f92672>==</span> <span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>DATABASE_DRIVER_MYSQL</span> {
+    <span style=color:#f92672>...</span>
 }
 </code></pre></div><p>まず検索ワードが無い場合の処理をして、その後は使用しているDBごとに処理を分けている。</p>
-<h3 id="検索ワード検索除外ワードが共に指定されていない場合">検索ワード/検索除外ワードが共に指定されていない場合</h3>
+<h3 id=検索ワード検索除外ワードが共に指定されていない場合>検索ワード/検索除外ワードが共に指定されていない場合</h3>
 <p>チャンネルだけ指定した検索(<code>in:channel_name</code>)はこれにあたりそう。
-やっている処理は変数 <code>searchQuery</code> 内の <code>SEARCH_CLAUSE</code> という文字列を空文字に置換して消している。変数<code>searchQuery</code>は少し前の<a href="https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1160">1160行目</a>で宣言されているSQL文。SQLテンプレートの内部を置換しながらSQLを組み立てて行っている模様。検索ワードの有無は<code>SEARCH_CLAUSE</code>というパートで扱われていることがわかる。</p>
+やっている処理は変数 <code>searchQuery</code> 内の <code>SEARCH_CLAUSE</code> という文字列を空文字に置換して消している。変数<code>searchQuery</code>は少し前の<a href=https://github.com/mattermost/mattermost-server/blob/aad76a13e8381fc2a7c79d37d842d530c450a728/store/sqlstore/post_store.go#L1160>1160行目</a>で宣言されているSQL文。SQLテンプレートの内部を置換しながらSQLを組み立てて行っている模様。検索ワードの有無は<code>SEARCH_CLAUSE</code>というパートで扱われていることがわかる。</p>
 <p>検索ワードが指定されている場合は使用しているDBごとにクエリの作り方を分岐させている。</p>
-<h3 id="検索ワード有り-かつ-postgresqlの場合">検索ワード有り かつ PostgreSQLの場合</h3>
+<h3 id=検索ワード有り-かつ-postgresqlの場合>検索ワード有り かつ PostgreSQLの場合</h3>
 <ol>
-<li><code>terms</code>, <code>excludedTerms</code>のワイルドカードを <code>*</code> -&gt; <code>:*</code> に置換</li>
+<li><code>terms</code>, <code>excludedTerms</code>のワイルドカードを <code>*</code> -> <code>:*</code> に置換</li>
 <li>除外句(<code>excludedClause</code>)の構築</li>
 </ol>
 <ul>
-<li><code>&amp; !(exTerm1|exTerm2|exTerm3))</code></li>
+<li><code>& !(exTerm1|exTerm2|exTerm3))</code></li>
 </ul>
-<ol start="3">
+<ol start=3>
 <li>検索句全体(<code>:Terms</code>)の構築</li>
 </ol>
 <ul>
 <li>OrTerms?
 <ul>
-<li>YES -&gt; <code>(Term1|Term2|Term3) &amp; !(exTerm1|exTerm2|exTerm3))</code></li>
-<li>No  -&gt; <code>(Term1&amp;Term2&amp;Term3) &amp; !(exTerm1|exTerm2|exTerm3))</code></li>
+<li>YES -> <code>(Term1|Term2|Term3) & !(exTerm1|exTerm2|exTerm3))</code></li>
+<li>No -> <code>(Term1&Term2&Term3) & !(exTerm1|exTerm2|exTerm3))</code></li>
 </ul>
 </li>
 </ul>
 <p>途中、SearchParams内のbool型変数<code>OrTerms</code>で分岐しているが、APIドキュメントによると<code>OrTerms</code>というのはOR検索かAND検索かを判別フラグっぽい。</p>
-<p><a href="https://api.mattermost.com/#tag/posts/paths/~1teams~1%7Bteam_id%7D~1posts~1search/post">https://api.mattermost.com/#tag/posts/paths/~1teams~1{team_id}~1posts~1search/post</a></p>
+<p><a href=https://api.mattermost.com/#tag/posts/paths/~1teams~1%7Bteam_id%7D~1posts~1search/post>https://api.mattermost.com/#tag/posts/paths/~1teams~1{team_id}~1posts~1search/post</a></p>
 <blockquote>
 <p>is_or_search
 Set to true if an Or search should be performed vs an And search.</p>
 </blockquote>
-<p>以上からPostgreSQLの場合、検索除外ワードのみが設定されていた場合、検索句全体(<code>:Terms</code>)は <code>&amp; !(exTerm1|exTerm2|exTerm3))</code> となるはずです。検索句が <code>&amp;</code> で始まっているのでクエリ的に怪しい気が(SQLについては詳しくないので予想ですが)。
-ExcludedTermsしか設定されていない場合は、検索対象の語句をワイルドカードで与えてあげる (<code>:* &amp; !(exTerm1|exTerm2|exTerm3))</code>) と良いような気がします。(PostgreSQLは使ってないので未検証)</p>
-<h3 id="検索ワード有り-かつ-mysqlの場合">検索ワード有り かつ MySQLの場合</h3>
+<p>以上からPostgreSQLの場合、検索除外ワードのみが設定されていた場合、検索句全体(<code>:Terms</code>)は <code>& !(exTerm1|exTerm2|exTerm3))</code> となるはずです。検索句が <code>&</code> で始まっているのでクエリ的に怪しい気が(SQLについては詳しくないので予想ですが)。
+ExcludedTermsしか設定されていない場合は、検索対象の語句をワイルドカードで与えてあげる (<code>:* & !(exTerm1|exTerm2|exTerm3))</code>) と良いような気がします。(PostgreSQLは使ってないので未検証)</p>
+<h3 id=検索ワード有り-かつ-mysqlの場合>検索ワード有り かつ MySQLの場合</h3>
 <p>今回知りたかった部分の処理。</p>
 <ol>
 <li>除外句(<code>excludedClause</code>)構築</li>
@@ -248,150 +156,81 @@ ExcludedTermsしか設定されていない場合は、検索対象の語句を�
 <ul>
 <li><code>-($excludedTerms)</code></li>
 </ul>
-<ol start="2">
+<ol start=2>
 <li>検索句全体 (<code>:Terms</code>) の構築</li>
 </ol>
 <ul>
 <li>OrTerms?
 <ul>
-<li>YES -&gt; <code>$terms -($excludedTerms)</code></li>
-<li>NO  -&gt; <code>+term1 +term2 +term3 -($excludedTerms)</code></li>
+<li>YES -> <code>$terms -($excludedTerms)</code></li>
+<li>NO -> <code>+term1 +term2 +term3 -($excludedTerms)</code></li>
 </ul>
 </li>
 </ul>
 <p>MySQLの場合、<code>OrTerms</code>が設定されていると与えられた（除外）検索句をそのまま利用するようです。
-スペース区切りで与えられるからそのままOr検索になるのかな？ ただそうだとすると、除外句の部分 (<code>-($excludedTerms)</code>) を見ると、除外句の方が <code>or</code> にならなそうな気がしますが&hellip;。</p>
+スペース区切りで与えられるからそのままOr検索になるのかな？ ただそうだとすると、除外句の部分 (<code>-($excludedTerms)</code>) を見ると、除外句の方が <code>or</code> にならなそうな気がしますが&mldr;。</p>
 <p>以上から、MySQLでは、検索除外話ーどのみが設定されていた場合、検索句全体(<code>:Terms</code>)は <code>-($excludedTerms)</code> となるはずです。</p>
 <p><code>-</code> で開始する検索句が有効なのか分からないのでMySQLのドキュメントを見てみる。</p>
 <p>するど、どうやら検索除外ワードのみのクエリが与えられた場合、MySQLは空の結果を返すようです。</p>
-<p><a href="https://dev.mysql.com/doc/refman/5.7/en/fulltext-boolean.html">https://dev.mysql.com/doc/refman/5.7/en/fulltext-boolean.html</a></p>
-<pre><code>* -
+<p><a href=https://dev.mysql.com/doc/refman/5.7/en/fulltext-boolean.html>https://dev.mysql.com/doc/refman/5.7/en/fulltext-boolean.html</a></p>
+<pre tabindex=0><code>* -
  A leading or trailing minus sign indicates that this word must not be present in any of the rows that are returned. InnoDB only supports leading minus signs.
  
  Note: The - operator acts only to exclude rows that are otherwise matched by other search terms. Thus, a boolean-mode search that contains only terms preceded by - returns an empty result. It does not return “all rows except those containing any of the excluded terms.”
 </code></pre><p>Mattermostは<code>boolean-mode</code>で検索を行っているため、検索除外ワードのみで検索ワードが与えられていないと検索結果が空となってしまい、空の検索結果から何を除外しても空ということのようです。
 検索ワード、検索除外ワードともに空の場合は、PostgreSQL/MySQLごとに処理を分岐する以前に検索クエリ部分をSQL文から削除しているため、全ての投稿が検索結果として返ってきます。</p>
 <p>つまり、MySQLの場合も検索除外ワードのみが設定されているような場合は、検索対象の語句をワイルドカードで与えてあげる (<code>* -($excludedTerms)</code>) と良い気がします。
-が、ワイルドカード(<code>*</code>) を使った検索は <code>innodb_ft_min_token_size</code> の影響を受けてしまい、1文字のワイルドカード(<code>*</code>)はクエリとして無効となってしまうらしい&hellip;。(<code>AB*</code> のように2文字 + ワイルドカード(<code>*</code>) ならOK）。
-Mattermostはこのサイズが最低でも<code>2</code>にしかできなかったため、単純にワイルドカードを付与する方法ではダメそうです&hellip;。</p>
-<h2 id="おわりに">おわりに</h2>
+が、ワイルドカード(<code>*</code>) を使った検索は <code>innodb_ft_min_token_size</code> の影響を受けてしまい、1文字のワイルドカード(<code>*</code>)はクエリとして無効となってしまうらしい&mldr;。(<code>AB*</code> のように2文字 + ワイルドカード(<code>*</code>) ならOK）。
+Mattermostはこのサイズが最低でも<code>2</code>にしかできなかったため、単純にワイルドカードを付与する方法ではダメそうです&mldr;。</p>
+<h2 id=おわりに>おわりに</h2>
 <p>どうしよ。とりあえずIssueを立てた。
-<a href="https://github.com/mattermost/mattermost-server/issues/14641">https://github.com/mattermost/mattermost-server/issues/14641</a></p>
-<p>Issue立ててる間に調べててわかったけど、<a href="https://community.mattermost.com/core">Mattermostのコミュニティサーバー</a>だと検索できるな。Elasticsearch使ってるからかな。お金を払ってちゃんと使おう。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/search/"
-              >search</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<a href=https://github.com/mattermost/mattermost-server/issues/14641>https://github.com/mattermost/mattermost-server/issues/14641</a></p>
+<p>Issue立ててる間に調べててわかったけど、<a href=https://community.mattermost.com/core>Mattermostのコミュニティサーバー</a>だと検索できるな。Elasticsearch使ってるからかな。お金を払ってちゃんと使おう。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/search/>search</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

@@ -1,462 +1,293 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>[Mattermost Integrations] Matterpoll Plugin (Server)</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Mattermost Integrations] Matterpoll Plugin (Server)"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第22日目の記事です。 以前から開発に参加"/>
-
-
-  <meta property="og:title" content="[Mattermost Integrations] Matterpoll Plugin (Server)" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第22日目の記事です。 以前から開発に参加" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day22-matterpoll-server/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-22T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2020-12-22T00:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="[Mattermost Integrations] Matterpoll Plugin (Server)">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第22日目の記事です。 以前から開発に参加">
+<meta property="og:title" content="[Mattermost Integrations] Matterpoll Plugin (Server)">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第22日目の記事です。 以前から開発に参加">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day22-matterpoll-server/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-12-22T00:00:00+09:00">
+<meta property="article:modified_time" content="2020-12-22T00:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              [Mattermost Integrations] Matterpoll Plugin (Server)
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 22, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+[Mattermost Integrations] Matterpoll Plugin (Server)
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 22, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#本記事について">本記事について</a></li>
-    <li><a href="#概要">概要</a></li>
-    <li><a href="#server側の処理">Server側の処理</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#さいごに">さいごに</a></li>
-  </ul>
-</nav><h2 id="本記事について">本記事について</h2>
-<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第22日目の記事です。</p>
-<p>以前から開発に参加している<a href="https://github.com/matterpoll/matterpoll">Matterpoll</a>がMattermost公式のPlugin MarketplaceでCommunity Pluginとして公開されました。</p>
-<p>公式のPlugin Marketplaceで公開されたことにより、プラグインをアップロードする必要なく<strong>メインメニュー &gt; プラグインマーケットプレース</strong>からボタン一つでインストールできるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/marketplace-menu.png" alt="main menu"></p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/marketplace-install-button.png" alt="install button"></p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#本記事について>本記事について</a></li>
+<li><a href=#概要>概要</a></li>
+<li><a href=#server側の処理>Server側の処理</a>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><a href=#さいごに>さいごに</a></li>
+</ul>
+</nav><h2 id=本記事について>本記事について</h2>
+<p><a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>Mattermostの統合機能アドベントカレンダー</a>の第22日目の記事です。</p>
+<p>以前から開発に参加している<a href=https://github.com/matterpoll/matterpoll>Matterpoll</a>がMattermost公式のPlugin MarketplaceでCommunity Pluginとして公開されました。</p>
+<p>公式のPlugin Marketplaceで公開されたことにより、プラグインをアップロードする必要なく<strong>メインメニュー > プラグインマーケットプレース</strong>からボタン一つでインストールできるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/marketplace-menu.png alt="main menu"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/marketplace-install-button.png alt="install button"></p>
 <p>MatterpollはMattermost上で投票を行うことができるPluginであり、Mattermost社の開発者である Hanzei と私を中心に開発が進められています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.png" alt="screenshot of MatterPoll"></p>
-<p>以前よりMattermostに投票機能を付けるという提案は<a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/11721996-polls-like-doodle-or-for-decision-making">MattermostのFeature Request Forumでも票数を集めて</a>いたため、以前は絵文字で投票を促すような統合機能を開発していました。</p>
-<p><a href="https://github.com/matterpoll/matterpoll-emoji">https://github.com/matterpoll/matterpoll-emoji</a></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.png alt="screenshot of MatterPoll"></p>
+<p>以前よりMattermostに投票機能を付けるという提案は<a href=https://mattermost.uservoice.com/forums/306457-general/suggestions/11721996-polls-like-doodle-or-for-decision-making>MattermostのFeature Request Forumでも票数を集めて</a>いたため、以前は絵文字で投票を促すような統合機能を開発していました。</p>
+<p><a href=https://github.com/matterpoll/matterpoll-emoji>https://github.com/matterpoll/matterpoll-emoji</a></p>
 <p>ただその当時はMattermostにPlugin機能がなかったため、この統合機能を利用するにはMattermostとは別にサーバーアプリを起動しておく必要があるのが難点でした。</p>
 <p>その後、MattermostにPlugin機能が付いたことで、Mattermostのプロセスの上で統合機能を動作させることができるようになり、<code>matterpoll-emoji</code> もPluginとして開発し直すこととなりました。そこで出来たプラグインが、今回Plugin Marketplaceで公開されたMatterpoll Pluginになります。</p>
 <p>この記事では、まだ日本語ではあまり情報のないMattermost Pluginについて、Matterpoll Pluginの構造を元に紹介していきたいと思います。</p>
-<p>本記事では、MattermostプラグインのGetting Started的な部分についてはあまり触れません。Mattermost Pluginの基本的な部分については、<a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">アドベントカレンダーの他の記事</a>や、公式ドキュメントを参照いただければと思います。</p>
-<p><a href="https://developers.mattermost.com/extend/plugins/">https://developers.mattermost.com/extend/plugins/</a></p>
-<p>また、実際に開発を始める場合はGitHubで公開されているMattermost Plugin用のテンプレートリポジトリ <a href="https://github.com/mattermost/mattermost-plugin-starter-template">https://github.com/mattermost/mattermost-plugin-starter-template</a> を使用するのがおすすめです。テンプレートリポジトリを使った開発の始め方については、下記の記事で紹介しています。（少し情報が古いかもしれません&hellip;）</p>
-<p><a href="https://blog.kaakaa.dev/post/mattermost/plugin-template/">Mattermostプラグイン用のリポジトリテンプレート · kaakaa blog</a></p>
-<h2 id="概要">概要</h2>
+<p>本記事では、MattermostプラグインのGetting Started的な部分についてはあまり触れません。Mattermost Pluginの基本的な部分については、<a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>アドベントカレンダーの他の記事</a>や、公式ドキュメントを参照いただければと思います。</p>
+<p><a href=https://developers.mattermost.com/extend/plugins/>https://developers.mattermost.com/extend/plugins/</a></p>
+<p>また、実際に開発を始める場合はGitHubで公開されているMattermost Plugin用のテンプレートリポジトリ <a href=https://github.com/mattermost/mattermost-plugin-starter-template>https://github.com/mattermost/mattermost-plugin-starter-template</a> を使用するのがおすすめです。テンプレートリポジトリを使った開発の始め方については、下記の記事で紹介しています。（少し情報が古いかもしれません&mldr;）</p>
+<p><a href=https://blog.kaakaa.dev/post/mattermost/plugin-template/>Mattermostプラグイン用のリポジトリテンプレート · kaakaa blog</a></p>
+<h2 id=概要>概要</h2>
 <p>Matterpoll PluginはServer側の機能とWebapp側の機能が連携して動作しています。</p>
 <p>Server側の機能は投票作成コマンド(<code>/poll</code>)を処理したり、投票が実行のHTTPリクエストを受け取って処理をしたり、投票に関するデータを管理したりしています。Webapp側ではユーザー毎に表示を変えたい場合など、クライアント側の処理を実装しています。Server側はGo言語、WebApp側はReact.js(JavaScript/TypeScript)で書かれています。</p>
 <p>Mattermostの基本的な処理の流れは下記のようになります。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.dio.png" alt="architecture"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll.dio.png alt=architecture></p>
 <p>ユーザーがMattermost上でスラッシュコマンド <code>/poll</code> を実行する <strong>(1)</strong> と、そのコマンドをMatterpoll Server側が受け取り <strong>(2)</strong>、投票データ(<code>Poll</code>)を作成します <strong>(3)</strong>。作成された <code>Poll</code> のデータは、プラグイン用のKey-Value Storeに格納されます <strong>(4)</strong>。そして、Mattermostの投稿形式 (<code>Post</code>)へ変換され <strong>(5)</strong>、通常の投稿と同様にMattermostのデータベースに格納され <strong>(6)</strong>、WebappへWebSocketを通じてPublishされます <strong>(7)</strong>。(実際には、諸事情により投稿が作成 <strong>(6)</strong> されてから投票データをKey-Valueストア に格納 <strong>(4)</strong> していますが、話を簡単にするため上記の順で話をしています)</p>
 <p>Matterpoll Pluginにより作成されたメッセージは、Mattermost Webapp側の処理によってユーザー毎に見た目が変わります <strong>(8)</strong>。具体的には、自分が投票した回答のボタンの色が変わったり、投票管理系のボタンが権限のないユーザーから見えなくなったりします。このWebApp側の機能は、現在実験的な機能として提供されており、デフォルトではOffになっています。MattermostのSystem ConsoleのMatterpollプラグインの設定からOnにすることが出来ます。(設定がOffでも、投票機能自体は利用可能)</p>
-<h2 id="server側の処理">Server側の処理</h2>
+<h2 id=server側の処理>Server側の処理</h2>
 <p>MatterpollプラグインはServer側で投票の作成、実行、データの管理などの投票に関わる基本的な処理を実装しています。ここでは、Mattermost Pluginの機能により、以下の処理をどのように実装しているかについて紹介していきます。</p>
 <ul>
 <li>プラグイン専用のスラッシュコマンドを追加し、投票作成コマンドを実行できるようにする</li>
 <li>プラグイン専用のエンドポイントを追加し、ユーザーからの投票を受け付ける</li>
 <li>プラグイン専用のKey-Valueストアで投票データを管理する</li>
 </ul>
-<h4 id="投票作成用の独自スラッシュコマンドの追加">投票作成用の独自スラッシュコマンドの追加</h4>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-command.dio.png" alt="matterpoll-command.dio.png"></p>
+<h4 id=投票作成用の独自スラッシュコマンドの追加>投票作成用の独自スラッシュコマンドの追加</h4>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-command.dio.png alt=matterpoll-command.dio.png></p>
 <p>Matterpollは専用のスラッシュコマンド <code>/poll</code> を実行することで投票を作成します。この <code>/poll</code> コマンドは、プラグイン起動時に登録されます。</p>
-<p>Mattermostプラグインでは、プラグインAPIの <a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand)">RegisterCommand</a> を実行することで新たなスラッシュコマンドを登録することができます。</p>
+<p>Mattermostプラグインでは、プラグインAPIの <a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand)>RegisterCommand</a> を実行することで新たなスラッシュコマンドを登録することができます。</p>
 <p>実際のコードでは下記のようになります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/configuration.go" data-lang="go:server/plugin/configuration.go"><span style="color:#f92672">...</span>
-<span style="color:#75715e">// OnConfigurationChange loads the plugin configuration, validates it and saves it.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">OnConfigurationChange</span>() <span style="color:#66d9ef">error</span> {
-  <span style="color:#f92672">...</span>
-	<span style="color:#75715e">// This require a loaded i18n bundle
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">isActivated</span>() {
-		<span style="color:#a6e22e">command</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">getCommand</span>(<span style="color:#a6e22e">configuration</span>.<span style="color:#a6e22e">Trigger</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to get command&#34;</span>)
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/configuration.go data-lang=go:server/plugin/configuration.go><span style=color:#f92672>...</span>
+<span style=color:#75715e>// OnConfigurationChange loads the plugin configuration, validates it and saves it.
+</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>OnConfigurationChange</span>() <span style=color:#66d9ef>error</span> {
+  <span style=color:#f92672>...</span>
+	<span style=color:#75715e>// This require a loaded i18n bundle
+</span><span style=color:#75715e></span>	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>isActivated</span>() {
+		<span style=color:#a6e22e>command</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>getCommand</span>(<span style=color:#a6e22e>configuration</span>.<span style=color:#a6e22e>Trigger</span>)
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+			<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>errors</span>.<span style=color:#a6e22e>Wrap</span>(<span style=color:#a6e22e>err</span>, <span style=color:#e6db74>&#34;failed to get command&#34;</span>)
 		}
-    <span style="color:#f92672">...</span>
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">RegisterCommand</span>(<span style="color:#a6e22e">command</span>); <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">errors</span>.<span style="color:#a6e22e">Wrap</span>(<span style="color:#a6e22e">err</span>, <span style="color:#e6db74">&#34;failed to register new command&#34;</span>)
+    <span style=color:#f92672>...</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>API</span>.<span style=color:#a6e22e>RegisterCommand</span>(<span style=color:#a6e22e>command</span>); <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+			<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>errors</span>.<span style=color:#a6e22e>Wrap</span>(<span style=color:#a6e22e>err</span>, <span style=color:#e6db74>&#34;failed to register new command&#34;</span>)
 		}
-    <span style="color:#f92672">...</span>
+    <span style=color:#f92672>...</span>
 	}
-  <span style="color:#f92672">...</span>
+  <span style=color:#f92672>...</span>
 }
-<span style="color:#f92672">...</span>
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/configuration.go#L43">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/configuration.go#L43</a></p>
+<span style=color:#f92672>...</span>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/configuration.go#L43>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/configuration.go#L43</a></p>
 <p><code>RegisterCommand</code>の引数には、<code>getCommand</code>メソッドの戻り値 <code>command</code> を指定していますが、<code>getCommand</code>はSlash Commandのモデルである<code>model.Command</code>を生成するための内部メソッドです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/command.go" data-lang="go:server/plugin/command.go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">getCommand</span>(<span style="color:#a6e22e">trigger</span> <span style="color:#66d9ef">string</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Command</span>, <span style="color:#66d9ef">error</span>) {
-  <span style="color:#f92672">...</span>
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Command</span>{
-		<span style="color:#a6e22e">Trigger</span>:              <span style="color:#a6e22e">trigger</span>,
-		<span style="color:#a6e22e">AutoComplete</span>:         <span style="color:#66d9ef">true</span>,
-		<span style="color:#a6e22e">AutoCompleteDesc</span>:     <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">LocalizeDefaultMessage</span>(<span style="color:#a6e22e">localizer</span>, <span style="color:#a6e22e">commandAutoCompleteDesc</span>),
-		<span style="color:#a6e22e">AutoCompleteHint</span>:     <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">LocalizeDefaultMessage</span>(<span style="color:#a6e22e">localizer</span>, <span style="color:#a6e22e">commandAutoCompleteHint</span>),
-		<span style="color:#a6e22e">AutocompleteIconData</span>: <span style="color:#a6e22e">iconData</span>,
-	}, <span style="color:#66d9ef">nil</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/command.go data-lang=go:server/plugin/command.go><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>getCommand</span>(<span style=color:#a6e22e>trigger</span> <span style=color:#66d9ef>string</span>) (<span style=color:#f92672>*</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>Command</span>, <span style=color:#66d9ef>error</span>) {
+  <span style=color:#f92672>...</span>
+	<span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>Command</span>{
+		<span style=color:#a6e22e>Trigger</span>:              <span style=color:#a6e22e>trigger</span>,
+		<span style=color:#a6e22e>AutoComplete</span>:         <span style=color:#66d9ef>true</span>,
+		<span style=color:#a6e22e>AutoCompleteDesc</span>:     <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>LocalizeDefaultMessage</span>(<span style=color:#a6e22e>localizer</span>, <span style=color:#a6e22e>commandAutoCompleteDesc</span>),
+		<span style=color:#a6e22e>AutoCompleteHint</span>:     <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>LocalizeDefaultMessage</span>(<span style=color:#a6e22e>localizer</span>, <span style=color:#a6e22e>commandAutoCompleteHint</span>),
+		<span style=color:#a6e22e>AutocompleteIconData</span>: <span style=color:#a6e22e>iconData</span>,
+	}, <span style=color:#66d9ef>nil</span>
 }
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L215">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L215</a></p>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L215>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L215</a></p>
 <p>また、<code>getCommand</code>の引数 (<code>configuration.Trigger</code>)はSlash Commandのトリガーワード(スラッシュコマンド名)ですが、Matterpollではスラッシュコマンド名を設定から変更できるようにしてあるため、設定画面で入力された値を使用するために<code>configuration.Trigger</code>を指定しています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-settings-trigger.png" alt="設定画面"></p>
-<p>そのため、設定が変更された際に実行される <a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnConfigurationChange%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnConfigurationChange)">OnConfigurationChange</a> Hook の中で、<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand)">RegisterCommand</a> を実行しています。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-settings-trigger.png alt=設定画面></p>
+<p>そのため、設定が変更された際に実行される <a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnConfigurationChange%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.OnConfigurationChange)>OnConfigurationChange</a> Hook の中で、<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.RegisterCommand)>RegisterCommand</a> を実行しています。</p>
 <hr>
-<p>プラグインにより登録されたスラッシュコマンド(<code>/poll</code>)が実行された場合の処理は、<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand)">ExecuteCommand</a> Hookとして実装します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/command.go" data-lang="go:server/plugin/command.go"><span style="color:#75715e">// ExecuteCommand parses a given input and creates a poll if the input is correct
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">ExecuteCommand</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">args</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandArgs</span>) (<span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>, <span style="color:#f92672">*</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">AppError</span>) {
-	<span style="color:#a6e22e">msg</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">executeCommand</span>(<span style="color:#a6e22e">args</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">msg</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
-		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">SendEphemeralPost</span>(<span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">ChannelId</span>, <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">UserId</span>, <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">RootId</span>, <span style="color:#a6e22e">msg</span>)
+<p>プラグインにより登録されたスラッシュコマンド(<code>/poll</code>)が実行された場合の処理は、<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand)>ExecuteCommand</a> Hookとして実装します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/command.go data-lang=go:server/plugin/command.go><span style=color:#75715e>// ExecuteCommand parses a given input and creates a poll if the input is correct
+</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>ExecuteCommand</span>(<span style=color:#a6e22e>c</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>args</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>CommandArgs</span>) (<span style=color:#f92672>*</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>CommandResponse</span>, <span style=color:#f92672>*</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>AppError</span>) {
+	<span style=color:#a6e22e>msg</span>, <span style=color:#a6e22e>appErr</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>executeCommand</span>(<span style=color:#a6e22e>args</span>)
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>msg</span> <span style=color:#f92672>!=</span> <span style=color:#e6db74>&#34;&#34;</span> {
+		<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>SendEphemeralPost</span>(<span style=color:#a6e22e>args</span>.<span style=color:#a6e22e>ChannelId</span>, <span style=color:#a6e22e>args</span>.<span style=color:#a6e22e>UserId</span>, <span style=color:#a6e22e>args</span>.<span style=color:#a6e22e>RootId</span>, <span style=color:#a6e22e>msg</span>)
 	}
-	<span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{}, <span style="color:#a6e22e">appErr</span>
+	<span style=color:#66d9ef>return</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>CommandResponse</span>{}, <span style=color:#a6e22e>appErr</span>
 }
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L84">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L84</a></p>
-<p><a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand)">ExecuteCommand</a>の第二引数である <a href="%5Bhttps://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#CommandArgs%5D(https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#CommandArgs)">*model.CommandArgs</a> 型の変数にコマンド実行時の引数や、コマンド実行したユーザーのユーザーID、コマンドが実行されたチャンネルのIDなどの情報が格納されているため、これらの値を使ってスラッシュコマンドが実行された時の処理を実装していきます。</p>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L84>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L84</a></p>
+<p><a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ExecuteCommand)>ExecuteCommand</a>の第二引数である <a href=%5Bhttps://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#CommandArgs%5D(https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#CommandArgs)>*model.CommandArgs</a> 型の変数にコマンド実行時の引数や、コマンド実行したユーザーのユーザーID、コマンドが実行されたチャンネルのIDなどの情報が格納されているため、これらの値を使ってスラッシュコマンドが実行された時の処理を実装していきます。</p>
 <p><code>executeCommand</code> メソッドで引数を解析して投票を作成する処理が実行されますが、細かい処理が多いためこれ以上の説明は割愛します。</p>
-<h4 id="投票リクエストを受け付けるための独自エンドポイントの追加">投票リクエストを受け付けるための独自エンドポイントの追加</h4>
+<h4 id=投票リクエストを受け付けるための独自エンドポイントの追加>投票リクエストを受け付けるための独自エンドポイントの追加</h4>
 <p>Matterpollにより作成された投稿では、メッセージに埋め込まれたボタンをクリックすることで投票を行うことができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-sample.png" alt="Message Button"></p>
-<p>このボタンはMattermostの <a href="%5Bhttps://docs.mattermost.com/developer/interactive-messages.html%5D(https://docs.mattermost.com/developer/interactive-messages.html)">Interacitve Message</a> 機能を利用して実装されています (Interactive Messageについては<a href="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day14-interactive-message-button/">第14日目</a>、<a href="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day15-interactive-message-menu/">第15日目</a>の記事で紹介しています)。Matterpollでは <a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186</a> のあたりで実装されています。）</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-sample.png alt="Message Button"></p>
+<p>このボタンはMattermostの <a href=%5Bhttps://docs.mattermost.com/developer/interactive-messages.html%5D(https://docs.mattermost.com/developer/interactive-messages.html)>Interacitve Message</a> 機能を利用して実装されています (Interactive Messageについては<a href=https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day14-interactive-message-button/>第14日目</a>、<a href=https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day15-interactive-message-menu/>第15日目</a>の記事で紹介しています)。Matterpollでは <a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L186</a> のあたりで実装されています。）</p>
 <p>Matterpollが作成する投稿に表示されているボタンは、クリックするとそれぞれ異なるURLへHTTPリクエストが送信されます。このHTTPリクエストをMatterpollのServer側が受け取り、どのユーザーがどの回答に投票したかを解析し、データベースに保存されている投票のデータを更新することで投票処理を実行しています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-vote.dio.png" alt="matterpoll-command.dio.png"></p>
-<p>リクエストを受け取るためにはMatterpollプラグイン用のエンドポイントをMattermost上に定義する必要がありますが、これはMattermostプラグインの機能である <a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)">ServeHTTP</a> Hookにより実現しています。<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)">ServeHTTP</a>を実装すると、Mattermostに <code>/plugins/{pluginid}</code> というエンドポイントが生成され、このエンドポイントに送信されたリクエストをプラグインで処理することができるようになります。例えば、Mattermostに <code>https://example.com:8065</code> というURLでアクセスできるとすると、<code>https://example.com:8065/plugins/com.github.matterpoll.matterpoll</code>がMatterpollプラグイン専用のエンドポイントになります。</p>
-<p>Matterpollでは、さらに<a href="%5Bhttps://github.com/gorilla/mux%5D(https://github.com/gorilla/mux)">gorilla/mux</a> を使用して Router を生成し、<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)">ServeHTTP</a> の引数をそのままRouterへ流し込むことで、投票の作成/削除/終了や投票の管理など様々なリクエストに対応するエンドポイントを生成して処理を実装しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/api.go" data-lang="go:server/plugin/api.go"><span style="color:#f92672">...</span>
-<span style="color:#75715e">// InitAPI initializes the REST API
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">InitAPI</span>() <span style="color:#f92672">*</span><span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">Router</span> {
-	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">mux</span>.<span style="color:#a6e22e">NewRouter</span>()
-	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleInfo</span>).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodGet</span>)
-	<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/&#34;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">iconFilename</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleLogo</span>).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodGet</span>)
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-vote.dio.png alt=matterpoll-command.dio.png></p>
+<p>リクエストを受け取るためにはMatterpollプラグイン用のエンドポイントをMattermost上に定義する必要がありますが、これはMattermostプラグインの機能である <a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)>ServeHTTP</a> Hookにより実現しています。<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)>ServeHTTP</a>を実装すると、Mattermostに <code>/plugins/{pluginid}</code> というエンドポイントが生成され、このエンドポイントに送信されたリクエストをプラグインで処理することができるようになります。例えば、Mattermostに <code>https://example.com:8065</code> というURLでアクセスできるとすると、<code>https://example.com:8065/plugins/com.github.matterpoll.matterpoll</code>がMatterpollプラグイン専用のエンドポイントになります。</p>
+<p>Matterpollでは、さらに<a href=%5Bhttps://github.com/gorilla/mux%5D(https://github.com/gorilla/mux)>gorilla/mux</a> を使用して Router を生成し、<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP%5D(https://developers.mattermost.com/extend/plugins/server/reference/#Hooks.ServeHTTP)>ServeHTTP</a> の引数をそのままRouterへ流し込むことで、投票の作成/削除/終了や投票の管理など様々なリクエストに対応するエンドポイントを生成して処理を実装しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/api.go data-lang=go:server/plugin/api.go><span style=color:#f92672>...</span>
+<span style=color:#75715e>// InitAPI initializes the REST API
+</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>InitAPI</span>() <span style=color:#f92672>*</span><span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>Router</span> {
+	<span style=color:#a6e22e>r</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>mux</span>.<span style=color:#a6e22e>NewRouter</span>()
+	<span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleInfo</span>).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodGet</span>)
+	<span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/&#34;</span><span style=color:#f92672>+</span><span style=color:#a6e22e>iconFilename</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleLogo</span>).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodGet</span>)
 
-	<span style="color:#a6e22e">apiV1</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">PathPrefix</span>(<span style="color:#e6db74">&#34;/api/v1&#34;</span>).<span style="color:#a6e22e">Subrouter</span>()
-	<span style="color:#a6e22e">apiV1</span>.<span style="color:#a6e22e">Use</span>(<span style="color:#a6e22e">checkAuthenticity</span>)
-	<span style="color:#a6e22e">apiV1</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/configuration&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePluginConfiguration</span>).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodGet</span>)
+	<span style=color:#a6e22e>apiV1</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>PathPrefix</span>(<span style=color:#e6db74>&#34;/api/v1&#34;</span>).<span style=color:#a6e22e>Subrouter</span>()
+	<span style=color:#a6e22e>apiV1</span>.<span style=color:#a6e22e>Use</span>(<span style=color:#a6e22e>checkAuthenticity</span>)
+	<span style=color:#a6e22e>apiV1</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/configuration&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePluginConfiguration</span>).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodGet</span>)
 
-	<span style="color:#a6e22e">apiV1</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/polls/create&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleSubmitDialogRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleCreatePoll</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">apiV1</span>.<span style="color:#a6e22e">PathPrefix</span>(<span style="color:#e6db74">&#34;/polls/{id:[a-z0-9]+}&#34;</span>).<span style="color:#a6e22e">Subrouter</span>()
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/vote/{optionNumber:[0-9]+}&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePostActionIntegrationRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleVote</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/votes/reset&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePostActionIntegrationRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleResetVotes</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/option/add/request&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePostActionIntegrationRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleAddOption</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/option/add&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleSubmitDialogRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleAddOptionConfirm</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/end&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePostActionIntegrationRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleEndPoll</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/end/confirm&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleSubmitDialogRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleEndPollConfirm</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/delete&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePostActionIntegrationRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleDeletePoll</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/delete/confirm&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleSubmitDialogRequest</span>(<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handleDeletePollConfirm</span>)).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodPost</span>)
-	<span style="color:#a6e22e">pollRouter</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/metadata&#34;</span>, <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">handlePollMetadata</span>).<span style="color:#a6e22e">Methods</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">MethodGet</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">r</span>
+	<span style=color:#a6e22e>apiV1</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/polls/create&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleSubmitDialogRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleCreatePoll</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>apiV1</span>.<span style=color:#a6e22e>PathPrefix</span>(<span style=color:#e6db74>&#34;/polls/{id:[a-z0-9]+}&#34;</span>).<span style=color:#a6e22e>Subrouter</span>()
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/vote/{optionNumber:[0-9]+}&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePostActionIntegrationRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleVote</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/votes/reset&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePostActionIntegrationRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleResetVotes</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/option/add/request&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePostActionIntegrationRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleAddOption</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/option/add&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleSubmitDialogRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleAddOptionConfirm</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/end&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePostActionIntegrationRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleEndPoll</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/end/confirm&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleSubmitDialogRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleEndPollConfirm</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/delete&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePostActionIntegrationRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleDeletePoll</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/delete/confirm&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleSubmitDialogRequest</span>(<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handleDeletePollConfirm</span>)).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodPost</span>)
+	<span style=color:#a6e22e>pollRouter</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/metadata&#34;</span>, <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>handlePollMetadata</span>).<span style=color:#a6e22e>Methods</span>(<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>MethodGet</span>)
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>r</span>
 }
 
-<span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">c</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">plugin</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogDebug</span>(<span style="color:#e6db74">&#34;New request:&#34;</span>, <span style="color:#e6db74">&#34;Host&#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Host</span>, <span style="color:#e6db74">&#34;RequestURI&#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">RequestURI</span>, <span style="color:#e6db74">&#34;Method&#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Method</span>)
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">router</span>.<span style="color:#a6e22e">ServeHTTP</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">r</span>)
+<span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>ServeHTTP</span>(<span style=color:#a6e22e>c</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>plugin</span>.<span style=color:#a6e22e>Context</span>, <span style=color:#a6e22e>w</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ResponseWriter</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>Request</span>) {
+	<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>API</span>.<span style=color:#a6e22e>LogDebug</span>(<span style=color:#e6db74>&#34;New request:&#34;</span>, <span style=color:#e6db74>&#34;Host&#34;</span>, <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Host</span>, <span style=color:#e6db74>&#34;RequestURI&#34;</span>, <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>RequestURI</span>, <span style=color:#e6db74>&#34;Method&#34;</span>, <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Method</span>)
+	<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>router</span>.<span style=color:#a6e22e>ServeHTTP</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>r</span>)
 }
-<span style="color:#f92672">...</span>
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L70">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L70</a></p>
-<h4 id="key-valueストア-による投票データの管理">Key-Valueストア による投票データの管理</h4>
+<span style=color:#f92672>...</span>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L70>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L70</a></p>
+<h4 id=key-valueストア-による投票データの管理>Key-Valueストア による投票データの管理</h4>
 <p>ここまで、スラッシュコマンドによる投票の作成、Interactive Messageによる投票処理について説明してきましたが、投票機能を実現するには、これらの投票に関するユーザーの操作を記録しておく必要があります。Mattermostプラグインでは各プラグイン毎に専用のKey Valueストアが用意されており、Matterpollでは投票に関するデータの保存にこのKey-Valueストアを利用しています。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-kv.dio.png" alt="matterpoll-kv.dio.png"></p>
-<p>投票データのKeyは <code>poll_</code> を接頭辞にもつ投票IDであり、投票IDは投票が作成されるごとに Mattermost本体の<a href="%5Bhttps://github.com/mattermost/mattermost-server/blob/00ed2b138b0099be64a5f6b829ad916c220e1d6a/model/utils.go#L160%5D(https://github.com/mattermost/mattermost-server/blob/00ed2b138b0099be64a5f6b829ad916c220e1d6a/model/utils.go#L160)"><code>model.NewID</code></a>メソッドを使って乱数を生成しています。Mattermost PluginのKey Valueストアには<code>[]byte</code>型のデータのみ格納できるため、投票状態を持つ<a href="%5Bhttps://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/poll/poll.go#L23%5D(https://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/poll/poll.go#L23)">Poll</a>構造体をJSON形式の <code>[]byte</code> に変換した値を格納しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/poll.go" data-lang="go:server/plugin/poll.go"><span style="color:#f92672">...</span>
-<span style="color:#75715e">// Poll stores all needed information for a poll
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">Poll</span> <span style="color:#66d9ef">struct</span> {
-	<span style="color:#a6e22e">ID</span>            <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">PostID</span>        <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;post_id,omitempty&#34;`</span>
-	<span style="color:#a6e22e">CreatedAt</span>     <span style="color:#66d9ef">int64</span>
-	<span style="color:#a6e22e">Creator</span>       <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">Question</span>      <span style="color:#66d9ef">string</span>
-	<span style="color:#a6e22e">AnswerOptions</span> []<span style="color:#f92672">*</span><span style="color:#a6e22e">AnswerOption</span>
-	<span style="color:#a6e22e">Settings</span>      <span style="color:#a6e22e">Settings</span>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day22/matterpoll-kv.dio.png alt=matterpoll-kv.dio.png></p>
+<p>投票データのKeyは <code>poll_</code> を接頭辞にもつ投票IDであり、投票IDは投票が作成されるごとに Mattermost本体の<a href=%5Bhttps://github.com/mattermost/mattermost-server/blob/00ed2b138b0099be64a5f6b829ad916c220e1d6a/model/utils.go#L160%5D(https://github.com/mattermost/mattermost-server/blob/00ed2b138b0099be64a5f6b829ad916c220e1d6a/model/utils.go#L160)><code>model.NewID</code></a>メソッドを使って乱数を生成しています。Mattermost PluginのKey Valueストアには<code>[]byte</code>型のデータのみ格納できるため、投票状態を持つ<a href=%5Bhttps://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/poll/poll.go#L23%5D(https://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/poll/poll.go#L23)>Poll</a>構造体をJSON形式の <code>[]byte</code> に変換した値を格納しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/poll.go data-lang=go:server/plugin/poll.go><span style=color:#f92672>...</span>
+<span style=color:#75715e>// Poll stores all needed information for a poll
+</span><span style=color:#75715e></span><span style=color:#66d9ef>type</span> <span style=color:#a6e22e>Poll</span> <span style=color:#66d9ef>struct</span> {
+	<span style=color:#a6e22e>ID</span>            <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>PostID</span>        <span style=color:#66d9ef>string</span> <span style=color:#e6db74>`json:&#34;post_id,omitempty&#34;`</span>
+	<span style=color:#a6e22e>CreatedAt</span>     <span style=color:#66d9ef>int64</span>
+	<span style=color:#a6e22e>Creator</span>       <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>Question</span>      <span style=color:#66d9ef>string</span>
+	<span style=color:#a6e22e>AnswerOptions</span> []<span style=color:#f92672>*</span><span style=color:#a6e22e>AnswerOption</span>
+	<span style=color:#a6e22e>Settings</span>      <span style=color:#a6e22e>Settings</span>
 }
-<span style="color:#f92672">...</span>
-<span style="color:#75715e">// EncodeToByte returns a poll as a byte array
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">Poll</span>) <span style="color:#a6e22e">EncodeToByte</span>() []<span style="color:#66d9ef">byte</span> {
-	<span style="color:#a6e22e">b</span>, <span style="color:#a6e22e">_</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">p</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">b</span>
+<span style=color:#f92672>...</span>
+<span style=color:#75715e>// EncodeToByte returns a poll as a byte array
+</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>Poll</span>) <span style=color:#a6e22e>EncodeToByte</span>() []<span style=color:#66d9ef>byte</span> {
+	<span style=color:#a6e22e>b</span>, <span style=color:#a6e22e>_</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>json</span>.<span style=color:#a6e22e>Marshal</span>(<span style=color:#a6e22e>p</span>)
+	<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>b</span>
 }
-<span style="color:#f92672">...</span>
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/poll/poll.go#L23">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/poll/poll.go#L23</a></p>
-<p>Key Valueストアは、単純に<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.KVSet%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.KVSet)">KVSet</a> で値の格納、<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.KVGet%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.KVGet)">KVGet</a>で値の取得を行うことができますが、Matterpollでは同時に投票操作が行われた場合などに不整合が起きないようにするため、データを格納する際はAtomicオプションを付けて実行しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">...</span>
-<span style="color:#75715e">// Update updates an existing a poll in the KV Store.
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">s</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">PollStore</span>) <span style="color:#a6e22e">Update</span>(<span style="color:#a6e22e">prev</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">poll</span>.<span style="color:#a6e22e">Poll</span>, <span style="color:#a6e22e">new</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">poll</span>.<span style="color:#a6e22e">Poll</span>) <span style="color:#66d9ef">error</span> {
-	<span style="color:#a6e22e">opt</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">PluginKVSetOptions</span>{
-		<span style="color:#a6e22e">Atomic</span>:   <span style="color:#66d9ef">true</span>,
-		<span style="color:#a6e22e">OldValue</span>: <span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">EncodeToByte</span>(),
+<span style=color:#f92672>...</span>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/poll/poll.go#L23>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/poll/poll.go#L23</a></p>
+<p>Key Valueストアは、単純に<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.KVSet%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.KVSet)>KVSet</a> で値の格納、<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.KVGet%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.KVGet)>KVGet</a>で値の取得を行うことができますが、Matterpollでは同時に投票操作が行われた場合などに不整合が起きないようにするため、データを格納する際はAtomicオプションを付けて実行しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#f92672>...</span>
+<span style=color:#75715e>// Update updates an existing a poll in the KV Store.
+</span><span style=color:#75715e></span><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>s</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>PollStore</span>) <span style=color:#a6e22e>Update</span>(<span style=color:#a6e22e>prev</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>poll</span>.<span style=color:#a6e22e>Poll</span>, <span style=color:#a6e22e>new</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>poll</span>.<span style=color:#a6e22e>Poll</span>) <span style=color:#66d9ef>error</span> {
+	<span style=color:#a6e22e>opt</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>PluginKVSetOptions</span>{
+		<span style=color:#a6e22e>Atomic</span>:   <span style=color:#66d9ef>true</span>,
+		<span style=color:#a6e22e>OldValue</span>: <span style=color:#a6e22e>prev</span>.<span style=color:#a6e22e>EncodeToByte</span>(),
 	}
-	<span style="color:#a6e22e">ok</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">api</span>.<span style="color:#a6e22e">KVSetWithOptions</span>(<span style="color:#a6e22e">pollPrefix</span><span style="color:#f92672">+</span><span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#a6e22e">new</span>.<span style="color:#a6e22e">EncodeToByte</span>(), <span style="color:#a6e22e">opt</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">err</span>
+	<span style=color:#a6e22e>ok</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>s</span>.<span style=color:#a6e22e>api</span>.<span style=color:#a6e22e>KVSetWithOptions</span>(<span style=color:#a6e22e>pollPrefix</span><span style=color:#f92672>+</span><span style=color:#a6e22e>prev</span>.<span style=color:#a6e22e>ID</span>, <span style=color:#a6e22e>new</span>.<span style=color:#a6e22e>EncodeToByte</span>(), <span style=color:#a6e22e>opt</span>)
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#66d9ef>return</span> <span style=color:#a6e22e>err</span>
 	}
-  <span style="color:#f92672">...</span>
+  <span style=color:#f92672>...</span>
 }
-<span style="color:#f92672">...</span>
-</code></pre></div><p>また、Matterpollでは、<a href="%5Bhttps://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/store/store.go%5D(https://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/store/store.go)">Key Valueストア への処理は全てinterfaceを用意しています</a>が、これはテスト用に <a href="%5Bhttps://github.com/vektra/mockery%5D(https://github.com/vektra/mockery)">mockery</a> でモックオブジェクトを自動で作成するためです。</p>
-<h2 id="さいごに">さいごに</h2>
+<span style=color:#f92672>...</span>
+</code></pre></div><p>また、Matterpollでは、<a href=%5Bhttps://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/store/store.go%5D(https://github.com/matterpoll/matterpoll/blob/22dc39da19825ef10c59e35d28359c02c220debb/server/store/store.go)>Key Valueストア への処理は全てinterfaceを用意しています</a>が、これはテスト用に <a href=%5Bhttps://github.com/vektra/mockery%5D(https://github.com/vektra/mockery)>mockery</a> でモックオブジェクトを自動で作成するためです。</p>
+<h2 id=さいごに>さいごに</h2>
 <p>本日は、Mattermost上で投票を行えるようにするMatterpoll Pluginの概要とServer側の実装について紹介しました。
 明日は、Matterpoll PluginのWebapp側の実装について紹介します。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/integration/"
-              >integration</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/plugin/"
-              >plugin</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/matterpoll/"
-              >matterpoll</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/integration/>integration</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/plugin/>plugin</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/matterpoll/>matterpoll</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

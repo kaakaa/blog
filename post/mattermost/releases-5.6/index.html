@@ -1,225 +1,133 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost5.6の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost5.6の新機能"/>
-<meta name="twitter:description" content="はじめに 2018/12/14にMattermost 5.6.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については"/>
-
-
-  <meta property="og:title" content="Mattermost5.6の新機能" />
-<meta property="og:description" content="はじめに 2018/12/14にMattermost 5.6.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.6/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2018-12-16T15:17:06&#43;09:00" />
-<meta property="article:modified_time" content="2018-12-16T15:17:06&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost5.6の新機能">
+<meta name=twitter:description content="はじめに 2018/12/14にMattermost 5.6.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については">
+<meta property="og:title" content="Mattermost5.6の新機能">
+<meta property="og:description" content="はじめに 2018/12/14にMattermost 5.6.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.6/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2018-12-16T15:17:06+09:00">
+<meta property="article:modified_time" content="2018-12-16T15:17:06+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost5.6の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 16, 2018
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost5.6の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 16, 2018
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
 <p>2018/12/14にMattermost 5.6.0がリリースされたので、アップデートの内容について簡単に紹介します。</p>
 <p>詳細については公式のリリースを確認ください。</p>
 <ul>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-6">Mattermost Changelog — Mattermost 5.6 documentation</a></li>
-<li><a href="https://mattermost.com/blog/mattermost-5-6-interactive-message-dialogs-new-admin-tools-ukrainian-language-support-and-more/">Mattermost 5.6: Interactive message dialogs, new admin tools, Ukrainian language support and more - Mattermost Private Cloud Messaging</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-6>Mattermost Changelog — Mattermost 5.6 documentation</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-6-interactive-message-dialogs-new-admin-tools-ukrainian-language-support-and-more/>Mattermost 5.6: Interactive message dialogs, new admin tools, Ukrainian language support and more - Mattermost Private Cloud Messaging</a></li>
 </ul>
 <hr>
 <p>2018/11/16にMattermost 5.5.0がリリースされていましたが、事前の予告通りBug Fixと小さな改善しかなかったため記事は書きませんでした。
 今後も目ぼしい昨日がなければ奇数バージョンのリリースについては記事を書かないつもりです。</p>
 <ul>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-5">Mattermost Changelog — Mattermost 5.6 documentation</a></li>
-<li><a href="https://mattermost.com/blog/mattermost-5-5-web-conferencing-integration-hacktoberfest-contributions-and-more/">Mattermost 5.5: Web conferencing integration, Hacktoberfest contributions and more - Mattermost Private Cloud Messaging</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-5>Mattermost Changelog — Mattermost 5.6 documentation</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-5-web-conferencing-integration-hacktoberfest-contributions-and-more/>Mattermost 5.5: Web conferencing integration, Hacktoberfest contributions and more - Mattermost Private Cloud Messaging</a></li>
 </ul>
 <hr>
-<h1 id="アップデート内容">アップデート内容</h1>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#インタラクティブダイアログ">インタラクティブダイアログ</a></li>
-    <li><a href="#ユーザー体験の向上">ユーザー体験の向上</a>
-      <ul>
-        <li><a href="#ダイレクトメッセージ作成画面でグループメッセージを検索可能に">ダイレクトメッセージ作成画面で、グループメッセージを検索可能に</a></li>
-        <li><a href="#ファイルアップロード時のプログレスバー">ファイルアップロード時のプログレスバー</a></li>
-        <li><a href="#管理者バッジ">管理者バッジ</a></li>
-        <li><a href="#その他の改善">その他の改善</a></li>
-      </ul>
-    </li>
-    <li><a href="#サポート言語の追加">サポート言語の追加</a></li>
-    <li><a href="#モバイルアプリの改善">モバイルアプリの改善</a></li>
-    <li><a href="#デスクトップアプリ">デスクトップアプリ</a></li>
-  </ul>
-</nav><h2 id="インタラクティブダイアログ">インタラクティブダイアログ</h2>
+<h1 id=アップデート内容>アップデート内容</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#インタラクティブダイアログ>インタラクティブダイアログ</a></li>
+<li><a href=#ユーザー体験の向上>ユーザー体験の向上</a>
+<ul>
+<li><a href=#ダイレクトメッセージ作成画面でグループメッセージを検索可能に>ダイレクトメッセージ作成画面で、グループメッセージを検索可能に</a></li>
+<li><a href=#ファイルアップロード時のプログレスバー>ファイルアップロード時のプログレスバー</a></li>
+<li><a href=#管理者バッジ>管理者バッジ</a></li>
+<li><a href=#その他の改善>その他の改善</a></li>
+</ul>
+</li>
+<li><a href=#サポート言語の追加>サポート言語の追加</a></li>
+<li><a href=#モバイルアプリの改善>モバイルアプリの改善</a></li>
+<li><a href=#デスクトップアプリ>デスクトップアプリ</a></li>
+</ul>
+</nav><h2 id=インタラクティブダイアログ>インタラクティブダイアログ</h2>
 <p>インタラクティブボタンやスラッシュコマンドなどの連携機能への操作に対して、ダイアログを表示することができるようになりました。</p>
-<p><a href="https://docs.mattermost.com/developer/interactive-dialogs.html#dialog-submission">Interactive Dialogs — Mattermost 5.6 documentation</a>
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/91475afb-5f52-6ffc-a758-6cdfb0599983.gif" alt="dialog.gif"></p>
+<p><a href=https://docs.mattermost.com/developer/interactive-dialogs.html#dialog-submission>Interactive Dialogs — Mattermost 5.6 documentation</a>
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/91475afb-5f52-6ffc-a758-6cdfb0599983.gif alt=dialog.gif></p>
 <p>スラッシュコマンドからダイアログを呼び出す場合のサンプルコードは下記のようになります。
-<a href="https://gist.github.com/kaakaa/1f87869f0d6520a2f645f8af014be1a5">https://gist.github.com/kaakaa/1f87869f0d6520a2f645f8af014be1a5</a></p>
-<h2 id="ユーザー体験の向上">ユーザー体験の向上</h2>
-<h3 id="ダイレクトメッセージ作成画面でグループメッセージを検索可能に">ダイレクトメッセージ作成画面で、グループメッセージを検索可能に</h3>
+<a href=https://gist.github.com/kaakaa/1f87869f0d6520a2f645f8af014be1a5>https://gist.github.com/kaakaa/1f87869f0d6520a2f645f8af014be1a5</a></p>
+<h2 id=ユーザー体験の向上>ユーザー体験の向上</h2>
+<h3 id=ダイレクトメッセージ作成画面でグループメッセージを検索可能に>ダイレクトメッセージ作成画面で、グループメッセージを検索可能に</h3>
 <p>ダイレクトメッセージの追加画面で、グループメッセージ（複数人でのダイレクトメッセージ）を検索できるようになりました。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/c1fcf831-d768-9ed6-e281-697c50157694.png" alt="dm.png"></p>
-<h3 id="ファイルアップロード時のプログレスバー">ファイルアップロード時のプログレスバー</h3>
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/c1fcf831-d768-9ed6-e281-697c50157694.png alt=dm.png></p>
+<h3 id=ファイルアップロード時のプログレスバー>ファイルアップロード時のプログレスバー</h3>
 <p>ファイルをアップロードした際に、アップロード完了までのプログレスバーが表示されるようになりました。</p>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/d21fcb32-d4b7-5871-dab6-e1cef60b7303.png" alt="image.png"></p>
-<h3 id="管理者バッジ">管理者バッジ</h3>
+<p><img src=https://qiita-image-store.s3.amazonaws.com/0/9891/d21fcb32-d4b7-5871-dab6-e1cef60b7303.png alt=image.png></p>
+<h3 id=管理者バッジ>管理者バッジ</h3>
 <p>投稿者のアイコンをクリックすることで開くプロフィールポップオーバーに、管理者であることを示すバッジが表示されるようになりました。</p>
-<p><img src="https://qiita-image-store.s3.amazonaws.com/0/9891/de1012a2-f10e-d97e-21d1-c050710e78a8.png" alt="profile.png"></p>
-<h3 id="その他の改善">その他の改善</h3>
-<h4 id="管理者向けコマンドラインツール改善">管理者向けコマンドラインツール改善</h4>
+<p><img src=https://qiita-image-store.s3.amazonaws.com/0/9891/de1012a2-f10e-d97e-21d1-c050710e78a8.png alt=profile.png></p>
+<h3 id=その他の改善>その他の改善</h3>
+<h4 id=管理者向けコマンドラインツール改善>管理者向けコマンドラインツール改善</h4>
 <p><code>mattermost</code>コマンドにウェブフックやカスタムスラッシュコマンドを操作するコマンドなどが追加されています
-<a href="https://docs.mattermost.com/administration/changelog.html#command-line-interface-cli">https://docs.mattermost.com/administration/changelog.html#command-line-interface-cli</a></p>
-<h4 id="スラッシュコマンドに複数レスポンス">スラッシュコマンドに複数レスポンス</h4>
+<a href=https://docs.mattermost.com/administration/changelog.html#command-line-interface-cli>https://docs.mattermost.com/administration/changelog.html#command-line-interface-cli</a></p>
+<h4 id=スラッシュコマンドに複数レスポンス>スラッシュコマンドに複数レスポンス</h4>
 <p>スラッシュコマンドを実行した際、複数のレスポンスを一度に返せるようになりました。<br>
-サンプルコード: <a href="https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112">https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112</a></p>
-<h4 id="webrtc機能の廃止">WebRTC機能の廃止</h4>
-<p>ベータ版として提供されていたWebRTC機能が廃止されました。代わりに<a href="https://docs.mattermost.com/integrations/zoom.html">Zoom</a>, <a href="https://github.com/blindsidenetworks/mattermost-plugin-bigbluebutton">BigBlueButton</a>, <a href="https://kopano.com/releases/a-first-look-at-the-new-kopano-web-meetings/">Kopano</a>などのプラグインの使用が推奨されています。
-<a href="https://forum.mattermost.org/t/built-in-webrtc-video-and-audio-calls-removed-in-v5-6-in-favor-of-open-source-plugins/5998">https://forum.mattermost.org/t/built-in-webrtc-video-and-audio-calls-removed-in-v5-6-in-favor-of-open-source-plugins/5998</a></p>
-<h2 id="サポート言語の追加">サポート言語の追加</h2>
+サンプルコード: <a href=https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112>https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112</a></p>
+<h4 id=webrtc機能の廃止>WebRTC機能の廃止</h4>
+<p>ベータ版として提供されていたWebRTC機能が廃止されました。代わりに<a href=https://docs.mattermost.com/integrations/zoom.html>Zoom</a>, <a href=https://github.com/blindsidenetworks/mattermost-plugin-bigbluebutton>BigBlueButton</a>, <a href=https://kopano.com/releases/a-first-look-at-the-new-kopano-web-meetings/>Kopano</a>などのプラグインの使用が推奨されています。
+<a href=https://forum.mattermost.org/t/built-in-webrtc-video-and-audio-calls-removed-in-v5-6-in-favor-of-open-source-plugins/5998>https://forum.mattermost.org/t/built-in-webrtc-video-and-audio-calls-removed-in-v5-6-in-favor-of-open-source-plugins/5998</a></p>
+<h2 id=サポート言語の追加>サポート言語の追加</h2>
 <p>ウクライナ語がサポートされ、サポート言語が16言語になりました。また、ルーマニア語がベータ版として追加されています。
 その他にもチェコ語、セルビア語、スウェーデン語の翻訳作業も始まっているようです。</p>
 <p>また、シンガポール国立大学がMattermostを採用したというニュースもありました。
 下記の記事ではコストとスケーラビリティの点でMattermostが採用されるまでの経緯が綴られています。
-<a href="https://mattermost.com/blog/the-national-university-of-singapore-chooses-mattermost-for-student-faculty-collaboration/">The National University of Singapore chooses Mattermost for student-faculty collaboration - Mattermost Private Cloud Messaging</a></p>
-<h2 id="モバイルアプリの改善">モバイルアプリの改善</h2>
+<a href=https://mattermost.com/blog/the-national-university-of-singapore-chooses-mattermost-for-student-faculty-collaboration/>The National University of Singapore chooses Mattermost for student-faculty collaboration - Mattermost Private Cloud Messaging</a></p>
+<h2 id=モバイルアプリの改善>モバイルアプリの改善</h2>
 <ul>
 <li>メンションのハイライト</li>
 <li>ピン留め機能のサポート</li>
@@ -227,10 +135,10 @@
 <li>ネットワーク問題が発生した際の自動再接続機能によるネットワーク接続の改善</li>
 </ul>
 <p>その他のアップデート内容については下記を参照ください
-<a href="https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1150-release">https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1150-release</a></p>
-<h2 id="デスクトップアプリ">デスクトップアプリ</h2>
+<a href=https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1150-release>https://github.com/mattermost/mattermost-mobile/blob/master/CHANGELOG.md#1150-release</a></p>
+<h2 id=デスクトップアプリ>デスクトップアプリ</h2>
 <p>Mattermostデスクトップアプリ v4.2.0のリリースも行われています。
-<a href="https://mattermost.com/download/#mobile">https://mattermost.com/download/#mobile</a></p>
+<a href=https://mattermost.com/download/#mobile>https://mattermost.com/download/#mobile</a></p>
 <ul>
 <li>Ctrl/CMD+F でMattermostのメッセージが検索できるようになりました</li>
 <li>英語・ポルトガル語・スペイン語(スペイン/メキシコ)のスペルチェック機能が追加されました</li>
@@ -238,126 +146,57 @@
 <li>MacOS向けの .dmg インストーラーが追加されました</li>
 </ul>
 <p>その他のアップデート内容については下記を参照ください
-<a href="https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v420">https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v420</a></p>
-<h1 id="おわりに">おわりに</h1>
+<a href=https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v420>https://github.com/mattermost/desktop/blob/master/CHANGELOG.md#release-v420</a></p>
+<h1 id=おわりに>おわりに</h1>
 <p>次回の<code>v5.7</code>のリリースは2019/1/16(Fri)を予定しています。
 そして機能追加が行われる<code>v5.8</code>は恐らく2019/2/15(Fri)のリリースになるかと思います。</p>
 <hr>
 <p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

@@ -1,329 +1,168 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost5.8の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost5.8の新機能"/>
-<meta name="twitter:description" content="はじめに 2019/2/15にMattermost v5.8.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については"/>
-
-
-  <meta property="og:title" content="Mattermost5.8の新機能" />
-<meta property="og:description" content="はじめに 2019/2/15にMattermost v5.8.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.8/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-02-18T15:17:06&#43;09:00" />
-<meta property="article:modified_time" content="2019-02-18T15:17:06&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost5.8の新機能">
+<meta name=twitter:description content="はじめに 2019/2/15にMattermost v5.8.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については">
+<meta property="og:title" content="Mattermost5.8の新機能">
+<meta property="og:description" content="はじめに 2019/2/15にMattermost v5.8.0がリリースされたので、アップデートの内容について簡単に紹介します。 詳細については">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.8/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-02-18T15:17:06+09:00">
+<meta property="article:modified_time" content="2019-02-18T15:17:06+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost5.8の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Feb 18, 2019
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost5.8の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Feb 18, 2019
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
 <p>2019/2/15にMattermost v5.8.0がリリースされたので、アップデートの内容について簡単に紹介します。</p>
 <p>詳細については公式のリリースを確認ください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-5-8/">Mattermost 5.8: MFA for Team Edition, LDAP group sync, improved image performance and more - Mattermost Private Cloud Messaging</a></li>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-8">Mattermost Changelog — Mattermost 5.8 documentation</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-5-8/>Mattermost 5.8: MFA for Team Edition, LDAP group sync, improved image performance and more - Mattermost Private Cloud Messaging</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-8>Mattermost Changelog — Mattermost 5.8 documentation</a></li>
 </ul>
 <hr>
-<h1 id="アップデート内容">アップデート内容</h1>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#team-editionに多要素認証機能が追加">Team Editionに多要素認証機能が追加</a></li>
-    <li><a href="#e20-ldapグループ機能の追加">(E20) LDAPグループ機能の追加</a></li>
-    <li><a href="#画像プロキシのデフォルト化">画像プロキシのデフォルト化</a></li>
-    <li><a href="#その他の変更">その他の変更</a></li>
-  </ul>
-</nav><h2 id="team-editionに多要素認証機能が追加">Team Editionに多要素認証機能が追加</h2>
-<p><a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/19636537-make-mfa-part-of-the-team-edition">コミュニティからの要望</a>として、今までEnterprise Edition限定機能であったGoogle Authenticatorによる多要素認証機能がOSS版であるTeam Editionでも利用できるようになりました。
+<h1 id=アップデート内容>アップデート内容</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#team-editionに多要素認証機能が追加>Team Editionに多要素認証機能が追加</a></li>
+<li><a href=#e20-ldapグループ機能の追加>(E20) LDAPグループ機能の追加</a></li>
+<li><a href=#画像プロキシのデフォルト化>画像プロキシのデフォルト化</a></li>
+<li><a href=#その他の変更>その他の変更</a></li>
+</ul>
+</nav><h2 id=team-editionに多要素認証機能が追加>Team Editionに多要素認証機能が追加</h2>
+<p><a href=https://mattermost.uservoice.com/forums/306457-general/suggestions/19636537-make-mfa-part-of-the-team-edition>コミュニティからの要望</a>として、今までEnterprise Edition限定機能であったGoogle Authenticatorによる多要素認証機能がOSS版であるTeam Editionでも利用できるようになりました。
 これにより、悪意のある第三者によるなりすましなどのリスクを低減することができます。
-今回Team Editionに追加された多要素認証機能はユーザーが自ら設定を行うことで有効になるものであり、<a href="https://docs.mattermost.com/deployment/auth.html#enforcing-mfa-e10">サーバー内すべてのユーザーに多要素認証を強制する設定</a>はEnterprise Edition限定機能のままです。</p>
-<p>多要素認証の設定を行うには、まず <strong>システムコンソール</strong> &gt; <strong>認証</strong> &gt; <strong>多要素認証</strong> &gt; <strong>多要素認証を有効にする</strong> を有効にします。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/0d2beab9-64f9-1db8-7409-5bbac5542e78.png" alt="スクリーンショット 2019-02-18 10.06.43.png"></p>
-<p>多要素認証を有効にすると <strong>アカウント設定</strong> &gt; <strong>セキュリティー</strong> &gt; <strong>多要素認証</strong> のメニューが現れるため、<strong>多要素認証をあなたのアカウントに追加する</strong> をクリックしGoogle Authenticatorの設定を行います。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/68144a0b-d32d-5dd3-9215-b82521bbd977.png" alt="スクリーンショット 2019-02-18 10.08.54.png"></p>
-<p>画面の指示に従い、QRコードをスキャンするかシークレットコードを入力し、アカウントをGoogle Authenticatorに登録します。すると、登録したアカウントの多要素認証コードがGoogle Authenticatorに表示されるので、そのコードを画面下の&quot;多要素認証コード&quot;欄に入力し、「保存」ボタンを押します。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/376f306b-e18d-7c06-25e7-31dc161f9db6.png" alt="スクリーンショット 2019-02-18 10.10.14.png"></p>
+今回Team Editionに追加された多要素認証機能はユーザーが自ら設定を行うことで有効になるものであり、<a href=https://docs.mattermost.com/deployment/auth.html#enforcing-mfa-e10>サーバー内すべてのユーザーに多要素認証を強制する設定</a>はEnterprise Edition限定機能のままです。</p>
+<p>多要素認証の設定を行うには、まず <strong>システムコンソール</strong> > <strong>認証</strong> > <strong>多要素認証</strong> > <strong>多要素認証を有効にする</strong> を有効にします。
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/0d2beab9-64f9-1db8-7409-5bbac5542e78.png alt="スクリーンショット 2019-02-18 10.06.43.png"></p>
+<p>多要素認証を有効にすると <strong>アカウント設定</strong> > <strong>セキュリティー</strong> > <strong>多要素認証</strong> のメニューが現れるため、<strong>多要素認証をあなたのアカウントに追加する</strong> をクリックしGoogle Authenticatorの設定を行います。
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/68144a0b-d32d-5dd3-9215-b82521bbd977.png alt="スクリーンショット 2019-02-18 10.08.54.png"></p>
+<p>画面の指示に従い、QRコードをスキャンするかシークレットコードを入力し、アカウントをGoogle Authenticatorに登録します。すると、登録したアカウントの多要素認証コードがGoogle Authenticatorに表示されるので、そのコードを画面下の"多要素認証コード"欄に入力し、「保存」ボタンを押します。
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/376f306b-e18d-7c06-25e7-31dc161f9db6.png alt="スクリーンショット 2019-02-18 10.10.14.png"></p>
 <p>多要素認証コードが正しく入力されると、多要素認証の登録完了画面が表示されます。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/8b22dc8f-d6d6-e852-0ace-a07a0a8c5ad2.png" alt="スクリーンショット 2019-02-18 10.10.58.png"></p>
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/8b22dc8f-d6d6-e852-0ace-a07a0a8c5ad2.png alt="スクリーンショット 2019-02-18 10.10.58.png"></p>
 <p>以降、このMattermostにログインする際にはユーザー名/パスワードによるサインインの後、多要素認証コードの入力を求める画面が表示されるようになります。ここには登録時と同様、Google Authenticatorで表示される多要素認証コードを入力することでログインを完了することができます。
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/84893711-59a9-79be-a055-6ed633dae5f7.png" alt="スクリーンショット 2019-02-18 10.11.35.png"></p>
-<h2 id="e20-ldapグループ機能の追加">(E20) LDAPグループ機能の追加</h2>
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/84893711-59a9-79be-a055-6ed633dae5f7.png alt="スクリーンショット 2019-02-18 10.11.35.png"></p>
+<h2 id=e20-ldapグループ機能の追加>(E20) LDAPグループ機能の追加</h2>
 <p>LDAPのグループに基づいてデフォルトのチームやチャンネルのメンバーシップを自動同期できる機能がE20版のベータ機能として追加されています。
-グループ同期機能は<a href="https://forum.mattermost.org/t/ldap-group-sync-alpha-release/6351">今後も機能追加が行われる予定</a>であり、E10版でも利用可能になる予定とのことです。</p>
-<h2 id="画像プロキシのデフォルト化">画像プロキシのデフォルト化</h2>
+グループ同期機能は<a href=https://forum.mattermost.org/t/ldap-group-sync-alpha-release/6351>今後も機能追加が行われる予定</a>であり、E10版でも利用可能になる予定とのことです。</p>
+<h2 id=画像プロキシのデフォルト化>画像プロキシのデフォルト化</h2>
 <p>v5.8.0より画像プロキシがデフォルトで有効になりました。今後は画像プロキシによりキャッシュが行われるため、画像を含む投稿の表示が高速になります。また、Mattermost内で通信が完了するため、サードパーティーのサービスを使用するよりプライバシー性の向上が期待できます。</p>
-<h2 id="その他の変更">その他の変更</h2>
+<h2 id=その他の変更>その他の変更</h2>
 <ul>
 <li>
 <p>@channel, @all, @hereなどによるチャンネル全体へのメンションを通知として受け取るかどうかを設定できるようになりました
-<img src="https://qiita-image-store.s3.amazonaws.com/0/9891/a06286ff-afe3-467d-2fdc-1df23f545022.png" alt="スクリーンショット 2019-02-18 10.37.59.png"></p>
+<img src=https://qiita-image-store.s3.amazonaws.com/0/9891/a06286ff-afe3-467d-2fdc-1df23f545022.png alt="スクリーンショット 2019-02-18 10.37.59.png"></p>
 </li>
 <li>
 <p>スラッシュコマンドを実行した際、スラッシュコマンドを実行したチャンネル以外にもメッセージを投稿できるようになりました</p>
 <ul>
-<li><a href="https://github.com/mattermost/mattermost-server/blob/release-5.8/model/command_response.go#L24"><code>model.CommandResponse</code></a>に追加された<code>ChannelId</code>フィールドを指定することで実現できます。（<a href="https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112#file-mm_v5-8_response_to_other_channel-go">サンプルコード</a>）</li>
+<li><a href=https://github.com/mattermost/mattermost-server/blob/release-5.8/model/command_response.go#L24><code>model.CommandResponse</code></a>に追加された<code>ChannelId</code>フィールドを指定することで実現できます。（<a href=https://gist.github.com/kaakaa/b040bcd0a6fdccc18b3daaea214c6112#file-mm_v5-8_response_to_other_channel-go>サンプルコード</a>）</li>
 <li>コマンド実行ユーザーが所属しているチャンネル以外のチャンネルに投稿しようとするとエラーとなります</li>
 </ul>
 </li>
 </ul>
-<h1 id="おわりに">おわりに</h1>
+<h1 id=おわりに>おわりに</h1>
 <p>次回の<code>v5.9</code>のリリースは2019/3/15(Fri)を予定しています。
 そして機能追加が行われる<code>v5.10</code>は恐らく2019/4/16(Tue)のリリースになるかと思います。</p>
 <hr>
 <p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

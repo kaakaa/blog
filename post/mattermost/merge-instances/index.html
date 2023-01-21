@@ -1,244 +1,152 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Lessons learned from merging Mattermost instances</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Lessons learned from merging Mattermost instances"/>
-<meta name="twitter:description" content="この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例"/>
-
-
-  <meta property="og:title" content="Lessons learned from merging Mattermost instances" />
-<meta property="og:description" content="この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/merge-instances/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2021-12-20T12:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2021-12-20T12:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Lessons learned from merging Mattermost instances">
+<meta name=twitter:description content="この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例">
+<meta property="og:title" content="Lessons learned from merging Mattermost instances">
+<meta property="og:description" content="この記事はFUJITSU Advent Calender 2021の20日目の記事です。 今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/merge-instances/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-12-20T12:00:00+09:00">
+<meta property="article:modified_time" content="2021-12-20T12:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Lessons learned from merging Mattermost instances
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 20, 2021
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Lessons learned from merging Mattermost instances
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 20, 2021
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>この記事は<a href="https://qiita.com/advent-calendar/2021/fujitsu">FUJITSU Advent Calender 2021</a>の20日目の記事です。</p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>この記事は<a href=https://qiita.com/advent-calendar/2021/fujitsu>FUJITSU Advent Calender 2021</a>の20日目の記事です。</p>
 <p>今回は、別々に運用されていた2つのMattermostインスタンスを合体させた事例について紹介します。</p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#変更履歴">変更履歴</a></li>
-    <li><a href="#背景">背景</a>
-      <ul>
-        <li><a href="#免責事項">免責事項</a></li>
-        <li><a href="#mattermostの機能について">Mattermostの機能について</a></li>
-      </ul>
-    </li>
-    <li><a href="#mattermostインスタンス統合作業について">Mattermostインスタンス統合作業について</a>
-      <ul>
-        <li><a href="#はじめに">はじめに</a></li>
-        <li><a href="#bulk-exportbulk-import機能について">Bulk Export/Bulk Import機能について</a></li>
-        <li><a href="#移行時に実行したコマンド">移行時に実行したコマンド</a></li>
-      </ul>
-    </li>
-    <li><a href="#統合実施時に注意が必要なデータ">統合実施時に注意が必要なデータ</a>
-      <ul>
-        <li><a href="#team-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlteam-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#team-object">Team object</a></a></li>
-        <li><a href="#channel-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlchannel-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#channel-object">Channel object</a></a></li>
-        <li><a href="#user-objecthttpsdocsmattermostcommanagebulk-export-toolhtmluser-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#user-object">User object</a></a></li>
-        <li><a href="#post-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlpost-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#post-object">Post object</a></a></li>
-        <li><a href="#emoji-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlemoji-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#emoji-object">Emoji object</a></a></li>
-      </ul>
-    </li>
-    <li><a href="#ossへの貢献">OSSへの貢献</a>
-      <ul>
-        <li><a href="#解決済み">解決済み</a></li>
-        <li><a href="#未解決">未解決</a></li>
-      </ul>
-    </li>
-    <li><a href="#さいごに">さいごに</a></li>
-    <li><a href="#謝辞">謝辞</a></li>
-  </ul>
-</nav><h2 id="変更履歴">変更履歴</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#変更履歴>変更履歴</a></li>
+<li><a href=#背景>背景</a>
+<ul>
+<li><a href=#免責事項>免責事項</a></li>
+<li><a href=#mattermostの機能について>Mattermostの機能について</a></li>
+</ul>
+</li>
+<li><a href=#mattermostインスタンス統合作業について>Mattermostインスタンス統合作業について</a>
+<ul>
+<li><a href=#はじめに>はじめに</a></li>
+<li><a href=#bulk-exportbulk-import機能について>Bulk Export/Bulk Import機能について</a></li>
+<li><a href=#移行時に実行したコマンド>移行時に実行したコマンド</a></li>
+</ul>
+</li>
+<li><a href=#統合実施時に注意が必要なデータ>統合実施時に注意が必要なデータ</a>
+<ul>
+<li><a href=#team-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlteam-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#team-object>Team object</a></a></li>
+<li><a href=#channel-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlchannel-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#channel-object>Channel object</a></a></li>
+<li><a href=#user-objecthttpsdocsmattermostcommanagebulk-export-toolhtmluser-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#user-object>User object</a></a></li>
+<li><a href=#post-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlpost-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#post-object>Post object</a></a></li>
+<li><a href=#emoji-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlemoji-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#emoji-object>Emoji object</a></a></li>
+</ul>
+</li>
+<li><a href=#ossへの貢献>OSSへの貢献</a>
+<ul>
+<li><a href=#解決済み>解決済み</a></li>
+<li><a href=#未解決>未解決</a></li>
+</ul>
+</li>
+<li><a href=#さいごに>さいごに</a></li>
+<li><a href=#謝辞>謝辞</a></li>
+</ul>
+</nav><h2 id=変更履歴>変更履歴</h2>
 <ul>
 <li>2021/12/22: <strong>移行時に実行したコマンド</strong> にて、Bulk Exportコマンドに<code>--attachments</code>オプションが付与されていなかったため追加</li>
 <li>2021/12/22: <strong>移行時に実行したコマンド</strong> について説明を追加</li>
 </ul>
-<h2 id="背景">背景</h2>
-<p>社内では、オンプレミスで運用できるチャット基盤としてOSSの<a href="https://mattermost.com/">Mattermost</a>を利用しているところが数多くあります。もちろんコミュニケーション基盤は統一的なインスタンスで運用できているのが望ましいですが、MattermostはOSSで誰でも使えるということもあり、過去に同時発生的に有志によるMattermostの運用が始まってしまったため、それぞれのインスタンスでの運用が続いているという状況があります。</p>
-<p>今回統合を行った2つのMattermostインスタンスは、幾度かの組織変更により両方のインスタンスにアカウントを持つユーザーが増えてきているということもあって、以前からユーザーの利便性のためにも統合したいねという話が出ていました。<a href="https://pr.fujitsu.com/jp/news/2021/01/28-2.pdf">今年の4月に大きなグループ再編の動き</a>があったことから、この流れに乗ってMattermostインスタンスの統合に踏み切りました。</p>
-<p>Mattermostのインスタンスを統合した事例は今まで目にしたことは無いため、公開されている事例としては世界初になるのではないかと思っています(あったら教えて欲しい)。(refs: <a href="https://forum.mattermost.org/t/consolidate-two-instances/5265/4">Mattermost Forum</a>)</p>
-<h3 id="免責事項">免責事項</h3>
+<h2 id=背景>背景</h2>
+<p>社内では、オンプレミスで運用できるチャット基盤としてOSSの<a href=https://mattermost.com/>Mattermost</a>を利用しているところが数多くあります。もちろんコミュニケーション基盤は統一的なインスタンスで運用できているのが望ましいですが、MattermostはOSSで誰でも使えるということもあり、過去に同時発生的に有志によるMattermostの運用が始まってしまったため、それぞれのインスタンスでの運用が続いているという状況があります。</p>
+<p>今回統合を行った2つのMattermostインスタンスは、幾度かの組織変更により両方のインスタンスにアカウントを持つユーザーが増えてきているということもあって、以前からユーザーの利便性のためにも統合したいねという話が出ていました。<a href=https://pr.fujitsu.com/jp/news/2021/01/28-2.pdf>今年の4月に大きなグループ再編の動き</a>があったことから、この流れに乗ってMattermostインスタンスの統合に踏み切りました。</p>
+<p>Mattermostのインスタンスを統合した事例は今まで目にしたことは無いため、公開されている事例としては世界初になるのではないかと思っています(あったら教えて欲しい)。(refs: <a href=https://forum.mattermost.org/t/consolidate-two-instances/5265/4>Mattermost Forum</a>)</p>
+<h3 id=免責事項>免責事項</h3>
 <p>Mattermostは、2つのインスタンスの統合を公式にはサポートしていません。
 本記事で述べる内容は非公式の手順であるため、データの損失や欠落を招く可能性があります。その点に留意してください。</p>
 <p>最終的に統合作業を完了させていますが、以下のような制限事項がありました。</p>
 <ol>
-<li><a href="https://docs.mattermost.com/about/integrations.html#integrations-overview">統合機能（ウェブフックやスラッシュコマンド）</a>は手動での移行作業が必要
+<li><a href=https://docs.mattermost.com/about/integrations.html#integrations-overview>統合機能（ウェブフックやスラッシュコマンド）</a>は手動での移行作業が必要
 <ul>
 <li>API の URL が変わるので、内向きのウェブフックなどは連携アプリ側も書き換える必要がある</li>
 </ul>
 </li>
-<li><a href="https://docs.mattermost.com/messaging/pinning-messages.html">ピン留めされた投稿</a>のリストが消える</li>
-<li><a href="https://docs.mattermost.com/messaging/saving-messages.html">保存済みの投稿</a>のリストが消える</li>
+<li><a href=https://docs.mattermost.com/messaging/pinning-messages.html>ピン留めされた投稿</a>のリストが消える</li>
+<li><a href=https://docs.mattermost.com/messaging/saving-messages.html>保存済みの投稿</a>のリストが消える</li>
 <li>チャンネルやダイレクトメッセージが全部未読になる</li>
 <li><strong>プロフィール画像</strong>が移行されない</li>
 <li>投稿に付けられた<strong>絵文字リアクション</strong>が消えることがある</li>
 <li>投稿に対する URL が変わるので、Mattermost内に書き込まれた<strong>投稿へのリンク</strong>が切れてしまう</li>
 <li><strong>チャンネルの作成者と作成日時</strong>の情報が消えてしまう</li>
-<li><a href="https://docs.mattermost.com/messaging/using-emoji.html#creating-custom-emojis">カスタム絵文字</a>の登録者の情報が消えてしまう</li>
+<li><a href=https://docs.mattermost.com/messaging/using-emoji.html#creating-custom-emojis>カスタム絵文字</a>の登録者の情報が消えてしまう</li>
 <li>移行前と移行後でユーザー名が異なる場合、投稿内の <strong>@メンション</strong> がリンクからテキストになってしまう</li>
-<li>チャンネルへの参加/脱退やヘッダー変更を伝える<strong>システムメッセージ</strong>がユーザーの投稿になってしまう (<a href="https://github.com/mattermost/mattermost-server/pull/18992">対応中</a>)</li>
-<li>投稿を後から編集した場合にメッセージに表示される <strong>(編集済)</strong> のフラグが消えてしまう (<a href="https://github.com/mattermost/mattermost-server/pull/18992">対応中</a>)</li>
+<li>チャンネルへの参加/脱退やヘッダー変更を伝える<strong>システムメッセージ</strong>がユーザーの投稿になってしまう (<a href=https://github.com/mattermost/mattermost-server/pull/18992>対応中</a>)</li>
+<li>投稿を後から編集した場合にメッセージに表示される <strong>(編集済)</strong> のフラグが消えてしまう (<a href=https://github.com/mattermost/mattermost-server/pull/18992>対応中</a>)</li>
 </ol>
 <p>これらの点については、事前にユーザーに通知をし、制限事項を認識してもらったうえでインスタンスの統合を実施しました。</p>
-<h3 id="mattermostの機能について">Mattermostの機能について</h3>
+<h3 id=mattermostの機能について>Mattermostの機能について</h3>
 <p>Mattermostには、2つの異なるインスタンス間の共有や移行に関する以下のような機能があります。</p>
-<h4 id="shared-channelhttpsdocsmattermostcomonboardshared-channelshtml"><a href="https://docs.mattermost.com/onboard/shared-channels.html">Shared Channel</a></h4>
+<h4 id=shared-channelhttpsdocsmattermostcomonboardshared-channelshtml><a href=https://docs.mattermost.com/onboard/shared-channels.html>Shared Channel</a></h4>
 <p>複数インスタンス間でチャンネルを共有する機能です。<br>
 今回は、ユーザーの利便性のためにインスタンス自体を統合したいという要求であったため、この方法は採用しませんでした。(また、この機能は有償版限定のためそもそも採用できませんでした)</p>
-<h4 id="migration-guidehttpsdocsmattermostcomonboardmigrating-to-mattermosthtml"><a href="https://docs.mattermost.com/onboard/migrating-to-mattermost.html">Migration Guide</a></h4>
+<h4 id=migration-guidehttpsdocsmattermostcomonboardmigrating-to-mattermosthtml><a href=https://docs.mattermost.com/onboard/migrating-to-mattermost.html>Migration Guide</a></h4>
 <p>Mattermostは、稼働中のインスタンスを別サーバーを移行するための手順を公開しています(Slackなどの他のメッセージングサービスからからMattermostへ移行する手順の紹介などもあります)。<br>
 ただし、この手順によるMattermostサーバーの移行は、データベースごと新しいインスタンスへ移行する方式のため、既にデータの存在するMattermostインスタンスへの移行には適用できませんでした。</p>
-<h4 id="bulk-exporthttpsdocsmattermostcommanagebulk-export-toolhtml--bulk-importloadinghttpsdocsmattermostcomonboardbulk-loading-datahtml"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> / <a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a></h4>
+<h4 id=bulk-exporthttpsdocsmattermostcommanagebulk-export-toolhtml--bulk-importloadinghttpsdocsmattermostcomonboardbulk-loading-datahtml><a href=https://docs.mattermost.com/manage/bulk-export-tool.html>Bulk Export</a> / <a href=https://docs.mattermost.com/onboard/bulk-loading-data.html>Bulk Import(Loading)</a></h4>
 <p><strong>Bulk Export/Bulk Import(Loading)</strong> 機能は、インスタンス上のデータをファイル形式でExportする機能と、Exportされたファイル形式を元にImport処理を行う機能です。<br>
 これらの機能も、Mattermostインスタンス上のデータをアーカイブとして出力することを目的とした <strong>Bulk Export</strong> と、他のメッセージングシステム(Slack, HipChat等)からExportしたデータをMattermostへImportする際のデータ形式を定めた <strong>Bulk Import</strong> の機能という位置づけであり、2つのMattermostインスタンスの統合をサポートしているものではありません。単純に <strong>Bulk Export</strong> したデータを、そのまま既にデータの存在するMattermostインスタンスへ <strong>Bulk Import</strong> すると、様々なデータの不整合が発生する可能性があります。</p>
-<p>しかし、その他にインスタンスを統合する有効な手段が無かったため、今回はこの<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a>/<a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a>の機能をベースにインスタンス統合の作業を行いました。</p>
+<p>しかし、その他にインスタンスを統合する有効な手段が無かったため、今回はこの<a href=https://docs.mattermost.com/manage/bulk-export-tool.html>Bulk Export</a>/<a href=https://docs.mattermost.com/onboard/bulk-loading-data.html>Bulk Import(Loading)</a>の機能をベースにインスタンス統合の作業を行いました。</p>
 <p>本記事では、 <strong>Bulk Export/Bulk Import</strong> 機能を利用したインスタンス統合において発生した問題と、対処方法について紹介していきます。</p>
-<h2 id="mattermostインスタンス統合作業について">Mattermostインスタンス統合作業について</h2>
-<h3 id="はじめに">はじめに</h3>
+<h2 id=mattermostインスタンス統合作業について>Mattermostインスタンス統合作業について</h2>
+<h3 id=はじめに>はじめに</h3>
 <p>インスタンスの統合を行う際には、以下のことが重要です。</p>
 <ul>
 <li>移行元と移行先のMattermostのバージョンを合わせること</li>
@@ -248,33 +156,33 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">移行元</th>
-<th style="text-align:left">移行先</th>
+<th style=text-align:left></th>
+<th style=text-align:left>移行元</th>
+<th style=text-align:left>移行先</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">Mattermost Version</td>
-<td style="text-align:left">v5.35.2</td>
-<td style="text-align:left">v5.34.0</td>
+<td style=text-align:left>Mattermost Version</td>
+<td style=text-align:left>v5.35.2</td>
+<td style=text-align:left>v5.34.0</td>
 </tr>
 <tr>
-<td style="text-align:left">ユーザー数</td>
-<td style="text-align:left">301</td>
-<td style="text-align:left">685</td>
+<td style=text-align:left>ユーザー数</td>
+<td style=text-align:left>301</td>
+<td style=text-align:left>685</td>
 </tr>
 <tr>
-<td style="text-align:left">投稿数</td>
-<td style="text-align:left">数十万程度</td>
-<td style="text-align:left">100万程度</td>
+<td style=text-align:left>投稿数</td>
+<td style=text-align:left>数十万程度</td>
+<td style=text-align:left>100万程度</td>
 </tr>
 </tbody>
 </table>
-<p>(早速バージョン合ってないですが、移行元からデータをExportする際にバージョン上げないと上手く動かない部分があり&hellip;)</p>
-<h3 id="bulk-exportbulk-import機能について">Bulk Export/Bulk Import機能について</h3>
-<p>Mattermostの <a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> 機能は、Mattermost内の各リソースを以下のようなJSONL形式で出力できる機能です。</p>
-<pre><code class="language-JSONL" data-lang="JSONL">{ &quot;type&quot;: &quot;version&quot;, ... }
+<p>(早速バージョン合ってないですが、移行元からデータをExportする際にバージョン上げないと上手く動かない部分があり&mldr;)</p>
+<h3 id=bulk-exportbulk-import機能について>Bulk Export/Bulk Import機能について</h3>
+<p>Mattermostの <a href=https://docs.mattermost.com/manage/bulk-export-tool.html>Bulk Export</a> 機能は、Mattermost内の各リソースを以下のようなJSONL形式で出力できる機能です。</p>
+<pre tabindex=0><code class=language-JSONL data-lang=JSONL>{ &quot;type&quot;: &quot;version&quot;, ... }
 { &quot;type&quot;: &quot;team&quot;, &quot;team&quot;: { &quot;name&quot;: &quot;TeamA&quot;, ...} }
 { &quot;type&quot;: &quot;team&quot;, &quot;team&quot;: { &quot;name&quot;: &quot;TeamB&quot;, ...} }
 { &quot;type&quot;: &quot;channel&quot;, &quot;channel&quot;: { &quot;team&quot;: &quot;TeamA&quot;, &quot;name&quot;: &quot;ChannelA1&quot;, ...} }
@@ -293,95 +201,95 @@
 </code></pre><p>Mattermost内のリソースが1行のJSONデータとして各行に記録されており、Bulk Import実行時も1行ずつ処理されていきます。<br>
 投稿に対する添付ファイルや、カスタム絵文字のファイルの実体などは、このJSONLファイルとは別に出力されており、Bulk Import実行時に併せて読みだされてMattermostへ登録されていきます。</p>
 <p>Exportされるデータ種別やその内容については、公式ドキュメントを参照してください。
-<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">https://docs.mattermost.com/manage/bulk-export-tool.html</a></p>
-<h3 id="移行時に実行したコマンド">移行時に実行したコマンド</h3>
+<a href=https://docs.mattermost.com/manage/bulk-export-tool.html>https://docs.mattermost.com/manage/bulk-export-tool.html</a></p>
+<h3 id=移行時に実行したコマンド>移行時に実行したコマンド</h3>
 <p>統合実行時のコマンドは以下になります。</p>
 <p>まず、移行元のサーバーでBulk Exportのコマンドを実行します。<br>
 この時、<code>--config</code>オプションの値には起動しているMattermostサーバーの<code>config.json</code>を指定します。また、<code>mattermost-export-YYYY-MM-DD.txt</code>が出力ファイルとなるのですが、<strong>このファイルの出力先フォルダにMattermostの添付ファイルを格納している<code>data/</code>フォルダが存在すると、その内容がすべて0byteのファイルで上書きされてしまいます。Bulk Exportコマンドの出力先には十分注意してください。</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Export</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e># Export</span>
 $ ./bin/mattermost --config ~/config.json export bulk ~/mattermost-export-YYYY-MM-DD.txt --attachments
 </code></pre></div><p>先にも述べましたが、既にデータの存在するインスタンスに対して、ExportしたJSONLファイルをそのままImportしようすると、データの不整合が発生する可能性があります。そのため、Exportされたデータに対してsedによる置換を実施しています。また、Bulk Import実行時にエラーとならないようファイルの拡張子を<code>.jsonl</code>に変更しています。sedによる置換内容については以降のセクションで紹介していきます。</p>
-<pre><code># Edit exported data
+<pre tabindex=0><code># Edit exported data
 $ sed -f migration.sed ~/mattermost-export-YYYY-MM-DD.txt &gt; ~/mattermost-import-YYYY-MM-DD.jsonl
 </code></pre><p>最後に、Bulk Exportによって出力された<code>data/</code>,<code>exported_emoji/</code>,<code>mattermost-import-YYYY-MM-DD.jsonl</code>を移行先のMattermostサーバーへコピーし、Bulk Importを実行します。この時、<code>mattermost-import-YYYY-MM-DD.jsonl</code>と<code>data/</code>,<code>exported_emoji/</code>フォルダは同じフォルダ内に置いておく必要があります。</p>
-<pre><code># Validation
+<pre tabindex=0><code># Validation
 $ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-MM-DD.jsonl --import-path ~/data --validate
 
 # Import
 $ ./bin/mattermost --config ~/config.json import bulk ~/mattermost-import-YYYY-MM-DD.jsonl --import-path ~/data --apply
 </code></pre><p>(余談ですが、今回統合を実施した環境では、Mattermostの管理CLIツールが<code>mattermost</code>コマンドから<code>mmctl</code>コマンドへ移行する過渡期であり、ところどころの調査では<code>mmctl</code>コマンドを利用していたりもします。Mattermost v6からは管理CLIコマンドの大部分が<code>mmctl</code>コマンドに集約されているため、Mattermost v6移行の環境で統合を実施する場合は実行コマンドが変わるかもしれません。)</p>
-<h2 id="統合実施時に注意が必要なデータ">統合実施時に注意が必要なデータ</h2>
-<h3 id="team-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlteam-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#team-object">Team object</a></h3>
-<p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-team-object">Example Team object</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-JSON" data-lang="JSON">{
-  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;team&#34;</span>,
-  <span style="color:#f92672">&#34;team&#34;</span>: {
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;team-name&#34;</span>,
-    <span style="color:#f92672">&#34;display_name&#34;</span>: <span style="color:#e6db74">&#34;Team Display Name&#34;</span>,
-    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;O&#34;</span>,
-    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;The Team Description&#34;</span>,
-    <span style="color:#f92672">&#34;allow_open_invite&#34;</span>: <span style="color:#66d9ef">true</span>
+<h2 id=統合実施時に注意が必要なデータ>統合実施時に注意が必要なデータ</h2>
+<h3 id=team-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlteam-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#team-object>Team object</a></h3>
+<p><a href=https://docs.mattermost.com/onboard/bulk-loading-data.html#example-team-object>Example Team object</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-JSON data-lang=JSON>{
+  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;team&#34;</span>,
+  <span style=color:#f92672>&#34;team&#34;</span>: {
+    <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;team-name&#34;</span>,
+    <span style=color:#f92672>&#34;display_name&#34;</span>: <span style=color:#e6db74>&#34;Team Display Name&#34;</span>,
+    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;O&#34;</span>,
+    <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;The Team Description&#34;</span>,
+    <span style=color:#f92672>&#34;allow_open_invite&#34;</span>: <span style=color:#66d9ef>true</span>
   }
 }
-</code></pre></div><h4 id="name"><code>name</code></h4>
+</code></pre></div><h4 id=name><code>name</code></h4>
 <p>移行元/移行先で <strong>チーム名</strong> (<code>name</code>)が同じだった場合、移行元と移行先のチームがマージされる (移行先のチームに移行元の同名チーム内のチャンネルが作成される) ような動作になります。</p>
 <p>今回の移行では、移行元/移行先で異なるチーム名で運用していましたが、<strong>チームを統一するために移行元のチーム名を移行先のメインで使われているチーム名に変更</strong>しました。</p>
-<h3 id="channel-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlchannel-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#channel-object">Channel object</a></h3>
-<p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-channel-object">Example Channel object</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;channel&#34;</span>,
-  <span style="color:#f92672">&#34;channel&#34;</span>: {
-    <span style="color:#f92672">&#34;team&#34;</span>: <span style="color:#e6db74">&#34;team-name&#34;</span>,
-    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;channel-name&#34;</span>,
-    <span style="color:#f92672">&#34;display_name&#34;</span>: <span style="color:#e6db74">&#34;Channel Name&#34;</span>,
-    <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;O&#34;</span>,
-    <span style="color:#f92672">&#34;header&#34;</span>: <span style="color:#e6db74">&#34;The Channel Header&#34;</span>,
-    <span style="color:#f92672">&#34;purpose&#34;</span>: <span style="color:#e6db74">&#34;The Channel Purpose&#34;</span>,
+<h3 id=channel-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlchannel-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#channel-object>Channel object</a></h3>
+<p><a href=https://docs.mattermost.com/onboard/bulk-loading-data.html#example-channel-object>Example Channel object</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;channel&#34;</span>,
+  <span style=color:#f92672>&#34;channel&#34;</span>: {
+    <span style=color:#f92672>&#34;team&#34;</span>: <span style=color:#e6db74>&#34;team-name&#34;</span>,
+    <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;channel-name&#34;</span>,
+    <span style=color:#f92672>&#34;display_name&#34;</span>: <span style=color:#e6db74>&#34;Channel Name&#34;</span>,
+    <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;O&#34;</span>,
+    <span style=color:#f92672>&#34;header&#34;</span>: <span style=color:#e6db74>&#34;The Channel Header&#34;</span>,
+    <span style=color:#f92672>&#34;purpose&#34;</span>: <span style=color:#e6db74>&#34;The Channel Purpose&#34;</span>,
   }
 }
-</code></pre></div><h4 id="teamname"><code>team</code>/<code>name</code></h4>
+</code></pre></div><h4 id=teamname><code>team</code>/<code>name</code></h4>
 <p>移行元/移行先の両方に同じ　<strong>チーム名/チャンネル名</strong>　を持つチャンネルが存在する場合、2つのチャンネルの投稿が1つのチャンネルにマージされます（すごい）。
 今回のインスタンス統合では、移行元/移行先で同名となるチャンネルについて事前に調査を行い、マージを希望しないチャンネルについては、移行元のインスタンスのチャンネル名に <strong>特定のprefixを付ける</strong> ことでマージが実施されないように対処しました。一部、マージを希望するチャンネルについては同名チャンネルのまま統合作業を行いましたが、<strong>特に問題なく移行元/移行先のチャンネルのマージが行われました</strong>(すごい)。</p>
 <p>ただし、Mattermostでチームを作成した時に自動で作成される <code>town-square</code>、<code>off-topic</code> チャンネルには注意が必要です。<br>
 この2つのチャンネルは、ユーザーがチームに新しく参加した時に自動で参加するチャンネルであり、事前にチャンネル名を変更してしまうと、新たにユーザーをチームに参加させたときにエラーが発生してしまいます(<code>off-topic</code>はUIから名前を変更できますが、<code>town-square</code>はシステム的な固有値だったはず)。この2つのチャンネルのチャンネル名を変更する場合はExportされたデータ上でチャンネル名を編集した方が良いです。</p>
 <hr>
 <p>また、Mattermost内に日本語を含むチャンネル表示名がある場合も注意が必要です。</p>
-<p>Mattermostではチャンネルの名前を表す属性として <strong>チャンネル名</strong>  (<code>name</code>) と <strong>チャンネル表示名</strong>  (<code>display_name</code>) の2つがあります。普段Mattermost画面上で見ている名前は <strong>チャンネル表示名</strong>  (<code>display_name</code>) で、URLに使われる文字列が <strong>チャンネル名</strong> (<code>name</code>) です。<br>
-Mattermostで画面上からチャンネルを作成する際に入力する名前は <strong>チャンネル表示名</strong> (<code>display_name</code>)になりますが、表示名を入力すると自動で <strong>チャンネル名</strong> (<code>name</code>)の方も同じ文字列で設定されます（チャンネル名のみを変更することも可能）。英語のみで構成されている <strong>チャンネル表示名</strong> であれば同じ値が設定されますが、もし日本語などのマルチバイト文字が含まれる場合、Mattermostはそれらのマルチバイト文字を無視して英語部分だけで <strong>チャンネル名</strong> を設定します。そのため「○○PJ(プロジェクトの意味)」のような、日本語を含む短い <strong>チャンネル表示名</strong> を設定している場合、意図せず <strong>チャンネル名</strong>  (<code>name</code>) が重複することが有ります。</p>
+<p>Mattermostではチャンネルの名前を表す属性として <strong>チャンネル名</strong> (<code>name</code>) と <strong>チャンネル表示名</strong> (<code>display_name</code>) の2つがあります。普段Mattermost画面上で見ている名前は <strong>チャンネル表示名</strong> (<code>display_name</code>) で、URLに使われる文字列が <strong>チャンネル名</strong> (<code>name</code>) です。<br>
+Mattermostで画面上からチャンネルを作成する際に入力する名前は <strong>チャンネル表示名</strong> (<code>display_name</code>)になりますが、表示名を入力すると自動で <strong>チャンネル名</strong> (<code>name</code>)の方も同じ文字列で設定されます（チャンネル名のみを変更することも可能）。英語のみで構成されている <strong>チャンネル表示名</strong> であれば同じ値が設定されますが、もし日本語などのマルチバイト文字が含まれる場合、Mattermostはそれらのマルチバイト文字を無視して英語部分だけで <strong>チャンネル名</strong> を設定します。そのため「○○PJ(プロジェクトの意味)」のような、日本語を含む短い <strong>チャンネル表示名</strong> を設定している場合、意図せず <strong>チャンネル名</strong> (<code>name</code>) が重複することが有ります。</p>
 <p>このため、日本語を含むチャンネル名が多く存在する場合、チャンネル名のConflictが発生しやすくなっており、事前の調査がとても重要になります。</p>
 <hr>
-<p>また、<a href="https://docs.mattermost.com/messaging/managing-channels.html#archiving-a-channel">アーカイブ済みのチャンネル</a>は <strong>Bulk Exportの対象になりません</strong>。
+<p>また、<a href=https://docs.mattermost.com/messaging/managing-channels.html#archiving-a-channel>アーカイブ済みのチャンネル</a>は <strong>Bulk Exportの対象になりません</strong>。
 今回はアーカイブ済みのチャンネルも移行するために、Bulk Export実行前に移行元インスタンスのアーカイブされているチャンネルを復元し、移行先へImportした後に再度アーカイブを実行しました。</p>
 <p>また、移行元のチャンネル名と同名のチャンネルが移行先にあり、かつ、移行先のチャンネルがアーカイブ済みだった場合、<strong>Import処理が失敗します</strong>。この場合は、当該チャンネルのデータを削除するか、アーカイブを解除する対処が必要です。</p>
-<h3 id="user-objecthttpsdocsmattermostcommanagebulk-export-toolhtmluser-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#user-object">User object</a></h3>
-<p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-user-object">Example User object</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;user&#34;</span>,
-  <span style="color:#f92672">&#34;user&#34;</span>: {
-    <span style="color:#f92672">&#34;profile_image&#34;</span>: <span style="color:#e6db74">&#34;avatar.png&#34;</span>,
-    <span style="color:#f92672">&#34;username&#34;</span>: <span style="color:#e6db74">&#34;username&#34;</span>,
-    <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;email@example.com&#34;</span>,
-    <span style="color:#f92672">&#34;auth_service&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-    <span style="color:#f92672">&#34;auth_data&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-    <span style="color:#f92672">&#34;password&#34;</span>: <span style="color:#e6db74">&#34;passw0rd&#34;</span>,
-    <span style="color:#f92672">&#34;nickname&#34;</span>: <span style="color:#e6db74">&#34;bobuser&#34;</span>,
-    <span style="color:#f92672">&#34;first_name&#34;</span>: <span style="color:#e6db74">&#34;Bob&#34;</span>,
-    <span style="color:#f92672">&#34;last_name&#34;</span>: <span style="color:#e6db74">&#34;User&#34;</span>,
-    <span style="color:#f92672">&#34;position&#34;</span>: <span style="color:#e6db74">&#34;Senior Developer&#34;</span>,
-    <span style="color:#f92672">&#34;roles&#34;</span>: <span style="color:#e6db74">&#34;system_user&#34;</span>,
-    <span style="color:#f92672">&#34;locale&#34;</span>: <span style="color:#e6db74">&#34;pt_BR&#34;</span>,
-    <span style="color:#f92672">&#34;teams&#34;</span>: [
+<h3 id=user-objecthttpsdocsmattermostcommanagebulk-export-toolhtmluser-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#user-object>User object</a></h3>
+<p><a href=https://docs.mattermost.com/onboard/bulk-loading-data.html#example-user-object>Example User object</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;user&#34;</span>,
+  <span style=color:#f92672>&#34;user&#34;</span>: {
+    <span style=color:#f92672>&#34;profile_image&#34;</span>: <span style=color:#e6db74>&#34;avatar.png&#34;</span>,
+    <span style=color:#f92672>&#34;username&#34;</span>: <span style=color:#e6db74>&#34;username&#34;</span>,
+    <span style=color:#f92672>&#34;email&#34;</span>: <span style=color:#e6db74>&#34;email@example.com&#34;</span>,
+    <span style=color:#f92672>&#34;auth_service&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+    <span style=color:#f92672>&#34;auth_data&#34;</span>: <span style=color:#e6db74>&#34;&#34;</span>,
+    <span style=color:#f92672>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;passw0rd&#34;</span>,
+    <span style=color:#f92672>&#34;nickname&#34;</span>: <span style=color:#e6db74>&#34;bobuser&#34;</span>,
+    <span style=color:#f92672>&#34;first_name&#34;</span>: <span style=color:#e6db74>&#34;Bob&#34;</span>,
+    <span style=color:#f92672>&#34;last_name&#34;</span>: <span style=color:#e6db74>&#34;User&#34;</span>,
+    <span style=color:#f92672>&#34;position&#34;</span>: <span style=color:#e6db74>&#34;Senior Developer&#34;</span>,
+    <span style=color:#f92672>&#34;roles&#34;</span>: <span style=color:#e6db74>&#34;system_user&#34;</span>,
+    <span style=color:#f92672>&#34;locale&#34;</span>: <span style=color:#e6db74>&#34;pt_BR&#34;</span>,
+    <span style=color:#f92672>&#34;teams&#34;</span>: [
       {
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;team-name&#34;</span>,
-        <span style="color:#f92672">&#34;theme&#34;</span>: <span style="color:#e6db74">&#34;{\&#34;awayIndicator\&#34;:\&#34;#DBBD4E\&#34;,...}&#34;</span>,
-        <span style="color:#f92672">&#34;roles&#34;</span>: <span style="color:#e6db74">&#34;team_user team_admin&#34;</span>,
-        <span style="color:#f92672">&#34;channels&#34;</span>: [
+        <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;team-name&#34;</span>,
+        <span style=color:#f92672>&#34;theme&#34;</span>: <span style=color:#e6db74>&#34;{\&#34;awayIndicator\&#34;:\&#34;#DBBD4E\&#34;,...}&#34;</span>,
+        <span style=color:#f92672>&#34;roles&#34;</span>: <span style=color:#e6db74>&#34;team_user team_admin&#34;</span>,
+        <span style=color:#f92672>&#34;channels&#34;</span>: [
           {
-            <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;channel-name&#34;</span>,
-            <span style="color:#f92672">&#34;roles&#34;</span>: <span style="color:#e6db74">&#34;channel_user&#34;</span>,
-            <span style="color:#f92672">&#34;notify_props&#34;</span>: {
-              <span style="color:#f92672">&#34;desktop&#34;</span>: <span style="color:#e6db74">&#34;default&#34;</span>,
-              <span style="color:#f92672">&#34;mark_unread&#34;</span>: <span style="color:#e6db74">&#34;all&#34;</span>
+            <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;channel-name&#34;</span>,
+            <span style=color:#f92672>&#34;roles&#34;</span>: <span style=color:#e6db74>&#34;channel_user&#34;</span>,
+            <span style=color:#f92672>&#34;notify_props&#34;</span>: {
+              <span style=color:#f92672>&#34;desktop&#34;</span>: <span style=color:#e6db74>&#34;default&#34;</span>,
+              <span style=color:#f92672>&#34;mark_unread&#34;</span>: <span style=color:#e6db74>&#34;all&#34;</span>
             }
           }
         ]
@@ -389,10 +297,10 @@ Mattermostで画面上からチャンネルを作成する際に入力する名�
     ]
   }
 }
-</code></pre></div><h4 id="usernameemail"><code>username</code>/<code>email</code></h4>
+</code></pre></div><h4 id=usernameemail><code>username</code>/<code>email</code></h4>
 <p>移行元/移行先の両方のインスタンスにアカウントを持っているユーザーがいる場合、アカウントのユーザー名/メールアドレスに応じて対処が必要になります。</p>
 <ul>
-<li>移行元/移行先のアカウントが&hellip;
+<li>移行元/移行先のアカウントが&mldr;
 <ol>
 <li><strong>同じ</strong>ユーザー名 / <strong>同じ</strong>メールアドレス: 対処不要</li>
 <li><strong>同じ</strong>ユーザー名 / <strong>異なる</strong>メールアドレス: 移行元のメールアドレスに<strong>書き換えられる</strong></li>
@@ -404,268 +312,187 @@ Mattermostで画面上からチャンネルを作成する際に入力する名�
 <p><code>2.</code>の事象については、もし、別々の人が移行元/移行先で同じユーザー名を使っていた場合、アカウントを乗っ取られたような動作になるので対処が必要になります。
 <code>4.</code>の事象については、本来は正常動作ですが、同じユーザーがが移行元/移行先で<strong>異なるユーザー名 / 異なるメールアドレス</strong>のユーザーを持っていた場合、そのユーザーに対して2つのアカウントが生成されることになります。本来あまり起こらない事象だとは思いますが、過去に全社的にメールアドレスのドメイン名が微妙に変更になったことが有り(以前のメールアドレスも利用可能)、このような事象が発生しやすくなっていました。</p>
 <p>これらの点についても、事前にユーザー名/メールアドレスの情報を突合せ、問題が発生する可能性のあるアカウントについては事前にユーザー名/メールアドレスの変更をお願いしたり、移行先のデータが書き換えられないようExportデータの内容を変更するなどして対処しました。</p>
-<h4 id="auth_serviceauth_data"><code>auth_service</code>/<code>auth_data</code></h4>
+<h4 id=auth_serviceauth_data><code>auth_service</code>/<code>auth_data</code></h4>
 <p>移行元/移行先で異なる認証サービスを利用していた場合、Export後のJSONLファイルに対する対処が必要です。</p>
-<p>今回の統合においては、<strong>移行元のMattermostではGitLab認証</strong>を利用しており、<strong>移行先ではMattermost自身のパスワード認証</strong>を利用していました。ただ、移行元で利用していたGitLabは、<a href="https://dev.classmethod.jp/articles/github-constellation-conf-fujitsu/">富士通研究所としてGitHub Enterpriseが導入された</a>こともあってMattermost認証のためのアカウント管理機能ぐらいしか使われていなかったため、統合に併せてアカウント管理も移行先のMattermostに寄せることにしました。<br>
-認証関連の情報は、 User object が持つ <code>auth_service</code>/<code>auth_data</code> 要素として格納されているため、Import実施前にこれらの要素を<code>{..., &quot;auth_service&quot;:null, ...}</code>のみ(<code>auth_data</code>要素は削除)に編集しました。これにより、Import実施時にシステム側でパスワードが生成・設定されるようになります。システム側で設定されたパスワードを知る術がないので、移行先のインスタンスでパスワードリセットの操作を行う必要がありました。</p>
-<h4 id="roles"><code>roles</code></h4>
+<p>今回の統合においては、<strong>移行元のMattermostではGitLab認証</strong>を利用しており、<strong>移行先ではMattermost自身のパスワード認証</strong>を利用していました。ただ、移行元で利用していたGitLabは、<a href=https://dev.classmethod.jp/articles/github-constellation-conf-fujitsu/>富士通研究所としてGitHub Enterpriseが導入された</a>こともあってMattermost認証のためのアカウント管理機能ぐらいしか使われていなかったため、統合に併せてアカウント管理も移行先のMattermostに寄せることにしました。<br>
+認証関連の情報は、 User object が持つ <code>auth_service</code>/<code>auth_data</code> 要素として格納されているため、Import実施前にこれらの要素を<code>{..., "auth_service":null, ...}</code>のみ(<code>auth_data</code>要素は削除)に編集しました。これにより、Import実施時にシステム側でパスワードが生成・設定されるようになります。システム側で設定されたパスワードを知る術がないので、移行先のインスタンスでパスワードリセットの操作を行う必要がありました。</p>
+<h4 id=roles><code>roles</code></h4>
 <p>ユーザーの権限に関するデータである<code>roles</code>は <strong>非常に注意が必要です</strong>。</p>
 <p>移行元/移行先の両方に同じユーザー名のアカウントが存在した場合、そのユーザーの権限はExportデータ内の<code>roles</code>の値で上書きされてしまいます。もし、移行先のシステム管理者ユーザーが移行元システムの一般ユーザー権限で上書きされ、<strong>移行先にシステム管理者がいなくなってしまった場合</strong>、そのインスタンスの運用を続けることが困難になってしまいます。統合にあたって事前にテストするなどして、このような状況が発生しないよう十分に注意してください。</p>
-<h4 id="localethemenotify_props"><code>locale</code>/<code>theme</code>/<code>notify_props</code>/&hellip;</h4>
+<h4 id=localethemenotify_props><code>locale</code>/<code>theme</code>/<code>notify_props</code>/&mldr;</h4>
 <p>その他、ユーザーのアカウントに関する設定（表示言語、テーマ、通知設定など）も、移行元/移行先で同じユーザー名のユーザーが存在した場合、移行元のデータで置き換えられてしまいます。</p>
-<h3 id="post-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlpost-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#post-object">Post object</a></h3>
-<p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-post-object">Example Post object</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;post&#34;</span>,
-  <span style="color:#f92672">&#34;post&#34;</span>: {
-    <span style="color:#f92672">&#34;team&#34;</span>: <span style="color:#e6db74">&#34;team-name&#34;</span>,
-    <span style="color:#f92672">&#34;channel&#34;</span>: <span style="color:#e6db74">&#34;channel-name&#34;</span>,
-    <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;username&#34;</span>,
-    <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;The post message&#34;</span>,
-    <span style="color:#f92672">&#34;props&#34;</span>: {
-      <span style="color:#f92672">&#34;attachments&#34;</span>: [{
-        <span style="color:#f92672">&#34;pretext&#34;</span>: <span style="color:#e6db74">&#34;This is the attachment pretext.&#34;</span>,
-        <span style="color:#f92672">&#34;text&#34;</span>: <span style="color:#e6db74">&#34;This is the attachment text.&#34;</span>
+<h3 id=post-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlpost-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#post-object>Post object</a></h3>
+<p><a href=https://docs.mattermost.com/onboard/bulk-loading-data.html#example-post-object>Example Post object</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+  <span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;post&#34;</span>,
+  <span style=color:#f92672>&#34;post&#34;</span>: {
+    <span style=color:#f92672>&#34;team&#34;</span>: <span style=color:#e6db74>&#34;team-name&#34;</span>,
+    <span style=color:#f92672>&#34;channel&#34;</span>: <span style=color:#e6db74>&#34;channel-name&#34;</span>,
+    <span style=color:#f92672>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;username&#34;</span>,
+    <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;The post message&#34;</span>,
+    <span style=color:#f92672>&#34;props&#34;</span>: {
+      <span style=color:#f92672>&#34;attachments&#34;</span>: [{
+        <span style=color:#f92672>&#34;pretext&#34;</span>: <span style=color:#e6db74>&#34;This is the attachment pretext.&#34;</span>,
+        <span style=color:#f92672>&#34;text&#34;</span>: <span style=color:#e6db74>&#34;This is the attachment text.&#34;</span>
       }]
     },
-    <span style="color:#f92672">&#34;create_at&#34;</span>: <span style="color:#ae81ff">140012340013</span>,
-    <span style="color:#f92672">&#34;flagged_by&#34;</span>: [
-      <span style="color:#e6db74">&#34;username1&#34;</span>,
-      <span style="color:#e6db74">&#34;username2&#34;</span>,
-      <span style="color:#e6db74">&#34;username3&#34;</span>
+    <span style=color:#f92672>&#34;create_at&#34;</span>: <span style=color:#ae81ff>140012340013</span>,
+    <span style=color:#f92672>&#34;flagged_by&#34;</span>: [
+      <span style=color:#e6db74>&#34;username1&#34;</span>,
+      <span style=color:#e6db74>&#34;username2&#34;</span>,
+      <span style=color:#e6db74>&#34;username3&#34;</span>
     ],
-    <span style="color:#f92672">&#34;replies&#34;</span>: [{
-      <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;username4&#34;</span>,
-      <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;The reply message&#34;</span>,
-      <span style="color:#f92672">&#34;create_at&#34;</span>: <span style="color:#ae81ff">140012352049</span>,
-      <span style="color:#f92672">&#34;attachments&#34;</span>: [{
-          <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/some/valid/file/path/1&#34;</span>
+    <span style=color:#f92672>&#34;replies&#34;</span>: [{
+      <span style=color:#f92672>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;username4&#34;</span>,
+      <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;The reply message&#34;</span>,
+      <span style=color:#f92672>&#34;create_at&#34;</span>: <span style=color:#ae81ff>140012352049</span>,
+      <span style=color:#f92672>&#34;attachments&#34;</span>: [{
+          <span style=color:#f92672>&#34;path&#34;</span>: <span style=color:#e6db74>&#34;/some/valid/file/path/1&#34;</span>
       }],
     }, {
-      <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;username5&#34;</span>,
-      <span style="color:#f92672">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Other reply message&#34;</span>,
-      <span style="color:#f92672">&#34;create_at&#34;</span>: <span style="color:#ae81ff">140012353057</span>,
+      <span style=color:#f92672>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;username5&#34;</span>,
+      <span style=color:#f92672>&#34;message&#34;</span>: <span style=color:#e6db74>&#34;Other reply message&#34;</span>,
+      <span style=color:#f92672>&#34;create_at&#34;</span>: <span style=color:#ae81ff>140012353057</span>,
     }],
-    <span style="color:#f92672">&#34;reactions&#34;</span>: [{
-      <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;username6&#34;</span>,
-      <span style="color:#f92672">&#34;emoji_name&#34;</span>: <span style="color:#e6db74">&#34;+1&#34;</span>,
-      <span style="color:#f92672">&#34;create_at&#34;</span>: <span style="color:#ae81ff">140012356032</span>,
+    <span style=color:#f92672>&#34;reactions&#34;</span>: [{
+      <span style=color:#f92672>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;username6&#34;</span>,
+      <span style=color:#f92672>&#34;emoji_name&#34;</span>: <span style=color:#e6db74>&#34;+1&#34;</span>,
+      <span style=color:#f92672>&#34;create_at&#34;</span>: <span style=color:#ae81ff>140012356032</span>,
     }, {
-      <span style="color:#f92672">&#34;user&#34;</span>: <span style="color:#e6db74">&#34;username7&#34;</span>,
-      <span style="color:#f92672">&#34;emoji_name&#34;</span>: <span style="color:#e6db74">&#34;heart&#34;</span>,
-      <span style="color:#f92672">&#34;create_at&#34;</span>: <span style="color:#ae81ff">140012359034</span>,
+      <span style=color:#f92672>&#34;user&#34;</span>: <span style=color:#e6db74>&#34;username7&#34;</span>,
+      <span style=color:#f92672>&#34;emoji_name&#34;</span>: <span style=color:#e6db74>&#34;heart&#34;</span>,
+      <span style=color:#f92672>&#34;create_at&#34;</span>: <span style=color:#ae81ff>140012359034</span>,
     }],
-    <span style="color:#f92672">&#34;attachments&#34;</span>: [{
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/some/valid/file/path/1&#34;</span>
+    <span style=color:#f92672>&#34;attachments&#34;</span>: [{
+      <span style=color:#f92672>&#34;path&#34;</span>: <span style=color:#e6db74>&#34;/some/valid/file/path/1&#34;</span>
     }, {
-      <span style="color:#f92672">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/some/valid/file/path/2&#34;</span>
+      <span style=color:#f92672>&#34;path&#34;</span>: <span style=color:#e6db74>&#34;/some/valid/file/path/2&#34;</span>
     }]
   }
 }
-</code></pre></div><h4 id="attachments">Attachments</h4>
+</code></pre></div><h4 id=attachments>Attachments</h4>
 <p>投稿に添付されたファイルの拡張子と実際に添付されたファイルの形式が異なる場合、<strong>Import処理でエラー</strong>が発生します。<br>
 Import処理では、投稿に添付された画像ファイルなどに対してサムネイルを作成する処理が自動で実行されます。この時、Mattermostはファイル名の拡張子を元にサムネイル作成処理を実行しようとしますが、ファイル名の拡張子と実際のファイル形式が異なる場合、エラーが発生します。</p>
 <p>今回の統合作業でも、移行元のインスタンスに、<code>.gif</code>という拡張子を持つJPEGファイルなどが存在したため、以下のようなエラーが発生しました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">GetInfoForBytes</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">Could</span> <span style="color:#a6e22e">not</span> <span style="color:#a6e22e">decode</span> <span style="color:#a6e22e">gif</span>., <span style="color:#a6e22e">gif</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">can</span><span style="color:#e6db74">&#39;t recognize format &#34;\xff\xd8\xff\xe0\x00\x10&#34;
-</span><span style="color:#e6db74">Error occurred on data file line 87634
-</span><span style="color:#e6db74">{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9272816,&#34;caller&#34;:&#34;app/server.go:841&#34;,&#34;msg&#34;:&#34;Stopping Server...&#34;}
-</span><span style="color:#e6db74">{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9273949,&#34;caller&#34;:&#34;app/web_hub.go:103&#34;,&#34;msg&#34;:&#34;stopping websocket hub connections&#34;}
-</span><span style="color:#e6db74">{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9294012,&#34;caller&#34;:&#34;app/server.go:914&#34;,&#34;msg&#34;:&#34;Server stopped&#34;}
-</span><span style="color:#e6db74">Error: GetInfoForBytes: Could not decode gif., gif: can&#39;</span><span style="color:#a6e22e">t</span> <span style="color:#a6e22e">recognize</span> <span style="color:#a6e22e">format</span> <span style="color:#e6db74">&#34;\xff\xd8\xff\xe0\x00\x10&#34;</span>
-</code></pre></div><h3 id="emoji-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlemoji-object"><a href="https://docs.mattermost.com/manage/bulk-export-tool.html#emoji-object">Emoji object</a></h3>
-<p><a href="https://docs.mattermost.com/onboard/bulk-loading-data.html#example-emoji-object">Example Emoji object</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-<span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;emoji&#34;</span>,
-<span style="color:#f92672">&#34;emoji&#34;</span>: {
-  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;custom-emoji-troll&#34;</span>,
-  <span style="color:#f92672">&#34;image&#34;</span>: <span style="color:#e6db74">&#34;bulkdata/emoji/trollolol.png&#34;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-jsx data-lang=jsx><span style=color:#a6e22e>GetInfoForBytes</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>Could</span> <span style=color:#a6e22e>not</span> <span style=color:#a6e22e>decode</span> <span style=color:#a6e22e>gif</span>., <span style=color:#a6e22e>gif</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>can</span><span style=color:#e6db74>&#39;t recognize format &#34;\xff\xd8\xff\xe0\x00\x10&#34;
+</span><span style=color:#e6db74>Error occurred on data file line 87634
+</span><span style=color:#e6db74>{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9272816,&#34;caller&#34;:&#34;app/server.go:841&#34;,&#34;msg&#34;:&#34;Stopping Server...&#34;}
+</span><span style=color:#e6db74>{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9273949,&#34;caller&#34;:&#34;app/web_hub.go:103&#34;,&#34;msg&#34;:&#34;stopping websocket hub connections&#34;}
+</span><span style=color:#e6db74>{&#34;level&#34;:&#34;info&#34;,&#34;ts&#34;:1624515819.9294012,&#34;caller&#34;:&#34;app/server.go:914&#34;,&#34;msg&#34;:&#34;Server stopped&#34;}
+</span><span style=color:#e6db74>Error: GetInfoForBytes: Could not decode gif., gif: can&#39;</span><span style=color:#a6e22e>t</span> <span style=color:#a6e22e>recognize</span> <span style=color:#a6e22e>format</span> <span style=color:#e6db74>&#34;\xff\xd8\xff\xe0\x00\x10&#34;</span>
+</code></pre></div><h3 id=emoji-objecthttpsdocsmattermostcommanagebulk-export-toolhtmlemoji-object><a href=https://docs.mattermost.com/manage/bulk-export-tool.html#emoji-object>Emoji object</a></h3>
+<p><a href=https://docs.mattermost.com/onboard/bulk-loading-data.html#example-emoji-object>Example Emoji object</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+<span style=color:#f92672>&#34;type&#34;</span>: <span style=color:#e6db74>&#34;emoji&#34;</span>,
+<span style=color:#f92672>&#34;emoji&#34;</span>: {
+  <span style=color:#f92672>&#34;name&#34;</span>: <span style=color:#e6db74>&#34;custom-emoji-troll&#34;</span>,
+  <span style=color:#f92672>&#34;image&#34;</span>: <span style=color:#e6db74>&#34;bulkdata/emoji/trollolol.png&#34;</span>
   }
 }
-</code></pre></div><h4 id="name-1"><code>name</code></h4>
+</code></pre></div><h4 id=name-1><code>name</code></h4>
 <p>移行元/移行先で同名のカスタム絵文字が登録されている場合、<strong>移行元の画像でカスタム絵文字が上書きされて</strong> しまいます。
 今回の移行では、同名のカスタム絵文字については移行元のデータを削除することで対応しました。もし、Exportデータ内でカスタム絵文字の名前を変更するという対処を行う場合、投稿のデータにもリアクションとしてカスタム絵文字名が使用されている場合があるため、併せてそちらも修正する必要があると思います。</p>
-<h2 id="ossへの貢献">OSSへの貢献</h2>
+<h2 id=ossへの貢献>OSSへの貢献</h2>
 <p>Mattermost Bulk Export/Importツールについてはあまり利用例がないのか、移行にあたっていくつか問題が発生しました。これらの問題について、MattermostへIssueによる報告や、PRによる改善要望を送っています。</p>
-<h3 id="解決済み">解決済み</h3>
+<h3 id=解決済み>解決済み</h3>
 <ul>
-<li>[PR] <a href="https://github.com/mattermost/mattermost-server/issues/11659">Bulk export fails due to missing user · Issue #11659 · mattermost/mattermost-server</a>
+<li>[PR] <a href=https://github.com/mattermost/mattermost-server/issues/11659>Bulk export fails due to missing user · Issue #11659 · mattermost/mattermost-server</a>
 <ul>
 <li>投稿にリアクションを付けていたユーザーをインスタンスから削除した場合、Bulk Export実行時にエラーとなるバグの報告と修正</li>
 <li>2年以上前のIssueですが、この頃から少しずつ移行に向けて進捗していました</li>
 </ul>
 </li>
-<li>[PR] <a href="https://github.com/mattermost/mattermost-server/pull/17849">Fix bulk export file when exporting reply threads by kaakaa · Pull Request #17849 · mattermost/mattermost-server</a>
+<li>[PR] <a href=https://github.com/mattermost/mattermost-server/pull/17849>Fix bulk export file when exporting reply threads by kaakaa · Pull Request #17849 · mattermost/mattermost-server</a>
 <ul>
 <li>メッセージスレッド内に多くのファイルが添付されている投稿をエクスポートする場合に、スレッド内の全添付ファイルを各投稿の情報として保持してしまうという問題の修正です。</li>
 </ul>
 </li>
-<li>[PR] <a href="https://github.com/mattermost/docs/pull/4688">Add bulk export options by kaakaa · Pull Request #4688 · mattermost/docs</a>
+<li>[PR] <a href=https://github.com/mattermost/docs/pull/4688>Add bulk export options by kaakaa · Pull Request #4688 · mattermost/docs</a>
 <ul>
 <li>公式ドキュメントにて、Bulk Exportコマンドのオプションの説明が不足していたため、説明を追加。</li>
 </ul>
 </li>
 </ul>
-<h3 id="未解決">未解決</h3>
+<h3 id=未解決>未解決</h3>
 <ul>
-<li>[Issue] <a href="https://github.com/mattermost/mattermost-server/issues/18640">Bulk import makes the system message the user message · Issue #18640 · mattermost/mattermost-server</a></li>
-<li>[PR] <a href="https://github.com/mattermost/mattermost-server/pull/18992">Added support for exporting and importing the type and edit_at of a post by kaakaa · Pull Request #18992 · mattermost/mattermost-server</a>
+<li>[Issue] <a href=https://github.com/mattermost/mattermost-server/issues/18640>Bulk import makes the system message the user message · Issue #18640 · mattermost/mattermost-server</a></li>
+<li>[PR] <a href=https://github.com/mattermost/mattermost-server/pull/18992>Added support for exporting and importing the type and edit_at of a post by kaakaa · Pull Request #18992 · mattermost/mattermost-server</a>
 <ul>
 <li>Bulk Export/Importによるデータ移行を実施した際、システムメッセージが移行先でユーザーメッセージとして表示されてしまう問題</li>
 </ul>
 </li>
-<li>[Issue] <a href="https://github.com/mattermost/mattermost-server/issues/18699">Bulk export writes 0byte data to existing files · Issue #18699 · mattermost/mattermost-server</a>
+<li>[Issue] <a href=https://github.com/mattermost/mattermost-server/issues/18699>Bulk export writes 0byte data to existing files · Issue #18699 · mattermost/mattermost-server</a>
 <ul>
 <li>Bulk Exportコマンドを <code>--attachments</code> オプション（添付ファイルをエクスポートするオプション）付きで実行した際、コマンド実行ディレクトリにMattermostのデータファイル格納フォルダ(<code>data/</code>)が存在する場合にデータファイルを0バイトで上書きしてしまう問題</li>
 </ul>
 </li>
-<li>[Issue] <a href="https://github.com/mattermost/mattermost-server/issues/18641">Doing bulk export/import drops saved post data · Issue #18641 · mattermost/mattermost-server</a>
+<li>[Issue] <a href=https://github.com/mattermost/mattermost-server/issues/18641>Doing bulk export/import drops saved post data · Issue #18641 · mattermost/mattermost-server</a>
 <ul>
 <li>Bulk Export実行時、保存された投稿の情報がExport対象にならない問題</li>
 </ul>
 </li>
-<li>[Issue] <a href="https://github.com/mattermost/mmctl/issues/401">There is no way to list archived private channels if the user isn&rsquo;t the member of its channel · Issue #401 · mattermost/mmctl</a>
+<li>[Issue] <a href=https://github.com/mattermost/mmctl/issues/401>There is no way to list archived private channels if the user isn&rsquo;t the member of its channel · Issue #401 · mattermost/mmctl</a>
 <ul>
 <li>Mattermostの新しいCLIツール <code>mmctl</code> では、privateかつarchivedなチャンネルの一覧を取得できない問題</li>
 </ul>
 </li>
 </ul>
-<h2 id="さいごに">さいごに</h2>
-<p>今回は、Mattermostの<a href="https://docs.mattermost.com/manage/bulk-export-tool.html">Bulk Export</a> / <a href="https://docs.mattermost.com/onboard/bulk-loading-data.html">Bulk Import(Loading)</a>の機能を使い、2つのMattermostインスタンスの統合を行いました。そして、インスタンス統合時に発生するデータ不整合と、その不整合にどのように対応したかについて紹介しました。<br>
+<h2 id=さいごに>さいごに</h2>
+<p>今回は、Mattermostの<a href=https://docs.mattermost.com/manage/bulk-export-tool.html>Bulk Export</a> / <a href=https://docs.mattermost.com/onboard/bulk-loading-data.html>Bulk Import(Loading)</a>の機能を使い、2つのMattermostインスタンスの統合を行いました。そして、インスタンス統合時に発生するデータ不整合と、その不整合にどのように対応したかについて紹介しました。<br>
 2つのMattermostを完全な形で移行することは出来ませんでしたが、制限事項の部分以外は移行後も大きな問題が起こることも無く、現時点で数か月運用が出来ています。</p>
-<p>今回、インスタンス統合実施時に発生する問題に対処しつつ作業を完遂出来たのは、MattermostがOSSであったという点が大きいと思っています。問題が発生しても、データとコードを読み解くことで問題の原因を特定でき、原因に対してソフトウェアの方を修正するという対処も取りながら作業を進めることが出来ました。Mattermostは、<strong>自分たちのコミュニケーションのデータを自分たちの自由にできないフラストレーション</strong> から生まれたプロダクトであり、今回はその恩恵を十分に受けることができたと思います。(refs: <a href="https://flagsmith.com/podcast/ian-tien-mattermost/">The Mattermost Origin Story - The Craft of Open Source - Flagsmith</a>)</p>
-<h2 id="謝辞">謝辞</h2>
+<p>今回、インスタンス統合実施時に発生する問題に対処しつつ作業を完遂出来たのは、MattermostがOSSであったという点が大きいと思っています。問題が発生しても、データとコードを読み解くことで問題の原因を特定でき、原因に対してソフトウェアの方を修正するという対処も取りながら作業を進めることが出来ました。Mattermostは、<strong>自分たちのコミュニケーションのデータを自分たちの自由にできないフラストレーション</strong> から生まれたプロダクトであり、今回はその恩恵を十分に受けることができたと思います。(refs: <a href=https://flagsmith.com/podcast/ian-tien-mattermost/>The Mattermost Origin Story - The Craft of Open Source - Flagsmith</a>)</p>
+<h2 id=謝辞>謝辞</h2>
 <p>今回、記事を公開しているのは私ですが、実際のインスタンス統合作業にはあまり関れておらず、普段からMattermostに関する記事を書いているということで、記事公開役を拝命しております。</p>
-<p>実際のインスタンス統合作業は、<a href="https://twitter.com/zenjiro0123">@zenjiro0123</a>さんが 移行元のMattermostインスタンスの管理者 兼 今回の統合のメインの実施者として進めてくれました。また、<a href="https://twitter.com/zenjiro0123">@zenjiro0123</a>さんが途中から育休に入るということで、<a href="https://researchmap.jp/iwata-satoshi">岩田 聡</a>さん(任天堂じゃない方)も、様々な面でサポートに回ってもらいました。また、統合作業のテストについては、移行先のMattermostインスタンスの管理者である<a href="https://qiita.com/lastis">@lastis</a>さんに協力いただき、最終的な移行作業も<a href="https://qiita.com/lastis">@lastis</a>さんに実行してもらいました。</p>
+<p>実際のインスタンス統合作業は、<a href=https://twitter.com/zenjiro0123>@zenjiro0123</a>さんが 移行元のMattermostインスタンスの管理者 兼 今回の統合のメインの実施者として進めてくれました。また、<a href=https://twitter.com/zenjiro0123>@zenjiro0123</a>さんが途中から育休に入るということで、<a href=https://researchmap.jp/iwata-satoshi>岩田 聡</a>さん(任天堂じゃない方)も、様々な面でサポートに回ってもらいました。また、統合作業のテストについては、移行先のMattermostインスタンスの管理者である<a href=https://qiita.com/lastis>@lastis</a>さんに協力いただき、最終的な移行作業も<a href=https://qiita.com/lastis>@lastis</a>さんに実行してもらいました。</p>
 <p>皆様、お疲れさまでした。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/bulk-export/"
-              >bulk-export</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/bulk-import/"
-              >bulk-import</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/advent-calendar/"
-              >advent-calendar</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/tips/"
-              >tips</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/bulk-export/>bulk-export</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/bulk-import/>bulk-import</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/advent-calendar/>advent-calendar</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/tips/>tips</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

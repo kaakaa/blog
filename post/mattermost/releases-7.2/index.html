@@ -1,413 +1,252 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost 7.2の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost 7.2の新機能"/>
-<meta name="twitter:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/08/16 に Mattermost のアップデートとなる v7.2.0 がリリースされました。 本記事は、個人的に気"/>
-
-
-  <meta property="og:title" content="Mattermost 7.2の新機能" />
-<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/08/16 に Mattermost のアップデートとなる v7.2.0 がリリースされました。 本記事は、個人的に気" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.2/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2022-08-19T10:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2022-08-19T10:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 7.2の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/08/16 に Mattermost のアップデートとなる v7.2.0 がリリースされました。 本記事は、個人的に気">
+<meta property="og:title" content="Mattermost 7.2の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/08/16 に Mattermost のアップデートとなる v7.2.0 がリリースされました。 本記事は、個人的に気">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-7.2/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-08-19T10:00:00+09:00">
+<meta property="article:modified_time" content="2022-08-19T10:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost 7.2の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Aug 19, 2022
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 7.2の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Aug 19, 2022
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost 記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<p><a href="https://twitter.com/mattermost_jp">Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
-<h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
 <p>2022/08/16 に Mattermost のアップデートとなる <code>v7.2.0</code> がリリースされました。</p>
 <p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-v7-2-is-now-available/">Mattermost v7.2 is now available - Mattermost</a></li>
-<li><a href="https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-2-feature-release">Mattermost self-hosted changelog</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-v7-2-is-now-available/>Mattermost v7.2 is now available - Mattermost</a></li>
+<li><a href=https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-2-feature-release>Mattermost self-hosted changelog</a></li>
 </ul>
 <hr>
 <p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
 <ul>
-<li><a href="https://mattermost.com/pricing/">Professional</a></li>
-<li><a href="https://mattermost.com/pricing/">Enterprise</a></li>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
 </ul>
 <p>見出しの前に何もない場合、Starter(OSS 版)でも利用可能な機能です。</p>
 <p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
 <ul>
-<li><a href="https://docs.mattermost.com/guides/channels.html">Channels</a>: 従来のチャット機能</li>
-<li><a href="https://docs.mattermost.com/guides/playbooks.html">Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
-<li><a href="https://docs.mattermost.com/guides/boards.html">Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href="https://www.focalboard.com/">Focalboard</a>)</li>
+<li><a href=https://docs.mattermost.com/guides/channels.html>Channels</a>: 従来のチャット機能</li>
+<li><a href=https://docs.mattermost.com/guides/playbooks.html>Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href=https://docs.mattermost.com/guides/boards.html>Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href=https://www.focalboard.com/>Focalboard</a>)</li>
 <li>Platform: 上記機能を含むMattermost全体</li>
 </ul>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#channels-メッセージ転送-message-forwarding">Channels: メッセージ転送 (Message Forwarding)</a>
-      <ul>
-        <li><a href="#注意-日本語入力時の不具合について">注意: 日本語入力時の不具合について</a></li>
-      </ul>
-    </li>
-    <li><a href="#enterprise-platform-audit-log-v2-beta">(Enterprise) Platform: Audit Log v2 Beta</a></li>
-    <li><a href="#その他の変更">その他の変更</a>
-      <ul>
-        <li><a href="#channels-未読チャンネルを表示する際のスクロールポジション設定">Channels: 未読チャンネルを表示する際のスクロールポジション設定</a></li>
-      </ul>
-    </li>
-    <li><a href="#アップグレード時の注意事項">アップグレード時の注意事項</a>
-      <ul>
-        <li><a href="#スキーマ変更に係る所要時間">スキーマ変更に係る所要時間</a></li>
-      </ul>
-    </li>
-    <li><a href="#その他のトピック">その他のトピック</a>
-      <ul>
-        <li><a href="#slack料金改訂に伴いmattermostへの言及が増加">Slack料金改訂に伴いMattermostへの言及が増加</a></li>
-        <li><a href="#mattermost-pricingページの記載内容に一部誤解を招く表現があることについて">Mattermost Pricingページの記載内容に一部誤解を招く表現があることについて</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a>
-      <ul>
-        <li><a href="#channels-今後追加される予定の機能について">Channels: 今後追加される予定の機能について</a></li>
-      </ul>
-    </li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="channels-メッセージ転送-message-forwarding">Channels: メッセージ転送 (Message Forwarding)</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#channels-メッセージ転送-message-forwarding>Channels: メッセージ転送 (Message Forwarding)</a>
+<ul>
+<li><a href=#注意-日本語入力時の不具合について>注意: 日本語入力時の不具合について</a></li>
+</ul>
+</li>
+<li><a href=#enterprise-platform-audit-log-v2-beta>(Enterprise) Platform: Audit Log v2 Beta</a></li>
+<li><a href=#その他の変更>その他の変更</a>
+<ul>
+<li><a href=#channels-未読チャンネルを表示する際のスクロールポジション設定>Channels: 未読チャンネルを表示する際のスクロールポジション設定</a></li>
+</ul>
+</li>
+<li><a href=#アップグレード時の注意事項>アップグレード時の注意事項</a>
+<ul>
+<li><a href=#スキーマ変更に係る所要時間>スキーマ変更に係る所要時間</a></li>
+</ul>
+</li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#slack料金改訂に伴いmattermostへの言及が増加>Slack料金改訂に伴いMattermostへの言及が増加</a></li>
+<li><a href=#mattermost-pricingページの記載内容に一部誤解を招く表現があることについて>Mattermost Pricingページの記載内容に一部誤解を招く表現があることについて</a></li>
+</ul>
+</li>
+<li><a href=#roadmap>Roadmap</a>
+<ul>
+<li><a href=#channels-今後追加される予定の機能について>Channels: 今後追加される予定の機能について</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=channels-メッセージ転送-message-forwarding>Channels: メッセージ転送 (Message Forwarding)</h2>
 <p>Mattermost内の投稿を他のチャンネルへ転送するメニューが追加されました。</p>
-<p><a href="https://docs.mattermost.com/channels/forward-messages.html">Forward messages</a></p>
-<p>メッセージ転送機能を使わなくても、投稿のURLをMattermostへ投稿することで<a href="https://blog.kaakaa.dev/post/mattermost/releases-6.0/#%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E8%A1%A8%E7%A4%BA">メッセージを別のチャンネルでプレビュー表示する機能はMattermost v6.0の時点で利用可能</a>でした。しかし、このメッセージプレビューによる投稿内容の共有を行う場合、元の投稿のURLを取得・コピーし、転送先のチャンネルへ移動してURLを投稿する必要がありました。本バージョンで転送機能が実装されたことで、この作業が簡略化され、有益なメッセージを簡単に共有することができるようになります。</p>
+<p><a href=https://docs.mattermost.com/channels/forward-messages.html>Forward messages</a></p>
+<p>メッセージ転送機能を使わなくても、投稿のURLをMattermostへ投稿することで<a href=https://blog.kaakaa.dev/post/mattermost/releases-6.0/#%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%83%AA%E3%83%B3%E3%82%AF%E3%81%AE%E3%83%97%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC%E8%A1%A8%E7%A4%BA>メッセージを別のチャンネルでプレビュー表示する機能はMattermost v6.0の時点で利用可能</a>でした。しかし、このメッセージプレビューによる投稿内容の共有を行う場合、元の投稿のURLを取得・コピーし、転送先のチャンネルへ移動してURLを投稿する必要がありました。本バージョンで転送機能が実装されたことで、この作業が簡略化され、有益なメッセージを簡単に共有することができるようになります。</p>
 <hr>
 <p>転送機能を利用するには、投稿のメニューから<code>転送</code>を選択します。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-menu.png" alt="channels-forwarding-menu"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-menu.png alt=channels-forwarding-menu></p>
 <p>表示されるダイアログに転送先チャンネルとコメントを入力し、転送を実行することで、転送先に指定したチャンネルに記入したコメントとともに投稿内容が転送されます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-dialog.png" alt="channels-forwarding-dialog"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-dialog.png alt=channels-forwarding-dialog></p>
 <p>転送先チャンネルには、Mattermostインスタンス内の自分が参加しているチャンネルならばどのチャンネルでも指定することができます。また、以前にダイレクトメッセージ(DM)をやり取りしたことのあるユーザーに対しては、そのDMチャンネルを転送先として選択することもできます(手元の環境では、DMを送ったことのないユーザーとのDMチャンネルは転送先として指定できないようでした)。また、非公開チャンネルやDM/GM(グループメッセージ)チャンネルの投稿でも転送メニューを選択することはできますが、転送先チャンネルは指定することができず、その投稿の存在するチャンネルにしか転送することができません。</p>
 <p>また、コメント入力欄は1行テキスト欄に見えますが、<code>Shift+Enter</code>を押すことで改行を行うことができ、Markdown記法も使用することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-content.png" alt="channels-forwarding-content"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-content.png alt=channels-forwarding-content></p>
 <p>転送が完了すると、ダイアログで選択した転送先チャンネルに以下のような投稿が作成されます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-post.png" alt="channels-forwarding-post"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-forwarding-post.png alt=channels-forwarding-post></p>
 <p>元の投稿へのリンクURLは自動で挿入されます。</p>
-<h3 id="注意-日本語入力時の不具合について">注意: 日本語入力時の不具合について</h3>
+<h3 id=注意-日本語入力時の不具合について>注意: 日本語入力時の不具合について</h3>
 <p>現在、コメントを追加する前に転送先チャンネルを選択してしまうと、コメント入力中の<code>Enter</code>キー押下によってメッセージ転送が実行されてしまうバグがあるようです。日本語でコメントを入力する場合は、<code>Enter</code>キーを押さずに確定を行う（カーソルを押下することが確定するなど）か、転送先チャンネルを選択する前に入力を完了することで回避できそうです。</p>
-<p><a href="https://github.com/mattermost/mattermost-server/issues/20838">Unable to add Japanese comments correctly in Message Forwarding Dialog · Issue #20838 · mattermost/mattermost-server</a></p>
-<h2 id="enterprise-platform-audit-log-v2-beta">(Enterprise) Platform: Audit Log v2 Beta</h2>
+<p><a href=https://github.com/mattermost/mattermost-server/issues/20838>Unable to add Japanese comments correctly in Message Forwarding Dialog · Issue #20838 · mattermost/mattermost-server</a></p>
+<h2 id=enterprise-platform-audit-log-v2-beta>(Enterprise) Platform: Audit Log v2 Beta</h2>
 <p>システム管理者向けの監査ログの内容がアップデートされるようです。</p>
-<p><a href="https://docs.mattermost.com/comply/audit-log.html">Audit log v2 (experimental)</a></p>
+<p><a href=https://docs.mattermost.com/comply/audit-log.html>Audit log v2 (experimental)</a></p>
 <p>今回のアップデートでは、監査対象イベントの前後の状態の変化により焦点を当て、以前より多くのイベントのデータが記録できるようスキーマの変更が行われているようです。
 以前のバージョンの監査ログを対象にアラート設定などを行なっている場合、今後Audit Log v2に合わせた修正が必要になります。</p>
-<h2 id="その他の変更">その他の変更</h2>
-<h3 id="channels-未読チャンネルを表示する際のスクロールポジション設定">Channels: 未読チャンネルを表示する際のスクロールポジション設定</h3>
-<p>未読の投稿が存在するチャンネルを開いた時のスクロール位置に関する設定が追加されました。<strong>設定 &gt; 詳細 &gt; 未読チャンネルを表示したときのスクロール位置</strong> から設定を変更することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-scroll-position.png" alt="channels-scroll-position"></p>
+<h2 id=その他の変更>その他の変更</h2>
+<h3 id=channels-未読チャンネルを表示する際のスクロールポジション設定>Channels: 未読チャンネルを表示する際のスクロールポジション設定</h3>
+<p>未読の投稿が存在するチャンネルを開いた時のスクロール位置に関する設定が追加されました。<strong>設定 > 詳細 > 未読チャンネルを表示したときのスクロール位置</strong> から設定を変更することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/channels-scroll-position.png alt=channels-scroll-position></p>
 <p><code>Start me where I left off</code> (以前表示した位置から開始する)を選択すると、以前チャンネルを開いた時に表示していた位置に遡ってチャンネルが表示されます。<code>Start me at the newest message</code> (最新のメッセージから開始する)を選択すると、以前開いていた位置とは関係なく、常に最新のメッセージを開始位置としてチャンネルを表示します。</p>
-<h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
-<h3 id="スキーマ変更に係る所要時間">スキーマ変更に係る所要時間</h3>
+<h2 id=アップグレード時の注意事項>アップグレード時の注意事項</h2>
+<h3 id=スキーマ変更に係る所要時間>スキーマ変更に係る所要時間</h3>
 <p>今回のバージョンアップでは、格納されるデータをより厳密なものにするためにデータベースのスキーマ変更が実行されます。スキーマ変更にかかる時間はチャンネル数に依存するようですが、10万チャンネル以上あるインスタンスでも10秒超ほどで完了するため、大きな問題にはならないかと思います。</p>
 <p>スキーマの変更内容と所要時間に関するテスト結果については以下のリンク先を参照してください。</p>
-<p><a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">Important Upgrade Notes</a></p>
-<h2 id="その他のトピック">その他のトピック</h2>
-<h3 id="slack料金改訂に伴いmattermostへの言及が増加">Slack料金改訂に伴いMattermostへの言及が増加</h3>
-<p>2022/07/18に<a href="https://slack.com/intl/ja-jp/blog/news/pricing-and-plan-updates">Slackが料金改訂を行うことを発表しました</a>。<br>
+<p><a href=https://docs.mattermost.com/upgrade/important-upgrade-notes.html>Important Upgrade Notes</a></p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<h3 id=slack料金改訂に伴いmattermostへの言及が増加>Slack料金改訂に伴いMattermostへの言及が増加</h3>
+<p>2022/07/18に<a href=https://slack.com/intl/ja-jp/blog/news/pricing-and-plan-updates>Slackが料金改訂を行うことを発表しました</a>。<br>
 中でもフリープランのメッセージ上限が10,000件から90日間に変更されたことの影響が大きいようで、フリープランを利用していたSlackユーザーの方々が代わりのチャット基盤となり得るチャットツールを探し、SNS等でそれらのツールに対する言及するといったことが多く行われていました。<br>
 それに合わせ、ここ１ヶ月ほどでMattermostを紹介する記事がいくつも公開されていたため、見つけた範囲でまとめてみました。</p>
 <p>Mattermostnの紹介およびセットアップ手順に関する記事</p>
 <ul>
-<li><a href="https://gihyo.jp/admin/serial/01/ubuntu-recipe/0726">第726回　Slackの代替として、ハドルミーティングも実装されたオープンソース版のMattermostはいかが？ | gihyo.jp</a></li>
-<li><a href="https://travelwork.jp/2022/07/mattermost/">チャットツールMattermostとは？使い方や評判、無料で出来ることを紹介 - TravelWork</a></li>
-<li><a href="https://qiita.com/bezeklik/items/a3882af7f4303bdc3cb6?utm_campaign=post_article&amp;utm_medium=twitter&amp;utm_source=twitter_share">Slack フリープランが改悪したので Mattermost をインストールしてみた - Qiita</a></li>
-<li><a href="https://zenn.dev/fehde/articles/a8919efbe2efa7">WSL2 Ubuntu で Mattermost Preview を試す</a></li>
-<li><a href="https://zenn.dev/fehde/articles/8d530e1118f8a6">Mattermost を Docker で試験導入する (Docker Image 版)</a></li>
+<li><a href=https://gihyo.jp/admin/serial/01/ubuntu-recipe/0726>第726回　Slackの代替として、ハドルミーティングも実装されたオープンソース版のMattermostはいかが？ | gihyo.jp</a></li>
+<li><a href=https://travelwork.jp/2022/07/mattermost/>チャットツールMattermostとは？使い方や評判、無料で出来ることを紹介 - TravelWork</a></li>
+<li><a href="https://qiita.com/bezeklik/items/a3882af7f4303bdc3cb6?utm_campaign=post_article&utm_medium=twitter&utm_source=twitter_share">Slack フリープランが改悪したので Mattermost をインストールしてみた - Qiita</a></li>
+<li><a href=https://zenn.dev/fehde/articles/a8919efbe2efa7>WSL2 Ubuntu で Mattermost Preview を試す</a></li>
+<li><a href=https://zenn.dev/fehde/articles/8d530e1118f8a6>Mattermost を Docker で試験導入する (Docker Image 版)</a></li>
 </ul>
 <p>SlackからMattermostへの移行に関する記事</p>
 <ul>
-<li><a href="https://qiita.com/mitsurupj/items/7f002a696bab66b4259e?utm_campaign=post_article&amp;utm_medium=twitter&amp;utm_source=twitter_share">SlackからMattermostへの移行 - Qiita</a></li>
-<li><a href="https://blog2.issei.org/2022/07/27/slack-to-mattermost/?utm_source=dlvr.it&amp;utm_medium=twitter">Slack から Mattermost へ移行</a></li>
+<li><a href="https://qiita.com/mitsurupj/items/7f002a696bab66b4259e?utm_campaign=post_article&utm_medium=twitter&utm_source=twitter_share">SlackからMattermostへの移行 - Qiita</a></li>
+<li><a href="https://blog2.issei.org/2022/07/27/slack-to-mattermost/?utm_source=dlvr.it&utm_medium=twitter">Slack から Mattermost へ移行</a></li>
 </ul>
 <p>Mattermost利用者向けサポートサービスに関する記事</p>
 <ul>
-<li><a href="https://note.ricksoft.jp/n/n1124f6b5ee87">【インターネットにつながってなくても使える】NASAがSlackの代わりに使うビジネスチャット「Mattermost」を知ってほしい。｜リックソフト：Jira,Slack, WorkatoなどBtoB「仕事を楽にする」ITツール導入支援</a></li>
-<li><a href="https://presswalker.jp/press/2127">SlackからMattermostの切り替えサポートについて｜PressWalker</a></li>
+<li><a href=https://note.ricksoft.jp/n/n1124f6b5ee87>【インターネットにつながってなくても使える】NASAがSlackの代わりに使うビジネスチャット「Mattermost」を知ってほしい。｜リックソフト：Jira,Slack, WorkatoなどBtoB「仕事を楽にする」ITツール導入支援</a></li>
+<li><a href=https://presswalker.jp/press/2127>SlackからMattermostの切り替えサポートについて｜PressWalker</a></li>
 </ul>
-<h3 id="mattermost-pricingページの記載内容に一部誤解を招く表現があることについて">Mattermost Pricingページの記載内容に一部誤解を招く表現があることについて</h3>
+<h3 id=mattermost-pricingページの記載内容に一部誤解を招く表現があることについて>Mattermost Pricingページの記載内容に一部誤解を招く表現があることについて</h3>
 <p>MattermostのPricingページの記述を確認すると、Self-hostedのStarterプラン(無償利用)でも、アクセスできるメッセージ履歴の数に制限があるように読めてしまうようです。</p>
 <p>PricingページのStarterプランの説明に、メッセージ履歴は最新の10,000件しかアクセスできないというような表記があります。この制限は、<strong>Cloud版</strong>のStarterプラン利用時のみの制約であるはずですが、PricingページはSelf-hosted版とCloud版について記載を分けていないようなので、この制限がSelf-hosted版にも適用されるように見えてしまいます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing.png" alt="topic-pricing"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing.png alt=topic-pricing></p>
 <p>また、Pricingページ末尾のFAQにも、「Self-hosted版とCloud版で料金の面で差異は無い」と書かれているため、Pricingページの記載だけを読むと、やはりSelf-hosted版にもデータ制限があるように読めてしまいます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing-faq.png" alt="topic-pricing-faq"></p>
-<p>この点について<a href="https://community-daily.mattermost.com/core/pl/nnhn63q8c3gpukow1xqe6f5x5o">Mattermost公式チームに問い合わせ</a>てみましたが、やはりデータ制限はCloud版のみの話で、Self-hosted版には特にMattermostとしてデータ制限は無いはずとの回答をもらいました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing-confirmation.png" alt="topic-pricing-confirmation"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing-faq.png alt=topic-pricing-faq></p>
+<p>この点について<a href=https://community-daily.mattermost.com/core/pl/nnhn63q8c3gpukow1xqe6f5x5o>Mattermost公式チームに問い合わせ</a>てみましたが、やはりデータ制限はCloud版のみの話で、Self-hosted版には特にMattermostとしてデータ制限は無いはずとの回答をもらいました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-pricing-confirmation.png alt=topic-pricing-confirmation></p>
 <p>Pricingページの記載内容についても見直してくれるそうです。</p>
-<h2 id="roadmap">Roadmap</h2>
-<h3 id="channels-今後追加される予定の機能について">Channels: 今後追加される予定の機能について</h3>
-<p>毎月、<a href="https://community-daily.mattermost.com/core/channels/roadmap">Mattermost公式コミュニティサーバーのRoadmapチャンネル</a>にて、Mattermostプロダクトの方向性についての情報共有が行われています。その中から、Mattermostのチャット機能である<code>Channels</code>に追加される予定の機能を紹介します。</p>
+<h2 id=roadmap>Roadmap</h2>
+<h3 id=channels-今後追加される予定の機能について>Channels: 今後追加される予定の機能について</h3>
+<p>毎月、<a href=https://community-daily.mattermost.com/core/channels/roadmap>Mattermost公式コミュニティサーバーのRoadmapチャンネル</a>にて、Mattermostプロダクトの方向性についての情報共有が行われています。その中から、Mattermostのチャット機能である<code>Channels</code>に追加される予定の機能を紹介します。</p>
 <p>参考にしたのは以下の資料で、誰でもみれる形で公開されています。</p>
 <p><a href="https://docs.google.com/presentation/d/1gORMxIpa87z0R2vWZuOmJURVB8K2HFjQn0wXPeuzM9Y/edit#slide=id.ge9b7e537ec_0_0">July 2022 - Channels Roadmap Update - Viewer Copy - Google スライド</a></p>
 <p>まず、<code>Global Drafts</code>です。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-roadmap-channels-drafts.png" alt="topic-roadmap-channels-drafts"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-roadmap-channels-drafts.png alt=topic-roadmap-channels-drafts></p>
 <p><code>Global Drafts</code>では、Mattermost上でメッセージを投稿しようとして途中で入力を中断した場合などに、その書きかけのメッセージを集約してくれる機能です。<br>
 今までのバージョンでも、書きかけのメッセージがある場合、左サイドバーでそのチャンネルのアイコンが鉛筆アイコンに変わることで目視することはできましたが、参加するチャンネルが多い場合は見つけづらいなどの難点がありました。<code>Global Drafts</code>によって、急な対応が必要になった場合でも、すぐに書きかけのメッセージに戻ることができそうです。</p>
-<p>もう一つは<code>Message Priority &amp; Acknowledgement</code>です。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-roadmap-channels-priority.png" alt="topic-roadmap-channels-priority"></p>
+<p>もう一つは<code>Message Priority & Acknowledgement</code>です。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.2/topic-roadmap-channels-priority.png alt=topic-roadmap-channels-priority></p>
 <p>この機能により、Mattermost内の投稿に対する注目度をさまざまな形式で設定できるようになりそうです。</p>
 <p><code>Message Priority</code>では、メッセージの重要度を<code>Standard</code>、<code>Important</code>、<code>Urgent</code>などの形式で設定できるようになるようです。<br>
 また、<code>Request acknowledgement</code>では、メッセージの既読チェックに使えるボタンが付与されるようです。今までは絵文字リアクションで行なうことが多いかと思いますが、公式の機能としてサポートされるようです。<br>
 最後に、<code>Message Priority</code>を<code>Urgent</code>に設定した投稿は、<code>acknowledge</code>か返信が行われるまで5分ごとに通知が行われるようにすることもできるようです。</p>
 <p>これらの機能について、実装されたらまた紹介したいと思います。</p>
-<h2 id="おわりに">おわりに</h2>
+<h2 id=おわりに>おわりに</h2>
 <p>次の<code>v7.3</code>のリリースは 2022/09/16(Fri)を予定しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

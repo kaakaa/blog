@@ -1,384 +1,215 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>[Mattermost Integrations] Matterpoll Plugin (Webapp)</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Mattermost Integrations] Matterpoll Plugin (Webapp)"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第23日目の記事です。 以前から開発に参加"/>
-
-
-  <meta property="og:title" content="[Mattermost Integrations] Matterpoll Plugin (Webapp)" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第23日目の記事です。 以前から開発に参加" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day23-matterpoll-webapp/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-23T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2020-12-23T00:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="[Mattermost Integrations] Matterpoll Plugin (Webapp)">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第23日目の記事です。 以前から開発に参加">
+<meta property="og:title" content="[Mattermost Integrations] Matterpoll Plugin (Webapp)">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第23日目の記事です。 以前から開発に参加">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day23-matterpoll-webapp/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-12-23T00:00:00+09:00">
+<meta property="article:modified_time" content="2020-12-23T00:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              [Mattermost Integrations] Matterpoll Plugin (Webapp)
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 23, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+[Mattermost Integrations] Matterpoll Plugin (Webapp)
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 23, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#本記事について">本記事について</a></li>
-    <li><a href="#webapp側の処理">Webapp側の処理</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#さいごに">さいごに</a></li>
-  </ul>
-</nav><h2 id="本記事について">本記事について</h2>
-<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第23日目の記事です。</p>
-<p>以前から開発に参加している<a href="https://github.com/matterpoll/matterpoll">Matterpoll</a>がMattermost公式のPlugin MarketplaceでCommunity Pluginとして公開されました。</p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#本記事について>本記事について</a></li>
+<li><a href=#webapp側の処理>Webapp側の処理</a>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><a href=#さいごに>さいごに</a></li>
+</ul>
+</nav><h2 id=本記事について>本記事について</h2>
+<p><a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>Mattermostの統合機能アドベントカレンダー</a>の第23日目の記事です。</p>
+<p>以前から開発に参加している<a href=https://github.com/matterpoll/matterpoll>Matterpoll</a>がMattermost公式のPlugin MarketplaceでCommunity Pluginとして公開されました。</p>
 <p>昨日の記事ではMatterpoll PluginのServer側の実装について紹介しましたが、本日の記事ではMatterpoll PluginのWebapp側の機能について紹介します。</p>
-<h2 id="webapp側の処理">Webapp側の処理</h2>
+<h2 id=webapp側の処理>Webapp側の処理</h2>
 <p>Webapp側では、ユーザー毎に投票の見え方を変えるための処理を実装しています。</p>
-<h4 id="独自のposttypeによる投票済み回答のハイライト">独自のPostTypeによる投票済み回答のハイライト</h4>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/matterpoll-posttype.dio.png" alt="matterpoll-posttype.dio.png"></p>
-<p>Mattermosで投稿したメッセージは、Mattermost上では <a href="%5Bhttps://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72%5D(https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72)">Post</a> 構造体のデータとして扱われています。そして、<code>Post</code>構造体の<code>Type</code> フィールドの値によって投稿の種別を判別しています。<code>Post.Type</code>はデフォルトでは大きく分けて二つの種類があり、一つは通常ユーザーが投稿するメッセージ（ <code>Post.Type</code> が空文字（<code>POST_DEFAULT</code>）。もう一つは、チャンネル参加時などにシステムによって投稿されるメッセージ（<code>Post.Type</code> は <a href="%5Bhttps://github.com/mattermost/mattermost-server/blob/master/model/post.go#L22%5D(https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L22)"><code>system_</code> で始まる</a>）です。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/posttype-sample.png" alt="2 つのPost.Typeの投稿"></p>
-<p>Mattermost上のメッセージの見た目は <a href="%5Bhttps://docs.mattermost.com/developer/message-attachments.html%5D(https://docs.mattermost.com/developer/message-attachments.html)">Message Attachements</a> の機能を使う事である程度変更することはできますが、 Message AttachmentsではMattermostユーザー全員に対して同じ見た目しか提供できないため、ユーザー毎にメッセージの一部を変更したい場合などはプラグインで処理する必要があります。Matterpollの場合「自分が投票した回答がどれなのか表示したい」というようなユーザー毎に表示を変更する要求があったため、この部分をプラグインで処理しています。</p>
-<p>プラグインで投稿の見た目を変えたい場合、まずServer側で投稿を作成する際に、独自の<code>Post.Type</code>を設定する必要があります。Matterpollではスラッシュコマンド <code>/poll</code> が実装された際に投票用の投稿  (<code>Post</code>) を作成するのですが、その際に <code>Post.Type</code>  に <code>custom_matterpoll</code> という値を設定しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/plugin.go" data-lang="go:server/plugin/plugin.go"><span style="color:#f92672">...</span>
-<span style="color:#66d9ef">const</span> (
-  <span style="color:#f92672">...</span>
-	<span style="color:#75715e">// MatterpollPostType is post_type of posts generated by Matterpoll
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">MatterpollPostType</span> = <span style="color:#e6db74">&#34;custom_matterpoll&#34;</span>
+<h4 id=独自のposttypeによる投票済み回答のハイライト>独自のPostTypeによる投票済み回答のハイライト</h4>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/matterpoll-posttype.dio.png alt=matterpoll-posttype.dio.png></p>
+<p>Mattermosで投稿したメッセージは、Mattermost上では <a href=%5Bhttps://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72%5D(https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L72)>Post</a> 構造体のデータとして扱われています。そして、<code>Post</code>構造体の<code>Type</code> フィールドの値によって投稿の種別を判別しています。<code>Post.Type</code>はデフォルトでは大きく分けて二つの種類があり、一つは通常ユーザーが投稿するメッセージ（ <code>Post.Type</code> が空文字（<code>POST_DEFAULT</code>）。もう一つは、チャンネル参加時などにシステムによって投稿されるメッセージ（<code>Post.Type</code> は <a href=%5Bhttps://github.com/mattermost/mattermost-server/blob/master/model/post.go#L22%5D(https://github.com/mattermost/mattermost-server/blob/master/model/post.go#L22)><code>system_</code> で始まる</a>）です。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/posttype-sample.png alt="2 つのPost.Typeの投稿"></p>
+<p>Mattermost上のメッセージの見た目は <a href=%5Bhttps://docs.mattermost.com/developer/message-attachments.html%5D(https://docs.mattermost.com/developer/message-attachments.html)>Message Attachements</a> の機能を使う事である程度変更することはできますが、 Message AttachmentsではMattermostユーザー全員に対して同じ見た目しか提供できないため、ユーザー毎にメッセージの一部を変更したい場合などはプラグインで処理する必要があります。Matterpollの場合「自分が投票した回答がどれなのか表示したい」というようなユーザー毎に表示を変更する要求があったため、この部分をプラグインで処理しています。</p>
+<p>プラグインで投稿の見た目を変えたい場合、まずServer側で投稿を作成する際に、独自の<code>Post.Type</code>を設定する必要があります。Matterpollではスラッシュコマンド <code>/poll</code> が実装された際に投票用の投稿 (<code>Post</code>) を作成するのですが、その際に <code>Post.Type</code> に <code>custom_matterpoll</code> という値を設定しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/plugin.go data-lang=go:server/plugin/plugin.go><span style=color:#f92672>...</span>
+<span style=color:#66d9ef>const</span> (
+  <span style=color:#f92672>...</span>
+	<span style=color:#75715e>// MatterpollPostType is post_type of posts generated by Matterpoll
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MatterpollPostType</span> = <span style=color:#e6db74>&#34;custom_matterpoll&#34;</span>
 )
-<span style="color:#f92672">...</span>
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/plugin.go#L53">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/plugin.go#L53</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/command.go" data-lang="go:server/plugin/command.go"><span style="color:#f92672">...</span>
-  <span style="color:#a6e22e">post</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">Post</span>{
-		<span style="color:#a6e22e">UserId</span>:    <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">botUserID</span>,
-		<span style="color:#a6e22e">ChannelId</span>: <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">ChannelId</span>,
-		<span style="color:#a6e22e">RootId</span>:    <span style="color:#a6e22e">args</span>.<span style="color:#a6e22e">RootId</span>,
-		<span style="color:#a6e22e">Type</span>:      <span style="color:#a6e22e">MatterpollPostType</span>,
-		<span style="color:#a6e22e">Props</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
-			<span style="color:#e6db74">&#34;poll_id&#34;</span>: <span style="color:#a6e22e">newPoll</span>.<span style="color:#a6e22e">ID</span>,
+<span style=color:#f92672>...</span>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/plugin.go#L53>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/plugin.go#L53</a></p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/command.go data-lang=go:server/plugin/command.go><span style=color:#f92672>...</span>
+  <span style=color:#a6e22e>post</span> <span style=color:#f92672>:=</span> <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>Post</span>{
+		<span style=color:#a6e22e>UserId</span>:    <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>botUserID</span>,
+		<span style=color:#a6e22e>ChannelId</span>: <span style=color:#a6e22e>args</span>.<span style=color:#a6e22e>ChannelId</span>,
+		<span style=color:#a6e22e>RootId</span>:    <span style=color:#a6e22e>args</span>.<span style=color:#a6e22e>RootId</span>,
+		<span style=color:#a6e22e>Type</span>:      <span style=color:#a6e22e>MatterpollPostType</span>,
+		<span style=color:#a6e22e>Props</span>: <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>interface</span>{}{
+			<span style=color:#e6db74>&#34;poll_id&#34;</span>: <span style=color:#a6e22e>newPoll</span>.<span style=color:#a6e22e>ID</span>,
 		},
 	}
-	<span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">ParseSlackAttachment</span>(<span style="color:#a6e22e">post</span>, <span style="color:#a6e22e">actions</span>)
+	<span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>ParseSlackAttachment</span>(<span style=color:#a6e22e>post</span>, <span style=color:#a6e22e>actions</span>)
 
-	<span style="color:#a6e22e">rPost</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">CreatePost</span>(<span style="color:#a6e22e">post</span>)
-<span style="color:#f92672">...</span>
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L191">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L191</a></p>
-<p>上記のように<code>Post.Type</code> にプラグイン独自の値を設定しましたが、Webapp側で<code>custom_matterpoll</code>という<code>Post.Type</code>に対する処理を追加しない限り、通常の投稿と同じように表示されてしまいます。Mattermostプラグインでは、WebApp プラグインAPIの<a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)">registerPostTypeComponent</a> を使い <code>Post.Type</code> に <code>custom_matterpoll</code> が設定された場合のレンダリング方法を指定しています。</p>
-<p><a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)">registerPostTypeComponent</a>  は第一引数に<code>Post.Type</code> の文字列を指定し、第二引数にReactコンポーネントを指定します。Matterpollの場合は、Server側で <code>Post.Type</code> に <code>custom_matterpoll</code> を指定しているため、下記のように第一引数に <code>custom_matterpoll</code> を、第二引数に独自のReactコンポーネントを指定して <a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)">registerPostTypeComponent</a> を呼び出しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx:webapp/src/actions/config.js" data-lang="jsx:webapp/src/actions/config.js"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PostType</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;components/post_type&#39;</span>;
+	<span style=color:#a6e22e>rPost</span>, <span style=color:#a6e22e>appErr</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>API</span>.<span style=color:#a6e22e>CreatePost</span>(<span style=color:#a6e22e>post</span>)
+<span style=color:#f92672>...</span>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L191>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/command.go#L191</a></p>
+<p>上記のように<code>Post.Type</code> にプラグイン独自の値を設定しましたが、Webapp側で<code>custom_matterpoll</code>という<code>Post.Type</code>に対する処理を追加しない限り、通常の投稿と同じように表示されてしまいます。Mattermostプラグインでは、WebApp プラグインAPIの<a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)>registerPostTypeComponent</a> を使い <code>Post.Type</code> に <code>custom_matterpoll</code> が設定された場合のレンダリング方法を指定しています。</p>
+<p><a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)>registerPostTypeComponent</a> は第一引数に<code>Post.Type</code> の文字列を指定し、第二引数にReactコンポーネントを指定します。Matterpollの場合は、Server側で <code>Post.Type</code> に <code>custom_matterpoll</code> を指定しているため、下記のように第一引数に <code>custom_matterpoll</code> を、第二引数に独自のReactコンポーネントを指定して <a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)>registerPostTypeComponent</a> を呼び出しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-jsx:webapp/src/actions/config.js data-lang=jsx:webapp/src/actions/config.js><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>PostType</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#39;components/post_type&#39;</span>;
 ...
 
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">data</span>.<span style="color:#a6e22e">experimentalui</span>) {
-        <span style="color:#a6e22e">registeredComponentId</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerPostTypeComponent</span>(<span style="color:#e6db74">&#39;custom_matterpoll&#39;</span>, <span style="color:#a6e22e">PostType</span>);
-    } <span style="color:#66d9ef">else</span> {
-       <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">unregisterPostTypeComponent</span>(<span style="color:#a6e22e">registeredComponentId</span>);
-       <span style="color:#a6e22e">registeredComponentId</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>;
+    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>data</span>.<span style=color:#a6e22e>experimentalui</span>) {
+        <span style=color:#a6e22e>registeredComponentId</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>registry</span>.<span style=color:#a6e22e>registerPostTypeComponent</span>(<span style=color:#e6db74>&#39;custom_matterpoll&#39;</span>, <span style=color:#a6e22e>PostType</span>);
+    } <span style=color:#66d9ef>else</span> {
+       <span style=color:#a6e22e>registry</span>.<span style=color:#a6e22e>unregisterPostTypeComponent</span>(<span style=color:#a6e22e>registeredComponentId</span>);
+       <span style=color:#a6e22e>registeredComponentId</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;&#39;</span>;
     }
 ...
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/fa1f3aa8489deb24706937beac7d9976b0528ed7/webapp/src/actions/config.js#L11">https://github.com/matterpoll/matterpoll/blob/fa1f3aa8489deb24706937beac7d9976b0528ed7/webapp/src/actions/config.js#L11</a></p>
-<p><a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)">registerPostTypeComponent</a> は戻り値として登録されたReactコンポーネントに対応するID文字列を返しますが、これは登録したコンポーネントを<a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)">unregisterPostTypeComponent</a>を利用して解除する場合に必要なためstateに保持しています。</p>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/fa1f3aa8489deb24706937beac7d9976b0528ed7/webapp/src/actions/config.js#L11>https://github.com/matterpoll/matterpoll/blob/fa1f3aa8489deb24706937beac7d9976b0528ed7/webapp/src/actions/config.js#L11</a></p>
+<p><a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)>registerPostTypeComponent</a> は戻り値として登録されたReactコンポーネントに対応するID文字列を返しますが、これは登録したコンポーネントを<a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#unregisterPostTypeComponent%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerPostTypeComponent)>unregisterPostTypeComponent</a>を利用して解除する場合に必要なためstateに保持しています。</p>
 <p>Matterpollでは、Webapp側の機能はまだExperimentalな機能として設定でOn/Offを切り替えられるようにしているため、設定変更によってコンポーネントを登録/解除できるようにしています。</p>
-<p>このように、プラグイン独自に投稿の見た目を変えたい場合、自作のReactコンポーネントを作成する必要があります。この時、Mattermost本体が構築する投稿に関するDOMの一部だけ表示を変更するなどができると良いのですが、MattermostのReactコンポーネントは外部から参照できる形で公開されていないため、一から自分で作る必要がありなかなか難儀しています&hellip;。ただ、Reactコンポーネントを開発する際のユーティリティ関数がいくつか利用可能なため、この辺りを使っいます。</p>
-<p><a href="https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils">https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils</a></p>
-<h4 id="プラグイン独自のwebsocketイベント">プラグイン独自のWebSocketイベント</h4>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/matterpoll-ws.dio.png" alt="matterpoll-ws.dio.png"></p>
+<p>このように、プラグイン独自に投稿の見た目を変えたい場合、自作のReactコンポーネントを作成する必要があります。この時、Mattermost本体が構築する投稿に関するDOMの一部だけ表示を変更するなどができると良いのですが、MattermostのReactコンポーネントは外部から参照できる形で公開されていないため、一から自分で作る必要がありなかなか難儀しています&mldr;。ただ、Reactコンポーネントを開発する際のユーティリティ関数がいくつか利用可能なため、この辺りを使っいます。</p>
+<p><a href=https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils>https://developers.mattermost.com/extend/plugins/webapp/reference/#post-utils</a></p>
+<h4 id=プラグイン独自のwebsocketイベント>プラグイン独自のWebSocketイベント</h4>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day23/matterpoll-ws.dio.png alt=matterpoll-ws.dio.png></p>
 <p>MattermostのServerとWebappの間はWebSocketによりやり取りが行われています。</p>
-<p>Webapp側でWebSocketイベントを受信した時の独自処理を登録するのが <a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler)">registerWebSocketEventHandler</a>メソッドです。このメソッドは、第一引数にWebSocketイベント名、第二引数にWebSocketイベントを受け取ったときに実行される処理を関数として登録します。</p>
-<p>MattermostがデフォルトでPublishしているWebSocketイベントは<a href="%5Bhttps://api.mattermost.com/#tag/WebSocket%5D(https://api.mattermost.com/#tag/WebSocket)">APIドキュメント</a>に一覧でまとめられており、メッセージの投稿/削除/編集やチャンネルの作成/削除、参加/脱退など、ユーザー操作に対するイベントが一通り網羅されています。また、Server側からプラグインごとに独自のWebSocketイベントをPublishすることもでき、Matterpollでは、Matterpollプラグインの設定が変更された時と、ユーザーが投票に回答したときに独自のWebSocketイベントを送信しています。</p>
-<p>プラグイン独自のWebSocketイベントをPublishするには、Server側でプラグインAPIの<a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent)">PublishWebSocketEvent</a>を実行するだけでよく、Matterpollでは下記のようなメソッドを作成し、投票データに変更があった時にこの処理を呼び出すことで、投票に関する最新のデータをWebappに送信しています。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go:server/plugin/api.go" data-lang="go:server/plugin/api.go"><span style="color:#66d9ef">func</span> (<span style="color:#a6e22e">p</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">MatterpollPlugin</span>) <span style="color:#a6e22e">publishPollMetadata</span>(<span style="color:#a6e22e">poll</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">poll</span>.<span style="color:#a6e22e">Poll</span>, <span style="color:#a6e22e">userID</span> <span style="color:#66d9ef">string</span>) {
-	<span style="color:#a6e22e">hasAdminPermission</span>, <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">HasAdminPermission</span>(<span style="color:#a6e22e">poll</span>, <span style="color:#a6e22e">userID</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">appErr</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">LogWarn</span>(<span style="color:#e6db74">&#34;Failed to check admin permission&#34;</span>, <span style="color:#e6db74">&#34;userID&#34;</span>, <span style="color:#a6e22e">userID</span>, <span style="color:#e6db74">&#34;pollID&#34;</span>, <span style="color:#a6e22e">poll</span>.<span style="color:#a6e22e">ID</span>, <span style="color:#e6db74">&#34;error&#34;</span>, <span style="color:#a6e22e">appErr</span>.<span style="color:#a6e22e">Error</span>())
-		<span style="color:#a6e22e">hasAdminPermission</span> = <span style="color:#66d9ef">false</span>
+<p>Webapp側でWebSocketイベントを受信した時の独自処理を登録するのが <a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler)>registerWebSocketEventHandler</a>メソッドです。このメソッドは、第一引数にWebSocketイベント名、第二引数にWebSocketイベントを受け取ったときに実行される処理を関数として登録します。</p>
+<p>MattermostがデフォルトでPublishしているWebSocketイベントは<a href=%5Bhttps://api.mattermost.com/#tag/WebSocket%5D(https://api.mattermost.com/#tag/WebSocket)>APIドキュメント</a>に一覧でまとめられており、メッセージの投稿/削除/編集やチャンネルの作成/削除、参加/脱退など、ユーザー操作に対するイベントが一通り網羅されています。また、Server側からプラグインごとに独自のWebSocketイベントをPublishすることもでき、Matterpollでは、Matterpollプラグインの設定が変更された時と、ユーザーが投票に回答したときに独自のWebSocketイベントを送信しています。</p>
+<p>プラグイン独自のWebSocketイベントをPublishするには、Server側でプラグインAPIの<a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent)>PublishWebSocketEvent</a>を実行するだけでよく、Matterpollでは下記のようなメソッドを作成し、投票データに変更があった時にこの処理を呼び出すことで、投票に関する最新のデータをWebappに送信しています。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go:server/plugin/api.go data-lang=go:server/plugin/api.go><span style=color:#66d9ef>func</span> (<span style=color:#a6e22e>p</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>MatterpollPlugin</span>) <span style=color:#a6e22e>publishPollMetadata</span>(<span style=color:#a6e22e>poll</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>poll</span>.<span style=color:#a6e22e>Poll</span>, <span style=color:#a6e22e>userID</span> <span style=color:#66d9ef>string</span>) {
+	<span style=color:#a6e22e>hasAdminPermission</span>, <span style=color:#a6e22e>appErr</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>HasAdminPermission</span>(<span style=color:#a6e22e>poll</span>, <span style=color:#a6e22e>userID</span>)
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>appErr</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>API</span>.<span style=color:#a6e22e>LogWarn</span>(<span style=color:#e6db74>&#34;Failed to check admin permission&#34;</span>, <span style=color:#e6db74>&#34;userID&#34;</span>, <span style=color:#a6e22e>userID</span>, <span style=color:#e6db74>&#34;pollID&#34;</span>, <span style=color:#a6e22e>poll</span>.<span style=color:#a6e22e>ID</span>, <span style=color:#e6db74>&#34;error&#34;</span>, <span style=color:#a6e22e>appErr</span>.<span style=color:#a6e22e>Error</span>())
+		<span style=color:#a6e22e>hasAdminPermission</span> = <span style=color:#66d9ef>false</span>
 	}
-	<span style="color:#a6e22e">metadata</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">poll</span>.<span style="color:#a6e22e">GetMetadata</span>(<span style="color:#a6e22e">userID</span>, <span style="color:#a6e22e">hasAdminPermission</span>)
-	<span style="color:#a6e22e">p</span>.<span style="color:#a6e22e">API</span>.<span style="color:#a6e22e">PublishWebSocketEvent</span>(<span style="color:#e6db74">&#34;has_voted&#34;</span>, <span style="color:#a6e22e">metadata</span>.<span style="color:#a6e22e">ToMap</span>(), <span style="color:#f92672">&amp;</span><span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">WebsocketBroadcast</span>{<span style="color:#a6e22e">UserId</span>: <span style="color:#a6e22e">userID</span>})
+	<span style=color:#a6e22e>metadata</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>poll</span>.<span style=color:#a6e22e>GetMetadata</span>(<span style=color:#a6e22e>userID</span>, <span style=color:#a6e22e>hasAdminPermission</span>)
+	<span style=color:#a6e22e>p</span>.<span style=color:#a6e22e>API</span>.<span style=color:#a6e22e>PublishWebSocketEvent</span>(<span style=color:#e6db74>&#34;has_voted&#34;</span>, <span style=color:#a6e22e>metadata</span>.<span style=color:#a6e22e>ToMap</span>(), <span style=color:#f92672>&amp;</span><span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>WebsocketBroadcast</span>{<span style=color:#a6e22e>UserId</span>: <span style=color:#a6e22e>userID</span>})
 }
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L411">https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L411</a></p>
-<p>プラグインAPIである <a href="%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent)">PublishWebSocketEvent</a>  は3つの引数を取り、第一引数でPublishするWebSocketイベントのイベント名を指定します。実際には、ここで指定されたイベント名の先頭に <code>custom_&lt;pluginid&gt;_</code> を付与したイベント名としてやり取りされるため、第1引数を &ldquo;has_voted&rdquo; としている今回の例では <code>custom_com.github.matterpoll.matterpoll_has_voted</code>というWebSocketイベント名となります。イベント名にプラグインIDが入っているため、プラグイン間のイベント名の競合については考慮する必要がありません。</p>
-<p>第2引数にはPublishするデータを指定します。<code>map</code> 形式でvalueには <code>interface{}</code> 型が指定できますが、この値にはGoのプリミティブ型か <a href="%5Bhttps://github.com/mattermost/mattermost-server/tree/master/model%5D(https://github.com/mattermost/mattermost-server/tree/master/model)">mattermost-server/model</a> しか指定できません。それ以外の値を指定してしまうと、実行時にエンコードエラーとなります。（Mattermostサーバーのログを確認しないと分からないためハマりがちです）</p>
-<p>第3引数では、このWebSocketイベントをどのユーザーに対して送信するかを決定します。<a href="%5Bhttps://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#WebsocketBroadcast%5D(https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#WebsocketBroadcast)">model.WebsocketBroadcast</a>の定義を見ると、ユーザー単位以外にもチャンネルやチーム単位で指定することもできそうです（試したことはないですが）。</p>
-<p>次に、Server側からPublishされたWebSocketイベント <code>custome_com.github.matterpoll.matterpoll_has_voted</code> をWebapp側で処理するために、前述の <a href="%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler)">registerWebSocketEventHandler</a> を実行します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx:webapp/src/plugin.jsx" data-lang="jsx:webapp/src/plugin.jsx"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MatterPollPlugin</span> {
-    <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">initialize</span>(<span style="color:#a6e22e">registry</span>, <span style="color:#a6e22e">store</span>) {
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L411>https://github.com/matterpoll/matterpoll/blob/45f095875a98fb1d4f3f166851c86f41b987493e/server/plugin/api.go#L411</a></p>
+<p>プラグインAPIである <a href=%5Bhttps://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent%5D(https://developers.mattermost.com/extend/plugins/server/reference/#API.PublishWebSocketEvent)>PublishWebSocketEvent</a> は3つの引数を取り、第一引数でPublishするWebSocketイベントのイベント名を指定します。実際には、ここで指定されたイベント名の先頭に <code>custom_&lt;pluginid>_</code> を付与したイベント名としてやり取りされるため、第1引数を &ldquo;has_voted&rdquo; としている今回の例では <code>custom_com.github.matterpoll.matterpoll_has_voted</code>というWebSocketイベント名となります。イベント名にプラグインIDが入っているため、プラグイン間のイベント名の競合については考慮する必要がありません。</p>
+<p>第2引数にはPublishするデータを指定します。<code>map</code> 形式でvalueには <code>interface{}</code> 型が指定できますが、この値にはGoのプリミティブ型か <a href=%5Bhttps://github.com/mattermost/mattermost-server/tree/master/model%5D(https://github.com/mattermost/mattermost-server/tree/master/model)>mattermost-server/model</a> しか指定できません。それ以外の値を指定してしまうと、実行時にエンコードエラーとなります。（Mattermostサーバーのログを確認しないと分からないためハマりがちです）</p>
+<p>第3引数では、このWebSocketイベントをどのユーザーに対して送信するかを決定します。<a href=%5Bhttps://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#WebsocketBroadcast%5D(https://pkg.go.dev/github.com/mattermost/mattermost-server/v5/model#WebsocketBroadcast)>model.WebsocketBroadcast</a>の定義を見ると、ユーザー単位以外にもチャンネルやチーム単位で指定することもできそうです（試したことはないですが）。</p>
+<p>次に、Server側からPublishされたWebSocketイベント <code>custome_com.github.matterpoll.matterpoll_has_voted</code> をWebapp側で処理するために、前述の <a href=%5Bhttps://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler%5D(https://developers.mattermost.com/extend/plugins/webapp/reference/#registerWebSocketEventHandler)>registerWebSocketEventHandler</a> を実行します。</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-jsx:webapp/src/plugin.jsx data-lang=jsx:webapp/src/plugin.jsx><span style=color:#66d9ef>export</span> <span style=color:#66d9ef>default</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MatterPollPlugin</span> {
+    <span style=color:#66d9ef>async</span> <span style=color:#a6e22e>initialize</span>(<span style=color:#a6e22e>registry</span>, <span style=color:#a6e22e>store</span>) {
         ...
-        <span style="color:#a6e22e">registry</span>.<span style="color:#a6e22e">registerWebSocketEventHandler</span>(
-            <span style="color:#e6db74">&#39;custom_&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">pluginId</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;_has_voted&#39;</span>,
-            (<span style="color:#a6e22e">message</span>) =&gt; {
-                <span style="color:#a6e22e">store</span>.<span style="color:#a6e22e">dispatch</span>(<span style="color:#a6e22e">websocketHasVoted</span>(<span style="color:#a6e22e">message</span>.<span style="color:#a6e22e">data</span>));
+        <span style=color:#a6e22e>registry</span>.<span style=color:#a6e22e>registerWebSocketEventHandler</span>(
+            <span style=color:#e6db74>&#39;custom_&#39;</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>pluginId</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#39;_has_voted&#39;</span>,
+            (<span style=color:#a6e22e>message</span>) =&gt; {
+                <span style=color:#a6e22e>store</span>.<span style=color:#a6e22e>dispatch</span>(<span style=color:#a6e22e>websocketHasVoted</span>(<span style=color:#a6e22e>message</span>.<span style=color:#a6e22e>data</span>));
             },
         );
         ...
     }
-</code></pre></div><p><a href="https://github.com/matterpoll/matterpoll/blob/0b797025cfbf319c43464fcf457d4cdfe5086188/webapp/src/plugin.jsx#L17">https://github.com/matterpoll/matterpoll/blob/0b797025cfbf319c43464fcf457d4cdfe5086188/webapp/src/plugin.jsx#L17</a></p>
+</code></pre></div><p><a href=https://github.com/matterpoll/matterpoll/blob/0b797025cfbf319c43464fcf457d4cdfe5086188/webapp/src/plugin.jsx#L17>https://github.com/matterpoll/matterpoll/blob/0b797025cfbf319c43464fcf457d4cdfe5086188/webapp/src/plugin.jsx#L17</a></p>
 <p>上記のように、Webapp側のプラグイン起動時にWebSocketを受信した時のHandlerを登録しておくことで、Mattermost上の操作に応じてWebapp側の表示を変えるなどの処理を行えるようになります。</p>
-<h2 id="さいごに">さいごに</h2>
+<h2 id=さいごに>さいごに</h2>
 <p>本日は、Mattermost上で投票を行えるようにするMatterpoll PluginのWebapp側の実装について紹介しました。
 明日は、Matterpoll Plugin開発におけるテストやCIについて紹介します。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/integration/"
-              >integration</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/plugin/"
-              >plugin</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/matterpoll/"
-              >matterpoll</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/integration/>integration</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/plugin/>plugin</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/matterpoll/>matterpoll</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

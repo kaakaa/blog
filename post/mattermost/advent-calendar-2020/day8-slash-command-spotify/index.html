@@ -1,417 +1,248 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>[Mattermost Integrations] Slash Command 応用編</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="[Mattermost Integrations] Slash Command 応用編"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第8日目の記事です。 本日の記事は、昨日ま"/>
-
-
-  <meta property="og:title" content="[Mattermost Integrations] Slash Command 応用編" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第8日目の記事です。 本日の記事は、昨日ま" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day8-slash-command-spotify/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-08T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2020-12-08T00:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="[Mattermost Integrations] Slash Command 応用編">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第8日目の記事です。 本日の記事は、昨日ま">
+<meta property="og:title" content="[Mattermost Integrations] Slash Command 応用編">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ 本記事について Mattermostの統合機能アドベントカレンダーの第8日目の記事です。 本日の記事は、昨日ま">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/advent-calendar-2020/day8-slash-command-spotify/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-12-08T00:00:00+09:00">
+<meta property="article:modified_time" content="2020-12-08T00:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              [Mattermost Integrations] Slash Command 応用編
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 8, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+[Mattermost Integrations] Slash Command 応用編
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 8, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#本記事について">本記事について</a></li>
-    <li><a href="#背景">背景</a></li>
-    <li><a href="#動作例">動作例</a></li>
-    <li><a href="#コード">コード</a>
-      <ul>
-        <li><a href="#1-定数の設定">(1) 定数の設定</a></li>
-        <li><a href="#2-spotify-クライアントの初期化">(2) Spotify クライアントの初期化</a></li>
-        <li><a href="#3-トークンによるリクエストの検証">(3) トークンによるリクエストの検証</a></li>
-        <li><a href="#4-serach_termの取得">(4) serach_termの取得</a></li>
-        <li><a href="#5-プレイリストの検索">(5) プレイリストの検索</a></li>
-        <li><a href="#6-プレイリスト内のトラック情報の取得">(6) プレイリスト内のトラック情報の取得</a></li>
-        <li><a href="#7-mattermostへのレスポンスの構築">(7) Mattermostへのレスポンスの構築</a></li>
-      </ul>
-    </li>
-    <li><a href="#さいごに">さいごに</a></li>
-  </ul>
-</nav><h2 id="本記事について">本記事について</h2>
-<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermostの統合機能アドベントカレンダー</a>の第8日目の記事です。</p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#本記事について>本記事について</a></li>
+<li><a href=#背景>背景</a></li>
+<li><a href=#動作例>動作例</a></li>
+<li><a href=#コード>コード</a>
+<ul>
+<li><a href=#1-定数の設定>(1) 定数の設定</a></li>
+<li><a href=#2-spotify-クライアントの初期化>(2) Spotify クライアントの初期化</a></li>
+<li><a href=#3-トークンによるリクエストの検証>(3) トークンによるリクエストの検証</a></li>
+<li><a href=#4-serach_termの取得>(4) serach_termの取得</a></li>
+<li><a href=#5-プレイリストの検索>(5) プレイリストの検索</a></li>
+<li><a href=#6-プレイリスト内のトラック情報の取得>(6) プレイリスト内のトラック情報の取得</a></li>
+<li><a href=#7-mattermostへのレスポンスの構築>(7) Mattermostへのレスポンスの構築</a></li>
+</ul>
+</li>
+<li><a href=#さいごに>さいごに</a></li>
+</ul>
+</nav><h2 id=本記事について>本記事について</h2>
+<p><a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>Mattermostの統合機能アドベントカレンダー</a>の第8日目の記事です。</p>
 <p>本日の記事は、昨日まで紹介してきたSlash Commandを使ったサンプルアプリの紹介です。</p>
-<h2 id="背景">背景</h2>
-<p>コロナ影響によりWFH(Work From Home)が定着してきましたが、毎日自宅で作業していると同じ景色しか見えないため気持ちが滅入ってくることがあります。自分は少しでも日常に変化を付けようと音楽を流しながら作業していることが多いので、MattermostからSpotifyのプレイリストを探すことができる統合機能を作ってみました。（普段はAppleMusic派ですが&hellip;）</p>
-<h2 id="動作例">動作例</h2>
-<p><img src="https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day8/example-music-command.gif" alt="movie"></p>
+<h2 id=背景>背景</h2>
+<p>コロナ影響によりWFH(Work From Home)が定着してきましたが、毎日自宅で作業していると同じ景色しか見えないため気持ちが滅入ってくることがあります。自分は少しでも日常に変化を付けようと音楽を流しながら作業していることが多いので、MattermostからSpotifyのプレイリストを探すことができる統合機能を作ってみました。（普段はAppleMusic派ですが&mldr;）</p>
+<h2 id=動作例>動作例</h2>
+<p><img src=https://blog.kaakaa.dev/images/posts/advent-calendar-2020/day8/example-music-command.gif alt=movie></p>
 <p><code>/music [search_term]</code>で、<code>[search_term]</code>を検索キーとしてプレイリストを検索します。<code>[search_term]</code>を指定しない場合、<code>workfromhome</code>を検索キーとして検索します。
 コマンドを実行すると、見つかったプレイリストの情報をリンク付きでMattermostに投稿します。この時、<code>card</code>機能を使って投稿からプレイリストの内容を確認できるようにしています。</p>
-<h2 id="コード">コード</h2>
+<h2 id=コード>コード</h2>
 <p>ソースコードは下記のリポジトリにコミットしてあります。</p>
-<p><a href="https://github.com/kaakaa/blog/tree/master/code/mattermost/2020-advent-calendar/slash-command-spotify">https://github.com/kaakaa/blog/tree/master/code/mattermost/2020-advent-calendar/slash-command-spotify</a></p>
+<p><a href=https://github.com/kaakaa/blog/tree/master/code/mattermost/2020-advent-calendar/slash-command-spotify>https://github.com/kaakaa/blog/tree/master/code/mattermost/2020-advent-calendar/slash-command-spotify</a></p>
 <p>Mattermost連携部分の動作コードは下記になります。これとは別にSpotifyクライアント用のコードもありますが、そちらの紹介は割愛します。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#f92672>package</span> <span style=color:#a6e22e>main</span>
 
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-	<span style="color:#e6db74">&#34;io&#34;</span>
-	<span style="color:#e6db74">&#34;log&#34;</span>
-	<span style="color:#e6db74">&#34;math/rand&#34;</span>
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
-	<span style="color:#e6db74">&#34;strings&#34;</span>
+<span style=color:#f92672>import</span> (
+	<span style=color:#e6db74>&#34;fmt&#34;</span>
+	<span style=color:#e6db74>&#34;io&#34;</span>
+	<span style=color:#e6db74>&#34;log&#34;</span>
+	<span style=color:#e6db74>&#34;math/rand&#34;</span>
+	<span style=color:#e6db74>&#34;net/http&#34;</span>
+	<span style=color:#e6db74>&#34;strings&#34;</span>
 
-	<span style="color:#e6db74">&#34;github.com/mattermost/mattermost-server/v5/model&#34;</span>
+	<span style=color:#e6db74>&#34;github.com/mattermost/mattermost-server/v5/model&#34;</span>
 )
 
-<span style="color:#66d9ef">const</span> (
-	<span style="color:#75715e">// (1) 定数の設定
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">MattermostToken</span>     = <span style="color:#e6db74">&#34;arzoyh4i57dw5x57yumenuktqw&#34;</span>
-	<span style="color:#a6e22e">SpotifyClientID</span>     = <span style="color:#e6db74">&#34;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#34;</span>
-	<span style="color:#a6e22e">SpotifyClientSecret</span> = <span style="color:#e6db74">&#34;ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ&#34;</span>
+<span style=color:#66d9ef>const</span> (
+	<span style=color:#75715e>// (1) 定数の設定
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>MattermostToken</span>     = <span style=color:#e6db74>&#34;arzoyh4i57dw5x57yumenuktqw&#34;</span>
+	<span style=color:#a6e22e>SpotifyClientID</span>     = <span style=color:#e6db74>&#34;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX&#34;</span>
+	<span style=color:#a6e22e>SpotifyClientSecret</span> = <span style=color:#e6db74>&#34;ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ&#34;</span>
 )
 
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#75715e">// (2) Spotify クライアントの初期化
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">client</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">NewSpotifyClient</span>(<span style="color:#a6e22e">SpotifyClientID</span>, <span style="color:#a6e22e">SpotifyClientSecret</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;failed to set up spotify client: %s&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>())
+<span style=color:#66d9ef>func</span> <span style=color:#a6e22e>main</span>() {
+	<span style=color:#75715e>// (2) Spotify クライアントの初期化
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>client</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>NewSpotifyClient</span>(<span style=color:#a6e22e>SpotifyClientID</span>, <span style=color:#a6e22e>SpotifyClientSecret</span>)
+	<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+		<span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Fatalf</span>(<span style=color:#e6db74>&#34;failed to set up spotify client: %s&#34;</span>, <span style=color:#a6e22e>err</span>.<span style=color:#a6e22e>Error</span>())
 	}
-	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandleFunc</span>(<span style="color:#e6db74">&#34;/spotify&#34;</span>, <span style="color:#66d9ef">func</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-		<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">ParseForm</span>()
-		<span style="color:#75715e">// (3) トークンによるリクエストの検証
-</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">MattermostToken</span> <span style="color:#f92672">!=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Form</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;token&#34;</span>) {
-			<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;received token is invalid: %s&#34;</span>, <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Form</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;token&#34;</span>))
-			<span style="color:#66d9ef">return</span>
+	<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>HandleFunc</span>(<span style=color:#e6db74>&#34;/spotify&#34;</span>, <span style=color:#66d9ef>func</span>(<span style=color:#a6e22e>w</span> <span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ResponseWriter</span>, <span style=color:#a6e22e>r</span> <span style=color:#f92672>*</span><span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>Request</span>) {
+		<span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>ParseForm</span>()
+		<span style=color:#75715e>// (3) トークンによるリクエストの検証
+</span><span style=color:#75715e></span>		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>MattermostToken</span> <span style=color:#f92672>!=</span> <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Form</span>.<span style=color:#a6e22e>Get</span>(<span style=color:#e6db74>&#34;token&#34;</span>) {
+			<span style=color:#a6e22e>log</span>.<span style=color:#a6e22e>Printf</span>(<span style=color:#e6db74>&#34;received token is invalid: %s&#34;</span>, <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Form</span>.<span style=color:#a6e22e>Get</span>(<span style=color:#e6db74>&#34;token&#34;</span>))
+			<span style=color:#66d9ef>return</span>
 		}
 
-		<span style="color:#75715e">// (4) serach_termの取得
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">term</span> <span style="color:#f92672">:=</span> <span style="color:#e6db74">&#34;workfromhome&#34;</span>
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Form</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;text&#34;</span>); len(<span style="color:#a6e22e">t</span>) &gt; <span style="color:#ae81ff">0</span> {
-			<span style="color:#a6e22e">term</span> = <span style="color:#a6e22e">t</span>
+		<span style=color:#75715e>// (4) serach_termの取得
+</span><span style=color:#75715e></span>		<span style=color:#a6e22e>term</span> <span style=color:#f92672>:=</span> <span style=color:#e6db74>&#34;workfromhome&#34;</span>
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>t</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>r</span>.<span style=color:#a6e22e>Form</span>.<span style=color:#a6e22e>Get</span>(<span style=color:#e6db74>&#34;text&#34;</span>); len(<span style=color:#a6e22e>t</span>) &gt; <span style=color:#ae81ff>0</span> {
+			<span style=color:#a6e22e>term</span> = <span style=color:#a6e22e>t</span>
 		}
 
-		<span style="color:#75715e">// (5) プレイリストの検索
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">playlist</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">findRandomPlaylist</span>(<span style="color:#a6e22e">term</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;failed to serach playlist: %s&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>()))
-			<span style="color:#66d9ef">return</span>
+		<span style=color:#75715e>// (5) プレイリストの検索
+</span><span style=color:#75715e></span>		<span style=color:#a6e22e>playlist</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>client</span>.<span style=color:#a6e22e>findRandomPlaylist</span>(<span style=color:#a6e22e>term</span>)
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+			<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;failed to serach playlist: %s&#34;</span>, <span style=color:#a6e22e>err</span>.<span style=color:#a6e22e>Error</span>()))
+			<span style=color:#66d9ef>return</span>
 		}
 
-		<span style="color:#75715e">// (6) プレイリスト内のトラック情報の取得
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">tracks</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">client</span>.<span style="color:#a6e22e">getTracks</span>(<span style="color:#a6e22e">playlist</span>.<span style="color:#a6e22e">Id</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;failed to get tracks: %s&#34;</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>()))
-			<span style="color:#66d9ef">return</span>
+		<span style=color:#75715e>// (6) プレイリスト内のトラック情報の取得
+</span><span style=color:#75715e></span>		<span style=color:#a6e22e>tracks</span>, <span style=color:#a6e22e>err</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>client</span>.<span style=color:#a6e22e>getTracks</span>(<span style=color:#a6e22e>playlist</span>.<span style=color:#a6e22e>Id</span>)
+		<span style=color:#66d9ef>if</span> <span style=color:#a6e22e>err</span> <span style=color:#f92672>!=</span> <span style=color:#66d9ef>nil</span> {
+			<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;failed to get tracks: %s&#34;</span>, <span style=color:#a6e22e>err</span>.<span style=color:#a6e22e>Error</span>()))
+			<span style=color:#66d9ef>return</span>
 		}
-		<span style="color:#a6e22e">contextInfo</span> <span style="color:#f92672">:=</span> []<span style="color:#66d9ef">string</span>{<span style="color:#e6db74">&#34;Tracks&#34;</span>}
-		<span style="color:#66d9ef">for</span> <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">t</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">range</span> <span style="color:#a6e22e">tracks</span> {
-			<span style="color:#a6e22e">contextInfo</span> = append(<span style="color:#a6e22e">contextInfo</span>, <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;1. %s&#34;</span>, <span style="color:#a6e22e">t</span>))
+		<span style=color:#a6e22e>contextInfo</span> <span style=color:#f92672>:=</span> []<span style=color:#66d9ef>string</span>{<span style=color:#e6db74>&#34;Tracks&#34;</span>}
+		<span style=color:#66d9ef>for</span> <span style=color:#a6e22e>_</span>, <span style=color:#a6e22e>t</span> <span style=color:#f92672>:=</span> <span style=color:#66d9ef>range</span> <span style=color:#a6e22e>tracks</span> {
+			<span style=color:#a6e22e>contextInfo</span> = append(<span style=color:#a6e22e>contextInfo</span>, <span style=color:#a6e22e>fmt</span>.<span style=color:#a6e22e>Sprintf</span>(<span style=color:#e6db74>&#34;1. %s&#34;</span>, <span style=color:#a6e22e>t</span>))
 		}
 
-		<span style="color:#75715e">// (7) Mattermostへのレスポンスの構築
-</span><span style="color:#75715e"></span>		<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">CommandResponse</span>{
-			<span style="color:#a6e22e">ResponseType</span>: <span style="color:#a6e22e">model</span>.<span style="color:#a6e22e">COMMAND_RESPONSE_TYPE_IN_CHANNEL</span>,
-			<span style="color:#a6e22e">Username</span>:     <span style="color:#e6db74">&#34;Music Provider&#34;</span>,
-			<span style="color:#a6e22e">Props</span>: <span style="color:#66d9ef">map</span>[<span style="color:#66d9ef">string</span>]<span style="color:#66d9ef">interface</span>{}{
-				<span style="color:#e6db74">&#34;card&#34;</span>: <span style="color:#a6e22e">strings</span>.<span style="color:#a6e22e">Join</span>(<span style="color:#a6e22e">contextInfo</span>, <span style="color:#e6db74">&#34;\n&#34;</span>),
+		<span style=color:#75715e>// (7) Mattermostへのレスポンスの構築
+</span><span style=color:#75715e></span>		<span style=color:#a6e22e>response</span> <span style=color:#f92672>:=</span> <span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>CommandResponse</span>{
+			<span style=color:#a6e22e>ResponseType</span>: <span style=color:#a6e22e>model</span>.<span style=color:#a6e22e>COMMAND_RESPONSE_TYPE_IN_CHANNEL</span>,
+			<span style=color:#a6e22e>Username</span>:     <span style=color:#e6db74>&#34;Music Provider&#34;</span>,
+			<span style=color:#a6e22e>Props</span>: <span style=color:#66d9ef>map</span>[<span style=color:#66d9ef>string</span>]<span style=color:#66d9ef>interface</span>{}{
+				<span style=color:#e6db74>&#34;card&#34;</span>: <span style=color:#a6e22e>strings</span>.<span style=color:#a6e22e>Join</span>(<span style=color:#a6e22e>contextInfo</span>, <span style=color:#e6db74>&#34;\n&#34;</span>),
 			},
-			<span style="color:#a6e22e">Attachments</span>: <span style="color:#a6e22e">playlist</span>.<span style="color:#a6e22e">ToMessage</span>(),
+			<span style=color:#a6e22e>Attachments</span>: <span style=color:#a6e22e>playlist</span>.<span style=color:#a6e22e>ToMessage</span>(),
 		}
 
-		<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Add</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
-		<span style="color:#a6e22e">io</span>.<span style="color:#a6e22e">WriteString</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ToJson</span>())
+		<span style=color:#a6e22e>w</span>.<span style=color:#a6e22e>Header</span>().<span style=color:#a6e22e>Add</span>(<span style=color:#e6db74>&#34;Content-Type&#34;</span>, <span style=color:#e6db74>&#34;application/json&#34;</span>)
+		<span style=color:#a6e22e>io</span>.<span style=color:#a6e22e>WriteString</span>(<span style=color:#a6e22e>w</span>, <span style=color:#a6e22e>response</span>.<span style=color:#a6e22e>ToJson</span>())
 	})
 
-	<span style="color:#75715e">// Start server
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ListenAndServe</span>(<span style="color:#e6db74">&#34;:8080&#34;</span>, <span style="color:#66d9ef">nil</span>)
+	<span style=color:#75715e>// Start server
+</span><span style=color:#75715e></span>	<span style=color:#a6e22e>http</span>.<span style=color:#a6e22e>ListenAndServe</span>(<span style=color:#e6db74>&#34;:8080&#34;</span>, <span style=color:#66d9ef>nil</span>)
 }
-</code></pre></div><h3 id="1-定数の設定">(1) 定数の設定</h3>
+</code></pre></div><h3 id=1-定数の設定>(1) 定数の設定</h3>
 <p>プログラム内で使用する定数を宣言しています。</p>
 <p>Mattermost関係はSlash Commandから送信されるリクエスト検証用のトークン文字列。<br>
-Spotifyは、アプリケーションのクライアントID/クライアントシークレットです。これらの値の取得方法については <a href="https://qiita.com/shirok/items/ba5c45511498b75aac27">Spotify Developer Platform: Spotify APIアクセスしてデータ取得してみてみた - Qiita</a> などを参照ください。<a href="https://developer.spotify.com/documentation/general/guides/authorization-guide/">Client Credential Flow</a>で認証するため、Redirect URIなどの設定は必要無いかと思います。</p>
-<h3 id="2-spotify-クライアントの初期化">(2) Spotify クライアントの初期化</h3>
+Spotifyは、アプリケーションのクライアントID/クライアントシークレットです。これらの値の取得方法については <a href=https://qiita.com/shirok/items/ba5c45511498b75aac27>Spotify Developer Platform: Spotify APIアクセスしてデータ取得してみてみた - Qiita</a> などを参照ください。<a href=https://developer.spotify.com/documentation/general/guides/authorization-guide/>Client Credential Flow</a>で認証するため、Redirect URIなどの設定は必要無いかと思います。</p>
+<h3 id=2-spotify-クライアントの初期化>(2) Spotify クライアントの初期化</h3>
 <p>SpotifyのAPIを実行するためのインスタンスを構築しています。内容については割愛します。</p>
-<h3 id="3-トークンによるリクエストの検証">(3) トークンによるリクエストの検証</h3>
+<h3 id=3-トークンによるリクエストの検証>(3) トークンによるリクエストの検証</h3>
 <p>MattermostのCustom Slash Commandによるリクエストを受信したら、まずはトークンによる検証を行います。</p>
-<h3 id="4-serach_termの取得">(4) serach_termの取得</h3>
+<h3 id=4-serach_termの取得>(4) serach_termの取得</h3>
 <p>Custom Slash Commandのリクエストから、Slash Commandの引数として指定されたテキストを取得します。これがSpotifyへの検索キーワードになります。
 Custom Slash Commandのリクエスト内容については公式ドキュメントを参照ください。</p>
 <ul>
-<li><a href="https://developers.mattermost.com/integrate/slash-commands/#basic-usage">https://developers.mattermost.com/integrate/slash-commands/#basic-usage</a></li>
+<li><a href=https://developers.mattermost.com/integrate/slash-commands/#basic-usage>https://developers.mattermost.com/integrate/slash-commands/#basic-usage</a></li>
 </ul>
-<h3 id="5-プレイリストの検索">(5) プレイリストの検索</h3>
-<p>(2) で初期化したSpotifyクライアントを使ってプレイリストの検索を行います。詳細は割愛しますが、<a href="https://developer.spotify.com/documentation/web-api/reference/search/search/">Search for an Item | Spotify for Developers</a>のAPIを実行し、ランダムに選んだ一つのプレイリストを返すようになっています。</p>
-<h3 id="6-プレイリスト内のトラック情報の取得">(6) プレイリスト内のトラック情報の取得</h3>
-<p>こちらもSpotifyクライアントを使って(5)で取得したプレイリストのトラックを取得しています。内部では<a href="https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/">Get a Playlist&rsquo;s Items | Spotify for Developers</a>のAPIを実行しています。
+<h3 id=5-プレイリストの検索>(5) プレイリストの検索</h3>
+<p>(2) で初期化したSpotifyクライアントを使ってプレイリストの検索を行います。詳細は割愛しますが、<a href=https://developer.spotify.com/documentation/web-api/reference/search/search/>Search for an Item | Spotify for Developers</a>のAPIを実行し、ランダムに選んだ一つのプレイリストを返すようになっています。</p>
+<h3 id=6-プレイリスト内のトラック情報の取得>(6) プレイリスト内のトラック情報の取得</h3>
+<p>こちらもSpotifyクライアントを使って(5)で取得したプレイリストのトラックを取得しています。内部では<a href=https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlists-tracks/>Get a Playlist&rsquo;s Items | Spotify for Developers</a>のAPIを実行しています。
 一度のAPIリクエストで取得できる最大のトラックス数が100であり、100トラック以上あるプレイリストについては、最初の100トラックだけを取得しています。</p>
-<h3 id="7-mattermostへのレスポンスの構築">(7) Mattermostへのレスポンスの構築</h3>
-<p>今まで取得してきた情報を使ってMattermostへのレスポンスを構築しています。<code>attachments</code>フィールドは<a href="https://docs.mattermost.com/developer/message-attachments.html">MessageAttachments</a>の機能を使っていますが、<a href="https://docs.mattermost.com/developer/message-attachments.html">MessageAttachments</a>については後日紹介します。</p>
+<h3 id=7-mattermostへのレスポンスの構築>(7) Mattermostへのレスポンスの構築</h3>
+<p>今まで取得してきた情報を使ってMattermostへのレスポンスを構築しています。<code>attachments</code>フィールドは<a href=https://docs.mattermost.com/developer/message-attachments.html>MessageAttachments</a>の機能を使っていますが、<a href=https://docs.mattermost.com/developer/message-attachments.html>MessageAttachments</a>については後日紹介します。</p>
 <hr>
-<h2 id="さいごに">さいごに</h2>
-<p>以上のように、Custom Slash Commandによるリクエストを受信したサーバーから、外部のAPIを実行し、結果をMattermostに返すようなアプリケーションを構築することができます。外部APIの実行に時間がかかる恐れがある場合は、<a href="https://developers.mattermost.com/integrate/slash-commands/#delayed-and-multiple-responses">Delayed Response</a>を利用するとSlash Commandを実行したユーザーへフィードバックをすぐに返せるため便利です。[Delayed Response]の機能については昨日の記事で紹介しました。</p>
+<h2 id=さいごに>さいごに</h2>
+<p>以上のように、Custom Slash Commandによるリクエストを受信したサーバーから、外部のAPIを実行し、結果をMattermostに返すようなアプリケーションを構築することができます。外部APIの実行に時間がかかる恐れがある場合は、<a href=https://developers.mattermost.com/integrate/slash-commands/#delayed-and-multiple-responses>Delayed Response</a>を利用するとSlash Commandを実行したユーザーへフィードバックをすぐに返せるため便利です。[Delayed Response]の機能については昨日の記事で紹介しました。</p>
 <p>明日は、Message Attachmentsについて紹介します。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/integration/"
-              >integration</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/slashcommand/"
-              >slashcommand</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/command/"
-              >command</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/integration/>integration</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/slashcommand/>slashcommand</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/command/>command</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

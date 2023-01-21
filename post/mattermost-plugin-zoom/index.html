@@ -1,219 +1,127 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost Plugin Zoom</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost Plugin Zoom"/>
-<meta name="twitter:description" content="MattermostからZoomのミーティングに参加する Mattemrostではテキストでの議論が主になるため、テキストでは伝わり切らないニ"/>
-
-
-  <meta property="og:title" content="Mattermost Plugin Zoom" />
-<meta property="og:description" content="MattermostからZoomのミーティングに参加する Mattemrostではテキストでの議論が主になるため、テキストでは伝わり切らないニ" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost-plugin-zoom/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-04-10T21:26:17&#43;09:00" />
-<meta property="article:modified_time" content="2020-04-10T21:26:17&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost Plugin Zoom">
+<meta name=twitter:description content="MattermostからZoomのミーティングに参加する Mattemrostではテキストでの議論が主になるため、テキストでは伝わり切らないニ">
+<meta property="og:title" content="Mattermost Plugin Zoom">
+<meta property="og:description" content="MattermostからZoomのミーティングに参加する Mattemrostではテキストでの議論が主になるため、テキストでは伝わり切らないニ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost-plugin-zoom/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-04-10T21:26:17+09:00">
+<meta property="article:modified_time" content="2020-04-10T21:26:17+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost Plugin Zoom
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Apr 10, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost Plugin Zoom
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Apr 10, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="mattermostからzoomのミーティングに参加する">MattermostからZoomのミーティングに参加する</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=mattermostからzoomのミーティングに参加する>MattermostからZoomのミーティングに参加する</h1>
 <p>Mattemrostではテキストでの議論が主になるため、テキストでは伝わり切らないニュアンスを伝えたい場合などに会話による調整が必要になる場面もあると思います。Mattermost社ではミーティングにZoomを利用しているというのもあり、Zoomミーティングを開催しやすくするプラグインを開発しています。</p>
 <p>本記事はMattemrost Zoomプラグインの使い方について紹介します。</p>
 <p>注記: Work From Homeの流れで必要性が増した気がしたので紹介しようとしましたが、Zoomのセキュリティ対応により現在は上手く動作しないようです。
-<a href="https://support.zoom.us/hc/en-us/articles/360041408732-April-2020-Setting-updates-for-free-accounts-and-single-Pro-users">April 2020: Setting updates for free accounts and single Pro users – Zoom Help Center</a></p>
+<a href=https://support.zoom.us/hc/en-us/articles/360041408732-April-2020-Setting-updates-for-free-accounts-and-single-Pro-users>April 2020: Setting updates for free accounts and single Pro users – Zoom Help Center</a></p>
 <p>具体的には、Zoom参加ボタンを押すとZoomミーティング参加のためのパスワードの入力が求められるようになりましたが、そのパスワードがどこからも取得できないため、開催者以外がZoomミーティングに参加できないという問題です。既にIssueが立っているので、利用される方は下記Issueの動向を確認してください。
-<a href="https://github.com/mattermost/mattermost-plugin-zoom/issues/99">https://github.com/mattermost/mattermost-plugin-zoom/issues/99</a></p>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#環境">環境</a></li>
-    <li><a href="#インストール">インストール</a>
-      <ul>
-        <li><a href="#プラグインマーケットプレース">プラグインマーケットプレース</a></li>
-        <li><a href="#手動インストール">手動インストール</a></li>
-      </ul>
-    </li>
-    <li><a href="#設定">設定</a>
-      <ul>
-        <li><a href="#zoom-api-keysecret取得">Zoom API Key/Secret取得</a></li>
-        <li><a href="#mattermost-zooom-plugin設定">Mattermost Zooom Plugin設定</a></li>
-      </ul>
-    </li>
-    <li><a href="#実行">実行</a></li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="環境">環境</h2>
+<a href=https://github.com/mattermost/mattermost-plugin-zoom/issues/99>https://github.com/mattermost/mattermost-plugin-zoom/issues/99</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#環境>環境</a></li>
+<li><a href=#インストール>インストール</a>
+<ul>
+<li><a href=#プラグインマーケットプレース>プラグインマーケットプレース</a></li>
+<li><a href=#手動インストール>手動インストール</a></li>
+</ul>
+</li>
+<li><a href=#設定>設定</a>
+<ul>
+<li><a href=#zoom-api-keysecret取得>Zoom API Key/Secret取得</a></li>
+<li><a href=#mattermost-zooom-plugin設定>Mattermost Zooom Plugin設定</a></li>
+</ul>
+</li>
+<li><a href=#実行>実行</a></li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=環境>環境</h2>
 <ul>
 <li>Mattermost v5.21.0</li>
 </ul>
-<h2 id="インストール">インストール</h2>
+<h2 id=インストール>インストール</h2>
 <p><strong>プラグインのインストールにはシステム管理者の権限が必要です</strong></p>
-<h3 id="プラグインマーケットプレース">プラグインマーケットプレース</h3>
+<h3 id=プラグインマーケットプレース>プラグインマーケットプレース</h3>
 <p>Mattermost v5.16からプラグインのマーケットプレース機能が使えるようになり、UIからプラグインをダウンロードできます。</p>
-<p><strong>メインメニュー &gt; プラグインマーケットプレース</strong>からマーケットプレース画面を開ます。(プラグインマーケットプレースメニューは<strong>システム管理者</strong>にしか見えません)</p>
+<p><strong>メインメニュー > プラグインマーケットプレース</strong>からマーケットプレース画面を開ます。(プラグインマーケットプレースメニューは<strong>システム管理者</strong>にしか見えません)</p>
 <p>表示されたプラグインからZoomプラグインを探し、 <strong>インストール</strong> のボタン押し、少し待てばZoomプラグインがインストールされます。</p>
-<p><img src="/blog/images/posts/mattermost/mattermost-plugin-zoom/marketplace.png" alt=""></p>
+<p><img src=/blog/images/posts/mattermost/mattermost-plugin-zoom/marketplace.png alt></p>
 <p>インストールが完了すると、<strong>インストール</strong>ボタンが<strong>設定</strong>ボタンに変わるはずです。</p>
-<h3 id="手動インストール">手動インストール</h3>
+<h3 id=手動インストール>手動インストール</h3>
 <p>プラグインマーケットプレースメニューが表示されない、もしくはマーケットプレースへ接続できない、という場合は手動でプラグインをインストールします。手動でのプラグインのインストールにも、<strong>システム管理者</strong>の権限が必要です。</p>
 <p>手動でインストールするには、まず、GitHubから現時点(2020/4/10)での最新版である <code>zoom-1.3.0.tar.gz</code> をダウンロードします。<code>v1.3.0</code> は、Mattermost v5.12 以上で使用できます。</p>
-<p><a href="https://github.com/mattermost/mattermost-plugin-zoom/releases">https://github.com/mattermost/mattermost-plugin-zoom/releases</a></p>
-<p><strong>システムコンソール &gt; プラグイン(ベータ版) &gt; プラグイン管理</strong> を開き、 <strong>プラグインをアップロードする</strong>メニューから先ほどダウンロードした <code>zoom-1.3.0.tar.gz</code> をアップロードします。</p>
+<p><a href=https://github.com/mattermost/mattermost-plugin-zoom/releases>https://github.com/mattermost/mattermost-plugin-zoom/releases</a></p>
+<p><strong>システムコンソール > プラグイン(ベータ版) > プラグイン管理</strong> を開き、 <strong>プラグインをアップロードする</strong>メニューから先ほどダウンロードした <code>zoom-1.3.0.tar.gz</code> をアップロードします。</p>
 <p>(もし、<strong>ファイルを選択する</strong>ボタンが非活性になっている場合、Mattermostサーバーの設定ファイル<code>config.json</code>の <strong>PluginSettings.EnableUploads</strong>設定を <code>true</code> に手動で修正し、サーバーを再起動する必要があります。)</p>
 <p>アップロードが完了すると、<strong>プラグイン管理</strong>の設定画面下部の<strong>インストール済みプラグイン</strong>に Zoomプラグインが表示されているはずです。</p>
-<p><img src="/blog/images/posts/mattermost/mattermost-plugin-zoom/running.png" alt=""></p>
-<h2 id="設定">設定</h2>
+<p><img src=/blog/images/posts/mattermost/mattermost-plugin-zoom/running.png alt></p>
+<h2 id=設定>設定</h2>
 <p>プラグインを起動する前にZoomの接続設定を行う必要があります。</p>
-<h3 id="zoom-api-keysecret取得">Zoom API Key/Secret取得</h3>
+<h3 id=zoom-api-keysecret取得>Zoom API Key/Secret取得</h3>
 <p>Zoomプラグインの設定を行うにはZoomのAPI KeyとAPI Secretが必要です。</p>
 <ol>
-<li><a href="https://marketplace.zoom.us/">https://marketplace.zoom.us/</a> にアクセスし、ログインする</li>
-<li>右上のメニューから<strong>Develop &gt; Bulid App</strong>をクリックする</li>
+<li><a href=https://marketplace.zoom.us/>https://marketplace.zoom.us/</a> にアクセスし、ログインする</li>
+<li>右上のメニューから<strong>Develop > Bulid App</strong>をクリックする</li>
 <li>JWTの <strong>Create</strong> ボタンをクリックし、任意のApp Nameを入力して <strong>Create</strong> ボタンを押します
-<img src="/blog/images/posts/mattermost/mattermost-plugin-zoom/jwt.png" alt=""></li>
+<img src=/blog/images/posts/mattermost/mattermost-plugin-zoom/jwt.png alt></li>
 <li>必須項目を入力し <strong>Continue</strong> ボタンを押すと、API KeyとAPI Secretが表示された画面に遷移するためコピーしておきます</li>
 </ol>
-<h3 id="mattermost-zooom-plugin設定">Mattermost Zooom Plugin設定</h3>
-<p><strong>システムコンソール &gt; プラグイン(ベータ版) &gt; Zoom</strong>を開き、設定を入力していきます。</p>
+<h3 id=mattermost-zooom-plugin設定>Mattermost Zooom Plugin設定</h3>
+<p><strong>システムコンソール > プラグイン(ベータ版) > Zoom</strong>を開き、設定を入力していきます。</p>
 <ul>
 <li><strong>Zoom URL</strong>: (パブリックのZoomサービスを使う場合は空欄)</li>
 <li><strong>Zoom API URL</strong>: (パブリックのZoomサービスを使う場合は空欄)</li>
@@ -221,136 +129,63 @@
 <li><strong>API Secret</strong>: (先ほどコピーしておいたAPI Secret)</li>
 <li><strong>Webhook Secret</strong>: (<strong>再生成する</strong>ボタンを押してランダム文字列を生成しておく)</li>
 </ul>
-<p>以上の設定が完了したら、再び<strong>システムコンソール &gt; プラグイン(ベータ版) &gt; プラグイン管理 &gt; インストール済みプラグイン</strong>の設定へ移動し、Zoomプラグインの<strong>有効にする</strong>ボタンを押し、プラグインを起動してください。(もし、エラーとなっている場合は一度<strong>無効にする</strong>ボタンで停止してから、もう一度起動し直してください)</p>
-<p><code>このプラグインは起動中です。</code>のメッセージが表示されていれば、起動完了です。もし、起動に失敗した場合は、<strong>システムコンソール &gt; レポート &gt; サーバーログ</strong>からZoomプラグインのエラーログを確認してください。</p>
-<h2 id="実行">実行</h2>
+<p>以上の設定が完了したら、再び<strong>システムコンソール > プラグイン(ベータ版) > プラグイン管理 > インストール済みプラグイン</strong>の設定へ移動し、Zoomプラグインの<strong>有効にする</strong>ボタンを押し、プラグインを起動してください。(もし、エラーとなっている場合は一度<strong>無効にする</strong>ボタンで停止してから、もう一度起動し直してください)</p>
+<p><code>このプラグインは起動中です。</code>のメッセージが表示されていれば、起動完了です。もし、起動に失敗した場合は、<strong>システムコンソール > レポート > サーバーログ</strong>からZoomプラグインのエラーログを確認してください。</p>
+<h2 id=実行>実行</h2>
 <p>プラグインの起動が完了すると、Mattermostのチャンネルヘッダ部分にビデオカメラのアイコンが表示されているはずです。</p>
-<p><img src="/blog/images/posts/mattermost/mattermost-plugin-zoom/meeting-button.png" alt=""></p>
+<p><img src=/blog/images/posts/mattermost/mattermost-plugin-zoom/meeting-button.png alt></p>
 <p>このアイコンをクリックすることで、チャンネルにZoomミーティングへの参加ボタンが投稿されます。</p>
-<p><img src="/blog/images/posts/mattermost/mattermost-plugin-zoom/meeting-post.png" alt=""></p>
+<p><img src=/blog/images/posts/mattermost/mattermost-plugin-zoom/meeting-post.png alt></p>
 <p>Mattermostのチャンネル参加者は、この参加ボタンをクリックすることでZoomミーティングに簡単に参加できるようになります。</p>
-<h2 id="おわりに">おわりに</h2>
+<h2 id=おわりに>おわりに</h2>
 <p>MattermostにもZoom以外にも、ビデオカンファレンスサービスと連携するための統合機能がコミュニティベースで公開されています。
-<a href="https://integrations.mattermost.com/category/directory/video-conferencing/#main">https://integrations.mattermost.com/category/directory/video-conferencing/#main</a></p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/zoom/"
-              >zoom</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/plugin/"
-              >plugin</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<a href=https://integrations.mattermost.com/category/directory/video-conferencing/#main>https://integrations.mattermost.com/category/directory/video-conferencing/#main</a></p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/zoom/>zoom</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/plugin/>plugin</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

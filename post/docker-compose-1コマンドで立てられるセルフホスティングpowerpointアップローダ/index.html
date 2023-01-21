@@ -1,186 +1,93 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ"/>
-<meta name="twitter:description" content="これは何？ kaakaa/ppt-museum: ppt/pptx file uploader docker-compose up -dだけで起動するPowerPoint資料アップローダを作っています。 トップ画面 スライド画面 使い方 必須環境 docker docker-compose 実行コマ"/>
-
-
-  <meta property="og:title" content="docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ" />
-<meta property="og:description" content="これは何？ kaakaa/ppt-museum: ppt/pptx file uploader docker-compose up -dだけで起動するPowerPoint資料アップローダを作っています。 トップ画面 スライド画面 使い方 必須環境 docker docker-compose 実行コマ" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/docker-compose-1%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E7%AB%8B%E3%81%A6%E3%82%89%E3%82%8C%E3%82%8B%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0powerpoint%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%80/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2016-04-06T23:00:26&#43;09:00" />
-<meta property="article:modified_time" content="2016-04-06T23:00:26&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ">
+<meta name=twitter:description content="これは何？ kaakaa/ppt-museum: ppt/pptx file uploader docker-compose up -dだけで起動するPowerPoint資料アップローダを作っています。 トップ画面 スライド画面 使い方 必須環境 docker docker-compose 実行コマ">
+<meta property="og:title" content="docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ">
+<meta property="og:description" content="これは何？ kaakaa/ppt-museum: ppt/pptx file uploader docker-compose up -dだけで起動するPowerPoint資料アップローダを作っています。 トップ画面 スライド画面 使い方 必須環境 docker docker-compose 実行コマ">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/docker-compose-1%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%A7%E7%AB%8B%E3%81%A6%E3%82%89%E3%82%8C%E3%82%8B%E3%82%BB%E3%83%AB%E3%83%95%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0powerpoint%E3%82%A2%E3%83%83%E3%83%97%E3%83%AD%E3%83%BC%E3%83%80/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2016-04-06T23:00:26+09:00">
+<meta property="article:modified_time" content="2016-04-06T23:00:26+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Apr 6, 2016
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+docker-compose 1コマンドで立てられるセルフホスティングPowerPointアップローダ
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Apr 6, 2016
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="これは何">これは何？</h1>
-<p><a href="https://github.com/kaakaa/ppt-museum">kaakaa/ppt-museum: ppt/pptx file uploader</a></p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=これは何>これは何？</h1>
+<p><a href=https://github.com/kaakaa/ppt-museum>kaakaa/ppt-museum: ppt/pptx file uploader</a></p>
 <p><code>docker-compose up -d</code>だけで起動するPowerPoint資料アップローダを作っています。</p>
 <p>トップ画面
-<img width="480px" ald="top" src="https://qiita-image-store.s3.amazonaws.com/0/9891/eb1c9dde-803c-d94c-4f55-1a5f93b230c3.png"></p>
+<img width=480px ald=top src=https://qiita-image-store.s3.amazonaws.com/0/9891/eb1c9dde-803c-d94c-4f55-1a5f93b230c3.png></p>
 <p>スライド画面
-<img width="480px" alt="スライド画面" src="https://qiita-image-store.s3.amazonaws.com/0/9891/425bdf28-7cfd-9f1a-7489-83a9856edb4a.png"></p>
-<h1 id="使い方">使い方</h1>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#必須環境">必須環境</a></li>
-    <li><a href="#実行コマンド">実行コマンド</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#アーキテクチャ">アーキテクチャ</a></li>
-    <li><a href="#既知の問題">既知の問題</a></li>
-  </ul>
-</nav><h2 id="必須環境">必須環境</h2>
+<img width=480px alt=スライド画面 src=https://qiita-image-store.s3.amazonaws.com/0/9891/425bdf28-7cfd-9f1a-7489-83a9856edb4a.png></p>
+<h1 id=使い方>使い方</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#必須環境>必須環境</a></li>
+<li><a href=#実行コマンド>実行コマンド</a></li>
+</ul>
+<ul>
+<li><a href=#アーキテクチャ>アーキテクチャ</a></li>
+<li><a href=#既知の問題>既知の問題</a></li>
+</ul>
+</nav><h2 id=必須環境>必須環境</h2>
 <ul>
 <li>docker</li>
 <li>docker-compose</li>
 </ul>
-<h2 id="実行コマンド">実行コマンド</h2>
-<pre><code>$ git clone https://github.com/kaakaa/ppt-museum.git
+<h2 id=実行コマンド>実行コマンド</h2>
+<pre tabindex=0><code>$ git clone https://github.com/kaakaa/ppt-museum.git
 $ cd ppt-museum
 
 // docker v1.10.0+ / docker-compose v1.6.0+ の場合 
@@ -190,31 +97,31 @@ $ docker-compose up -d
 $ docker-compose -f docker-compose-v1.yml up -d
 
 </code></pre><p><code>http://localhost:4567/</code> にアクセスするとトップページが表示されます。</p>
-<h1 id="内部構造">内部構造</h1>
-<h2 id="アーキテクチャ">アーキテクチャ</h2>
+<h1 id=内部構造>内部構造</h1>
+<h2 id=アーキテクチャ>アーキテクチャ</h2>
 <p>4つのDockerコンテナを起動しています。</p>
 <ul>
-<li><a href="https://hub.docker.com/_/nginx/">nginx</a></li>
-<li><a href="https://hub.docker.com/_/mongo/">mongo</a></li>
-<li><a href="https://hub.docker.com/r/kaakaa/jodconverter/">jodconverter</a>
+<li><a href=https://hub.docker.com/_/nginx/>nginx</a></li>
+<li><a href=https://hub.docker.com/_/mongo/>mongo</a></li>
+<li><a href=https://hub.docker.com/r/kaakaa/jodconverter/>jodconverter</a>
 <ul>
-<li>=&gt; <a href="https://github.com/kaakaa/jodconverter-container">kaakaa/jodconverter-container: Dockerfile for JODConverter</a></li>
+<li>=> <a href=https://github.com/kaakaa/jodconverter-container>kaakaa/jodconverter-container: Dockerfile for JODConverter</a></li>
 <li>PowerPointファイルをPDFファイルに変換するコンテナ</li>
 </ul>
 </li>
-<li><a href="https://hub.docker.com/r/kaakaa/ppt-museum-web/">ppt-museum-web</a>
+<li><a href=https://hub.docker.com/r/kaakaa/ppt-museum-web/>ppt-museum-web</a>
 <ul>
-<li>=&gt; <a href="https://github.com/kaakaa/ppt-museum-webapp">kaakaa/ppt-museum-webapp: Webapp for ppt-museum</a></li>
-<li>Javaのマイクロフレームワーク <a href="http://sparkjava.com/">Spark Framework - A tiny Java web framework</a> ベースのWebアプリコンテナ</li>
+<li>=> <a href=https://github.com/kaakaa/ppt-museum-webapp>kaakaa/ppt-museum-webapp: Webapp for ppt-museum</a></li>
+<li>Javaのマイクロフレームワーク <a href=http://sparkjava.com/>Spark Framework - A tiny Java web framework</a> ベースのWebアプリコンテナ</li>
 </ul>
 </li>
 </ul>
-<img width="640px" alt="architecture" src="https://qiita-image-store.s3.amazonaws.com/0/9891/7d045e14-fd44-e7c2-b925-640bfccfa938.png">
-<h2 id="既知の問題">既知の問題</h2>
+<img width=640px alt=architecture src=https://qiita-image-store.s3.amazonaws.com/0/9891/7d045e14-fd44-e7c2-b925-640bfccfa938.png>
+<h2 id=既知の問題>既知の問題</h2>
 <ul>
 <li>DB構造が変わったときのマイグレーションパスを用意していない
 <ul>
-<li>アップロード資産をZipダウンロードして、<a href="https://github.com/kaakaa/ppt-batch">kaakaa/ppt-batch</a>でアップロードし直すという最底辺の人力運用でカバーの現状</li>
+<li>アップロード資産をZipダウンロードして、<a href=https://github.com/kaakaa/ppt-batch>kaakaa/ppt-batch</a>でアップロードし直すという最底辺の人力運用でカバーの現状</li>
 </ul>
 </li>
 <li>UI周りが要改善
@@ -225,155 +132,82 @@ $ docker-compose -f docker-compose-v1.yml up -d
 <li>テストコードを全然書いていない</li>
 </ul>
 <p>他にもたくさんありますが。。。</p>
-<h1 id="背景">背景</h1>
+<h1 id=背景>背景</h1>
 <p>以降は蛇足ですが、これを作ろうと思った背景について。</p>
 <hr>
 <p>社内勉強会の資料をアップロードするために作りました。</p>
 <p>社内勉強会の資料には、社外NGの話が含まれていたり、「外に公開するほどの…」という方もいたりするので、そういう資料を個人で貯めこむことの無いようにと作りました。また、勉強会開始当初は勉強会用に立ててるWikiに資料を添付するという運用を取っていましたが、Wikiに添付された資料をわざわざダウンロードして開くことなんて無いので、閲覧機会の損失を防ぎたかったという想いもあります。</p>
 <hr>
-<p>その昔に<a href="https://github.com/kaakaa/pptgallery">kaakaa/pptgallery</a>を作って今まで運用していました。
+<p>その昔に<a href=https://github.com/kaakaa/pptgallery>kaakaa/pptgallery</a>を作って今まで運用していました。
 しかし、コレには</p>
 <ul>
 <li>LibreOffice / ImageMagick などのミドルに依存しており、二度と環境が作れる気がしない</li>
 <li>ruby / jsを手探りで組んでいたのでメンテできる気がしない</li>
 </ul>
 <p>などの辛い面が多くあったため、匙を投げることにしました。
-そして作りなおしたのが <a href="https://github.com/kaakaa/ppt-museum">kaakaa/ppt-museum</a> です。</p>
-<p><a href="https://github.com/kaakaa/pptgallery">kaakaa/pptgallery</a>の反省から</p>
+そして作りなおしたのが <a href=https://github.com/kaakaa/ppt-museum>kaakaa/ppt-museum</a> です。</p>
+<p><a href=https://github.com/kaakaa/pptgallery>kaakaa/pptgallery</a>の反省から</p>
 <ul>
 <li>環境はどこでも立てられるようにdocker-composeを使う</li>
 <li>ruby/jsに夢を見るのをやめて、メンテする気になれるよう一番慣れているJavaで書く</li>
 </ul>
 <p>という方針で作っています。</p>
 <hr>
-<p>また、作りなおそうと思ったきっかけとなったのが、<a href="https://github.com/azu/pdf.js-controller">azu/pdf.js-controller</a>を見つけたことでした。スライド表示部分では<a href="https://github.com/azu/pdf.js-controller">azu/pdf.js-controller</a>をそのまま使っています。</p>
-<p>PPTGalleryの頃にも、PowerPointファイルを<a href="http://www.artofsolving.com/opensource/jodconverter.html">JODConverter | Art of Solving</a>でPDFファイルに変換することはできていましたが、そのPDFファイルをスライド形式で表示する方法が分からず、ImageMagickを使って画像ファイルに変換したものを表示するという茨の道を選択してしまいました。</p>
-<p><a href="https://github.com/azu/pdf.js-controller">azu/pdf.js-controller</a>により、PowerPointファイルをPDFファイルに変換するところまでを考えれば良くなったため、Javascript方面へ深く足を踏み入れなくて済みました。</p>
-<h1 id="おわりに">おわりに</h1>
+<p>また、作りなおそうと思ったきっかけとなったのが、<a href=https://github.com/azu/pdf.js-controller>azu/pdf.js-controller</a>を見つけたことでした。スライド表示部分では<a href=https://github.com/azu/pdf.js-controller>azu/pdf.js-controller</a>をそのまま使っています。</p>
+<p>PPTGalleryの頃にも、PowerPointファイルを<a href=http://www.artofsolving.com/opensource/jodconverter.html>JODConverter | Art of Solving</a>でPDFファイルに変換することはできていましたが、そのPDFファイルをスライド形式で表示する方法が分からず、ImageMagickを使って画像ファイルに変換したものを表示するという茨の道を選択してしまいました。</p>
+<p><a href=https://github.com/azu/pdf.js-controller>azu/pdf.js-controller</a>により、PowerPointファイルをPDFファイルに変換するところまでを考えれば良くなったため、Javascript方面へ深く足を踏み入れなくて済みました。</p>
+<h1 id=おわりに>おわりに</h1>
 <p>dockerを使って開発してみるのは初めてでしたが、一度動かせればインフラを簡単に立て
 たり壊したりできるので、アプリを書くことに集中できるようになっていると思います。</p>
 <hr>
 <p>これを作る時に試した、Gradleを使ったnpm/gruntビルドや、Dockerイメージの作成について、下記にまとめています。
-<a href="http://qiita.com/kaakaa_hoe/items/0e3c622ae8bde3d116ad">Gradleでbowerを利用したフロントエンドのビルドまでを行う方法 (1/6) - Qiita</a></p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/powerpoint/"
-              >PowerPoint</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/docker/"
-              >docker</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/docker-compose/"
-              >docker-compose</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<a href=http://qiita.com/kaakaa_hoe/items/0e3c622ae8bde3d116ad>Gradleでbowerを利用したフロントエンドのビルドまでを行う方法 (1/6) - Qiita</a></p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/powerpoint/>PowerPoint</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/docker/>docker</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/docker-compose/>docker-compose</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

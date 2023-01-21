@@ -1,387 +1,218 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>新しくなったGitHub ActionsでHugoブログのデプロイをしてみた</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="新しくなったGitHub ActionsでHugoブログのデプロイをしてみた"/>
-<meta name="twitter:description" content="はじめに CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、Travisでビルド/デプロイしていたブログを"/>
-
-
-  <meta property="og:title" content="新しくなったGitHub ActionsでHugoブログのデプロイをしてみた" />
-<meta property="og:description" content="はじめに CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、Travisでビルド/デプロイしていたブログを" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/github_actions/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2019-08-31T10:50:21&#43;09:00" />
-<meta property="article:modified_time" content="2019-08-31T10:50:21&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="新しくなったGitHub ActionsでHugoブログのデプロイをしてみた">
+<meta name=twitter:description content="はじめに CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、Travisでビルド/デプロイしていたブログを">
+<meta property="og:title" content="新しくなったGitHub ActionsでHugoブログのデプロイをしてみた">
+<meta property="og:description" content="はじめに CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、Travisでビルド/デプロイしていたブログを">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/github_actions/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-08-31T10:50:21+09:00">
+<meta property="article:modified_time" content="2019-08-31T10:50:21+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              新しくなったGitHub ActionsでHugoブログのデプロイをしてみた
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Aug 31, 2019
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+新しくなったGitHub ActionsでHugoブログのデプロイをしてみた
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Aug 31, 2019
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <h1 id="はじめに">はじめに</h1>
-<p>CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、<a href="https://github.com/kaakaa/blog">Travisでビルド/デプロイしていたブログ</a>をActionsに移行してみました。</p>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
+<p>CI/CD機能が付いて新しくなったGitHub Actionsが使えるようになったので、<a href=https://github.com/kaakaa/blog>Travisでビルド/デプロイしていたブログ</a>をActionsに移行してみました。</p>
 <p>GitHub Actionsのベータプログラムには下記サイトから応募できます。
-<a href="https://github.com/features/actions">https://github.com/features/actions</a></p>
-<h1 id="前提">前提</h1>
+<a href=https://github.com/features/actions>https://github.com/features/actions</a></p>
+<h1 id=前提>前提</h1>
 <p>今まで利用していたTravisの設定ファイルはこちら。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">notifications</span>:
-  <span style="color:#f92672">email</span>: <span style="color:#66d9ef">false</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>notifications</span>:
+  <span style=color:#f92672>email</span>: <span style=color:#66d9ef>false</span>
 
-<span style="color:#f92672">sudo</span>: <span style="color:#66d9ef">false</span>
-<span style="color:#f92672">dist</span>: <span style="color:#ae81ff">trusty</span>
-<span style="color:#f92672">language</span>: <span style="color:#ae81ff">go</span>
+<span style=color:#f92672>sudo</span>: <span style=color:#66d9ef>false</span>
+<span style=color:#f92672>dist</span>: <span style=color:#ae81ff>trusty</span>
+<span style=color:#f92672>language</span>: <span style=color:#ae81ff>go</span>
 
-<span style="color:#f92672">env</span>:
-  - <span style="color:#ae81ff">HUGO_VERSION=0.51</span>
+<span style=color:#f92672>env</span>:
+  - <span style=color:#ae81ff>HUGO_VERSION=0.51</span>
 
-<span style="color:#f92672">go</span>:
-- <span style="color:#e6db74">&#39;1.10&#39;</span>
+<span style=color:#f92672>go</span>:
+- <span style=color:#e6db74>&#39;1.10&#39;</span>
 
-<span style="color:#f92672">install</span>: <span style="color:#66d9ef">true</span>
+<span style=color:#f92672>install</span>: <span style=color:#66d9ef>true</span>
 
-<span style="color:#f92672">before_script</span>:
-  - <span style="color:#ae81ff">wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb</span>
-  - <span style="color:#ae81ff">sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb</span>
+<span style=color:#f92672>before_script</span>:
+  - <span style=color:#ae81ff>wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb</span>
+  - <span style=color:#ae81ff>sudo dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb</span>
 
-<span style="color:#f92672">script</span>:
-  - <span style="color:#ae81ff">git submodule update --init</span>
-  - <span style="color:#ae81ff">hugo -v</span>
+<span style=color:#f92672>script</span>:
+  - <span style=color:#ae81ff>git submodule update --init</span>
+  - <span style=color:#ae81ff>hugo -v</span>
 
-<span style="color:#f92672">deploy</span>:
-  <span style="color:#f92672">provider</span>: <span style="color:#ae81ff">pages</span>
-  <span style="color:#f92672">local-dir</span>: <span style="color:#ae81ff">public</span>
-  <span style="color:#f92672">skip-cleanup</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">github-token</span>: <span style="color:#ae81ff">$GITHUB_TOKEN</span>
-  <span style="color:#f92672">keep-history</span>: <span style="color:#66d9ef">true</span>
-  <span style="color:#f92672">on</span>:
-    <span style="color:#f92672">branch</span>: <span style="color:#ae81ff">master</span>
-</code></pre></div><p>Hugoのインストールとビルドを行い、<code>pages</code>のproviderを使って<code>gh-pages</code>ブランチにデプロイしています。(GoとHugoのバージョンが古いですね&hellip;むしろGoはいらないんじゃないような&hellip;)</p>
-<h1 id="移行">移行</h1>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#github-actionsの作成">GitHub Actionsの作成</a></li>
-    <li><a href="#完成品-mainyml">完成品 (main.yml)</a>
-      <ul>
-        <li><a href="#secrets">Secrets</a></li>
-        <li><a href="#微妙な点">微妙な点</a></li>
-      </ul>
-    </li>
-    <li><a href="#動作確認">動作確認</a></li>
-  </ul>
-</nav><h2 id="github-actionsの作成">GitHub Actionsの作成</h2>
+<span style=color:#f92672>deploy</span>:
+  <span style=color:#f92672>provider</span>: <span style=color:#ae81ff>pages</span>
+  <span style=color:#f92672>local-dir</span>: <span style=color:#ae81ff>public</span>
+  <span style=color:#f92672>skip-cleanup</span>: <span style=color:#66d9ef>true</span>
+  <span style=color:#f92672>github-token</span>: <span style=color:#ae81ff>$GITHUB_TOKEN</span>
+  <span style=color:#f92672>keep-history</span>: <span style=color:#66d9ef>true</span>
+  <span style=color:#f92672>on</span>:
+    <span style=color:#f92672>branch</span>: <span style=color:#ae81ff>master</span>
+</code></pre></div><p>Hugoのインストールとビルドを行い、<code>pages</code>のproviderを使って<code>gh-pages</code>ブランチにデプロイしています。(GoとHugoのバージョンが古いですね&mldr;むしろGoはいらないんじゃないような&mldr;)</p>
+<h1 id=移行>移行</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#github-actionsの作成>GitHub Actionsの作成</a></li>
+<li><a href=#完成品-mainyml>完成品 (main.yml)</a>
+<ul>
+<li><a href=#secrets>Secrets</a></li>
+<li><a href=#微妙な点>微妙な点</a></li>
+</ul>
+</li>
+<li><a href=#動作確認>動作確認</a></li>
+</ul>
+</nav><h2 id=github-actionsの作成>GitHub Actionsの作成</h2>
 <p>Actionsを使いたいリポジトリのタブの部分に <code>Actions</code> というメニューが生えているため、そこをクリックします。</p>
-<img width="645" alt="スクリーンショット 2019-08-31 10.01.26.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b1276252-5a63-2823-aeb7-33c41590be69.png">
+<img width=645 alt="スクリーンショット 2019-08-31 10.01.26.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b1276252-5a63-2823-aeb7-33c41590be69.png>
 <p>まだActionsが設定されていない場合は、Workflowのサンプルがいくつか表示されています。
 自分は何も分からなかったので右上の <code>Set up a workflow yourself</code> のボタンを選択しました。</p>
-<img width="1188" alt="スクリーンショット 2019-08-31 10.05.34.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/db8fde68-bc9c-f430-aa60-20efbf10f693.png">
+<img width=1188 alt="スクリーンショット 2019-08-31 10.05.34.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/db8fde68-bc9c-f430-aa60-20efbf10f693.png>
 <p>すると、 <code>.github/workflows/main.yml</code> というファイルにサンプルのワークフローの定義ファイルを作成する画面に移ります。CircleCIの設定ファイルによく似てますね。</p>
-<img width="1012" alt="スクリーンショット 2019-08-31 10.07.06.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b6c65c5b-fae2-72a7-af04-33c273b18684.png">
-<p>右ペインに簡単な説明が書かれているのでそれを見たり、<a href="https://help.github.com/en/categories/automating-your-workflow-with-github-actions">ドキュメント</a>を見たりしながら編集していきます。</p>
-<h2 id="完成品-mainyml">完成品 (main.yml)</h2>
+<img width=1012 alt="スクリーンショット 2019-08-31 10.07.06.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/b6c65c5b-fae2-72a7-af04-33c273b18684.png>
+<p>右ペインに簡単な説明が書かれているのでそれを見たり、<a href=https://help.github.com/en/categories/automating-your-workflow-with-github-actions>ドキュメント</a>を見たりしながら編集していきます。</p>
+<h2 id=完成品-mainyml>完成品 (main.yml)</h2>
 <p>とりあえず動くものが出来ました。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">Deploy Pages</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>name</span>: <span style=color:#ae81ff>Deploy Pages</span>
 
-<span style="color:#f92672">on</span>:
-  <span style="color:#f92672">push</span>:
-    <span style="color:#f92672">branches</span>:
-    - <span style="color:#ae81ff">master</span>
+<span style=color:#f92672>on</span>:
+  <span style=color:#f92672>push</span>:
+    <span style=color:#f92672>branches</span>:
+    - <span style=color:#ae81ff>master</span>
 
-<span style="color:#f92672">jobs</span>:
-  <span style="color:#f92672">deploy</span>:
-    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest    </span>
-    <span style="color:#f92672">steps</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Checkout</span>
-      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v1</span>
-    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Build and Deploy</span>
-      <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">JamesIves/github-pages-deploy-action@master</span>
-      <span style="color:#f92672">env</span>:
-        <span style="color:#f92672">ACCESS_TOKEN</span>: <span style="color:#ae81ff">${{ secrets.ACCESS_TOKEN }}</span>
-        <span style="color:#f92672">BRANCH</span>: <span style="color:#ae81ff">gh-pages</span>
-        <span style="color:#f92672">FOLDER</span>: <span style="color:#ae81ff">public</span>
-        <span style="color:#f92672">HUGO_VERSION</span>: <span style="color:#ae81ff">0.57.2</span>
-        <span style="color:#f92672">BUILD_SCRIPT</span>: |<span style="color:#e6db74">
-</span><span style="color:#e6db74">          wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
-</span><span style="color:#e6db74">          dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
-</span><span style="color:#e6db74">          git submodule update --init
-</span><span style="color:#e6db74">          hugo -v</span>          
+<span style=color:#f92672>jobs</span>:
+  <span style=color:#f92672>deploy</span>:
+    <span style=color:#f92672>runs-on</span>: <span style=color:#ae81ff>ubuntu-latest    </span>
+    <span style=color:#f92672>steps</span>:
+    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Checkout</span>
+      <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>actions/checkout@v1</span>
+    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Build and Deploy</span>
+      <span style=color:#f92672>uses</span>: <span style=color:#ae81ff>JamesIves/github-pages-deploy-action@master</span>
+      <span style=color:#f92672>env</span>:
+        <span style=color:#f92672>ACCESS_TOKEN</span>: <span style=color:#ae81ff>${{ secrets.ACCESS_TOKEN }}</span>
+        <span style=color:#f92672>BRANCH</span>: <span style=color:#ae81ff>gh-pages</span>
+        <span style=color:#f92672>FOLDER</span>: <span style=color:#ae81ff>public</span>
+        <span style=color:#f92672>HUGO_VERSION</span>: <span style=color:#ae81ff>0.57.2</span>
+        <span style=color:#f92672>BUILD_SCRIPT</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>          wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.deb
+</span><span style=color:#e6db74>          dpkg -i hugo_${HUGO_VERSION}_Linux-64bit.deb
+</span><span style=color:#e6db74>          git submodule update --init
+</span><span style=color:#e6db74>          hugo -v</span>          
 
-</code></pre></div><p><code>Build and Deploy</code> というステップで、<a href="https://github.com/JamesIves/github-pages-deploy-action">JamesIves/github-pages-deploy-action</a>という他の人の作ったGitHub PagesをデプロイするActionsを使っています。CircleCIで言うところのOrbでしょうか（あまり知らない）。</p>
-<h3 id="secrets">Secrets</h3>
+</code></pre></div><p><code>Build and Deploy</code> というステップで、<a href=https://github.com/JamesIves/github-pages-deploy-action>JamesIves/github-pages-deploy-action</a>という他の人の作ったGitHub PagesをデプロイするActionsを使っています。CircleCIで言うところのOrbでしょうか（あまり知らない）。</p>
+<h3 id=secrets>Secrets</h3>
 <p><code>env: ACCESS_TOKEN:</code> のところで <code>secrets.ACCESS_TOKEN</code> と言う変数を使っていますが、これはリポジトリのSettingsメニューから設定できる変数を使っているようです。
-<strong>Settings &gt; Secrets &gt; Add a new secret</strong>を選択し、変数名とその値を入れるとActionsの定義ファイル(<code>main.yml</code>)でその変数を使えるようになります。</p>
-<p>詳しくは<a href="https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables">公式ドキュメント</a>を。</p>
-<img width="1009" alt="スクリーンショット 2019-08-31 10.29.54.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/2910d27e-fd10-c161-d9e1-cfa1c7b98c2f.png">
-<h3 id="微妙な点">微妙な点</h3>
+<strong>Settings > Secrets > Add a new secret</strong>を選択し、変数名とその値を入れるとActionsの定義ファイル(<code>main.yml</code>)でその変数を使えるようになります。</p>
+<p>詳しくは<a href=https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables>公式ドキュメント</a>を。</p>
+<img width=1009 alt="スクリーンショット 2019-08-31 10.29.54.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/2910d27e-fd10-c161-d9e1-cfa1c7b98c2f.png>
+<h3 id=微妙な点>微妙な点</h3>
 <p>このステップの <code>BUILD_SCRIPT</code> のところでHugoでのビルドを行っているのですが、ここでHugoのインストールまでここでやっているのがちょっと微妙です。別のステップを作って、その中でHugoのインストールを行ってみたりしたのですが、<code>hugo</code>コマンドが見つからないと言うエラーとなり、別のステップでの変更は持ち込めないようでした。
 なんかやり方あるのかな？</p>
-<h2 id="動作確認">動作確認</h2>
+<h2 id=動作確認>動作確認</h2>
 <p>コミットを契機にビルドが開始される設定となっているので、<code>.github/workflows/main.yml</code> をコミットすると、Actionsが開始されます。結果はActionsタブから確認できます。ビルドログも見れます。</p>
-<img width="1003" alt="スクリーンショット 2019-08-31 10.33.42.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/cd34afd7-6a2e-149a-f64b-7d648436a199.png">
-<h1 id="おわりに">おわりに</h1>
+<img width=1003 alt="スクリーンショット 2019-08-31 10.33.42.png" src=https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/9891/cd34afd7-6a2e-149a-f64b-7d648436a199.png>
+<h1 id=おわりに>おわりに</h1>
 <p>深くは使ってないので判断はできませんが、GitHubだけで完結できるのは楽ですね。</p>
-<p>今年の初めぐらいに<a href="https://blog.travis-ci.com/2019-01-23-travis-ci-joins-idera-inc">TravisがIderaに買収</a>されたり、<a href="https://news.ycombinator.com/item?id=19218036">Travisのエンジニアが解雇された</a>りとTravis周りはキナ臭い話が多く、それを機にCircleCIに移行するプロジェクトも多かったと思いましたが、そこでビッグウェーブに乗らずに移行しなかったために難なくGitHub Actionsに移れてよかったです。果報は寝て待てですね（動きが遅かっただけ）。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/github/"
-              >GitHub</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/githubactions/"
-              >GitHubActions</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/github-pages/"
-              >github-pages</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/hugo/"
-              >Hugo</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<p>今年の初めぐらいに<a href=https://blog.travis-ci.com/2019-01-23-travis-ci-joins-idera-inc>TravisがIderaに買収</a>されたり、<a href="https://news.ycombinator.com/item?id=19218036">Travisのエンジニアが解雇された</a>りとTravis周りはキナ臭い話が多く、それを機にCircleCIに移行するプロジェクトも多かったと思いましたが、そこでビッグウェーブに乗らずに移行しなかったために難なくGitHub Actionsに移れてよかったです。果報は寝て待てですね（動きが遅かっただけ）。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/github/>GitHub</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/githubactions/>GitHubActions</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/github-pages/>github-pages</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/hugo/>Hugo</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>

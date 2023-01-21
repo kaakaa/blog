@@ -1,368 +1,207 @@
-<!DOCTYPE html>
-<html lang="ja-JP">
-  <head>
-    <meta charset="utf-8" />
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
 <title>Mattermost5.30の新機能</title>
-
-
-  
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-7H97CTR9R6');
-  </script>
-  
-
-
-
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link
-  rel="alternate"
-  type="application/rss+xml"
-  href="https://blog.kaakaa.dev/index.xml"
-  title="kaakaa blog"
-/>
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Mattermost5.30の新機能"/>
-<meta name="twitter:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/12/18にMattermost v5.30.0がリリースされました。また、現在v5.30"/>
-
-
-  <meta property="og:title" content="Mattermost5.30の新機能" />
-<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/12/18にMattermost v5.30.0がリリースされました。また、現在v5.30" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.30/" /><meta property="article:section" content="post" />
-<meta property="article:published_time" content="2020-12-20T00:00:00&#43;09:00" />
-<meta property="article:modified_time" content="2020-12-20T00:00:00&#43;09:00" />
-
-
-
-
-<link rel="stylesheet" href="https://blog.kaakaa.dev/fontawesome/css/all.min.css" />
-
-<link
-  id="dark-mode-theme"
-  rel="stylesheet"
-  href="https://blog.kaakaa.dev/css/dark.css"
-/>
-
-<script>
-  var darkTheme = document.getElementById('dark-mode-theme')
-  var storedTheme = localStorage.getItem('dark-mode-storage')
-  if (storedTheme === 'dark') {
-    darkTheme.disabled = false
-  } else if (storedTheme === 'light') {
-    darkTheme.disabled = true
-  }
-</script>
-
-<script src="https://blog.kaakaa.dev/js/main.bundle.js"></script>
-<script src="https://blog.kaakaa.dev/js/instantpage.min.js" type="module" defer></script>
-<meta name="generator" content="Hugo 0.82.0" />
-  </head>
-  <body>
-    
-  
-
-
-
-
-  <header>
-    <nav class="navbar">
-  <div class="nav">
-    
-      <a href="https://blog.kaakaa.dev/" class="nav-logo">
-        <img
-          src="https://blog.kaakaa.dev/images/icon.png"
-          width="50"
-          height="50"
-          alt="Logo"
-        />
-      </a>
-    
-
-    <ul class="nav-links">
-      
-        
-          <li>
-            <a href="/" id="Home"
-              ><em class="fas fa-home fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/about/" id="About"
-              ><em class="fas fa-user fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/tags/" id="Tags"
-              ><em class="fas fa-tag fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/search/" id="Search"
-              ><em class="fas fa-search fa-lg"></em
-            ></a>
-          </li>
-          
-      
-        
-          <li>
-            <a href="/index.xml" id="Subscribe"
-              ><em class="fas fa-rss fa-lg"></em
-            ></a>
-          </li>
-          
-      
-    </ul>
-  </div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost5.30の新機能">
+<meta name=twitter:description content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/12/18にMattermost v5.30.0がリリースされました。また、現在v5.30">
+<meta property="og:title" content="Mattermost5.30の新機能">
+<meta property="og:description" content="Mattermost記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ はじめに 2020/12/18にMattermost v5.30.0がリリースされました。また、現在v5.30">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-5.30/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-12-20T00:00:00+09:00">
+<meta property="article:modified_time" content="2020-12-20T00:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
 </nav>
-
-    <div class="intro-header">
-      <div class="container">
-        <div class="post-heading">
-          
-            <h1>
-              Mattermost5.30の新機能
-            </h1>
-          
-          
-            <span class="meta-post">
-  <em class="fa fa-calendar-alt"></em
-  >&nbsp;Dec 20, 2020
-  
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost5.30の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 20, 2020
 </span>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-  
-
-    
-  <div class="container" role="main">
-    <article class="article" class="blog-post">
-      <p>Mattermost記事まとめ: <a href="https://blog.kaakaa.dev/tags/mattermost/">https://blog.kaakaa.dev/tags/mattermost/</a></p>
-<h1 id="はじめに">はじめに</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<h1 id=はじめに>はじめに</h1>
 <p>2020/12/18にMattermost v5.30.0がリリースされました。また、現在v5.30.1もリリースされています。</p>
 <p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。（なので、Enterprise版限定の機能などについてはリリースノート書いてあることの紹介程度となっています）</p>
 <p>変更内容の詳細については公式のリリースを確認してください。</p>
 <ul>
-<li><a href="https://mattermost.com/blog/mattermost-release-v5-30/">Mattermost release v5.30 is now available</a></li>
-<li><a href="https://docs.mattermost.com/administration/changelog.html#release-v5-30">Mattermost Changelog — Mattermost 5.30 documentation</a></li>
+<li><a href=https://mattermost.com/blog/mattermost-release-v5-30/>Mattermost release v5.30 is now available</a></li>
+<li><a href=https://docs.mattermost.com/administration/changelog.html#release-v5-30>Mattermost Changelog — Mattermost 5.30 documentation</a></li>
 </ul>
 <hr>
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#mattermostで投票機能">Mattermostで投票機能</a></li>
-    <li><a href="#e20-mattermostでインシデント管理">(E20) Mattermostでインシデント管理</a>
-      <ul>
-        <li><a href="#インシデント管理方法">インシデント管理方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#e20-microsoft-teams会議プラグイン-beta版">(E20) Microsoft Teams会議プラグイン (Beta版)</a></li>
-    <li><a href="#e20-新たに追加された管理者ロールの権限が設定可能に">(E20) 新たに追加された管理者ロールの権限が設定可能に</a></li>
-    <li><a href="#その他のトピック">その他のトピック</a>
-      <ul>
-        <li><a href="#mattermost-cloud">Mattermost Cloud</a></li>
-        <li><a href="#リリースサイクルの見直し">リリースサイクルの見直し</a></li>
-        <li><a href="#what-matters---a-podcast-from-mattermost">What Matters - A Podcast from Mattermost</a></li>
-        <li><a href="#mattermost-dev-sneak-peek-youtube">Mattermost Dev Sneak Peek (YouTube)</a></li>
-        <li><a href="#mattermost-integrations-advent-calendar">Mattermost Integrations Advent Calendar</a></li>
-      </ul>
-    </li>
-    <li><a href="#おわりに">おわりに</a></li>
-  </ul>
-</nav><h2 id="mattermostで投票機能">Mattermostで投票機能</h2>
-<p>Mattermost上で投票機能を実現する<a href="https://github.com/matterpoll/matterpoll"><code>Matterpoll Plugin</code></a>が、公式のプラグインマーケットプレースからインストールできるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/matterpoll.gif" alt="movie"></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#mattermostで投票機能>Mattermostで投票機能</a></li>
+<li><a href=#e20-mattermostでインシデント管理>(E20) Mattermostでインシデント管理</a>
+<ul>
+<li><a href=#インシデント管理方法>インシデント管理方法</a></li>
+</ul>
+</li>
+<li><a href=#e20-microsoft-teams会議プラグイン-beta版>(E20) Microsoft Teams会議プラグイン (Beta版)</a></li>
+<li><a href=#e20-新たに追加された管理者ロールの権限が設定可能に>(E20) 新たに追加された管理者ロールの権限が設定可能に</a></li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#mattermost-cloud>Mattermost Cloud</a></li>
+<li><a href=#リリースサイクルの見直し>リリースサイクルの見直し</a></li>
+<li><a href=#what-matters---a-podcast-from-mattermost>What Matters - A Podcast from Mattermost</a></li>
+<li><a href=#mattermost-dev-sneak-peek-youtube>Mattermost Dev Sneak Peek (YouTube)</a></li>
+<li><a href=#mattermost-integrations-advent-calendar>Mattermost Integrations Advent Calendar</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=mattermostで投票機能>Mattermostで投票機能</h2>
+<p>Mattermost上で投票機能を実現する<a href=https://github.com/matterpoll/matterpoll><code>Matterpoll Plugin</code></a>が、公式のプラグインマーケットプレースからインストールできるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/matterpoll.gif alt=movie></p>
 <p>Matterpollプラグインについては、過去に自分が作り始めたものがプラグイン形式に変わって開発が進められているものです。
-<a href="https://qiita.com/kaakaa_hoe/items/b2605ce3816cfc517ecd">Mattermostで投票機能もどき - Qiita</a></p>
-<p>Matterpollプラグインについては、<a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermost Integrations Advent Calendar 2020 - Qiita</a>の第22日目以降の記事で内部構造等を紹介します。</p>
-<h2 id="e20-mattermostでインシデント管理">(E20) Mattermostでインシデント管理</h2>
+<a href=https://qiita.com/kaakaa_hoe/items/b2605ce3816cfc517ecd>Mattermostで投票機能もどき - Qiita</a></p>
+<p>Matterpollプラグインについては、<a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>Mattermost Integrations Advent Calendar 2020 - Qiita</a>の第22日目以降の記事で内部構造等を紹介します。</p>
+<h2 id=e20-mattermostでインシデント管理>(E20) Mattermostでインシデント管理</h2>
 <p>Mattermost上でインシデントの管理を行うことができる機能が追加されたようです。
-元々、<a href="https://github.com/mattermost/mattermost-plugin-incident-management">Incident Management Plugin</a>と<a href="https://mattermost.gitbook.io/channel-export-plugin/">Mattermost Channel Export Plugin</a>として公開されていたプラグインをMattermost本体に内蔵したということのようです。（E20版限定の機能として紹介されていますが、Team Editionでも使用できている気がします）</p>
-<h3 id="インシデント管理方法">インシデント管理方法</h3>
-<p><a href="https://github.com/mattermost/mattermost-plugin-incident-management">Incident Management Plugin</a>が有効になっている場合、<strong>メインメニュー &gt; Playbook &amp; Incidents</strong>からインシデント管理画面を表示できます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-mainmenu.png" alt=""></p>
+元々、<a href=https://github.com/mattermost/mattermost-plugin-incident-management>Incident Management Plugin</a>と<a href=https://mattermost.gitbook.io/channel-export-plugin/>Mattermost Channel Export Plugin</a>として公開されていたプラグインをMattermost本体に内蔵したということのようです。（E20版限定の機能として紹介されていますが、Team Editionでも使用できている気がします）</p>
+<h3 id=インシデント管理方法>インシデント管理方法</h3>
+<p><a href=https://github.com/mattermost/mattermost-plugin-incident-management>Incident Management Plugin</a>が有効になっている場合、<strong>メインメニュー > Playbook & Incidents</strong>からインシデント管理画面を表示できます。
+<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-mainmenu.png alt></p>
 <p>インシデント管理画面では、インシデント対応の手順をまとめた<code>Playbook</code>と、インシデント一覧を管理することができます。
-<img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-management.png" alt=""></p>
+<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-management.png alt></p>
 <p><code>Playbook</code>タブで<code>+ New Playbook</code>をクリックするとPlaybookの作成画面が表示され、インシデント対応プロセスとしてステージと各ステージにおけるタスクを入力することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-playbook.png" alt=""></p>
-<p>また、各タスクにはSlash Commandを指定することができるようですが、これは、例えば<a href="https://mattermost.gitbook.io/plugin-jira/">Mattermost Jira Plugin</a>のコマンドを指定してタスク完了時にJiraなどの外部サービスへの通知が必要なことを表示するための機能ではないかと思われます。Playbook内のタスクに存在しないSlash Commandを指定しても、新たなSlash Commandが作成されるわけではなさそうです。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident-playbook.png alt></p>
+<p>また、各タスクにはSlash Commandを指定することができるようですが、これは、例えば<a href=https://mattermost.gitbook.io/plugin-jira/>Mattermost Jira Plugin</a>のコマンドを指定してタスク完了時にJiraなどの外部サービスへの通知が必要なことを表示するための機能ではないかと思われます。Playbook内のタスクに存在しないSlash Commandを指定しても、新たなSlash Commandが作成されるわけではなさそうです。</p>
 <p>ここで作成したPlaybookは、チャンネルヘッダーボタンの<code>Incidents</code>メニューなどから<code>+ Start Incident</code>を実行した際に、インシデント対応プロセスとして指定することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident.gif" alt="movie"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/incident.gif alt=movie></p>
 <p>インシデントが作成されると、インシデント対応専用のチャンネルが作られ、右サイドバーではインシデントの進行状況を確認することができます。対応担当を指定したり、完了したタスクをクローズするなどしてインシデントを進めていくことになります。</p>
-<p>タスク完了後は<a href="https://mattermost.gitbook.io/channel-export-plugin/">Mattermost Channel Export Plugin</a>で、チャンネル内でのやりとりをCSV形式でエクスポートなどもできるようです。</p>
+<p>タスク完了後は<a href=https://mattermost.gitbook.io/channel-export-plugin/>Mattermost Channel Export Plugin</a>で、チャンネル内でのやりとりをCSV形式でエクスポートなどもできるようです。</p>
 <p>Incident Managementプラグインには、インシデント管理用のSlash Commandなどもあるようで、詳しくは下記の公式ドキュメントを参照ください。</p>
-<p><a href="https://docs.mattermost.com/administration/devops-command-center.html">https://docs.mattermost.com/administration/devops-command-center.html</a></p>
-<h2 id="e20-microsoft-teams会議プラグイン-beta版">(E20) Microsoft Teams会議プラグイン (Beta版)</h2>
+<p><a href=https://docs.mattermost.com/administration/devops-command-center.html>https://docs.mattermost.com/administration/devops-command-center.html</a></p>
+<h2 id=e20-microsoft-teams会議プラグイン-beta版>(E20) Microsoft Teams会議プラグイン (Beta版)</h2>
 <p>Mattermostのチャンネルヘッダーボタンから、Microsoft Teamsの会議を作成し、会議へ参加するためのボタンを含む投稿をMattermostチャンネルに作成するプラグインのようです。こちらは有償版Mattermost限定の昨日のようです。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/ms-teams-plugin.webp" alt="公式ブログから">
-（※画像は<a href="https://mattermost.com/blog/mattermost-release-v5-30/">公式ブログ</a>から）</p>
-<h2 id="e20-新たに追加された管理者ロールの権限が設定可能に">(E20) 新たに追加された管理者ロールの権限が設定可能に</h2>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/ms-teams-plugin.webp alt=公式ブログから>
+（※画像は<a href=https://mattermost.com/blog/mattermost-release-v5-30/>公式ブログ</a>から）</p>
+<h2 id=e20-新たに追加された管理者ロールの権限が設定可能に>(E20) 新たに追加された管理者ロールの権限が設定可能に</h2>
 <p>Mattermos v5.28で、システム管理者の一部の権限のみを持つ<code>System Manager</code>、<code>User Manager</code>、<code>Read-only Admin</code>という役割が新たに追加されましたが、今回のv5.30から、これらの役割の権限を任意に設定できるようになりました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/admin-roles.webp" alt="公式ブログから">
-（※画像は<a href="https://mattermost.com/blog/mattermost-release-v5-30/">公式ブログ</a>から）</p>
-<h2 id="その他のトピック">その他のトピック</h2>
-<h3 id="mattermost-cloud">Mattermost Cloud</h3>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-5.30/admin-roles.webp alt=公式ブログから>
+（※画像は<a href=https://mattermost.com/blog/mattermost-release-v5-30/>公式ブログ</a>から）</p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<h3 id=mattermost-cloud>Mattermost Cloud</h3>
 <p>今までオンプレミス専門でやってきたMattermostのクラウドサービスが始まりました。</p>
-<p><a href="https://mattermost.com/blog/introducing-mattermost-cloud/">Introducing Mattermost Cloud - Open Source, Private Cloud Messaging</a></p>
+<p><a href=https://mattermost.com/blog/introducing-mattermost-cloud/>Introducing Mattermost Cloud - Open Source, Private Cloud Messaging</a></p>
 <p>ユーザーとワークスペースを作成すると専用のMattermostのインスタンスが作成され、自分が作成したワークスペース内ならシステムコンソールにも普通にアクセスできるようです。<br>
 10ユーザーまでは無償で利用でき、無償版でもセルフホスティング版の有償版相当の機能が使え流ように見えます。（システムコンソールで有償版の設定にもアクセスできる）</p>
-<p><a href="https://mattermost.com/pricing-cloud/">https://mattermost.com/pricing-cloud/</a></p>
+<p><a href=https://mattermost.com/pricing-cloud/>https://mattermost.com/pricing-cloud/</a></p>
 <p>Slackのようにメッセージ履歴や統合機能数などでの制限ではなく、ユーザー数での制限のみのため、その辺りが一つの差異化ポイントのようです。</p>
-<h3 id="リリースサイクルの見直し">リリースサイクルの見直し</h3>
-<p>これまで、Mattermostは偶数バージョンは新機能を追加、奇数バージョンはバグ修正などの品質改善のみを追加、という&quot;tick-tock&quot;なリリースサイクルを採用していました。</p>
+<h3 id=リリースサイクルの見直し>リリースサイクルの見直し</h3>
+<p>これまで、Mattermostは偶数バージョンは新機能を追加、奇数バージョンはバグ修正などの品質改善のみを追加、という"tick-tock"なリリースサイクルを採用していました。</p>
 <p>しかし、前記のMattermost Cloudの開始などを受け、リリースサイクルを早めるべきとの結論に至ったようで、2021/01/16リリースのv5.31からは各バージョンでの新機能の追加が行われるようになります。</p>
-<p><a href="https://mattermost.com/blog/discontinuing-alternating-release-cycle/">Mattermost moves away from alternating release cycle</a></p>
-<h3 id="what-matters---a-podcast-from-mattermost">What Matters - A Podcast from Mattermost</h3>
+<p><a href=https://mattermost.com/blog/discontinuing-alternating-release-cycle/>Mattermost moves away from alternating release cycle</a></p>
+<h3 id=what-matters---a-podcast-from-mattermost>What Matters - A Podcast from Mattermost</h3>
 <p>少し前になりますが、Mattermost主催のPodcastの配信が始まっています。
 Mattermost社のメンバーや、外部からエンジニアを迎えて技術的な話や開発に関するトークなどを不定期で配信しているようです。</p>
 <ul>
-<li><a href="https://mattermost.libsyn.com/">https://mattermost.libsyn.com/</a></li>
-<li><a href="https://mattermost.com/blog/what-matters-podcast/">Announcing What Matters: A podcast from the folks at Mattermost</a></li>
+<li><a href=https://mattermost.libsyn.com/>https://mattermost.libsyn.com/</a></li>
+<li><a href=https://mattermost.com/blog/what-matters-podcast/>Announcing What Matters: A podcast from the folks at Mattermost</a></li>
 </ul>
-<h3 id="mattermost-dev-sneak-peek-youtube">Mattermost Dev Sneak Peek (YouTube)</h3>
+<h3 id=mattermost-dev-sneak-peek-youtube>Mattermost Dev Sneak Peek (YouTube)</h3>
 <p>最近、MattermostのYouTubeチャンネルで<strong>Dev Sneak Peek</strong>として、開発中の新機能の紹介動画をよくアップロードしているようです。</p>
 <ul>
-<li><a href="https://www.youtube.com/channel/UCNR05H72hi692y01bWaFXNA">https://www.youtube.com/channel/UCNR05H72hi692y01bWaFXNA</a></li>
+<li><a href=https://www.youtube.com/channel/UCNR05H72hi692y01bWaFXNA>https://www.youtube.com/channel/UCNR05H72hi692y01bWaFXNA</a></li>
 </ul>
-<h3 id="mattermost-integrations-advent-calendar">Mattermost Integrations Advent Calendar</h3>
+<h3 id=mattermost-integrations-advent-calendar>Mattermost Integrations Advent Calendar</h3>
 <p>Mattermost Integrationsに関する記事をQiita Advent Calendarに書いています。</p>
-<p><a href="https://qiita.com/advent-calendar/2020/mattermost-integrations">Mattermost Integrations Advent Calendar 2020 - Qiita</a></p>
-<h2 id="おわりに">おわりに</h2>
+<p><a href=https://qiita.com/advent-calendar/2020/mattermost-integrations>Mattermost Integrations Advent Calendar 2020 - Qiita</a></p>
+<h2 id=おわりに>おわりに</h2>
 <p>次の<code>v5.31</code>のリリースは2021/01/15(Fri)を予定しています。</p>
 <hr>
 <p><a href="https://twitter.com/mattermost_jp?lang=ja">Mattermost 日本語(@mattermost_jp)さん | Twitter</a> でMattermostに関する日本語の情報を提供しています。</p>
-
-
-
-      
-        <div class="blog-tags">
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/mattermost/"
-              >mattermost</a
-            >&nbsp;
-          
-            <a
-              href="https://blog.kaakaa.dev/tags/releases/"
-              >releases</a
-            >&nbsp;
-          
-        </div>
-      
-    </article>
-    
-    
-      
-  <div id="disqus_thread"></div>
-  <script type="text/javascript">
-        (function() {
-            
-            
-            if (window.location.hostname == "localhost") return;
-
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            var disqus_shortname = 'kaakaa-blog';
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-  <noscript
-    >Please enable JavaScript to view the
-    <a href="https://disqus.com/?ref_noscript"
-      >comments powered by Disqus.</a
-    ></noscript
-  >
-  <a href="https://disqus.com/" class="dsq-brlink"
-    >comments powered by <span class="logo-disqus">Disqus</span></a
-  >
-
-
-    
-  </div>
-
-    <footer>
-  
-
-<div class="social-icons">
-  
-    
-    
-      
-      <a href="https://github.com/kaakaa" name="GitHub">
-        <em class="fab fa-github-alt fa-lg"></em>
-      </a>
-    
-       &nbsp;&ndash;&nbsp;
-      <a href="https://twitter.com/kaakaa_hoe_prog" name="Twitter">
-        <em class="fab fa-twitter fa-lg"></em>
-      </a>
-    
-  
-
-  
-    
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://zenn.dev/kaakaa" name="Zenn">
-        <img
-          src="https://blog.kaakaa.dev/images/zenn.svg"
-          alt="Zenn"
-        />
-      </a>
-    
-       &nbsp;&ndash;&nbsp; 
-      <a class="social-icon" href="https://twitter.com/kaakaa_hoe_prog" name="Qiita">
-        <img
-          src="https://blog.kaakaa.dev/images/qiita.png"
-          alt="Qiita"
-        />
-      </a>
-    
-  
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
 </div>
-
-
-  
-  <div class="container">
-    <p class="credits copyright">
-      <a href="https://blog.kaakaa.dev/about">Yusuke Nemoto</a>
-      &nbsp;&copy;
-      2023
-      
-        &nbsp;/&nbsp;
-        <a href="https://blog.kaakaa.dev/">kaakaa blog</a>
-      
-      &nbsp;&ndash;&nbsp;
-      <em class="fas fa-moon" id="dark-mode-toggle"></em>
-    </p>
-
-    <p class="credits theme-by">
-      Powered By <a href="https://gohugo.io">Hugo</a>&nbsp;
-      Theme
-      <a href="https://github.com/matsuyoshi30/harbor">Harbor</a>
-    </p>
-  </div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
 </footer>
-
-  </body>
+</body>
 </html>
