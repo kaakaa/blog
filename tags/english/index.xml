@@ -14,6 +14,14 @@
 		<atom:link href="/tags/english/" rel="self" type="application/rss+xml" />
 		
 		<item>
+			<title>Mattermost 7.7の新機能</title>
+			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.7/</link>
+			<pubDate>Fri, 20 Jan 2023 23:30:00 +0900</pubDate>
+			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.7/</guid>
+			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2023/01/16 に Mattermost のアップデートとなる v7.7.0 がリリースされました。 また、2023/01</description>
+		</item>
+      	
+		<item>
 			<title>go-gitで特定のコミットをDepth=1でCloneする</title>
 			<link>https://blog.kaakaa.dev/post/tech/git-fetch-specific-commit-depth-1/</link>
 			<pubDate>Thu, 05 Jan 2023 23:40:00 +0900</pubDate>
@@ -83,14 +91,6 @@
 			<pubDate>Sun, 19 Jun 2022 12:30:00 +0900</pubDate>
 			<guid>https://blog.kaakaa.dev/post/tech/github-pr-update-branch/</guid>
 			<description>背景 CIが壊れてるときにPRをもらってしまい、CIがコケてCheckが通らずマージができないという事態。 CIを直すにはCIスクリプトの方を直</description>
-		</item>
-      	
-		<item>
-			<title>Mattermost 7.0の新機能</title>
-			<link>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</link>
-			<pubDate>Sat, 18 Jun 2022 12:30:00 +0900</pubDate>
-			<guid>https://blog.kaakaa.dev/post/mattermost/releases-7.0/</guid>
-			<description>Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2022/06/15 に Mattermost のメジャーバージョンアップデートとなる v7.0.0 がリリースされました。 本</description>
 		</item>
       	
 	</channel>
