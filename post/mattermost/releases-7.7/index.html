@@ -161,7 +161,7 @@
 <h1 id="はじめに">はじめに</h1>
 <p>2023/01/16 に Mattermost のアップデートとなる <code>v7.7.0</code> がリリースされました。<br>
 また、2023/01/20に<code>v7.7.1</code>がリリースされています。<code>v7.7.1</code>では、<code>v7.7.0</code>からMattermost使い始めた場合に最初のシステム管理者のユーザーアカウントを作成できない問題や、インサイト機能でトップチャンネルの結果が表示されない問題に対応されています。</p>
-<p>2022/12/16にリリース予定だった<code>v7.6.0</code>は、パフォーマンスに関する問題を理由にリリースが中止されていたため、2ヶ月ぶりのリリースです。</p>
+<p>2022/12/16にリリース予定だった<code>v7.6.0</code>は、パフォーマンスに関する問題を理由にリリースが中止されていたため、2ヶ月ぶりのリリースになります。</p>
 <blockquote>
 <p>The Mattermost v7.6 release has been cancelled as we are working on investigating performance issues. The next scheduled release is v7.7 in January 16th, 2023.</p>
 </blockquote>
@@ -195,19 +195,18 @@
     <li><a href="#playbooks-タスクリスト">Playbooks: タスクリスト</a></li>
     <li><a href="#boards-ファイル添付">Boards: ファイル添付</a></li>
     <li><a href="#integrations-servicenow-channel-integrations-gitlab-playbooks-integration">Integrations: ServiceNow Channel integrations, GitLab Playbooks integration</a></li>
+    <li><a href="#その他の変更">その他の変更</a>
+      <ul>
+        <li><a href="#下書きの保存">下書きの保存</a></li>
+        <li><a href="#フリープランでもmy-insightが利用可能に">フリープランでもMy Insightが利用可能に</a></li>
+      </ul>
+    </li>
     <li><a href="#アップグレード時の注意事項">アップグレード時の注意事項</a>
       <ul>
         <li><a href="#webappコンポーネントを含むplugin">Webappコンポーネントを含むPlugin</a></li>
         <li><a href="#calls機能の最低動作バージョン">Calls機能の最低動作バージョン</a></li>
         <li><a href="#mysqlでのシステムタイムゾーン設定時の問題">MySQLでのシステムタイムゾーン設定時の問題</a></li>
         <li><a href="#threadsテーブルの非正規化">Threadsテーブルの非正規化</a></li>
-        <li><a href="#webappプラグイン">Webappプラグイン</a></li>
-      </ul>
-    </li>
-    <li><a href="#その他の変更">その他の変更</a>
-      <ul>
-        <li><a href="#下書きの保存">下書きの保存</a></li>
-        <li><a href="#フリープランでもmy-insightが利用可能に">フリープランでもMy Insightが利用可能に</a></li>
       </ul>
     </li>
     <li><a href="#その他のトピック">その他のトピック</a>
@@ -220,46 +219,50 @@
   </ul>
 </nav><h2 id="calls-general-availability">Calls: General Availability</h2>
 <p>2022/06にリリースされたMattermost v7.0でベータ版として追加されたCalls機能がGeneral Availabilityとなりました。</p>
-<p>先々月のリリースからのアップデートとして、通話中にリアクションを送ることができるようになりました。リアクションをクリックすると、ユーザー名と共に選択したリアクションが画面左に表示され、一定時間経過すると消えていきます。</p>
+<p>先々月のリリースからのアップデートとして、通話中にリアクションを送ることができるようになりました。　　
+通話画面でリアクションを選択すると、選択したリアクションがユーザー名と共に画面左に表示されます。このリアクションは一定時間経過すると消えていきます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/calls-reaction.png" alt="calls-reaction"></p>
 <p>また、Mattermost Enterpriseプラン限定の機能ですが、通話の記録を動画ファイルとして残す機能も追加されています。<br>
 <a href="https://docs.mattermost.com/channels/make-calls.html#record-calls">Record calls</a></p>
-<p>Calls機能は<a href="https://mattermost.com/sign-up">Mattermost Cloud</a>を使えばすぐにCalls機能を利用することができますが、Cloud Freeプランでは参加者の上限が8名に制限されています。Cloud Professional/Enterprプランでは200名が上限です。</p>
+<p><a href="https://mattermost.com/sign-up">Mattermost Cloud</a>を使えばすぐにCalls機能を利用することができますが、Cloud Freeプランでは参加者の上限が8名に制限されています。
+Cloud Professional/Enterpriseプランでは200名が上限です。</p>
 <h2 id="channels-mattermost-モバイルアプリ-v2">Channels: Mattermost モバイルアプリ v2</h2>
-<p>Mattermostのモバイルアプリのメジャーバージョンアップである v2.0 がリリースされました。</p>
-<p>このリリースには、モバイルアプリに対して<a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/10975938-ios-and-android-apps-should-allow-multiple-server">最も要望の多かった</a>複数サーバーの管理機能が追加されています。</p>
+<p>Mattermostのモバイルアプリのメジャーバージョンアップである v2.0 がリリースされました。<br>
+このリリースには、モバイルアプリに対して<a href="https://mattermost.uservoice.com/forums/306457-general/suggestions/10975938-ios-and-android-apps-should-allow-multiple-server">最も要望の多かった</a>複数サーバーの管理機能が追加されています。</p>
 <p>YouTubeで新しいモバイルアプリの紹介動画が公開されています。</p>
-<p><a href="https://www.youtube.com/watch?v=YPFfXISvydk">https://www.youtube.com/watch?v=YPFfXISvydk</a></p>
-<p>Mattermost Mobile v2.0にアップデートする場合、サポート対象のMattermost Serverがv7.1以降に設定されているため、事前にMattermost Serverのバージョンを確認しておいたほうが良いかと思います。<br>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/YPFfXISvydk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Mattermost Mobile v2.0にアップデートする場合、接続するMattermost Serverのバージョンはv7.1以降である必要があるため、事前にMattermost Serverのバージョンを確認することをお勧めします。<br>
 <a href="https://mattermost.com/blog/preparing-for-mobile-v2-0/">Preparing for Mobile v2.0 - Mattermost</a></p>
 <blockquote>
 <p>What server versions are supported by v2.0?</p>
 <p>Mattermost Server v7.1+ is required.</p>
 </blockquote>
 <h2 id="channels-メッセージの優先度設定と既読確認">Channels： メッセージの優先度設定と既読確認</h2>
-<p>Mattermostにメッセージを投稿する際、優先度を設定できるようになりました。<br>
-<strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; メッセージの優先度</strong>から有効にすることができます。</p>
+<p>Mattermostにメッセージを投稿する際、そのメッセージの優先度を設定できるようになりました。この機能は、<strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; メッセージの優先度</strong>から有効にすることができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-priority-system-console.png" alt="channels-priority-system-console"></p>
 <p>メッセージの優先度機能を有効にすると、メッセージ入力欄の左部に優先度を設定するためのアイコンが表示されます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-priority-set.png" alt="channels-priority-set"></p>
-<p>設定できる優先度は、<code>標準(Standard)</code>、<code>重要(Important)</code>、<code>緊急(Urgent)</code>の3種類です。(通常のメッセージが<code>標準(Standard)</code>です)</p>
+<p>設定できる優先度は、<code>標準(Standard)</code>、<code>重要(Important)</code>、<code>緊急(Urgent)</code>の3種類です。(優先度を設定しない通常のメッセージは<code>標準(Standard)</code>になります)</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-priority-type.png" alt="channels-priority-type"></p>
-<p><code>標準</code>以外の優先度を設定すると、投稿の上部に選択した優先度が色付きで表示されます。</p>
+<p><code>標準</code>以外の優先度を設定して投稿すると、メッセージの上部に選択した優先度が色付きで表示されるため、重要なメッセージを一目で認識することができるようになります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-priority-post.png" alt="channels-priority-post"></p>
 <p>また、Professionalプランでは、メッセージに対する確認を要求することもできます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-acknowledge.png" alt="channels-acknowledge"></p>
 <p><code>確認を要求する</code>をONにしてメッセージを投稿すると、他のユーザーには　<strong>確認</strong> ボタンが表示されるようになります。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-acknowledge-ok.png" alt="channels-acknowledge-ok"></p>
-<p><strong>確認</strong> ボタンを押すと、確認済みのユーザー数がカウントアップされます。マウスを当てると、誰が確認済みかを確認することができます。</p>
+<p><strong>確認</strong> ボタンを押すと、確認済みのユーザー数がカウントアップされます。マウスを当てると、誰が確認済みかを表示することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-acknowledge-show.png" alt="channels-acknowledge-show"></p>
 <h2 id="playbooks-既存チャンネルでのplaybookの実行">Playbooks: 既存チャンネルでのPlaybookの実行</h2>
 <p>今までのバージョンでは、Playbookを実行すると新しいチャンネルが自動で作成されていましたが、今回のバージョンから既存のチャンネル内でPlaybookを実行できるようになりました。</p>
-<p>まず、チャンネル右部に表示されているPlaybooksのアイコンをクリックすると、現在、このチャンネルで実行中のPlaybookを確認することができます。(<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; App Barを有効にする</strong>が無効になっている場合、右サイドバーのメニューは表示されず、チャンネルヘッダ部分にPlaybookアイコンが表示されます)<br>
-ここで、右サイドバー上部に表示されている <code>実行開始</code> ボタンをクリックすると、Playbookを開始することができます。</p>
+<p>まず、チャンネル右部に表示されているPlaybooksのアイコンをクリックすると、現在、このチャンネルで実行中のPlaybookを確認することができます。(<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; App Barを有効にする</strong>が無効になっている場合、チャンネル右部にPlaybooksのメニューは表示されず、チャンネルヘッダ部分にPlaybooksアイコンが表示されているはずです)</p>
+<p>ここで、右サイドバー上部に表示されている <code>実行開始</code> ボタンをクリックすると、Playbookを開始することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/playbooks-rhs-run.png" alt="playbooks-rhs-run"></p>
-<p>開始したいPlaybookを選択すると、</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/playbooks-select-playbook.png" alt="playbooks-select-playbook"></p>
-<p>実行の詳細を入力する画面が表示されます。<br>
+<p>開始したいPlaybookを選択すると、次に実行の詳細を入力する画面が表示されます。<br>
 この時、<code>既存のチャンネルとリンクする</code>を選択し、Playbookを実行したいチャンネルを選択してから <code>実行開始</code> を押すことで、新規にチャンネルを作成することなく既存のチャンネル内でPlaybookを開始することができます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/playbooks-select-channel.png" alt="playbooks-select-channel"></p>
 <p>既存のチャンネル内にPlaybookの実行が追加され、このチャンネルの中で実行の状況を追跡することができます。</p>
@@ -269,8 +272,8 @@
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/playbooks-task-inbox.png" alt="playbooks-task-inbox"></p>
 <p><code>フィルター</code>メニューから、以下のタスクの表示/非表示を切り替えることができます。</p>
 <ul>
-<li><strong>所有する実行からすべてのタスクを表示する</strong>: 自分がオーナーとして参加しているPlaybook実行のタスクをすべて表示する</li>
-<li><strong>チェック済みのタスクを表示する</strong>: 既に完了としてチェックしたタスクを表示する</li>
+<li><strong>所有する実行からすべてのタスクを表示する</strong>: 自分がオーナーとして参加しているPlaybook実行のすべてのタスクを表示する</li>
+<li><strong>チェック済みのタスクを表示する</strong>: 完了としてチェック済みのタスクも表示する</li>
 </ul>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/playbooks-task-filter.png" alt="playbooks-task-filter"></p>
 <h2 id="boards-ファイル添付">Boards: ファイル添付</h2>
@@ -284,43 +287,43 @@ Card画面の上部に表示されている <code>Attach</code> メニューか�
 <p><a href="https://mattermost.com/marketplace/servicenow/">ServiceNowr連携機能</a>では、ServiceNowのITSM機能と連携し、特定のイベントが発生した際にMattermostに通知したり、MattermostからITSMレコードへのコメント追加等を行うことができるようです。また、MattermostのPlaybooks機能と連携することで、インシデント対応時のコミュニケーションを円滑に行うことができます。<br>
 また、<a href="https://mattermost.com/marketplace/servicenow-virtual-agent/">ServiceNow Virtual Agent</a>を使うことで、ServiceNowのAIチャットボット機能であるVirtual AgentをMattermostに組み込むことができます。<br>
 ServiceNow連携についてはYouTubeで紹介動画が公開されています。</p>
-<p><a href="https://www.youtube.com/watch?v=OVHng0IjLT0">https://www.youtube.com/watch?v=OVHng0IjLT0</a></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/OVHng0IjLT0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <p>GitLab Pluginは、最新バージョン(v1.6)でGitLab Pipelineとの連携が強化され、MattermostのPlaybooksk機能と連携することで、プロダクトのリリース管理をより効率的に行うことができるようになったようです。</p>
 <p><a href="https://mattermost.com/marketplace/gitlab-plugin/">GitLab Plugin - Mattermost</a></p>
+<h2 id="その他の変更">その他の変更</h2>
+<h3 id="下書きの保存">下書きの保存</h3>
+<p>編集途中のメッセージを管理する <code>下書き</code> 機能が追加されました。下書きは、チームごとに管理されます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-draft.png" alt="channels-draft"></p>
+<p><strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; 下書きのサーバーへの同期を有効にする</strong>を有効にすることで、下書きの情報をサーバーに保管できるようになり、編集を開始した端末とは別の端末からでも下書きにアクセスできるようになります。(ただし、モバイルアプリでは下書き機能自体がないようです)</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-draft-config.png" alt="channels-draft-config"></p>
+<p>システムコンソールでこの設定を有効にした場合でも、<strong>設定 &gt; 詳細 &gt; メッセージの下書きをサーバーと同期する</strong>からユーザーごとにOn/Offを切り替えることができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-draft-setting.png" alt="channels-draft-setting"></p>
+<h3 id="フリープランでもmy-insightが利用可能に">フリープランでもMy Insightが利用可能に</h3>
+<p>今までは有償版でのみ利用可能であったインサイト機能のうち、自分のアクティビティに関係する <code>私のインサイト</code> 機能がフリープラン(無償版)でも利用可能になりました。<br>
+自分がよく活動するチャンネルやPlaybook、よく使うリアクション、また、活動の少ないチャンネル等を確認することができます。</p>
+<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-insight.png" alt="channels-insight"></p>
 <h2 id="アップグレード時の注意事項">アップグレード時の注意事項</h2>
 <p>アップグレード時の注意事項について、詳しくは公式ドキュメントを確認ください。　
 <a href="https://docs.mattermost.com/upgrade/important-upgrade-notes.html">Important Upgrade Notes</a></p>
 <h3 id="webappコンポーネントを含むplugin">Webappコンポーネントを含むPlugin</h3>
 <p>今回のリリースから依存するReactのバージョンがReact 17になった影響で、もしPluginがReact 16を使用してビルドされている場合、バージョン不整合によりMattermostがクラッシュする恐れがあります。Mattermost公式のPluginテンプレートである<a href="https://github.com/mattermost/mattermost-plugin-starter-template">mattermost/mattermost-plugin-starter-template</a>を利用している場合、この問題の影響を受ける可能性があります。</p>
 <p>回避策としては、<a href="https://github.com/mattermost/mattermost-plugin-playbooks/pull/1489">このPR</a>を参考に修正を行なって再度Pluginをビルドし直すか、一時的な回避策として<strong>システムコンソール &gt; 実験的機能 &gt; 機能 &gt; プラグインが使用するReact DOMにパッチを当てる</strong>を有効にすることで回避することができます。</p>
-<p><code>Posts</code>テーブル内の<code>ParentID</code>カラムを削除するDBマイグレーションが実行されますが、MySQLを利用している場合、<code>Posts</code>テーブルのサイズによってはこの処理によってCPU使用率が上昇する場合があります。
-また、このマイグレーション実行中は書き込みが制限されます。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/warning-reactdom.png" alt="warning-reactdom"></p>
 <h3 id="calls機能の最低動作バージョン">Calls機能の最低動作バージョン</h3>
-<p>Calls機能専用サーバーである<a href="https://github.com/mattermost/rtcd">rtcd</a>を利用してCalls機能を動作させている場合、今回のリリースからrtcdの最低動作バージョンが設定されるようになりました。Mattermost v7.7に組み込まれているCalls機能ではrctd v0.8.0を要求し、これ以下のバージョンで動作している場合はCalls機能が動作しません。</p>
+<p>Calls機能専用サーバーである<a href="https://github.com/mattermost/rtcd">rtcd</a>を利用してCalls機能を動作させている場合、今回のリリースからrtcdの最低動作バージョンが設定されるようになりました。Mattermost v7.7に組み込まれているCalls機能では<code>rctd v0.8.0</code>を要求し、これ以下のバージョンで動作している場合はCalls機能が動作しません。</p>
 <h3 id="mysqlでのシステムタイムゾーン設定時の問題">MySQLでのシステムタイムゾーン設定時の問題</h3>
-<p>Mattermostが利用しているMySQLがシステムのタイムゾーンを参照しており、かつ、システム側で設定されているタイムゾーンがMySQLでサポートされていなかったばい、エラーが発生する可能性があります。この問題はタイムゾーンテーブルを入力することで回避することができます。</p>
+<p>Mattermostが利用しているMySQLがシステムのタイムゾーンを参照しており、かつ、システム側で設定されているタイムゾーンがMySQLでサポートされていなかった場合、エラーが発生する可能性があります。この問題はタイムゾーンテーブルを入力することで回避することができます。</p>
 <h3 id="threadsテーブルの非正規化">Threadsテーブルの非正規化</h3>
-<p><code>Threads</code>テーブルに<code>TeamId</code>が追加される非正規化が行われました。これによるデメリットは無いとされています。</p>
-<h3 id="webappプラグイン">Webappプラグイン</h3>
-<p><a href="https://developers.mattermost.com/integrate/plugins/components/webapp/reference/#registerCustomRoute"><code>PluginRegistry.registerCustomRoute</code></a>を利用したプラグイン開発を行なっている場合、CSS<code>grid-area: center</code>が設定されていないとコンポーネントが適正な位置に表示されなくなります。</p>
-<h2 id="その他の変更">その他の変更</h2>
-<h3 id="下書きの保存">下書きの保存</h3>
-<p>編集途中のメッセージを管理する <code>下書き</code> 機能が追加されました。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-draft.png" alt="channels-draft"></p>
-<p>下書きは、チームごとに管理されます。</p>
-<p>また、<strong>システムコンソール &gt; サイト設定 &gt; 投稿 &gt; 下書きのサーバーへの同期を有効にする</strong>を有効にすることで、下書きの情報をサーバーに保管できるようになり、編集を開始した端末とは別の端末からでも下書きにアクセスできるようになります。(ただし、モバイルアプリでは下書き機能自体がないようです)<br>
-システムコンソールでこの設定を有効にした場合でも、<strong>設定 &gt; 詳細 &gt; メッセージの下書きをサーバーと同期する</strong>からユーザーごとにOn/Offを切り替えることができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-draft-setting.png" alt="channels-draft-setting"></p>
-<h3 id="フリープランでもmy-insightが利用可能に">フリープランでもMy Insightが利用可能に</h3>
-<p>今までは有償版でのみ利用可能であったインサイト機能のうち、自分のアクティビティに関係する <code>私のインサイト</code> 機能がフリープラン(無償版)でも利用可能になりました。<br>
-自分がよく活動するチャンネルやPlaybook、よく使うリアクション、また、活動の少ないチャンネル等を確認することができます。</p>
-<p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/channels-insight.png" alt="channels-insight"></p>
+<p><code>Threads</code>テーブルに<code>TeamId</code>が追加され、非正規化されることになりました。これによるデメリットは無いとされています。</p>
 <h2 id="その他のトピック">その他のトピック</h2>
 <h3 id="roadmap">Roadmap</h3>
-<p>Mattermostの各機能のRoadmapは以下の公式チャットで公開されています。</p>
+<p>Mattermostの各機能のRoadmapは、下記の公式チャットで毎月共有されています。</p>
 <p><a href="https://community.mattermost.com/core/channels/roadmap">https://community.mattermost.com/core/channels/roadmap</a></p>
-<p>Mattermostのチャット機能では、再来月(2023/03)リリース予定の v7.9 で、メッセージに対する確認を定期的に要求する機能が追加されるようです。<br>
+<p>Mattermostのチャット機能では、再来月(2023/03)リリース予定の<code>v7.9</code>で、メッセージに対する確認を定期的に要求する機能が追加されるようです。<br>
 この機能は今回リリースされたメッセージへの確認要求に付随する機能になるため、Professionalプラン以上で利用可能になるようです。</p>
 <p><img src="https://blog.kaakaa.dev/images/posts/mattermost/releases-7.7/roadmap-persistent-notification.png" alt="roadmap-persistent-notification"></p>
 <p><a href="https://docs.google.com/presentation/d/1jExa80sdoylFbUnD8SyO7irGveTUCfZDXSI4zRCnm0A/edit">Channels: January 2023 Roadmap Update</a></p>
