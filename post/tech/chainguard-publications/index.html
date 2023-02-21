@@ -1,0 +1,157 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Chainguard社の気になる記事メモ</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Chainguard社の気になる記事メモ">
+<meta name=twitter:description content="はじめに 昨今、ソフトウェアサプライチェーンの問題に対処するため、SBOMを用いたソフトウェアサプライチェーンの管理に関する議論が活発。SBO">
+<meta property="og:title" content="Chainguard社の気になる記事メモ">
+<meta property="og:description" content="はじめに 昨今、ソフトウェアサプライチェーンの問題に対処するため、SBOMを用いたソフトウェアサプライチェーンの管理に関する議論が活発。SBO">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/tech/chainguard-publications/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-02-21T21:30:00+09:00">
+<meta property="article:modified_time" content="2023-02-21T21:30:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Chainguard社の気になる記事メモ
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Feb 21, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
+<p>昨今、ソフトウェアサプライチェーンの問題に対処するため、SBOMを用いたソフトウェアサプライチェーンの管理に関する議論が活発。SBOMに関しては、2021年のサイバーセキュリティ関する米国大統領令で触れられたことをはじめ、日本の経済産業省でもSBOM活用に関する議論が続けられている。</p>
+<p><a href=https://www.meti.go.jp/shingikai/mono_info_service/sangyo_cyber/wg_seido/wg_bunyaodan/software/index.html>サイバー・フィジカル・セキュリティ確保に向けたソフトウェア管理手法等検討タスクフォース （METI/経済産業省）</a></p>
+<p>ここ最近、Chainguard社がSBOM関連の興味深い記事をいくつか出しているので、備忘録がてらメモする。</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#20221109-software-dark-matter-is-the-enemy-of-software-transparencyhttpswwwchainguarddevunchainedsoftware-dark-matter-is-the-enemy-of-software-transparency>(2022/11/09) <a href=https://www.chainguard.dev/unchained/software-dark-matter-is-the-enemy-of-software-transparency>Software Dark Matter is the Enemy of Software Transparency</a></a></li>
+<li><a href=#20221221-are-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sbomshttpswwwchainguarddevunchainedare-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sboms>(2022/12/21) <a href=https://www.chainguard.dev/unchained/are-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sboms>Are SBOMs Any Good? Preliminary Measurement of the Quality of Open Source Project SBOMs</a></a></li>
+<li><a href=#20230119-are-sboms-good-enough-for-government-workhttpswwwchainguarddevunchainedare-sboms-good-enough-for-government-work>(2023/01/19) <a href=https://www.chainguard.dev/unchained/are-sboms-good-enough-for-government-work>Are SBOMs Good Enough for Government Work?</a></a></li>
+<li><a href=#20230126-make-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generationhttpswwwchainguarddevunchainedmake-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generation>(2023/01/26) <a href=https://www.chainguard.dev/unchained/make-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generation>Make SBOMs, not GuessBOMs: Why we need to shift left on SBOM generation</a></a></li>
+</ul>
+</nav><h2 id=20221109-software-dark-matter-is-the-enemy-of-software-transparencyhttpswwwchainguarddevunchainedsoftware-dark-matter-is-the-enemy-of-software-transparency>(2022/11/09) <a href=https://www.chainguard.dev/unchained/software-dark-matter-is-the-enemy-of-software-transparency>Software Dark Matter is the Enemy of Software Transparency</a></h2>
+<p>宇宙の27%は観測不可能なdark matterで構成されているが、数百のポピュラーなOSSのコンテナを調べたところ、ソフトウェアにもパッケージマネージャーやSBOMなどで捕捉されないパッケージなどの <strong>ソフトウェアダークマター</strong> が32%ほど含まれていたという話。<strong>ソフトウェアダークマター</strong> は、記事内ではOSのパッケージマネージャー (<code>apt</code> や <code>apk</code>)で管理されていないファイルとして定義されている。</p>
+<p><strong>ソフトウェアダークマター</strong> の現実世界での問題点として、ソフトウェア解析ツールがソフトウェアコンポーネントを正しく特定できないためにセキュリティスキャナーが検出できない脆弱性があることや、SBOMによる情報管理が不完全になる点などを挙げている。</p>
+<p>筆者は、<u>350のポピュラーなOSSのコンテナ内のファイルの内、どの程度の割合が <strong>ソフトウェアダークマター</strong> なのかを自作ツール (<a href=https://github.com/chainguard-dev/darkfiles>chainguard-dev/darkfiles</a>) で調査</u>している。結果は、<u>平均32%のファイルが <strong>ソフトウェアダークマター</strong> </u>であり、調査対象のコンテナ内に含まれるファイル数で重みづけを行うと、その割合は 63% まで上昇した。また、調査したコンテナの約30%は <strong>ソフトウェアダークマター</strong> が1%未満であったため、ソフトウェアダークマターを少なくすることもできること示している。</p>
+<p>(実際に計測を行っているのは以下のファイルの処理だと思うが、少し大味な測定方法な気もする (ちゃんと読めてないだけかもしれないが))</p>
+<p><a href=https://github.com/chainguard-dev/darkfiles/blob/main/pkg/distro/distro.go>https://github.com/chainguard-dev/darkfiles/blob/main/pkg/distro/distro.go</a></p>
+<hr>
+<p>調査結果のソフトウェアダークマターのパーセンテージは少し誇張されている気もするが、ソフトウェアダークマターという言葉はキャッチーであるし、現実に問題となる可能性の高い事象であるため、言語化されたことで改善が進んでいくと良いなと思った。</p>
+<h2 id=20221221-are-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sbomshttpswwwchainguarddevunchainedare-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sboms>(2022/12/21) <a href=https://www.chainguard.dev/unchained/are-sboms-any-good-preliminary-measurement-of-the-quality-of-open-source-project-sboms>Are SBOMs Any Good? Preliminary Measurement of the Quality of Open Source Project SBOMs</a></h2>
+<p>SBOMの質が悪いとSBOMの情報を利用するツールの結果も悪化するという問題意識から、OSSプロジェクトの公開されているSBOMの質的調査を実施したという記事。収集したSBOMは、GitHub (<a href=https://github.com/chainguard-dev/bom-shelter>chainguard-dev/bom-shelter</a>) で公開している。</p>
+<p>収集したSBOMは、<a href=https://sourcegraph.com/search>Sourcegraph</a> を使ってある特定の名前 (例: <code>spdx.json</code>)のファイルを検索して見つけたもの。SBOMの質的評価は <a href=https://github.com/eBay/sbom-scorecard>eBay/sbom-scorecard</a> と <a href=https://github.com/spdx/ntia-conformance-checker>spdx/ntia-conformance-checker</a> を使用して行っている。</p>
+<p>結果としては、調査したSBOMの内、<u>80% はライセンスに関する情報が欠落</u>しており、<u>40% はパッケージのバージョン情報が欠落</u>していた。また、SPDXコミュニティのNTIA最小要素チェックツール (<a href=https://github.com/spdx/ntia-conformance-checker>spdx/ntia-conformance-checker</a>) の結果より、<u>今回収集したSBOMには、NTIA最小要素に適合するSBOMが無い</u>ことがわかった。(NTIA最小要素に関する言及としては、次に紹介する記事でより詳細に調査をしている)</p>
+<hr>
+<p>SBOMに書かれている情報が、本当に対象のソフトウェアのすべての構成物を表しているかは保証がなく、この調査では実際に不完全なSBOMファイルがSBOMとして公開されていることを示している。ただ、個人的な考えだが、SBOMファイルがリポジトリにコミットして管理されるというのはあまり正しい管理方法だとは思えず、その視点で見ると今回の収集方法で集めたSBOMファイルはそもそも管理方法自体に問題がある気がするので、低い品質のSBOMを集めたことがこの結果につながったのでは無いかという疑念が残る。(ただ、次の記事でより範囲の広い詳細な調査を行なっているため、この疑念は今では晴れている)</p>
+<h2 id=20230119-are-sboms-good-enough-for-government-workhttpswwwchainguarddevunchainedare-sboms-good-enough-for-government-work>(2023/01/19) <a href=https://www.chainguard.dev/unchained/are-sboms-good-enough-for-government-work>Are SBOMs Good Enough for Government Work?</a></h2>
+<p>一つ前で紹介した記事と同様、SBOMの質を評価する記事。</p>
+<p>DockerHubで公開されているPopularなコンテナイメージからSBOMを生成し、生成された約3,000のSBOMファイルが、<a href=%5Bhttps://ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf%5D(https://ntia.gov/sites/default/files/publications/sbom_minimum_elements_report_0.pdf)>NTIAの最小要素</a> を満たしているかを検証している。NTIA最小要素への適合は、SPDXコミュニティにより開発が行われている <a href=https://github.com/spdx/ntia-conformance-checker>spdx/ntia-conformance-checker</a> を使用。</p>
+<p>対象となるSBOMは、<u>Docker Hubで公開されている1,000個のコンテナイメージから、様々なSBOM生成ツール (<a href=https://github.com/anchore/syft>syft</a>, <a href=https://github.com/kubernetes-sigs/bom>bom</a>, <a href=https://github.com/aquasecurity/trivy>Trivy</a>, <a href=https://github.com/tern-tools/tern>Tern</a>) を使用して生成</u>したもの。(調査用のコードは <a href=https://github.com/chainguard-dev/bom-shelter/tree/main/in-the-lab/spdx-popular-containers>GitHub</a> で公開されている)</p>
+<p>結果としては、調査したSBOMの内、<u>NTIA最小要素を完全に満たすSBOMはたったの1%</u>だった。ただ、この結果は、Supplierに関する項目がすべてのコンポーネントにおいて満たされていたSBOMが1%しかなかったということに影響を大きく受けているため、Supplierに関する項目を除外すれば数値はもっと上がるものと思われる。SBOM生成ツールごとに比較では、syftのみがNTIA最小要素準拠のSBOMを生成できていた。また、bomも<code>Author</code>、<code>Supplier</code>以外の項目では高い適合率のSBOMを生成できていた。</p>
+<hr>
+<p>Supplierという項目は、対象がOSSであると考えるとパッケージマネージャーの情報が入ることが多いと思うが、ビルド後の成果物からは取得先の情報は失われていることが多いと考えられるため、確かにこの項目の扱いは難しいように感じた。</p>
+<h2 id=20230126-make-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generationhttpswwwchainguarddevunchainedmake-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generation>(2023/01/26) <a href=https://www.chainguard.dev/unchained/make-sboms-not-guessboms-why-we-need-to-shift-left-on-sbom-generation>Make SBOMs, not GuessBOMs: Why we need to shift left on SBOM generation</a></h2>
+<p>SBOMは、ビルド後の後処理としてSCAツールを実行することで生成する手法が主流だが、その方法では問題がある。<br>
+一つ目に挙げられている問題は、例えば、Golangのコンテナイメージから生成されたSBOMにはGolang自体が含まれていないというように、SCAツールでは自分自身のことを認識できない場合がある。(記事から参照されている以下のTweetではPythonイメージの話をしているが)</p>
+<blockquote class=twitter-tweet><p lang=en dir=ltr>A few more examples of this:<br><br>* scanners can find python in the python image (because it's installed with a .deb), but not go in the golang image!<br>* scanners can find nginx, mysql, and postgres in the respective images, but not redis or cassandra!<br>* they can't find wordpress! <a href=https://t.co/gMJ92k9tgj>https://t.co/gMJ92k9tgj</a></p>&mdash; Dan Lorenc (@lorenc_dan) <a href="https://twitter.com/lorenc_dan/status/1563896969021558784?ref_src=twsrc%5Etfw">August 28, 2022</a></blockquote>
+<script async src=https://platform.twitter.com/widgets.js></script>
+<p>その他にも、解析対象の中にはSCAツールでは発見できない資産 (<strong>Software dark matter</strong>) が30~60%の割合で存在しているという問題もある。これらの問題を含むSBOMは、疑わしい情報である <code>GuessBOM</code> なのでは? という記事。</p>
+<p>これを解決する方法として、NTIAも推奨しているように、ビルド後の後処理としてSCAツールを実行するのではなく、ビルド時の動作をキャプチャしながらSBOMに含める情報を集めるのが良いのではないかと提言している。ビルド時であれば、ビルド後の資産からは消えてしまう可能性のあるソースコードなどの元の情報にアクセスすることもできる。</p>
+<p>しかし、現時点ではビルド時の情報を集めてSBOM を生成するツールはあまりなく、それが実現できるツールとしてChainguard社が開発している <a href=https://github.com/chainguard-dev/apko><code>apko</code></a> を紹介している。 <code>apko</code> ではコンテナイメージのビルドを実行することで同時にSBOMファイルを生成することができ、さらに生成されたSBOMに対するSigstoreによる署名を行うこともできるらしい。</p>
+<p>GuessBOMである可能性の高い成果物スキャンにより生成されたSBOMではなく、生成物に含まれる署名付きのSBOMを利用することで、SBOM内の情報の信頼性が高まるという話。</p>
+<hr>
+<p><code>apko</code>の宣伝エントリという感じもするが、語られている問題意識としては非常に納得できるものだった。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/sbom/>sbom</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/chainguard/>chainguard</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
