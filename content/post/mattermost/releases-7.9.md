@@ -40,16 +40,19 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## (Boards) システム管理者/チーム管理者がBoardsにアクセス可能に
 
-Mattermostインスタンスのシステム管理者とチーム管理者は、Boardの作成者が招待しなくとも、作成されたBoardにアクセスできるようになりました。これにより、使われなくなったBoardの削除等、Boardsの管理作業がやりやすくなります。  
-公開されたBoardには、`Boardを探す`メニューから、もしくはBoardのURLに直接アクセスすることで、そのBoardに参加できます。非公開Boardには、URLに直接アクセスすることで、Boardに参加するかどうかを確認するダイアログが表示されます。
+Mattermostインスタンスのシステム管理者とチーム管理者は、Boardの作成者が招待しなくとも、作成されたBoardにアクセスできるようになりました。  
+これにより、使われなくなったBoardの削除等、Boardsの管理作業を行いやすくなります。  
+
+システム管理者/チーム管理者は、公開Boardに`Boardを探す`メニューから、もしくはBoardのURLへの直接アクセスにより、そのBoardに参加することができます。非公開Boardには、BoardのURLに直接アクセスすると、Boardに参加するかどうかを確認するダイアログが表示されます。
 
 ---
 
-ユーザーがBoard作成を行うと、**非公開Board**として作成されます。作成されたBoardの**共有**メニューより、チームの全員に対する権限を与えることで、そのBoardは**公開Board**となります。
+まず、ユーザーがBoard作成を行うと、**非公開Board**として作成されます。  
+作成されたBoardの**共有**メニューより、チームの全員に対する権限を設定することで、そのBoardは**公開Board**となります。
 
 ![boards-to-public](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/boards-to-public.png)
 
-Mattermostのシステム管理者、もしくは作成したBoardが属するチームのチーム管理者は、`Boardを探す`メニューから公開Boardを検索できるようになります。
+Mattermostのシステム管理者、もしくは作成されたBoardが属するチームのチーム管理者は、`Boardを探す`メニューから公開Boardを検索できるようになります。
 
 ![boards-search-public](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/boards-search-public.png)
 
@@ -65,7 +68,7 @@ Mattermostのシステム管理者、もしくは作成したBoardが属する�
 
 ## (Channels) メッセージの編集履歴が確認可能に
 
-投稿済みのメッセージを後から編集した場合、`編集済`の表示をクリックすることで、投稿者がメッセージの修正履歴を確認できるようになりました。指定したバージョンに復元することもできます。
+投稿済みのメッセージを後から編集した場合、`編集済`の表示をクリックすることで、投稿者がメッセージの修正履歴を確認できるようになりました。ある特定のバージョンのメッセージを復元することもできます。
 
 ![channels-edit-history](https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/channels-edit-history.png)
 
