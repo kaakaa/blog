@@ -101,12 +101,14 @@ Mattermost 7.9の新機能
 <li><a href=#おわりに>おわりに</a></li>
 </ul>
 </nav><h2 id=boards-システム管理者チーム管理者がboardsにアクセス可能に>(Boards) システム管理者/チーム管理者がBoardsにアクセス可能に</h2>
-<p>Mattermostインスタンスのシステム管理者とチーム管理者は、Boardの作成者が招待しなくとも、作成されたBoardにアクセスできるようになりました。これにより、使われなくなったBoardの削除等、Boardsの管理作業がやりやすくなります。<br>
-公開されたBoardには、<code>Boardを探す</code>メニューから、もしくはBoardのURLに直接アクセスすることで、そのBoardに参加できます。非公開Boardには、URLに直接アクセスすることで、Boardに参加するかどうかを確認するダイアログが表示されます。</p>
+<p>Mattermostインスタンスのシステム管理者とチーム管理者は、Boardの作成者が招待しなくとも、作成されたBoardにアクセスできるようになりました。<br>
+これにより、使われなくなったBoardの削除等、Boardsの管理作業を行いやすくなります。</p>
+<p>システム管理者/チーム管理者は、公開Boardに<code>Boardを探す</code>メニューから、もしくはBoardのURLへの直接アクセスにより、そのBoardに参加することができます。非公開Boardには、BoardのURLに直接アクセスすると、Boardに参加するかどうかを確認するダイアログが表示されます。</p>
 <hr>
-<p>ユーザーがBoard作成を行うと、<strong>非公開Board</strong>として作成されます。作成されたBoardの<strong>共有</strong>メニューより、チームの全員に対する権限を与えることで、そのBoardは<strong>公開Board</strong>となります。</p>
+<p>まず、ユーザーがBoard作成を行うと、<strong>非公開Board</strong>として作成されます。<br>
+作成されたBoardの<strong>共有</strong>メニューより、チームの全員に対する権限を設定することで、そのBoardは<strong>公開Board</strong>となります。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/boards-to-public.png alt=boards-to-public></p>
-<p>Mattermostのシステム管理者、もしくは作成したBoardが属するチームのチーム管理者は、<code>Boardを探す</code>メニューから公開Boardを検索できるようになります。</p>
+<p>Mattermostのシステム管理者、もしくは作成されたBoardが属するチームのチーム管理者は、<code>Boardを探す</code>メニューから公開Boardを検索できるようになります。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/boards-search-public.png alt=boards-search-public></p>
 <p>検索されたBoardにアクセスすると、そのBoardの<strong>管理者</strong>として自動的に参加することができます。また、公開Boardには、BoardのURLを直接指定して参加することもできます。</p>
 <p>非公開のBoardの場合、システム管理者であっても<code>Boardを探す</code>からは検索できず、BoardのURLから直接アクセスする必要があります。非公開のBoardにURLから直接アクセスすると、以下のようなダイアログが表示されます。</p>
@@ -114,7 +116,7 @@ Mattermost 7.9の新機能
 <p>ここで、<strong>Join</strong>を選択すると、非公開BoardにそのBoardの<strong>管理者</strong>として参加することができます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/boards-joined-private.png alt=boards-joined-private></p>
 <h2 id=channels-メッセージの編集履歴が確認可能に>(Channels) メッセージの編集履歴が確認可能に</h2>
-<p>投稿済みのメッセージを後から編集した場合、<code>編集済</code>の表示をクリックすることで、投稿者がメッセージの修正履歴を確認できるようになりました。指定したバージョンに復元することもできます。</p>
+<p>投稿済みのメッセージを後から編集した場合、<code>編集済</code>の表示をクリックすることで、投稿者がメッセージの修正履歴を確認できるようになりました。ある特定のバージョンのメッセージを復元することもできます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.9/channels-edit-history.png alt=channels-edit-history></p>
 <h2 id=アップグレード時の注意事項>アップグレード時の注意事項</h2>
 <p>アップグレード時の注意事項について、詳しくは公式ドキュメントを確認ください。　
