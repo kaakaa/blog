@@ -103,31 +103,33 @@ Mattermost 7.10の新機能
 </ul>
 </nav><h2 id=channels-投稿のリマインド>(Channels) 投稿のリマインド</h2>
 <p>Mattermost上の投稿を一定期間後にリマインドする機能が追加されました。<br>
-メッセージの内容を忘れずに後で確認したい時や、土日を挟んだ翌月曜向けのタスクを設定しておくことなどができます。</p>
-<p>リマインドを設定するには、リマインドしたい投稿のメニューにある <strong>Remind</strong> からリマインドしたい時刻を選択します。</p>
+メッセージの内容を忘れずに後で確認したい時や、土日を挟んだ翌月曜向けのタスクを設定しておきたい時などに便利な機能です。</p>
+<p>リマインドしたい投稿のメニューにある <strong>Remind</strong> からリマインドしたい時刻を選択することで、リマインドを設定することができます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/channels-remind-menu.png alt=channels-remind-menu></p>
-<p>リマインド時刻を指定すると、以下のような予告投稿が行われます。</p>
+<p>リマインド時刻を指定すると、以下のようなリマインドが実行される時刻を含む予告投稿が行われます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/channels-remind-notice.png alt=channels-remind-notice></p>
 <p>指定した時刻になると、<code>system-bot</code>という名前のBotからのダイレクトメッセージとして以下のようなリマインドが送信されます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/channels-remind-post.png alt=channels-remind-post></p>
-<p>リマインド時刻は <code>30分後</code>、<code>1時間後</code>、<code>2時間後</code>、<code>明日</code>、<code>カスタム</code>から選択することができ、<code>カスタム</code>を選択すると、30分単位の任意の日時を指定することができます。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/channeld-remind-custom.png alt=channels-remind-custom></p>
+<p>リマインド時刻は <code>30分後</code>、<code>1時間後</code>、<code>2時間後</code>、<code>明日</code>、<code>カスタム</code>から選択することができ、<code>カスタム</code>を選択すると、30分単位で任意の日時を指定することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/channels-remind-custom.png alt=channels-remind-custom></p>
 <h2 id=calls-通話画面を別ウィンドウで開けるように-desktop>(Calls) 通話画面を別ウィンドウで開けるように (Desktop)</h2>
-<p>2023/03/30にリリースされたMattermost Desktop App v5.3から、Calls画面を別ウィンドウとして開くことができるようになりました。<br>
+<p>2023/03/30にリリースされた<a href=https://mattermost.com/apps/>Mattermost Desktop App</a> v5.3から、Calls画面を別ウィンドウとして開くことができるようになりました。<br>
 これによりCalls画面を開きながら、いつも通りMattermostでチャットができるようになります。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/.png alt=calls-window></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-7.10/calls-window.png alt=calls-window></p>
 <h2 id=その他のトピック>その他のトピック</h2>
 <h3 id=mattermostリポジトリのモノレポ化>Mattermostリポジトリのモノレポ化</h3>
-<p>Mattermostのソースコードはサーバーサイドの<a href=https://github.com/mattermost/mattermost-server>mattermost-server</a>とフロントエンドの<a href=https://github.com/mattermost/mattermost-webapp>mattermost-webapp</a>に分かれて管理されていましたが、次回のv7.11リリースから<a href=https://github.com/mattermost/mattermost-server>mattermost-server</a>に集約され、モノレポ管理となります。<br>
-また、<a href=https://github.com/mattermost/mattermost-plugin-playbooks>Playbooks</a>機能と<a href=https://github.com/mattermost/focalboard>Boards</a>機能も、今まではMattermost Pluginとして開発されていましたが、これらも<a href=https://github.com/mattermost/mattermost-server>mattermost-server</a>に集約され、Mattermostのコア機能の一つとして開発が進められることになりました。</p>
-<p>Mattermostのコア機能関係のリポジトリがモノレポされたことで、ソースコードからMattermostを起動する際の開発者向けセットアップが変更されています。<br>
-<a href=https://developers.mattermost.com/contribute/developer-setup/>Developer setup</a></p>
+<p>Mattermostのソースコードはサーバーサイドの <a href=https://github.com/mattermost/mattermost-server>mattermost-server</a> とフロントエンドの <a href=https://github.com/mattermost/mattermost-webapp>mattermost-webapp</a> に分けて管理されていましたが、次回のv7.11リリースから <a href=https://github.com/mattermost/mattermost-server>mattermost-server</a> に集約され、モノレポ管理となります。<br>
+また、<a href=https://github.com/mattermost/mattermost-plugin-playbooks>Playbooks</a>機能と<a href=https://github.com/mattermost/focalboard>Boards</a>機能も、今まではMattermost Pluginとして開発されていましたが、これらも<a href=https://github.com/mattermost/mattermost-server>mattermost-server</a>に集約され、Mattermostのコア機能の一つとして開発が進められることになります。</p>
+<p>Mattermostのコア機能に関するリポジトリがモノレポ化されたことで、開発者向けのセットアップ手順が変更されています。 <a href=https://developers.mattermost.com/contribute/developer-setup/>Developer setup</a></p>
 <h3 id=chatgpt-bot>ChatGPT Bot</h3>
-<p>話題のChatGPTをMattermostから使う方法について、Mattermost公式ブログで紹介がありました。<br>
+<p>最近話題のChatGPTをMattermostから使う方法について、Mattermost公式ブログで紹介がありました。<br>
 <a href=https://mattermost.com/blog/community-spotlight-mattermost-chatgpt-bot-by-sebastian-muller/>Community Spotlight: Mattermost ChatGPT bot by Sebastian Müller</a></p>
-<p>これはコミュニティメンバによって作られたツールで、Mattermostのメッセージを受け取ってOpenAI APIとやり取りをして、結果をMattermostに投稿するBotサーバーを構築するものです。<br>
+<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
+<iframe src=https://www.youtube.com/embed/Hx4Ex7YZZiA style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
+</div>
+<p>これはコミュニティメンバによって作られたツールで、Mattermostのメッセージを受け取ってOpenAI APIとやり取りをし、結果をMattermostに投稿するBotサーバーを構築するものです。<br>
 <a href=https://github.com/yGuy/chatgpt-mattermost-bot>yGuy/chatgpt-mattermost-bot: A very simple implementation of a service for a mattermost bot that uses ChatGPT in the backend.</a></p>
-<p>この他にも、MattermostとChatGPTを連携したという記事がいくつも公開されています。</p>
+<p>この他にも、MattermostとChatGPTを連携したという日本語の記事もいくつか公開されています。</p>
 <ul>
 <li><a href=https://www.d-make.co.jp/blog/2023/03/06/%E3%81%8A%E6%89%8B%E8%BB%BD%EF%BC%81-mattermost-%E3%81%AB-chatgpt-bot-%E3%82%92%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%81%9F%EF%BC%81/>お手軽！ Mattermost に ChatGPT Bot を実装してみた！ - ディーメイクブログ</a></li>
 <li><a href=https://qiita.com/IShun/items/8fb2501c8ae6388798bb>ChatGPTにRedmineの起票を任せてみた - Qiita</a></li>
