@@ -1,0 +1,156 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Slidevでプレゼン時間管理のためにウサギとカメを表示する</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Slidevでプレゼン時間管理のためにウサギとカメを表示する">
+<meta name=twitter:description content="はじめに Rubyistの方々御用達(?)のプレゼンテーションツールにRabbitというものがある。 Rabbit自体は使ったことはないんだけど">
+<meta property="og:title" content="Slidevでプレゼン時間管理のためにウサギとカメを表示する">
+<meta property="og:description" content="はじめに Rubyistの方々御用達(?)のプレゼンテーションツールにRabbitというものがある。 Rabbit自体は使ったことはないんだけど">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/tech/slidev-rabbit-turtle/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-04-22T23:30:00+09:00">
+<meta property="article:modified_time" content="2023-04-22T23:30:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Slidevでプレゼン時間管理のためにウサギとカメを表示する
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Apr 22, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
+<p>Rubyistの方々御用達(?)のプレゼンテーションツールに<a href=https://rabbit-shocker.org/ja/>Rabbit</a>というものがある。<br>
+Rabbit自体は使ったことはないんだけど、プレゼン画面にうさぎとかめを表示して、最初に設定したプレゼン想定時間と残りページ数の状況を可視化するという方式は何度か目にしたことがある。</p>
+<p>最近、tmtmsさんがruby.wasmを使ってFirefoxでPDFを表示する際にうさぎとかめを表示するというものを作っているのをみて、自分が最近よく使っているSlidevでも同じようなことができないかと思い立ち、ちょっと作ってみた。</p>
+<p><a href=https://blog.tmtms.net/entry/202303-rabbit-on-firefox>Rabbit on Firefox - tmtms のメモ</a></p>
+<h1 id=できたもの>できたもの</h1>
+<p><a href=https://github.com/kaakaa/slidev-rabbit-turtle>kaakaa/slidev-rabbit-turtle: Presentation time management for slidev inspired rabbit</a></p>
+<p>ビルドしたスライド資料をGitHub Pagesで公開している。<br>
+<a href="https://kaakaa.github.io/slidev-rabbit-turtle/?time=1">https://kaakaa.github.io/slidev-rabbit-turtle/?time=1</a></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/tech/slidev-rabbit-turtle/screen.gif alt="screen shot"></p>
+<p>プレゼンを開始すると(表紙から2ページへ移動すると)、スライド資料下部にあるウサギとカメのアイコンが右に向かって移動する。<br>
+ウサギはページを遷移するごとに移動し、最後のページまで到達すると一番右まで到達する。<br>
+カメは時間経過と共に移動し、URLクエリ<code>time</code>で指定した時間(分)が経過すると一番右まで到達する。<br>
+ウサギが右端に到達する前にカメが到達すると、時間オーバーということになる。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/tech/slidev-rabbit-turtle/descriptin.png alt=description></p>
+<h1 id=使い方>使い方</h1>
+<p>SlidevはMarkdownからスライドを作成できるツール。 公式ドキュメントもコミュニティによって日本語化されているし、ググればいくらでも解説資料は出てくるので、Slidevに関する説明は省略する。</p>
+<ul>
+<li><a href=https://sli.dev/>Home | Slidev</a></li>
+<li><a href=https://qiita.com/loftkun/items/2fbeddc9449eb5d85dfd>Slidevを導入してMarkdownで美しいスライドを書こう - Qiita</a></li>
+</ul>
+<p>slidev-rabbit-turtleは、Slidevの<a href=https://sli.dev/custom/global-layers.html>Global Layers</a>を利用している。これは、ヘッダーやフッターなどのスライド全ページに表示されるコンテンツを指定する機能。ウサギとカメはスライド下部に表示するので、<code>globa-bottom.vue</code>に記述している。</p>
+<p>ウサギとカメの表示に必要なのは <code>components/</code>, <code>global-bottom.vue</code>, <code>style.css</code>。</p>
+<pre tabindex=0><code>.
+├── components
+│   ├── Flag.vue
+│   ├── Rabbit.vue
+│   └── Turtle.vue
+├── global-bottom.vue
+├── package-lock.json
+├── package.json
+├── pages
+│   └── multiple-entries.md
+├── slides.md
+└── style.css
+</code></pre><p><code>global-bottom.vue</code>でスライドのフッターを宣言し、フッターに表示する内容は<code>components/</code>内のVueコンポーネントで定義している。また、<code>style.css</code>は表示位置の指定等に利用している。　　
+Slideプロジェクトにこれらのファイルを追加すれば、表示できるようになると思う。</p>
+<p>ファイルを追加した後に<code>slidev</code>コマンド等でスライドを開始し、URL末尾に<code>time=10</code>などでプレゼン時間を設定すると、ウサギとカメが表示される。<code>time</code>クエリがないとアイコンを表示しないようにしている。<br>
+また、<code>slidev export</code>でPDF出力する際はアイコンがエクスポートされないようにしている。PDFでウサカメしたい場合は、冒頭で紹介したtmtmsさんの<a href=https://blog.tmtms.net/entry/202303-rabbit-on-firefox>Rabbit on Firefox</a>などを使うと良いと思う。</p>
+<h1 id=おわりに>おわりに</h1>
+<p>毎回Slidevプロジェクトを作るたびにファイルをコピーするのは面倒なので、<a href=https://sli.dev/addons/use.html>Slidev Addon</a>にできると使いやすくなるのかもしれない。(Addon機能を今初めて知ったので、そういうことに使えるのかどうかもわからないけど。)</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/slidev/>slidev</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/rabbit/>rabbit</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/presentation/>presentation</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
