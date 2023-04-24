@@ -14,8 +14,8 @@
 <meta property="og:description" content="はじめに Rubyistの方々御用達(?)のプレゼンテーションツールにRabbitというものがある。 Rabbit自体は使ったことはないんだけど">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.kaakaa.dev/post/tech/slidev-rabbit-turtle/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2023-04-22T23:30:00+09:00">
-<meta property="article:modified_time" content="2023-04-22T23:30:00+09:00">
+<meta property="article:published_time" content="2023-04-23T23:30:00+09:00">
+<meta property="article:modified_time" content="2023-04-23T23:30:00+09:00">
 <link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
 <link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
 <script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
@@ -56,7 +56,7 @@
 Slidevでプレゼン時間管理のためにウサギとカメを表示する
 </h1>
 <span class=meta-post>
-<em class="fa fa-calendar-alt"></em>&nbsp;Apr 22, 2023
+<em class="fa fa-calendar-alt"></em>&nbsp;Apr 23, 2023
 </span>
 </div>
 </div>
@@ -74,18 +74,19 @@ Rabbit自体は使ったことはないんだけど、プレゼン画面にう�
 <p>ビルドしたスライド資料をGitHub Pagesで公開している。<br>
 <a href="https://kaakaa.github.io/slidev-rabbit-turtle/?time=1">https://kaakaa.github.io/slidev-rabbit-turtle/?time=1</a></p>
 <p><img src=https://blog.kaakaa.dev/images/posts/tech/slidev-rabbit-turtle/screen.gif alt="screen shot"></p>
-<p>プレゼンを開始すると(表紙から2ページへ移動すると)、スライド資料下部にあるウサギとカメのアイコンが右に向かって移動する。<br>
-ウサギはページを遷移するごとに移動し、最後のページまで到達すると一番右まで到達する。<br>
+<p>プレゼンを開始すると(表紙から2ページ目以降へ移動すると)、スライド資料下部にあるウサギとカメのアイコンが右に向かって移動する。<br>
+ウサギはページを遷移するごとに移動し、最後のスライドが表示されるとウサギは一番右まで到達する。<br>
 カメは時間経過と共に移動し、URLクエリ<code>time</code>で指定した時間(分)が経過すると一番右まで到達する。<br>
 ウサギが右端に到達する前にカメが到達すると、時間オーバーということになる。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/tech/slidev-rabbit-turtle/descriptin.png alt=description></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/tech/slidev-rabbit-turtle/description.png alt=description></p>
 <h1 id=使い方>使い方</h1>
-<p>SlidevはMarkdownからスライドを作成できるツール。 公式ドキュメントもコミュニティによって日本語化されているし、ググればいくらでも解説資料は出てくるので、Slidevに関する説明は省略する。</p>
+<p>SlidevはMarkdownからスライドを作成できるツール。<br>
+公式ドキュメントはコミュニティによって日本語化されているし、ググれば解説資料はたくさん出てくるので、Slidevに関する説明は省略する。</p>
 <ul>
 <li><a href=https://sli.dev/>Home | Slidev</a></li>
 <li><a href=https://qiita.com/loftkun/items/2fbeddc9449eb5d85dfd>Slidevを導入してMarkdownで美しいスライドを書こう - Qiita</a></li>
 </ul>
-<p>slidev-rabbit-turtleは、Slidevの<a href=https://sli.dev/custom/global-layers.html>Global Layers</a>を利用している。これは、ヘッダーやフッターなどのスライド全ページに表示されるコンテンツを指定する機能。ウサギとカメはスライド下部に表示するので、<code>globa-bottom.vue</code>に記述している。</p>
+<p>ウサギとカメの表示には、Slidevの<a href=https://sli.dev/custom/global-layers.html>Global Layers</a>を利用している。これは、ヘッダーやフッターなどのスライド全ページに表示されるコンテンツを指定する機能。ウサギとカメはスライド下部に表示するので、フッターを表示するための<code>globa-bottom.vue</code>に記述している。</p>
 <p>ウサギとカメの表示に必要なのは <code>components/</code>, <code>global-bottom.vue</code>, <code>style.css</code>。</p>
 <pre tabindex=0><code>.
 ├── components
@@ -100,8 +101,8 @@ Rabbit自体は使ったことはないんだけど、プレゼン画面にう�
 ├── slides.md
 └── style.css
 </code></pre><p><code>global-bottom.vue</code>でスライドのフッターを宣言し、フッターに表示する内容は<code>components/</code>内のVueコンポーネントで定義している。また、<code>style.css</code>は表示位置の指定等に利用している。　　
-Slideプロジェクトにこれらのファイルを追加すれば、表示できるようになると思う。</p>
-<p>ファイルを追加した後に<code>slidev</code>コマンド等でスライドを開始し、URL末尾に<code>time=10</code>などでプレゼン時間を設定すると、ウサギとカメが表示される。<code>time</code>クエリがないとアイコンを表示しないようにしている。<br>
+Slidevプロジェクトにこれらのファイルを追加すれば、表示できるようになると思う。</p>
+<p>ファイルを追加した後に<code>slidev</code>コマンド等でスライドを開始し、スライドURLの末尾に<code>?time=10</code>等のプレゼン時間(分)を設定すると、ウサギとカメが表示される。<code>time</code>クエリがないとウサギとカメを表示しないようにしている。<br>
 また、<code>slidev export</code>でPDF出力する際はアイコンがエクスポートされないようにしている。PDFでウサカメしたい場合は、冒頭で紹介したtmtmsさんの<a href=https://blog.tmtms.net/entry/202303-rabbit-on-firefox>Rabbit on Firefox</a>などを使うと良いと思う。</p>
 <h1 id=おわりに>おわりに</h1>
 <p>毎回Slidevプロジェクトを作るたびにファイルをコピーするのは面倒なので、<a href=https://sli.dev/addons/use.html>Slidev Addon</a>にできると使いやすくなるのかもしれない。(Addon機能を今初めて知ったので、そういうことに使えるのかどうかもわからないけど。)</p>
