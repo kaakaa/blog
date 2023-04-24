@@ -17,6 +17,12 @@ Rabbit自体は使ったことはないんだけど、プレゼン画面にう�
 
 # できたもの
 
+(2023/04/24追記)
+[Slidev Addon](https://sli.dev/addons/use)としてnpm公開した。  
+https://www.npmjs.com/package/slidev-addon-rabbit
+
+---
+
 [kaakaa/slidev\-rabbit\-turtle: Presentation time management for slidev inspired rabbit](https://github.com/kaakaa/slidev-rabbit-turtle)
 
 ビルドしたスライド資料をGitHub Pagesで公開している。  
