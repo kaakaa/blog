@@ -1,0 +1,178 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Slidev関連のファイルやスライド資料をGitHubリポジトリで管理する</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Slidev関連のファイルやスライド資料をGitHubリポジトリで管理する">
+<meta name=twitter:description content="はじめに Markdownkからプレゼンテーションを作成できるSlidevというVue/Viteベースのフレームワークがある。2年ほど前に日本">
+<meta property="og:title" content="Slidev関連のファイルやスライド資料をGitHubリポジトリで管理する">
+<meta property="og:description" content="はじめに Markdownkからプレゼンテーションを作成できるSlidevというVue/Viteベースのフレームワークがある。2年ほど前に日本">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/tech/slidev-template/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-05-21T15:30:00+09:00">
+<meta property="article:modified_time" content="2023-05-21T15:30:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=tech-heading>
+<h1>
+Slidev関連のファイルやスライド資料をGitHubリポジトリで管理する
+</h1>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=はじめに>はじめに</h1>
+<p>Markdownkからプレゼンテーションを作成できる<a href=https://sli.dev/>Slidev</a>というVue/Viteベースのフレームワークがある。2年ほど前に日本でも少し話題になっていた。</p>
+<ul>
+<li><a href=https://zenn.dev/ryo_kawamata/articles/introduce-slidev>開発者のためのスライド作成ツール Slidev がすごい</a></li>
+<li><a href=https://qiita.com/loftkun/items/2fbeddc9449eb5d85dfd>Slidevを導入してMarkdownで美しいスライドを書こう - Qiita</a></li>
+</ul>
+<p><a href=https://marp.app/>reveal.js</a>, <a href=https://marp.app/>Marp</a>なども触ったことはあったが、<a href=https://sli.dev/>Slidev</a>プロジェクトを作成した時に同時に生成されるサンプルスライドがスタイリッシュなので、今でも愛用している。</p>
+<p>Slidevでいくつも資料を作っていると、Slidevの原稿やビルドしたスライド資料をどこかに管理しておきたくなる。Slidevは、基本的には1スライドが1Web Applicationのような立て付け（だと思う）ので、Slidev資料の原稿をGitHubで管理する場合、1スライド1リポジトリのような形になると思う。(npm workspaceでモノレポっぽく管理するのもアリだとは思うが)</p>
+<p>Slidevの原稿といってもMarkdownと多少の画像ファイルがあるぐらいなので、GitHubの1つのリポジトリ内で複数スライドの資産を管理したいなと思っており、せっかくGitHubで管理するならActionsでSlidevのビルドまで実行し、GitHub Pages/Releasesでビルドしたスライド資料の管理もできるようにしてみたという話。</p>
+<h1 id=できたもの>できたもの</h1>
+<p>GitHubのTemplate Repositoryとして作成した。(個人用途のものを勉強がてらテンプレートリポジトリにして見たものなので、諸々不具合が出ることも予想される)</p>
+<p><a href=https://github.com/kaakaa/slidev-resources-template>https://github.com/kaakaa/slidev-resources-template</a></p>
+<p>このテンプレートリポジトリを使ってSlidev資産を管理しているリポジトリ↓。</p>
+<p><a href=https://github.com/kaakaa/slidev-resources>https://github.com/kaakaa/slidev-resources</a></p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#ディレクトリ構成>ディレクトリ構成</a></li>
+<li><a href=#ビルド実行>ビルド実行</a></li>
+<li><a href=#使い方>使い方</a>
+<ul>
+<li><a href=#1-gh-pagesブランチを用意する>1. gh-pagesブランチを用意する</a></li>
+<li><a href=#2-slidev-buildコマンドの--baseオプションの値を変更する>2. slidev buildコマンドの<code>--base</code>オプションの値を変更する</a></li>
+</ul>
+</li>
+</ul>
+</nav><h2 id=ディレクトリ構成>ディレクトリ構成</h2>
+<p>スライドごとにディレクトリを作成し、Markdown原稿(<code>slides.md</code>)や画像ファイルなどをそのディレクトリ内で管理する形式。</p>
+<pre tabindex=0><code>.
+├── .github/         # GitHub Actionsなど
+├── example-slide  　# Slidev原稿
+│   ├── pages/
+│   ├── public/      # 画像ファイルなど
+│   └── slides.md    # Markdownファイル名は`slides.md`固定
+├── awesome-slide/   # 別のSlidev原稿
+│   └── slides.md
+└── package.json     # slidevへの依存等はここにまとめられている
+</code></pre><p>この方式だと、全てのSlidev資料に対して共通の<code>package.json</code>を使ってバージョン管理・ビルドスクリプト管理をしているため、今後Slidevのバージョンをあげた際に過去のSlidev資産をビルドできなくなる可能性はある。<br>
+<a href=https://docs.npmjs.com/cli/v7/using-npm/workspaces>npm workspaces</a>を使うことで、スライドごとにSlidevのバージョンを指定してモノレポ的に管理することもできたとは思うが、そうするとchild packageを作成するたびにSlidevビルド用のnpm scriptを編集する必要が出てきそうだったので辞めた。(npm workspacesでは、parent packageで定義したscriptをchild packageから呼び出すことは出来なかったと認識している。)<br>
+また、スライド作成が完了したら、ビルドして成果物はPages/Releaseで管理されるため、後から資産をビルドし直すということもあまりないかとも思っているため、今の管理方式でも問題にはならないと考えている。（最悪、Gitの履歴からビルドが成功した時に使っていたSlidevのバージョンを調べることもできるはずだし）</p>
+<h2 id=ビルド実行>ビルド実行</h2>
+<p>ディレクトリ名と同名のTagを打つと、指定したディレクトリ内のSlidev資産をビルドしてGitHub PagesとGitHub ReleasesにSPA形式とPDF形式のスライドをそれぞれデプロイしてくれる。</p>
+<ul>
+<li><a href=https://kaakaa.github.io/slidev-resources/>GitHub Pages(SPA)</a></li>
+<li><a href=https://github.com/kaakaa/slidev-resources/releases>GitHub Releases(PDF)</a></li>
+</ul>
+<p>図にするとこんな感じ</p>
+<p><img src=https://raw.githubusercontent.com/kaakaa/slidev-resources-template/main/assets/structure.png alt=structure></p>
+<h2 id=使い方>使い方</h2>
+<p><a href=https://github.com/kaakaa/slidev-resources-template>テンプレートリポジトリ</a>から新たにリポジトリを作成するだけだが、GitHub PagesによるSPA管理を実施するには、いくつかステップが必要。(PDF形式のSlidev資料だけを管理する場合は、テンプレートからリポジトリを作成してTagを打つだけで良いと思う。ただ、GitHub ActionsのSPAビルド/デプロイ関連のステップでエラーが出ると思うので、不要なステップの削除は必要そう(試してない))</p>
+<p>GitHub PagesでSPA形式のSlidev資料を管理する場合は、以下の2つの手順が必要。</p>
+<h3 id=1-gh-pagesブランチを用意する>1. gh-pagesブランチを用意する</h3>
+<p>SPA形式でビルドされたSlidev資料は<code>gh-pages</code>へデプロイするようGitHub Actionsが組んであるので、<code>gh-pages</code>ブランチを用意しておく必要がある。テンプレートリポジトリの方に<code>gh-pages</code>ブランチを用意してあるので、テンプレートリポジトリからリポジトリを作成する際に<code>Include all branches</code>にチェックを入れるだけで良い。</p>
+<p>自分で<code>gh-pages</code>ブランチを作ってPushしても良いが、その場合は<code>gh-pages</code>ブランチをorphanブランチとして切っておいた方が良い。</p>
+<h3 id=2-slidev-buildコマンドの--baseオプションの値を変更する>2. slidev buildコマンドの<code>--base</code>オプションの値を変更する</h3>
+<p><code>slidev build</code>でSPA形式のビルドを実行する際、<code>--base</code>オプションにより出力されるSPAのbaseパスを指定することができる。テンプレートリポジトリでは<code>--base</code>オプションの指定はしているが、この内容を自分のリポジトリ向けに書き換えておかないと、SPAをGitHub Pagesにデプロイしても、スライドを表示することができない。</p>
+<p>実際に編集が必要なのは、<a href=https://github.com/kaakaa/slidev-resources-template/blob/b04259db5c82da58e5b9dce3e22c8a5af062353a/package.json#L5><code>package.json</code></a>内の<code>build</code>スクリプトで指定されている <code>--base /slidev-resources-template/${npm_config_slide}</code> の<code>slidev-resources-template</code>部分を、自分のリポジトリ名に置き換えるだけ。</p>
+<p>この修正を含む、リポジトリのセットアップを行うPRを作成するWorkflowを用意してあるので、テンプレートから作成したリポジトリでこれを実行する方が早い。(GitHub ActionsからPull Requestを生成するには、リポジトリの<code>Settings > Actions > General > Allow GitHub Actions to create and approve pull requests</code>にチェックを入れる必要がある)</p>
+<p><img src=https://raw.githubusercontent.com/kaakaa/slidev-resources-template/main/assets/run-setup-workflow.png alt></p>
+<p>Setup workflowを実行すると、こんなPull Requestが作成される。
+<a href=https://github.com/kaakaa/slidev-resources/pull/1/files#diff-7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519>chore: setup repository by github-actions · Pull Request #1 · kaakaa/slidev-resources</a></p>
+<h1 id=おわりに>おわりに</h1>
+<p>Slidevの資産を成果物まで含めて一つのリポジトリで管理できるようになったので、スライド資料の管理にあまり頭を使う必要がなくなったように感じる。<br>
+スライドで使う画像ファイルもリポジトリで管理するところがちょっと気持ち悪いが、画像管理のために他サービス使い出すと頭への負荷が上がってしまうので、目下のところはそこが悩みどころ。</p>
+<p>あと、Tag消した時に関連する資産を削除したりはしてくれないので、その辺りなんとかしたい。あとOGP周りも。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/slidev/>slidev</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/github/>github</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/githubactions/>githubactions</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/githubpages/>githubpages</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/githubreleases/>githubreleases</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
