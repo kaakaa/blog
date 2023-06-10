@@ -1,0 +1,5 @@
+{
+    "markdown.copyFiles.destination": {
+        "content/post/mattermost/*": "/static/images/posts/mattermost/${documentBaseName}/"
+    }
+}
