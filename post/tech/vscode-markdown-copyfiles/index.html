@@ -64,10 +64,21 @@ VS CodeでMarkdownファイルに画像・動画ファイルを直接アップ�
 </header>
 <div class=container role=main>
 <article class=article class=blog-post>
-<h1 id=まとめ>まとめ</h1>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#まとめ>まとめ</a></li>
+<li><a href=#はじめに>はじめに</a></li>
+<li><a href=#やってみた>やってみた</a></li>
+<li><a href=#懸念点>懸念点</a>
+<ul>
+<li><a href=#markdownで参照する画像ファイルの場所が相対パスになる>Markdownで参照する画像ファイルの場所が相対パスになる</a></li>
+<li><a href=#スクショをペーストした場合に作成されるファイル名が-image-固定>スクショをペーストした場合に作成されるファイル名が <code>image</code> 固定</a></li>
+</ul>
+</li>
+</ul>
+</nav><h2 id=まとめ>まとめ</h2>
 <p>VS Code上でMarkdownファイルに画像ファイルを貼り付けることで、自動で画像のコピー/Markown記法の挿入ができる機能が追加されたため、自分のHugoブログに設定を追加してみたけど、あと一歩足りない感じだった。</p>
-<h1 id=概要>概要</h1>
-<p>VS Code v1.79.2を使用。</p>
+<h2 id=はじめに>はじめに</h2>
 <blockquote class=twitter-tweet><p lang=ja dir=ltr>VSCode、神アプデ来てる<br>クリップボードの画像をMarkdownに直接ペーストできるようになった<a href=https://t.co/HMxv2d7Sxs>https://t.co/HMxv2d7Sxs</a> <a href=https://t.co/XYxlwHCROe>pic.twitter.com/XYxlwHCROe</a></p>&mdash; よしはる (@Yossy_Hal) <a href="https://twitter.com/Yossy_Hal/status/1666980518163001344?ref_src=twsrc%5Etfw">June 9, 2023</a></blockquote>
 <script async src=https://platform.twitter.com/widgets.js></script>
 <p>VS Codeの May 2023 アップデートで、Markdownへの画像・動画の追加がドラッグ＆ドロップ、またはペーストだけで出来るようになったらしい。</p>
@@ -75,11 +86,13 @@ VS CodeでMarkdownファイルに画像・動画ファイルを直接アップ�
 <blockquote>
 <p>Copy external media files into workspace on drop or paste for Markdown</p>
 </blockquote>
-<p>今まで、画像や動画ファイルを追加する場合は、まずVS Codeのエクスプローラーにファイルをドラッグ&ドロップするなどしてファイルシステムの特定の場所に画像・動画ファイルを置き、その画像ファイルを参照するMarkdown記法 (<code>![..](..)</code>)を手作業で描いていたが、この機能を使えばその手間が省けそう。<br>
-ブログやSlidevでの資料作成でMarkdown + 画像・動画ファイルという組み合わせは多く扱うため、この機能追加はとても嬉しい。</p>
+<p>今まで、画像や動画ファイルを追加する場合は、まずVS Codeのエクスプローラーにファイルをドラッグ&ドロップするなどしてファイルシステムの特定の場所に画像・動画ファイルを置き、その画像ファイルを参照するMarkdown記法 (<code>![..](..)</code>)を手作業で書いていたが、この機能を使えばその辺りの手間が省けそうに思えた。<br>
+ブログやSlidevででMarkdown + 画像・動画ファイルという組み合わせは多く扱っていたが、常に画像ファイルの取り扱いが難儀だったので、この辺りが省力ができるととても嬉しい。</p>
+<h2 id=やってみた>やってみた</h2>
+<p>VS Code v1.79.2を使用して検証。</p>
 <p>何も設定がない場合、Markdownファイルにペーストした画像ファイルはMarkdownファイルと同じ場所に<code>image.png</code>, <code>image-1.png</code>,<code>image-2.png</code>,&mldr;という名前で作成される。そしてペーストした箇所に <code>![Alt text](image.png)</code>というテキストが挿入される。<br>
-ドラッグ&ドロップの場合は、Shiftを押しながらドロップすることでファイルがコピーされる。Shiftを押さずにドロップすると、普通にVS Codeで画像ファイルを開くという動きになる。また、ドラッグ&(Shift+)ドロップによりファイルをコピーした場合は、コピーしたファイル名がそのまま使われる)</p>
-<p>Hugoでは、Markdown原稿は<code>content/</code>配下に、画像などの静的ファイルは<code>static/</code>配下に配置するというお作法のようなものがあり、自分のブログもそれに従っているため、Markdownファイルと同じディレクトリに画像ファイルが作成されると、後でディレクトリを移動する必要があり多少の面倒が残る。</p>
+ドラッグ&ドロップの場合は、VS Code上のMarkdownファイルにShiftを押しながらドロップすることでファイルがコピーされる(Shiftを押さずにドロップすると、普通にVS Codeで画像ファイルを開くという動きになる)。また、ドラッグ&(Shift+)ドロップによりファイルをコピーした場合は、コピーしたファイル名がそのまま使われる。</p>
+<p>Hugoでは、Markdown原稿は<code>content/</code>配下に、画像などの静的ファイルは<code>static/</code>配下に配置するというお作法のようなものがあり、自分のブログもそれに従っているため、Markdownファイルと同じディレクトリに画像ファイルが作成されると後でディレクトリを移動する必要があり多少の面倒が残る。</p>
 <p>例えば以下のような構成。</p>
 <pre tabindex=0><code>.
 ├── content
@@ -97,28 +110,20 @@ VS CodeでMarkdownファイルに画像・動画ファイルを直接アップ�
         <span style=color:#f92672>&#34;content/post/*&#34;</span>: <span style=color:#e6db74>&#34;/static/images/posts/${documentBaseName}/&#34;</span>
     }
 }
-</code></pre></div><p>この設定では、keyがこの設定が有効になるMarkdownファイルのパスを表し、value側がそのMarkdownファイルに画像がペースト(or ドロップ)された場合のコピー先を表している。<br>
-この設定は、VS Codenの設定画面でも編集でき、そちらではコピー先の設定に使用できる変数も載っている。</p>
+</code></pre></div><p><code>markdown.copyFiles.destination</code>の設定では、keyがこの設定が有効になるMarkdownファイルのパスを表し、value側がそのMarkdownファイルに画像がペースト(or ドロップ)された場合のコピー先を表している。</p>
+<p>この設定例では、<code>content/post/</code>配下に置かれたMarkdownファイルに画像ファイルがペーストされると、<code>static/images/posts/</code>配下にMarkdownファイルと同名のフォルダを自動で作成し、ペーストされたファイルをその作成されたフォルダ配下に生成してくれる。</p>
+<p>仕様として明記されていないような気もするが、コピー先を<code>/</code>で始めると、開いているVS CodeのWorkspaceのルートからのパスを指定できる。<code>/</code>で始めないと、Markdownファイルが置いてあるディレクトリのパスがコピー先設定のルートになる。</p>
+<p>また、コピー先のパスに <code>${documentBaseName}</code> という変数が使われているが、使用可能な変数については、VS Codeの当該設定の説明で確認できる。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/tech/vscode-markdown-copyfiles/variables-copyfiles-destination.png alt=variables></p>
-<p>また、仕様として明記されていないような気もするが、コピー先を<code>/</code>で始めると、開いているVS CodeのWorkspaceのルートからのパスを指定できる。<code>/</code>で始めないと、Markdownファイルが置いてあるディレクトリのパスがコピー先設定のルートになる。</p>
-<p>（この設定、変数を使った時の挙動が分かりづらい上に、VS Codeで開いているワークスペースより上位の階層にもファイルを作りにいってしまうっぽいので (流石にドライブルート直下に作成はしなかったようだが) 設定する際は注意した方が良いと思う）</p>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#懸念点>懸念点</a>
-<ul>
-<li><a href=#markdownで参照する画像ファイルの場所が相対パスになる>Markdownで参照する画像ファイルの場所が相対パスになる</a></li>
-<li><a href=#スクショをペーストした時のファイル名が-image-固定>スクショをペーストした時のファイル名が <code>image</code> 固定</a></li>
-</ul>
-</li>
-</ul>
-</nav><h2 id=懸念点>懸念点</h2>
-<p>一応上記の対応を行うことでそれっぽい動きはするようになったが、まだまだ色々と気になる点が残った。</p>
+<p>ただ、この設定、変数を使った時の挙動が分かりづらい(特に<code>documentWorkspaceFolder</code>あたり)上に、VS Codeで開いているワークスペースより上位の階層にもファイルを作りにいってしまうっぽいので (流石にドライブルート直下に作成はしなかったようだが) 設定する際は注意した方が良いと思う。</p>
+<h2 id=懸念点>懸念点</h2>
+<p>上記の対応を行うことでそれっぽい動きはするようになったが、まだまだ色々と気になる点が残る。</p>
 <h3 id=markdownで参照する画像ファイルの場所が相対パスになる>Markdownで参照する画像ファイルの場所が相対パスになる</h3>
-<p>挿入されるMarkdown記法の設定は行えないようなので、挿入されるMarkdown記法における画像の参照先が以下のような相対リンクになる。</p>
-<p><code>![Alt text](../../../static/images/posts/tech/vscode-markdown-copyfiles/variables-copyfiles-destination.png)</code></p>
-<p>上記をそのままビルドしても画像ファイルは表示されないので、この部分は書き換える必要がある。<br>
+<p>挿入されるMarkdown記法における画像の参照先は以下のような相対リンクになる。</p>
+<pre tabindex=0><code>![Alt text](../../../static/images/posts/tech/vscode-markdown-copyfiles/variables-copyfiles-destination.png)
+</code></pre><p>挿入されるMarkdown記法の設定は行えず、上記をそのままHugoでビルドしてもデプロイ先とパスが異なるために画像ファイルが表示されないので、この部分は書き換える必要がある。<br>
 Hugoブログだと、Build/Deploy後のパスを意識しながら参照させる必要があるため、この部分は任意の設定ができないと上手く扱えない気がしている。</p>
-<h3 id=スクショをペーストした時のファイル名が-image-固定>スクショをペーストした時のファイル名が <code>image</code> 固定</h3>
+<h3 id=スクショをペーストした場合に作成されるファイル名が-image-固定>スクショをペーストした場合に作成されるファイル名が <code>image</code> 固定</h3>
 <p>ブログで何かしらの画面を紹介する際、スクリーンショット撮ってブログに貼り付けるというのを多用するが、Markdownにスクリーンショットをペーストすると、ファイルのベース名が <code>image</code> 固定になってしまう。<br>
 クリティカルな問題ではないが、後から画像を差し替えたいと思った時の認知負荷が高そうで好ましくない。ファイル名をつけたい場合は、一旦ローカルで名前を変えてからドラッグ&ドロップするか、一旦ペーストしてからVS Code上でファイル名変更するかなので、何だかそんなに楽になった感じがしない。</p>
 <h1 id=まとめ-1>まとめ</h1>
@@ -144,10 +149,10 @@ Hugoブログだと、Build/Deploy後のパスを意識しながら参照させ�
 </ol>
 </li>
 </ul>
-<p>Markdownファイル上で画像の参照先を編集するのはある程度受け入れられるが、画像のファイル名を変更する部分が手順としては煩雑に感じる。<br>
-ただ、もうファイル名は気にしないという判断を取れば幸せに近づく気がしてきたな。(何十ものファイルがあるわけでもないし)
-あと、今までブログエントリのファイル名で、そのエントリ専用のフォルダ切ってたりする手順が無くなるのは良いのかもしれない。</p>
-<p>最初知った時は神機能と思ったけど、使ってみたら「後一歩」という感じだった。</p>
+<p>導入後の手順で、Markdownファイル上で画像の参照先を編集するのはある程度受け入れられるが、<code>3.</code>の画像のファイル名を変更する部分が手順としては煩雑に感じる。<br>
+もうファイル名は気にしないという判断を取れば幸せに近づく気がしてきた。(何十ものファイルがあるわけでもないし)</p>
+<p>今までブログエントリのファイル名で、そのエントリ専用のフォルダ切ってたりする手順が無くなるのは良いのかもしれない。</p>
+<p>最初知った時は「神機能!」と思ったけど、使ってみたら「後一歩」という感じだった。</p>
 <div class=blog-tags>
 <a href=https://blog.kaakaa.dev/tags/vscode/>vscode</a>&nbsp;
 <a href=https://blog.kaakaa.dev/tags/hugo/>hugo</a>&nbsp;
