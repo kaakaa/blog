@@ -1,7 +1,6 @@
 ---
-title: "VS CodeでMarkdownファイルに画像・動画ファイルを直接アップロードできるようになった"
+title: "VS CodeでMarkdownファイルに画像・動画ファイルを直接アップロードできるようになったので試してみた"
 emoji: "👨‍💻"
-type: "tech"
 published: true
 date: 2023-06-25T11:30:00+09:00
 toc: true
