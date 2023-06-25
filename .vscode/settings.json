@@ -1,5 +1,6 @@
 {
     "markdown.copyFiles.destination": {
-        "content/post/mattermost/*": "/static/images/posts/mattermost/${documentBaseName}/"
+        "content/post/mattermost/*": "/static/images/posts/mattermost/${documentBaseName}/",
+        "content/post/tech/*": "/static/images/posts/tech/${documentBaseName}/"
     }
 }
