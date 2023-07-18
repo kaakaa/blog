@@ -14,7 +14,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 # はじめに
 
 2023/07/14 に Mattermost の約一年ぶりのメジャーアップデートとなる `v8.0.0` がリリースされました。  
-2023/04/14にMattermost v7.10がリリースされてから、5/16リリース予定だったv7.11のリリースがキャンセルされ](content/post/mattermost/releases-7.10.md)、v8.0のリリースも当初の予定より1ヶ月延伸されたため、3ヶ月ぶりの新バージョンのリリースとなります。
+2023/04/14にMattermost v7.10がリリースされてから、5/16リリース予定だった[v7.11のリリースがキャンセルされ](https://docs.mattermost.com/install/self-managed-changelog.html#release-v7-11-feature-release)、v8.0のリリースも当初の予定より1ヶ月延伸されたため、3ヶ月ぶりの新バージョンのリリースとなります。
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
@@ -41,54 +41,57 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## (Platform) プライベートクラウドでのLLM, Azure AI, OpenAIとの連携
 
-Mattermostと生成AIを組み合わせたサンドボックス環境を構築することを目的とした[`OpenOps`](https://github.com/mattermost/openops)が紹介されています(以前[`mattermost/ai-framework`](https://github.com/mattermost/mattermost-ai-framework)として公開されていたもの)。  
+MatttermostでもGenerativeAIの活用は[ホットなトピック](https://venturebeat.com/ai/mattermost-brings-generative-ai-power-to-open-source-collaboration/)であり、最近、Mattermostと生成AIを組み合わせたサンドボックス環境を構築することを目的とした[OpenOps](https://github.com/mattermost/openops)が公開されました(以前[`mattermost/ai-framework`](https://github.com/mattermost/mattermost-ai-framework)として公開されていたもの)。[OpenOpsのリポジトリ](https://github.com/mattermost/openops)では、MattermostとLLMを連携する機能一式をセットアップするためのスクリプトが公開されており、手順通りに環境を構築するだけで、MattermostとGenerative AIとを連携させる環境を構築することができます。
 
-[OpenOpsのリポジトリ](https://github.com/mattermost/openops)では、MattermostとLLMを連携する機能一式をセットアップするためのスクリプトが公開されていますが、既にMattermostのインスタンスを持っている場合、追加で必要なのは[Mattermost AI Plugin](https://github.com/mattermost/mattermost-plugin-ai)と、Mattermost AI Pluginのバックエンドとして呼び出されるLLMサービスになると思います。バックエンドとして利用できるLLMサービスはOpenAI APIや[Azure OpenAI Service](https://azure.microsoft.com/ja-jp/products/cognitive-services/openai-service)を始め、[Anthoropic](https://console.anthropic.com/login?selectAccount&returnTo=https%3A%2F%2Fconsole.anthropic.com%2Faccount%2Fkeys)、[Ask Sage](https://www.asksage.ai/)などが利用でき、さらにOpenAI APIと互換性のあるAPIであればなんでも利用することができるようです。OpenOpsでは、OpanAIと互換性のあるAPIとして、[LocalAI](https://localai.io/)が利用されています。
+既にMattermostのインスタンスを持っている場合、追加で必要なのは[Mattermost AI Plugin](https://github.com/mattermost/mattermost-plugin-ai)と、Mattermost AI Pluginのバックエンドとして呼び出されるGenerative AI系のサービスになるかと思います。バックエンドとして利用できるサービスはOpenAI APIや[Azure OpenAI Service](https://azure.microsoft.com/ja-jp/products/cognitive-services/openai-service)を始め、[Anthoropic](https://console.anthropic.com/login?selectAccount&returnTo=https%3A%2F%2Fconsole.anthropic.com%2Faccount%2Fkeys)、[Ask Sage](https://www.asksage.ai/)などが利用でき、さらにOpenAI APIと互換性のあるAPIであればなんでも利用することができるようです。OpenOpsでは、OpanAIと互換性のあるAPIとして[LocalAI](https://localai.io/)が利用されています。
 
 MattermostからAIを呼び出すポイントは[Mattermost AI Plugin](https://github.com/mattermost/mattermost-plugin-ai)に実装されており、以下のような場面でAIを呼び出すことができます。(詳しい説明は[公式リポジトリのREADME](https://github.com/mattermost/mattermost-plugin-ai#usage)等を参照ください)
 
 | 機能 | 概要 |
 |:------|:---|
-| `Streaming Conversation` | (これは利用シーンではないですが)AI Botからの返信は、全てを一括で表示されるのではなく、ChatGPTのUIのように受信した単語/ワードごとに表示されていきます |
-| `Thread Summarization` | Mattermostでの会話のスレッド全体の要約をDMとして受け取ることができます |
+| `Streaming Conversation` | (これは利用シーンではないですが) AI Botからの返信は、ChatGPTのUIのように文字列ストリームとして受信した単語/ワードごとにMattermost上に表示されていきます |
+| `Thread Summarization` | Mattermostのスレッドの内容の要約をAI BotからのDMとして受け取ることができます |
 | `Answer questions about Threads` | AI Botからの返信に対して、スレッドから追加の質問を行うことができます |
 | `Chat anywhere` | AI Botに@メンションすることで、どこからでもAIに質問することができます　|
 | `Create meeting summary` | Mattermost上で音声通話ができる[Calls Plugin](https://github.com/mattermost/mattermost-plugin-calls)と連携することで、ミーティングの要約を生成することができます |
 | `React for me` | AI Botがメッセージの内容に沿った絵文字リアクションをつけてくれます (Just for fun!) |
 | `RLHF Feedback Collection` | (これは利用シーンではないですが)AI Botからの投稿には👍 👎のアイコンが付いており、fine tuningのためのフィードバックを集めることができます  |
 
-MattermostでもAIに対する取り組みが開始されていますが、まだ色々手を加える必要がありそうな点と、日本語に関するサポートがまだ十分ではない点には注意が必要かと思います。
+Mattermost AI PluginとLocalAIを組み合わせた環境を試してみましたが、まだそのまま利用するには動作に難がありそうな点と、日本語に関するサポートがまだ十分ではない点には注意が必要かと思いました。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/platform-openops-japanese.png)
 
-とりあえずMattermostからOpenAI API(ChatGPT)に質問を投げたいというだけであれば、以前紹介されていた方法を利用することもできるかと思います。
+とりあえずMattermostからOpenAI API(ChatGPT)に質問を投げたいというだけであれば、以前紹介されていた単にMattermostとOpenAI APIを繋ぐ手段も利用できるかと思います。
 [Mattermost 7\.10の新機能 - ChatGPT Bot](https://blog.kaakaa.dev/post/mattermost/releases-7.10/#chatgpt-bot)
 
 ## (Channels) Apps Barの有効化
 
 Mattermost v7.0でベータ機能として導入された[Apps Bar機能](https://blog.kaakaa.dev/post/mattermost/releases-7.0/#integrations-apps-bar-%E3%83%99%E3%83%BC%E3%82%BF%E7%89%88)がデフォルトで有効化されました。  
-Apps Barは、チャンネル画面の右端に常に表示される領域のことで、ここにはインストール済みのプラグインやAppsのアイコンが表示されており、1クリックで各機能の詳細を呼び出すことができます。また、プラグインインストールの権限を持つユーザーには、Apps Barの下部にMattermostアプリマーケットプレースへのリンクアイコンが表示されており、ここからプラグインやAppsをインストールすることができます。
+
+Apps Barは、チャンネル画面の右端に常に表示される領域のことで、ここにはインストール済みのプラグインやAppsのアイコンが表示されており、1クリックで各機能の詳細を呼び出すことができます。また、プラグインインストールの権限を持つユーザーには、Apps Barの下部にMattermostアプリマーケットプレースへのリンクアイコンが表示されており、ここからプラグインやAppsを簡単にインストールすることができます。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-appsbar.png)
 
-今までのバージョンでは、**システムコンソール > 実験的機能 > 機能 > Apps Barを有効にする**から設定を有効にした場合のみApps Barが表示されていましたが、v8からは **Disable Apps Bar**を有効にしない限りApps Barが表示されます。この設定について、詳細については以下を参照してください。
+今までのバージョンでは、**システムコンソール > 実験的機能 > 機能 > Apps Barを有効にする** から設定を有効にした場合のみApps Barが表示されていましたが、v8からは **Disable Apps Bar** の設定を有効にしない限りApps Barが表示されます。この設定について、詳細については以下を参照してください。
 * [Experimental configuration settings](https://docs.mattermost.com/configure/experimental-configuration-settings.html#disable-apps-bar)
 * [Channel Header Plugin Changes \- Announcements \- Mattermost Discussion Forums](https://forum.mattermost.com/t/channel-header-plugin-changes/13551)
 
-## (Channels) Enterprise/Professional: 優先度緊急のメッセージに対する永続的な通知
+## (Channels) Enterprise/Professional: 優先度:緊急 のメッセージに対する永続的な通知
 
 Enterprise版もしくはProfessional版限定の機能です。  
-Mattermost v7.7で追加された[メッセージの優先度を指定する機能](https://blog.kaakaa.dev/post/mattermost/releases-7.7/#channels-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AE%E5%84%AA%E5%85%88%E5%BA%A6%E8%A8%AD%E5%AE%9A%E3%81%A8%E6%97%A2%E8%AA%AD%E7%A2%BA%E8%AA%8D)で、優先度が `緊急(Urgent)` に設定された投稿内に@メンション(`@channel`、`@all`、`@here`は対象外)が含まれていた場合、メンションされたユーザーが内容を確認するまで通知が送信され続ける機能(Persistent notifications/永続的な通知)が追加されました。
+Mattermost v7.7で追加された[メッセージの優先度を指定する機能](https://blog.kaakaa.dev/post/mattermost/releases-7.7/#channels-%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AE%E5%84%AA%E5%85%88%E5%BA%A6%E8%A8%AD%E5%AE%9A%E3%81%A8%E6%97%A2%E8%AA%AD%E7%A2%BA%E8%AA%8D)で、優先度が `緊急(Urgent)` に設定された投稿内に @メンション(`@channel`、`@all`、`@here`は対象外) が含まれていた場合、メンションされたユーザーが内容を確認するまで通知が送信され続ける機能(Persistent notifications/永続的な通知)が追加されました。
 
 メッセージ優先度に `緊急(Urgent)` を指定すると、`Send persistent notifications` の設定が表示されます。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-persistent-notifications.png)
 
-上記のメッセージを投稿しようとすると、永続的な通知を送るかどうかを確認するダイアログが表示され、`Send`をクリックすると永続的な通知が送信されるようになり、定期的に通知音が鳴り続けます。(再度未読状態になったり、DMなどで通知されたりはしないようでした)
+`Send persistent notifications`を有効にし、@メンションを含むメッセージを投稿しようとすると、以下のような永続的な通知を送るかどうかを確認するダイアログが表示されます。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-confirm-notifications.png)
 
-この通知は、通知を受け取ったユーザーが確認処理(Acknowledge、返信、リアウションのいずれか)を行うまで通知され続けますが、通知の頻度や通知の最大送信回数は[システムコンソールから設定することができます](https://docs.mattermost.com/configure/site-configuration-settings.html#persistent-notifications)。デフォルトでは、通知頻度が5分間隔、通知の再度大送信数が6回となっているため、30分間が5分間隔で通知が実行されることになります。
+`Send`をクリックすると、@メンションされたユーザーには定期的に通知音が鳴り続けます(一度既読状態にしたメッセージが再度未読状態になったり、DMなどで通知されたりはしないようでした)。この通知は、通知を受け取ったユーザーが確認処理(Acknowledge、返信、リアクションのいずれか)を行うまで通知され続けます。
+
+永続的な通知の頻度や通知の最大送信回数は[システムコンソールから設定することができます](https://docs.mattermost.com/configure/site-configuration-settings.html#persistent-notifications)。デフォルトでは、通知頻度が5分間隔、通知の再度大送信数が6回となっているため、計30分間、5分間隔で通知が実行されることになります。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-persistent-notification-settings.png)
 
@@ -96,20 +99,22 @@ Mattermost v7.7で追加された[メッセージの優先度を指定する機�
 
 > Added a new option to auto-follow all threads in the channel Notification Preference settings.
 
-Mattermost v7.0でGAとなった[返信スレッドの折り畳み](https://blog.kaakaa.dev/post/mattermost/releases-7.0/#channels-%E8%BF%94%E4%BF%A1%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%81%AE%E6%8A%98%E3%82%8A%E3%81%9F%E3%81%9F%E3%81%BF%E6%A9%9F%E8%83%BD%E3%81%8Cgageneral-availability%E3%81%B8%E6%98%87%E6%A0%BC)機能ですが、自分がメンションされていないスレッドや自分が投稿したことがないスレッドなどは例え重要な返信があったとしても通知が来ることはなく、通知を受け取るためには手動でスレッドをフォローする必要がありました。  
+Mattermost v7.0でGAとなった[返信スレッドの折り畳み](https://blog.kaakaa.dev/post/mattermost/releases-7.0/#channels-%E8%BF%94%E4%BF%A1%E3%82%B9%E3%83%AC%E3%83%83%E3%83%89%E3%81%AE%E6%8A%98%E3%82%8A%E3%81%9F%E3%81%9F%E3%81%BF%E6%A9%9F%E8%83%BD%E3%81%8Cgageneral-availability%E3%81%B8%E6%98%87%E6%A0%BC)機能ですが、自分がメンションされていないスレッドや自分が投稿したことがないスレッドなどは例え重要な返信があったとしても通知されないため、重要な投稿を見逃してしまうことがありました。それを防ぐために通知を受け取るには、手動でスレッドをフォローする必要がありました。  
 今回のバージョンから、手動でフォローしていないスレッドであっても、返信があった場合に更新通知を受け取るかどうかをチャンネル毎に指定できるようになりました。
 
-この設定は、**チャンネルメニュー > 通知の設定 > Auto-follow all new threads in this channel**から指定できます。
+この設定は、**チャンネルメニュー > 通知の設定 > Auto-follow all new threads in this channel** から設定できます。  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-notification-settings.png)
 
-**Auto-follow all new threads in this channel**を有効にすると、自分が参加していないスレッドであっても、誰かから追加の返信があった場合に、左サイドバーの**スレッド**に変更があったことが表示されるようになります。
+**Auto-follow all new threads in this channel** を有効にすると、自分が参加していないスレッドであっても、誰かから追加の返信があった場合に、左サイドバーの**スレッド**に変更があったことが表示されるようになります。  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-auto-follow-thraeds.png)
 
 ## その他の変更
 
 ### (Channels) チャンネル名に日本語を指定する場合の注意点
 
-現在公開されている`v8.0.0`では、チャンネル作成ダイアログから新規にチャンネルを作成する際に、チャンネル名入力欄で`Enter`キーを押すとチャンネル作成処理が走ってしまうようです。チャンネル名の中に日本語を使おうとする場合、入力文字の確定のために`Enter`キーを押した時点でチャンネルが作成されてしまう場合があるため、注意が必要です。(チャンネル名欄に日本語のみ入力している場合は別のエラー(後述)によりチャンネル作成が停止しますが、`team_`のように既に英数字が入力されているチャンネル名欄で`Enter`キーを押すと、その時点のチャンネルURLが既存チャンネルと重複していない限り即座にチャンネル作成処理が実行されてしまいます。)
+現在公開されている`v8.0.0`では、チャンネル作成ダイアログから新規にチャンネルを作成する際に、チャンネル名入力欄で`Enter`キーを押すとチャンネル作成処理が走ってしまうようです。チャンネル名に日本語を使おうとする場合、入力文字の確定のために`Enter`キーを押す必要があると思うのですが、この`Enter`キーを押した時点でチャンネルが作成されてしまう場合があるため、日本語話者としては難のある状況になっているかと思います。
+
+チャンネル名欄に日本語のみ入力している場合は別のエラー(後述)によりチャンネル作成が停止しますが、例えば`team_`のように既に英数字が入力されている際に追加で日本語を入力して`Enter`キーを押すと、その時点のチャンネルURLが既存チャンネルと重複していない限り即座にチャンネル作成処理が実行されてしまいます。
 
 本件についてはIssueを立てていますが、英語話者には問題点が伝わりづらい部分にも思うため、リアクションなりで反応いただけると助かります。
 
@@ -140,7 +145,7 @@ Mattermost v7.0でGAとなった[返信スレッドの折り畳み](https://blog
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-8.0/channels-hours-ahead.png)
 
-上記の例では、タイムゾーンが `UTC+09:00` のユーザーから `UTC±0`` のユーザーのプロフィールポップアップを開いた時の画面であり、タイムゾーン的に9時間遅れであることが表示されています。
+上記の例では、タイムゾーンが `UTC+09:00` のユーザーから `UTC±0` のユーザーのプロフィールポップアップを開いた時の画面であり、タイムゾーン的に9時間遅れであることが表示されています。
 
 ### (Channels) `CTRL/CMD + K` によるリンクの指定
 
