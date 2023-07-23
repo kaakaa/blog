@@ -2,7 +2,7 @@
 title: "Mattermost AI Pluinを試してみた"
 emoji: "🤖"
 published: true
-date: 2023-07-18T23:00:00+09:00
+date: 2023-07-23T23:30:00+09:00
 toc: true
 tags: ["mattermost", "plugin", "ai", "LLM"]
 ---
