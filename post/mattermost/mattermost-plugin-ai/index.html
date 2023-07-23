@@ -1,0 +1,281 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Mattermost AI Pluinを試してみた</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost AI Pluinを試してみた">
+<meta name=twitter:description content="Mattermot AI Plugin Mattermostから生成的AIサービスを呼び出すためのプラグインとして、Mattermost社によりMattermost AI Plug">
+<meta property="og:title" content="Mattermost AI Pluinを試してみた">
+<meta property="og:description" content="Mattermot AI Plugin Mattermostから生成的AIサービスを呼び出すためのプラグインとして、Mattermost社によりMattermost AI Plug">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/mattermost-plugin-ai/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-07-18T23:00:00+09:00">
+<meta property="article:modified_time" content="2023-07-18T23:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost AI Pluinを試してみた
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Jul 18, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<h1 id=mattermot-ai-plugin>Mattermot AI Plugin</h1>
+<p>Mattermostから生成的AIサービスを呼び出すためのプラグインとして、Mattermost社により<strong>Mattermost AI Plugin</strong>の開発が進められています。</p>
+<p><a href=https://github.com/mattermost/mattermost-plugin-ai>https://github.com/mattermost/mattermost-plugin-ai</a></p>
+<p><strong>Mattermost AI Plugin</strong>はMattermostプラグインとして開発されているため、単にMattermost上でAI Botに質問するという使い方だけでなく、Mattermost本体の機能やプラグインと連携した形で利用することができるようです。この記事では、<strong>Mattermost AI Plugin</strong>で実行できる機能を一通り触ってみた記録です。</p>
+<p>※ Mattermost AI Pluginは、まだ開発が始まったばかりのプロジェクトであり、この記事に書いた内容にも今後変更が加わる可能性がある点に注意して下さい。この記事では <a href=https://github.com/mattermost/mattermost-plugin-ai/commit/4b53767d6acadb290be1266f288e9d4b755fc6c4>Commit: 4b53767d6acadb290be1266f288e9d4b755fc6c4</a> (2023/07/20)時点のプラグインを使用しています。</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#mattermost-ai-pluginインストール><strong>Mattermost AI Plugin</strong>インストール</a>
+<ul>
+<li><a href=#注意>注意</a></li>
+</ul>
+</li>
+<li><a href=#mattermost-ai-pluginの設定><strong>Mattermost AI Plugin</strong>の設定</a></li>
+<li><a href=#mattermost-ai-pluginの機能><strong>Mattermost AI Plugin</strong>の機能</a>
+<ul>
+<li><a href=#aiとのチャット-chat-anywhere>AIとのチャット (Chat anywhere)</a></li>
+<li><a href=#スレッドの要約-thread-summarization>スレッドの要約 (Thread Summarization)</a></li>
+<li><a href=#スレッドに関する質問-answer-questions-about-threads>スレッドに関する質問 (Answer questions about Threads)</a></li>
+<li><a href=#openai限定の機能>OpenAI限定の機能</a></li>
+</ul>
+</li>
+</ul>
+</nav><h2 id=mattermost-ai-pluginインストール><strong>Mattermost AI Plugin</strong>インストール</h2>
+<p>Mattermost AIは開発段階のため、手動でインストールする必要があります。<br>
+インストールするには、以下のリンクから現在の最新版である<code>mattermost-ai-0.2.0.tar.gz</code>をダウンロードして、Mattermostへアップロードします。</p>
+<p><a href=https://github.com/mattermost/mattermost-plugin-ai/releases/tag/v0.2.0>https://github.com/mattermost/mattermost-plugin-ai/releases/tag/v0.2.0</a></p>
+<p>初めてMattermostプラグインを手動でアップロードする場合は、以下の記事が参考になるかと思います。<br>
+<a href=https://zenn.dev/kaakaa/articles/qiita-20201217-c190c104f44199da02ad#mattermost-plugin-%E3%81%AE%E4%BD%BF%E7%94%A8>[Mattermost Integrations] Plugin基本編</a></p>
+<h3 id=注意>注意</h3>
+<p><strong>Mattermost AI Plugin</strong>は、データベースにMySQLを使用したMattermostでは使用することができません。
+過去にMySQLを使用した大規模なMattermostインスタンスで多くのパフォーマンス問題が発生していたことを受け、Mattermostでは将来的にPostgreSQLのみのサポートを行なっていく方針となったようで、この方針が<strong>Mattermost AI Plugin</strong>でMySQLをサポートしない判断の元となっているようです。その辺りの背景については以下のIssueで述べられています。</p>
+<p><a href=https://github.com/mattermost/mattermost-plugin-ai/issues/19>https://github.com/mattermost/mattermost-plugin-ai/issues/19</a></p>
+<p><strong>Mattermost AI Plugin</strong>を使用したサンドボックス環境を簡単に構築するため<a href=https://github.com/mattermost/openops>mattermost/openops</a>が公開されているため、試してみるだけであればこちらを使用する方法もあります。</p>
+<h2 id=mattermost-ai-pluginの設定><strong>Mattermost AI Plugin</strong>の設定</h2>
+<p><strong>Mattermost AI Plugin</strong>のインストールができたら、プラグインから生成的AIサービス呼び出すための設定を行います。設定は、<strong>システムコンソール > プラグイン > Mattermost AI Plugin</strong>から行います。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-settings.png alt="Alt text"></p>
+<p>今回は、生成的AIサービスとして OpenAI API を利用し、モデルは<code>gpt-3.5-turbo</code>を使いました。</p>
+<table>
+<thead>
+<tr>
+<th style=text-align:left>Name</th>
+<th style=text-align:left>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:left>プラグインを有効にする</td>
+<td style=text-align:left><code>有効</code></td>
+</tr>
+<tr>
+<td style=text-align:left>OpenAI API Key</td>
+<td style=text-align:left><code>sk-.....</code></td>
+</tr>
+<tr>
+<td style=text-align:left>OpenAI Default Model</td>
+<td style=text-align:left><code>gpt-3.5-turbo</code></td>
+</tr>
+<tr>
+<td style=text-align:left>AI Large Language Model service</td>
+<td style=text-align:left><code>Open AI</code></td>
+</tr>
+</tbody>
+</table>
+<p>上記の他にも、別の生成的AIサービスを利用する場合の設定や、<strong>Mattermost AI Plugin</strong>の機能に関する設定項目等がありますが、とりあえず上記のみ設定すれば一通りの機能は使えるはずです。</p>
+<h2 id=mattermost-ai-pluginの機能><strong>Mattermost AI Plugin</strong>の機能</h2>
+<p>ここからは、<strong>Mattermost AI Plugin</strong>の機能について紹介していきます。</p>
+<h3 id=aiとのチャット-chat-anywhere>AIとのチャット (Chat anywhere)</h3>
+<p>AIに対して質問をして、AIから回答を得るというChatGPTなどでお馴染みの機能です。</p>
+<p>Mattermost上のチャンネル、DM、グループメッセージなど、どこででも <code>@ai</code> にメンションすることで、AIとのチャットを開始することができますです。また、スレッド内で <code>@ai</code> によるメンションを行うと、スレッドの会話に基づいたやり取りを行うことができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-chat.png alt="Alt text"></p>
+<p>上記の例では、一つ目の回答内容について、箇条書きの項番のみを指定する形で追加の質問を行いましたが、ちゃんと指定した項番の内容を理解して回答をしてくれました。</p>
+<h3 id=スレッドの要約-thread-summarization>スレッドの要約 (Thread Summarization)</h3>
+<p>Mattermost内の会話スレッドの内容を要約してくれる機能です。</p>
+<p>サンプルとして以下のMattermost Forumの質問をMattermost上のスレッドに転記し、そのスレッドの要約を生成させてみました。</p>
+<p><a href=https://forum.mattermost.com/t/font-of-mattermost-app-changed-accidentally/16347>Font of Mattermost app changed accidentally - Troubleshooting - Mattermost Discussion Forums</a></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary1-post.png alt="Alt text"></p>
+<p>質問内容は、MattermostデスクトップアプリでMattermostを開いた場合のみ、投稿のフォントが変わってしまい直し方がわからないというもので、それに対する回答として「<code>C:\windows\fonts</code>フォルダ内を確認し、怪しいものがあればリネームして治らないか確認してほしい」というコメントが付き、それを試したら解決した、という質問→回答→解決の3メッセージのみの流れです。</p>
+<p>このスレッドの要約として、以下のような文章を得ました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary1-answer.png alt="Alt text"></p>
+<blockquote>
+<p>The thread discusses an issue where the font of the Mattermost app was accidentally changed. The user is seeking information on how to change it back. They mention that the issue only occurs in the Mattermost app on Windows and not in any other apps or in the web browser. Reinstalling the Mattermost app does not resolve the issue. Another user suggests checking the C:\windows\fonts folder for the font causing the issue and renaming it or removing it to see if that fixes the problem. The issue was resolved by deleting the font and reinstalling the Mattermost app.</p>
+</blockquote>
+<p>発生事象〜提案内容〜解決までが要約されており、要約としては及第点のように個人的には見えます。<br>
+(一点、要約内の提案内容に、フォントファイルの削除指示(<code>...renaming it or removing it..</code>)がありますが、<a href=https://forum.mattermost.com/t/font-of-mattermost-app-changed-accidentally/16347/2>元の投稿</a>には削除に関する言及は無いので、その辺りは少し気になりました。)</p>
+<blockquote>
+<p>Another user suggests checking the C:\windows\fonts folder for the font causing the issue and renaming it or removing it to see if that fixes the problem.</p>
+</blockquote>
+<hr>
+<p>次に、もう少し複雑なやり取りの例として以下の質問の要約を生成させてみました。</p>
+<p><a href=https://forum.mattermost.com/t/upgrading-from-v5-1-to-v7-1/13741>Upgrading from v5.1 to v7.1 - Troubleshooting / Docs - Help Wanted - Mattermost Discussion Forums</a></p>
+<p>この質問は、Mattermost v5.1からv7.1アップグレードする際に注意すべき点やバックアップの方法について尋ねています。<br>
+質問事項に対して一旦は回答者が注意点について答えていますが、その後、実は元のMattermost Serverのバージョンがv6.3.7だと分かったり、Docker環境のアップデート方法に話が移ったりと、スレッド内で質問の状況が変更されています。</p>
+<p>この質問の要約は以下のようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary2-answer.png alt="Alt text"></p>
+<blockquote>
+<p>The thread is about upgrading Mattermost from version 5.1 to version 7.1. The user asks for points to consider beyond the documentation, whether they should upgrade to another older ESR before jumping to v7.1, and the meaning of backing up the database. Another user suggests reading the Important Upgrade Notes for the big upgrade and mentions schema changes starting from version 5.22. They recommend upgrading in multiple steps and provide download links for older versions. They also explain how to back up the database using tar and mysqldump commands. The user acknowledges the advice and mentions failing once but restoring from a virtual machine snapshot. They also mention that their Mattermost version is actually 6.3.7 and not 5.1.1. They tried upgrading using a deprecated script and encountered errors. They ask for guidance on what to do next and provide some proposed steps. The other user suggests getting rid of the old installation and starting fresh with a supported environment. They mention backing up the current setup and deploying a new setup in parallel with the same version. They provide detailed steps for restoring the data and suggest testing everything before running the upgrade to 7.1.2. The user thanks for the advice and mentions using the Mattermost Docker setup from the mattermost/docker repository. They mention the issue they faced with the upgrade-postgres.sh script and ask for further guidance. The other user explains that the mattermost/docker setup does not require the upgrade-postgres.sh script and suggests changing the release tag in the .env file and restarting the setup. The user shares the docker ps output and asks for confirmation on the steps to take. The other user confirms the steps to follow and provides the necessary commands to update the .env file and restart the setup. The user follows the instructions and confirms that it worked. They express their gratitude for the help. The other user responds with a welcome message and expresses happiness that the user&rsquo;s Mattermost is up and running.</p>
+</blockquote>
+<p>質問に対する結論から要約を導く訳ではなく、質問内の全ての回答に対する要約を生成しているようで、スレッド内のコメント数が多くなる程、単純に要約も長くなってしまうようでした。プロンプトとして、スレッドの結論を指定して要約ができたりすると、もう少し結論を元にした端的な要約が生成できるようになるのかなと思いました。</p>
+<hr>
+<p>最後に、一つ目の質問を日本語に訳したスレッドに対して要約を実行してみましたが、回答は英語で返ってきました。英語のスレッドの要約とは若干表現が違う部分がありますが、概ね同じ内容のことを言っているように見えます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary3-post.png alt="Alt text"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary3-answer.png alt="Alt text"></p>
+<blockquote>
+<p>A Mattermost app user reported that the font in the app was unintentionally changed and asked how to revert it back. The user is using Mattermost App version 5.4.0 on Windows 10 Enterprise. They mentioned that the font change issue only occurred in the Mattermost app and not in other apps or the web browser. Reinstalling the app did not resolve the issue. Another user suggested checking the C:\windows\fonts folder for the font or changing the font&rsquo;s file name if found. However, the original user resolved the issue by deleting the font and reinstalling the Mattermost app.</p>
+</blockquote>
+<h4 id=実験内部で使われているプロンプトを日本語に変更する>(実験)内部で使われているプロンプトを日本語に変更する</h4>
+<p><strong>Mattermost AI Plugin</strong>は、各ユースケースごとに使用されるプロンプトを内部に保持しています。現在、プロンプトは英語のみに対応しているため、日本語のスレッドに対しても英語の要約が生成されてしまうのだと思います。<br>
+試しに、このプロンプトの内容を日本語にして、日本語のスレッドの要約を生成させてみました。</p>
+<p>スレッド要約時のプロンプトは、以下のものが使われます。<br>
+<a href=https://github.com/mattermost/mattermost-plugin-ai/blob/4b53767d6acadb290be1266f288e9d4b755fc6c4/server/ai/prompts/summarize_thread.tmpl>https://github.com/mattermost/mattermost-plugin-ai/blob/4b53767d6acadb290be1266f288e9d4b755fc6c4/server/ai/prompts/summarize_thread.tmpl</a></p>
+<p>このプロンプトの内容を以下のように変更しました。</p>
+<pre tabindex=0><code>{{define &quot;summarize_thread.system&quot;}}
+{{template &quot;standard_personality.tmpl&quot; .}}
+あなたはスレッドを要約する専門家です。
+ユーザーがスレッドを与えると、スレッドの要約を返します。
+スレッドについては言及せず、ただ要約のみを提供して下さい。
+{{end}}
+{{define &quot;summarize_thread.user&quot;}}
+スレッドは以下の通りです:
+
+---- Thread Start ----
+{{.PromptParameters.Thread}}
+---- Thread End ----
+{{end}}
+</code></pre><p>このテンプレートから使用されている <a href=https://github.com/mattermost/mattermost-plugin-ai/blob/4b53767d6acadb290be1266f288e9d4b755fc6c4/server/ai/prompts/standard_personality.tmpl><code>standard_personality.tmpl</code></a>の方も以下のように変更しました。</p>
+<pre tabindex=0><code>あなたは利用者の手助けをするAIアシスタントです。Mattermostのサーバー名は{{.ServerName}}で、{{.CompanyName}}が所有しています。
+利用者の現在の時刻と日付は{{.Time}}です。
+利用者の名前は'{{.RequestingUser.Username}}'です。
+{{if .RequestingUser.FirstName}}
+フルネームは{{.RequestingUser.FirstName}} {{.RequestingUser.LastName}}です。
+{{end}}
+{{if .RequestingUser.Position}}
+彼らの役職は'{{.RequestingUser.Position}}'です。彼らの役職に基づいて、利用者に対する応答をカスタマイズしてください。
+{{end}}
+
+{{if and (ne .Channel nil) (ne .Channel.Type &quot;D&quot;)}}
+あなたがやり取りをしているチャンネルは'{{.Channel.Name}}'で、表示名は'{{.Channel.DisplayName}}'です。チャンネルはチーム'{{.Team.Name}}'に属しており、表示名は'{{.Team.DisplayName}}'です。
+{{end}}
+</code></pre><p>プロンプトを変更した後にプラグインをビルドし直し、再度インストールした環境で、日本語スレッドの要約を生成させると、以下の出力を得ました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary4-answer.png alt="Alt text"></p>
+<blockquote>
+<p>以下は、与えられたスレッドの要約です：</p>
+<p>Mattermostアプリのフォントが意図せず変更されてしまったが、元に戻す方法を尋ねる投稿がありました。再現手順や想定される動作についての詳細があります。他のユーザーがフォントの問題についてアドバイスをしましたが、結局はフォントを削除してアプリを再インストールした結果、問題が解決されました。ユーザーは感謝の気持ちを述べています。</p>
+</blockquote>
+<p>英語の時よりだいぶスッキリした要約が生成されていますが、最も重要な部分であるフォントファイルの場所(<code>C:\windows\fonts</code>)が回答から抜けてしまっているため、要約としては少し厳しいものがある気がしました。</p>
+<h3 id=スレッドに関する質問-answer-questions-about-threads>スレッドに関する質問 (Answer questions about Threads)</h3>
+<p>スレッドの要約を生成した後、そのスレッドに関する追加の質問を行うこともできるようです。</p>
+<p>一つ前のセクションで書いた日本語スレッド向けのプロンプトを導入した環境で、回答に含まれていなかったフォントファイルの場所について追加で質問してみたところ、以下の回答を得ました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/mattermost-plugin-ai/ai-thread-summary-response1.png alt="Alt text"></p>
+<blockquote>
+<p>はい、このスレッド内でフォントが存在するフォルダに関する議論があります。</p>
+<p>投稿者の"test-user"は、問題の解決策として、フォントが存在するフォルダであるC:\windows\fontsを確認するよう提案しています。フォルダの中にこのフォントが存在するか、またはファイルの最終更新日時をチェックすることで、問題のフォントを特定しようとしています。</p>
+<p>投稿者"kaakaa"は、フォントを削除してMattermostアプリを再インストールした結果、問題が解決されたと報告しています。フォントが存在するフォルダに関しては具体的な議論はありませんが、再インストールによって問題が解決されたことが伺えます。</p>
+</blockquote>
+<p>追加の質問をすることで、詳しい状況を確認することができました(ただ、これはスレッドの内容を知っているからできる質問であって、スレッドを読んでいない状態でこの質問を思いつくかは少し微妙だなと思いました)。</p>
+<p>また、元の要約ではメッセージを投稿したユーザー名等は出てきていませんでしたが、追加の質問ではユーザー名が明示されるようになっています。</p>
+<h3 id=openai限定の機能>OpenAI限定の機能</h3>
+<p>OpenAIのFunction calling機能を使った機能も開発中のようです。<br>
+現在は、<code>LookupMattermostUser</code>と<code>GetChannelPosts</code>、また、GitHub Pluginを有効化している場合のみ<code>GetGithubIssue</code>というFunctionが使えるようでです。詳細は<a href=https://github.com/mattermost/mattermost-plugin-ai/blob/4b53767d6acadb290be1266f288e9d4b755fc6c4/server/built_in_tools.go#L143>server/built_in_tools.go</a>の定義を参照ください。</p>
+<p>いくつか試してみましたが、思うような回答を得ることができなかったため、ここでは概要の紹介のみにとどめます。</p>
+<h1 id=さいごに>さいごに</h1>
+<p><strong>Mattermost AI Plugin</strong>の機能をいくつか試してみましたが、単純にAIに対して質問をするだけでなく、スレッドの要約や、Function Callingの機能を使ったMattermostの情報との連携など、Mattermost上での生成的AIのユースケースを色々と模索している感じがしました。<br>
+また、現時点では英語のプロンプトのみが用意されているため、まだ日本語でのチャットとは少し相性が悪いかもしれません(単純なAIチャットの機能だけなら大丈夫そうですが)。英語以外の言語への対応については、以下のIssueで方向性について意見を募集している段階のようです。</p>
+<p><a href=https://github.com/mattermost/mattermost-plugin-ai/issues/34>Support multiple languages for input messages · Issue #34 · mattermost/mattermost-plugin-ai</a></p>
+<p>対応言語に関する部分に限らず、Mattermostの情報をどのように生成的AIサービスへ連携させるかというところは試行錯誤となるであろう部分のため、今後どのような形に落ち着いていくのかは気になるところです。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/plugin/>plugin</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/ai/>ai</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/llm/>LLM</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
