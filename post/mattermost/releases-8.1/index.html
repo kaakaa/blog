@@ -1,0 +1,197 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Mattermost 8.1の新機能</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 8.1の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2023/08/25 に Mattermost のアップデートとなる v8.1.0 がリリースされました。 本バージョンはESR">
+<meta property="og:title" content="Mattermost 8.1の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2023/08/25 に Mattermost のアップデートとなる v8.1.0 がリリースされました。 本バージョンはESR">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-8.1/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-08-26T14:45:00+09:00">
+<meta property="article:modified_time" content="2023-08-26T14:45:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 8.1の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Aug 26, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
+<p>2023/08/25 に Mattermost のアップデートとなる <code>v8.1.0</code> がリリースされました。<br>
+本バージョンは<a href=https://docs.mattermost.com/upgrade/extended-support-release.html>ESR(Extended Support Release)</a>に設定されており、2024/05/15までセキュリティ対応/バグ修正等のサポートが行われる予定です。(ESRでないバージョンのサポート期間は3ヶ月間です)</p>
+<p>現在、いくつかの修正を加えた<code>v8.1.1</code>のリリース作業を進めているようなので、近日中にリリースされると思います。<br>
+8/10以降に加えられた変更が、<code>v8.1.1</code>に含まれるものだと思います。<br>
+<a href=https://github.com/mattermost/mattermost/commits/release-8.1/>https://github.com/mattermost/mattermost/commits/release-8.1/</a></p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/install/self-managed-changelog.html#release-v8-1-extended-support-release>Mattermost self-hosted changelog</a></li>
+</ul>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Free版も利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/guides/channels.html>Channels</a>: 従来のチャット機能</li>
+<li><a href=https://docs.mattermost.com/guides/playbooks.html>Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href=https://docs.mattermost.com/guides/boards.html>Boards</a>: Mattermost v6.0から追加されたKanbanボード機能 (<a href=https://www.focalboard.com/>Focalboard</a>)</li>
+<li><a href=https://docs.mattermost.com/channels/make-calls.html>Calls</a>: Mattermost上で音声通話と画面共有を行うことができるプラグイン</li>
+<li>Platform: 上記機能を含むMattermost全体</li>
+</ul>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#channels-チャンネル閲覧モーダルのui更新>(Channels) チャンネル閲覧モーダルのUI更新</a></li>
+<li><a href=#platform-パスワード復元リンクのカスタマイズ>(Platform) パスワード復元リンクのカスタマイズ</a></li>
+<li><a href=#その他の変更>その他の変更</a>
+<ul>
+<li><a href=#channels-解決-チャンネル名に日本語を指定する場合の注意点>(Channels) [解決] チャンネル名に日本語を指定する場合の注意点</a></li>
+</ul>
+</li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#mattermost-v90>Mattermost v9.0</a></li>
+<li><a href=#mattermost-ai-plugin>Mattermost AI plugin</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=channels-チャンネル閲覧モーダルのui更新>(Channels) チャンネル閲覧モーダルのUI更新</h2>
+<p>左サイドバーの <strong>チャンネルを追加する > チャンネルを閲覧する</strong> を選択することで開くチャンネル一覧を閲覧する画面の内容が更新されました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-8.1/channels-browse-channels.png alt="Alt text"></p>
+<p>参加済みのチャンネルには、チャンネル名の下に <code>Joined</code> 表示されるようになり、また、右上の<code>Hide Joined</code>のチェックボックスから参加済みのチャンネルを非表示に設定できるようになりました。</p>
+<h2 id=platform-パスワード復元リンクのカスタマイズ>(Platform) パスワード復元リンクのカスタマイズ</h2>
+<p>Mattermostのログイン画面には、パスワードを忘れた場合にユーザー自身でパスワードの再設定を実施するための<code>パスワードをお忘れですか?</code>というリンクが表示されていますが、このリンクをカスタマイズできるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-8.1/platform-forgot-password.png alt="Alt text"></p>
+<p>まず、<strong>システムコンソール > サイト設定 > カスタマイズ > Forgot Password Custom Link(パスワード再設定カスタムリンク)</strong> から、<code>パスワードをお忘れですか?</code>のリンクを自由に設定することができます。これは、パスワード再設定を組織内の定められたプロセスで行いたい場合に、そのプロセスの案内ページへのリンクを設定するなどのユースケースで利用できます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-8.1/platform-forgot-custom-link.png alt="Alt text"></p>
+<p>まず、<strong>システムコンソール > 認証 > パスワード > Enable Forgot Password Link(パスワード再設定リンクを有効にする)</strong> から、<code>パスワードをお忘れですか?</code>のリンクを非表示にすることもできます。ただ、パスワード再設定リンクを非表示にした場合、ユーザーがパスワードを忘れると復元する手段がなくなってしまうため、<strong>システムコンソール > サイト設定 > カスタマイズ > 独自ブランド機能を有効にする</strong>を有効にし、<strong>独自ブランドテキスト</strong>に管理者の連絡先を記載するなど、復旧手段も合わせて検討する必要があるかと思います。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-8.1/platform-forgot-password-disabled.png alt="Alt text"></p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-8.1/platform-forgot-password-brandtext.png alt="Alt text"></p>
+<h2 id=その他の変更>その他の変更</h2>
+<h3 id=channels-解決-チャンネル名に日本語を指定する場合の注意点>(Channels) [解決] チャンネル名に日本語を指定する場合の注意点</h3>
+<p>Mattermost v8.0リリース時のエントリにも書きましたが、新しくチャンネルを作成する際、チャンネル名に日本語を指定すると意図しないタイミングでチャンネル作成が実施されることがあり、その件についてIssueを立てていました。<br>
+<a href=https://github.com/mattermost/mattermost/issues/23967>Unexpectedly fire the handleEnterKeyPress in NewChannelModal with Japanese IME input mode · Issue #23967 · mattermost/mattermost</a><br>
+<a href=https://blog.kaakaa.dev/post/mattermost/releases-8.0/#channels-%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB%E5%90%8D%E3%81%AB%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%82%92%E6%8C%87%E5%AE%9A%E3%81%99%E3%82%8B%E5%A0%B4%E5%90%88%E3%81%AE%E6%B3%A8%E6%84%8F%E7%82%B9>(Channels) チャンネル名に日本語を指定する場合の注意点 - Mattermost 8.0の新機能</a></p>
+<p>Mattermost v8.1でも再現するか確認したところ再現せず、Mattermostに対する変更を見ていたところ、ちょうどv8.1リリースに向けてKorean IMEのEnterキーの問題を解決するPRが取り込まれており、おそらくこの影響でチャンネル作成時の日本語の問題も解決されていたのだと思います（詳細までは理解しきれていないですが）。<br>
+<a href=https://github.com/mattermost/mattermost/pull/23839>MM-51676 - korean chars create duplicate categories by pvev · Pull Request #23839 · mattermost/mattermost</a></p>
+<p>もし、v8.1以降でも再現する方がいれば、上記のIssueに追加でコメントするか、新規にIssueを立てていただければと思います。</p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<h3 id=mattermost-v90>Mattermost v9.0</h3>
+<p>来月(2023/09/15)にリリース予定のMattermostの次バージョンは、メジャーアップデートとなるMattermost v9.0になる予定だそうです。<br>
+これは、大規模な新機能があるというより、いくつかの機能の削減の必要に迫られてという感じのようです。</p>
+<p>大きな話としては、Mattermost Board(Focalboard)の機能の公式サポートが終了するようです。また、その他にも多くのプラグインが公式のサポートを外れ、限られたプラグインのみをサポートしていく方針だと以下のForumエントリで語られています。<br>
+<a href=https://forum.mattermost.com/t/upcoming-product-changes-to-boards-and-various-plugins/16669>Upcoming product changes to Boards and various plugins - Announcements - Mattermost Discussion Forums</a></p>
+<p>その他、Mattermost v9.0で削減される機能については以下を参照ください。<br>
+<a href=https://docs.mattermost.com/install/deprecated-features.html#removed-features-in-upcoming-versions>Removed and deprecated features for Mattermost</a></p>
+<h3 id=mattermost-ai-plugin>Mattermost AI plugin</h3>
+<p>先月のMattermost v8.0のリリースエントリでも触れましたが、最近Mattermost AIプラグインの活動が活発なようです。<br>
+<a href=https://github.com/mattermost/mattermost-plugin-ai>mattermost/mattermost-plugin-ai: Mattermost plugin for LLMs</a></p>
+<p>Mattermost公式YouTubeチャンネルの方でも、Mattermost AI関連の動画がよくアップロードされています。<br>
+<a href=https://www.youtube.com/@MattermostHQ/videos>Mattermost - YouTube</a></p>
+<p>自分も、少し触ってみた感触に関する記事を書きました。<br>
+<a href=https://zenn.dev/kaakaa/articles/mattermost-plugin-ai>Mattermost AI Pluginを試してみた</a></p>
+<p>まだ安定版という感じではないですが、Mattermost上の様々な場面でAIを使えるようにしていこうとしているようなので、AIのユースケースの参考として少し触ってみるのも面白いかと思います。</p>
+<h2 id=おわりに>おわりに</h2>
+<p>次の<code>v9.0</code>のリリースは 2023/09/15(Fri)を予定しています。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
