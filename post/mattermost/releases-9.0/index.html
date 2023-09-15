@@ -96,7 +96,7 @@ Mattermost 9.0の新機能
 <li><a href=#gif画像サービスがgifycatからgiphyに>GIF画像サービスがGifycatからGIPHYに</a></li>
 <li><a href=#その他の変更>その他の変更</a>
 <ul>
-<li><a href=#boards-pluginを始めとした多くのプラグインのコミュニティへの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへの移行</a></li>
+<li><a href=#boards-pluginを始めとした多くのプラグインのコミュニティへサポートの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへサポートの移行</a></li>
 <li><a href=#インサイト機能の削除>インサイト機能の削除</a></li>
 </ul>
 </li>
@@ -108,37 +108,37 @@ Mattermost 9.0の新機能
 <li><a href=#おわりに>おわりに</a></li>
 </ul>
 </nav><h2 id=channels-チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように>(Channels) チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように</h2>
-<p>左サイドバーの <strong>チャンネルを追加する > チャンネルを閲覧する</strong> を選択することで開くチャンネル一覧を閲覧する画面が更新され、チャンネルに所属するユーザー数やチャンネルの説明が見れるようになりました。</p>
+<p>左サイドバーの <strong>チャンネルを追加する > チャンネルを閲覧する</strong> メニューで開くことができるチャンネル一覧を閲覧するモーダルの表示内容が更新され、各チャンネルに所属するユーザー数やチャンネルの説明が見れるようになりました。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-browse-channels.png alt="Alt text"></p>
 <h2 id=channels-カテゴリ全体を既読にするメニューの追加>(Channels) カテゴリ全体を既読にするメニューの追加</h2>
-<p>チャンネルカテゴリ内に未読投稿が残っているチャンネルが存在する場合に、一括でカテゴリ内の全チャンネルを既読にするメニュー <code>Mark category as read</code> が追加されました。</p>
+<p>チャンネルカテゴリ内に未読投稿が残っているチャンネルが存在する場合に、一括でカテゴリ内の全チャンネルを既読にできるメニュー <code>Mark category as read</code> が追加されました。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-mark-category-1.png alt="Alt text"></p>
 <p><code>Mark category as read</code> メニューをクリックすると、以下のようなダイアログが表示されます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-mark-category-2.png alt="Alt text"></p>
 <p><code>Mark as read</code>を選ぶと、選択したカテゴリ内の全チャンネルが既読状態になります。</p>
 <h2 id=gif画像サービスがgifycatからgiphyに>GIF画像サービスがGifycatからGIPHYに</h2>
-<p>Mattermostの投稿にGIF動画を貼る機能では、今までGifycatが使われていましたが、<a href=https://techcrunch.com/2023/07/05/gfycat-shuts-down-on-september-1/>Gifycatが2023/09/01にサービス終了する</a>ことを受け、GIFサービスとして新たに<a href=https://giphy.com/>GIPHY</a>が使われるようになりました。</p>
+<p>今までのバージョンでは、Mattermostの投稿にGIF動画を貼る機能としてGifycatが使用されていましたが、<a href=https://techcrunch.com/2023/07/05/gfycat-shuts-down-on-september-1/>Gifycatが2023/09/01にサービス終了する</a>ことを受け、GIFサービスとして新たに<a href=https://giphy.com/>GIPHY</a>が使用されるようになりました。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-giphy.png alt="Alt text"></p>
 <p>過去のGifycatを採用していたバージョンのMattermostを使用している場合、GIF画像が何も表示されない状態となっています。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-gfycat.png alt="Alt text"></p>
 <h2 id=その他の変更>その他の変更</h2>
-<h3 id=boards-pluginを始めとした多くのプラグインのコミュニティへの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへの移行</h3>
-<p>前バージョン(v8.1)リリース時も予告がありましたが、Mattermost公式チームによりメンテナンスされていたBoardsプラグインを含む多くのプラグインがコミュニティサポートに移行しました。引き続きプラグイン自体は利用できますが、Mattermost公式チームがバグフィックスを含むプラグインの更新に携わらなくなります。</p>
+<h3 id=boards-pluginを始めとした多くのプラグインのコミュニティへサポートの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへサポートの移行</h3>
+<p>前バージョン(v8.1)リリース時も予告がありましたが、Mattermost公式チームによりメンテナンスされていた多くのプラグインがコミュニティサポートに移行しました。引き続きプラグイン自体は利用できますが、Mattermost公式チームがバグフィックスを含むプラグインの更新に携わらなくなります。</p>
 <p>コミュニティサポートに移行するプラグイン一覧は以下のページで確認できます。
 <a href=https://forum.mattermost.com/t/upcoming-product-changes-to-boards-and-various-plugins/16669>Upcoming product changes to Boards and various plugins - Announcements - Mattermost Discussion Forums</a></p>
-<p>Mattermost v6.0リリース時にMattermostのコア機能として追加されたBoards(Focalboard)も、コミュニティサポートに移行するプラグインに含まれます。<br>
-Boardsが削除される理由としては、Boards機能のユースケースが限定的で、プロジェクト管理はJiraのようなツールで行われるのが一般的であり、さらにPlaybooks機能を使うことでよりよく解決できるはずだと説明されています。<br>
-Boards機能についてはUIの自由度が高いために細かなバグが多い印象があり、メンテナンスコストも高かったのかなと想像しています。</p>
+<p>Mattermost v6.0リリース時にMattermostのコア機能として追加された<a href=https://github.com/mattermost/focalboard/blob/main/docs/index.md>Boardsプラグイン(Focalboard)</a>も、コミュニティサポートに移行するプラグインに含まれます。<br>
+Boardsが削除される理由としては、Boards機能のユースケースが限定的で、プロジェクト管理はJiraのようなツールで行われるのが一般的であり、さらにPlaybooks機能を使うことで同じ問題をよりよく解決できるはずだと説明されています。<br>
+Boards機能については、UIの自由度が高いために細かなバグが多い印象があり、メンテナンスコストも高かったのかなと想像しています。</p>
 <h3 id=インサイト機能の削除>インサイト機能の削除</h3>
 <p>Mattermost v7.1でベータ版として追加されたインサイト機能が削除されました。<br>
 <a href=https://blog.kaakaa.dev/post/mattermost/releases-7.1/#professionalenterprise-platform-%E3%82%A4%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%88-%E3%83%99%E3%83%BC%E3%82%BF%E7%89%88>Platform: インサイト(ベータ版) - Mattermost 7.1の新機能</a></p>
-<p>DBへの負荷が高いのが原因だと見た記憶があります。</p>
+<p>DBへの負荷が高いのが原因だとどこかで見た記憶があります。</p>
 <h2 id=その他のトピック>その他のトピック</h2>
 <h3 id=mysql非推奨化に向けた活動>MySQL非推奨化に向けた活動</h3>
-<p>Mattermostでは、バックエンドのDBとしてMySQLとPostgreSQLのどちらかを選択することができますが、Mattermost v11.0にMySQLの利用を非推奨とする予定があるそうです。<br>
-以下のIssueの中にで一部説明がありますが、大規模な環境ではMySQLに信頼性とパフォーマンスの問題が起こりがちで、サポートコストがかかることが判断の一因とのことです。
+<p>Mattermostでは、バックエンドのDBとしてMySQLとPostgreSQLのどちらかを選択することができますが、Mattermost v11.0からMySQLの利用を非推奨とする予定があるそうです。<br>
+以下のIssueの中でその理由について一部説明されていますが、大規模な環境ではMySQLを使用している場合に信頼性とパフォーマンスの問題が起こりがちで、サポートコストがかかることが判断の一因とのことです。
 <a href=https://github.com/mattermost/mattermost-plugin-ai/issues/19>Support MySQL · Issue #19 · mattermost/mattermost-plugin-ai</a></p>
-<p>先日、MySQLからPostgreSQLへの移行ガイドラインのドラフトが公開され、フィードバックを募集しています。
+<p>先日、MySQLからPostgreSQLへの移行ガイドラインのドラフトが公開され、現在フィードバックを募集している状況です。
 <a href=https://docs.mattermost.com/deploy/postgres-migration.html>Migration guidelines from MySQL to PostgreSQL</a></p>
 <h2 id=おわりに>おわりに</h2>
 <p>次の<code>v9.1</code>のリリースは 2023/10/16(Mon)を予定しています。</p>
