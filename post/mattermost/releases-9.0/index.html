@@ -1,0 +1,192 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Mattermost 9.0の新機能</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 9.0の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2023/09/15 に Mattermost のメジャーアップデートとなる v9.0.0 がリリースされました。 2023/0">
+<meta property="og:title" content="Mattermost 9.0の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2023/09/15 に Mattermost のメジャーアップデートとなる v9.0.0 がリリースされました。 2023/0">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-9.0/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-09-16T00:00:00+09:00">
+<meta property="article:modified_time" content="2023-09-16T00:00:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 9.0の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Sep 16, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
+<p>2023/09/15 に Mattermost のメジャーアップデートとなる <code>v9.0.0</code> がリリースされました。<br>
+2023/07/14に<code>v8.0.0</code>が出たばかりで、2ヶ月ほどでのメジャーバージョンアップですが、これはいくつかの主要機能を削除したことによる破壊的な変更という意味でのメジャーバージョンアップの位置付けかと思います。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href=https://mattermost.com/blog/mattermost-v9-0-is-now-available/>Mattermost v9.0 offers new secure collaboration solutions in AI, Dev/Sec/ChatOps, and Zero Trust from partners</a></li>
+<li><a href=https://docs.mattermost.com/install/self-managed-changelog.html#release-v9-0-major-release>Mattermost self-hosted changelog</a></li>
+</ul>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Free版も利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/guides/channels.html>Channels</a>: 従来のチャット機能</li>
+<li><a href=https://docs.mattermost.com/guides/playbooks.html>Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href=https://docs.mattermost.com/channels/make-calls.html>Calls</a>: Mattermost上で音声通話と画面共有を行うことができるプラグイン</li>
+<li>Platform: 上記機能を含むMattermost全体</li>
+</ul>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#channels-チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように>(Channels) チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように</a></li>
+<li><a href=#channels-カテゴリ全体を既読にするメニューの追加>(Channels) カテゴリ全体を既読にするメニューの追加</a></li>
+<li><a href=#gif画像サービスがgifycatからgiphyに>GIF画像サービスがGifycatからGIPHYに</a></li>
+<li><a href=#その他の変更>その他の変更</a>
+<ul>
+<li><a href=#boards-pluginを始めとした多くのプラグインのコミュニティへの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへの移行</a></li>
+<li><a href=#インサイト機能の削除>インサイト機能の削除</a></li>
+</ul>
+</li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#mysql非推奨化に向けた活動>MySQL非推奨化に向けた活動</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=channels-チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように>(Channels) チャンネル閲覧モーダルにチャンネル内のユーザー数が表示されるように</h2>
+<p>左サイドバーの <strong>チャンネルを追加する > チャンネルを閲覧する</strong> を選択することで開くチャンネル一覧を閲覧する画面が更新され、チャンネルに所属するユーザー数やチャンネルの説明が見れるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-browse-channels.png alt="Alt text"></p>
+<h2 id=channels-カテゴリ全体を既読にするメニューの追加>(Channels) カテゴリ全体を既読にするメニューの追加</h2>
+<p>チャンネルカテゴリ内に未読投稿が残っているチャンネルが存在する場合に、一括でカテゴリ内の全チャンネルを既読にするメニュー <code>Mark category as read</code> が追加されました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-mark-category-1.png alt="Alt text"></p>
+<p><code>Mark category as read</code> メニューをクリックすると、以下のようなダイアログが表示されます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-mark-category-2.png alt="Alt text"></p>
+<p><code>Mark as read</code>を選ぶと、選択したカテゴリ内の全チャンネルが既読状態になります。</p>
+<h2 id=gif画像サービスがgifycatからgiphyに>GIF画像サービスがGifycatからGIPHYに</h2>
+<p>Mattermostの投稿にGIF動画を貼る機能では、今までGifycatが使われていましたが、<a href=https://techcrunch.com/2023/07/05/gfycat-shuts-down-on-september-1/>Gifycatが2023/09/01にサービス終了する</a>ことを受け、GIFサービスとして新たに<a href=https://giphy.com/>GIPHY</a>が使われるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-giphy.png alt="Alt text"></p>
+<p>過去のGifycatを採用していたバージョンのMattermostを使用している場合、GIF画像が何も表示されない状態となっています。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.0/channels-gfycat.png alt="Alt text"></p>
+<h2 id=その他の変更>その他の変更</h2>
+<h3 id=boards-pluginを始めとした多くのプラグインのコミュニティへの移行>Boards Pluginを始めとした多くのプラグインのコミュニティへの移行</h3>
+<p>前バージョン(v8.1)リリース時も予告がありましたが、Mattermost公式チームによりメンテナンスされていたBoardsプラグインを含む多くのプラグインがコミュニティサポートに移行しました。引き続きプラグイン自体は利用できますが、Mattermost公式チームがバグフィックスを含むプラグインの更新に携わらなくなります。</p>
+<p>コミュニティサポートに移行するプラグイン一覧は以下のページで確認できます。
+<a href=https://forum.mattermost.com/t/upcoming-product-changes-to-boards-and-various-plugins/16669>Upcoming product changes to Boards and various plugins - Announcements - Mattermost Discussion Forums</a></p>
+<p>Mattermost v6.0リリース時にMattermostのコア機能として追加されたBoards(Focalboard)も、コミュニティサポートに移行するプラグインに含まれます。<br>
+Boardsが削除される理由としては、Boards機能のユースケースが限定的で、プロジェクト管理はJiraのようなツールで行われるのが一般的であり、さらにPlaybooks機能を使うことでよりよく解決できるはずだと説明されています。<br>
+Boards機能についてはUIの自由度が高いために細かなバグが多い印象があり、メンテナンスコストも高かったのかなと想像しています。</p>
+<h3 id=インサイト機能の削除>インサイト機能の削除</h3>
+<p>Mattermost v7.1でベータ版として追加されたインサイト機能が削除されました。<br>
+<a href=https://blog.kaakaa.dev/post/mattermost/releases-7.1/#professionalenterprise-platform-%E3%82%A4%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%88-%E3%83%99%E3%83%BC%E3%82%BF%E7%89%88>Platform: インサイト(ベータ版) - Mattermost 7.1の新機能</a></p>
+<p>DBへの負荷が高いのが原因だと見た記憶があります。</p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<h3 id=mysql非推奨化に向けた活動>MySQL非推奨化に向けた活動</h3>
+<p>Mattermostでは、バックエンドのDBとしてMySQLとPostgreSQLのどちらかを選択することができますが、Mattermost v11.0にMySQLの利用を非推奨とする予定があるそうです。<br>
+以下のIssueの中にで一部説明がありますが、大規模な環境ではMySQLに信頼性とパフォーマンスの問題が起こりがちで、サポートコストがかかることが判断の一因とのことです。
+<a href=https://github.com/mattermost/mattermost-plugin-ai/issues/19>Support MySQL · Issue #19 · mattermost/mattermost-plugin-ai</a></p>
+<p>先日、MySQLからPostgreSQLへの移行ガイドラインのドラフトが公開され、フィードバックを募集しています。
+<a href=https://docs.mattermost.com/deploy/postgres-migration.html>Migration guidelines from MySQL to PostgreSQL</a></p>
+<h2 id=おわりに>おわりに</h2>
+<p>次の<code>v9.1</code>のリリースは 2023/10/16(Mon)を予定しています。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
