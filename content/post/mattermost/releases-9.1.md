@@ -71,18 +71,17 @@ Mattermostでは、複数人が参加するダイレクトメッセージを「�
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-gm-notification.png)
 
-Mattermost v9.1以降でグループメッセージを表示すると、以下のようなポップアップが表示されます。
+Mattermost v9.1以降でグループメッセージを表示すると、通知設定の変更に関する以下のようなポップアップが表示されます。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-gm-notification-popup.png)
 
 
 ## (Channels) セルフホストMarketplaceが再び利用可能に
 
-
-Mattermost v9.0にて、Mattermost UI上のマーケットプレースで管理可能なプラグインが[大幅に絞られる](https://blog.kaakaa.dev/post/mattermost/releases-9.0/#boards-plugin%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A8%E3%81%97%E3%81%9F%E5%A4%9A%E3%81%8F%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%B8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E7%A7%BB%E8%A1%8C)こととなり、コミュニティ管理のプラグインについては、今後、プラグインの更新があった場合に手動でのプラグインアップデートを実施しなくてはならなくなりました。
+Mattermost v9.0にて、Mattermost UI上のマーケットプレースで管理可能なプラグインが[大幅に絞られる](https://blog.kaakaa.dev/post/mattermost/releases-9.0/#boards-plugin%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A8%E3%81%97%E3%81%9F%E5%A4%9A%E3%81%8F%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%B8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E7%A7%BB%E8%A1%8C)こととなり、Mattermost公式によってサポートされていないコミュニティ管理のプラグインについては、今後、プラグインの更新があった場合に手動でのプラグインアップデートを実施しなくてはならなくなりました。
 
 今後も引き続きMattermost UI上のマーケットプレース画面でプラグインの管理を実施するための機能として、セルフホストのMarketplaceと接続する設定が復活しました。  
-[mattermost/mattermost\-marketplace](https://github.com/mattermost/mattermost-marketplace)を起動し、そのURLを`PluginSettings.MarketplaceURL`に設定し、`PluginSettings.EnableRemoteMarketplace`を`true`とすることで、セルフホストのマーケットプレースに接続できるようになります。
+[mattermost/mattermost\-marketplace](https://github.com/mattermost/mattermost-marketplace)を起動し、そのURLを`PluginSettings.MarketplaceURL`に設定し、`PluginSettings.EnableRemoteMarketplace`を`true`とすることで、セルフホストのマーケットプレースに接続できるようになり、Mattermost公式によってサポートされていないプラグインもMattermost UI上のマーケットプレースから管理できるようになります。
 
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-marketplace.png)
 
@@ -98,7 +97,7 @@ Mattermost v9.0にて、Mattermost UI上のマーケットプレースで管理�
 
 [Hacktoberfest 2023: Celebrate open source, make an impact on the planet](https://mattermost.com/blog/mattermost-hacktoberfest-2023/)
 
-Hacktoberfestへの参加登録を行うと、[Holopin](https://www.holopin.io/)からBadgeが送られてきますが、上記のブログエントリの末尾にもMattermostからのHolopin Badgeがもらえるリンクが記載されています。
+Hacktoberfestへの参加登録を行うと、[Holopin](https://www.holopin.io/)からBadgeが送られてきますが、上記のブログエントリの末尾にMattermostからのHolopin Badgeがもらえるリンクが記載されています。
 
 ## おわりに
 次の`v9.2`のリリースは 2023/11/16(Thu)を予定しています。  
