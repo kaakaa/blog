@@ -121,12 +121,12 @@ Mattermost 9.1の新機能
 <h2 id=channels-グループメッセージへの投稿の通知設定が変更に>(Channels) グループメッセージへの投稿の通知設定が変更に</h2>
 <p>グループメッセージの通知設定が変更され、明示的にメンションされていなくてもメンションされた時と同様、チャンネル名の横に投稿数を示すバッジが表示され、デスクトップ通知が実施されるようになりました。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-gm-notification.png alt="Alt text"></p>
-<p>Mattermost v9.1以降でグループメッセージを表示すると、以下のようなポップアップが表示されます。</p>
+<p>Mattermost v9.1以降でグループメッセージを表示すると、通知設定の変更に関する以下のようなポップアップが表示されます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-gm-notification-popup.png alt="Alt text"></p>
 <h2 id=channels-セルフホストmarketplaceが再び利用可能に>(Channels) セルフホストMarketplaceが再び利用可能に</h2>
-<p>Mattermost v9.0にて、Mattermost UI上のマーケットプレースで管理可能なプラグインが<a href=https://blog.kaakaa.dev/post/mattermost/releases-9.0/#boards-plugin%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A8%E3%81%97%E3%81%9F%E5%A4%9A%E3%81%8F%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%B8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E7%A7%BB%E8%A1%8C>大幅に絞られる</a>こととなり、コミュニティ管理のプラグインについては、今後、プラグインの更新があった場合に手動でのプラグインアップデートを実施しなくてはならなくなりました。</p>
+<p>Mattermost v9.0にて、Mattermost UI上のマーケットプレースで管理可能なプラグインが<a href=https://blog.kaakaa.dev/post/mattermost/releases-9.0/#boards-plugin%E3%82%92%E5%A7%8B%E3%82%81%E3%81%A8%E3%81%97%E3%81%9F%E5%A4%9A%E3%81%8F%E3%81%AE%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%83%86%E3%82%A3%E3%81%B8%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E7%A7%BB%E8%A1%8C>大幅に絞られる</a>こととなり、Mattermost公式によってサポートされていないコミュニティ管理のプラグインについては、今後、プラグインの更新があった場合に手動でのプラグインアップデートを実施しなくてはならなくなりました。</p>
 <p>今後も引き続きMattermost UI上のマーケットプレース画面でプラグインの管理を実施するための機能として、セルフホストのMarketplaceと接続する設定が復活しました。<br>
-<a href=https://github.com/mattermost/mattermost-marketplace>mattermost/mattermost-marketplace</a>を起動し、そのURLを<code>PluginSettings.MarketplaceURL</code>に設定し、<code>PluginSettings.EnableRemoteMarketplace</code>を<code>true</code>とすることで、セルフホストのマーケットプレースに接続できるようになります。</p>
+<a href=https://github.com/mattermost/mattermost-marketplace>mattermost/mattermost-marketplace</a>を起動し、そのURLを<code>PluginSettings.MarketplaceURL</code>に設定し、<code>PluginSettings.EnableRemoteMarketplace</code>を<code>true</code>とすることで、セルフホストのマーケットプレースに接続できるようになり、Mattermost公式によってサポートされていないプラグインもMattermost UI上のマーケットプレースから管理できるようになります。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.1/channels-marketplace.png alt="Alt text"></p>
 <h2 id=その他の変更>その他の変更</h2>
 <p>特になし</p>
@@ -134,7 +134,7 @@ Mattermost 9.1の新機能
 <h3 id=hacktoberfest-2023>Hacktoberfest 2023</h3>
 <p>もう10月も下旬に差し掛かってきましたが、今年もMattermostはHacktoberfestへの参加を奨励しています。</p>
 <p><a href=https://mattermost.com/blog/mattermost-hacktoberfest-2023/>Hacktoberfest 2023: Celebrate open source, make an impact on the planet</a></p>
-<p>Hacktoberfestへの参加登録を行うと、<a href=https://www.holopin.io/>Holopin</a>からBadgeが送られてきますが、上記のブログエントリの末尾にもMattermostからのHolopin Badgeがもらえるリンクが記載されています。</p>
+<p>Hacktoberfestへの参加登録を行うと、<a href=https://www.holopin.io/>Holopin</a>からBadgeが送られてきますが、上記のブログエントリの末尾にMattermostからのHolopin Badgeがもらえるリンクが記載されています。</p>
 <h2 id=おわりに>おわりに</h2>
 <p>次の<code>v9.2</code>のリリースは 2023/11/16(Thu)を予定しています。</p>
 <div class=blog-tags>
