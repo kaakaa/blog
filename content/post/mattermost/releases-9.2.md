@@ -15,7 +15,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 2023/11/16 に Mattermost のアップデートとなる `v9.2.2` がリリースされました。  
 
-今までCloud版のMattermostとセルフホスト版のMattermostは異なるリリースサイクルとなっていましたが、本バージョンからリリースサイクルを揃えることになった影響で、セルフホスト版のリリースバージョンが`v9.2.2`となっています。
+今までCloud版のMattermostとセルフホスト版のMattermostは異なるリリースサイクルを採用していましたが、本バージョンからリリースサイクルを揃えることになった影響で、セルフホスト版のリリースバージョンが`v9.2.2`となっています。
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
@@ -49,10 +49,10 @@ Changelogのページも新しくなっており、`v9.1`以前のバージョ�
 
 複数行のチャンネルヘッダーを編集する際、ヘッダーを編集したことを通知するシステムメッセージでは改行が削除された形で書き込まれていましたが、本バージョンから改行を維持したまま編集内容を表示するようになりました。
 
-* Mattermost v9.1 (以前のバージョン)
+* Mattermost v9.1 (以前のバージョン)  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.2/channels-sysmsg-header-v91.png)
 
-* Mattermost v9.2 (今回のバージョン)
+* Mattermost v9.2 (今回のバージョン)  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.2/channels-sysmsg-header-v92.png)
 
 ## その他の変更
@@ -64,7 +64,7 @@ Changelogのページも新しくなっており、`v9.1`以前のバージョ�
 
 ### Mattermost MVP
 
-今回のリリースで、3度目のMattermost MVPに選出いただきました。　 
+今回のリリースで、3度目のMattermost MVPに選出いただきました。  
 [Mattermost MVP](https://developers.mattermost.com/contribute/more-info/mvp/)
 
 あまり主だった活動はしていなかった認識だったので面食らいましたが、貰えるものはありがたく頂戴したいと思います。
