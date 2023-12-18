@@ -44,14 +44,16 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## Channels: 設定モーダルのデザイン変更
 
-**設定**や**プロフィール**メニューを開いた時に表示されるモーダルのでデザインが変更されました。
+**設定**や**プロフィール**メニューを開いた時に表示されるモーダルのデザインが変更されました。
 
 左が旧バージョン(Mattermost v9.2)で、右が新バージョン(Mattermost v9.3)になります。  
+
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-modal-design.png)
 
 ## Channels: 最新の投稿に移動するボタンの表示
 
-チャンネルの投稿を過去に遡った際に、最新の投稿まで1クリックで戻ることができるボタンが表示されるようになりました。
+チャンネルの投稿を過去に遡った際に、最新の投稿まで1クリックで戻ることができるボタンが表示されるようになりました。  
+
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-jump-to-recent.png)
 
 ## Channels: 1投稿に対するリアクション種別の上限設定
@@ -65,18 +67,20 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 **システムコンソール > サイト設定 > 投稿 > Unique Emoji Reaction Limit**から設定できます。初期値は`50`に設定されています。  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-unique-emoji-settings.png)
 
-上限値を超える種別のリアクションを付与しようとすると、以下のモーダルが表示され、リアクションを付与できません。  
+上限値を超える種別のリアクションを付与しようとすると、以下のモーダルが表示され、リアクションを付与できません。(以下の例は**Unique Emoji Reaction Limit**を`5`に設定し、6種類目のリアクションを付与しようとした際に表示される画面です。)  
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-unique-emoji-error.png)
 
 ## (Professional/Enterprise) Channels: 通知なしのキーワードハイライト
 
-今まで、**通知のトリガーとなるキーワード**に設定された単語は、その単語を含む投稿が行われた際にMattermostから通知が送信されると共にMattermost画面上でハイライト表示されていましたが、今回のバージョンから、通知を行うことなくMattermost画面上でのハイライト表示のみが行われるキーワードを設定できるようになりました。  
-例えば`"AI"`のような、その単語を含む投稿は注目はしておきたい物の、そのような投稿がたくさん行われることが予想されるために一々通知はしてほしくない、というような場合に使用できる機能かと思います。
+今まで、**通知のトリガーとなるキーワード**に設定された単語は、その単語を含む投稿が行われた際にMattermostから通知が送信されると共にMattermost画面上でハイライト表示されていましたが、今回のバージョンから、通知を行うことなくMattermost画面上でのハイライト表示のみを行うキーワードを設定できるようになりました。  
+例えば`"AI"`のような、その単語を含む投稿は注目はしておきたいものの、そのような投稿が数多く行われることが予想されるために一々通知はして欲しくない、というような場合に使用できる機能です。
 
-**設定 > 通知 > ハイライトされるキーワード（通知はされません）**から設定できます。  
+**設定 > 通知 > ハイライトされるキーワード（通知はされません）** から設定できます。  
+
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight-settings.png)
 
 設定したキーワードは、以下のようにハイライトされます。  
+
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight.png)
 
 この機能は、有償版(Professional/Enterprise)限定の機能です。
@@ -87,6 +91,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 > Removed all uses of the `ExperimentalTimezone` setting. The Timezone feature is now always enabled and no longer behind a configuration setting.
 
 今までのバージョンですは、**システムコンソール > 実験的機能 > 機能 > タイムゾーン**を`有効`に設定した場合に限り、各ユーザーの設定画面で自身のタイムゾーンを設定することができましたが、v9.3から正式な機能となっため、システムコンソールの**タイムゾーン**設定が削除され、すべての環境でユーザーがタイムゾーンを設定できるようになりました。
+
 ![Alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-timezone.png)
 
 > Added support for previewing WebVTT attachments.
@@ -95,14 +100,14 @@ WebVTT形式のファイルプレビューに対応しました。
 
 ---
 
-その他、パフォーマンス改善やログ出力改善とうの変更が数多くあります。  
+その他、パフォーマンス改善やログ出力改善等の変更が数多くあります。  
 詳しくは[公式のChangelog](https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-3-feature-release)を参照ください。
 
 ## その他のトピック
 
 ### Hacktoberfest 2023 
 
-10月に行われていた[Hacktoberfest 2023](https://hacktoberfest.com/)のWrap upが以下の記事にまとめられています。　 
+10月に行われていた[Hacktoberfest 2023](https://hacktoberfest.com/)のWrap upが以下の記事にまとめられています。  
 期間中、Mattermostとしては80人のコントリビューターによる159のPull Requestがマージされたようです。
 
 [Hacktoberfest 2023: Incredible community contributions, digital rewards & a healthier planet \- Mattermost](https://mattermost.com/blog/hacktoberfest-2023-incredible-community-contributions-digital-rewards-a-healthier-planet/)
@@ -116,7 +121,7 @@ MySQL v8にアップグレードすることの影響等は以下の記事で説
 
 ### Mattermost Enterprise版の紹介
 
-Mattermostの有償版であるEnterprise Editionによって、どのようにワークフローを改善できるかについて以下の記事で紹介されています。  
+Mattermostの有償版であるEnterprise Editionの機能を使うことで、どのようにワークフローを改善できるかについて以下の記事で紹介されています。  
 
 * [Enterprise Collaboration with Advanced Workflows \- Mattermost](https://mattermost.com/blog/enterprise-collaboration-with-advanced-workflows/)
 * [Mattermost Playbooks for Enterprise Workflows \- Mattermost](https://mattermost.com/blog/mattermost-playbooks-for-enterprise-workflows/)
