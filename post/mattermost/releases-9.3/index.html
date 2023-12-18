@@ -109,12 +109,12 @@ Mattermost 9.3の新機能
 <li><a href=#おわりに>おわりに</a></li>
 </ul>
 </nav><h2 id=channels-設定モーダルのデザイン変更>Channels: 設定モーダルのデザイン変更</h2>
-<p><strong>設定</strong>や<strong>プロフィール</strong>メニューを開いた時に表示されるモーダルのでデザインが変更されました。</p>
-<p>左が旧バージョン(Mattermost v9.2)で、右が新バージョン(Mattermost v9.3)になります。<br>
-<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-modal-design.png alt="Alt text"></p>
+<p><strong>設定</strong>や<strong>プロフィール</strong>メニューを開いた時に表示されるモーダルのデザインが変更されました。</p>
+<p>左が旧バージョン(Mattermost v9.2)で、右が新バージョン(Mattermost v9.3)になります。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-modal-design.png alt="Alt text"></p>
 <h2 id=channels-最新の投稿に移動するボタンの表示>Channels: 最新の投稿に移動するボタンの表示</h2>
-<p>チャンネルの投稿を過去に遡った際に、最新の投稿まで1クリックで戻ることができるボタンが表示されるようになりました。
-<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-jump-to-recent.png alt="Alt text"></p>
+<p>チャンネルの投稿を過去に遡った際に、最新の投稿まで1クリックで戻ることができるボタンが表示されるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-jump-to-recent.png alt="Alt text"></p>
 <h2 id=channels-1投稿に対するリアクション種別の上限設定>Channels: 1投稿に対するリアクション種別の上限設定</h2>
 <p>一つの投稿に対して付与できるリアクション種別の上限が設定できるようになりました。<br>
 リアクション種別が多すぎることによるパフォーマンス低下を防ぐための設定です。</p>
@@ -122,32 +122,32 @@ Mattermost 9.3の新機能
 例えば、上限値を<code>5</code>に設定した場合、5種類のリアクションに対して計10個のリアクションを付与するのは問題ないですが、6種類目のリアクションを付与しようとするとエラーとなります。</p>
 <p><strong>システムコンソール > サイト設定 > 投稿 > Unique Emoji Reaction Limit</strong>から設定できます。初期値は<code>50</code>に設定されています。<br>
 <img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-unique-emoji-settings.png alt="Alt text"></p>
-<p>上限値を超える種別のリアクションを付与しようとすると、以下のモーダルが表示され、リアクションを付与できません。<br>
+<p>上限値を超える種別のリアクションを付与しようとすると、以下のモーダルが表示され、リアクションを付与できません。(以下の例は<strong>Unique Emoji Reaction Limit</strong>を<code>5</code>に設定し、6種類目のリアクションを付与しようとした際に表示される画面です。)<br>
 <img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-unique-emoji-error.png alt="Alt text"></p>
 <h2 id=professionalenterprise-channels-通知なしのキーワードハイライト>(Professional/Enterprise) Channels: 通知なしのキーワードハイライト</h2>
-<p>今まで、<strong>通知のトリガーとなるキーワード</strong>に設定された単語は、その単語を含む投稿が行われた際にMattermostから通知が送信されると共にMattermost画面上でハイライト表示されていましたが、今回のバージョンから、通知を行うことなくMattermost画面上でのハイライト表示のみが行われるキーワードを設定できるようになりました。<br>
-例えば<code>"AI"</code>のような、その単語を含む投稿は注目はしておきたい物の、そのような投稿がたくさん行われることが予想されるために一々通知はしてほしくない、というような場合に使用できる機能かと思います。</p>
-<p>**設定 > 通知 > ハイライトされるキーワード（通知はされません）**から設定できます。<br>
-<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight-settings.png alt="Alt text"></p>
-<p>設定したキーワードは、以下のようにハイライトされます。<br>
-<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight.png alt="Alt text"></p>
+<p>今まで、<strong>通知のトリガーとなるキーワード</strong>に設定された単語は、その単語を含む投稿が行われた際にMattermostから通知が送信されると共にMattermost画面上でハイライト表示されていましたが、今回のバージョンから、通知を行うことなくMattermost画面上でのハイライト表示のみを行うキーワードを設定できるようになりました。<br>
+例えば<code>"AI"</code>のような、その単語を含む投稿は注目はしておきたいものの、そのような投稿が数多く行われることが予想されるために一々通知はして欲しくない、というような場合に使用できる機能です。</p>
+<p><strong>設定 > 通知 > ハイライトされるキーワード（通知はされません）</strong> から設定できます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight-settings.png alt="Alt text"></p>
+<p>設定したキーワードは、以下のようにハイライトされます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-keyword-highlight.png alt="Alt text"></p>
 <p>この機能は、有償版(Professional/Enterprise)限定の機能です。</p>
 <h2 id=その他の変更>その他の変更</h2>
 <blockquote>
 <p>Removed all uses of the <code>ExperimentalTimezone</code> setting. The Timezone feature is now always enabled and no longer behind a configuration setting.</p>
 </blockquote>
-<p>今までのバージョンですは、<strong>システムコンソール > 実験的機能 > 機能 > タイムゾーン</strong>を<code>有効</code>に設定した場合に限り、各ユーザーの設定画面で自身のタイムゾーンを設定することができましたが、v9.3から正式な機能となっため、システムコンソールの<strong>タイムゾーン</strong>設定が削除され、すべての環境でユーザーがタイムゾーンを設定できるようになりました。
-<img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-timezone.png alt="Alt text"></p>
+<p>今までのバージョンですは、<strong>システムコンソール > 実験的機能 > 機能 > タイムゾーン</strong>を<code>有効</code>に設定した場合に限り、各ユーザーの設定画面で自身のタイムゾーンを設定することができましたが、v9.3から正式な機能となっため、システムコンソールの<strong>タイムゾーン</strong>設定が削除され、すべての環境でユーザーがタイムゾーンを設定できるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.3/channels-timezone.png alt="Alt text"></p>
 <blockquote>
 <p>Added support for previewing WebVTT attachments.</p>
 </blockquote>
 <p>WebVTT形式のファイルプレビューに対応しました。</p>
 <hr>
-<p>その他、パフォーマンス改善やログ出力改善とうの変更が数多くあります。<br>
+<p>その他、パフォーマンス改善やログ出力改善等の変更が数多くあります。<br>
 詳しくは<a href=https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-3-feature-release>公式のChangelog</a>を参照ください。</p>
 <h2 id=その他のトピック>その他のトピック</h2>
 <h3 id=hacktoberfest-2023>Hacktoberfest 2023</h3>
-<p>10月に行われていた<a href=https://hacktoberfest.com/>Hacktoberfest 2023</a>のWrap upが以下の記事にまとめられています。　
+<p>10月に行われていた<a href=https://hacktoberfest.com/>Hacktoberfest 2023</a>のWrap upが以下の記事にまとめられています。<br>
 期間中、Mattermostとしては80人のコントリビューターによる159のPull Requestがマージされたようです。</p>
 <p><a href=https://mattermost.com/blog/hacktoberfest-2023-incredible-community-contributions-digital-rewards-a-healthier-planet/>Hacktoberfest 2023: Incredible community contributions, digital rewards & a healthier planet - Mattermost</a></p>
 <h3 id=mysql-v57のサポート停止>MySQL v5.7のサポート停止</h3>
@@ -155,7 +155,7 @@ Mattermost 9.3の新機能
 <p>MySQL v8にアップグレードすることの影響等は以下の記事で説明されています。<br>
 <a href=https://mattermost.com/blog/mysql-5-7-reached-eol-upgrade-to-mysql-8-x-today/>MySQL 5.7 reached EOL. Upgrade to MySQL 8.x today - Mattermost</a></p>
 <h3 id=mattermost-enterprise版の紹介>Mattermost Enterprise版の紹介</h3>
-<p>Mattermostの有償版であるEnterprise Editionによって、どのようにワークフローを改善できるかについて以下の記事で紹介されています。</p>
+<p>Mattermostの有償版であるEnterprise Editionの機能を使うことで、どのようにワークフローを改善できるかについて以下の記事で紹介されています。</p>
 <ul>
 <li><a href=https://mattermost.com/blog/enterprise-collaboration-with-advanced-workflows/>Enterprise Collaboration with Advanced Workflows - Mattermost</a></li>
 <li><a href=https://mattermost.com/blog/mattermost-playbooks-for-enterprise-workflows/>Mattermost Playbooks for Enterprise Workflows - Mattermost</a></li>
