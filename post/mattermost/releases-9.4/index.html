@@ -1,0 +1,177 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Mattermost 9.3の新機能</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 9.3の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/01/16 に Mattermost のアップデートとなる v9.4.0 がリリースされました。 (同日にバグ修正版の">
+<meta property="og:title" content="Mattermost 9.3の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/01/16 に Mattermost のアップデートとなる v9.4.0 がリリースされました。 (同日にバグ修正版の">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-9.4/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2023-12-18T17:50:00+09:00">
+<meta property="article:modified_time" content="2023-12-18T17:50:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 9.3の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;Dec 18, 2023
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
+<p>2024/01/16 に Mattermost のアップデートとなる <code>v9.4.0</code> がリリースされました。<br>
+(同日にバグ修正版の<code>v9.4.1</code>がリリースされています)</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-4-feature-release>Mattermost changelog — Mattermost documentation</a></li>
+</ul>
+<p>本バージョンでの主な変更点を紹介する動画がMattermostの公式YouTubeチャンネルで公開されています。<br>
+実際の動作を確認したい方は、こちらを参照ください。</p>
+<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
+<iframe src=https://www.youtube.com/embed/bEMp4vYLi6c style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
+</div>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Free版も利用可能な機能です。</p>
+<p>また、各見出しにPrefixとしてMattermostの機能分類を記述しています。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/guides/channels.html>Channels</a>: 従来のチャット機能</li>
+<li><a href=https://docs.mattermost.com/guides/playbooks.html>Playbook</a>: Mattermost v6.0から追加されたインシデント管理機能</li>
+<li><a href=https://docs.mattermost.com/channels/make-calls.html>Calls</a>: Mattermost上で音声通話と画面共有を行うことができるプラグイン</li>
+<li>Platform: 上記機能を含むMattermost全体</li>
+</ul>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#channels-チャンネルの通知設定uiの改善>Channels: チャンネルの通知設定UIの改善</a></li>
+<li><a href=#cloud-enterprise-platform-ipフィルタ機能>(Cloud Enterprise) Platform: IPフィルタ機能</a></li>
+<li><a href=#cloud-enterprise-platform-byokによる暗号化>(Cloud Enterprise) Platform: BYOKによる暗号化</a></li>
+<li><a href=#platform-mysql-v57のサポート終了について>Platform: MySQL v5.7のサポート終了について</a></li>
+<li><a href=#その他の変更>その他の変更</a></li>
+<li><a href=#その他のトピック>その他のトピック</a></li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=channels-チャンネルの通知設定uiの改善>Channels: チャンネルの通知設定UIの改善</h2>
+<p>チャンネルメニューからアクセスできるチャンネル毎の通知設定モーダルのUIが改善されました。以前より少ないクリック数で設定変更が出来るようになっています。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.4/channels-channel-notification.png alt="Alt text"></p>
+<p>チャンネルの通知設定は、<strong>チャンネル名をクリック > 通知の設定</strong>から開くことができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.4/channels-channel-notification-menu.png alt="Alt text"></p>
+<h2 id=cloud-enterprise-platform-ipフィルタ機能>(Cloud Enterprise) Platform: IPフィルタ機能</h2>
+<p>Mattermost CloudのEnterprise版限定ですが、Mattermostへのアクセス元IPアドレスを指定できるようになりました。<br>
+Company Proxyを利用している場合など、Mattermostユーザーのアクセス元IPアドレスが限定されている組織において、環境をよりセキュアにできるようになります。</p>
+<p>詳しくは以下のドキュメントを参照ください。<br>
+<a href=https://docs.mattermost.com/manage/cloud-ip-filtering.html>Cloud IP Filtering — Mattermost documentation</a></p>
+<h2 id=cloud-enterprise-platform-byokによる暗号化>(Cloud Enterprise) Platform: BYOKによる暗号化</h2>
+<p>Mattermost CloudのEnterprise版限定ですが、AWSの各サービスを利用したBring Your Own Key (BYOK)による暗号化がサポートされました。</p>
+<p>詳しくは以下のドキュメントを参照ください。<br>
+<a href=https://docs.mattermost.com/manage/cloud-byok.html>Cloud Dedicated Bring Your Own Key — Mattermost documentation</a></p>
+<h2 id=platform-mysql-v57のサポート終了について>Platform: MySQL v5.7のサポート終了について</h2>
+<p>MySQL v5.7がEoLを迎えたため、次のバージョンであるMattermost v9.5 (<a href=https://docs.mattermost.com/upgrade/extended-support-release.html>ESR</a>) から、MySQL v5.7がサポートされなくなります。<br>
+MattermostではMySQL v8以降の使用が推奨されています。</p>
+<h2 id=その他の変更>その他の変更</h2>
+<p>その他、Administrator関連の機能追加などが行われています。 <br>
+詳しくは<a href=https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-3-feature-release>公式のChangelog</a>を参照ください。</p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<p>特になし。</p>
+<h2 id=おわりに>おわりに</h2>
+<p>次の<code>v9.5</code>のリリースは 2024/2/16(Fri)を予定しています。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2023
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
