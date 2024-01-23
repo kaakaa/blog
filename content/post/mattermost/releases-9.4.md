@@ -19,6 +19,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
 
+- [Mattermost v9\.4: IP filtering, bring your own key & more\!](https://mattermost.com/blog/mattermost-v9-4-is-now-available/)
 - [Mattermost changelog — Mattermost documentation](https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-4-feature-release)
 
 本バージョンでの主な変更点を紹介する動画がMattermostの公式YouTubeチャンネルで公開されています。  
