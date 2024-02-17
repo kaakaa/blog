@@ -40,13 +40,13 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## (Professional/Enterprise) スレッドを別チャンネルに移動する機能のリリース
 
-有償版(Professional/Enterprise)限定ですが、メッセージをスレッドごと別のチャンネルへ移動する機能がリリースされました。  
-今まで[Mattermost Wrangler Plugin](https://github.com/gabrieljackson/mattermost-plugin-wrangler)として開発されていたものを、Mattermost本体に取り込んだ機能になります。  
+有償版(Professional/Enterprise)限定ですが、メッセージをスレッドごと別のチャンネルへ移動する機能がリリースされました。今まで[Mattermost Wrangler Plugin](https://github.com/gabrieljackson/mattermost-plugin-wrangler)として開発されていたものを、Mattermost本体に取り込んだ機能になります。  
+
 動作画面については、以下のIssueにスクリーンショットがあります。(実際の画面とは異なる可能性があります)  
 [Feature: Wrangler by nickmisasi · Pull Request \#23602 · mattermost/mattermost](https://github.com/mattermost/mattermost/pull/23602)
 
 本機能は現在は有償版限定機能としてリリースされていますが、機能が成熟した後に無償版でも利用可能とする計画があるようです。  
-[Lock wrangler behind enterprise by nickmisasi · Pull Request \#25703 · mattermost/mattermost](https://github.com/mattermost/mattermost/pull/25703#issuecomment-1879030136)
+[Lock wrangler behind enterprise by nickmisasi · Pull Request \#25703 · mattermost/mattermost](https://github.com/mattermost/mattermost/pull/25703#issuecomment-1879030136)  
 
 
 ## その他の変更
@@ -63,15 +63,14 @@ Mattermostのセキュリティプログラムに関する情報を掲載したM
 [Mattermost Trustcenter](https://trust.mattermost.com/)  
 [Announcing the Mattermost Trustcenter \- Mattermost](https://mattermost.com/blog/announcing-mattermost-trustcenter/)
 
-Mattermost Trustcenterでは、Mattermost自体のセキュリティに関するドキュメントとしてSOC2等のコンプライアンスレポートやPenTestの結果、セキュリティに関するナレッジ集などにアクセスできます。(アクセスするためにTrustcenterへの登録を求められるドキュメントもあります)  
+Mattermost Trustcenterでは、Mattermost自体のセキュリティに関する情報が確認でき、具体的にはSOC2等のコンプライアンスレポートやPenTestの結果、セキュリティに関するナレッジ集などが公開されています。(一部、アクセスするためにTrustcenterへの登録を求められるドキュメントもあります)  
 
 ### Mattermost Academy
 
-先月、Mattermostのオンライン学習サイトであるMattermost Academyの紹介がありました。  
+Mattermostのオンライン学習サイトであるMattermost Academyの紹介がありました。  
 [Free Mattermost training courses: Mattermost Academy \- Mattermost](https://mattermost.com/blog/free-mattermost-training-courses/)
 
-コンテンツは英語のみですが、Mattermostの基本的な使い方から、セルフホストする場合のパフォーマンスに関するTipsなど様々なコースが公開されています。  
-無料で見れるコースも多くあります。（支払い情報を登録する機能はありますが、支払いは実施していないため有償コースが存在するかはよくわかっていません）  
+英語コンテンツのみですが、Mattermostの基本的な使い方から、セルフホストする場合のパフォーマンスに関するTipsなど様々なコースが公開されています。無料で見れるコースも多くあります。（支払い情報を登録する機能はありますが、支払いは実施していないため有償コースが存在するかはよくわかっていません）  
 
 [Mattermost Academy](https://academy.mattermost.com/)
 
