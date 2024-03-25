@@ -1,5 +1,5 @@
 ---
-title: "Mattermost 9.5の新機能"
+title: "Mattermost 9.6の新機能"
 emoji: "🎉"
 published: true
 date: 2024-03-25T23:00:00+09:00
@@ -42,36 +42,17 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 正しく理解できているか自信がないですが、スラッシュコマンドを使って認証が必要なシステムにリクエストを送信する際に、認証に必要なOAuthトークンを取得してくれる中間者として動作する統合機能だと理解しています。
 
-```
-+---------------+ 1.Send request +----------------+                          +-----------------+
-|               |   /api/exec    |                | 2.Call TokenURL          |                 |
-| <Mattermost>  +--------------> |  <Mattermost>  +------------------------->| Target System   |
-| Slash Command |                | Outgoing OAuth |                          | (require authz) |
-|               |<-------------- |   Connection   |<-------------------------+                 |
-+---------------+ 6.Get response |                | 3.Get access_token       |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                | 4.Call API /api/exec     |                 |
-                                 |                |   Bearer: ${access_token}|                 |
-                                 |                +------------------------->|                 |
-                                 |                |                          |                 |
-                                 |                |<-------------------------+                 |
-                                 |                | 5.Get respoonse          |                 |
-                                 |                |                          |                 |
-                                 +----------------+                          +-----------------+
-```
+[![alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/outgoing-oauth-connection.png)](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/outgoing-oauth-connection.png)
 
 ## システムコンソール > ユーザー管理画面の改善
 
 システムコンソールのユーザー管理画面が刷新され、ユーザーに関する様々な情報を一覧表示することができるようになりました。  
 
-![alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png)
+[![alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png)](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png)
 
-チームやロールによるフィルタリング、表示項目の選択、集計範囲の設定等を行うことができます。
+チーム・ロールによるフィルタリング、表示項目の選択、集計範囲の設定等を行うことができます。
 
-![alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png)
+[![alt text](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png)](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png)
 
 また、Professional/Enterprise版限定機能として、ユーザー情報のCSV Exportを実行することもできます。
 
