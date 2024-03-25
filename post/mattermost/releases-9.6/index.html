@@ -1,16 +1,16 @@
 <!doctype html><html lang=ja-jp>
 <head>
 <meta charset=utf-8>
-<title>Mattermost 9.5の新機能</title>
+<title>Mattermost 9.6の新機能</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1">
 <link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="Mattermost 9.5の新機能">
+<meta name=twitter:title content="Mattermost 9.6の新機能">
 <meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/03/15 に Mattermost のアップデートとなる v9.6.0 がリリースされました。 本記事は、個人的に気">
-<meta property="og:title" content="Mattermost 9.5の新機能">
+<meta property="og:title" content="Mattermost 9.6の新機能">
 <meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/03/15 に Mattermost のアップデートとなる v9.6.0 がリリースされました。 本記事は、個人的に気">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-9.6/"><meta property="article:section" content="post">
@@ -53,7 +53,7 @@
 <div class=container>
 <div class=post-heading>
 <h1>
-Mattermost 9.5の新機能
+Mattermost 9.6の新機能
 </h1>
 <span class=meta-post>
 <em class="fa fa-calendar-alt"></em>&nbsp;Mar 25, 2024
@@ -105,29 +105,12 @@ Mattermost 9.5の新機能
 <p>統合機能の一つとして、外向きのOAuth接続(Outgoing OAuth Connection)が追加されました。<br>
 詳しくは、公式ドキュメント<a href=https://developers.mattermost.com/integrate/slash-commands/outgoing-oauth-connections/>Outgoing OAuth connections</a>を参照ください。</p>
 <p>正しく理解できているか自信がないですが、スラッシュコマンドを使って認証が必要なシステムにリクエストを送信する際に、認証に必要なOAuthトークンを取得してくれる中間者として動作する統合機能だと理解しています。</p>
-<pre tabindex=0><code>+---------------+ 1.Send request +----------------+                          +-----------------+
-|               |   /api/exec    |                | 2.Call TokenURL          |                 |
-| &lt;Mattermost&gt;  +--------------&gt; |  &lt;Mattermost&gt;  +-------------------------&gt;| Target System   |
-| Slash Command |                | Outgoing OAuth |                          | (require authz) |
-|               |&lt;-------------- |   Connection   |&lt;-------------------------+                 |
-+---------------+ 6.Get response |                | 3.Get access_token       |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                |                          |                 |
-                                 |                | 4.Call API /api/exec     |                 |
-                                 |                |   Bearer: ${access_token}|                 |
-                                 |                +-------------------------&gt;|                 |
-                                 |                |                          |                 |
-                                 |                |&lt;-------------------------+                 |
-                                 |                | 5.Get respoonse          |                 |
-                                 |                |                          |                 |
-                                 +----------------+                          +-----------------+
-</code></pre><h2 id=システムコンソール--ユーザー管理画面の改善>システムコンソール > ユーザー管理画面の改善</h2>
+<p><a href=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/outgoing-oauth-connection.png><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/outgoing-oauth-connection.png alt="alt text"></a></p>
+<h2 id=システムコンソール--ユーザー管理画面の改善>システムコンソール > ユーザー管理画面の改善</h2>
 <p>システムコンソールのユーザー管理画面が刷新され、ユーザーに関する様々な情報を一覧表示することができるようになりました。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png alt="alt text"></p>
-<p>チームやロールによるフィルタリング、表示項目の選択、集計範囲の設定等を行うことができます。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png alt="alt text"></p>
+<p><a href=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management.png alt="alt text"></a></p>
+<p>チーム・ロールによるフィルタリング、表示項目の選択、集計範囲の設定等を行うことができます。</p>
+<p><a href=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.6/user-management-settings.png alt="alt text"></a></p>
 <p>また、Professional/Enterprise版限定機能として、ユーザー情報のCSV Exportを実行することもできます。</p>
 <h2 id=その他の変更>その他の変更</h2>
 <h3 id=webp画像のプレビューが可能に>Webp画像のプレビューが可能に</h3>
