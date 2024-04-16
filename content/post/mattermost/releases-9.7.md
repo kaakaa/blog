@@ -14,7 +14,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 # はじめに
 
 2024/04/16 に Mattermost のアップデートとなる `v9.7.0` がリリースされました。  
-同日にノイジーなログの削除という軽微な修正を加えた `v9.7.1` がリリースされています。また、現在 `v9.7.2` のリリース作業も進んでいるようです。
+同日にノイジーなログの削除 [PR](https://github.com/mattermost/mattermost/pull/26713) という軽微な修正を加えた `v9.7.1` がリリースされています。また、現在 `v9.7.2` のリリース作業も進んでいるようです。
 
 本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
 変更内容の詳細については公式のリリースを確認してください。
@@ -41,7 +41,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 > ・Added Mattermost AI plugin to pre-packaged plugins.
 
 Mattermost AI Copilot Pluginがpre-packagedなプラグインとして提供されるようになったようです。  
-pre-packagedなプラグインは、Mattermostをv9.7アップデートするだけで自動でインストールされるはずですが、もし**システムコンソール > プラグイン > プラグイン管理 > インストール済みプラグイン** にAI Copilotプラグインが表示されていない場合でも、Mattermostのアプリマーケットプレースからインストールすることが可能です。
+pre-packagedなプラグインは、Mattermostをv9.7アップデートするだけで自動でインストールされるはずですが、もし**システムコンソール > プラグイン > プラグイン管理 > インストール済みプラグイン** にAI Copilotプラグインが表示されていない場合、Mattermostのアプリマーケットプレースからインストールすることが可能です。
 
 [![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.7/ai-copilot-marketplace.png)](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.7/ai-copilot-marketplace.png)
 
