@@ -39,11 +39,12 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 > ・Combined Desktop and Mobile notifications in the user settings modal.
 
-今までのバージョンでは通知の対象となるイベントに関する設定は、「Web/デスクトップアプリ」と「モバイルアプリ」で別々に管理されていましたが、v9.8からユーザー設定画面から一括で管理できるようになりました。
+今までのバージョンでは通知の対象となるイベントに関する設定は、「Web/デスクトップアプリ」と「モバイルアプリ」で別々に管理されていましたが、v9.8からユーザー設定画面から一括で管理できるようになりました。  
+**Send notifications for** の設定を変更することで、Web/デスクトップアプリ/モバイルアプリに対して共通の設定を適用することができます。
 
-![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notificatin-settings.png)
+![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notification-settings.png)
 
-**Send notifications for** の設定を変更することで、Web/デスクトップアプリ/モバイルアプリに対して共通の設定を適用することができます。モバイルアプリでは異なる設定を使用したい場合、**Use different settings for my mobile devices**のチェックを入れると、モバイルアプリ専用の設定画面が現れます。
+モバイルアプリでは異なる設定を使用したい場合、**Use different settings for my mobile devices**のチェックを入れると、モバイルアプリ専用の設定画面が現れます。
 
 **Send notifications for**の設定については、モバイルアプリからも設定を変更することができます。
 
@@ -69,7 +70,7 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 
 ## 右サイドバーのスレッド表示改善
 
-> ・Updated the right-hand side Thread view to use relative timestamps to be more consistent with the global Threads view.
+> ・Updated the right-hand side Thread view to use relative timestamps to be more consistent with the global Threads view.  
 > ・Added a total reply count to the right-hand side thread view.
 
 メッセージスレッドを確認する際に開く右サイドバーに、スレッド内のメッセージ数が表示される用になりました。  
@@ -87,8 +88,10 @@ Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/
 チャンネルヘッダーの下にリンクやファイル添付ができる**チャンネルブックマーク**機能が一部使えるようになったようです(?)。  
 (デフォルトで無効化されており、チャンネルブックマーク用の権限があるとChangelogには説明がありましたが、v9.8のシステムコンソールを見ても当該設定は見当たりませんでした)
 
-今回のリリースではサーバー側の機能のみ実装された状態のようで、UIからこの機能が利用できるようになるのは、以下のPRがマージされてからのようです。PRの説明文の中にチャンネルブックマーク機能の動作イメージの動画も添付されています。  
+今回のリリースではサーバー側の機能のみ実装された状態のようで、UIからこの機能が利用できるようになるのは、以下のPRがマージされてからのようです。  
 [Channel Bookmarks UI by calebroseland · Pull Request \#25889 · mattermost/mattermost](https://github.com/mattermost/mattermost/pull/25889)
+
+PRの説明文の中にチャンネルブックマーク機能の動作イメージの動画も添付されています。  
 
 ### ERROR_SAFETY_LIMITS_EXCEEDED
 
