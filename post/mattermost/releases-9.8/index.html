@@ -1,0 +1,214 @@
+<!doctype html><html lang=ja-jp>
+<head>
+<meta charset=utf-8>
+<title>Mattermost 9.8の新機能</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7H97CTR9R6"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-7H97CTR9R6')</script>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://blog.kaakaa.dev/index.xml title="kaakaa blog">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Mattermost 9.8の新機能">
+<meta name=twitter:description content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/05/16 に Mattermost のアップデートとなる v9.8.0 がリリースされました。 本記事は、個人的に気">
+<meta property="og:title" content="Mattermost 9.8の新機能">
+<meta property="og:description" content="Mattermost 記事まとめ: https://blog.kaakaa.dev/tags/mattermost/ Twitter: @mattermost_jp で Mattermost に関する日本語の情報を提供しています。 はじめに 2024/05/16 に Mattermost のアップデートとなる v9.8.0 がリリースされました。 本記事は、個人的に気">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.kaakaa.dev/post/mattermost/releases-9.8/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2024-05-17T22:50:00+09:00">
+<meta property="article:modified_time" content="2024-05-17T22:50:00+09:00">
+<link rel=stylesheet href=https://blog.kaakaa.dev/fontawesome/css/all.min.css>
+<link id=dark-mode-theme rel=stylesheet href=https://blog.kaakaa.dev/css/dark.css>
+<script>var darkTheme=document.getElementById('dark-mode-theme'),storedTheme=localStorage.getItem('dark-mode-storage');storedTheme==='dark'?darkTheme.disabled=!1:storedTheme==='light'&&(darkTheme.disabled=!0)</script>
+<script src=https://blog.kaakaa.dev/js/main.bundle.js></script>
+<script src=https://blog.kaakaa.dev/js/instantpage.min.js type=module defer></script>
+<meta name=generator content="Hugo 0.91.2">
+</head>
+<body>
+<header>
+<nav class=navbar>
+<div class=nav>
+<a href=https://blog.kaakaa.dev/ class=nav-logo>
+<img src=https://blog.kaakaa.dev/images/icon.png width=50 height=50 alt=Logo>
+</a>
+<ul class=nav-links>
+<li>
+<a href=/ id=Home><em class="fas fa-home fa-lg"></em></a>
+</li>
+<li>
+<a href=/about/ id=About><em class="fas fa-user fa-lg"></em></a>
+</li>
+<li>
+<a href=/tags/ id=Tags><em class="fas fa-tag fa-lg"></em></a>
+</li>
+<li>
+<a href=/search/ id=Search><em class="fas fa-search fa-lg"></em></a>
+</li>
+<li>
+<a href=/index.xml id=Subscribe><em class="fas fa-rss fa-lg"></em></a>
+</li>
+</ul>
+</div>
+</nav>
+<div class=intro-header>
+<div class=container>
+<div class=post-heading>
+<h1>
+Mattermost 9.8の新機能
+</h1>
+<span class=meta-post>
+<em class="fa fa-calendar-alt"></em>&nbsp;May 17, 2024
+</span>
+</div>
+</div>
+</div>
+</header>
+<div class=container role=main>
+<article class=article class=blog-post>
+<p>Mattermost 記事まとめ: <a href=https://blog.kaakaa.dev/tags/mattermost/>https://blog.kaakaa.dev/tags/mattermost/</a></p>
+<p><a href=https://twitter.com/mattermost_jp>Twitter: @mattermost_jp</a> で Mattermost に関する日本語の情報を提供しています。</p>
+<h1 id=はじめに>はじめに</h1>
+<p>2024/05/16 に Mattermost のアップデートとなる <code>v9.8.0</code> がリリースされました。</p>
+<p>本記事は、個人的に気になった新しい機能などを動かしてみることを目的としています。
+変更内容の詳細については公式のリリースを確認してください。</p>
+<ul>
+<li><a href=https://docs.mattermost.com/deploy/mattermost-changelog.html#release-v9-8-feature-release>Mattermost changelog - Mattermost documentation</a></li>
+</ul>
+<p>本バージョンでの主な変更点を紹介する動画がMattermostの公式YouTubeチャンネルで公開されています。<br>
+実際の動作を確認したい方は、こちらを参照ください。</p>
+<div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden>
+<iframe src=https://www.youtube.com/embed/o-OWdIkBYLk style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 allowfullscreen title="YouTube Video"></iframe>
+</div>
+<hr>
+<p>各機能の見出し前の記号は、その機能が利用可能なエディションを表しています。</p>
+<ul>
+<li><a href=https://mattermost.com/pricing/>Professional</a></li>
+<li><a href=https://mattermost.com/pricing/>Enterprise</a></li>
+</ul>
+<p>見出しの前に何もない場合、Free版も利用可能な機能です。</p>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#通知設定のdesktopmobile共通化>通知設定のDesktop/Mobile共通化</a></li>
+<li><a href=#チャンネル初期画面の変更>チャンネル初期画面の変更</a></li>
+<li><a href=#投稿メッセージ内絵文字のツールチップ表示>投稿メッセージ内絵文字のツールチップ表示</a></li>
+<li><a href=#右サイドバーのスレッド表示改善>右サイドバーのスレッド表示改善</a></li>
+<li><a href=#その他の変更>その他の変更</a>
+<ul>
+<li><a href=#チャンネルブックマーク>チャンネルブックマーク</a></li>
+<li><a href=#error_safety_limits_exceeded>ERROR_SAFETY_LIMITS_EXCEEDED</a></li>
+</ul>
+</li>
+<li><a href=#その他のトピック>その他のトピック</a>
+<ul>
+<li><a href=#cgoに対するmattermostの貢献>cgoに対するMattermostの貢献</a></li>
+<li><a href=#postgresクエリを1000倍高速化した話>Postgresクエリを1000倍高速化した話</a></li>
+</ul>
+</li>
+<li><a href=#おわりに>おわりに</a></li>
+</ul>
+</nav><h2 id=通知設定のdesktopmobile共通化>通知設定のDesktop/Mobile共通化</h2>
+<blockquote>
+<p>・Combined Desktop and Mobile notifications in the user settings modal.</p>
+</blockquote>
+<p>今までのバージョンでは通知の対象となるイベントに関する設定は、「Web/デスクトップアプリ」と「モバイルアプリ」で別々に管理されていましたが、v9.8からユーザー設定画面から一括で管理できるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notificatin-settings.png alt></p>
+<p><strong>Send notifications for</strong> の設定を変更することで、Web/デスクトップアプリ/モバイルアプリに対して共通の設定を適用することができます。モバイルアプリでは異なる設定を使用したい場合、<strong>Use different settings for my mobile devices</strong>のチェックを入れると、モバイルアプリ専用の設定画面が現れます。</p>
+<p><strong>Send notifications for</strong>の設定については、モバイルアプリからも設定を変更することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notification-mobile.png alt></p>
+<h2 id=チャンネル初期画面の変更>チャンネル初期画面の変更</h2>
+<blockquote>
+<p>・Enhanced the user interface for channel introductions.</p>
+</blockquote>
+<p>チャンネルを作成したときに最初に表示される画面が刷新され、各種情報が分かりやすく表示されるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-channel-introduction.png alt></p>
+<h2 id=投稿メッセージ内絵文字のツールチップ表示>投稿メッセージ内絵文字のツールチップ表示</h2>
+<blockquote>
+<p>・Added emoji tooltips on hover in post message.</p>
+</blockquote>
+<p>投稿内で使用された絵文字をツールチップとして表示できるようになりました。<br>
+文字を詰め込んだ絵文字などは投稿内で使用すると表示が小さすぎて読めないことがありますが、そのような場合でも絵文字の内容が確認できるようになります。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-emoji-tooltip.png alt></p>
+<h2 id=右サイドバーのスレッド表示改善>右サイドバーのスレッド表示改善</h2>
+<blockquote>
+<p>・Updated the right-hand side Thread view to use relative timestamps to be more consistent with the global Threads view.
+・Added a total reply count to the right-hand side thread view.</p>
+</blockquote>
+<p>メッセージスレッドを確認する際に開く右サイドバーに、スレッド内のメッセージ数が表示される用になりました。<br>
+また、スレッド内の各メッセージの投稿時間が相対時間で表示されるようになりました。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-message-thread.png alt></p>
+<h2 id=その他の変更>その他の変更</h2>
+<h3 id=チャンネルブックマーク>チャンネルブックマーク</h3>
+<blockquote>
+<p>・Added Channel Bookmarks (disabled by default).</p>
+</blockquote>
+<p>チャンネルヘッダーの下にリンクやファイル添付ができる<strong>チャンネルブックマーク</strong>機能が一部使えるようになったようです(?)。<br>
+(デフォルトで無効化されており、チャンネルブックマーク用の権限があるとChangelogには説明がありましたが、v9.8のシステムコンソールを見ても当該設定は見当たりませんでした)</p>
+<p>今回のリリースではサーバー側の機能のみ実装された状態のようで、UIからこの機能が利用できるようになるのは、以下のPRがマージされてからのようです。PRの説明文の中にチャンネルブックマーク機能の動作イメージの動画も添付されています。<br>
+<a href=https://github.com/mattermost/mattermost/pull/25889>Channel Bookmarks UI by calebroseland · Pull Request #25889 · mattermost/mattermost</a></p>
+<h3 id=error_safety_limits_exceeded>ERROR_SAFETY_LIMITS_EXCEEDED</h3>
+<blockquote>
+<p>Added safety limit error message in compiled Team Edition and Enterprise Edition deployments when enterprise scale and access control automation features are unavailable, and message count exceeds 5 million posts. ERROR_SAFE_LIMITS_EXCEEDED.</p>
+</blockquote>
+<p>Free版のMattermostでは、登録ユーザーは1万ユーザーまでというSafety Limitがあり、それを超えると警告とともにいくつか機能が制限される可能性があるそうです。<br>
+<a href=https://docs.mattermost.com/manage/error-codes.html>Mattermost error codes - Mattermost documentation</a></p>
+<p>このSafety Limitに「500万投稿まで」という制限が新たに追加されたようです。<br>
+ただ、この新たに追加された制限を削除するPRが投稿されているようで、もしかしたら「500万投稿まで」という制限は削除されるのかもしれません。（背景が分かっていないので断定的なことは言えませんが）<br>
+<a href=https://github.com/mattermost/mattermost/pull/27036>Removed message post limits warning by harshilsharma63 · Pull Request #27036 · mattermost/mattermost</a></p>
+<h2 id=その他のトピック>その他のトピック</h2>
+<p>今月は、Mattermost公式ブログの方で技術系の記事がいくつか公開されていたため、その内の2つを紹介します。</p>
+<h3 id=cgoに対するmattermostの貢献>cgoに対するMattermostの貢献</h3>
+<p>MattermostのSecurity Researchにより発見されたcgoの任意コード実行の脆弱性 (CVE-2024-24787)に関する解説記事が公開されました。<br>
+<a href=https://mattermost.com/blog/go-fixes-its-7th-code-execution-bug-in-the-same-feature/>Go fixes its 7th code execution bug in the same feature - Mattermost</a></p>
+<p>今までcgoで発見された7つの任意コード実行の内、4つがMattermostによって発見されているそうです。</p>
+<h3 id=postgresクエリを1000倍高速化した話>Postgresクエリを1000倍高速化した話</h3>
+<p>大規模なMattermostのデータベース (投稿メッセージ1億件) に対するElasticsearchのIndexingに非常に時間がかかるという事象から、対象のクエリを発見し、そのクエリを高速化させるための分析や対策等について述べられています。</p>
+<p><a href=https://mattermost.com/blog/making-a-postgres-query-1000-times-faster/>Making a Postgres query 1,000 times faster - Mattermost</a></p>
+<h2 id=おわりに>おわりに</h2>
+<p>次の<code>v9.9</code>のリリースは 2024/6/14(Fri)を予定しています。</p>
+<div class=blog-tags>
+<a href=https://blog.kaakaa.dev/tags/mattermost/>mattermost</a>&nbsp;
+<a href=https://blog.kaakaa.dev/tags/releases/>releases</a>&nbsp;
+</div>
+</article>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='kaakaa-blog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the
+<a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript>
+<a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<footer>
+<div class=social-icons>
+<a href=https://github.com/kaakaa name=GitHub>
+<em class="fab fa-github-alt fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a href=https://twitter.com/kaakaa_hoe_prog name=Twitter>
+<em class="fab fa-twitter fa-lg"></em>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://zenn.dev/kaakaa name=Zenn>
+<img src=https://blog.kaakaa.dev/images/zenn.svg alt=Zenn>
+</a>
+&nbsp;&ndash;&nbsp;
+<a class=social-icon href=https://twitter.com/kaakaa_hoe_prog name=Qiita>
+<img src=https://blog.kaakaa.dev/images/qiita.png alt=Qiita>
+</a>
+</div>
+<div class=container>
+<p class="credits copyright">
+<a href=https://blog.kaakaa.dev/about>Yusuke Nemoto</a>
+&nbsp;&copy;
+2024
+&nbsp;/&nbsp;
+<a href=https://blog.kaakaa.dev/>kaakaa blog</a>
+&nbsp;&ndash;&nbsp;
+<em class="fas fa-moon" id=dark-mode-toggle></em>
+</p>
+<p class="credits theme-by">
+Powered By <a href=https://gohugo.io>Hugo</a>&nbsp;
+Theme
+<a href=https://github.com/matsuyoshi30/harbor>Harbor</a>
+</p>
+</div>
+</footer>
+</body>
+</html>
