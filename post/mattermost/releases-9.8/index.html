@@ -109,9 +109,10 @@ Mattermost 9.8の新機能
 <blockquote>
 <p>・Combined Desktop and Mobile notifications in the user settings modal.</p>
 </blockquote>
-<p>今までのバージョンでは通知の対象となるイベントに関する設定は、「Web/デスクトップアプリ」と「モバイルアプリ」で別々に管理されていましたが、v9.8からユーザー設定画面から一括で管理できるようになりました。</p>
-<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notificatin-settings.png alt></p>
-<p><strong>Send notifications for</strong> の設定を変更することで、Web/デスクトップアプリ/モバイルアプリに対して共通の設定を適用することができます。モバイルアプリでは異なる設定を使用したい場合、<strong>Use different settings for my mobile devices</strong>のチェックを入れると、モバイルアプリ専用の設定画面が現れます。</p>
+<p>今までのバージョンでは通知の対象となるイベントに関する設定は、「Web/デスクトップアプリ」と「モバイルアプリ」で別々に管理されていましたが、v9.8からユーザー設定画面から一括で管理できるようになりました。<br>
+<strong>Send notifications for</strong> の設定を変更することで、Web/デスクトップアプリ/モバイルアプリに対して共通の設定を適用することができます。</p>
+<p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notification-settings.png alt></p>
+<p>モバイルアプリでは異なる設定を使用したい場合、<strong>Use different settings for my mobile devices</strong>のチェックを入れると、モバイルアプリ専用の設定画面が現れます。</p>
 <p><strong>Send notifications for</strong>の設定については、モバイルアプリからも設定を変更することができます。</p>
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-notification-mobile.png alt></p>
 <h2 id=チャンネル初期画面の変更>チャンネル初期画面の変更</h2>
@@ -129,7 +130,7 @@ Mattermost 9.8の新機能
 <p><img src=https://blog.kaakaa.dev/images/posts/mattermost/releases-9.8/channels-emoji-tooltip.png alt></p>
 <h2 id=右サイドバーのスレッド表示改善>右サイドバーのスレッド表示改善</h2>
 <blockquote>
-<p>・Updated the right-hand side Thread view to use relative timestamps to be more consistent with the global Threads view.
+<p>・Updated the right-hand side Thread view to use relative timestamps to be more consistent with the global Threads view.<br>
 ・Added a total reply count to the right-hand side thread view.</p>
 </blockquote>
 <p>メッセージスレッドを確認する際に開く右サイドバーに、スレッド内のメッセージ数が表示される用になりました。<br>
@@ -142,8 +143,9 @@ Mattermost 9.8の新機能
 </blockquote>
 <p>チャンネルヘッダーの下にリンクやファイル添付ができる<strong>チャンネルブックマーク</strong>機能が一部使えるようになったようです(?)。<br>
 (デフォルトで無効化されており、チャンネルブックマーク用の権限があるとChangelogには説明がありましたが、v9.8のシステムコンソールを見ても当該設定は見当たりませんでした)</p>
-<p>今回のリリースではサーバー側の機能のみ実装された状態のようで、UIからこの機能が利用できるようになるのは、以下のPRがマージされてからのようです。PRの説明文の中にチャンネルブックマーク機能の動作イメージの動画も添付されています。<br>
+<p>今回のリリースではサーバー側の機能のみ実装された状態のようで、UIからこの機能が利用できるようになるのは、以下のPRがマージされてからのようです。<br>
 <a href=https://github.com/mattermost/mattermost/pull/25889>Channel Bookmarks UI by calebroseland · Pull Request #25889 · mattermost/mattermost</a></p>
+<p>PRの説明文の中にチャンネルブックマーク機能の動作イメージの動画も添付されています。</p>
 <h3 id=error_safety_limits_exceeded>ERROR_SAFETY_LIMITS_EXCEEDED</h3>
 <blockquote>
 <p>Added safety limit error message in compiled Team Edition and Enterprise Edition deployments when enterprise scale and access control automation features are unavailable, and message count exceeds 5 million posts. ERROR_SAFE_LIMITS_EXCEEDED.</p>
