@@ -48,20 +48,20 @@ Mattermostのメイン画面のUIが少し変わりました。
 
 
 また、色味についても目の疲労を軽減するよう変更されたようです(微妙な違いですが)。  
-特に、デフォルトテーマの中のダーク系のテーマで変化が顕著だそうです。以下は `Onyx` テーマについて、全バージョンと並べて比較したものです。
+特に、デフォルトテーマの中のダーク系のテーマで変化が顕著だそうです。以下は `Onyx` テーマについて、前バージョンと並べて比較したものです。
 
 ![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.9/channels-theme-color.png)
 
 
 ## 内向きのウェブフックでメッセージ優先度付きの投稿が可能に
 
-Mattermost外のシステムからMattermostに対してメッセージを投稿する内向きのウェブフック機能で、作成する投稿に対するメッセージ優先度を付与することができるようになりました。  
-メッセージ優先度は、重要なメッセージを投稿する際などに視認性を高くするためのラベルを付けて投稿できる機能です。
+Mattermost外のシステムからMattermostに対してメッセージを投稿する内向きのウェブフック機能で、メッセージ優先度付きの投稿を作成することができるようになりました。
+
+メッセージ優先度は、投稿の重要度を目立たせるためにラベルを付けて投稿することができる機能です。全員に見て欲しい重要なメッセージを投稿する際などに使用します。
 
 ![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.9/channels-message-priority.png)
 
-内向きのウェブフックでメッセージ優先度付きの投稿をする場合、以下のように `{..., "priority": {"priority":"urgent"}}` を含むリクエストを送信します。  
-`priority` として指定できるのは `urgent`, `important`, `standard`です。
+内向きのウェブフックでメッセージ優先度付きの投稿をする場合、以下のように `{"priority": {"priority":"urgent"}}` を含むリクエストを送信します。  
 
 ```
 curl -X POST \
@@ -70,10 +70,12 @@ curl -X POST \
   http://192.168.11.99:8065/hooks/9z63d3i7838y3eqs1y9f3nej8c 
 ```
 
-![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.9/chennels-post-with-priority.png)
+![](https://blog.kaakaa.dev/images/posts/mattermost/releases-9.9/channels-post-with-priority.png)
+
+`priority` として指定できるのは `urgent`, `important`, `standard`です。
 
 
-内向きのウェブフックについては、以下のドキュメントを参照してください。  
+内向きのウェブフックについて、詳しくは以下のドキュメントを参照してください。  
 [Incoming webhooks](https://developers.mattermost.com/integrate/webhooks/incoming/)
 
 また、外向きのウェブフックに対するレスポンスとして作成できる投稿にも、メッセージ優先度を設定できるようになりました。（こちらの説明は割愛します）  
@@ -81,16 +83,14 @@ curl -X POST \
 
 ## その他のトピック
 
-今月は、Mattermost公式ブログの方で技術系の記事がいくつか公開されていたため、その内の2つを紹介します。
-
 ### Mattermost Copilot
 
-これまでにも何度か紹介しているMattermostのAIプラグインであるMattermost Copilotの新たな動画が公開されています。　　
+これまでにも何度か紹介しているMattermostのAI系機能であるMattermost AI Copilotプラグインについて、新たな紹介動画が公開されています。  
 JIRAやGitHubのリンクをMattermostに投稿することで、チケットの要約をMattermost上に投稿することなどもできるようです。 (動画 0:57~)
 
 {{< youtube E3EGLxgNxNA >}}
 
-また、以下のサイトからインタラクティブなデモを体験することもできます。  
+また、以下のサイトからインタラクティブなデモを体験することもできるようになっています。  
 [AI innovation meets unparalleled data control](https://mattermost.com/copilot/)
 
 ## おわりに
